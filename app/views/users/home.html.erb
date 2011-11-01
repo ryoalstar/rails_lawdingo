@@ -1,0 +1,6 @@
+
+<div style="margin-top: 20px;">
+  <% @lawyers.each{|lawyer| %>
+    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+  <% } %>
+</div>

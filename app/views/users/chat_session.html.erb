@@ -1,0 +1,13 @@
+
+<% if @lawyer %>
+  Conversation with  <b><%= @lawyer.full_name %></b><hr/>
+  <div style="min-height: 300px;width: 88%;border: 1px solid grey;padding: 45px;">
+    Flash Player <br/><br/>
+    End session link do all stuff for now!
+  </div>
+
+  <%= link_to "End Session", new_conversation_path  %>
+
+<% else %>
+  No one to chat with!
+<% end %>

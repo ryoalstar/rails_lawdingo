@@ -1,0 +1,20 @@
+
+<% is_client = @user.is_client? %>
+
+<% if is_client %>
+  To speak live to an attorney, you will need a Lawdingo account.  <br/>
+  Already a member? <%= link_to "log in", "" %><br/><br/>
+  <span style="margin-left: 200px;margin-bottom: 50px;">
+    <b>1. Create account </b>&nbsp;&nbsp;2. Enter payment info
+  </span>
+<% else %>
+  <h3>
+    <span style="margin-left: 200px;margin-bottom: 50px;"> Sign-up for <%= is_client ? 'User' : 'Lawyer' %> </span>
+  </h3>
+<% end %>
+
+<div style="margin: 20px auto 10px 0px;">
+  <%= render 'form' %>
+</div>
+
+

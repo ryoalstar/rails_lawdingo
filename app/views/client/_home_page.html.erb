@@ -1,0 +1,43 @@
+<% 
+detail    = user.detail
+tab       = (tab == User::PAYMENT_TAB or tab == User::SESSION_TAB) ? tab : User::ACCOUNT_TAB
+txt_color = ['black','blue']
+%>
+<div style="width: 100%;margin-right: 10px;margin-top: 20px;float: left;">  
+  <div class="header_mb">
+    <span style="width:150px;margin-left:20px;margin-right:30px;">
+      <%= link_to "Account information", user_path(user), :style =>"color:#{txt_color[ tab == 'f' ? 0 : 1]};text-decoration:none;" %>
+    </span>|
+    <span style="width:150px;margin-left:20px;margin-right:30px;">
+      <%= link_to "Payment info", user_path(user, :t =>User::PAYMENT_TAB), :style =>"color:#{txt_color[ tab == 'm' ? 0 : 1]};text-decoration:none;" %>
+    </span>|
+    <span style="width:150px;margin-left:20px;margin-right:30px;">
+      <%= link_to "Summary of sessions", user_path(user, :t =>User::SESSION_TAB), :style =>"color:#{txt_color[ tab == 'l' ? 0 : 1]};text-decoration:none;" %>
+    </span>   
+  </div>  
+</div>
+<div style="width: 100%;margin-right: 10px;margin-top: 0px;float: left;">
+  <div class="desc">
+    <% if tab == User::ACCOUNT_TAB %>
+      <%= render :partial =>"/users/account_info" %>
+    <% elsif tab == User::PAYMENT_TAB %>
+      <%= render :partial =>"/client/payment_info" %>
+    <% elsif tab == User::SESSION_TAB %>
+      <%= render :template =>"/conversations/index" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<% if false %>
+  <div style="width: 30%;margin-right: 10px;margin-top: 20px;float: left;">
+    <div class="header_mb">
+      Conversations
+    </div>
+    <div class="desc">
+      <%= link_to "All Conversations", conversations_path %><br/>
+      Recent Conversations<hr/>
+    </div>
+  </div>
+<% end %>

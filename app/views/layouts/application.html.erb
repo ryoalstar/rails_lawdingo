@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lawdingo</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+  </head>
+  <body>
+    <div style="margin-left: 150px;">
+      <div style="margin-top: 10px;border-bottom: 2px solid grey;padding: 5px 20px 2px 5px;height: 40px;">
+        <%= link_to image_tag("logo.png"), root_path, :title=>'Home Page' %>
+        <%= AppParameter.service_homepage_tagline %>
+        
+        <span style="float: right;">
+          <% if logged_in?
+            user = current_user
+          %>
+            Logged in as <b><%= link_to user.full_name, user_path(user.id), :title =>'Account Profile!' %></b>&nbsp;&nbsp;|
+            <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
+          <% else %>
+            Lawyer? <%= link_to "Appy to Lawdingo", new_user_path(:ut=>1) %> or <%= link_to "log in", login_path  %><br/>
+            Client? <%= link_to "Signup", new_user_path %> or <%= link_to "log in", login_path  %><br/>
+          <% end %>
+        </span>
+      </div>
+
+      <div style="margin: 0px 50px 0px 50px;border: 1px solid blue;border-top: none;border-bottom: none;min-height: 800px;padding:10px;">
+        <% if flash[:notice] %>
+          <div style="width: auto;border: 1px solid red;padding: 2px;margin-bottom: 10px;">
+            <%= flash[:notice].html_safe %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+      <div style="border-top: 2px solid grey;padding: 5px 20px 2px 5px;">
+        &copy; Lawdingo, Inc.
+        <span style="float: right;">
+          <%= link_to "About", about_page_path %> &nbsp; | &nbsp;
+          <%= link_to "Contact", "mailto:sup@lawdingo.com" %> &nbsp; | &nbsp;
+          <%= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank' %> &nbsp; | &nbsp;
+          <%= link_to "Terms & Privacy", terms_page_path %>
+        </span>
+      </div>
+    </div>    
+  </body>
+</html>

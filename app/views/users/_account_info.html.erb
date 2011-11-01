@@ -1,0 +1,67 @@
+<% errors = @user.errors %>
+<%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+
+  <% if errors.size > 0 %>
+    <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+      The following errors prevented from saving account <br/>
+      <ul>
+        <% errors.full_messages.each{|error| %>
+          <li><%= error %></li>
+        <% } %>
+      </ul>
+
+    </div>
+  <% end %>
+
+  <% if @msg %>
+    <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+      <%= @msg %>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag :return_url, request.url %>
+  <%= hidden_field_tag :user_type, @user[:user_type] %>
+
+  <div class="f_label"> Name : </div>
+  <%= f.text_field :full_name %> <br/>
+
+  <div class="f_label">Email:</div>
+  <%= f.text_field :email %><br/>
+
+  <div class="f_label">Password:</div>
+  <%= f.password_field :password %><br/>
+
+  <% if @user.is_lawyer?  %>
+
+    <div class="f_label">Personal Tagline:</div>
+    <%= f.text_field :personal_tagline %><br/>
+
+    <div class="f_label">Undergraduate School:</div>
+    <%= f.text_field :undergraduate_school %><br/>
+
+    <div class="f_label">Law School:</div>
+    <%= f.text_field :law_school %><br/>
+
+    <div class="f_label">Bar Membership(s):</div>
+    <%= f.text_area :bar_memberships, :size =>'50x3' %><br/>
+
+    <div class="f_label">Bar ID(s):</div>
+    <%= f.text_field :bar_ids %> <br/>
+
+    <div class="f_label">Practice Areas: </div>
+    <%= f.text_area :practice_areas, :size =>'50x3' %><br/>
+
+    <div class="f_label">Per-minute Rate:</div>
+    $<%= f.text_field :rate %>/minute<br/>
+
+    <div class="f_label"></div>
+    <span style="font-size:12px;">note that Lawdingo charges a $<%= AppParameter.service_charge_value %>/minute fee on top of this to clients</span><br/><br/>
+    <div class="f_label">Pay-pal Email:</div>
+    <%= f.text_field :payment_email %><br/>
+    <div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/>
+  <% end %>
+  <div style="margin: 10px 10px 10px 270px;">
+    <%= f.submit 'Update Account' %>
+    &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
+  </div>
+<% end %>

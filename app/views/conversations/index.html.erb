@@ -1,0 +1,89 @@
+
+<% if @conversations.size.zero? %>
+  No conversations to list!
+<% else %>
+
+  <% if current_user.is_lawyer?  %>
+    <br/>
+    Your summary of earnings and sessions: <br/><br/>
+    <table>
+      <thead>
+        <tr>
+          <td> Client Name </td>
+          <td> Session Start </td>
+          <td> Duration of Session </td>
+          <td> Paid Duration </td>
+          <td> Rate </td>
+          <td> Amount Earned </td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @conversations.each{|con| %>
+          <tr>
+            <td> <%= con.client_name %> </td>
+            <td> <%= con.start_date %> </td>
+            <td> <%= seconds_in_string con.duration %> </td>
+            <td> <%= seconds_in_string con.billable_time %> </td>
+            <td> <%= number_to_currency con.lawyer_rate %>/min </td>
+            <td> <%= number_to_currency con.lawyer_earning %> </td>
+          </tr>
+        <% } %>
+        <% user = current_user.corresponding_user %>
+        <tr>
+          <td colspan="6"><hr/></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td> &nbsp; </td>
+          <td> <%= seconds_in_string user.total_session_duration %> </td>
+          <td> <%= seconds_in_string user.total_paid_duration %> </td>
+          <td>  </td>
+          <td> <%= number_to_currency user.total_earning.to_i %> </td>
+        </tr>
+      </tbody>
+    </table><br/><br/>
+    Checks are mailed at the end of the each month. Would you like it sooner? Just email to payments@lawdingo.com.
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <td> Lawyer Name </td>
+          <td> Session Start </td>
+          <td> Duration of Session </td>
+          <td> Paid Duration </td>
+          <td> Rate </td>
+          <td> Lawdingo Fee </td>
+          <td> Amount Billed </td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @conversations.each{|con| %>
+          <tr>
+            <td> <%= con.lawyer_name %> </td>
+            <td> <%= con.start_date %> </td>
+            <td> <%= seconds_in_string con.duration %> </td>
+            <td> <%= seconds_in_string con.billable_time %> </td>
+            <td> <%= number_to_currency con.lawyer_rate %>/min </td>
+            <td> <%= number_to_currency con.lawdingo_charge %> </td>
+            <td> <%= number_to_currency con.billed_amount %> </td>
+          </tr>
+        <% } %>
+        <% user = current_user.corresponding_user %>
+        <tr>
+          <td colspan="7"><hr/></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td> &nbsp; </td>
+          <td> <%= seconds_in_string user.total_session_duration %> </td>
+          <td> <%= seconds_in_string user.total_paid_duration %> </td>
+          <td>  </td>
+          <td>  </td>
+          <td> <%= number_to_currency user.total_spending.to_i %> </td>
+        </tr>
+      </tbody>
+    </table> <br/><br/>
+    Any questions about this? Just email payments@lawdingo.com.
+
+  <% end %>
+<% end %>

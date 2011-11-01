@@ -1,0 +1,27 @@
+
+<div class="lawyer_temp" id="lawyer_<%= lawyer.id %>">
+  <div style="float:left;width:105px;padding-top: 0px;height: 100px;">
+    <%= image_tag lawyer.photo.url(:thumb),:style=>"border:solid #000 0px;height:120px;width:120px" %>
+  </div>
+  <div style="float:left;margin-left: 45px;">
+    <span class="header_text">
+      Attorney <%= lawyer.full_name %>
+    </span>
+    <% unless lawyer.bar_memberships.blank? %> , licensed in <%= lawyer.bar_memberships %> <% end %>
+    <br/>
+    <%= lawyer.personal_tagline %><br/>
+    Specialties : <%= lawyer.practice_areas %><br/>
+    <%= image_tag "ck.png", :height=>"20", :width =>"20" %> &nbsp;<span style="color:grey;"> Bar memberships and credentials verified </span>
+  </div>
+  <div style="float:right;width:180px;">
+    <span style="font-size: 20px;font-weight: bold;float: right;">$<%= lawyer.rate %> /min</span> <br/>
+    <span style="float: right;"> +$<%= @app_charge || AppParameter.service_charge_value %>/min fees </span><br/>
+    <span style="float:right;"> free initial consultation</span><br/>
+    <% if lawyer.is_online? %>
+      <%= link_to image_tag("request_session.png"), user_chat_session_path(lawyer), :title =>"Request for a session!" %>
+    <% else %>      
+      <%= link_to image_tag("request_session.png"), "#", :title =>"Request to schedule a session!" %>
+    <% end %>
+    <br/>    
+  </div>
+</div>

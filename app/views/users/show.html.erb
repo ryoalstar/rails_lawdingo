@@ -1,0 +1,10 @@
+
+<% if @user.is_client?  %>
+  <%= render :partial =>'/client/home_page', :locals =>{:user =>@user, :tab =>@tab} %>
+<% elsif @user.is_lawyer? %>
+  <%= render :partial =>'/lawyer/home_page', :locals =>{:user =>@user, :tab =>@tab} %>
+<% elsif @user.is_admin? %>
+  <% if is_self_login?(@user.id)  %>
+    <%= render :partial =>'/admin/home_page', :locals =>{:user =>@user} %>
+  <% end %>
+<% end %>

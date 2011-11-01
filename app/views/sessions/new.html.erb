@@ -1,0 +1,18 @@
+
+<h2> Login to Lawdingo</h2>
+<%= form_tag sessions_path do %>  
+  <div class="field">
+    <%= label_tag :email %><br />
+    <%= text_field_tag :email %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </div>
+  <div class="actions">
+    <%= submit_tag 'Login' %>
+  </div>
+<% end %>
+
+<hr/>
+OR <%= link_to 'Apply to Lawdingo as lawyer', new_user_path(:ut=>1) %> or <%= link_to 'Signup for legal advice', new_user_path %>
