@@ -1,3 +1,4 @@
+<% @user = user if user %>
 <% errors = @user.errors %>
 <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
 
@@ -65,3 +66,4 @@
     &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
   </div>
 <% end %>
+
