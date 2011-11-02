@@ -16126,3 +16126,3185 @@ Served asset /jquery.js - 304 Not Modified (0ms)
 
 Started GET "/assets/logo.png" for 49.244.137.166 at 2011-10-31 12:48:01 +0000
 Served asset /logo.png - 304 Not Modified (0ms)
+  [1m[36m (192.9ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (246.0ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20110927113553)
+  [1m[35m (97.1ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `full_name` varchar(255), `email` varchar(255), `hashed_password` varchar(255), `address` varchar(255), `skype` varchar(255), `balance` float DEFAULT 0.0, `is_online` tinyint(1) DEFAULT 0, `is_busy` tinyint(1) DEFAULT 0, `last_login` datetime, `last_online` datetime, `user_type` varchar(255) NOT NULL, `is_approved` tinyint(1) DEFAULT 0, `bar_memberships` text, `undergraduate_school` text, `law_school` text, `alma_maters` text, `practice_areas` text, `law_firm` varchar(255), `rate` float DEFAULT 0.0, `payment_email` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (54.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110927113553')[0m
+Migrating to CreateConversations (20110927115021)
+  [1m[35m (128.6ms)[0m  CREATE TABLE `conversations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `client_id` int(11) NOT NULL, `lawyer_id` int(11) NOT NULL, `start_date` datetime NOT NULL, `end_date` datetime NOT NULL, `billable_time` int(11), `lawyer_rate` float, `billed_amount` float DEFAULT 0.0, `paid_to_lawyer` tinyint(1) DEFAULT 1, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (55.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110927115021')[0m
+Migrating to AddAttachmentPhotoToUsers (20110928052252)
+  [1m[35m (279.0ms)[0m  ALTER TABLE `users` ADD `photo_file_name` varchar(255)
+  [1m[36m (257.0ms)[0m  [1mALTER TABLE `users` ADD `photo_content_type` varchar(255)[0m
+  [1m[35m (224.2ms)[0m  ALTER TABLE `users` ADD `photo_file_size` int(11)
+  [1m[36m (235.1ms)[0m  [1mALTER TABLE `users` ADD `photo_updated_at` datetime[0m
+  [1m[35m (56.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20110928052252')
+Migrating to AddPersonalTaglineToUsers (20111014072907)
+  [1m[36m (290.3ms)[0m  [1mALTER TABLE `users` ADD `personal_tagline` varchar(255)[0m
+  [1m[35m (246.3ms)[0m  ALTER TABLE `users` ADD `bar_ids` varchar(255)
+  [1m[36m (54.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111014072907')[0m
+Migrating to CreatePages (20111014081829)
+  [1m[35m (140.8ms)[0m  CREATE TABLE `pages` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `page_title` varchar(255), `page_header` varchar(255), `content` text, `is_deleted` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (32.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111014081829')[0m
+Migrating to AddIsApprovedToUsers (20111014091232)
+  [1m[35m (0.5ms)[0m  ALTER TABLE `users` ADD `is_approved` tinyint(1) DEFAULT 0
+Mysql2::Error: Duplicate column name 'is_approved': ALTER TABLE `users` ADD `is_approved` tinyint(1) DEFAULT 0
+  [1m[36m (166.6ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (214.0ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (0.3ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20110927113553)
+  [1m[35m (113.8ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `full_name` varchar(255), `email` varchar(255), `hashed_password` varchar(255), `address` varchar(255), `skype` varchar(255), `balance` float DEFAULT 0.0, `is_online` tinyint(1) DEFAULT 0, `is_busy` tinyint(1) DEFAULT 0, `last_login` datetime, `last_online` datetime, `user_type` varchar(255) NOT NULL, `is_approved` tinyint(1) DEFAULT 0, `bar_memberships` text, `undergraduate_school` text, `law_school` text, `alma_maters` text, `practice_areas` text, `law_firm` varchar(255), `rate` float DEFAULT 0.0, `payment_email` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (54.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110927113553')[0m
+Migrating to CreateConversations (20110927115021)
+  [1m[35m (141.9ms)[0m  CREATE TABLE `conversations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `client_id` int(11) NOT NULL, `lawyer_id` int(11) NOT NULL, `start_date` datetime NOT NULL, `end_date` datetime NOT NULL, `billable_time` int(11), `lawyer_rate` float, `billed_amount` float DEFAULT 0.0, `paid_to_lawyer` tinyint(1) DEFAULT 1, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (58.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20110927115021')[0m
+Migrating to AddAttachmentPhotoToUsers (20110928052252)
+  [1m[35m (207.9ms)[0m  ALTER TABLE `users` ADD `photo_file_name` varchar(255)
+  [1m[36m (224.2ms)[0m  [1mALTER TABLE `users` ADD `photo_content_type` varchar(255)[0m
+  [1m[35m (281.0ms)[0m  ALTER TABLE `users` ADD `photo_file_size` int(11)
+  [1m[36m (290.4ms)[0m  [1mALTER TABLE `users` ADD `photo_updated_at` datetime[0m
+  [1m[35m (43.8ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20110928052252')
+Migrating to AddPersonalTaglineToUsers (20111014072907)
+  [1m[36m (233.6ms)[0m  [1mALTER TABLE `users` ADD `personal_tagline` varchar(255)[0m
+  [1m[35m (247.8ms)[0m  ALTER TABLE `users` ADD `bar_ids` varchar(255)
+  [1m[36m (54.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111014072907')[0m
+Migrating to CreatePages (20111014081829)
+  [1m[35m (152.9ms)[0m  CREATE TABLE `pages` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `page_title` varchar(255), `page_header` varchar(255), `content` text, `is_deleted` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (55.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111014081829')[0m
+Migrating to CreateAppParameters (20111014112315)
+  [1m[35m (143.1ms)[0m  CREATE TABLE `app_parameters` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `value` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (66.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111014112315')[0m
+Migrating to CreateCardDetails (20111014114308)
+  [1m[35m (151.2ms)[0m  CREATE TABLE `card_details` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `first_name` varchar(255), `last_name` varchar(255), `street_address` varchar(255), `city` varchar(255), `state` varchar(255), `postal_code` varchar(255), `country` varchar(255), `card_type` varchar(255), `card_number` varchar(255), `expire_month` varchar(255), `expire_year` varchar(255), `card_verification` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (44.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111014114308')[0m
+Migrating to AddPaymentInfoUpdatedToUsers (20111020112423)
+  [1m[35m (222.0ms)[0m  ALTER TABLE `users` ADD `has_payment_info` tinyint(1) DEFAULT 0
+  [1m[36m (43.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111020112423')[0m
+Migrating to AddChargedStatusToConversation (20111021084255)
+  [1m[35m (278.1ms)[0m  ALTER TABLE `conversations` ADD `has_been_charged` tinyint(1) DEFAULT 0
+  [1m[36m (235.3ms)[0m  [1mALTER TABLE `conversations` ADD `payment_params` text[0m
+  [1m[35m (32.8ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20111021084255')
+Migrating to CreateReviews (20111021103441)
+  [1m[36m (118.7ms)[0m  [1mCREATE TABLE `reviews` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `client_id` int(11) NOT NULL, `lawyer_id` int(11) NOT NULL, `conversation_id` int(11) NOT NULL, `content` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (34.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20111021103441')
+Migrating to AddLawdingoChargeToConversations (20111021111022)
+  [1m[36m (254.0ms)[0m  [1mALTER TABLE `conversations` ADD `lawdingo_charge` float[0m
+  [1m[35m (43.8ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20111021111022')
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+
+
+Started GET "/" for 127.0.0.1 at 2011-11-02 12:20:46 +0545
+  Processing by UsersController#home as HTML
+  [1m[36mLawyer Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (user_type = 'LAWYER' and is_approved is true)[0m
+Rendered users/home.html.erb within layouts/application (21.1ms)
+Compiled application.js  (28ms)  (pid 2794)
+Compiled jquery.js  (13ms)  (pid 2794)
+Compiled jquery_ujs.js  (1ms)  (pid 2794)
+  [1m[35mAppParameter Load (0.4ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 447ms (Views: 426.9ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /application.css - 200 OK (75ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /all.css - 200 OK (15ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /jquery.js - 200 OK (7ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /users.css - 200 OK (24ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /jquery_ujs.js - 200 OK (5ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /application.js - 200 OK (18ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 12:20:48 +0545
+Served asset /logo.png - 200 OK (29ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (3.9ms)
+Rendered users/new.html.erb within layouts/application (37.9ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 135ms (Views: 101.7ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:13 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YNBMWe1flRzvrOLeQ22m3BTGxKeZomw8R0Bh7Rhc7Is=", "user_type"=>"CLIENT", "user"=>{"full_name"=>"Nav Raj", "email"=>"nav@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Join Lawdingo"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mSELECT 1 FROM `users` WHERE `users`.`email` = BINARY 'nav@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `users` (`address`, `alma_maters`, `balance`, `bar_ids`, `bar_memberships`, `created_at`, `email`, `full_name`, `has_payment_info`, `hashed_password`, `is_approved`, `is_busy`, `is_online`, `last_login`, `last_online`, `law_firm`, `law_school`, `payment_email`, `personal_tagline`, `photo_content_type`, `photo_file_name`, `photo_file_size`, `photo_updated_at`, `practice_areas`, `rate`, `skype`, `undergraduate_school`, `updated_at`, `user_type`) VALUES (NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:36:29', 'nav@gmail.com', 'Nav Raj', 0, '7c4a8d09ca3762af61e59520943dc26494f8941b', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:36:29', 'CLIENT')
+[paperclip] Saving attachments.
+  [1m[36m (34.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/details
+Completed 302 Found in 294ms
+
+
+Started GET "/details" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+  Processing by UsersController#payment_info as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered users/_payment_detail.html.erb (40.0ms)
+Rendered users/payment_info.html.erb within layouts/application (46.7ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 189ms (Views: 139.1ms | ActiveRecord: 16.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:21:29 +0545
+Served asset /payment.js - 200 OK (47ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:21:43 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered users/_account_info.html.erb (53.9ms)
+Rendered client/_home_page.html.erb (62.5ms)
+Rendered users/index.html.erb within layouts/application (165.5ms)
+Completed 500 Internal Server Error in 212ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_34617460'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (47.0ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (55.5ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:23:04 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered users/_account_info.html.erb (2.2ms)
+Rendered client/_home_page.html.erb (4.8ms)
+Rendered users/index.html.erb within layouts/application (37.1ms)
+Completed 500 Internal Server Error in 44ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.new_record?):
+    1: <%# errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+    5:     <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+  app/views/users/_account_info.html.erb:2:in `_app_views_users__account_info_html_erb__4169508240025902781_20767760'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:23:04 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (2.1ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.2ms)
+Rendered users/index.html.erb within layouts/application (39.3ms)
+Completed 500 Internal Server Error in 47ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.new_record?):
+    1: <%# errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+    5:     <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+  app/views/users/_account_info.html.erb:2:in `_app_views_users__account_info_html_erb__4169508240025902781_20767760'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:23:05 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered users/_account_info.html.erb (0.8ms)
+Rendered client/_home_page.html.erb (3.4ms)
+Rendered users/index.html.erb within layouts/application (36.1ms)
+Completed 500 Internal Server Error in 43ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.new_record?):
+    1: <%# errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+    5:     <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+  app/views/users/_account_info.html.erb:2:in `_app_views_users__account_info_html_erb__4169508240025902781_20767760'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:23:05 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered users/_account_info.html.erb (1.5ms)
+Rendered client/_home_page.html.erb (4.7ms)
+Rendered users/index.html.erb within layouts/application (91.5ms)
+Completed 500 Internal Server Error in 99ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.new_record?):
+    1: <%# errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+    5:     <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+  app/views/users/_account_info.html.erb:2:in `_app_views_users__account_info_html_erb__4169508240025902781_20767760'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.5ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:23:05 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.3ms)
+Rendered users/index.html.erb within layouts/application (85.2ms)
+Completed 500 Internal Server Error in 93ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.new_record?):
+    1: <%# errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+    5:     <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+  app/views/users/_account_info.html.erb:2:in `_app_views_users__account_info_html_erb__4169508240025902781_20767760'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.5ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:23:05 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.4ms)
+Rendered users/index.html.erb within layouts/application (87.3ms)
+Completed 500 Internal Server Error in 105ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.new_record?):
+    1: <%# errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+    5:     <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+  app/views/users/_account_info.html.erb:2:in `_app_views_users__account_info_html_erb__4169508240025902781_20767760'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-11-02 12:23:33 +0545
+  Processing by UsersController#home as HTML
+  [1m[36mLawyer Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (user_type = 'LAWYER' and is_approved is true)[0m
+Rendered users/home.html.erb within layouts/application (1.9ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Completed 200 OK in 110ms (Views: 97.5ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:34 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:34 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:34 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:34 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:34 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:34 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered users/_account_info.html.erb (58.6ms)
+Rendered client/_home_page.html.erb (64.8ms)
+Rendered users/show.html.erb within layouts/application (67.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 159ms (Views: 123.6ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:37 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/1?t=m" for 127.0.0.1 at 2011-11-02 12:23:40 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"t"=>"m", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCardDetail Load (0.3ms)[0m  [1mSELECT `card_details`.* FROM `card_details` WHERE `card_details`.`user_id` = 1 LIMIT 1[0m
+Rendered client/_payment_info.html.erb (10.9ms)
+Rendered client/_home_page.html.erb (24.2ms)
+Rendered users/show.html.erb within layouts/application (24.9ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 304ms (Views: 39.5ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:40 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:40 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:40 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:40 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:41 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:41 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:41 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/1?t=l" for 127.0.0.1 at 2011-11-02 12:23:42 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"t"=>"l", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mClient Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `conversations` WHERE `conversations`.`client_id` = 1
+Rendered conversations/index.html.erb (20.4ms)
+Rendered client/_home_page.html.erb (36.9ms)
+Rendered users/show.html.erb within layouts/application (37.7ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 222ms (Views: 51.9ms | ActiveRecord: 6.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:43 +0545
+Served asset /application.css - 304 Not Modified (61ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:43 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:43 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:43 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:43 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:43 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Rendered users/_account_info.html.erb (2.6ms)
+Rendered client/_home_page.html.erb (5.1ms)
+Rendered users/show.html.erb within layouts/application (5.7ms)
+  [1m[35mAppParameter Load (0.2ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 55ms (Views: 21.2ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+Served asset /all.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:44 +0545
+Served asset /application.js - 304 Not Modified (66ms)
+
+
+Started GET "/users/1?t=m" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"t"=>"m", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mCardDetail Load (0.1ms)[0m  [1mSELECT `card_details`.* FROM `card_details` WHERE `card_details`.`user_id` = 1 LIMIT 1[0m
+Rendered client/_payment_info.html.erb (10.5ms)
+Rendered client/_home_page.html.erb (64.8ms)
+Rendered users/show.html.erb within layouts/application (65.4ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 139ms (Views: 80.4ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:46 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/1?t=l" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"t"=>"l", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1
+  [1m[36mClient Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM `conversations` WHERE `conversations`.`client_id` = 1
+Rendered conversations/index.html.erb (12.9ms)
+Rendered client/_home_page.html.erb (15.5ms)
+Rendered users/show.html.erb within layouts/application (16.2ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 129ms (Views: 30.5ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:48 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2011-11-02 12:23:49 +0545
+  Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.7ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 95ms (Views: 84.9ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+Served asset /all.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:50 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (2.5ms)
+Rendered users/new.html.erb within layouts/application (3.3ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 52ms (Views: 19.4ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:23:52 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2011-11-02 12:24:01 +0545
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YNBMWe1flRzvrOLeQ22m3BTGxKeZomw8R0Bh7Rhc7Is=", "user_type"=>"CLIENT", "user"=>{"full_name"=>"bardan", "email"=>"bardan@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Join Lawdingo"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mSELECT 1 FROM `users` WHERE `users`.`email` = BINARY 'bardan@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `users` (`address`, `alma_maters`, `balance`, `bar_ids`, `bar_memberships`, `created_at`, `email`, `full_name`, `has_payment_info`, `hashed_password`, `is_approved`, `is_busy`, `is_online`, `last_login`, `last_online`, `law_firm`, `law_school`, `payment_email`, `personal_tagline`, `photo_content_type`, `photo_file_name`, `photo_file_size`, `photo_updated_at`, `practice_areas`, `rate`, `skype`, `undergraduate_school`, `updated_at`, `user_type`) VALUES (NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:39:01', 'bardan@gmail.com', 'bardan', 0, '7c4a8d09ca3762af61e59520943dc26494f8941b', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:39:01', 'CLIENT')
+[paperclip] Saving attachments.
+  [1m[36m (54.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/details
+Completed 302 Found in 99ms
+
+
+Started GET "/details" for 127.0.0.1 at 2011-11-02 12:24:01 +0545
+  Processing by UsersController#payment_info as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered users/_payment_detail.html.erb (11.0ms)
+Rendered users/payment_info.html.erb within layouts/application (11.8ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 86ms (Views: 54.1ms | ActiveRecord: 5.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:24:02 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:24:10 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.3ms)
+Rendered users/index.html.erb within layouts/application (36.2ms)
+Completed 500 Internal Server Error in 43ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_8186700'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_34747120'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:36:48 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered users/_account_info.html.erb (2.1ms)
+Rendered client/_home_page.html.erb (6.2ms)
+Rendered users/index.html.erb within layouts/application (41.7ms)
+Completed 500 Internal Server Error in 48ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_33219660'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_33702040'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:36:50 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered users/_account_info.html.erb (0.8ms)
+Rendered client/_home_page.html.erb (4.0ms)
+Rendered users/index.html.erb within layouts/application (36.5ms)
+Completed 500 Internal Server Error in 44ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_33219660'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_33702040'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:36:51 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (4.1ms)
+Rendered users/index.html.erb within layouts/application (99.0ms)
+Completed 500 Internal Server Error in 106ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_33219660'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_33702040'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:36:51 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.3ms)
+Rendered users/index.html.erb within layouts/application (96.4ms)
+Completed 500 Internal Server Error in 105ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_33219660'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_33702040'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:36:51 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.2ms)
+Rendered users/index.html.erb within layouts/application (85.3ms)
+Completed 500 Internal Server Error in 94ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_33219660'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_33702040'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-11-02 12:37:10 +0545
+  Processing by UsersController#home as HTML
+  [1m[35mLawyer Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (user_type = 'LAWYER' and is_approved is true)
+Rendered users/home.html.erb within layouts/application (1.7ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Completed 200 OK in 110ms (Views: 98.2ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:10 +0545
+Served asset /application.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:10 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:10 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:10 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:11 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:11 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1
+Rendered users/_account_info.html.erb (2.8ms)
+Rendered client/_home_page.html.erb (6.3ms)
+Rendered users/show.html.erb within layouts/application (6.9ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 106ms (Views: 71.3ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:13 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+  Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/login
+Completed 302 Found in 2ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.2ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 30ms (Views: 19.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+Served asset /all.css - 304 Not Modified (12ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:19 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (3.1ms)
+Rendered users/new.html.erb within layouts/application (4.2ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 60ms (Views: 22.8ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:21 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2011-11-02 12:37:29 +0545
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YNBMWe1flRzvrOLeQ22m3BTGxKeZomw8R0Bh7Rhc7Is=", "user_type"=>"CLIENT", "user"=>{"full_name"=>"bisu", "email"=>"bisu@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Join Lawdingo"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mSELECT 1 FROM `users` WHERE `users`.`email` = BINARY 'bisu@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `users` (`address`, `alma_maters`, `balance`, `bar_ids`, `bar_memberships`, `created_at`, `email`, `full_name`, `has_payment_info`, `hashed_password`, `is_approved`, `is_busy`, `is_online`, `last_login`, `last_online`, `law_firm`, `law_school`, `payment_email`, `personal_tagline`, `photo_content_type`, `photo_file_name`, `photo_file_size`, `photo_updated_at`, `practice_areas`, `rate`, `skype`, `undergraduate_school`, `updated_at`, `user_type`) VALUES (NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:52:29', 'bisu@gmail.com', 'bisu', 0, '7c4a8d09ca3762af61e59520943dc26494f8941b', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:52:29', 'CLIENT')
+[paperclip] Saving attachments.
+  [1m[36m (82.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/details
+Completed 302 Found in 122ms
+
+
+Started GET "/details" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+  Processing by UsersController#payment_info as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+Rendered users/_payment_detail.html.erb (11.0ms)
+Rendered users/payment_info.html.erb within layouts/application (11.7ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 131ms (Views: 53.7ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:37:30 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:37:38 +0545
+  Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1
+Rendered users/_account_info.html.erb (0.7ms)
+Rendered client/_home_page.html.erb (3.2ms)
+Rendered users/index.html.erb within layouts/application (35.6ms)
+Completed 500 Internal Server Error in 42ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of ActiveRecord::Base.
+The error occurred while evaluating nil.errors):
+    1: <% errors = @user.errors %>
+    2: <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+    3: 
+    4:   <% if errors.size > 0 %>
+  app/views/users/_account_info.html.erb:1:in `_app_views_users__account_info_html_erb__4169508240025902781_33219660'
+  app/views/client/_home_page.html.erb:22:in `_app_views_client__home_page_html_erb__1472107080677771829_33702040'
+  app/views/users/index.html.erb:15:in `_app_views_users_index_html_erb__691974343030660721_16051740'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.1ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+Rendered client/_home_page.html.erb (2.7ms)
+Rendered users/index.html.erb within layouts/application (85.6ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 102ms (Views: 98.5ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 12:40:17 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+Rendered users/_account_info.html.erb (4.4ms)
+Rendered client/_home_page.html.erb (8.1ms)
+Rendered users/index.html.erb within layouts/application (92.2ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 108ms (Views: 104.9ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 12:41:15 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+  Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (50.6ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 82ms (Views: 72.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+Served asset /all.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:18 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2011-11-02 12:41:20 +0545
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (3.0ms)
+Rendered users/new.html.erb within layouts/application (4.2ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 107ms (Views: 74.3ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:21 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:21 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:21 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:21 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:21 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:21 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YNBMWe1flRzvrOLeQ22m3BTGxKeZomw8R0Bh7Rhc7Is=", "user_type"=>"CLIENT", "user"=>{"full_name"=>"test", "email"=>"test111@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Join Lawdingo"}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  SELECT 1 FROM `users` WHERE `users`.`email` = BINARY 'test111@gmail.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `users` (`address`, `alma_maters`, `balance`, `bar_ids`, `bar_memberships`, `created_at`, `email`, `full_name`, `has_payment_info`, `hashed_password`, `is_approved`, `is_busy`, `is_online`, `last_login`, `last_online`, `law_firm`, `law_school`, `payment_email`, `personal_tagline`, `photo_content_type`, `photo_file_name`, `photo_file_size`, `photo_updated_at`, `practice_areas`, `rate`, `skype`, `undergraduate_school`, `updated_at`, `user_type`) VALUES (NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:56:28', 'test111@gmail.com', 'test', 0, 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:56:28', 'CLIENT')[0m
+[paperclip] Saving attachments.
+  [1m[35m (46.9ms)[0m  COMMIT
+Redirected to http://localhost:3000/details
+Completed 302 Found in 88ms
+
+
+Started GET "/details" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+  Processing by UsersController#payment_info as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+Rendered users/_payment_detail.html.erb (10.2ms)
+Rendered users/payment_info.html.erb within layouts/application (10.9ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 84ms (Views: 53.5ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /application.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /users.css - 304 Not Modified (67ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:28 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+Rendered users/_account_info.html.erb (2.7ms)
+Rendered client/_home_page.html.erb (5.5ms)
+Rendered users/index.html.erb within layouts/application (38.2ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 54ms (Views: 50.8ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:41:31 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+  Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 30ms (Views: 18.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+Served asset /all.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:28 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (2.5ms)
+Rendered users/new.html.erb within layouts/application (3.3ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 50ms (Views: 18.8ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:30 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YNBMWe1flRzvrOLeQ22m3BTGxKeZomw8R0Bh7Rhc7Is=", "user_type"=>"CLIENT", "user"=>{"full_name"=>"navraj", "email"=>"nav@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Join Lawdingo"}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SELECT 1 FROM `users` WHERE `users`.`email` = BINARY 'nav@gmail.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `users` (`address`, `alma_maters`, `balance`, `bar_ids`, `bar_memberships`, `created_at`, `email`, `full_name`, `has_payment_info`, `hashed_password`, `is_approved`, `is_busy`, `is_online`, `last_login`, `last_online`, `law_firm`, `law_school`, `payment_email`, `personal_tagline`, `photo_content_type`, `photo_file_name`, `photo_file_size`, `photo_updated_at`, `practice_areas`, `rate`, `skype`, `undergraduate_school`, `updated_at`, `user_type`) VALUES (NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:58:41', 'nav@gmail.com', 'navraj', 0, '7c4a8d09ca3762af61e59520943dc26494f8941b', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0, NULL, NULL, '2011-11-02 06:58:41', 'CLIENT')[0m
+[paperclip] Saving attachments.
+  [1m[35m (76.6ms)[0m  COMMIT
+Redirected to http://localhost:3000/details
+Completed 302 Found in 175ms
+
+
+Started GET "/details" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+  Processing by UsersController#payment_info as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/_payment_detail.html.erb (58.7ms)
+Rendered users/payment_info.html.erb within layouts/application (59.5ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 133ms (Views: 101.4ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:41 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+  Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/_account_info.html.erb (4.6ms)
+Rendered client/_home_page.html.erb (8.1ms)
+Rendered users/index.html.erb within layouts/application (92.0ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 108ms (Views: 104.5ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:43 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started PUT "/users/5" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+  Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YNBMWe1flRzvrOLeQ22m3BTGxKeZomw8R0Bh7Rhc7Is=", "return_url"=>"http://localhost:3000/users", "user_type"=>"CLIENT", "user"=>{"full_name"=>"navraj", "email"=>"nav@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Update Account", "id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` =   LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'nav@gmail.com' AND `users`.`id` != 5) LIMIT 1[0m
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  COMMIT
+Rendered users/_account_info.html.erb (2.6ms)
+Rendered client/_home_page.html.erb (6.2ms)
+Rendered users/show.html.erb within layouts/application (6.9ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 112ms (Views: 22.5ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:48 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/5?t=m" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"t"=>"m", "id"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+  [1m[35mCardDetail Load (0.3ms)[0m  SELECT `card_details`.* FROM `card_details` WHERE `card_details`.`user_id` = 5 LIMIT 1
+Rendered client/_payment_info.html.erb (9.5ms)
+Rendered client/_home_page.html.erb (12.0ms)
+Rendered users/show.html.erb within layouts/application (12.6ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 139ms (Views: 27.5ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/payment.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:51 +0545
+Served asset /payment.js - 304 Not Modified (0ms)
+
+
+Started GET "/users/5?t=l" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"t"=>"l", "id"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+  [1m[35mClient Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM `conversations` WHERE `conversations`.`client_id` = 5[0m
+Rendered conversations/index.html.erb (12.3ms)
+Rendered client/_home_page.html.erb (14.6ms)
+Rendered users/show.html.erb within layouts/application (15.2ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 84ms (Views: 29.1ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 12:43:55 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20110927113553)
+Migrating to CreateConversations (20110927115021)
+Migrating to AddAttachmentPhotoToUsers (20110928052252)
+Migrating to AddPersonalTaglineToUsers (20111014072907)
+Migrating to CreatePages (20111014081829)
+Migrating to CreateAppParameters (20111014112315)
+Migrating to CreateCardDetails (20111014114308)
+Migrating to AddPaymentInfoUpdatedToUsers (20111020112423)
+Migrating to AddChargedStatusToConversation (20111021084255)
+Migrating to CreateReviews (20111021103441)
+Migrating to AddLawdingoChargeToConversations (20111021111022)
+Migrating to AddPeerIdToUsers (20111102072919)
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20110927113553)
+Migrating to CreateConversations (20110927115021)
+Migrating to AddAttachmentPhotoToUsers (20110928052252)
+Migrating to AddPersonalTaglineToUsers (20111014072907)
+Migrating to CreatePages (20111014081829)
+Migrating to CreateAppParameters (20111014112315)
+Migrating to CreateCardDetails (20111014114308)
+Migrating to AddPaymentInfoUpdatedToUsers (20111020112423)
+Migrating to AddChargedStatusToConversation (20111021084255)
+Migrating to CreateReviews (20111021103441)
+Migrating to AddLawdingoChargeToConversations (20111021111022)
+Migrating to AddPeerIdToUsers (20111102072919)
+  [1m[35m (365.0ms)[0m  ALTER TABLE `users` ADD `peer_id` varchar(255)
+  [1m[36m (43.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111102072919')[0m
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (0.1ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+Migrating to AddPeerIdToUsers (20111102072919)
+  [1m[36m (341.0ms)[0m  [1mALTER TABLE `users` DROP `peer_id`[0m
+  [1m[35m (54.6ms)[0m  DELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20111102072919'
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20110927113553)
+Migrating to CreateConversations (20110927115021)
+Migrating to AddAttachmentPhotoToUsers (20110928052252)
+Migrating to AddPersonalTaglineToUsers (20111014072907)
+Migrating to CreatePages (20111014081829)
+Migrating to CreateAppParameters (20111014112315)
+Migrating to CreateCardDetails (20111014114308)
+Migrating to AddPaymentInfoUpdatedToUsers (20111020112423)
+Migrating to AddChargedStatusToConversation (20111021084255)
+Migrating to CreateReviews (20111021103441)
+Migrating to AddLawdingoChargeToConversations (20111021111022)
+Migrating to AddPeerIdToUsers (20111102072919)
+  [1m[35m (358.0ms)[0m  ALTER TABLE `users` ADD `peer_id` varchar(255) DEFAULT 0
+  [1m[36m (54.6ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111102072919')[0m
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+
+
+Started GET "/" for 127.0.0.1 at 2011-11-02 14:44:47 +0545
+  Processing by UsersController#home as HTML
+  [1m[36mLawyer Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (user_type = 'LAWYER' and is_approved is true)[0m
+Rendered users/home.html.erb within layouts/application (20.3ms)
+  [1m[35mAppParameter Load (0.2ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Completed 200 OK in 278ms (Views: 266.1ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /all.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /users.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:44:49 +0545
+Served asset /logo.png - 304 Not Modified (2ms)
+
+
+Started GET "/users/register_user_for_videochat?username=5&identity=fsfsdfsd5345435" for 127.0.0.1 at 2011-11-02 14:46:01 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"username"=>"5", "identity"=>"fsfsdfsd5345435", "id"=>"register_user_for_videochat"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 0 LIMIT 1[0m
+Redirected to http://localhost:3000/users/5
+Completed 302 Found in 47ms
+
+
+Started GET "/users/5" for 127.0.0.1 at 2011-11-02 14:46:01 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/_account_info.html.erb (4.0ms)
+Rendered client/_home_page.html.erb (7.6ms)
+Rendered users/show.html.erb within layouts/application (21.4ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 133ms (Views: 47.3ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /all.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:46:02 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+  Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (3.2ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 31ms (Views: 20.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:46:14 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/users/register_user_for_videochat?username=5&identity=fsfsdfsd5345435" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"username"=>"5", "identity"=>"fsfsdfsd5345435", "id"=>"register_user_for_videochat"}
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 40ms (Views: 17.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:46:28 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/users/register_user_for_videochat?username=5&identity=fsfsdfsd5345435" for 127.0.0.1 at 2011-11-02 14:47:44 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"username"=>"5", "identity"=>"fsfsdfsd5345435", "id"=>"register_user_for_videochat"}
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.3ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 27ms (Views: 17.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:47:45 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/users/register_user_for_videochat?username=5&identity=fsfsdfsd5345435" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"username"=>"5", "identity"=>"fsfsdfsd5345435", "id"=>"register_user_for_videochat"}
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.2ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 29ms (Views: 18.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:47:59 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/users/register_user_for_videochat?username=5&identity=fsfsdfsd5345435" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"username"=>"5", "identity"=>"fsfsdfsd5345435", "id"=>"register_user_for_videochat"}
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.3ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 103ms (Views: 79.9ms | ActiveRecord: 12.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:48:52 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:48:53 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/users/register?username=5&identity=fsfsdfsd5345435" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+  Processing by UsersController#show as HTML
+  Parameters: {"username"=>"5", "identity"=>"fsfsdfsd5345435", "id"=>"register"}
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1ms
+
+
+Started GET "/login" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+  Processing by SessionsController#new as HTML
+Rendered sessions/new.html.erb within layouts/application (2.7ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 31ms (Views: 19.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/all.css?body=1" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /all.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-11-02 14:53:03 +0545
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:53:15 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 44ms
+
+ActionView::MissingTemplate (Missing template /failure.xml with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+  * "/home/navraj/ror_workspace/videochat"
+  * "/"
+):
+  app/controllers/users_controller.rb:180:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.6ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:54:02 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 20ms (Views: 17.7ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:54:58 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 21ms (Views: 18.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:00 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 17.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:00 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:00 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 22ms (Views: 19.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:00 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:07 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 20ms (Views: 18.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:08 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:08 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 71ms (Views: 68.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:08 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:29 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 71ms (Views: 69.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:29 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:30 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 18ms (Views: 15.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:30 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:55:34 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.5ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 18ms (Views: 16.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:58:31 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 17.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:58:33 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:58:39 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:58:45 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 18ms (Views: 16.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 14:58:46 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 72ms (Views: 21.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:50 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 71ms (Views: 69.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 81ms (Views: 79.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 18ms (Views: 16.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 15.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:22:53 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:24 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 17.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:35 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.2ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 21ms (Views: 18.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 74ms (Views: 71.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:37 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:37 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 67ms (Views: 65.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:23:37 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:11 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.6ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:12 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:12 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:12 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.4ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:18 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - /users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:19 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - /users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.4ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:19 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - /users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.4ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:24:19 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Completed 500 Internal Server Error in 1ms
+
+Errno::ENOENT (No such file or directory - /users/failure.xml):
+  app/controllers/users_controller.rb:182:in `read'
+  app/controllers/users_controller.rb:182:in `rescue in register_for_videochat'
+  app/controllers/users_controller.rb:173:in `register_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:25:45 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 20ms (Views: 17.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:25:45 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.0ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:25:45 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:25:46 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 18ms (Views: 16.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:25:46 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 72ms (Views: 69.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:25:46 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 20ms (Views: 17.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:01 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.4ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:01 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:01 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 20ms (Views: 17.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:01 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:02 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 17.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:02 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:46 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.5ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 20ms (Views: 17.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 20ms (Views: 17.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 72ms (Views: 69.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 20ms (Views: 17.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 19ms (Views: 16.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[36mAppParameter Load (0.1ms)[0m  [1mSELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1[0m
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:26:47 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml within layouts/application (0.1ms)
+  [1m[35mAppParameter Load (0.1ms)[0m  SELECT `app_parameters`.* FROM `app_parameters` WHERE `app_parameters`.`name` = 'Homepage Tag Line' LIMIT 1
+Completed 200 OK in 21ms (Views: 18.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:27:30 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:28:11 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:28:11 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:28:12 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:28:12 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?username=5&identity=sdfsdfsdf2342332" for 127.0.0.1 at 2011-11-02 15:28:49 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"username"=>"5", "identity"=>"sdfsdfsdf2342332"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mSELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'nav@gmail.com' AND `users`.`id` != 5) LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  UPDATE `users` SET `peer_id` = 'sdfsdfsdf2342332', `updated_at` = '2011-11-02 09:43:49' WHERE `users`.`id` = 5
+[paperclip] Saving attachments.
+  [1m[36m (82.1ms)[0m  [1mCOMMIT[0m
+Rendered users/success.xml (0.7ms)
+Completed 200 OK in 257ms (Views: 8.5ms | ActiveRecord: 85.2ms)
+
+
+Started GET "/register?username=5&identity=sdfsdfsdf2342332" for 127.0.0.1 at 2011-11-02 15:28:52 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"username"=>"5", "identity"=>"sdfsdfsdf2342332"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'nav@gmail.com' AND `users`.`id` != 5) LIMIT 1
+[paperclip] Saving attachments.
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Rendered users/success.xml (0.1ms)
+Completed 200 OK in 93ms (Views: 5.6ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:28:59 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.0ms)
+Completed 200 OK in 6ms (Views: 5.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?username=5&identity=sdfsdfsdf2342332" for 127.0.0.1 at 2011-11-02 15:29:22 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"username"=>"5", "identity"=>"sdfsdfsdf2342332"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'nav@gmail.com' AND `users`.`id` != 5) LIMIT 1
+[paperclip] Saving attachments.
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Rendered users/success.xml (0.1ms)
+Completed 200 OK in 42ms (Views: 5.0ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:29:38 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:18 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:35 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:35 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 57ms (Views: 56.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:36 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register?friends=5" for 127.0.0.1 at 2011-11-02 15:30:59 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:33:00 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/remote_user.xml (0.6ms)
+Completed 200 OK in 96ms (Views: 6.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=6" for 127.0.0.1 at 2011-11-02 15:34:06 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 6 LIMIT 1[0m
+Rendered users/no_remote_user.xml (1.1ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    1: <?xml version="1.0" encoding="utf-8"?>
+    2: <result>
+    3:  <friend>
+    4:    <user><%= @user.id %></user>
+    5:  </friend>
+    6: </result>
+  app/views/users/no_remote_user.xml:4:in `_app_views_users_no_remote_user_xml___2329199996913472579_38547420'
+  app/controllers/users_controller.rb:193:in `rescue in find_remote_user_for_videochat'
+  app/controllers/users_controller.rb:187:in `find_remote_user_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.9ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (0.1ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+Migrating to AddPeerIdToUsers (20111102072919)
+  [1m[36m (399.7ms)[0m  [1mALTER TABLE `users` DROP `peer_id`[0m
+  [1m[35m (54.5ms)[0m  DELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20111102072919'
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateUsers (20110927113553)
+Migrating to CreateConversations (20110927115021)
+Migrating to AddAttachmentPhotoToUsers (20110928052252)
+Migrating to AddPersonalTaglineToUsers (20111014072907)
+Migrating to CreatePages (20111014081829)
+Migrating to CreateAppParameters (20111014112315)
+Migrating to CreateCardDetails (20111014114308)
+Migrating to AddPaymentInfoUpdatedToUsers (20111020112423)
+Migrating to AddChargedStatusToConversation (20111021084255)
+Migrating to CreateReviews (20111021103441)
+Migrating to AddLawdingoChargeToConversations (20111021111022)
+Migrating to AddPeerIdToUsers (20111102072919)
+  [1m[35m (383.6ms)[0m  ALTER TABLE `users` ADD `peer_id` varchar(255) DEFAULT '0'
+  [1m[36m (32.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111102072919')[0m
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+
+
+Started GET "/find_remote_user?friends=6" for 127.0.0.1 at 2011-11-02 15:38:39 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"6"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 6 LIMIT 1
+Rendered users/no_remote_user.xml (0.7ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    1: <?xml version="1.0" encoding="utf-8"?>
+    2: <result>
+    3:  <friend>
+    4:    <user><%= @user.id %></user>
+    5:  </friend>
+    6: </result>
+  app/views/users/no_remote_user.xml:4:in `_app_views_users_no_remote_user_xml___2329199996913472579_38547420'
+  app/controllers/users_controller.rb:193:in `rescue in find_remote_user_for_videochat'
+  app/controllers/users_controller.rb:187:in `find_remote_user_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.4ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:38:42 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Completed 500 Internal Server Error in 51ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.5ms)
+
+
+Started GET "/find_remote_user" for 127.0.0.1 at 2011-11-02 15:39:52 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+Rendered users/no_remote_user.xml (0.7ms)
+Completed 500 Internal Server Error in 7ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    1: <?xml version="1.0" encoding="utf-8"?>
+    2: <result>
+    3:  <friend>
+    4:    <user><%= @user.id %></user>
+    5:  </friend>
+    6: </result>
+  app/views/users/no_remote_user.xml:4:in `_app_views_users_no_remote_user_xml___2329199996913472579_38547420'
+  app/controllers/users_controller.rb:193:in `rescue in find_remote_user_for_videochat'
+  app/controllers/users_controller.rb:187:in `find_remote_user_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.5ms)
+
+
+Started GET "/find_remote_user?friends=4" for 127.0.0.1 at 2011-11-02 15:40:06 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"4"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1
+Rendered users/no_remote_user.xml (0.7ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    1: <?xml version="1.0" encoding="utf-8"?>
+    2: <result>
+    3:  <friend>
+    4:    <user><%= @user.id %></user>
+    5:  </friend>
+    6: </result>
+  app/views/users/no_remote_user.xml:4:in `_app_views_users_no_remote_user_xml___2329199996913472579_38547420'
+  app/controllers/users_controller.rb:193:in `rescue in find_remote_user_for_videochat'
+  app/controllers/users_controller.rb:187:in `find_remote_user_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.7ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:40:08 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Completed 500 Internal Server Error in 42ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.6ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:41:26 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Completed 500 Internal Server Error in 94ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.5ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:41:27 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Completed 500 Internal Server Error in 93ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.5ms)
+
+
+Started GET "/register_user" for 127.0.0.1 at 2011-11-02 15:41:34 +0545
+
+ActionController::RoutingError (No route matches [GET] "/register_user"):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2011-11-02 15:41:37 +0545
+  Processing by UsersController#register_for_videochat as HTML
+Rendered users/failure.xml (0.1ms)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/find_remote_user" for 127.0.0.1 at 2011-11-02 15:41:47 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+Rendered users/no_remote_user.xml (0.7ms)
+Completed 500 Internal Server Error in 7ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    1: <?xml version="1.0" encoding="utf-8"?>
+    2: <result>
+    3:  <friend>
+    4:    <user><%= @user.id %></user>
+    5:  </friend>
+    6: </result>
+  app/views/users/no_remote_user.xml:4:in `_app_views_users_no_remote_user_xml___2329199996913472579_38547420'
+  app/controllers/users_controller.rb:193:in `rescue in find_remote_user_for_videochat'
+  app/controllers/users_controller.rb:187:in `find_remote_user_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.4ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (5.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:41:55 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Completed 500 Internal Server Error in 41ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.6ms)
+
+
+Started GET "/find_remote_user" for 127.0.0.1 at 2011-11-02 15:44:03 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+Rendered users/no_remote_user.xml (3.6ms)
+Completed 500 Internal Server Error in 10ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    1: <?xml version="1.0" encoding="utf-8"?>
+    2: <result>
+    3:  <friend>
+    4:    <user><%= @user.id %></user>
+    5:  </friend>
+    6: </result>
+  app/views/users/no_remote_user.xml:4:in `_app_views_users_no_remote_user_xml___2329199996913472579_38547420'
+  app/controllers/users_controller.rb:192:in `rescue in find_remote_user_for_videochat'
+  app/controllers/users_controller.rb:186:in `find_remote_user_for_videochat'
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.5ms)
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (7.7ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:44:24 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Completed 500 Internal Server Error in 39ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.7ms)
+
+
+Started GET "/register?username=5&identity=sdfsfsddfsdf423324" for 127.0.0.1 at 2011-11-02 15:48:22 +0545
+  Processing by UsersController#register_for_videochat as HTML
+  Parameters: {"username"=>"5", "identity"=>"sdfsfsddfsdf423324"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  SELECT 1 FROM `users` WHERE (`users`.`email` = BINARY 'nav@gmail.com' AND `users`.`id` != 5) LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mUPDATE `users` SET `peer_id` = 'sdfsfsddfsdf423324', `updated_at` = '2011-11-02 10:03:22' WHERE `users`.`id` = 5[0m
+[paperclip] Saving attachments.
+  [1m[35m (84.5ms)[0m  COMMIT
+Rendered users/success.xml (0.1ms)
+Completed 200 OK in 129ms (Views: 5.5ms | ActiveRecord: 87.7ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:49:23 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Completed 500 Internal Server Error in 41ms
+
+ActionView::MissingTemplate (Missing template users/find_remote_user_for_videochat, application/find_remote_user_for_videochat with {:handlers=>[:erb, :builder, :coffee], :formats=>[:html], :locale=>[:en, :en]}. Searched in:
+  * "/home/navraj/ror_workspace/videochat/app/views"
+):
+  
+
+Rendered /home/navraj/.rvm/gems/ruby-1.9.2-head/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.5ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:50:27 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/remote_user.xml (87.2ms)
+Completed 200 OK in 97ms (Views: 92.3ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:52:53 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.2ms)
+Completed 200 OK in 104ms (Views: 58.7ms | ActiveRecord: 9.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:53:09 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 41ms (Views: 5.6ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:55:48 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 41ms (Views: 5.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:55:59 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 93ms (Views: 5.4ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:56:59 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 42ms (Views: 5.3ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:00 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 5.6ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:02 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 4.9ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:03 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 100ms (Views: 5.5ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:05 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 39ms (Views: 5.0ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:06 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 39ms (Views: 5.4ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:07 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 95ms (Views: 5.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:08 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 95ms (Views: 6.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:29 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 39ms (Views: 5.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:30 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 5.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:30 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 118ms (Views: 5.5ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:42 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 92ms (Views: 58.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:42 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 5.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:42 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 44ms (Views: 5.6ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:57:43 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 94ms (Views: 5.6ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:58:37 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 39ms (Views: 5.0ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:58:39 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 39ms (Views: 5.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:58:48 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 5.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:59:21 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 96ms (Views: 5.1ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:59:35 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 39ms (Views: 5.4ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:59:35 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 5.3ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:59:35 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 96ms (Views: 6.5ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:59:35 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 95ms (Views: 6.2ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 15:59:35 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 40ms (Views: 5.5ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 16:00:21 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 56ms (Views: 5.4ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 16:00:52 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1
+Rendered users/no_remote_user.xml (0.1ms)
+Completed 200 OK in 95ms (Views: 5.4ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/find_remote_user?friends=5" for 127.0.0.1 at 2011-11-02 16:01:36 +0545
+  Processing by UsersController#find_remote_user_for_videochat as HTML
+  Parameters: {"friends"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Rendered users/remote_user.xml (0.1ms)
+Completed 200 OK in 94ms (Views: 5.4ms | ActiveRecord: 2.3ms)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021111022) do
+ActiveRecord::Schema.define(:version => 20111102072919) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -81,9 +81,11 @@ ActiveRecord::Schema.define(:version => 20111021111022) do
     t.string   "skype"
     t.float    "balance",              :default => 0.0
     t.boolean  "is_online",            :default => false
+    t.boolean  "is_busy",              :default => false
     t.datetime "last_login"
     t.datetime "last_online"
     t.string   "user_type",                               :null => false
+    t.boolean  "is_approved",          :default => false
     t.text     "bar_memberships"
     t.text     "undergraduate_school"
     t.text     "law_school"
@@ -100,8 +102,8 @@ ActiveRecord::Schema.define(:version => 20111021111022) do
     t.datetime "photo_updated_at"
     t.string   "personal_tagline"
     t.string   "bar_ids"
-    t.boolean  "is_approved",          :default => false
     t.boolean  "has_payment_info",     :default => false
+    t.string   "peer_id",              :default => "0"
   end
 
 end
