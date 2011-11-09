@@ -11,12 +11,14 @@ class SessionsController < ApplicationController
       login_in_user(user.id)
       if user.is_client?
         home_path = root_path
-      elsif user.is_lawyer?        
+      elsif user.is_lawyer?
         # redirect the lawyer to the session summary page
         home_path = user_path(current_user, :t=>'l')
       elsif user.is_admin?
         home_path = user_path(user.id)
       end
+      current_user.is_online = true
+      current_user.save
       redirect_to home_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
     else
       flash.now[:notice] = "You have entered incorrect login credintial."
@@ -25,6 +27,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_user.is_online = false
+    current_user.save
     logout_user
     redirect_to login_path, :notice => "You successfully logged out"
   end
@@ -40,3 +44,4 @@ class SessionsController < ApplicationController
   end
 
 end
+

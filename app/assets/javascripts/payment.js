@@ -16,7 +16,7 @@ $(document).ready(function() {
 		}
 	});
 });
-  
+
   $("#payment-form").submit(function(event) {
     // disable the submit button to prevent repeated clicks
     $('.submit-button').attr("disabled", "disabled");
@@ -24,7 +24,7 @@ $(document).ready(function() {
     var lname = $('#card_detail_last_name').val();
     var full_name = fname + ' ' + lname;
     var card;
-    
+
     card = {
       number: $('#card_detail_card_number').val(),
       exp_month: $('#card_month').val(),
@@ -56,3 +56,4 @@ function stripeResponseHandler(status, response) {
       form$.get(0).submit();
   }
 }
+

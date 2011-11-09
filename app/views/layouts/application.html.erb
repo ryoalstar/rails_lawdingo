@@ -12,7 +12,7 @@
       <div style="margin-top: 10px;border-bottom: 2px solid grey;padding: 5px 20px 2px 5px;height: 40px;">
         <%= link_to image_tag("logo.png"), root_path, :title=>'Home Page' %>
         <%= AppParameter.service_homepage_tagline %>
-        
+
         <span style="float: right;">
           <% if logged_in?
             user = current_user
@@ -32,8 +32,23 @@
             <%= flash[:notice].html_safe %>
           </div>
         <% end %>
+
+        <% if user and user.user_type == 'LAWYER' %>
+        <div id='outer_div' style="width:2px;height:2px;overflow:hidden;">
+	        <div id="flash_div" style = "border:1px red solid;width:520px;height:630px;">
+	          <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='630' width='520'>
+	            <param name='src' value='/swf/VideoChat.swf'/>
+	            <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&imgurl=192.168.1.102:3000/images/phone.jpg&lrate=<%= user.rate %>"/>
+	            <param name="allowScriptAccess" value="always" />
+	            <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&imgurl=192.168.1.102:3000/images/phone.jpg&lrate=<%= user.rate %>"/>
+	          </object>
+	        </div>
+        </div>
+      <% end %>
+
         <%= yield %>
       </div>
+  <div><a href = "javascript:void(0);" onClick="showFlash();return(false);">Test js</a></div>
       <div style="border-top: 2px solid grey;padding: 5px 20px 2px 5px;">
         &copy; Lawdingo, Inc.
         <span style="float: right;">
@@ -43,6 +58,13 @@
           <%= link_to "Terms & Privacy", terms_page_path %>
         </span>
       </div>
-    </div>    
+    </div>
+    <script = text/javascript>
+      function showFlash()
+      {
+        $("#outer_div").width(520).height(630);
+      }
+    </script>
   </body>
 </html>
+

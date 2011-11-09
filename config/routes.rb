@@ -69,8 +69,8 @@ Lawdingo::Application.routes.draw do
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
   match '/details' => 'users#payment_info', :as => :card_detail
-  match '/register' => 'users#register_for_videochat', :as => :register_videochat
-  match '/find_remote_user' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
+  match '/Register' => 'users#register_for_videochat', :as => :register_videochat
+  match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

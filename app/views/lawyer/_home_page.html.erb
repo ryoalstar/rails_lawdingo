@@ -18,8 +18,8 @@ txt_color = ['black','blue']
 </div>
 <div style="width: 100%;margin-right: 10px;margin-top: 0px;float: left;">
   <div class="desc">
-    <% if tab == User::ACCOUNT_TAB %>      
-      <%= render :partial =>"/users/account_info" %>
+    <% if tab == User::ACCOUNT_TAB %>
+      <%= render :partial =>"/users/account_info", :locals => {:user => user} %>
     <% elsif tab == User::SESSION_TAB %>
       <%= render :template =>"/conversations/index" %>
     <% end %>
@@ -43,3 +43,4 @@ txt_color = ['black','blue']
     </div>
   </div>
 <% end %>
+

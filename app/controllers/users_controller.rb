@@ -185,7 +185,8 @@ class UsersController < ApplicationController
     remote_user_id = params[:friends] if params[:friends]
     begin
       @user = User.find(remote_user_id)
-      if @user.peer_id != '0' && @user.is_online?
+#      if @user.peer_id != '0' && @user.is_online?
+      if @user.peer_id != '0'
         render :file=>"users/remote_user.xml", :content_type => 'application/xml', :layout => false
       else
         render :file=>"users/no_remote_user.xml", :content_type => 'application/xml', :layout => false
