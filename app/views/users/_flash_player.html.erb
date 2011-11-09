@@ -1,9 +1,9 @@
 <div id="flash_div" style = "border:1px red solid;width:520px;height:630px;">
 	          <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='630' width='520'>
 	            <param name='src' value='/swf/VideoChat.swf'/>
-	            <param name='FlashVars' value="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&imgurl=174.129.180.123/images/phone.jpg&lrate=<%= @lawyer.rate %>"/>
+	            <param name='FlashVars' value="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>"/>
 	            <param name="allowScriptAccess" value="always" />
-	            <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&imgurl=174.129.180.123:3000/images/phone.jpg/images/phone.jpg&lrate=<%= @lawyer.rate %>"/>
+	            <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>"/>
 	          </object>
 </div>
 
