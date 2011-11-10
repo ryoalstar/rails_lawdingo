@@ -3,7 +3,7 @@ detail    = user.detail
 tab       = (tab == User::PAYMENT_TAB or tab == User::SESSION_TAB) ? tab : User::ACCOUNT_TAB
 txt_color = ['black','blue']
 %>
-<div style="width: 100%;margin-right: 10px;margin-top: 20px;float: left;">
+<div>
   <div class="header_mb">
     <span style="width:150px;margin-left:20px;margin-right:30px;">
       <%= link_to "Account information", user_path(user), :style =>"color:#{txt_color[ tab == 'f' ? 0 : 1]};text-decoration:none;" %>

@@ -3,7 +3,7 @@
 <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
 
   <% if errors.size > 0 %>
-    <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+    <div class="error_explanation">
       The following errors prevented from saving account <br/>
       <ul>
         <% errors.full_messages.each{|error| %>

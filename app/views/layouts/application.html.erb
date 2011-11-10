@@ -4,67 +4,111 @@
     <title>Lawdingo</title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "jquery.domwindow" %>
+    
     <%= csrf_meta_tags %>
     <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   </head>
   <body>
-    <div style="margin-left: 150px;">
-      <div style="margin-top: 10px;border-bottom: 2px solid grey;padding: 5px 20px 2px 5px;height: 40px;">
-        <%= link_to image_tag("logo.png"), root_path, :title=>'Home Page' %>
+  <div id="page">
+    <div id="header">
+      <div id="hleft">
+        <%= link_to image_tag("logo.png" ,:border=>0), root_path, :title=>'Home Page' %>
         <%= AppParameter.service_homepage_tagline %>
-
-        <span style="float: right;">
+      </div>
+      <div id="hright">
           <% if logged_in?
             user = current_user
           %>
-            Logged in as <b><%= link_to user.full_name, user_path(user.id), :title =>'Account Profile!' %></b>&nbsp;&nbsp;|
+            Logged in as <b><%= link_to user.full_name, user_path(user.id), :title =>'Account Profile!' %>|
             <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
           <% else %>
-            Lawyer? <%= link_to "Appy to Lawdingo", new_user_path(:ut=>1) %> or <%= link_to "log in", login_path  %><br/>
+            Lawyer? <%= link_to "Appy to Lawdingo", new_user_path(:ut=>1) %> or <%= link_to "log in", login_path  %>
+            <br/>
             Client? <%= link_to "Signup", new_user_path %> or <%= link_to "log in", login_path  %><br/>
           <% end %>
-        </span>
       </div>
-
-      <div style="margin: 0px 50px 0px 50px;border: 1px solid blue;border-top: none;border-bottom: none;min-height: 800px;padding:10px;">
+      <div class="clear"></div>
+    </div>
+    <div id="content">
         <% if flash[:notice] %>
-          <div style="width: auto;border: 1px solid red;padding: 2px;margin-bottom: 10px;">
+          <div class="notice">
             <%= flash[:notice].html_safe %>
           </div>
         <% end %>
-
-        <% if user and user.user_type == 'LAWYER' %>
-        <div id='outer_div' style="width:2px;height:2px;overflow:hidden;">
-	        <div id="flash_div" style = "border:1px red solid;width:520px;height:630px;">
-	          <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='630' width='520'>
-	            <param name='src' value='/swf/VideoChat.swf'/>
-	            <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>"/>
-	            <param name="allowScriptAccess" value="always" />
-	            <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>"/>
-	          </object>
-	        </div>
-        </div>
+       <%= yield %>
+       <% if user and user.user_type == 'LAWYER' %>
+          
+<div id="outer_div" style="height:2px; overflow:hidden"> 
+<a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a> 
+<div id="flash_div">
+	                   
+	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='630' width='520'>
+	              <param name='src' value='/swf/VideoChat.swf'/>
+	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>"/>
+	              <param name="allowScriptAccess" value="always" />
+	              <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>"/>
+	            </object>
+	          </div>
+          </div>
       <% end %>
-
-        <%= yield %>
       </div>
-  <div><a href = "javascript:void(0);" onClick="showFlash();return(false);">Test js</a></div>
-      <div style="border-top: 2px solid grey;padding: 5px 20px 2px 5px;">
-        &copy; Lawdingo, Inc.
-        <span style="float: right;">
-          <%= link_to "About", about_page_path %> &nbsp; | &nbsp;
-          <%= link_to "Contact", "mailto:sup@lawdingo.com" %> &nbsp; | &nbsp;
-          <%= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank' %> &nbsp; | &nbsp;
-          <%= link_to "Terms & Privacy", terms_page_path %>
-        </span>
+ 
+      <div id="footer">
+          <div id="ftleft">
+            &copy; Lawdingo, Inc.
+          </div>
+          <div id="ftright">
+            <%= link_to "About", about_page_path %> &nbsp; | &nbsp;
+            <%= link_to "Contact", "mailto:sup@lawdingo.com" %> &nbsp; | &nbsp;
+            <%= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank' %> &nbsp; | &nbsp;
+            <%= link_to "Terms & Privacy", terms_page_path %>
+          </div>
+          <div class="clear"></div>
       </div>
-    </div>
-    <script = text/javascript>
-      function showFlash()
+    
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+  function topup(divid)
+  {
+   
+ $(divid).openDOMWindow({ 
+						height:650, 
+						width:600, 
+						//positionType:'fixed', 
+						//positionTop:300, 
+						//positionLeft:300, 
+						//eventType:'click', 
+						loader:0,
+						modal:1,
+						overlay:1, 
+						windowSourceID:'#outer_div', 
+						//loaderImagePath:'../../assets/images/rails.png', 
+						loaderHeight:16, 
+						loaderWidth:17, 
+						windowSource:'inline' 
+						//windowHTTPType:'post' 
+					}); 
+  
+    
+  }  
+  function showFlash()
       {
-        $("#outer_div").width(520).height(630);
+        //$("#outer_div").width(520).height(630);
+        topup("#outer_div");
+        
       }
+
+
+
+function closecall()
+  {
+    $("#outer_div").closeDOMWindow(); 
+  }
+ 
     </script>
-  </body>
+
 </html>
 

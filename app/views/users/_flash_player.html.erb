@@ -1,4 +1,5 @@
-<div id="flash_div" style = "border:1px red solid;width:520px;height:630px;">
+<div style="text-align:center; border:solid #dadada 1px;">
+<div id="flash_div" style="width:635px;border:solid #dadada 1px; margin: 5px auto;">
 	          <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='630' width='520'>
 	            <param name='src' value='/swf/VideoChat.swf'/>
 	            <param name='FlashVars' value="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>"/>
@@ -6,4 +7,4 @@
 	            <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>"/>
 	          </object>
 </div>
-
+</div>

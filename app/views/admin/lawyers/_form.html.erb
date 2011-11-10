@@ -2,7 +2,7 @@
 <% errors = @user.errors %>
 <%= form_for @user, :url =>admin_lawyers_path do |f| %>
   <% if @user.errors.size > 0 %>
-    <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+    <div class="error_explanation">
       The following errors prevented from creating account <br/>
       <ul>
         <% errors.full_messages.each{|error| %>

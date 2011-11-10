@@ -1,5 +1,6 @@
 // Place all the styles related to the firms controller here.
 // They will automatically be included in application.css.
+
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
@@ -10,34 +11,81 @@ body{
 }
 #page{
 
+background:#fff;
   margin:0 auto;
-  width:60%;
-  font-size:80%;
+  width:80%;
+  font-size:.74em;
   #header{
-    background:#FAFAFA;
+    background: #fafafa;
     height:80px;
     #hleft{
       float:left;
-      width:49%;
+      width:48%;
       h2{
+     
         a{
-          margin-left:20px;
-          text-decoration:none;
-          color:#000;
-          font-size:100%;
+          margin-left: 20px;
+          text-decoration: none;
+          color: #ccc;
+          font-size: 2em;
+          #sp1{
+            color: #E95D2F;
+          }
+          #sp2{
+            color:#60340D;
+          }
         }
       }
     }
     #hright{
-      margin-top:20px;
-      width:49%;
+      margin:20px 20px 0 0;
+      width:48%;
       float:right;
-      text-align:right
+      text-align:right;
     }
   }
-  #main_content{
+
+
+
+.error_explanation {
+  width: 70%;
+  border: 2px solid #fafafa;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+ 
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: 0px;
+    background: #fafafa;
+    color: #000; }
+   }
+    
+  ul {
+    font-size: 12px;
+    list-style: disc;
+   margin:0;
+   padding:10px;
+   
+   li {
+   margin:2px 10px;
+    color:#E84067;
+     }
+  }
+
+
+
+  #content{
+  //background:#fcfcfc;
+  min-height:400px;
     .notice{
-      color:#126021;
+      color:#FA0E0E;
+      font-size:1.2em;
     }
 
     .left{
@@ -56,18 +104,48 @@ body{
       padding:10px 0;
     }
     form{
-      background:#fafafa;
+ 
+ 
       padding:20px;
+      .f_label{
+        height: 15px;
+        width: 250px;
+        padding: 2px;
+        float:left;
+        
+        margin-right: 15px;
+    }
+    
     }
   }
 }
 
 #footer{
-    clear:both;
-    text-align:center;
-    color:#fff;
     height:25px;
-    background:#000;
-    a{color:#fff;}
+    border-top:solid 1px #dadada;
+       
+    #ftleft{
+      text-align:left;
+      float:left;
+      width:30%;
+      font-weight:bold;
+    }
+    #ftright{
+    float:right;
+    width:69%;
+    text-align:right;
+    a{
+    padding:0 4px;
+      
+    }
+      
+    }
+    
   }
 }
+.clear{
+  clear:both;
+  
+  
+}
+
