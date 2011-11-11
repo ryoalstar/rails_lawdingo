@@ -17,8 +17,8 @@ class SessionsController < ApplicationController
       elsif user.is_admin?
         home_path = user_path(user.id)
       end
-      current_user.is_online = true
-      current_user.save
+      user.is_online = true
+      user.save
       redirect_to home_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
     else
       flash.now[:notice] = "You have entered incorrect login credintial."

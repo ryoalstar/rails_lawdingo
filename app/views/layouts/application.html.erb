@@ -35,27 +35,27 @@
           </div>
         <% end %>
         <div class="mainc">
-       <%= yield %> 
+       <%= yield %>
         </div>
-       
+
        <% if user and user.user_type == 'LAWYER' %>
-          
-<div id="outer_div" style="height:2px;position:absolute;left:-2000px;"> 
-<a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a> 
+
+<div id="outer_div" style="height:2px;position:absolute;left:-2000px;">
+<a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a>
 <div id="flash_div">
-	                   
-	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='630' width='520'>
-	              <param name="wmode" value="transparent"/> 
+
+	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='380' width='680'>
+	              <param name="wmode" value="transparent"/>
 	              <param name='src' value='/swf/VideoChat.swf'/>
-	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>"/>
+	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=1.0"/>
 	              <param name="allowScriptAccess" value="always" />
-	              <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='630' width='520' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>" wmode="transparent" ></embed>
+	              <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=1.0" wmode="transparent" ></embed>
 	            </object>
 	          </div>
           </div>
       <% end %>
       </div>
- 
+
       <div id="footer">
           <div id="ftleft">
             &copy; Lawdingo, Inc.
@@ -76,7 +76,7 @@
   function showFlash()
       {
         $('#outer_div').css({"left":"400px","top":"40px",
-                              "height":"650px","border":"solid #000 2px","padding":"2px"});
+                              "height":"380px","border":"solid #000 2px","padding":"2px"});
         $('.mainc').css("display","none");
      }
   function closecall()
@@ -87,3 +87,4 @@
 </script>
 </body>
 </html>
+
