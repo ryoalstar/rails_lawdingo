@@ -11,7 +11,11 @@
   <div id="page">
     <div id="header">
       <div id="hleft">
-        <%= link_to image_tag("logo.png" ,:border=>0), root_path, :title=>'Home Page' %>
+        <% if current_user && current_user.is_lawyer? %>
+            <%= link_to image_tag("logo.png" ,:border=>0), user_path(current_user, :t=>'l'), :title=>'Home Page' %>
+          <% else %>
+            <%= link_to image_tag("logo.png" ,:border=>0), root_path, :title=>'Home Page' %>
+         <% end %>
         <%= AppParameter.service_homepage_tagline %>
       </div>
       <div id="hright">
@@ -47,9 +51,9 @@
 	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='380' width='680'>
 	              <param name="wmode" value="transparent"/>
 	              <param name='src' value='/swf/VideoChat.swf'/>
-	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=1.0"/>
+	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
 	              <param name="allowScriptAccess" value="always" />
-	              <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=1.0" wmode="transparent" ></embed>
+	              <embed name='mySwf' src='/swf/VideoChat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" wmode="transparent" ></embed>
 	            </object>
 	          </div>
           </div>

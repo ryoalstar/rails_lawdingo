@@ -6,7 +6,7 @@ txt_color = ['black','blue']
 <div>
   <div class="header_mb">
     <span style="width:150px;margin-left:20px;margin-right:30px;">
-      <%= link_to "Account information", user_path(user), :style =>"color:#{txt_color[ tab == 'f' ? 0 : 1]};text-decoration:none;" %>
+      <%= link_to "Account information", user_path(user, :t =>User::ACCOUNT_TAB), :style =>"color:#{txt_color[ tab == 'f' ? 0 : 1]};text-decoration:none;" %>
     </span>|
     <span style="width:150px;margin-left:20px;margin-right:30px;">
       <%= link_to "Payment info", user_path(user, :t =>User::PAYMENT_TAB), :style =>"color:#{txt_color[ tab == 'm' ? 0 : 1]};text-decoration:none;" %>

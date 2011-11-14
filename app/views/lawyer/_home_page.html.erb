@@ -2,14 +2,14 @@
 <%
 detail  = user.detail
 photo_url = user.photo.url(:medium)
-tab       = tab == User::SESSION_TAB ? tab : User::ACCOUNT_TAB
+tab       = tab == User::ACCOUNT_TAB ? tab : User::SESSION_TAB
 txt_color = ['black','blue']
 %>
 
 <div>
   <div class="header_mb">
     <span>
-      <%= link_to "Account information", user_path(user), :style =>"color:#{txt_color[ tab == User::ACCOUNT_TAB ? 0 : 1]};text-decoration:none;" %>
+      <%= link_to "Account information", user_path(user, :t =>User::ACCOUNT_TAB), :style =>"color:#{txt_color[ tab == User::ACCOUNT_TAB ? 0 : 1]};text-decoration:none;" %>
     </span>|
     <span>
       <%= link_to "Summary of sessions", user_path(user, :t =>User::SESSION_TAB), :style =>"color:#{txt_color[ tab == User::SESSION_TAB ? 0 : 1]};text-decoration:none;" %>

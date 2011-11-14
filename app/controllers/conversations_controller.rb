@@ -1,6 +1,7 @@
 class ConversationsController < ApplicationController
-  before_filter :authenticate
-  
+  before_filter :authenticate, :except => [:create]
+  #skip_before_filter :verify_authenticity_token, :only =>[:create]
+
   def index
     @conversations = current_user.corresponding_user.conversations
   end
@@ -37,3 +38,4 @@ class ConversationsController < ApplicationController
   end
 
 end
+

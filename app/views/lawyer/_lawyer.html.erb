@@ -17,11 +17,16 @@
     <span style="font-size: 20px;font-weight: bold;float: right;">$<%= lawyer.rate %> /min</span> <br/>
     <span style="float: right;"> +$<%= @app_charge || AppParameter.service_charge_value %>/min fees </span><br/>
     <span style="float:right;"> free initial consultation</span><br/>
+
+      <%= link_to image_tag("request_session.png"), user_chat_session_path(lawyer), :title =>"Request for a session!", :class =>'lawyer_profile', :remote =>true, :'data-lid' =>lawyer.id %>
+
     <% if lawyer.is_online? %>
-      <%= link_to image_tag("request_session.png"), user_chat_session_path(lawyer), :title =>"Request for a session!" %>
-    <% else %>      
-      <%= link_to image_tag("request_session.png"), "#", :title =>"Request to schedule a session!" %>
+          <% link_to image_tag("request_session.png"), user_chat_session_path(lawyer), :title =>"Request for a session!", :class =>'lawyer_profile' %>
+    <% else %>
+      <%#= link_to image_tag("request_session.png"), "#", :title =>"Request to schedule a session!" %>
+      <%= link_to "Schedule a session", "#", :title =>"Request to schedule a session!" %>
     <% end %>
-    <br/>    
+    <br/>
   </div>
 </div>
+

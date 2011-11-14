@@ -9,9 +9,18 @@ class UsersController < ApplicationController
   #before_filter :remove_ssl, :only => ['home']
 
   def index
+    @tab  = params[:t] ? params[:t] : User::SESSION_TAB
+    if User::PAYMENT_TAB == @tab
+      @card_detail = current_user.card_detail || CardDetail.new
+    elsif User::SESSION_TAB == @tab
+      @conversations = current_user.corresponding_user.conversations
+    end
   end
 
   def home
+    if current_user and current_user.is_lawyer?
+      redirect_to users_path(:t=>'l')
+    end
     @lawyers = Lawyer.home_page_lawyers
   end
 
@@ -19,7 +28,8 @@ class UsersController < ApplicationController
     begin
       @user = User.find params[:id]
       @user = Lawyer.find(@user.id) if @user.is_lawyer?
-      @tab  = params[:t] ? params[:t] : User::ACCOUNT_TAB
+#      @tab  = params[:t] ? params[:t] : User::ACCOUNT_TAB
+      @tab  = params[:t] ? params[:t] : User::SESSION_TAB
       if User::PAYMENT_TAB == @tab
         @card_detail = current_user.card_detail || CardDetail.new
       elsif User::SESSION_TAB == @tab
@@ -131,6 +141,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def onlinestatus
+    begin
+      user = User.find params[:user_id]
+    rescue
+    end
+    if user
+      render :text => ((!user.is_busy? && user.is_online?) ? '1' : '0') and return
+    else
+      render :text =>'0' and return
+    end
+  end
 
   # start chat session with chosen lawyer
   # for logged in user
@@ -167,6 +188,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_busy_status
+    user = User.find(params[:id])
+    bool = params[:busy] == 'true' ? true : false
+    user.update_attribute(:is_busy, bool)
+    render :text => "true", :layout => false
+  end
+
   def register_for_videochat
     u_id = params[:username] if params[:username]
     peer_id = params[:identity] if params[:identity]
@@ -185,8 +213,7 @@ class UsersController < ApplicationController
     remote_user_id = params[:friends] if params[:friends]
     begin
       @user = User.find(remote_user_id)
-#      if @user.peer_id != '0' && @user.is_online?
-      if @user.peer_id != '0'
+      if @user.peer_id != '0' && @user.is_online? && !@user.is_busy?
         render :file=>"users/remote_user.xml", :content_type => 'application/xml', :layout => false
       else
         render :file=>"users/no_remote_user.xml", :content_type => 'application/xml', :layout => false

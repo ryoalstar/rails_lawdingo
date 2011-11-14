@@ -4,3 +4,18 @@
     <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
   <% } %>
 </div>
+<script type="text/javascript">
+  $("a.lawyer_profile").live('click', function(link){
+      var lid = $(this).data('lid');
+      var url = 'users/' + lid + '/onlinestatus';
+      var curl = this.href;
+      $.get(url, function(res){
+        if(res == '0')
+         alert('This lawyer is not available for the service!');
+        else
+         document.location = curl;
+      });
+    }
+  );
+</script>
+

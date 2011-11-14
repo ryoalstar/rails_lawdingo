@@ -14,6 +14,7 @@ Lawdingo::Application.routes.draw do
   resources :users do
     put 'image_upload'
     get 'chat_session'
+    get 'onlinestatus'
   end
 
   resources :sessions
@@ -71,6 +72,7 @@ Lawdingo::Application.routes.draw do
   match '/details' => 'users#payment_info', :as => :card_detail
   match '/Register' => 'users#register_for_videochat', :as => :register_videochat
   match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
+  match '/UpdateBusyStatus' => 'users#update_busy_status', :as => :UpdateBusyStatus
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

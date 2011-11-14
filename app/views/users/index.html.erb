@@ -1,5 +1,5 @@
 
-<% if logged_in? %>  
+<% if logged_in? %>
   <%
   rfile = nil
   case current_user.user_type
@@ -12,12 +12,13 @@
   end
 %>
 <% if rfile %>
-  <%= render :partial =>rfile, :locals =>{:user =>current_user} %>
+  <%= render :partial =>rfile, :locals =>{:user =>current_user, :tab =>@tab} %>
 <% end %>
-<% else %>  
+<% else %>
   <%= render :template =>'/sessions/new' %>
 <% end %>
 
 <style type="text/css">
-  
+
 </style>
+
