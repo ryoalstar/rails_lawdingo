@@ -24,8 +24,8 @@
             <td> <%= con.start_date %> </td>
             <td> <%= seconds_in_string con.duration %> </td>
             <td> <%= seconds_in_string con.billable_time %> </td>
-            <td> $<%= number_to_currency con.lawyer_rate %>/min </td>
-            <td> $<%= number_to_currency con.lawyer_earning %> </td>
+            <td> <%= number_to_currency con.lawyer_rate %>/min </td>
+            <td> <%= number_to_currency con.lawyer_earning %> </td>
           </tr>
         <% } %>
         <% user = current_user.corresponding_user %>
@@ -63,9 +63,9 @@
             <td> <%= con.start_date %> </td>
             <td> <%= seconds_in_string con.duration %> </td>
             <td> <%= seconds_in_string con.billable_time %> </td>
-            <td> $<%= number_to_currency con.lawyer_rate %>/min </td>
-            <td> $<%= number_to_currency con.lawdingo_charge %> </td>
-            <td> $<%= number_to_currency con.billed_amount %> </td>
+            <td> <%= number_to_currency con.lawyer_rate %>/min </td>
+            <td> <%= number_to_currency con.lawdingo_charge %> </td>
+            <td> <%= number_to_currency con.billed_amount %> </td>
           </tr>
         <% } %>
         <% user = current_user.corresponding_user %>
