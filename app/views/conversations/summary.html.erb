@@ -3,10 +3,10 @@
   <h2> Summary of Conversation </h2><br/>
   Conversation with <b> <%= @conversation.lawyer_name %> </b><hr/>
   Duration of session : <%= @conversation.duration %> minutes <br/>
-  Billable time : <%= @conversation.billable_time %><br/>
-  Lawyer's rate : <%= @conversation.lawyer_rate   %><br/>
-  Lawdingo's fee : <%= @conversation.lawdingo_charge %><br/>
-  Amount Billed : <%= @conversation.billed_amount %><br/>
+  Billable time : <%= @conversation.billable_time %> minute(s)<br/>
+  Lawyer's rate : $<%= @conversation.lawyer_rate   %><br/>
+  Lawdingo's fee : $<%= @conversation.lawdingo_charge %><br/>
+  Amount Billed : $<%= @conversation.billed_amount %><br/>
 
   <hr/>
   <%= link_to "Back to home", root_path %> &nbsp;&nbsp;
@@ -15,3 +15,4 @@
 <% else %>
   Nothing to show!
 <% end %>
+
