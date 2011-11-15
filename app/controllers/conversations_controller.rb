@@ -1,6 +1,7 @@
 class ConversationsController < ApplicationController
   before_filter :authenticate, :except => [:create]
-  #skip_before_filter :verify_authenticity_token, :only =>[:create]
+  protect_from_forgery :except =>[:create]
+#  skip_before_filter :protect_from_frogery, :only =>[:create]
 
   def index
     @conversations = current_user.corresponding_user.conversations
@@ -17,8 +18,9 @@ class ConversationsController < ApplicationController
   # the id of the newly created conversation
   # then the flash redirects to the review page for this conversation
   def create
-    conversation = Conversation.create_conversation(params[:conversation])
-    render :text => conversation ? conversation.id.to_s : "0"
+    conversation = Conversation.create_conversation(params)
+    redirect_to conversation_summary_path(conversation)
+#    render :text => conversation ? conversation.id.to_s : "0"
   end
 
   def review

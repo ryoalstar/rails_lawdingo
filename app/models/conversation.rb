@@ -2,37 +2,38 @@ class Conversation < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :lawyer
-  
+
   after_create :process_payment
 
   def self.create_conversation input_params
-    #    client_id       = input_params[:client_id]
-    #    lawyer_id       = input_params[:lawyer_id]
-    #    start_date      = input_params[:start_date]
-    #    end_date        = input_params[:end_date]
-    #    billable_time   = input_params[:billable_time]
+    client_id       = input_params[:client_id]
+    lawyer_id       = input_params[:lawyer_id]
+    start_date      = input_params[:start_date]
+    end_date        = input_params[:end_date]
+    billable_time   = input_params[:billable_time] || "0"
     lawdingo_charge = AppParameter.service_charge_value
-    
-    client_id       = 2
-    lawyer_id       = 1
-    start_date      = Time.now
-    end_date        = Time.now + 1888
-    billable_time   = ((end_date - start_date)/60).round
+
+    #client_id       = 2
+    #lawyer_id       = 1
+    #start_date      = Time.now
+    #end_date        = Time.now + 1888
+    #billable_time   = ((end_date - start_date)/60).round
 
     begin
       lawyer = Lawyer.find(lawyer_id)
     rescue
+      logger.info("No Lawyer found")
       lawyer = nil
     end
-    
+
     if lawyer
       billing_rate  = lawyer.rate
       # calculate billing amount
-      billed_amount = billable_time * billing_rate + lawdingo_charge
+      billed_amount = billable_time.to_f * (billing_rate + lawdingo_charge)
 
       conversation = self.create(:client_id =>client_id, :lawyer_id =>lawyer_id, :lawyer_rate =>billing_rate,
         :start_date =>start_date, :end_date =>end_date,:billable_time =>billable_time,
-        :lawdingo_charge =>lawdingo_charge, :billed_amount =>billed_amount  )
+        :lawdingo_charge =>lawdingo_charge, :billed_amount =>billed_amount, :paid_to_lawyer =>false )
     else
       conversation = nil
     end
@@ -55,7 +56,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def lawyer_earning
-    self.billed_amount - self.lawdingo_charge
+    self.lawyer_rate * self.billable_time
   end
 
   # in seconds
@@ -71,18 +72,20 @@ class Conversation < ActiveRecord::Base
       user = nil
     end
     if user
-      payment_obj = self.class.process_card user.card_detail, self.id, self.billed_amount
+      if self.billable_time > 0
+        payment_obj = self.class.process_card user.card_detail, self.id, self.billed_amount
+      end
       # change payment status
       self.update_attributes(:has_been_charged => true, :payment_params =>payment_obj.to_json) if payment_obj
     end
   end
 
   # actual process for payment
-  def self.process_card card_detail, conversation_id = 1, billed_amount = 10
-    begin     
+  def self.process_card card_detail, conversation_id, billed_amount
+    begin
       # create the charge on Stripe's servers - this will charge the user's card
-      charge = Stripe::Charge.create(        
-        :card => {                
+      charge = Stripe::Charge.create(
+        :card => {
           :number           => card_detail.card_number,
           :exp_month        => card_detail.expire_month,
           :exp_year         => card_detail.expire_year,
@@ -96,7 +99,7 @@ class Conversation < ActiveRecord::Base
         :amount             => (billed_amount * 100).to_i, # amount in cents
         :currency           => "usd",
         :description        => "Charge for conversation with id: #{conversation_id}"
-      )            
+      )
     rescue Exception =>exp
       charge = nil
       logger.error("Unable to charge conversation with id: #{conversation_id}\n" + exp.message)
@@ -106,3 +109,4 @@ class Conversation < ActiveRecord::Base
 
   #--------------------------------------------------#
 end
+

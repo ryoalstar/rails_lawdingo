@@ -43,9 +43,6 @@ class SessionsController < ApplicationController
   end
 
   def reset_user_session user
-    if session[:user_id]= user.id
-      session[:user_id] = nil
-    end
     user.update_attributes(:is_online =>false, :is_busy =>false, :peer_id =>'0')
   end
 

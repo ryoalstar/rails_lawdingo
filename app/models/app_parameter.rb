@@ -17,7 +17,7 @@ class AppParameter < ActiveRecord::Base
     charge_value = charge ? charge.value : '0.75'
     charge_value.to_f
   end
-  
+
   def self.service_homepage_tagline
     tag = self.find_by_name(self::HOMEPAGE_TAG_LINE)
     return tag ? tag.value : ''
@@ -25,3 +25,4 @@ class AppParameter < ActiveRecord::Base
 
 
 end
+

@@ -6,6 +6,19 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+    <% if RAILS_ENV == 'production' %>
+    <script type="text/javascript">
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-3494749-4']);
+       _gaq.push(['_trackPageview']);
+
+       (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
+    </script>
+  <% end %>
  </head>
  <body>
   <div id="page">
@@ -63,7 +76,7 @@
       <div id="footer">
           <div id="ftleft">
             &copy; Lawdingo, Inc.
-          <a href="javascript:showFlash()">Open caller window</a>
+          <!--a href="javascript:showFlash()">Open caller window</a-->
           </div>
           <div id="ftright">
             <%= link_to "About", about_page_path %> &nbsp; | &nbsp;
