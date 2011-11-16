@@ -8,8 +8,6 @@ class ConversationsController < ApplicationController
   end
 
   def new
-    @lawyer = User.find(params[:lawyer_id])
-    @lawyer.update_attribute(:is_busy, false)
     conversation = Conversation.create_conversation(params[:conversation])
     redirect_to conversation_summary_path(conversation)
   end

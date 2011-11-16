@@ -190,7 +190,7 @@ class UsersController < ApplicationController
 
   def update_busy_status
     user = User.find(params[:id])
-    bool = params[:busy] == 'true' ? true : false
+    bool = params[:busy].to_i == 1 ? true : false
     user.update_attribute(:is_busy, bool)
     render :text => "true", :layout => false
   end
