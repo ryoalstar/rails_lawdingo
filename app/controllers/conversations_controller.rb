@@ -18,6 +18,8 @@ class ConversationsController < ApplicationController
   # the id of the newly created conversation
   # then the flash redirects to the review page for this conversation
   def create
+    lawyer = User.find(params[:lawyer_id])
+    lawyer.update_attribute(:is_busy, 0)
     conversation = Conversation.create_conversation(params)
     redirect_to conversation_summary_path(conversation)
 #    render :text => conversation ? conversation.id.to_s : "0"

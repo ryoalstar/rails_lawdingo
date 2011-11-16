@@ -63,10 +63,10 @@
 
 	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='380' width='680'>
 	              <param name="wmode" value="transparent"/>
-	              <param name='src' value='/swf/chat.swf'/>
+	              <param name='src' value='/swf/vchat.swf'/>
 	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
 	              <param name="allowScriptAccess" value="always" />
-	              <embed name='mySwf' src='/swf/chat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" wmode="transparent" ></embed>
+	              <embed name='mySwf' src='/swf/vchat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" wmode="transparent" ></embed>
 	            </object>
 	          </div>
           </div>
