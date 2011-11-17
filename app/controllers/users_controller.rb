@@ -93,7 +93,8 @@ class UsersController < ApplicationController
     end
     unless params[:return_url].blank?
       @msg = status ? 'Account Updated Successfully' : nil
-      render :action =>:show and return
+      #render :action =>:show, :t => User::ACCOUNT_TAB and return
+      redirect_to params[:return_url], :notice => @msg and return
     end
     if status
       redirect_to root_path, :notice =>"Account Updated Successfully"

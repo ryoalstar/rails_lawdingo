@@ -16,7 +16,7 @@ module ApplicationHelper
     n_sec = num_of_seconds.to_i
     t_str = ""
     if n_sec < 60
-      t_str = ["00" , n_sec.to_s.rjust(2, "0")].join(":")
+      t_str = ["00", "00" , n_sec.to_s.rjust(2, "0")].join(":")
     elsif
       hours = n_sec / 3600
       rem   = n_sec % 3600
@@ -28,3 +28,4 @@ module ApplicationHelper
   end
 
 end
+

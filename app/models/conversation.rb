@@ -52,7 +52,7 @@ class Conversation < ActiveRecord::Base
 
   # in minute
   def duration
-    ((self.end_date - self.start_date)/60).round
+    self.end_date - self.start_date
   end
 
   def lawyer_earning
@@ -61,7 +61,7 @@ class Conversation < ActiveRecord::Base
 
   # in seconds
   def billed_time
-    self.billable_time
+    self.billable_time * 60
   end
 
   #--------------- Payment Part ---------------------#
