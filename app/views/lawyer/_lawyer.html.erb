@@ -1,32 +1,29 @@
-
-<div class="lawyer_temp" id="lawyer_<%= lawyer.id %>">
-  <div style="float:left;width:105px;padding-top: 0px;height: 100px;">
-    <%= image_tag lawyer.photo.url(:thumb),:style=>"border:solid #000 0px;height:120px;width:120px" %>
-  </div>
-  <div style="float:left;margin-left: 45px;">
-    <span class="header_text">
-      Attorney <%= lawyer.full_name %>
-    </span>
-    <% unless lawyer.bar_memberships.blank? %> , licensed in <%= lawyer.bar_memberships %> <% end %>
-    <br/>
-    <%= lawyer.personal_tagline %><br/>
-    Specialties : <%= lawyer.practice_areas %><br/>
-    <%= image_tag "ck.png", :height=>"20", :width =>"20" %> &nbsp;<span style="color:grey;"> Bar memberships and credentials verified </span>
-  </div>
-  <div style="float:right;width:180px;">
-    <span style="font-size: 20px;font-weight: bold;float: right;">$<%= lawyer.rate %> /min</span> <br/>
-    <span style="float: right;"> +$<%= @app_charge || AppParameter.service_charge_value %>/min fees </span><br/>
-    <span style="float:right;"> free initial consultation</span><br/>
-
-      <%= link_to image_tag("request_session.png"), user_chat_session_path(lawyer), :title =>"Request for a session!", :class =>'lawyer_profile', :remote =>true, :'data-lid' =>lawyer.id %>
-
+<div class="row" id="lawyer_<%= lawyer.id %>">
+  <%= hidden_field(:current, :lid) %>
+    <!-- CALL TO ACTION -->
+    <div class="action">
     <% if lawyer.is_online? %>
-          <% link_to image_tag("request_session.png"), user_chat_session_path(lawyer), :title =>"Request for a session!", :class =>'lawyer_profile' %>
-    <% else %>
-      <%#= link_to image_tag("request_session.png"), "#", :title =>"Request to schedule a session!" %>
-      <%= link_to "Schedule a session", "#", :title =>"Request to schedule a session!" %>
-    <% end %>
-    <br/>
-  </div>
+      <%= link_to "Start Video Consultation", user_chat_session_path(lawyer), :title =>"Start Video Consultation", :class =>'button' %>
+      <% else %>
+      <a href="#schedule_session" data-l_id="<%= lawyer.id %>" class="dialog-opener button yellow">Schedule Session</a>
+      <% end %>
+        <div class="price">
+            <span class="amt"><sup class="curr">$</sup><%= lawyer.rate %></span><span class="rate">/min</span><span class="xtra">+<%= @app_charge || AppParameter.service_charge_value %>/min fees</span>
+            <div class="free">free initial consultation</div>
+        </div>
+    </div>
+    <!-- END CALL TO ACTION -->
+
+    <%= image_tag lawyer.photo.url(:thumb, :alt => "#{lawyer.full_name}") %>
+
+    <!-- RESULT INFO -->
+    <div class="info">
+        <h3>Attorney <%= lawyer.full_name %></h3>, <% unless lawyer.bar_memberships.blank? %> , licensed in <%= lawyer.bar_memberships %> <% end %>
+        <div class="tagline"><%= lawyer.personal_tagline %></div>
+        <div class="specialities">Specialties : <%= lawyer.practice_areas %></div>
+        <div class="verified">Bar membership and credentials verified</div>
+    </div>
+    <div class="clear"></div>
+    <!-- END RESULT INFO -->
 </div>
 

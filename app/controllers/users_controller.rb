@@ -189,6 +189,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def send_email_to_lawyer
+    if !current_user.nil?
+      begin
+        @lawyer = User.find(params[:l2])
+        msg = params[:email_msg]
+        UserMailer.schedule_session_email(current_user, @lawyer.email, msg).deliver
+      rescue
+      end
+      render :text => '1', :layout => false
+    else
+      render :text => '0', :layout => false
+    end
+  end
+
   def update_busy_status
     user = User.find(params[:id])
     bool = params[:busy].to_i == 1 ? true : false

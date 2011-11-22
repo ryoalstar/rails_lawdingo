@@ -5,14 +5,14 @@ class User < ActiveRecord::Base
   LAWYER_TYPE = 'LAWYER'
   ACCOUNT_TAB = 'f'
   PAYMENT_TAB = 'm'
-  SESSION_TAB = 'l'  
-  
+  SESSION_TAB = 'l'
+
   has_one :card_detail
 
   validates :full_name, :email, :user_type, :presence =>true
-  validates :email, :uniqueness =>true      
+  validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
-  
+
   attr_accessor :password
 
   has_attached_file :photo,
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     hash
   end
 
-  def password=(value)    
+  def password=(value)
     unless value.blank?
       self.hashed_password = Digest::SHA1.hexdigest(value)
     end
@@ -75,10 +75,11 @@ class User < ActiveRecord::Base
 
   def self.get_clients
     self.where("user_type = '#{self::CLIENT_TYPE}'").order('id desc')
-  end  
+  end
 
   def corresponding_user
     self.is_client? ? Client.find(self.id) : Lawyer.find(self.id)
   end
 
 end
+

@@ -1,0 +1,47 @@
+#results {
+    .row {
+        min-height: 98px;
+        padding: 10px;
+        border-bottom: 1px solid #cfcfcf;
+        &:last-child { border: none; }
+        img { border: solid 1px #cecece; float: left; }
+        .action { float: right; }
+        .info {
+            color: #666;
+            width: 610px;
+            font-size: 1.6em;
+            float: left;
+            margin-left: 10px;
+
+            h3 {
+                color: #000;
+                margin: 0px;
+                display: inline;
+            }
+
+            .verified {
+                background: url(certified.png) no-repeat left center transparent;
+                color: #6c6c6c;
+                font-size: 0.8em;
+                height: 22px;
+                line-height: 22px;
+                padding-left: 25px;
+                margin-top: 6px;
+            }
+        }
+    }
+}
+
+.price {
+    color: #333;
+    &>span { display:inline-block; margin: 4px 0px;}
+    .amt {
+        font-size: 3em;
+        font-weight: bold;
+    }
+    .rate { font-size: 1.8em;}
+    .xtra { color: #666; margin-left: 4px; }
+    .free { color: #666; font-size: 1.2em; }
+    .curr { font-weight: normal; position: relative; top: 6px; font-size: 0.75em;}
+}
+

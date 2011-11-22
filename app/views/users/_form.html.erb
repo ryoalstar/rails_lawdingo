@@ -1,9 +1,13 @@
+
 <% errors = @user.errors %>
 <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
   <% if errors.size > 0 %>
+
+
     <div class="error_explanation">
-      The following errors prevented from creating account <br/>
-      <ul>        
+
+                       <h4 class="error">Please fix the following errors:</h4>                    <ul class="errors">
+
         <% errors.full_messages.each{|error| %>
           <li><%= error %></li>
         <% } %>
@@ -11,49 +15,55 @@
     </div>
   <% end %>
 
+
   <%= hidden_field_tag :user_type, @user[:user_type] %>
 
   <div class="f_label"> Name : </div>
-  <%= f.text_field :full_name %> <br/>
+  <%= f.text_field :full_name ,{:placeholder=>"Full Name",:class=>"name"} %>
 
   <div class="f_label">Email:</div>
-  <%= f.text_field :email %><br/>
+  <%= f.text_field :email,{:placeholder=>"Email Address",:class=>"email"} %><br/>
 
   <div class="f_label">Password:</div>
-  <%= f.password_field :password %><br/>
+  <%= f.password_field :password ,{:placeholder=>"Password",:class=>"passw"} %><br/>
+
+<%# if !@user.is_lawyer? %>
+                    <!--select>
+                        <option>Select state</option>
+                        <option>Alabama</option>
+                        <option>Arkansas</option>
+                    </select-->
+<%# end %>
+
 
   <% if @user.is_lawyer?  %>
 
-    <div class="f_label">Personal Tagline:</div>
-    <%= f.text_field :personal_tagline %><br/>   
-
-    <div class="f_label">Undergraduate School:</div>
-    <%= f.text_field :undergraduate_school %><br/>
-
-    <div class="f_label">Law School:</div>
-    <%= f.text_field :law_school %><br/>
+    <div class="f_label">Practice Areas </div>
+    <%= f.text_field :practice_areas,{:placeholder=>"Practice areas" ,:rows=>4} %>
 
     <div class="f_label">Bar Membership(s):</div>
-    <%= f.text_area :bar_memberships, :size =>'50x3' %><br/>
+    <%= f.text_field :bar_memberships,{:placeholder=>"Bar membership(s)",:rows=>4} %>
 
     <div class="f_label">Bar ID(s):</div>
-    <%= f.text_field :bar_ids %> <br/>
+    <%= f.text_field :bar_ids,{:placeholder=>"Bar ID(s)"} %>
 
-    <div class="f_label">Practice Areas: </div>
-    <%= f.text_area :practice_areas, :size =>'50x3' %><br/>
-
-    <div class="f_label">Per-minute Rate:</div>
-    $<%= f.text_field :rate %>/minute<br/>
-
-    <div class="f_label"></div>
-    <span style="font-size:12px;">note that Lawdingo charges a $<%= AppParameter.service_charge_value %>/minute fee on top of this to clients</span><br/>
+    <div class="f_label">Per-minute Rate($)</div>
+    <%= f.text_field :rate ,{:placeholder=>"Per minute rate",:class=>"paypal"} %><br/>
 
     <div class="f_label">Pay-pal Email:</div>
-    <%= f.text_field :payment_email %><br/>
-    <div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/>
+    <%= f.text_field :payment_email ,{:placeholder=>"Paypal email(for payments)",:class=>"paypal"} %><br/>
+
+    <div class="f_label">Professional Summary:</div>
+    <%= f.text_area :personal_tagline ,{:placeholder=>"Professional summary (100 chars)", :class=>"summary",:maxlength => 100, :rows=>2} %>
+
+    <div class="f_label"></div>
+    Note that Lawdingo charges a $<%= AppParameter.service_charge_value %>/minute fee on top of this to clients</span><br/><br/>
+
+
+    <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
   <% end %>
-  <div style="margin: 10px 10px 10px 270px;">
-    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account') %>
-    &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
-  </div>
+
+    <div class="f_label"></div>
+    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
 <% end %>
+

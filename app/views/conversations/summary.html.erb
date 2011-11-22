@@ -1,18 +1,31 @@
-
-<% if @conversation %>
-  <h2> Summary of Conversation </h2><br/>
-  Conversation with <b> <%= @conversation.lawyer_name %> </b><hr/>
-  Duration of session : <%= @conversation.duration %> minutes <br/>
-  Billable time : <%= @conversation.billable_time %> minute(s)<br/>
-  Lawyer's rate : $<%= @conversation.lawyer_rate   %><br/>
-  Lawdingo's fee : $<%= @conversation.lawdingo_charge %><br/>
-  Amount Billed : $<%= @conversation.billed_amount %><br/>
-
-  <hr/>
-  <%= link_to "Back to home", root_path %> &nbsp;&nbsp;
-  <%= link_to "All conversations", user_path(current_user,:t =>'l'), :title =>"List of all your conversations!" %>
-
-<% else %>
-  Nothing to show!
-<% end %>
+        <div id="page">
+            <div>
+                <div class="inner session-complete">
+                    <div class="column">
+                        <h3>Session completed.</h3>
+                    </div>
+                    <div class="column">
+                        <h3>Session summary:</h3>
+                        <% if @conversation
+                          lawyer = @conversation.lawyer
+                        %>
+                        <ul>
+                            <li>Billed time elapsed: <%= @conversation.billable_time %> minute(s)</li>
+                            <li>Attorney's rate: $<%= @conversation.lawyer_rate %>/minute</li>
+                            <li>Lawdingo's rate: $<%= AppParameter.service_charge_value %>/minute</li>
+                            <li>Amount billed: $<%= @conversation.billed_amount %></li>
+                        </ul>
+                        <% if lawyer.is_online? && !lawyer.is_busy %>
+                            <%= link_to "Restart Session", user_chat_session_path(lawyer), :title =>"Restart Session", :class =>'button blue' %>
+                        <% end %>
+                        <%= link_to "<< Go home", root_path %>
+                        <%= link_to 'View all my previous sessions >>', user_path(current_user,:t =>'l'), :title => 'View all my previous sessions' %>
+                    </div>
+                    <% else %>
+                      Nothing to show!
+                    <% end %>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
 

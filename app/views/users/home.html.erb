@@ -1,21 +1,60 @@
+<div id="page">
+          <div>
+                <!-- FILTERS -->
+                <div id="filters">
+                <!--    Show
+                    <select name="type" id="type" size="1">
+                        <option value="dvcr">Divorce</option>
+                        <option value="crim">Criminal</option>
+                    </select>
+                    lawyers, licensed in
+                    <select name="city" id="city" size="1">
+                        <option value="new york">New York</option>
+                        <option value="boston">Boston</option>
+                    </select>,
+                    who can help me with
+                    <select name="help" id="help" size="1">
+                        <option value="chld">Child custody</option>
+                        <option value="trfk">Traffic violations</option>
+                    </select>.
+                -->
+                </div>
+                <!-- END FILTERS -->
 
-<div>
-  <% @lawyers.each{|lawyer| %>
-    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
-  <% } %>
+                <!-- RESULTS -->
+                <div id="results">
+                      <% @lawyers.each{|lawyer| %>
+                    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+                  <% } %>
+
+
+                </div>
+      </div>
+
 </div>
 <script type="text/javascript">
-  $("a.lawyer_profile").live('click', function(link){
-      var lid = $(this).data('lid');
-      var url = 'users/' + lid + '/onlinestatus';
-      var curl = this.href;
-      $.get(url, function(res){
-        if(res == '0')
-         alert('This lawyer is not available for the service!');
-        else
-         document.location = curl;
-      });
-    }
-  );
+function sendMessage(){
+  close_dialogs();
+  var msg = $('textarea#txt_msg').val();
+  var l1 = $("#current_lid").val();
+  if(msg != "")
+  {
+    $.ajax({
+        url: "/ScheduleSession",
+        type:'post',
+        data:{email_msg: msg,l2: l1},
+        success: function(response){
+              if(response == '1')
+                alert('Message has been delivered to the lawyer');
+              else{
+                alert('Problem sending message. You may not be logged in');
+              }
+            }
+    });
+  }else
+  {
+    alert('You can not send the blank message');
+  }
+}
 </script>
 

@@ -1,0 +1,82 @@
+@mixin rounded( $radius: 10px) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
+.button {
+    display: inline-block;
+    background: url(button_gradient.png) repeat-x center top transparent;
+    height: 38px;
+    color: #fff;
+    line-height: 38px;
+    font-size: 1.5em;
+    @include rounded( 4px );
+    padding: 0px 8px;
+    border: solid 1px #398c04;
+    text-shadow: 0px -1px 0px #398c04;
+    min-width: 165px;
+    text-align: center;
+    cursor: default;
+
+    &:hover {
+        background: url(button_gradient.png) repeat-x center bottom transparent;
+        text-decoration: none;
+        box-shadow: 0px 0px 6px #999;
+    }
+
+    &.pressed {
+        box-shadow: 2px 2px 2px #333 inset;
+        -moz-box-shadow: 2px 2px 2px #333 inset;
+        -webkit-box-shadow: 2px 2px 2px #333 inset;
+        border-color: #333;
+    }
+
+    &.small {
+        font-size: 1.2em;
+        background: url(button_gradient_small.png) repeat-x center top transparent;
+        height: 30px;
+        line-height: 30px;
+        min-width: 130px;
+        &:hover { background: url(button_gradient_small.png) repeat-x center bottom transparent; }
+    }
+
+    &.yellow {
+        background: url(button_gradient_yellow.png) repeat-x center top transparent;
+        border: solid 1px #e1ad33;
+        text-shadow: 0px -1px 0px #e1ad33;
+        &:hover { background: url(button_gradient_yellow.png) repeat-x center bottom transparent; }
+        &.small {
+            font-size: 1.2em;
+            background: url(button_gradient_yellow_small.png) repeat-x center top transparent;
+            height: 30px;
+            line-height: 30px;
+            min-width: 130px;
+            &:hover { background: url(button_gradient_yellow_small.png) repeat-x center bottom transparent; }
+        }
+    }
+
+    &.blue {
+        background: url(button_gradient_blue.png) repeat-x center top transparent;
+        height: 27px;
+        line-height: 27px;
+        border: solid 1px #286b92;
+        text-shadow: 0px -1px 0px #286b92;
+        font-size: 1.3em;
+        min-width: 100px;
+        &:hover { background: url(button_gradient_blue.png) repeat-x center bottom transparent; }
+    }
+
+    &.gray {
+        background: url(button_gradient_gray_small.png) repeat-x center top transparent;
+        height: 27px;
+        line-height: 27px;
+        border: solid 1px #b2b2b2;
+        text-shadow: 0px -1px 0px #888888;
+        font-size: 1.3em;
+        min-width: 100px;
+        color: #b2b2b2;
+        &:hover { background: url(button_gradient_gray_small.png) repeat-x center bottom transparent; }
+    }
+}
+
