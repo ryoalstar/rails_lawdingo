@@ -23,47 +23,39 @@
   <%= hidden_field_tag :return_url, request.url %>
   <%= hidden_field_tag :user_type, @user[:user_type] %>
 
-  <div class="f_label"> Name : </div>
-  <%= f.text_field :full_name %> <br/>
+  <%= f.text_field :first_name ,{:class=>"name"} %>
 
-  <div class="f_label">Email:</div>
-  <%= f.text_field :email %><br/>
+  <%= f.text_field :last_name ,{:class=>"name"} %>
 
-  <div class="f_label">Password:</div>
-  <%= f.password_field :password %><br/>
+  <%= f.text_field :email,{:class=>"email"} %><br/>
+
+  <%= f.password_field :password ,{:placeholder =>"Password", :class=>"passw"} %><br/>
+
+<%# if !@user.is_lawyer? %>
+                    <!--select>
+                        <option>Select state</option>
+                        <option>Alabama</option>
+                        <option>Arkansas</option>
+                    </select-->
+<%# end %>
 
   <% if @user.is_lawyer?  %>
 
-    <div class="f_label">Personal Tagline:</div>
-    <%= f.text_field :personal_tagline %><br/>
+    <%= f.text_field :practice_areas,{:rows=>4} %>
 
-    <div class="f_label">Undergraduate School:</div>
-    <%= f.text_field :undergraduate_school %><br/>
+    <%= f.text_field :bar_memberships,{:rows=>4} %>
 
-    <div class="f_label">Law School:</div>
-    <%= f.text_field :law_school %><br/>
+    <%= f.text_field :bar_ids %>
 
-    <div class="f_label">Bar Membership(s):</div>
-    <%= f.text_area :bar_memberships, :size =>'50x3' %><br/>
+    <%= f.text_field :rate ,{:class=>"paypal"} %><br/>
 
-    <div class="f_label">Bar ID(s):</div>
-    <%= f.text_field :bar_ids %> <br/>
+    <%= f.text_field :payment_email ,{:class=>"paypal"} %><br/>
 
-    <div class="f_label">Practice Areas: </div>
-    <%= f.text_area :practice_areas, :size =>'50x3' %><br/>
+    <%= f.text_area :personal_tagline ,{:class=>"summary",:maxlength => 100, :rows=>2} %>
 
-    <div class="f_label">Per-minute Rate:</div>
-    $<%= f.text_field :rate %>/minute<br/>
-
-    <div class="f_label"></div>
-    <span style="font-size:12px;">note that Lawdingo charges a $<%= AppParameter.service_charge_value %>/minute fee on top of this to clients</span><br/><br/>
-    <div class="f_label">Pay-pal Email:</div>
-    <%= f.text_field :payment_email %><br/>
-    <div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/>
+    <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
   <% end %>
-  <div style="margin: 10px 10px 10px 270px;">
-    <%= f.submit 'Update Account' %>
+    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
     &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
-  </div>
 <% end %>
 

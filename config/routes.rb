@@ -66,7 +66,7 @@ Lawdingo::Application.routes.draw do
 
 
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
-  match '/about_client' =>"pages#about_client", :name =>'about_client', :as =>:about_client
+  match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
   match '/terms' =>"pages#show", :name =>'terms', :as =>:terms_page
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout

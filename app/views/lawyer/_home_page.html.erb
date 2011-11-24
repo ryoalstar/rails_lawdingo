@@ -1,4 +1,4 @@
-
+<div>
 <%
 detail  = user.detail
 photo_url = user.photo.url(:medium)
@@ -6,29 +6,30 @@ tab       = tab == User::ACCOUNT_TAB ? tab : User::SESSION_TAB
 txt_color = ['black','blue']
 %>
 
-<div>
-  <div class="header_mb">
-    <span>
+
+
+  <ul>
+    <li>
       <%= link_to "Account information", user_path(user, :t =>User::ACCOUNT_TAB), :style =>"color:#{txt_color[ tab == User::ACCOUNT_TAB ? 0 : 1]};text-decoration:none;" %>
-    </span>|
-    <span>
+    </li><li>|</li>
+    <li>
       <%= link_to "Summary of sessions", user_path(user, :t =>User::SESSION_TAB), :style =>"color:#{txt_color[ tab == User::SESSION_TAB ? 0 : 1]};text-decoration:none;" %>
-    </span>
-  </div>
-</div>
-<div>
-  <div class="desc">
+    </li>
+  </ul>
+
+
+
+
     <% if tab == User::ACCOUNT_TAB %>
       <%= render :partial =>"/users/account_info", :locals => {:user => user} %>
     <% elsif tab == User::SESSION_TAB %>
       <%= render :template =>"/conversations/index" %>
     <% end %>
-  </div>
-</div>
+
 
 <% if false %>
-  <div style="width: 30%;margin-right: 10px;margin-top: 20px;float: left;">
-    <div class="header_mb">
+  <div>
+    <div class="">
       <% if is_self_login?(user.id) or is_admin_login? %>
         <span style="float:right;">
           <%= link_to "Edit", edit_user_path(user.id), :title =>"Edit Account"  %>
@@ -43,4 +44,5 @@ txt_color = ['black','blue']
     </div>
   </div>
 <% end %>
+</div>
 

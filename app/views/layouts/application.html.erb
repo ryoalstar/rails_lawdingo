@@ -29,8 +29,9 @@
                 <div class="links">
                   <% if logged_in?
                     user = current_user
+                    full_name = "#{user.first_name} #{user.last_name}"
                   %>
-                    Logged in as <%= link_to user.full_name, user_path(user.id), :title =>'Account Profile!' %>
+                    Logged in as <%= link_to full_name, user_path(user.id), :title =>'Account Profile!' %>
                     | <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
                   <% else %>
                     <%= link_to "Log In", login_path  %> <%= link_to "Sign Up", new_user_path %>
@@ -67,9 +68,9 @@
 	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='380' width='680'>
 	              <param name="wmode" value="transparent"/>
 	              <param name='src' value='/swf/vchat.swf'/>
-	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
+	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
 	              <param name="allowScriptAccess" value="always" />
-	              <embed name='mySwf' src='/swf/vchat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= user.full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= user.full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" wmode="transparent" ></embed>
+	              <embed name='mySwf' src='/swf/vchat.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" wmode="transparent" ></embed>
 	            </object>
 	          </div>
           </div>

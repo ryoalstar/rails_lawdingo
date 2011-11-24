@@ -1,12 +1,13 @@
-
+<div id="page" class="session-summary">
 <% if @conversations.size.zero? %>
   No conversations to list!
 <% else %>
 
   <% if current_user.is_lawyer?  %>
+    <h3>You are logged in and shown as available to take clients</h3>
     <br/>
     Your summary of earnings and sessions: <br/><br/>
-    <table>
+    <table class="summary">
       <thead>
         <tr>
           <td> Client Name </td>
@@ -29,10 +30,7 @@
           </tr>
         <% } %>
         <% user = current_user.corresponding_user %>
-        <tr>
-          <td colspan="6"><hr/></td>
-        </tr>
-        <tr>
+        <tr class="total">
           <td>Total</td>
           <td> &nbsp; </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
@@ -44,7 +42,7 @@
     </table><br/><br/>
     Checks are mailed at the end of the each month. Would you like it sooner? Just email to payments@lawdingo.com.
   <% else %>
-    <table>
+    <table class="summary">
       <thead>
         <tr>
           <td> Lawyer Name </td>
@@ -69,10 +67,7 @@
           </tr>
         <% } %>
         <% user = current_user.corresponding_user %>
-        <tr>
-          <td colspan="7"><hr/></td>
-        </tr>
-        <tr>
+        <tr class="total">
           <td>Total</td>
           <td> &nbsp; </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
@@ -82,9 +77,11 @@
           <td> <%= number_to_currency user.total_spending.to_i %> </td>
         </tr>
       </tbody>
-    </table> <br/><br/>
-    Any questions about this? Just email payments@lawdingo.com.
+    </table>
+
 
   <% end %>
 <% end %>
+<p>Payments are made at the end of each month. Would you like it sooner? Prefer a check? Email <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p>
+</div>
 

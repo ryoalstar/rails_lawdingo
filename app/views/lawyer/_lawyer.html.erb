@@ -8,17 +8,16 @@
       <a href="#schedule_session" data-l_id="<%= lawyer.id %>" class="dialog-opener button yellow">Schedule Session</a>
       <% end %>
         <div class="price">
-            <span class="amt"><sup class="curr">$</sup><%= lawyer.rate %></span><span class="rate">/min</span><span class="xtra">+<%= @app_charge || AppParameter.service_charge_value %>/min fees</span>
+            <span class="amt"><%= number_to_currency lawyer.rate %></span><span class="rate">/min</span><span class="xtra">+<%= @app_charge || AppParameter.service_charge_value %>/min fees</span>
             <div class="free">free initial consultation</div>
         </div>
     </div>
     <!-- END CALL TO ACTION -->
-
-    <%= image_tag lawyer.photo.url(:thumb, :alt => "#{lawyer.full_name}") %>
+    <%= image_tag lawyer.photo.url(:thumb) %>
 
     <!-- RESULT INFO -->
     <div class="info">
-        <h3>Attorney <%= lawyer.full_name %></h3>, <% unless lawyer.bar_memberships.blank? %> , licensed in <%= lawyer.bar_memberships %> <% end %>
+        <h3>Attorney <%= "#{lawyer.first_name} #{lawyer.last_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= lawyer.bar_memberships %> <% end %>
         <div class="tagline"><%= lawyer.personal_tagline %></div>
         <div class="specialities">Specialties : <%= lawyer.practice_areas %></div>
         <div class="verified">Bar membership and credentials verified</div>

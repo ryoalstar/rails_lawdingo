@@ -42,12 +42,14 @@ class Conversation < ActiveRecord::Base
 
   def lawyer_name
     lawyer = self.lawyer
-    lawyer ? lawyer.full_name : "-"
+    full_name = "#{lawyer.first_name} #{lawyer.last_name}"
+    lawyer ? full_name : "-"
   end
 
   def client_name
     client = self.client
-    client ? client.full_name : "-"
+    full_name = "#{client.first_name} #{client.last_name}"
+    client ? full_name : "-"
   end
 
   # in minute

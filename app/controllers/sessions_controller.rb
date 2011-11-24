@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
       end
       redirect_to home_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
     else
-      flash.now[:notice] = "You have entered incorrect login credintial."
+      @msg = "You have entered incorrect login credintial."
       render :action => 'new'
     end
   end

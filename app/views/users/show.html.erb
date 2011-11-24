@@ -1,4 +1,4 @@
-
+<div id="page" class="session-summary">
 <% if @user.is_client?  %>
   <%= render :partial =>'/client/home_page', :locals =>{:user =>@user, :tab =>@tab} %>
 <% elsif @user.is_lawyer? %>
@@ -8,3 +8,5 @@
     <%= render :partial =>'/admin/home_page', :locals =>{:user =>@user} %>
   <% end %>
 <% end %>
+</div>
+

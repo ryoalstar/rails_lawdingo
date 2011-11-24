@@ -313,6 +313,7 @@
             label, .label { font-size: 1.2em; }
             .button { margin-right: 8px; }
         }
+        .stripe_error {color:#ff0000; font-size: 1.2em;}
     }
 
     &.session-complete {
@@ -320,6 +321,8 @@
         .center ul { text-align: left; }
     }
 }
+
+
 
 #footer {
     font-size: 1.25em;

@@ -157,7 +157,7 @@ class UsersController < ApplicationController
   # start chat session with chosen lawyer
   # for logged in user
   def chat_session
-    redirect_to card_detail_path, :notice =>"You first need to enter your payment info to start chat" and return unless current_user.card_detail
+    redirect_to card_detail_path and return unless current_user.card_detail
     begin
       @lawyer = Lawyer.find params[:user_id]
     rescue

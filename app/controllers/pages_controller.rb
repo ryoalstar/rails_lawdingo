@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   end
 
   def about_client
-    render "about_client"
+    render "about_attorneys"
   end
 
 end

@@ -1,6 +1,6 @@
 class Lawyer < User
-  validates :payment_email, :bar_ids, :practice_areas, :presence =>true  
-  
+  validates :payment_email, :bar_ids, :practice_areas, :presence =>true
+
   has_many :conversations
 
   # returns currently online lawyer user
@@ -30,6 +30,6 @@ class Lawyer < User
     total_duration = 0
     self.conversations.map{|con| total_duration += con.billed_time }
     total_duration
-  end  
-
+  end
 end
+

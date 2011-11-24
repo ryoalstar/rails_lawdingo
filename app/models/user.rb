@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_one :card_detail
 
-  validates :full_name, :email, :user_type, :presence =>true
+  validates :first_name, :last_name, :email, :user_type, :presence =>true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
 
@@ -43,7 +43,8 @@ class User < ActiveRecord::Base
 
   def detail
     hash = {
-      "Name" => self.full_name,
+      "First Name" => self.first_name,
+      "Last Name" => self.last_name,
       "Email" => self.email
     }
     if self.is_lawyer?
@@ -80,6 +81,11 @@ class User < ActiveRecord::Base
   def corresponding_user
     self.is_client? ? Client.find(self.id) : Lawyer.find(self.id)
   end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
 
 end
 
