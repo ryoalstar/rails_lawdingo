@@ -1,9 +1,10 @@
+<div id="page">
 <% if @lawyer %>
   Conversation with  <b><%= @lawyer.full_name %></b>
   <%= render :partial => "flash_player" %>
   <%#= link_to "End Session", new_conversation_path  %>
-
 <% else %>
   No one to chat with!
 <% end %>
+</div>
 

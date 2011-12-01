@@ -45,7 +45,7 @@ function sendMessage(){
         data:{email_msg: msg,l2: l1},
         success: function(response){
               if(response == '1')
-                alert('Message has been delivered to the lawyer');
+                alert('Your message has been sent.');
               else{
                 alert('Problem sending message. You may not be logged in');
               }

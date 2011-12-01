@@ -1,4 +1,4 @@
-
+ $('#outer_div').css({"margin":"20px auto","border":"solid #000 2px","padding":"2px"});
 //functions to bring up and collapse the video chat screen for lawyer
 function CloseCall()
 {
@@ -7,14 +7,13 @@ function CloseCall()
 
 function showFlash()
 {
-  $('#outer_div').css({"left":"400px","top":"40px",
-                        "height":"380px","border":"solid #000 2px","padding":"2px"});
+  $('#outer_div').css({"left":""});
   $('.mainc').css("display","none");
 }
 
 function closecall()
 {
-      $('#outer_div').css({"left":"-2000px","height":"2px"});
+      $('#outer_div').css({"left":"-2000px"});
       $('.mainc').css("display","block");
 }
 /*----------------------------------------*/
@@ -89,6 +88,8 @@ $(function(){
 
         this.click( function(){
             var l_id = $(this).data('l_id');
+            var fullname = $(this).data('fullname');
+            $("#overlay_user_name").html('You\'ve reached attorney ' + fullname);
             $("#current_lid").val(l_id);
             $('#dialog-overlay').show();
             $( $(this).attr('href') ).show();

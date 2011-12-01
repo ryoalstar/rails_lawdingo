@@ -53,6 +53,8 @@
 
     <%= f.text_area :personal_tagline ,{:class=>"summary",:maxlength => 100, :rows=>2} %>
 
+    <%= f.file_field :photo, :class=>"button gray" %>
+
     <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
   <% end %>
     <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>

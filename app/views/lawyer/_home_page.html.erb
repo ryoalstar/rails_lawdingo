@@ -17,9 +17,6 @@ txt_color = ['black','blue']
     </li>
   </ul>
 
-
-
-
     <% if tab == User::ACCOUNT_TAB %>
       <%= render :partial =>"/users/account_info", :locals => {:user => user} %>
     <% elsif tab == User::SESSION_TAB %>

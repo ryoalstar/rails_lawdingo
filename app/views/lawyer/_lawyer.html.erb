@@ -5,7 +5,7 @@
     <% if lawyer.is_online? %>
       <%= link_to "Start Video Consultation", user_chat_session_path(lawyer), :title =>"Start Video Consultation", :class =>'button' %>
       <% else %>
-      <a href="#schedule_session" data-l_id="<%= lawyer.id %>" class="dialog-opener button yellow">Schedule Session</a>
+      <a href="#schedule_session" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.full_name %>" class="dialog-opener button yellow">Schedule Session</a>
       <% end %>
         <div class="price">
             <span class="amt"><%= number_to_currency lawyer.rate %></span><span class="rate">/min</span><span class="xtra">+<%= @app_charge || AppParameter.service_charge_value %>/min fees</span>

@@ -24,12 +24,13 @@
     <body id="lawdingo" onload="">
 
         <!-- HEADER -->
+
         <div id="header">
             <div>
                 <div class="links">
                   <% if logged_in?
                     user = current_user
-                    full_name = "#{user.first_name} #{user.last_name}"
+                    full_name = user.full_name
                   %>
                     Logged in as <%= link_to full_name, user_path(user.id), :title =>'Account Profile!' %>
                     | <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
@@ -51,18 +52,18 @@
         <!-- CONTENT -->
         <div id="container">
         <% if flash[:notice] %>
-          <div class="notice">
+          <!--div class="notice">
             <%= flash[:notice].html_safe %>
-          </div>
+          </div-->
         <% end %>
-
        <%= yield %>
+</div>
+        <!-- END CONTENT -->
+    <% if user and user.user_type == 'LAWYER' %>
 
-
-       <% if user and user.user_type == 'LAWYER' %>
-
-<div id="outer_div" style="height:2px;position:absolute;left:-2000px;">
-<a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a>
+<div id="outer_div" style="top:10%;position:absolute;width:100%;left:-2000px;">
+<div style="border:solid 1px #b8b8b8; background-color: #efefef;margin:0 auto;width:680px;">
+<strong><a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a></strong>
 <div id="flash_div">
 
 	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='380' width='680'>
@@ -74,10 +75,8 @@
 	            </object>
 	          </div>
           </div>
+          </div>
       <% end %>
-
-</div>
-        <!-- END CONTENT -->
 
         <!-- FOOTER -->
         <div id="footer">
@@ -94,9 +93,8 @@
         <!-- END FOOTER -->
         <div id="dialog-overlay"></div>
         <div id="schedule_session" class="dialog-window">
-            <h3>You've reached attorney Hank Miller.</h3>
-            I'm not in right now. Please leave me a message and I'll get back to you as soon as I can.
-            Briefly describe the matter you'd like to discuss as well as some times that work for you, and the attorney will email you directly about a good time to connect on Lawdingo.
+            <h3 id='overlay_user_name'></h3>
+            I’m currently away or in a Lawdingo consultation. Please describe what you’d like to talk about and I’ll get back to you as soon as I can.
             <textarea id='txt_msg' name ='txt_msg'></textarea>
             <span class="fine-print">Please do not include any private or confidential information here.</span>
             <hr>
