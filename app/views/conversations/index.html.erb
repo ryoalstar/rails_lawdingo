@@ -39,8 +39,8 @@
           <td> <%= number_to_currency user.total_earning.to_i %> </td>
         </tr>
       </tbody>
-    </table><br/><br/>
-    Checks are mailed at the end of the each month. Would you like it sooner? Just email to payments@lawdingo.com.
+    </table><br/>
+    <p>Checks are mailed at the end of the each month. Would you like it sooner? Just email to <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p>
   <% else %>
     <table class="summary">
       <thead>
@@ -78,10 +78,8 @@
         </tr>
       </tbody>
     </table>
-
-
   <% end %>
 <% end %>
-<p>Payments are made at the end of each month. Would you like it sooner? Prefer a check? Email <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p>
+
 </div>
 

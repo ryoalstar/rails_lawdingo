@@ -11,9 +11,9 @@
                         %>
                         <ul>
                             <li>Billed time elapsed: <%= @conversation.billable_time %> minute(s)</li>
-                            <li>Attorney's rate: $<%= @conversation.lawyer_rate %>/minute</li>
-                            <li>Lawdingo's rate: $<%= AppParameter.service_charge_value %>/minute</li>
-                            <li>Amount billed: $<%= @conversation.billed_amount %></li>
+                            <li>Attorney's rate: <%= number_to_currency @conversation.lawyer_rate %>/minute</li>
+                            <li>Lawdingo's rate: <%= number_to_currency AppParameter.service_charge_value %>/minute</li>
+                            <li>Amount billed: <%= number_to_currency @conversation.billed_amount %></li>
                         </ul>
                         <% if lawyer.is_online? && !lawyer.is_busy %>
                             <%= link_to "Restart Session", user_chat_session_path(lawyer), :title =>"Restart Session", :class =>'button blue' %>

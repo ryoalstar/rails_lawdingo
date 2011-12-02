@@ -2,7 +2,7 @@
   <%= hidden_field(:current, :lid) %>
     <!-- CALL TO ACTION -->
     <div class="action">
-    <% if lawyer.is_online? %>
+    <% if lawyer.is_online? && !lawyer.is_busy %>
       <%= link_to "Start Video Consultation", user_chat_session_path(lawyer), :title =>"Start Video Consultation", :class =>'button' %>
       <% else %>
       <a href="#schedule_session" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.full_name %>" class="dialog-opener button yellow">Schedule Session</a>
@@ -19,7 +19,7 @@
     <div class="info">
         <h3>Attorney <%= "#{lawyer.first_name} #{lawyer.last_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= lawyer.bar_memberships %> <% end %>
         <div class="tagline"><%= lawyer.personal_tagline %></div>
-        <div class="specialities">Specialties : <%= lawyer.practice_areas %></div>
+        <div class="specialities">Specialties: <%= lawyer.practice_areas %></div>
         <div class="verified">Bar membership and credentials verified</div>
     </div>
     <div class="clear"></div>

@@ -5,7 +5,7 @@
 <%= form_tag sessions_path do %>
   <% if @msg %>
     <div class="error_explanation">
-      <h4 class="error">You have entered incorrect login credintial.</h4>
+      <h4 class="error">Incorrect email or password.</h4>
     </div>
   <% end %>
   <%= text_field_tag :email ,nil ,:placeholder=>"Email address" ,:class=>"email" %>
