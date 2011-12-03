@@ -1,4 +1,3 @@
-<div id="page" class="session-summary">
 <% if @conversations.size.zero? %>
   No conversations to list!
 <% else %>
@@ -8,7 +7,7 @@
     <br/>
     Your summary of earnings and sessions: <br/><br/>
     <table class="summary">
-      <thead>
+      <thead style="font-weight:bold;">
         <tr>
           <td> Client Name </td>
           <td> Session Start </td>
@@ -40,10 +39,10 @@
         </tr>
       </tbody>
     </table><br/>
-    <p>Checks are mailed at the end of the each month. Would you like it sooner? Just email to <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p>
+    <!--p>Checks are mailed at the end of the each month. Would you like it sooner? Just email to <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p-->
   <% else %>
     <table class="summary">
-      <thead>
+      <thead style="font-weight:bold;">
         <tr>
           <td> Lawyer Name </td>
           <td> Session Start </td>
@@ -80,6 +79,4 @@
     </table>
   <% end %>
 <% end %>
-
-</div>
 

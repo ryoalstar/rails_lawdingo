@@ -1,63 +1,63 @@
-<% @user = user if user %>
-<% errors = @user.errors %>
-<%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
+  <% @user = user if user %>
+  <% errors = @user.errors %>
+  <%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f| %>
 
-  <% if errors.size > 0 %>
-    <div class="error_explanation">
-      The following errors prevented from saving account <br/>
-      <ul>
-        <% errors.full_messages.each{|error| %>
-          <li><%= error %></li>
-        <% } %>
-      </ul>
+    <% if errors.size > 0 %>
+      <div class="error_explanation">
+        The following errors prevented from saving account <br/>
+        <ul>
+          <% errors.full_messages.each{|error| %>
+            <li><%= error %></li>
+          <% } %>
+        </ul>
 
-    </div>
+      </div>
+    <% end %>
+
+    <% if @msg %>
+      <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
+        <%= @msg %>
+      </div>
+    <% end %>
+
+    <%= hidden_field_tag :return_url, request.url %>
+    <%= hidden_field_tag :user_type, @user[:user_type] %>
+
+    <%= f.text_field :first_name ,{:class=>"name"} %>
+
+    <%= f.text_field :last_name ,{:class=>"name"} %>
+
+    <%= f.text_field :email,{:class=>"email"} %><br/>
+
+    <%= f.password_field :password ,{:placeholder =>"Password", :class=>"passw"} %><br/>
+
+  <%# if !@user.is_lawyer? %>
+                      <!--select>
+                          <option>Select state</option>
+                          <option>Alabama</option>
+                          <option>Arkansas</option>
+                      </select-->
+  <%# end %>
+
+    <% if @user.is_lawyer?  %>
+
+      <%= f.text_field :practice_areas,{:rows=>4} %>
+
+      <%= f.text_field :bar_memberships,{:rows=>4} %>
+
+      <%= f.text_field :bar_ids %>
+
+      <%= f.text_field :rate ,{:class=>"paypal"} %><br/>
+
+      <%= f.text_field :payment_email ,{:class=>"paypal"} %><br/>
+
+      <%= f.text_area :personal_tagline ,{:class=>"summary",:maxlength => 100, :rows=>2} %>
+
+      <div style="font-size:14px;">Update photo</div>
+      <%= f.file_field :photo %>
+
+      <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
+    <% end %>
+      <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
   <% end %>
-
-  <% if @msg %>
-    <div style="border: 1px solid red;padding: 5px;margin: 10px 10px 20px 100px;width: 500px;">
-      <%= @msg %>
-    </div>
-  <% end %>
-
-  <%= hidden_field_tag :return_url, request.url %>
-  <%= hidden_field_tag :user_type, @user[:user_type] %>
-
-  <%= f.text_field :first_name ,{:class=>"name"} %>
-
-  <%= f.text_field :last_name ,{:class=>"name"} %>
-
-  <%= f.text_field :email,{:class=>"email"} %><br/>
-
-  <%= f.password_field :password ,{:placeholder =>"Password", :class=>"passw"} %><br/>
-
-<%# if !@user.is_lawyer? %>
-                    <!--select>
-                        <option>Select state</option>
-                        <option>Alabama</option>
-                        <option>Arkansas</option>
-                    </select-->
-<%# end %>
-
-  <% if @user.is_lawyer?  %>
-
-    <%= f.text_field :practice_areas,{:rows=>4} %>
-
-    <%= f.text_field :bar_memberships,{:rows=>4} %>
-
-    <%= f.text_field :bar_ids %>
-
-    <%= f.text_field :rate ,{:class=>"paypal"} %><br/>
-
-    <%= f.text_field :payment_email ,{:class=>"paypal"} %><br/>
-
-    <%= f.text_area :personal_tagline ,{:class=>"summary",:maxlength => 100, :rows=>2} %>
-
-    <%= f.file_field :photo, :class=>"button gray" %>
-
-    <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
-  <% end %>
-    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
-    &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
-<% end %>
 

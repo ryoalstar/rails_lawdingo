@@ -1,4 +1,10 @@
-<div id="page" class="session-summary">
+<% if @tab == User::ACCOUNT_TAB %>
+  <div id="page" class="signup">
+<% elsif @tab == User::PAYMENT_TAB %>
+  <div id="page" class="payment">
+<% else %>
+  <div id="page" class="session-summary">
+<% end %>
 <% if @user.is_client?  %>
   <%= render :partial =>'/client/home_page', :locals =>{:user =>@user, :tab =>@tab} %>
 <% elsif @user.is_lawyer? %>

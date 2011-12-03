@@ -1,20 +1,14 @@
-<div>
 <%
 detail    = user.detail
 tab       = (tab == User::PAYMENT_TAB or tab == User::SESSION_TAB) ? tab : User::ACCOUNT_TAB
 txt_color = ['black','blue']
 %>
-  <ul>
-    <li>
-      <%= link_to "Account information", user_path(user, :t =>User::ACCOUNT_TAB), :style =>"color:#{txt_color[ tab == 'f' ? 0 : 1]};text-decoration:none;" %>
-    </li><li>|</li>
-    <li>
-      <%= link_to "Payment info", user_path(user, :t =>User::PAYMENT_TAB), :style =>"color:#{txt_color[ tab == 'm' ? 0 : 1]};text-decoration:none;" %>
-    </li><li>|</li>
-    <li>
+<div>
+  <div style="font-size:14px;margin-right:8px;margin-bottom:10px;font-weight:bold;">
+      <%= link_to "Account information", user_path(user, :t =>User::ACCOUNT_TAB), :style =>"color:#{txt_color[ tab == 'f' ? 0 : 1]};text-decoration:none;" %> |
+      <%= link_to "Payment info", user_path(user, :t =>User::PAYMENT_TAB), :style =>"color:#{txt_color[ tab == 'm' ? 0 : 1]};text-decoration:none;" %> |
       <%= link_to "Summary of sessions", user_path(user, :t =>User::SESSION_TAB), :style =>"color:#{txt_color[ tab == 'l' ? 0 : 1]};text-decoration:none;" %>
-    </li>
-  </ul>
+  </div>
 
   <% if tab == User::ACCOUNT_TAB %>
     <%= render :partial =>"/users/account_info", :locals => {:user => user} %>

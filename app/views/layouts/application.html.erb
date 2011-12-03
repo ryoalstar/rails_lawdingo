@@ -32,7 +32,7 @@
                     user = current_user
                     full_name = user.full_name
                   %>
-                    Logged in as <%= link_to full_name, user_path(user.id), :title =>'Account Profile!' %>
+                    Logged in as<%= link_to full_name, user_path(user.id), :title =>'Account Profile!' %>
                     | <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
                   <% else %>
                     <%= link_to "Log In", login_path  %> <%= link_to "Sign Up", new_user_path %>
