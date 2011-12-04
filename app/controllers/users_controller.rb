@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
   #REMINDER: uncomment only in production
-  #before_filter :force_ssl, :only => ['payment_info']
-  #before_filter :remove_ssl, :only => ['home']
+  before_filter :force_ssl, :only => ['payment_info']
+  before_filter :remove_ssl, :only => ['home']
 
   def index
     @tab  = params[:t] ? params[:t] : User::SESSION_TAB

@@ -1,11 +1,12 @@
 <!--div id="outer_div" style="top:10%;position:absolute;width:100%;"-->
-<div id ="flash_div" style="border:solid 1px #b8b8b8; background-color: #efefef;margin:0 auto;width:680px;">
-<object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='380' width='680'>
-	            <param name='src' value='/swf/videoc.swf'/>
+<!--div id ="flash_div" style="border:solid 1px #b8b8b8; background-color: #efefef;margin:0 auto;width:960px;;"-->
+
+<object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='410' width='960'>
+	            <param name='src' value='/swf/vidchat.swf'/>
 	            <param name='FlashVars' value="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&uemail=<%= current_user.email %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&lemail=<%= @lawyer.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
 	            <param name="allowScriptAccess" value="always" />
-	            <embed name='mySwf' src='/swf/videoc.swf' allowScriptAccess='always' height='380' width='680' FlashVars="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&uemail=<%= current_user.email %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&lemail=<%= @lawyer.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
+	            <embed name='mySwf' src='/swf/vidchat.swf' allowScriptAccess='always' height='410' width='960' FlashVars="user_id=<%= current_user.id %>&user=<%= current_user.full_name %>&uemail=<%= current_user.email %>&lawyer_id=<%= @lawyer.id %>&lawyer=<%= @lawyer.full_name %>&lemail=<%= @lawyer.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= @lawyer.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
 	          </object>
-</div>
+
 <!--/div-->
 
