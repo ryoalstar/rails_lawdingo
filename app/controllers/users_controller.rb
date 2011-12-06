@@ -31,6 +31,9 @@ class UsersController < ApplicationController
 #      @tab  = params[:t] ? params[:t] : User::ACCOUNT_TAB
       @tab  = params[:t] ? params[:t] : User::SESSION_TAB
       if User::PAYMENT_TAB == @tab
+        if !request.ssl?
+          redirect_to :protocol => 'https', :t => 'm'
+        end
         @card_detail = current_user.card_detail || CardDetail.new
       elsif User::SESSION_TAB == @tab
         @conversations = current_user.corresponding_user.conversations
