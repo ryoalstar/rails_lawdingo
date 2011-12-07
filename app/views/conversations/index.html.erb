@@ -30,16 +30,17 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
-          <td>Total</td>
+          <td><%= @conversations.size %> Sessions</td>
           <td> &nbsp; </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
-          <td>  </td>
+          <td><%= number_to_currency(user.total_earning/(user.total_paid_duration/60)) %>/min</td>
           <td> <%= number_to_currency user.total_earning.to_i %> </td>
         </tr>
       </tbody>
     </table><br/>
     <!--p>Checks are mailed at the end of the each month. Would you like it sooner? Just email to <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p-->
+<p>Payments are made at the end of the month. Prefer a check? Want it sooner? Email <a href="mailto:payments@lawdingo.com">payments@lawdingo.com</a> with any requests.</p>
   <% else %>
     <table class="summary">
       <thead style="font-weight:bold;">
@@ -67,11 +68,11 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
-          <td>Total</td>
+          <td><%= @conversations.size %> Sessions</td>
           <td> &nbsp; </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
-          <td>  </td>
+          <td><%= number_to_currency(user.total_spending/(user.total_paid_duration/60)) %>/min </td>
           <td>  </td>
           <td> <%= number_to_currency user.total_spending.to_i %> </td>
         </tr>

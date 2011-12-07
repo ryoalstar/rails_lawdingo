@@ -7,14 +7,14 @@ function CloseCall()
 
 function showFlash()
 {
-  $('#outer_div').css({"left":"151px"});
-  $('.mainc').css("display","none");
+  $('#outer_div').css({"left":""});
+  //$('.mainc').css("display","none");
 }
 
 function closecall()
 {
       $('#outer_div').css({"left":"-2000px"});
-      $('.mainc').css("display","block");
+      //$('.maic').css("display","block");
 }
 /*----------------------------------------*/
 
