@@ -7,7 +7,7 @@ function CloseCall()
 
 function showFlash()
 {
-  $('#outer_div').css({"left":""});
+  $('#outer_div').css({"left":"12%"});
   //$('.mainc').css("display","none");
 }
 
