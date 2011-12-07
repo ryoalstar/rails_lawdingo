@@ -36,7 +36,7 @@
                     | <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
                   <% else %>
                     <%= link_to "Log In", login_path  %> <%= link_to "Sign Up", new_user_path %>
-                    Lawyers <%= link_to "Lawyers: Apply Here", new_user_path(:ut=>1) %>
+                    Lawyers: <%= link_to "Apply Here", new_user_path(:ut=>1) %>
                   <% end %>
                 </div>
                 <% if current_user && current_user.is_lawyer? %>
