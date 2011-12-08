@@ -1,9 +1,9 @@
+<h3>You are now shown as available to take calls. Keep this page open to remain available.</h3>
 <% if @conversations.size.zero? %>
   No conversations to list!
 <% else %>
 
   <% if current_user.is_lawyer?  %>
-    <h3>You are logged in and shown as available to take clients</h3>
     <br/>
     Your summary of earnings and sessions: <br/><br/>
     <table class="summary">
@@ -30,8 +30,8 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
-          <td><%= @conversations.size %> Sessions</td>
-          <td> &nbsp; </td>
+          <td> </td>
+          <td> <%= @conversations.size %> Sessions </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
           <td><%= number_to_currency(user.total_earning/(user.total_paid_duration/60)) %>/min</td>
@@ -68,8 +68,8 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
+          <td></td>
           <td><%= @conversations.size %> Sessions</td>
-          <td> &nbsp; </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
           <td><%= number_to_currency(user.total_spending/(user.total_paid_duration/60)) %>/min </td>

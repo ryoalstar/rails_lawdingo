@@ -9,3 +9,13 @@ ActionMailer::Base.smtp_settings = {
 }
 ActionMailer::Base.default_url_options[:host] = "localhost:3000"
 
+#ActionMailer::Base.smtp_settings = {
+ #:user_name => "nav1982",
+ #:password => "n!kh!ln!rm@l+977",
+ #:domain => "lawdingo.com",
+ #:address => "smtp.sendgrid.net",
+ #:port => 587,
+ #:authentication => :plain,
+ #:enable_starttls_auto => true
+#}
+

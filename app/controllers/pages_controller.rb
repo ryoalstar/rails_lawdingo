@@ -17,5 +17,8 @@ class PagesController < ApplicationController
     render "about_attorneys"
   end
 
+  def terms_of_use
+  end
+
 end
 

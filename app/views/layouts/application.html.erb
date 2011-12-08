@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Lawdingo</title>
+      <title>Lawdingo - Legal advice over video chat.</title>
       <%= stylesheet_link_tag    "application" %>
       <%= javascript_include_tag "application" %>
       <%= javascript_include_tag 'site'%>
@@ -86,7 +86,7 @@
                     <li><%= link_to "About", about_page_path %></li>
                     <li><%= link_to "Contact", "mailto:sup@lawdingo.com" %></li>
                     <li><%= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank' %></li>
-                    <li><%= link_to "Terms & Privacy", terms_page_path %></li>
+                    <li><%= link_to "Terms & Privacy", terms_page_path, :target=>'_blank' %></li>
                 </ul>
                 <div id="copyright">&copy; Lawdingo</div>
             </div>
