@@ -5,6 +5,7 @@ class UserMailer < ActionMailer::Base
   def schedule_session_email(user, lemail, msg)
     @user = user
     @msg = msg
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/logo.png")
     mail(
       :from => user.email,
       :to => lemail,

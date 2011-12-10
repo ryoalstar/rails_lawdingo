@@ -1,11 +1,22 @@
-A client, <%= @user.full_name %>, tried contacting you while you were offline on Lawdingo. Here's what they had to say:
-<br/>
-<br/>
-<%= @msg.gsub('\n', '<br />') %>
-<br/>
-<br/>
-You should reply to <%= @user.full_name %> about scheduling a time to connect on Lawdingo at <%= @user.email %>.
-<br/>
-Thanks,<br/>
-Team Lawdingo
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <div>
+    <%= image_tag attachments['logo.png'].url %>
+    </div><br/>
+    <p>
+      A client, <%= @user.full_name %>, tried contacting you while you were offline on Lawdingo. Here's what they had to say:<br/>
+    </p>
+    <p>
+      <%= simple_format(@msg.gsub(/\n/, '<br />')) %>
+    </p>
+    <p>You should reply to <%= @user.full_name %> about scheduling a time to connect on Lawdingo at <%= @user.email %>.</p><br/>
+    Thanks,<br/>
+    Team Lawdingo
+    </p>
+  </body>
+</html>
 
