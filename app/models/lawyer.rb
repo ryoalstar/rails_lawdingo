@@ -9,7 +9,7 @@ class Lawyer < User
   end
 
   def self.home_page_lawyers
-    self.where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true")
+    self.where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc")
   end
 
   def total_earning

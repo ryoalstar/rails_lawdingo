@@ -13,5 +13,13 @@ class UserMailer < ActionMailer::Base
       :subject => "Lawdingo appointment request while you were offline"
     )
   end
+
+  def notify_lawyer_application(user)
+    @lawyer = user
+    mail(
+      :to => "nikhil.nirmel@gmail.com",
+      :subject => "New lawyer applied"
+    )
+  end
 end
 

@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   has_attached_file :photo,
-    :styles => { :medium => "232x162>", :thumb => "116x81>" }
+    :styles => { :medium => "232x", :thumb => "100x" }
+  #  :styles => { :medium => "232x162>", :thumb => "116x81>" }
   #     ,:storage => :s3,
   #    :s3_credentials => "#{Rails.root}/config/s3.yml",
   #    :path => ":attachment/:id/:style.:extension",

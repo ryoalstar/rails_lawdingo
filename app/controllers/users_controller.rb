@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat]
+  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -64,17 +64,23 @@ class UsersController < ApplicationController
     @user.user_type = user_type
 
     if @user.save
-      session[:user_id] = @user.id
-      if @user.is_client?
+      if @user.user_type == User::LAWYER_TYPE
+        UserMailer.notify_lawyer_application(@user).deliver
+        redirect_to welcome_path and return
+      elsif @user.is_client?
+        session[:user_id] = @user.id
         redirect_to :action => :payment_info
         # @card_detail = CardDetail.new
         # render :action => 'payment_info' and return
       else
-        redirect_to root_path, :notice =>'Account successfully created!'
+        redirect_to root_path
       end
     else
       render :action =>:new, :ut =>user_type == User::LAWYER_TYPE ? '1' : '0'
     end
+  end
+
+  def welcome_lawyer
   end
 
   def edit

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery  
+  protect_from_forgery
 
   helper_method :current_user, :current_admin, :logged_in? , :logged_in_admin?, :log_in_user, :log_out_user
 
@@ -17,7 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    logged_in? ? true : access_denied
+    if logged_in?
+      current_user.update_attribute(:is_online,true)
+    else
+      access_denied
+    end
+    #logged_in? ? true : access_denied
   end
 
   def authenticate_admin
@@ -35,5 +40,6 @@ class ApplicationController < ActionController::Base
   def access_denied
     redirect_to login_path, :notice => 'You have not logged in' and return false
   end
-  
+
 end
+
