@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20111124141952) do
     t.datetime "last_online"
     t.string   "user_type",                               :null => false
     t.boolean  "is_approved",          :default => false
-    t.text     "bar_memberships"
     t.text     "undergraduate_school"
     t.text     "law_school"
     t.text     "alma_maters"
@@ -105,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20111124141952) do
     t.string   "peer_id",              :default => "0"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "bar_memberships"
   end
 
 end

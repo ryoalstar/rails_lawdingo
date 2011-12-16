@@ -19,7 +19,6 @@ function closecall()
 /*----------------------------------------*/
 
 
-
 function close_dialogs(){
     $('.dialog-window').hide();
     $('#dialog-overlay').hide();

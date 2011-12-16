@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer]
+  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -217,6 +217,15 @@ class UsersController < ApplicationController
     bool = params[:busy].to_i == 1 ? true : false
     user.update_attribute(:is_busy, bool)
     render :text => "true", :layout => false
+  end
+
+  def update_online_status
+    if current_user && current_user.is_lawyer?
+      current_user.update_attribute(:last_online, DateTime.now)
+      render :text => "true", :layout =>false
+    else
+      render :text => "false", :laout =>false
+    end
   end
 
   def register_for_videochat

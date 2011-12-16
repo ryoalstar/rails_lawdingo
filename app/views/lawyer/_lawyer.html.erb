@@ -19,7 +19,7 @@
     <div class="info">
         <h3>Attorney <%= "#{lawyer.first_name} #{lawyer.last_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= lawyer.bar_memberships %> <% end %>
         <div class="tagline"><%= lawyer.personal_tagline %></div>
-        <div class="specialities">Specialties: <%= lawyer.practice_areas %></div>
+        <div class="specialities">Practice Areas: <%= lawyer.practice_areas %></div>
         <div class="verified">Bar membership and credentials verified</div>
     </div>
     <div class="clear"></div>

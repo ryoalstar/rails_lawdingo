@@ -4,7 +4,7 @@
       <title>Lawdingo - Legal advice over video chat.</title>
       <%= stylesheet_link_tag    "application" %>
       <%= javascript_include_tag "application" %>
-      <%= javascript_include_tag 'site'%>
+      <%= javascript_include_tag 'site', 'jquery.timer'%>
       <%= csrf_meta_tags %>
       <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
       <% if ENV['RAILS_ENV'] == 'production' %>
@@ -101,7 +101,19 @@
             <hr>
             <a href="javascript:void(0)" class="button blue" onclick="sendMessage();return false;">Send Message</a>
         </div>
-
+    <script type = text/javascript>
+      $(document).ready(function(){
+        var timer = $.timer(function() {
+          $.ajax({
+            url: "/UpdateOnlineStatus",
+            type:'post',
+            success: function(response){
+              }
+          });
+        });
+        timer.set({ time : 60000, autostart : true });
+      });
+    </script>
     </body>
 </html>
 
