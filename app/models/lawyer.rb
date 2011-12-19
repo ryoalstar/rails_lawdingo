@@ -1,7 +1,10 @@
 class Lawyer < User
-  validates :payment_email, :bar_ids, :practice_areas, :presence =>true
+  #validates :payment_email, :bar_ids, :practice_areas, :presence =>true
+  validates :payment_email, :presence =>true
 
   has_many :conversations
+  has_many :bar_memberships
+  accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
   # returns currently online lawyer user
   def self.online

@@ -18,6 +18,65 @@ function closecall()
 }
 /*----------------------------------------*/
 
+function select_unselect_state(id) {
+ if ($('#state_' + id).attr("checked") == "checked"){
+   $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val($('#state_' + id).val());
+ }
+ else {
+   $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val('');
+   $('#lawyer_bar_memberships_attributes_' + id + '_bar_id').val('');
+ }
+
+}
+
+
+function setBarIds(){
+  var states_barids = new Array();
+  var form_data_status = false;
+  $('#leveled_list_bar_ids').children().each(function(index){
+    var self = $(this);
+    var checked = false;
+    var chkbox = self.find('input[type=checkbox]')
+
+    if (chkbox.attr('checked') == 'checked')
+    {
+        var dv = self.find('div');
+        var state = dv.attr('id');
+        var inp = dv.find('input');
+        barId = inp.attr('value');
+        if (barId == "")
+        {
+          alert("please enter barid for the selected state " + state);
+          form_data_status = false;
+        }
+        else
+        {
+          states_barids[state] = barId;
+          form_data_status = true
+        }
+    }
+  });
+  if(form_data_status)
+  {
+    var states_barids_string = "";
+    for(key in states_barids)
+    {
+      states_barids_string += key + '(' + states_barids[key] + ')' + ', '
+    }
+    states_barids_string = states_barids_string.substring(0,states_barids_string.length-2);
+    $('#barids_opener').hide();
+    $('#barids_editor').show();
+    $('#div_states_barids').html(states_barids_string);
+    close_dialogs();
+  }
+  else
+  {
+    alert("Please provide your barid for the states")
+    return;
+  }
+}
+
+
 
 function close_dialogs(){
     $('.dialog-window').hide();

@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
   #REMINDER: uncomment only in production
-  before_filter :force_ssl, :only => ['payment_info']
-  before_filter :remove_ssl, :only => ['home']
+  #before_filter :force_ssl, :only => ['payment_info']
+  #before_filter :remove_ssl, :only => ['home']
 
   def index
     @tab  = params[:t] ? params[:t] : User::SESSION_TAB
@@ -54,6 +54,8 @@ class UsersController < ApplicationController
       @user       = User.new(:user_type => User::CLIENT_TYPE  )
     else
       @user       = Lawyer.new(:user_type => User::LAWYER_TYPE )
+      @states = State.all
+      @states.count.times {@user.bar_memberships.build}
     end
   end
 
@@ -76,6 +78,23 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     else
+
+      if @user.user_type == User::LAWYER_TYPE
+        err_msg = ''
+        errors = @user.errors
+        if errors.size > 0
+          err_msg += '<div class="error_explanation"><h4 class="error">Please fix the following errors:</h4><ul><class="errors">'
+          errors.full_messages.each do |error|
+            err_msg += "<li>#{error}</li>"
+          end
+          err_msg += '</ul></div>'
+          flash[:error] = err_msg
+        end
+        redirect_to :action => :new, :ut => 1 and return
+      end
+
+      #@states = State.all
+
       render :action =>:new, :ut =>user_type == User::LAWYER_TYPE ? '1' : '0'
     end
   end

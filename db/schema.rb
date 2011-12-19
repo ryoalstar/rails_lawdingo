@@ -11,11 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124141952) do
+ActiveRecord::Schema.define(:version => 20111219084426) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
     t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bar_memberships", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.string   "bar_id"
+    t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,6 +81,13 @@ ActiveRecord::Schema.define(:version => 20111124141952) do
     t.datetime "updated_at"
   end
 
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "hashed_password"
@@ -104,7 +119,6 @@ ActiveRecord::Schema.define(:version => 20111124141952) do
     t.string   "peer_id",              :default => "0"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "bar_memberships"
   end
 
 end

@@ -16,8 +16,16 @@
     <%= image_tag lawyer.photo.url(:thumb) %>
 
     <!-- RESULT INFO -->
+    <% bms = []
+    bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
+      licenced_states = ""
+      bms.each{ |bm|
+        licenced_states += bm.state.name + ', '
+      }
+      licenced_states.chomp(', ')
+      %>
     <div class="info">
-        <h3>Attorney <%= "#{lawyer.first_name} #{lawyer.last_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= lawyer.bar_memberships %> <% end %>
+        <h3>Attorney <%= "#{lawyer.full_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= licenced_states %> <% end %>
         <div class="tagline"><%= lawyer.personal_tagline %></div>
         <div class="specialities">Practice Areas: <%= lawyer.practice_areas %></div>
         <div class="verified">Bar membership and credentials verified</div>
