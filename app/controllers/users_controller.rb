@@ -67,6 +67,10 @@ class UsersController < ApplicationController
 
     if @user.save
       if @user.user_type == User::LAWYER_TYPE
+        practice_areas = params[:practice_areas]
+        practice_areas.each{|pid|
+          ExpertArea.create(:lawyer_id => @user.id, :practice_area_id => pid)
+        }
         UserMailer.notify_lawyer_application(@user).deliver
         redirect_to welcome_path and return
       elsif @user.is_client?

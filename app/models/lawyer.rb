@@ -4,6 +4,9 @@ class Lawyer < User
 
   has_many :conversations
   has_many :bar_memberships
+  has_many :expert_areas
+  has_many :practice_areas, :through => :expert_areas
+
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
   # returns currently online lawyer user

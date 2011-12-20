@@ -58,15 +58,16 @@ function setBarIds(){
   });
   if(form_data_status)
   {
-    var states_barids_string = "";
+    var states_barids_string = "Bar Memberships: ";
     for(key in states_barids)
     {
-      states_barids_string += key + '(' + states_barids[key] + ')' + ', '
+      states_barids_string += key + "(Bar ID: " + states_barids[key] + ')' + ', '
     }
     states_barids_string = states_barids_string.substring(0,states_barids_string.length-2);
     $('#barids_opener').hide();
     $('#barids_editor').show();
     $('#div_states_barids').html(states_barids_string);
+    $('#div_states_barids').show();
     close_dialogs();
   }
   else
@@ -76,7 +77,19 @@ function setBarIds(){
   }
 }
 
-
+function setPracticeAreas()
+{
+  /*practice_area_string = "";
+  alert('helo');
+  $('#leveled-list_practice_areas').children().each(function(index){
+    alert('inside');
+    var parent_list = $(this);
+    alert('here');
+    var chkbox = parent_list.input[type=checkbox];
+    alert(chkbox.attr('html'));
+    });*/
+  close_dialogs();
+}
 
 function close_dialogs(){
     $('.dialog-window').hide();

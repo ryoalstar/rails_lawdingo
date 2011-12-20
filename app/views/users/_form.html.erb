@@ -28,7 +28,9 @@
     <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
     <a href="#bar_membership" id="barids_opener" class="dialog-opener">Select bar membership(s)</a>
     <%#= f.text_field :bar_ids, :style =>"display:none;" %>
-    <a href="#practices" class="dialog-opener">Select practice areas</a>
+    <div id="div_practice_areas"></div>
+    <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
+    <a href="#practices" id="practice_areas_opener" class="dialog-opener">Select practice areas</a>
     <%#= f.text_field :bar_ids,{:placeholder=>"Bar ID(s)"} %>
     <% @user.rate = nil if @user.new_record? %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
@@ -50,7 +52,7 @@
          <li id="<%= i %>">
            <%= check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")%><%=@states[i].name%>
            <%= bar_membership_fields.hidden_field :state_id %>
-           <div class="sub" id="<%= @states[i].abbreviation %>"><%= "#{@states[i].abbreviation} Bar ID:" %>
+           <div class="sub" id="<%= @states[i].name %>"><%= "#{@states[i].abbreviation} Bar ID:" %>
              <%= bar_membership_fields.text_field :bar_id %>
            </div>
          </li>
@@ -64,21 +66,23 @@
  <div id="practices" class="dialog-window">
     <h3>Select Practice Area(s)</h3>
     <div>
-      <ul class="leveled-list">
+      <ul id="leveled-list_practice_areas" class="leveled-list">
+          <% PracticeArea.parent_practice_areas.each do |p| %>
           <li>
-              <input type="checkbox"> Bankruptcy
+              <%= check_box_tag "practice_areas[]", "#{p.id}" %> <%= p.name %>
               <div class="sub">
-                  Bankruptcy specialities:
+                  <%= p.name %> specialities:
                   <ul>
-                      <li><input type="checkbox"> Felonies</li>
-                      <li><input type="checkbox"> Misdimeanors</li>
-                      <li><input type="checkbox"> White collar crime</li>
+                    <% p.specialities.each do |s| %>
+                      <li><%= check_box_tag "practice_areas[]", "#{s.id}" %> <%= s.name %> </li>
+                    <% end %>
                   </ul>
               </div>
           </li>
+          <% end %>
       </ul>
     </div>
-    <a class="button blue" onclick="close_dialogs();">Done</a>
+    <a class="button blue" onclick="setPracticeAreas();">Done</a>
 </div>
 
 
@@ -87,7 +91,9 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('#barids_editor').hide();
-    $('div_states_barids').hide();
+    $('#div_states_barids').hide();
+    $('#practice_areas_editor').hide();
+    $('#div_practice_areas').hide();
   });
 </script>
 

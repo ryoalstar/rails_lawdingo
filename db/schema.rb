@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111219084426) do
+ActiveRecord::Schema.define(:version => 20111220181651) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -62,12 +62,33 @@ ActiveRecord::Schema.define(:version => 20111219084426) do
     t.float    "lawdingo_charge"
   end
 
+  create_table "expert_areas", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.integer  "practice_area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lawyers_practice_areas", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.integer  "practice_area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", :force => true do |t|
     t.string   "name"
     t.string   "page_title"
     t.string   "page_header"
     t.text     "content"
     t.boolean  "is_deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "practice_areas", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
