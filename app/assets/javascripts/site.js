@@ -79,15 +79,38 @@ function setBarIds(){
 
 function setPracticeAreas()
 {
-  /*practice_area_string = "";
-  alert('helo');
+  var practice_area_string = "Practice Areas: ";
+  var specialities_string = "";
   $('#leveled-list_practice_areas').children().each(function(index){
-    alert('inside');
     var parent_list = $(this);
-    alert('here');
-    var chkbox = parent_list.input[type=checkbox];
-    alert(chkbox.attr('html'));
-    });*/
+    var parent_checkbox = parent_list.find(':checkbox:first');
+    if(parent_checkbox.attr('checked') == 'checked')
+    {
+      practice_area_string += parent_checkbox.attr('id');
+      var div = parent_list.find('div');
+      var inner_ul = div.find('ul');
+      specialities_string = "";
+      inner_ul.children().each(function(index){
+        var inner_list = $(this);
+        var chkbox = inner_list.find('input[type=checkbox]')
+        if(chkbox.attr('checked') == 'checked')
+        {
+          specialities_string +=chkbox.attr('id') + ', '
+        }
+      });
+      if(specialities_string != "")
+      {
+        specialities_string = specialities_string.substring(0,specialities_string.length-2);
+        practice_area_string += '(' + specialities_string + ')';
+      }
+      practice_area_string += ', ';
+    }
+    });
+  practice_area_string = practice_area_string.substring(0,practice_area_string.length-2);
+  $('#practice_areas_opener').hide();
+  $('#div_practice_areas').html(practice_area_string);
+  $('#div_practice_areas').show();
+  $('#practice_areas_editor').show();
   close_dialogs();
 }
 

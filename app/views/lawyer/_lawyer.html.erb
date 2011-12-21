@@ -20,14 +20,21 @@
     bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
       licenced_states = ""
       bms.each{ |bm|
-        licenced_states += bm.state.name + ', '
+        licenced_states += bm.state.abbreviation + ', '
       }
-      licenced_states.chomp(', ')
+      licenced_states.chomp!(', ')
+      pas = []
+      pas = lawyer.practice_areas.parent_practice_areas unless lawyer.practice_areas.blank?
+      pas_string = ""
+      pas.each{|pa|
+        pas_string += pa.name + ', '
+      }
+      pas_string.chomp!(', ')
       %>
     <div class="info">
         <h3>Attorney <%= "#{lawyer.full_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= licenced_states %> <% end %>
         <div class="tagline"><%= lawyer.personal_tagline %></div>
-        <div class="specialities">Practice Areas: <%#= lawyer.practice_areas %></div>
+        <div class="specialities"><% unless lawyer.practice_areas.blank? %> Practice Areas: <%= pas_string %><% end %></div>
         <div class="verified">Bar membership and credentials verified</div>
     </div>
     <div class="clear"></div>

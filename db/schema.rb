@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220181651) do
+ActiveRecord::Schema.define(:version => 20111221135945) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20111220181651) do
     t.text     "undergraduate_school"
     t.text     "law_school"
     t.text     "alma_maters"
-    t.text     "practice_areas"
     t.string   "law_firm"
     t.float    "rate",                 :default => 0.0
     t.string   "payment_email"
