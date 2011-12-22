@@ -1,5 +1,5 @@
 <%
-detail  = user.detail
+detail  = user.corresponding_user.detail
 photo_url = user.photo.url(:medium)
 tab       = tab == User::ACCOUNT_TAB ? tab : User::SESSION_TAB
 txt_color = ['black','blue']
