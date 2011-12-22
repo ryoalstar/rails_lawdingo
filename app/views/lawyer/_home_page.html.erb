@@ -10,7 +10,7 @@ txt_color = ['black','blue']
       <%= link_to "Summary of sessions", user_path(user, :t =>User::SESSION_TAB), :style =>"color:#{txt_color[ tab == User::SESSION_TAB ? 0 : 1]};text-decoration:none;" %>
   </div>
     <% if tab == User::ACCOUNT_TAB %>
-      <%= render :partial =>"/users/account_info", :locals => {:user => user} %>
+      <%= render :partial =>"/users/account_info", :locals => {:user => user.corresponding_user} %>
     <% elsif tab == User::SESSION_TAB %>
       <%= render :template =>"/conversations/index" %>
     <% end %>
