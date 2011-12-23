@@ -1,0 +1,16 @@
+<% if @lawyers.blank? %>
+<div style="font-size:12px;text-align:center;">
+<p>
+Whoops, we don’t have a lawyer that meets those criteria!
+</p>
+<p>
+If you happen to know an attorney who does meet your criteria, tell ‘em to get on Lawdingo, stat!
+</p>
+</div>
+<%else %>
+<% @lawyers.each{|lawyer| %>
+    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+<% } %>
+
+<% end %>
+
