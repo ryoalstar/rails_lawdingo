@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
   #REMINDER: uncomment only in production
-  #before_filter :force_ssl, :only => ['payment_info']
-  #before_filter :remove_ssl, :only => ['home']
+  before_filter :force_ssl, :only => ['payment_info']
+  before_filter :remove_ssl, :only => ['home']
 
   def index
     @tab  = params[:t] ? params[:t] : User::SESSION_TAB
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if current_user and current_user.is_lawyer?
       redirect_to users_path(:t=>'l')
     end
-    @lawyers = Lawyer.home_page_lawyers
+    @lawyers = Lawyer.approved_lawyers
   end
 
   def show
@@ -67,10 +67,12 @@ class UsersController < ApplicationController
 
     if @user.save
       if @user.user_type == User::LAWYER_TYPE
-        practice_areas = params[:practice_areas]
-        practice_areas.each{|pid|
-          ExpertArea.create(:lawyer_id => @user.id, :practice_area_id => pid)
-        }
+        unless params[:practice_areas].blank?
+          practice_areas = params[:practice_areas]
+          practice_areas.each{|pid|
+            ExpertArea.create(:lawyer_id => @user.id, :practice_area_id => pid)
+          }
+        end
         UserMailer.notify_lawyer_application(@user).deliver
         redirect_to welcome_path and return
       elsif @user.is_client?

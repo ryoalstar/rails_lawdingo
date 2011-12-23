@@ -77,6 +77,8 @@ Lawdingo::Application.routes.draw do
   match '/UpdateBusyStatus' => 'users#update_busy_status', :as => :UpdateBusyStatus
   match '/ScheduleSession' => 'users#send_email_to_lawyer', :as => :schedule_session
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
+  match '/search/populate_specialities' => 'search#populate_specialities'
+  match '/search/filter_results' => 'search#filter_results'
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

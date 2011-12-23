@@ -9,14 +9,16 @@ class Lawyer < User
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
+  scope :approved_lawyers, lambda { where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc") }
+
   # returns currently online lawyer user
   def self.online
    self.where('is_online is true' )
   end
 
-  def self.home_page_lawyers
-    self.where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc")
-  end
+  #def self.approved_lawyers
+   # self.where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc")
+  #end
 
   def total_earning
     sum = 0.0

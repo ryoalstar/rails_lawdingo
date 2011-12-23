@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
                   "Rate" =>"$ #{rate}/minute",
                   "Tag Line" =>self.personal_tagline,
                   "Address" => self.address,
-                  "Practice Areas" =>self.practice_areas,
+                  "Practice Areas" =>self.corresponding_user.practice_areas,
                   "Law School" => self.law_school,
                   "Bar memberships"=>self.bar_memberships
                 )

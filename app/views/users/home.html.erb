@@ -1,23 +1,28 @@
-<div id="page">
+<% options_states_arr = []
+  options_states_arr<< ['Any State', 0]
+   State.all.each { |state|
+   options_states_arr << [state.name, state.id]
+   }
+
+  options_pa_arr = []
+  options_pa_arr << ['Any Type', 0]
+  PracticeArea.parent_practice_areas.each { |pa|
+  options_pa_arr << [pa.name, pa.id]
+  }
+%>
+  <div id="page">
           <div>
                 <!-- FILTERS -->
                 <div id="filters">
-                <!--    Show
-                    <select name="type" id="type" size="1">
-                        <option value="dvcr">Divorce</option>
-                        <option value="crim">Criminal</option>
-                    </select>
-                    lawyers, licensed in
-                    <select name="city" id="city" size="1">
-                        <option value="new york">New York</option>
-                        <option value="boston">Boston</option>
-                    </select>,
-                    who can help me with
-                    <select name="help" id="help" size="1">
-                        <option value="chld">Child custody</option>
-                        <option value="trfk">Traffic violations</option>
-                    </select>.
-                -->
+
+                    Find the right lawyer. State:
+                    <%= select_tag('select_state', options_for_select(options_states_arr)) %>,
+                    Type of Law:
+                    <%= select_tag('select_pa', options_for_select(options_pa_arr)) %>
+                    <span id='specialities_container'>
+                      <%= select_tag('select_sp', options_for_select([["none", 0]])) %>
+                    </span>
+
                 </div>
                 <!-- END FILTERS -->
 
@@ -56,5 +61,43 @@ function sendMessage(){
     alert('You can not send the blank message');
   }
 }
+
+
+$(document).ready(function() {
+    $('#specialities_container').hide();
+    $('#select_pa').change(function() {
+      if($("#select_pa").val() != 0){
+        $.ajax({url: '/search/populate_specialities',
+          data: 'pid=' + $("#select_pa").val(),
+          success: function(data)
+          {
+            $("#specialities_container").html(data);
+            $('#specialities_container').show();
+            filterResults();
+          }});
+        }
+        else
+        {
+          $('#specialities_container').hide();
+          filterResults();
+        }
+
+    });
+  });
+
+  var filterResults = function(){
+    $.ajax({
+      url: 'search/filter_results',
+      data: {state:$("#select_state").val(),pa:$("#select_pa").val(), sp:$("#select_sp").val()},
+      success: function(data){
+        $('#results').html(data);
+      }
+    });
+  }
+
+  $("#select_state").change(function(){
+    filterResults();
+  });
+
 </script>
 

@@ -46,13 +46,15 @@ function setBarIds(){
         barId = inp.attr('value');
         if (barId == "")
         {
-          alert("please enter barid for the selected state " + state);
-          form_data_status = false;
+          //alert("please enter barid for the selected state " + state);
+          //form_data_status = false;
+          states_barids[state] = barId;
+          form_data_status = true;
         }
         else
         {
           states_barids[state] = barId;
-          form_data_status = true
+          form_data_status = true;
         }
     }
   });
