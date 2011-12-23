@@ -13,23 +13,23 @@
       <%= form_for @card_detail, :url => {:action => 'payment_info'}, :html => {:id => 'payment-form'}  do |f| %>
         <%= hidden_field_tag :stripe_card_token %>
           <fieldset class="personal-info">
-              <%= f.text_field :first_name %>
-              <%= f.text_field :last_name %>
-              <%= f.text_field :street_address %>
+              <%#= f.text_field :first_name %>
+              <%#= f.text_field :last_name %>
+              <%#= f.text_field :street_address %>
               <%#= f.text_field :apt_suite_bldg ,{:placeholder=>"Apt, Suite, Bldg (Optional)"} %>
-              <%= f.text_field :city %>
-              <%= f.text_field :state %>
-              <%= f.text_field :postal_code %>
+              <%#= f.text_field :city %>
+              <%#= f.text_field :state %>
+              <%#= f.text_field :postal_code %>
               <div class="clear"></div>
               <select id="card_detail_country" name="card_detail[country]">
                <option>United States</option>
                <option>United Kingdom</option>
               </select>
           </fieldset>
-          <fieldset class="card-info">
+          <fieldset class="personal-info">
               <%= image_tag("creditcards.png") %>
-              <label for="card_type">Card Type</label>
-              <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+              <!--label for="card_type">Card Type</label-->
+              <%#= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
               <%= f.text_field :card_number ,{:placeholder=>"Credit Card Number"} %>
               <div class="label">Expires On</div>
               <%= select_month nil, {add_month_numbers: true}, {name: "card_detail[expire_month]", id: "card_month"} %>

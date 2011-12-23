@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
   #REMINDER: uncomment only in production
-  before_filter :force_ssl, :only => ['payment_info']
-  before_filter :remove_ssl, :only => ['home']
+  #before_filter :force_ssl, :only => ['payment_info']
+  #before_filter :remove_ssl, :only => ['home']
 
   def index
     @tab  = params[:t] ? params[:t] : User::SESSION_TAB
@@ -31,9 +31,9 @@ class UsersController < ApplicationController
 #      @tab  = params[:t] ? params[:t] : User::ACCOUNT_TAB
       @tab  = params[:t] ? params[:t] : User::SESSION_TAB
       if User::PAYMENT_TAB == @tab
-        if !request.ssl?
-          redirect_to :protocol => 'https', :t => 'm'
-        end
+        #if !request.ssl?
+         # redirect_to :protocol => 'https', :t => 'm'
+        #end
         @card_detail = current_user.card_detail || CardDetail.new
       elsif User::SESSION_TAB == @tab
         @conversations = current_user.corresponding_user.conversations
@@ -77,7 +77,8 @@ class UsersController < ApplicationController
         redirect_to welcome_path and return
       elsif @user.is_client?
         session[:user_id] = @user.id
-        redirect_to :action => :payment_info
+        #redirect_to :action => :payment_info
+        redirect_to root_path
         # @card_detail = CardDetail.new
         # render :action => 'payment_info' and return
       else
@@ -155,7 +156,6 @@ class UsersController < ApplicationController
   def payment_info
 #    redirect_to root_path and return if current_user.card_detail
     if request.method == "POST"
-#      raise params[:card_detail].inspect
       @card_detail = current_user.card_detail || CardDetail.new(:user_id =>current_user.id)
       if @card_detail.update_attributes(params[:card_detail])
         redirect_to user_path(current_user), :notice => 'Thank you for completing your payment info' and return
@@ -191,7 +191,7 @@ class UsersController < ApplicationController
   # start chat session with chosen lawyer
   # for logged in user
   def chat_session
-    redirect_to card_detail_path and return unless current_user.card_detail
+    #redirect_to card_detail_path and return unless current_user.card_detail
     begin
       @lawyer = Lawyer.find params[:user_id]
     rescue
