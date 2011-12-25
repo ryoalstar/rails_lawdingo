@@ -5,7 +5,7 @@
    }
 
   options_pa_arr = []
-  options_pa_arr << ['Any Type', 0]
+  options_pa_arr << ['All Type', 0]
   PracticeArea.parent_practice_areas.each { |pa|
   options_pa_arr << [pa.name, pa.id]
   }
@@ -15,11 +15,15 @@
                 <!-- FILTERS -->
                 <div id="filters">
 
-                    Find the right lawyer. State:
-                    <%= select_tag('select_state', options_for_select(options_states_arr)) %>,
-                    Type of Law:
+                    <span style="color:black;font-weight:bold;">Find the right lawyer.</span>  State:
+                    <span>
+                    <%= select_tag('select_state', options_for_select(options_states_arr)) %>
+                    </span>
+                    Type of law:
+                    <span>
                     <%= select_tag('select_pa', options_for_select(options_pa_arr)) %>
-                    <span id='specialities_container'>
+                    </span>
+                    <span style="padding-left:5px;" id='specialities_container'>
                       <%= select_tag('select_sp', options_for_select([["none", 0]])) %>
                     </span>
 
