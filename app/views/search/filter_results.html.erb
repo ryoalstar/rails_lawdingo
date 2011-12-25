@@ -6,7 +6,7 @@ Sorry, no such lawyers!<br/>
 Recommend Lawdingo to great lawyers you know.
 </p>
 </div>
-<%else %>
+<% else %>
 <% @lawyers.each{|lawyer| %>
     <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
 <% } %>

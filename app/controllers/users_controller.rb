@@ -123,6 +123,19 @@ class UsersController < ApplicationController
     if @user.is_lawyer?
       @user  = Lawyer.find(@user.id)
       status = @user.update_attributes(params[:lawyer])
+      @user.corresponding_user.practice_areas.delete_all
+      unless params[:practice_areas].blank?
+        practice_areas = params[:practice_areas]
+        practice_areas.each{|pid|
+          pa = PracticeArea.find(pid)
+          if !pa.main_area.nil? && !practice_areas.include?(pa.main_area.id)
+            practice_areas << pa.main_area.id
+          end
+        }
+        practice_areas.each{|pid|
+          ExpertArea.create(:lawyer_id => @user.id, :practice_area_id => pid)
+        }
+      end
     else
       status = @user.update_attributes(params[:user])
     end
