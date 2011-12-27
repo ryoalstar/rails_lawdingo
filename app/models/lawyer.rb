@@ -4,6 +4,7 @@ class Lawyer < User
 
   has_many :conversations
   has_many :bar_memberships
+  has_many :states, :through => :bar_memberships
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
 

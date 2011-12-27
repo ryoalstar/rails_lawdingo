@@ -21,14 +21,33 @@
   <%= f.text_field :email,{:placeholder=>"Email Address",:class=>"email"} %><br/>
   <%= f.password_field :password ,{:placeholder=>"Password",:class=>"passw"} %><br/>
 
-  <% if @user.is_lawyer? %>
-    <div id="div_states_barids"></div>
-    <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
-    <a href="#bar_membership" id="barids_opener" class="dialog-opener">Select bar membership(s)</a>
-    <div id="div_practice_areas" ></div>
-    <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
-    <a href="#practices" id="practice_areas_opener" class="dialog-opener">Select practice areas</a>
-    <%#= f.text_field :bar_ids,{:placeholder=>"Bar ID(s)"} %>
+    <% if @user.is_lawyer?
+      bms = @user.corresponding_user.bar_memberships
+      bms_text = "Bar Memberships: "
+      bms.each{|bm|
+       bms_text += "#{bm.state.name}(Bar ID: #{bm.bar_id}), "
+      }
+      bms_text.chomp!(', ')
+      pas = @user.practice_areas
+      ppas = @user.corresponding_user.practice_areas.parent_practice_areas
+      pas_text = "Practice Areas: "
+      ppas.each{|pa|
+        pas_text += "#{pa.name}"
+        sps = pa.specialities
+        sps_text = ""
+        sps.each{|sp|
+          sps_text += pas.include?(sp)? "#{sp.name}, ": ""
+        }
+        sps_text.chomp!(', ')
+        pas_text += (sps_text != '')? "(#{sps_text})":""
+        pas_text += ', '
+      }
+      pas_text.chomp!(", ")
+    %>
+    <div id="div_states_barids" style="font-size:1em;"><%= bms_text %></div>
+      <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
+      <div id="div_practice_areas" style="font-size:1em;"><%= pas_text %></div>
+      <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
     <% @user.rate = nil if @user.new_record? %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
     <%= f.text_field :payment_email ,{:placeholder=>"Paypal email (for payments)",:class=>"paypal"} %><br/>
@@ -72,19 +91,26 @@
    <a class="button blue" onclick="setBarIds();">Done</a>
  </div>
  <div id="practices" class="dialog-window">
-    <h3>Select Practice Area(s)</h3>
+    <h3>Edit Practice Area(s)</h3>
     <div>
       <ul id="leveled-list_practice_areas" class="leveled-list">
-          <% PracticeArea.parent_practice_areas.each do |p| %>
+          <% l_pas = @user.practice_areas
+             PracticeArea.parent_practice_areas.each do |p| %>
           <li>
-              <%#= check_box_tag "practice_areas[]", "#{p.id}" %> <%#= p.name %>
-              <input type="checkbox" id="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>"/><%= p.name %>
+              <% if l_pas.include?(p) %>
+              <input type="checkbox" id="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>" checked/><%= p.name %>
+              <% else %>
+                <input type="checkbox" id="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>" /><%= p.name %>
+              <% end %>
               <div class="sub">
                   <%= p.name %> specialities:
                   <ul>
                     <% p.specialities.each do |s| %>
-                      <!--li><%= check_box_tag "practice_areas[]", "#{s.id}" %> <%= s.name %> </li-->
-                      <li><input type="checkbox" id="<%= s.name %>" name="practice_areas[]" value="<%= s.id %>"/><%= s.name %></li>
+                      <% if l_pas.include?(s) %>
+                      <li><input type="checkbox" id="<%= s.name %>" name="practice_areas[]" value="<%= s.id %>" checked/><%= s.name %></li>
+                      <% else %>
+                      <li><input type="checkbox" id="<%= s.name %>" name="practice_areas[]"  value="<%= s.id %>"/><%= s.name %></li>
+                      <% end %>
                     <% end %>
                   </ul>
               </div>
@@ -95,15 +121,6 @@
     <a class="button blue" onclick="setPracticeAreas();">Done</a>
 </div>
 <% end %>
-
   <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
 <% end %>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#barids_editor').hide();
-    $('#div_states_barids').hide();
-    $('#practice_areas_editor').hide();
-    $('#div_practice_areas').hide();
-  });
-</script>
 

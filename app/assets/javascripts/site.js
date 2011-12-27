@@ -23,6 +23,7 @@ function select_unselect_state(id) {
    $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val($('#state_' + id).val());
  }
  else {
+alert(id);
    $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val('');
    $('#lawyer_bar_memberships_attributes_' + id + '_bar_id').val('');
  }

@@ -31,14 +31,6 @@
 
     <%= f.password_field :password ,{:placeholder =>"Password", :class=>"passw"} %><br/>
 
-  <%# if !@user.is_lawyer? %>
-                      <!--select>
-                          <option>Select state</option>
-                          <option>Alabama</option>
-                          <option>Arkansas</option>
-                      </select-->
-  <%# end %>
-
     <% if @user.is_lawyer?
       @states = State.all
       #@states.count.times {@user.bar_memberships.build}

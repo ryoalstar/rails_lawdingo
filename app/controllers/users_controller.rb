@@ -35,6 +35,16 @@ class UsersController < ApplicationController
          # redirect_to :protocol => 'https', :t => 'm'
         #end
         @card_detail = current_user.card_detail || CardDetail.new
+      elsif User::ACCOUNT_TAB == @tab && @user.is_lawyer?
+        @filled_states = @user.states
+        unless @filled_states.blank?
+          filled_state_ids = []
+          @filled_states.each{|state| filled_state_ids << state.id}
+          @states = State.where('id not in (?)', filled_state_ids).all
+        else
+          @states = State.all
+        end
+        @states.count.times {@user.bar_memberships.build}
       elsif User::SESSION_TAB == @tab
         @conversations = current_user.corresponding_user.conversations
       end
@@ -60,6 +70,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    raise params.inspect
     redirect_to root_path and return if current_user
     user_type = params[:user_type]
     @user     = user_type == User::LAWYER_TYPE ? Lawyer.new(params[:lawyer]) : User.new(params[:user])
@@ -110,12 +121,23 @@ class UsersController < ApplicationController
   end
 
   def edit
-    begin
+    #begin
       @user = User.find(params[:id])
-      @user = Lawyer.find(@user.id) if @user.is_lawyer?
-    rescue
-      redirect_to root_path, :notice =>"Couldn't find any record"
-    end
+      if @user.is_lawyer?
+        @user = Lawyer.find(@user.id)
+        @filled_states = @user.states
+        unless @filled_states.blank?
+          filled_state_ids = []
+          @filled_states.each{|state| filled_state_ids << state.id}
+          @states = State.where('id not in (?)', filled_state_ids).all
+        else
+          @states = State.all
+        end
+        @states.count.times {@user.bar_memberships.build}
+      end
+    #rescue
+     # redirect_to root_path, :notice =>"Couldn't find any record"
+    #end
   end
 
   def update
@@ -128,10 +150,11 @@ class UsersController < ApplicationController
         practice_areas = params[:practice_areas]
         practice_areas.each{|pid|
           pa = PracticeArea.find(pid)
-          if !pa.main_area.nil? && !practice_areas.include?(pa.main_area.id)
-            practice_areas << pa.main_area.id
+          if !pa.main_area.nil? && !practice_areas.include?(pa.main_area.id.to_s)
+            practice_areas << pa.main_area.id.to_s
           end
         }
+        practice_areas.uniq!
         practice_areas.each{|pid|
           ExpertArea.create(:lawyer_id => @user.id, :practice_area_id => pid)
         }
