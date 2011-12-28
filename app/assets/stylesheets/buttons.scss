@@ -78,5 +78,9 @@
         color: #b2b2b2;
         &:hover { background: url(button_gradient_gray_small.png) repeat-x center bottom transparent; }
     }
+
+    &.no-inner-shadow {
+      text-shadow: none !important;
+    }
 }
 
