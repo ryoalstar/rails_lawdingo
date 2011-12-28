@@ -46,6 +46,7 @@
    <h3>Select your bar membership(s)</h3>
    <div>
      <ul id="leveled_list_bar_ids" class="leveled-list">
+       <li><input /></li>
        <%= f.fields_for :bar_memberships do |bar_membership_fields| %>
          <% if bar_membership_fields.object.new_record? %>
            <li id="<%= i %>">

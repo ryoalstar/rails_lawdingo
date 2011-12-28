@@ -77,8 +77,14 @@
             list-style: none;
         }
         input {
-            border: solid 1px #b8b8b8;
-            @include rounded( 2px );
+          border: solid 1px #B8B8B8 !important;
+          border-radius: 2px !important;
+          -moz-border-radius: 2px !important;
+          -webkit-border-radius: 2px !important;
+          width: 40% !important;
+          font-size: 1em !important;
+          padding: 2px !important;
+          margin-bottom: 0 !important;
         }
     }
 }
