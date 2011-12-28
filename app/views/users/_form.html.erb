@@ -25,10 +25,10 @@
 
   <% if @user.is_lawyer? %>
     <div id="div_states_barids"></div>
-    <%# <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a> %>
+    <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
     <a href="#bar_membership" id="barids_opener" class="dialog-opener button gray" style="width: 160px;">Select bar membership(s)</a>
-    <div id="div_practice_areas" ></div>
-    <%# <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a> %>
+    <div id="div_practice_areas"></div>
+    <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
     <a href="#practices" id="practice_areas_opener" class="dialog-opener button gray" style="width: 130px;">Select practice areas</a>
     <%#= f.text_field :bar_ids,{:placeholder=>"Bar ID(s)"} %>
     <% @user.rate = nil if @user.new_record? %>
@@ -41,7 +41,7 @@
     </div>
     <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
  <% i = 0 %>
- <div id="dialog-overlay"></div>
+ <%# <div id="dialog-overlay"></div> %>
  <div id="bar_membership" class="dialog-window">
    <h3>Select your bar membership(s)</h3>
    <div>
@@ -73,7 +73,7 @@
        <% end %>
      </ul>
    </div>
-   <a class="button blue" onclick="setBarIds();">Done</a>
+   <a class="button blue" style="width: 100px; text-align: center;" onclick="setBarIds();">Done</a>
  </div>
  <div id="practices" class="dialog-window">
     <h3>Select Practice Area(s)</h3>
@@ -96,7 +96,7 @@
           <% end %>
       </ul>
     </div>
-    <a class="button blue" onclick="setPracticeAreas();">Done</a>
+    <a class="button blue" style="width: 100px; text-align: center;" onclick="setPracticeAreas();">Done</a>
 </div>
 <% end %>
 
