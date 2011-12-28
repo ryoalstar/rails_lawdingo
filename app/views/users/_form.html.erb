@@ -35,8 +35,10 @@
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
     <%= f.text_field :payment_email ,{:placeholder=>"Paypal email (for payments)",:class=>"paypal"} %><br/>
     <%= f.text_area :personal_tagline ,{:placeholder=>"Professional summary (100 chars)", :class=>"summary",:maxlength => 100, :rows=>2} %>
-    <div style="font-size:14px;">Upload a photo</div>
-    <%= f.file_field :photo %>
+    <div class="file_field_wrapper button gray">
+      <ins>Upload a photo</ins>
+      <%= f.file_field :photo, :accept => 'image/png,image/gif,image/jpeg' %>
+    </div>
     <!--div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/-->
  <% i = 0 %>
  <div id="dialog-overlay"></div>
