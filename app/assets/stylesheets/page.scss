@@ -231,7 +231,13 @@
             > * { margin: 0px 0px 12px -8px; }
             a {
                 display: block;
-                font-size: 1.6em;
+                font-size: 1.63em;
+
+                &.button {
+                  font-size: 1.3em;
+                  text-align: left;
+                  letter-spacing: normal;
+                }
             }
 
             .file_field_wrapper {
