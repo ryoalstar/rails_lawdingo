@@ -173,26 +173,25 @@ $(function(){
     }
 
     $.fn.dialog = function( ){
-
-        var dialog_div = $( $(this).attr('href') );
-        var close = $('<div class="dialog-close"></div>');
-        close.click( close_dialogs );
-        dialog_div.append( close );
+        
+        this.each( function(){
+            var dialog_div = $( $(this).attr('href') );
+            var close = $('<div class="dialog-close"></div>');
+            close.click( close_dialogs );
+            dialog_div.append( close );
+        });
+        
         $('#dialog-overlay').click( function(){
             $('.dialog-window').hide();
             $(this).hide();
         });
-
+        
         this.click( function(){
-            var l_id = $(this).data('l_id');
-            var fullname = $(this).data('fullname');
-            $("#overlay_user_name").html('You\'ve reached attorney ' + fullname);
-            $("#current_lid").val(l_id);
             $('#dialog-overlay').show();
             $( $(this).attr('href') ).show();
             return false;
         });
-
+    
     };
 
     $.fn.leveled_list = function(){
