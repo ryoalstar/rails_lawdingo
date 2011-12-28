@@ -4,6 +4,15 @@
   -webkit-border-radius: $radius;
 }
 
+@mixin inline-block {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
 
 
 #header, #page, #footer {
@@ -223,6 +232,26 @@
             a {
                 display: block;
                 font-size: 1.6em;
+            }
+
+            ul.name_fields {
+              letter-spacing: 0;
+              position: relative;
+              list-style: none;
+              padding: 0;
+              margin-bottom: 0;
+              width: 100%;
+
+              li {
+                @include inline-block;
+                letter-spacing: normal;
+                width: 148px;
+                margin-right: 24px;
+
+                &.last-child {
+                  margin-right: 0 !important;
+                }
+              }
             }
         }
 
