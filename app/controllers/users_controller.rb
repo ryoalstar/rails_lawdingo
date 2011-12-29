@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    # raise params.inspect
     redirect_to root_path and return if current_user
     user_type = params[:user_type]
     @user     = user_type == User::LAWYER_TYPE ? Lawyer.new(params[:lawyer]) : User.new(params[:user])
