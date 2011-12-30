@@ -13,6 +13,14 @@
             float: left;
             margin-left: 10px;
 
+            .tagline, .specialities {
+              color: black;
+            }
+
+            .tagline {
+              font-style: italic;
+            }
+
             h3 {
                 color: #000;
                 margin: 0px;
@@ -31,9 +39,14 @@
         }
     }
 }
+.action {
+  .free { color: black; font-style: italic; font-size: 1.333em; margin-top: 3px; }
+}
 
 .price {
     color: #333;
+    line-height: 1;
+
     &>span { display:inline-block; margin: 4px 0px;}
     .amt {
         font-size: 3em;
@@ -41,7 +54,6 @@
     }
     .rate { font-size: 1.8em;}
     .xtra { color: #666; margin-left: 4px; }
-    .free { color: #666; font-size: 1.2em; }
     .curr { font-weight: normal; position: relative; top: 6px; font-size: 0.75em;}
 }
 

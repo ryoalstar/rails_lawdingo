@@ -5,11 +5,11 @@
     <% if lawyer.is_online? && !lawyer.is_busy %>
       <%= link_to "Start Video Consultation", user_chat_session_path(lawyer), :title =>"Start Video Consultation", :class =>'button' %>
       <% else %>
-      <a href="#schedule_session" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.full_name %>" class="dialog-opener button yellow">Schedule Session</a>
+      <a href="#schedule_session" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.full_name %>" class="dialog-opener button yellow">Schedule Consultation</a>
       <% end %>
+        <div class="free">free initial consultation, then:</div>
         <div class="price">
             <span class="amt"><%= number_to_currency lawyer.rate %></span><span class="rate">/min</span><span class="xtra">+<%= number_to_currency @app_charge || AppParameter.service_charge_value %>/min fees</span>
-            <div class="free">free initial consultation</div>
         </div>
     </div>
     <!-- END CALL TO ACTION -->
@@ -33,7 +33,7 @@
       %>
     <div class="info">
         <h3>Attorney <%= "#{lawyer.full_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= licenced_states %> <% end %>
-        <div class="tagline"><%= lawyer.personal_tagline %></div>
+        <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>
         <div class="specialities"><% unless lawyer.practice_areas.blank? %> Practice Areas: <%= pas_string %><% end %></div>
         <div class="verified">Bar membership and credentials verified</div>
     </div>
