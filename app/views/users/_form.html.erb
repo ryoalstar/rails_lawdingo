@@ -24,12 +24,16 @@
   <%= f.password_field :password ,{:placeholder=>"Password",:class=>"passw"} %><br/>
 
   <% if @user.is_lawyer? %>
-    <div id="div_states_barids"></div>
-    <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
-    <a href="#bar_membership" id="barids_opener" class="dialog-opener button gray no-inner-shadow" style="width: 160px;">Select bar membership(s)</a>
-    <div id="div_practice_areas"></div>
-    <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
-    <a href="#practices" id="practice_areas_opener" class="dialog-opener button gray no-inner-shadow" style="width: 130px;">Select practice areas</a>
+    <div style="display: block; margin-bottom: 1.5em;">
+      <div id="div_states_barids"></div>
+      <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
+      <a href="#bar_membership" id="barids_opener" class="dialog-opener button gray no-inner-shadow" style="width: 160px;">Select bar membership(s)</a>
+    </div>
+    <div style="display: block; margin-bottom: 1.5em;">
+      <div id="div_practice_areas"></div>
+      <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
+      <a href="#practices" id="practice_areas_opener" class="dialog-opener button gray no-inner-shadow" style="width: 130px;">Select practice areas</a>
+    </div>
     <%#= f.text_field :bar_ids,{:placeholder=>"Bar ID(s)"} %>
     <% @user.rate = nil if @user.new_record? %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
