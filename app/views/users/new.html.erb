@@ -16,9 +16,11 @@
 
  <%= render 'form' %>
 
-
-           <span class="fine-print">By clicking "Create Account" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
-
+          <% unless params[:ut].present? %>
+           <span class="fine-print">By clicking "Join Lawdingo" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
+          <% else %>
+           <span class="fine-print">By clicking "Apply as Lawyer" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
+          <% end %>
        </div>
         </div>
 
