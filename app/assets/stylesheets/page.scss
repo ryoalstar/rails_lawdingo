@@ -260,12 +260,33 @@
                 }
             }
 
-            .file_field_wrapper {
-              overflow: hidden;
+            .file_select_wrapper {
+              width: 100%;
+              position: relative;
+              zoom: 1;
               display: block;
+              letter-spacing: 0;
+
+              .file_select_value, .file_select_button {
+                @include inline-block;
+                letter-spacing: normal;                
+              }
+
+              .file_select_value {
+                font-size: 1.16667em;
+                color: #222;
+                padding: 2px;
+                background-color: #f7eec6;
+                @include rounded(3px);
+              }
+            }
+
+            .file_select_button {
+              overflow: hidden;
               cursor: pointer;
               width: 66px;
               position: relative;
+              margin: 0 1em 0.5em 0;
 
               ins {
                 text-decoration: none;

@@ -4,7 +4,7 @@
       <title>Lawdingo - Legal advice over video chat.</title>
       <%= stylesheet_link_tag    "application" %>
       <%= javascript_include_tag "application" %>
-      <%= javascript_include_tag 'site', 'jquery.timer'%>
+      <%= javascript_include_tag 'site', 'users', 'jquery.timer'%>
       <%= csrf_meta_tags %>
       <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
       <% if ENV['RAILS_ENV'] == 'production' %>
