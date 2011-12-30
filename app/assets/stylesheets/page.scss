@@ -241,6 +241,7 @@
             }
 
             input[type=text], input[type=password],input[type=email],input[type=number], textarea {
+                font-family: arial, verdana, tahoma;
                 width: 100%;
                 border: 1px solid #B8B8B8;
                 @include rounded( 4px );
