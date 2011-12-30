@@ -56,7 +56,7 @@
        <%= f.fields_for :bar_memberships do |bar_membership_fields| %>
          <% if bar_membership_fields.object.new_record? %>
            <li id="<%= i %>">
-             <%= check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")%><%=@states[i].name%>
+             <%= check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")%><%= label_tag "state_#{i}", @states[i].name %>
              <%= bar_membership_fields.hidden_field :state_id %>
              <div class="sub" id="<%= @states[i].name %>"><%= "#{@states[i].abbreviation} Bar ID:" %>
                <%= bar_membership_fields.text_field :bar_id %>
@@ -69,7 +69,7 @@
        <%= f.fields_for :bar_memberships do |bar_membership_fields| %>
          <% unless bar_membership_fields.object.new_record? %>
          <li id="<%= i + j %>">
-           <%= check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")%><%=@filled_states[j].name%>
+           <%= check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")%><%= label_tag "state_#{i+j}", @filled_states[j].name %>
            <%= bar_membership_fields.hidden_field :state_id %>
            <div class="sub" id="<%= @filled_states[j].name %>"><%= "#{@filled_states[j].abbreviation} Bar ID:" %>
              <%= bar_membership_fields.text_field :bar_id %>
@@ -89,13 +89,13 @@
           <% PracticeArea.parent_practice_areas.each do |p| %>
           <li>
               <%#= check_box_tag "practice_areas[]", "#{p.id}" %> <%#= p.name %>
-              <input type="checkbox" id="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>"/><%= p.name %>
+              <input type="checkbox" data-name="<%= p.name %>" id="practice_area_<%= p.id %>" name="practice_areas[]" value="<%= p.id %>"/><%= label_tag "practice_area_#{p.id}", p.name %>
               <div class="sub">
                   <%= p.name %> specialities:
                   <ul>
                     <% p.specialities.each do |s| %>
                       <!--li><%= check_box_tag "practice_areas[]", "#{s.id}" %> <%= s.name %> </li-->
-                      <li><input type="checkbox" id="<%= s.name %>" name="practice_areas[]" value="<%= s.id %>"/><%= s.name %></li>
+                      <li><input type="checkbox" data-name="<%= s.name %>" id="practice_area_<%= s.id %>" name="practice_areas[]" value="<%= s.id %>"/><%= label_tag "practice_area_#{s.id}", s.name %></li>
                     <% end %>
                   </ul>
               </div>

@@ -61,10 +61,11 @@ function setBarIds(){
   });
   if(form_data_status)
   {
-    var states_barids_string = "Bar Memberships: ";
+    var states_barids_string = "<strong>Bar Memberships:</strong> ";
     for(key in states_barids)
     {
-      states_barids_string += key + "(Bar ID: " + states_barids[key] + ')' + ', '
+      states_barids_key_label = ($(states_barids[key]).length > 0) ? "(Bar ID: " + $(states_barids[key]) + "), " : '';
+      states_barids_string += key + " " + states_barids_key_label;
     }
     states_barids_string = states_barids_string.substring(0,states_barids_string.length-2);
     $('#barids_opener').hide();
@@ -82,14 +83,14 @@ function setBarIds(){
 
 function setPracticeAreas()
 {
-  var practice_area_string = "Practice Areas: ";
+  var practice_area_string = "<strong>Practice Areas:</strong> ";
   var specialities_string = "";
   $('#leveled-list_practice_areas').children().each(function(index){
     var parent_list = $(this);
     var parent_checkbox = parent_list.find(':checkbox:first');
     if(parent_checkbox.attr('checked') == 'checked')
     {
-      practice_area_string += parent_checkbox.attr('id');
+      practice_area_string += parent_checkbox.data('name');
       var div = parent_list.find('div');
       var inner_ul = div.find('ul');
       specialities_string = "";
@@ -98,7 +99,7 @@ function setPracticeAreas()
         var chkbox = inner_list.find('input[type=checkbox]')
         if(chkbox.attr('checked') == 'checked')
         {
-          specialities_string +=chkbox.attr('id') + ', '
+          specialities_string +=chkbox.data('name') + ', '
         }
       });
       if(specialities_string != "")
