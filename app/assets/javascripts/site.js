@@ -64,8 +64,13 @@ function setBarIds(){
     var states_barids_string = "<strong>Bar Memberships:</strong> ";
     for(key in states_barids)
     {
-      states_barids_key_label = states_barids[key] ? "(Bar ID: " + states_barids[key] + "), " : '';
-      states_barids_string += key + " " + states_barids_key_label;
+      states_barids_key_label = states_barids[key] ? "(Bar ID: " + states_barids[key] + ")" : '';
+
+      if(states_barids_key_label) {
+        states_barids_string += key + " " + states_barids_key_label + ", ";
+      } else {
+        states_barids_string += key + ", ";
+      }
     }
     states_barids_string = states_barids_string.substring(0,states_barids_string.length-2);
     $('#barids_opener').hide();
