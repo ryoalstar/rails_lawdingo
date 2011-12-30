@@ -50,7 +50,7 @@
  <% i = 0 %>
  <%# <div id="dialog-overlay"></div> %>
  <div id="bar_membership" class="dialog-window">
-   <h3>Select your bar membership(s)</h3>
+   <h3>In which state(s) do you have active bar membership?</h3>
    <div>
      <ul id="leveled_list_bar_ids" class="leveled-list">
        <%= f.fields_for :bar_memberships do |bar_membership_fields| %>
@@ -83,7 +83,7 @@
    <a class="button blue" style="width: 100px; text-align: center;" onclick="setBarIds();">Done</a>
  </div>
  <div id="practices" class="dialog-window">
-    <h3>Select Practice Area(s)</h3>
+    <h3>What are your practice areas? Click any to expand.</h3>
     <div>
       <ul id="leveled-list_practice_areas" class="leveled-list">
           <% PracticeArea.parent_practice_areas.each do |p| %>
