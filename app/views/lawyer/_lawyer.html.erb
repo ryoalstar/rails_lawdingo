@@ -5,7 +5,11 @@
     <% if lawyer.is_online? && !lawyer.is_busy %>
       <%= link_to "Start Video Consultation", user_chat_session_path(lawyer), :title =>"Start Video Consultation", :class =>'button' %>
       <% else %>
-      <a href="#schedule_session" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.full_name %>" class="dialog-opener button yellow">Schedule Consultation</a>
+        <% if logged_in? %>
+          <a href="#schedule_session" id="schedule_session_button" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.full_name %>" class="dialog-opener button yellow">Schedule Consultation</a>
+        <% else %>
+          <%= link_to "Schedule Consultation", new_user_path, :class => "button yellow" %>
+        <% end %>
       <% end %>
         <div class="free">free initial consultation, then:</div>
         <div class="price">
