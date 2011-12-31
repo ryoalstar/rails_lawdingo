@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status]
+  before_filter :authenticate, :except =>[:index, :new, :create, :chat_session, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -228,10 +228,14 @@ class UsersController < ApplicationController
   # for logged in user
   def chat_session
     #redirect_to card_detail_path and return unless current_user.card_detail
-    begin
-      @lawyer = Lawyer.find params[:user_id]
-    rescue
-      @lawyer = nil
+    if logged_in?
+      begin
+        @lawyer = Lawyer.find params[:user_id]
+      rescue
+        @lawyer = nil
+      end
+    else
+      redirect_to new_user_path
     end
   end
 
