@@ -1,0 +1,9 @@
+<% if @status %>
+  alert('Payment info has been updated');
+  updateFlash();
+  close_dialogs();
+<% else %>
+  alert('Error in updating payment info');
+$('#errors_div').html(<%= @err_msg %>);
+<% end %>
+
