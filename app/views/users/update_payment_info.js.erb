@@ -3,7 +3,6 @@
   updateFlash();
   close_dialogs();
 <% else %>
-  alert('Error in updating payment info');
-$('#errors_div').html(<%= @err_msg %>);
+$('.stripe_error').html(<%= escape_javascript(@err_msg) %>);
 <% end %>
 

@@ -203,7 +203,7 @@ class UsersController < ApplicationController
   end
 
   def update_payment_info
-   @card_detail = CardDetail.new(:user_id =>current_user.id)
+   @card_detail = current_user.card_detail || CardDetail.new(:user_id =>current_user.id)
    @status = false
    @status = @card_detail.update_attributes(:card_number => params[:card_number], :expire_month => params[:expire_month], :expire_year => params[:expire_year], :card_verification=> params[:scode])
    @err_msg = ''

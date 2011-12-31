@@ -79,7 +79,7 @@ Lawdingo::Application.routes.draw do
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
   match '/search/populate_specialities' => 'search#populate_specialities'
   match '/search/filter_results' => 'search#filter_results'
-  match '/upatePaymentInfo' => 'users#update_payment_info'
+  match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
 
   # You can have the root of your site routed with "root"
