@@ -1,6 +1,6 @@
 class Lawyer < User
-  #validates :payment_email, :bar_ids, :practice_areas, :presence =>true
-  validates :payment_email, :presence =>true
+  # validates :payment_email, :bar_ids, :practice_areas, :presence =>true
+  # validates :payment_email, :presence => true
 
   has_many :conversations
   has_many :bar_memberships
