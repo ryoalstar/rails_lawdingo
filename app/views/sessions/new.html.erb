@@ -2,7 +2,7 @@
        <h1>Sign In</h1>
             <h3>Lawyers, <%= link_to 'apply', new_user_path(:ut=>1) %>. New members, <%= link_to 'sign up', new_user_path %>.</h3>
 <div>
-<%= form_tag sessions_path do %>
+<%= form_tag sessions_path, :validate => true do %>
   <% if @msg %>
     <div class="error_explanation">
       <h4 class="error">Incorrect email or password.</h4>

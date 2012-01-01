@@ -38,6 +38,7 @@ GEM
       xml-simple
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    client_side_validations (3.1.4)
     cocaine (0.1.0)
     coffee-rails (3.1.0)
       coffee-script (>= 2.2.0)
@@ -129,6 +130,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-s3
+  client_side_validations
   coffee-rails (~> 3.1.0.rc)
   jquery-rails
   mysql2

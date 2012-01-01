@@ -1,7 +1,7 @@
 <%=raw flash[:error] %>
 
 <% errors = @user.errors %>
-<%= form_for @user, :url =>@user.new_record? ? users_path : user_path(@user), :html=>{:multipart => true} do |f| %>
+<%= form_for @user, :validate => true, :url =>@user.new_record? ? users_path : user_path(@user), :html=>{:multipart => true} do |f| %>
 <% unless flash[:error] %>
   <% if errors.size > 0 %>
     <div class="error_explanation">
