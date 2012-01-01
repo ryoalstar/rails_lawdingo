@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 
+<<<<<<< HEAD
   before_filter :authenticate, :except =>[:index, :new, :create, :chat_session, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status]
+=======
+  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info]
+>>>>>>> 4c18e3702e416a58d248c6680d84fef9a5cf3059
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -70,7 +74,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     redirect_to root_path and return if current_user
     user_type = params[:user_type]
     @user     = user_type == User::LAWYER_TYPE ? Lawyer.new(params[:lawyer]) : User.new(params[:user])
@@ -121,7 +124,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    #begin
+    begin
       @user = User.find(params[:id])
       if @user.is_lawyer?
         @user = Lawyer.find(@user.id)
@@ -135,9 +138,9 @@ class UsersController < ApplicationController
         end
         @states.count.times {@user.bar_memberships.build}
       end
-    #rescue
-     # redirect_to root_path, :notice =>"Couldn't find any record"
-    #end
+    rescue
+      redirect_to root_path, :notice =>"Couldn't find any record"
+    end
   end
 
   def update
@@ -201,6 +204,27 @@ class UsersController < ApplicationController
     else
       @card_detail = CardDetail.new
     end
+  end
+
+  def update_payment_info
+   @card_detail = current_user.card_detail || CardDetail.new(:user_id =>current_user.id)
+   @status = false
+   @status = @card_detail.update_attributes(:card_number => params[:card_number], :expire_month => params[:expire_month], :expire_year => params[:expire_year], :card_verification=> params[:scode])
+   @err_msg = ''
+    errors = @card_detail.errors
+    if errors.size > 0
+      @err_msg += '<div class="error_explanation"><h4 class="error">Please fix the following errors:</h4><ul><class="errors">'
+      errors.full_messages.each do |error|
+        @err_msg += "<li>#{error}</li>"
+    end
+      @err_msg += '</ul></div>'
+    end
+  end
+
+  def has_payment_info
+    @user = User.find(params[:user_id])
+    status = @user.has_payment_info? ? '1' : '0'
+    render :text => status, :layout => false
   end
 
   def update_card_detail
