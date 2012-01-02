@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111231035935) do
+ActiveRecord::Schema.define(:version => 20111221135945) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20111231035935) do
 
   create_table "card_details", :force => true do |t|
     t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
     t.string   "card_type"
     t.string   "card_number"
     t.string   "expire_month"

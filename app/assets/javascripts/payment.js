@@ -20,9 +20,9 @@ $(document).ready(function() {
   $("#payment-form").submit(function(event) {
     // disable the submit button to prevent repeated clicks
     $('.submit-button').attr("disabled", "disabled");
-    //var fname = $('#card_detail_first_name').val();
-    //var lname = $('#card_detail_last_name').val();
-    //var full_name = fname + ' ' + lname;
+    var fname = $('#card_detail_first_name').val();
+    var lname = $('#card_detail_last_name').val();
+    var full_name = fname + ' ' + lname;
     var card;
 
     card = {
@@ -30,11 +30,11 @@ $(document).ready(function() {
       exp_month: $('#card_month').val(),
       exp_year: $('#card_year').val(),
       cvc: $('#card_detail_card_verification').val(),
-      //name: full_name ,
-      //address_line1: $('#card_detail_address').val(),
-      //address_zip: $('#card_detail_postal_code').val(),
-      //address_state: $('#card_detail_state').val(),
-      //address_country: $('#card_detail_country').val(),
+      name: full_name ,
+      address_line1: $('#card_detail_address').val(),
+      address_zip: $('#card_detail_postal_code').val(),
+      address_state: $('#card_detail_state').val(),
+      address_country: $('#card_detail_country').val(),
     };
     Stripe.createToken(card, stripeResponseHandler);
 
@@ -53,22 +53,7 @@ function stripeResponseHandler(status, response) {
       // token contains id, last4, and card type
       var token = response['id'];
       $('#stripe_card_token').val(token);
-      var form_type = $('#form_type').val();
-      if(form_type == "html")
-      {
-        form$.get(0).submit();
-      }
-      else
-      {
-        $.ajax({
-        url: "/updatePaymentInfo",
-        type:'post',
-        data:form$.serialize(),
-        success: function(response){
-            }
-    });
-
-      }
+      form$.get(0).submit();
   }
 }
 

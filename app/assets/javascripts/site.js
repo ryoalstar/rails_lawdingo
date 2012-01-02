@@ -11,28 +11,6 @@ function showFlash()
   //$('.mainc').css("display","none");
 }
 
-function getMyApp(appName) {
-  if (navigator.appName.indexOf ("Microsoft") !=-1) {
-      return window[appName];
-  } else {
-      return document[appName];
-  }
-}
-
-function updateFlash()
-{
-   var movie = getMyApp('mySwf');
-   movie.startPaidSession();
-}
-
-function openPaymentDialog()
-{
-  $('.dialog-window').show();
-  $('#dialog-overlay').show();
-  var close = $('<div class="dialog-close"></div>');
-  close.click( close_dialogs );
-  $('.dialog-window').append( close );
-}
 function closecall()
 {
       $('#outer_div').css({"left":"-2000px"});
@@ -201,25 +179,25 @@ $(function(){
     }
 
     $.fn.dialog = function( ){
-
+        
         this.each( function(){
             var dialog_div = $( $(this).attr('href') );
             var close = $('<div class="dialog-close"></div>');
             close.click( close_dialogs );
             dialog_div.append( close );
         });
-
+        
         $('#dialog-overlay').click( function(){
             $('.dialog-window').hide();
             $(this).hide();
         });
-
+        
         this.click( function(){
             $('#dialog-overlay').show();
             $( $(this).attr('href') ).show();
             return false;
         });
-
+    
     };
 
     $.fn.leveled_list = function(){
