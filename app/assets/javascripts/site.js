@@ -1,4 +1,6 @@
  $('#outer_div').css({"margin":"20px auto","border":"solid #000 2px","padding":"2px"});
+ var messageString = "";
+ var isOverlayOpen = false;
 //functions to bring up and collapse the video chat screen for lawyer
 function CloseCall()
 {
@@ -25,15 +27,42 @@ function updateFlash()
    movie.startPaidSession();
 }
 
-function openPaymentDialog()
+function cancelPaidSession()
 {
+  var movie = getMyApp('mySwf');
+  movie.cancelPaidSession();
+}
+
+
+function openPaymentDialog(username, caller)
+{
+  formatMessage(caller, username);
   $('.dialog-window').show();
   $('#dialog-overlay').show();
   var close = $('<div class="dialog-close"></div>');
-  close.click( close_dialogs );
+  close.click( postponePayment );
   $('.dialog-window').append( close );
 }
 
+function postponePayment()
+{
+  close_dialogs();
+  cancelPaidSession();
+}
+
+function formatMessage(caller,username)
+{
+  if(parseInt(caller) == 1)
+  {
+    messageString = "To start a paid session, you will need to have payment information on file";
+  }
+  else
+  {
+      messageString = "Attorney "+ username + " is requesting a paid session. To confirm this, you will need to have payment info on file";
+  }
+  $('.paid_model_header').html(messageString);
+  isOverlayOpen = true;
+}
 
 function closecall()
 {
@@ -214,6 +243,7 @@ $(function(){
         $('#dialog-overlay').click( function(){
             $('.dialog-window').hide();
             $(this).hide();
+            if(isOverlayOpen) postponePayment();
         });
 
         this.click( function(){
@@ -281,6 +311,7 @@ $(function(){
 
     $(document).keyup(function(e) {
         if (e.keyCode == 27) close_dialogs();
+        //if (isOverlayOpen) postponePayment();
     });
 
 });
