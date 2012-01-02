@@ -41,6 +41,15 @@
       </div>
 
 </div>
+<div id="schedule_session" class="dialog-window">
+            <h3 id='overlay_user_name'></h3>
+            I’m currently away or in a Lawdingo consultation. Please describe what you’d like to talk about and I’ll get back to you as soon as I can.
+            <textarea id='txt_msg' name ='txt_msg'></textarea>
+            <span class="fine-print">Please do not include any private or confidential information here.</span>
+            <hr>
+            <a href="javascript:void(0)" class="button blue" onclick="sendMessage();return false;">Send Message</a>
+</div>
+
 <script type="text/javascript">
 function sendMessage(){
   close_dialogs();

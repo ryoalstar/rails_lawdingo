@@ -1,0 +1,7 @@
+<% if @status %>
+  updateFlash();
+  close_dialogs();
+<% else %>
+$('.stripe_error').html(<%= escape_javascript(@err_msg) %>);
+<% end %>
+

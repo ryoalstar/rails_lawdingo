@@ -5,6 +5,7 @@
       <%= stylesheet_link_tag    "application" %>
       <%= javascript_include_tag "application" %>
       <%= javascript_include_tag 'site', 'users', 'jquery.timer'%>
+      <%= javascript_include_tag "https://js.stripe.com/v1/", "payment" %>
       <%= csrf_meta_tags %>
       <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
       <% if ENV['RAILS_ENV'] == 'production' %>
@@ -67,11 +68,12 @@
 <strong><a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a></strong>
 <div id="flash_div">
 
-	            <object id='myswf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='410' width='960'>
-	              <param name='src' value='/swf/lawdingo.swf'/>
+	            <object id='mySwf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='410' width='960'>
+	              <param name='src' value='/swf/vchat.swf'/>
 	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
 	              <param name="allowScriptAccess" value="always" />
-	              <embed name='mySwf' src='/swf/lawdingo.swf' allowScriptAccess='always' height='410' width='960' FlashVars="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" ></embed>
+	              <param name="wmode" value="transparent" />
+	              <embed name='mySwf' src='/swf/vchat.swf' allowScriptAccess='always' wmode='transparent' height='410' width='960' FlashVars="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" ></embed>
 	            </object>
 	          </div>
           </div>
@@ -92,14 +94,43 @@
         </div>
         <!-- END FOOTER -->
         <div id="dialog-overlay"></div>
-        <div id="schedule_session" class="dialog-window">
-            <h3 id='overlay_user_name'></h3>
-            <span class="lawyer_name">Lawyer</span> is currently away or in a Lawdingo video consultation. Please send the lawyer a message with some times that would work for you to connect on Lawdingo.
-            <textarea id='txt_msg' name ='txt_msg'></textarea>
-            <span class="fine-print">Please do not include any private or confidential information here.</span>
-            <hr>
-            <a href="javascript:void(0)" class="button blue" onclick="sendMessage();return false;">Send Message</a>
-        </div>
+        <div id="paid_schedule_session" class="dialog-window">
+        <ul>
+        <div class="error_explanation">
+        <ul class="errors">
+          <li> <div id="stripe_errors" class ="stripe_error" style="color:red;"></div></li>
+          <li> <div class ="stripe_error" style="color:red;"></div></li>
+        </ul>
+      </div>
+      </ul>
+
+        <%= form_tag("/updatePaymentInfo", :id => 'payment-form', :remote =>true) do %>
+          <%= hidden_field_tag :stripe_card_token %>
+          <%= hidden_field_tag :form_type, "ajax" %>
+            <h3 class="paid_model_header">Paid session has been requested. To confirm this, you'll need to have payment info on file.</h3>
+	    <label>Credit card number:</label><br/>
+	    <input type="text" name="card_number" autocomplete="off" placeholder="Credit card number" maxlength="26" size="26" id="card_detail_card_number"></input>
+	    <div id="security_wrapper">
+		<div id="exp_group">
+			<label>Expiration:</label><br/>
+			<select id="card_month" name = "expire_month">
+			<% for i in 0..11 %>
+			  <option <%= "selected='selected'" if i==0 %> value="<%= i+1 %>"><%= i+1 %></option>
+			<% end %>
+			</select>
+			<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+5}, {name: "expire_year", id: "card_year"} %>
+		</div>
+		<div id="sec_group">
+			<label>Security code:</label><br/>
+			<input id="card_detail_card_verification" type="password" size="9" autocomplete="off" name="scode" maxlength="4"></input>
+			<img src="img/question.png" alt="question help" title="Question help comes here" />
+		</div>
+
+	    </div>
+	    <%= submit_tag("Start Paid Session", :class => "button blue small_font") %>
+	    <% end %>
+            <!--a href="" class="button blue small_font" onclick="close_dialogs();">Start paid session</a-->
+    </div>
     <script type = text/javascript>
       $(document).ready(function(){
         var timer = $.timer(function() {
