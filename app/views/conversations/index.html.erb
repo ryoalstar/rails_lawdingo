@@ -77,7 +77,7 @@
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
           <% avg_rate = user.total_spending == 0? 0 : (user.total_spending/(user.total_paid_duration.to_f/60)) %>
           <td><%= number_to_currency avg_rate %>/min </td>
-          <td>  </td>
+          <td><%= number_to_currency @conversations.map{|c| c.lawdingo_charge}.sum %></td>
           <td> <%= number_to_currency user.total_spending.to_i %> </td>
         </tr>
       </tbody>
