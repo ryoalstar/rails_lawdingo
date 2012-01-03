@@ -32,7 +32,7 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
-          <td> </td>
+          <td> <%= pluralize @conversations.map {|c| c.client_id}.uniq.count, "Client", "Clients" %> </td>
           <td> <%= @conversations.size %> Sessions </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
@@ -71,13 +71,13 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
-          <td></td>
+          <td><%= pluralize @conversations.map{|c| c.lawyer_id}.uniq.count, "Lawyer", "Lawyers" %></td>
           <td><%= @conversations.size %> Sessions</td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
           <% avg_rate = user.total_spending == 0? 0 : (user.total_spending/(user.total_paid_duration.to_f/60)) %>
           <td><%= number_to_currency avg_rate %>/min </td>
-          <td>  </td>
+          <td><%= number_to_currency @conversations.map{|c| c.lawdingo_charge}.sum %></td>
           <td> <%= number_to_currency user.total_spending.to_i %> </td>
         </tr>
       </tbody>

@@ -163,7 +163,7 @@ function setPracticeAreas()
       if(specialities_string != "")
       {
         specialities_string = specialities_string.substring(0,specialities_string.length-2);
-        practice_area_string += '(' + specialities_string + ')';
+        practice_area_string += ' (' + specialities_string + ')';
       }
       practice_area_string += ', ';
     }

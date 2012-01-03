@@ -12,6 +12,16 @@ class Lawyer < User
 
   scope :approved_lawyers, lambda { where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc") }
 
+  def self.approved_lawyers_states
+    states = []
+
+    approved_lawyers.each do |lawyer|
+      states << lawyer.states
+    end
+
+   return states[0]
+  end
+
   # returns currently online lawyer user
   def self.online
    self.where('is_online is true' )
