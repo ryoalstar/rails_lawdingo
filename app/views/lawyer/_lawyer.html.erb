@@ -17,7 +17,13 @@
         </div>
     </div>
     <!-- END CALL TO ACTION -->
-    <%= image_tag lawyer.photo.url(:thumb) %>
+    <% 
+      if lawyer.photo.url.present? 
+        image_tag lawyer.photo.url(:thumb) 
+      else
+        image_tag "profile_m.gif", :width => 100
+      end
+    %>
 
     <!-- RESULT INFO -->
     <% bms = []
