@@ -32,7 +32,7 @@
         <% } %>
         <% user = current_user.corresponding_user %>
         <tr class="total">
-          <td> </td>
+          <td> <%= pluralize @conversations.map {|c| c.client_id}.uniq.count, "Client", "Clients" %> </td>
           <td> <%= @conversations.size %> Sessions </td>
           <td> <%= seconds_in_string user.total_session_duration %> </td>
           <td> <%= seconds_in_string user.total_paid_duration %> </td>
