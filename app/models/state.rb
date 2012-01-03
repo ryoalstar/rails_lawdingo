@@ -10,6 +10,5 @@ class State < ActiveRecord::Base
       self.create(:name => state[0], :abbreviation => state[1])
     end
   end
-
 end
 

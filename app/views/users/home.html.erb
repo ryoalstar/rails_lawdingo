@@ -1,13 +1,14 @@
-<% options_states_arr = []
-  options_states_arr<< ['Any State', 0]
-   State.all.each { |state|
-   options_states_arr << [state.name, state.id]
-   }
+<% 
+  options_states_arr = []
+  options_states_arr << ['Any State', 0]
+  Lawyer.approved_lawyers_states.each { |state|
+    options_states_arr << [state.name, state.id]
+  }
 
   options_pa_arr = []
   options_pa_arr << ['All types', 0]
   PracticeArea.parent_practice_areas.each { |pa|
-  options_pa_arr << [pa.name, pa.id]
+    options_pa_arr << [pa.name, pa.id]
   }
 %>
   <div id="page">
