@@ -1,8 +1,12 @@
 <% 
   options_states_arr = []
   options_states_arr << ['Any State', 0]
-  Lawyer.approved_lawyers_states.each { |state|
-    options_states_arr << [state.name, state.id]
+  State.all.each { |state|
+    unless state.lawyers.approved_lawyers.count > 0
+      options_states_arr << [state.name, state.id, {:disabled => "disabled"}]
+    else
+      options_states_arr << [state.name, state.id]
+    end
   }
 
   options_pa_arr = []
