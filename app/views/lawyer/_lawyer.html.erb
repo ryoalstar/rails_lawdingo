@@ -18,9 +18,9 @@
     </div>
     <!-- END CALL TO ACTION -->
     <% if lawyer.photo.present? %>
-      <%=  image_tag lawyer.photo.url(:thumb) %>
+      <%= image_tag(lawyer.photo.url(:thumb)) %>
     <% else %>
-      <%= image_tag "profile_m.gif", :width => 100, :height => 100 %>
+      <%= image_tag("http://s18.postimage.org/pdxbbgxd3/profile_m.gif", :width => 100, :height => 100, :alt => "f") %>
     <% end %>
 
     <!-- RESULT INFO -->
