@@ -87,6 +87,8 @@ Lawdingo::Application.routes.draw do
   match '/admin' =>"users#show", :as =>:admin_home
   root :to => 'users#home'
 
+  match '/next' => "users#next"
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

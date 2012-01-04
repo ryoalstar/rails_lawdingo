@@ -24,6 +24,10 @@ class UsersController < ApplicationController
     @lawyers = Lawyer.approved_lawyers
   end
 
+  def next
+
+  end
+
   def show
     begin
       @user = User.find params[:id]
