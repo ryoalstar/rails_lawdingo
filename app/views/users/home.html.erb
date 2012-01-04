@@ -20,14 +20,19 @@
 
                     <span style="color:black; margin-right: 1em; font-weight:bold;">Find the right lawyer.</span>  State:
                     <span>
-                    <%= select_tag('select_state', options_for_select(options_states_arr)) %>
+                    <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
                     </span>
                     Type of law:
                     <span>
-                    <%= select_tag('select_pa', options_for_select(options_pa_arr)) %>
+                    <%= select_tag('select_pa', options_for_select(options_pa_arr, @selected_pa_str)) %>
                     </span>
                     <span style="padding-left:5px;" id='specialities_container'>
-                      <%= select_tag('select_sp', options_for_select([["none", 0]])) %>
+                      Specific need: 
+                      <% if @selected_pa_str.present? %>
+                        <%= select_tag('select_sp', options_for_select(@selected_pa_specialities_str, @selected_sp_str)) %>
+                      <% else %>
+                        <%= select_tag('select_sp', options_for_select([["none", 0], @selected_sp_str])) %>
+                      <% end %>
                     </span>
 
                 </div>
@@ -80,7 +85,14 @@ function sendMessage(){
 
 
 $(document).ready(function() {
-    $('#specialities_container').hide();
+    // Do not hide specialities selector if one is selected 
+    // and filter results 
+    <% unless @selected_sp_str.present? %>
+      $('#specialities_container').hide();
+    <% else %>
+      filterResults();
+    <% end %>
+
     $('#select_pa').change(function() {
       if($("#select_pa").val() != 0){
         $.ajax({url: '/search/populate_specialities',

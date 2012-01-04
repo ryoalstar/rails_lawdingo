@@ -22,6 +22,37 @@ class UsersController < ApplicationController
       redirect_to users_path(:t=>'l')
     end
     @lawyers = Lawyer.approved_lawyers
+
+    # Filtering params from the next home page form
+    state_id = params[:select_state].to_i
+    pa_id = params[:select_pa].to_i
+    sp_id = params[:select_sp].to_i
+
+    if state_id.present? and state_id.to_i != 0
+      selected_state = State.find(state_id)
+      @selected_state_str = [selected_state.name, selected_state.id]
+    end
+
+    if pa_id.present? and pa_id != 0
+      selected_pa = PracticeArea.find(pa_id)
+      @selected_pa_str = [selected_pa.name, selected_pa.id]
+
+      # Obtaining specialities of this practice area
+      if sp_id.present? and sp_id != 0
+        selected_sp = selected_pa.specialities.find_by_id(sp_id)
+        @selected_sp_str = [selected_sp.name, selected_sp.id]
+      else
+        @selected_sp_str = ["General #{selected_pa.name}", 0]
+      end
+
+      # Making an array of specialities
+      # to populize the select field
+      @selected_pa_specialities_str = []
+      @selected_pa_specialities_str << ["General #{selected_pa.name}", 0]
+      selected_pa.specialities.each do |spec| 
+        @selected_pa_specialities_str << [spec.name, spec.id]
+      end
+    end 
   end
 
   def next
