@@ -23,13 +23,13 @@ function getMyApp(appName) {
 
 function updateFlash()
 {
-   var movie = getMyApp('mySwf');
+   var movie = swfobject.getObjectById('mySwf');
    movie.startPaidSession();
 }
 
 function cancelPaidSession()
 {
-  var movie = getMyApp('mySwf');
+  var movie = swfobject.getObjectById('mySwf');
   movie.cancelPaidSession();
 }
 

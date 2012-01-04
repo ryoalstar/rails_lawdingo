@@ -2,8 +2,13 @@
   <%= hidden_field(:current, :lid) %>
     <!-- CALL TO ACTION -->
     <div class="action">
+
     <% if lawyer.is_online? && !lawyer.is_busy %>
+      <% if logged_in? %>
       <%= link_to "Start Video Consultation", user_chat_session_path(lawyer), :title =>"Start Video Consultation", :class =>'button' %>
+      <% else %>
+        <%= link_to "Start Video Consultation", new_user_path, :title =>"Start Video Consultation", :class =>'button' %>
+      <% end %>
       <% else %>
         <% if logged_in? %>
           <a href="#schedule_session" id="schedule_session_button" data-l_id="<%= lawyer.id %>" data-fullname="<%= lawyer.first_name %>" class="dialog-opener button yellow">Schedule Consultation</a>
