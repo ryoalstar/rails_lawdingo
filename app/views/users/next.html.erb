@@ -1,0 +1,71 @@
+<% 
+  options_states_arr = []
+  options_states_arr << ['Any State', 0]
+  State.all.each { |state|
+    if state.lawyers.approved_lawyers.count > 0
+      options_states_arr << [state.name, state.id]
+    end
+  }
+
+  options_pa_arr = []
+  options_pa_arr << ['All types', 0]
+  PracticeArea.parent_practice_areas.each { |pa|
+    options_pa_arr << [pa.name, pa.id]
+  }
+%>
+
+<div id="page" class="home">
+  <div>
+    <!-- Image carousel block with a link to json file consisting of data about previewed lawyers -->
+    <div class="image-carousel" dataurl="http://theawesometastic.com/ldingo/data/data.json">
+      <div class="carousel-image">
+        <%= image_tag "http://theawesometastic.com/ldingo/img/dummy_profile.jpg", :alt => "Attorney Hank Miller" %>
+      </div>
+      <div class="carousel-description">
+        <h4>Attorney Hank Miller</h4>
+        <span>Advising on Civil Litigation, Employment, and Real Estate. Free consultation, then $4/min</span>
+      </div>
+    </div>
+    <!-- Filtering form -->
+    <div id="splash">
+      <h1>Legal advice over video chat</h1>
+      <h2>Hassle-free legal counsel from the comfort of your home or office.</h2>
+
+      <%= form_tag root_path, :method => :get do %>
+        <div class="inp">
+          <%= label_tag "select_state", "Relevant state" %>
+          <%= select_tag "select_state", options_for_select(options_states_arr) %>
+        </div>
+        <div class="inp">
+          <%= label_tag "select_pa", "Legal domain" %>
+          <%= select_tag "select_pa", options_for_select(options_pa_arr) %>
+        </div>
+        <div class="inp" id="specialities_container">
+          <%= label_tag "select_sp", "Specific need" %>
+          <%= select_tag "select_sp", options_for_select(["none", 0]) %>
+        </div>
+
+        <%= submit_tag "Get Started", :style => "display: block;", :class => "button" %>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $('#specialities_container').hide();
+    $('#select_pa').change(function() {
+      if($('#select_pa').val() != 0) {
+        $.ajax({
+          url: "/search/populate_specialities_next", 
+          data: 'pid=' + $('#select_pa').val(),
+          success: function(data) {
+            $('#specialities_container').html(data);
+            $('#specialities_container').show();
+          }
+        })
+      }
+    });
+  });
+<% end %>

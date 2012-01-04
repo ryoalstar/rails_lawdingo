@@ -5,6 +5,13 @@ class SearchController < ApplicationController
     render :action => 'populate_specialities', :layout => false
   end
 
+  # Temporary method for the next home page
+  def populate_specialities_next
+    @practice_area = PracticeArea.find(params[:pid])
+    @practice_area_specialities = @practice_area.specialities rescue []
+    render :action => 'populate_specialities_next', :layout => false
+  end
+
   def filter_results
     state_id = params[:state].to_i
     pa_id = params[:pa].to_i

@@ -78,6 +78,8 @@ Lawdingo::Application.routes.draw do
   match '/ScheduleSession' => 'users#send_email_to_lawyer', :as => :schedule_session
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
   match '/search/populate_specialities' => 'search#populate_specialities'
+  # Temporary route for the next home page
+  match '/search/populate_specialities_next' => 'search#populate_specialities_next'
   match '/search/filter_results' => 'search#filter_results'
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
@@ -86,7 +88,8 @@ Lawdingo::Application.routes.draw do
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
   root :to => 'users#home'
-
+  
+  # Next home page temporary route
   match '/next' => "users#next"
 
   # See how all your routes lay out with "rake routes"
