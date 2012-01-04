@@ -89,9 +89,11 @@ $(document).ready(function() {
     // and filter results 
     <% unless @selected_sp_str.present? %>
       $('#specialities_container').hide();
-    <% else %>
-      filterResults();
     <% end %>
+
+    <%# <% if @selected_state_str.present? || @selected_pa_str.present? %1> %>
+    <%#   filterResults(); %>
+    <%# <% end %1> %>
 
     $('#select_pa').change(function() {
       if($("#select_pa").val() != 0){
