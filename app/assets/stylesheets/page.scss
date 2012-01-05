@@ -255,6 +255,17 @@
               font-size: 1.6em;
             }
 
+            #lawyer_rate {
+              width: 120px !important;
+            }
+
+            .rate_hint {
+              display: inline-block;
+              margin-left: 10px;
+              font-size: 1.5em;
+              color: #B8B8B8;
+            }
+
             input[type=text], input[type=password],input[type=email],input[type=number], textarea {
                 font-family: arial, verdana, tahoma;
                 width: 100%;

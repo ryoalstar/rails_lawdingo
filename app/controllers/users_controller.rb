@@ -77,7 +77,6 @@ class UsersController < ApplicationController
   end
 
   def next
-
   end
 
   def show
