@@ -9,14 +9,6 @@ function CloseCall()
 
 function showFlash()
 {
-  // Centering video chat box wrapper
-  $('#outer_div').css({
-                  "position": "absolute", 
-                  "width": "960px", 
-                  "height": "800px", 
-                  "margin-top": "-200px",
-                  "margin-left": "-480px"
-  });
   //$('.mainc').css("display","none");
 }
 

@@ -169,6 +169,15 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
           });
         });
         timer.set({ time : 60000, autostart : true });
+
+        // Centering video chat box wrapper
+        $('#outer_div').css({
+          "position": "absolute", 
+          "width": "960px", 
+          "height": "800px", 
+          "margin-top": "-200px",
+          "margin-left": "-480px"
+        });
       });
 
     </script>
