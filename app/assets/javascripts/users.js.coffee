@@ -12,7 +12,7 @@ jQuery ->
     label.html(input_value.split(/\\/).pop()) if input_value.length > 0
 
   ($ "input#lawyer_rate").numeric() # accept only numbers
-  ($ "input#lawyer_rate").bind "change", ->
+  ($ "input#lawyer_rate").bind "keyup", ->
     $input = ($ @)
     rate = $input.val().match(/\d+/)[0] unless $input.val() == "" # remove dollar sign
     rate_per_minute = rate / 60
