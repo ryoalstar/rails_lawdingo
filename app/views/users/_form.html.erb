@@ -93,7 +93,7 @@
               <div class="sub">
                   <%= p.name %> specialities:
                   <ul>
-                    <% p.specialities.each do |s| %>
+                    <% p.specialities.order(:name).each do |s| %>
                       <!--li><%= check_box_tag "practice_areas[]", "#{s.id}" %> <%= s.name %> </li-->
                       <li><input type="checkbox" data-name="<%= s.name %>" id="practice_area_<%= s.id %>" name="practice_areas[]" value="<%= s.id %>"/><%= label_tag "practice_area_#{s.id}", s.name %></li>
                     <% end %>

@@ -9,7 +9,7 @@
 
   options_pa_arr = []
   options_pa_arr << ['All types', 0]
-  PracticeArea.parent_practice_areas.each { |pa|
+  PracticeArea.parent_practice_areas.order(:name).each { |pa|
     options_pa_arr << [pa.name, pa.id]
   }
 %>

@@ -1,14 +1,14 @@
 class SearchController < ApplicationController
   def populate_specialities
     @practice_area = PracticeArea.find(params[:pid])
-    @practice_area_specialities = @practice_area.specialities rescue []
+    @practice_area_specialities = @practice_area.specialities.order(:name) rescue []
     render :action => 'populate_specialities', :layout => false
   end
 
   # Temporary method for the next home page
   def populate_specialities_next
     @practice_area = PracticeArea.find(params[:pid])
-    @practice_area_specialities = @practice_area.specialities rescue []
+    @practice_area_specialities = @practice_area.specialities.order(:name) rescue []
     render :action => 'populate_specialities_next', :layout => false
   end
 
