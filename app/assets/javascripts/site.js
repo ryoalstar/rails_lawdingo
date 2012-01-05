@@ -1,4 +1,4 @@
- $('#outer_div').css({"margin":"20px auto","border":"solid #000 2px","padding":"2px"});
+ $('#outer_div').css({"border":"solid #000 2px","padding":"2px"});
  var messageString = "";
  var isOverlayOpen = false;
 //functions to bring up and collapse the video chat screen for lawyer
@@ -9,7 +9,14 @@ function CloseCall()
 
 function showFlash()
 {
-  $('#outer_div').css({"left":"12%"});
+  // Centering video chat box wrapper
+  $('#outer_div').css({
+                  "position": "absolute", 
+                  "width": "960px", 
+                  "height": "800px", 
+                  "margin-top": "-200px",
+                  "margin-left": "-480px"
+  });
   //$('.mainc').css("display","none");
 }
 
