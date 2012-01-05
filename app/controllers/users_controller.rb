@@ -129,6 +129,7 @@ class UsersController < ApplicationController
     user_type = params[:user_type]
     @user     = user_type == User::LAWYER_TYPE ? Lawyer.new(params[:lawyer]) : User.new(params[:user])
     @user.user_type = user_type
+    @user.rate = params[:lawyer][:rate].to_i / 60 # per minute rate from hourly
 
     if @user.save
       if @user.user_type == User::LAWYER_TYPE

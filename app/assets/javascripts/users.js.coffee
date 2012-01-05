@@ -18,7 +18,7 @@ jQuery ->
     rate_per_minute = rate / 60
 
     if $input.val() is ""
-      ($ "span.rate_hint").html "Will be quoted by the min." if $input.val() == ""
+      ($ "span.rate_hint").html "Will be quoted by the min."
     else
-      ($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toPrecision(3)}/minute."
+      ($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toFixed(2)}/minute."
 
