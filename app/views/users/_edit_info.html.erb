@@ -49,6 +49,7 @@
       <div id="div_practice_areas" style="font-size:1em;"><%= pas_text %></div>
       <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
     <% @user.rate = nil if @user.new_record? %>
+    <% @user.rate = number_with_precision @user.rate, :precision => 2 %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
     <%= f.text_field :payment_email ,{:placeholder=>"Paypal email (for payments)",:class=>"paypal"} %><br/>
     <%= f.text_area :personal_tagline ,{:placeholder=>"Professional summary (100 chars)", :class=>"summary",:maxlength => 100, :rows=>2} %>
