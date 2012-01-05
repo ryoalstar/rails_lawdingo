@@ -1,4 +1,4 @@
-<% 
+<%
   options_states_arr = []
   options_states_arr << ['Any State', 0]
   State.all.each { |state|
@@ -12,18 +12,23 @@
   PracticeArea.parent_practice_areas.order(:name).each { |pa|
     options_pa_arr << [pa.name, pa.id]
   }
+  default_image = HomepageImage.first
+  lawyer = default_image.lawyer
+  practice_area_text=""
+  practice_area_text = "Advising on #{lawyer.parent_practice_area_string}. " unless lawyer.parent_practice_area_string.empty?
+  description = practice_area_text + "Free consultation, then #{lawyer.rate}/minute."
 %>
 
 <div id="page" class="home">
   <div>
     <!-- Image carousel block with a link to json file consisting of data about previewed lawyers -->
-    <div class="image-carousel" dataurl="http://theawesometastic.com/ldingo/data/data.json">
+    <div class="image-carousel" dataurl="/search/carsousel_images">
       <div class="carousel-image">
-        <%= image_tag "http://theawesometastic.com/ldingo/img/dummy_profile.jpg", :alt => "Attorney Hank Miller" %>
+        <%= image_tag default_image.photo.url(:large), :alt => "" %>
       </div>
       <div class="carousel-description">
-        <h4>Attorney Hank Miller</h4>
-        <span>Advising on Civil Litigation, Employment, and Real Estate. Free consultation, then $4/min</span>
+        <h4><%= default_image.lawyer.full_name %></h4>
+        <span><%= description %></span>
       </div>
     </div>
     <!-- Filtering form -->
@@ -58,7 +63,7 @@
     $('#select_pa').change(function() {
       if($('#select_pa').val() != 0) {
         $.ajax({
-          url: "/search/populate_specialities_next", 
+          url: "/search/populate_specialities_next",
           data: 'pid=' + $('#select_pa').val(),
           success: function(data) {
             $('#specialities_container').html(data);
@@ -69,3 +74,4 @@
     });
   });
 <% end %>
+

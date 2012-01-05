@@ -46,6 +46,11 @@ class Admin::LawyersController < ApplicationController
     redirect_to admin_lawyers_path, :notice =>"Account Removed Successfully!"
   end
 
+  def hm_image
+    @lawyer = Lawyer.find params[:lawyer_id]
+    @homepage_image = HomepageImage.new
+  end
+
   def account_approval
     begin
       account = Lawyer.find params[:lawyer_id]
@@ -60,7 +65,8 @@ class Admin::LawyersController < ApplicationController
       notice = 'No Account found!'
     end
     path  = request.env["HTTP_REFERER"] || admin_lawyers_path
-    redirect_to path,  :notice => notice   
+    redirect_to path,  :notice => notice
   end
 
 end
+

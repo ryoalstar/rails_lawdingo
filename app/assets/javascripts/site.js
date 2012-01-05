@@ -11,22 +11,14 @@ function showFlash()
 {
   // Centering video chat box wrapper
   $('#outer_div').css({
-    "position": "absolute", 
+    "position": "absolute",
     "top": "62px",
     "left": "50%",
-    "width": "960px", 
-    "height": "800px", 
+    "width": "960px",
+    "height": "800px",
       "margin-left": "-480px"
   });
   //$('.mainc').css("display","none");
-}
-
-function getMyApp(appName) {
-  if (navigator.appName.indexOf ("Microsoft") !=-1) {
-      return window[appName];
-  } else {
-      return document[appName];
-  }
 }
 
 function updateFlash()

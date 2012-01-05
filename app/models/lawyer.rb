@@ -7,6 +7,7 @@ class Lawyer < User
   has_many :states, :through => :bar_memberships
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
+  has_one :homepage_image
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
@@ -27,10 +28,6 @@ class Lawyer < User
    self.where('is_online is true' )
   end
 
-  #def self.approved_lawyers
-   # self.where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc")
-  #end
-
   def total_earning
     sum = 0.0
     self.conversations.map{|con| sum += con.lawyer_earning }
@@ -49,6 +46,11 @@ class Lawyer < User
     total_duration = 0
     self.conversations.map{|con| total_duration += con.billed_time }
     total_duration
+  end
+
+  def parent_practice_area_string
+    ppa = self.practice_areas.parent_practice_areas.map{|p| p.name}
+    ppa.join(',')
   end
 end
 

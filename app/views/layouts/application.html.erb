@@ -4,7 +4,7 @@
       <title>Lawdingo - Legal advice over video chat.</title>
       <%= stylesheet_link_tag    "application" %>
       <%= javascript_include_tag "application" %>
-      <%= javascript_include_tag 'site', 'users', 'jquery.timer','swfobject'%>
+      <%= javascript_include_tag 'site', 'users', 'jquery.timer','swfobject','jquery-impromptu.3.2'%>
       <%= javascript_include_tag "https://js.stripe.com/v1/", "payment" %>
       <% if current_user && current_user.user_type == 'LAWYER' %>
         <script type = "text/javascript"> swfobject.registerObject("mySwf", "10.0.0");</script>
@@ -99,10 +99,12 @@
 </div>
 <script type="text/javascript">
 var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
-        if(playerVersion.major < 10 || (playerVersion.major == 10 && playerVersion.minor < 3))
+        if(playerVersion.major < 11 || (playerVersion.major == 10 && playerVersion.minor < 3))
         {
-            var output = "You have Flash player " + playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release + " installed. To use Lawdingo you'll just need to upgrade to Flash 11. It's free and easy";
+            var output = "You have Flash player " + playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release + " installed. To use Lawdingo you'll just need to upgrade to Flash 11. It's free and easy <a href=\"http://www.adobe.com/go/getflashplayer\" >Upgrade to Flash Player 11</a>";
+            $.prompt( output )
         }
+
 </script>
       <% end %>
 

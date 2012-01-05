@@ -56,15 +56,15 @@ Lawdingo::Application.routes.draw do
     resources :clients
     resources :lawyers do
       get 'account_approval'
+      get 'hm_image'
     end
     resources :clsessions
     resources :pages
+    resources :homepage_images
   end
 
   match 'modparam' =>'users#update_parameter', :as =>:update_parameter
   match '/user/sessions/:user_id' =>"users#session_history", :as =>:user_session_history
-
-
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
   match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page
@@ -81,6 +81,7 @@ Lawdingo::Application.routes.draw do
   # Temporary route for the next home page
   match '/search/populate_specialities_next' => 'search#populate_specialities_next'
   match '/search/filter_results' => 'search#filter_results'
+  match '/search/carsousel_images' =>'search#get_homepage_lawyers'
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
 
@@ -88,7 +89,7 @@ Lawdingo::Application.routes.draw do
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
   root :to => 'users#home'
-  
+
   # Next home page temporary route
   match '/next' => "users#next"
 

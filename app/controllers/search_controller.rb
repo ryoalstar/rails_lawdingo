@@ -35,5 +35,21 @@ class SearchController < ApplicationController
     end
     render :action => "filter_results", :layout =>false
   end
+
+  def get_homepage_lawyers
+     homepage_images = HomepageImage.all
+     list = []
+     practice_area_text = ""
+     homepage_images.each{|image|
+     lawyer = image.lawyer
+     practice_area_text = "Advising on #{lawyer.parent_practice_area_string}. " unless lawyer.parent_practice_area_string.empty?
+     images_hash = Hash.new
+     images_hash["url"] = image.photo.url(:large)
+     images_hash["title"] = "Attorney #{lawyer.full_name}"
+     images_hash["description"] = practice_area_text + "Free consultation, then $#{lawyer.rate}/minute"
+     list<< images_hash
+     }
+     render :text =>list.to_json, :layout=>false
+  end
 end
 
