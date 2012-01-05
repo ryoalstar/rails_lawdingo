@@ -20,5 +20,5 @@ jQuery ->
     if $input.val() is ""
       ($ "span.rate_hint").html "Will be quoted by the min." if $input.val() == ""
     else
-      ($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toPrecision(2)}/minute."
+      ($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toPrecision(3)}/minute."
 
