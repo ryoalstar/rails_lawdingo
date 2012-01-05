@@ -86,7 +86,7 @@
     <h3>What are your practice areas? Click any to expand.</h3>
     <div>
       <ul id="leveled-list_practice_areas" class="leveled-list">
-          <% PracticeArea.parent_practice_areas.each do |p| %>
+          <% PracticeArea.parent_practice_areas.order(:name).each do |p| %>
           <li>
               <%#= check_box_tag "practice_areas[]", "#{p.id}" %> <%#= p.name %>
               <input type="checkbox" data-name="<%= p.name %>" id="practice_area_<%= p.id %>" name="practice_areas[]" value="<%= p.id %>"/><%= label_tag "practice_area_#{p.id}", p.name %>
