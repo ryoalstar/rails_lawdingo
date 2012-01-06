@@ -82,7 +82,7 @@
       </div>
   </div>
 </div>
-<%= javascript_tag %>
+<%= javascript_tag do %>
 var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
         if(playerVersion.major < 10 || (playerVersion.major == 10 && playerVersion.minor < 3))
         {
@@ -144,7 +144,7 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
 	    <% end %>
     </div>
 
-<% javascript_tag %>
+<%= javascript_tag do %>
       $(document).ready(function(){
         var timer = $.timer(function() {
           $.ajax({
