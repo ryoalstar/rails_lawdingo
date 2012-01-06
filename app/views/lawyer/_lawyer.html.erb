@@ -41,7 +41,7 @@
       pas_string.chomp!(', ')
       %>
     <div class="info">
-        <h3>Attorney <%= "#{lawyer.full_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= licenced_states %> <% end %>
+        <h3><%= "#{lawyer.full_name}" %></h3><% unless lawyer.bar_memberships.blank? %> licensed in <%= licenced_states %> <% end %>
         <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>
         <div class="specialities"><% unless lawyer.practice_areas.blank? %> Practice Areas: <%= pas_string %><% end %></div>
         <div class="verified">Bar membership and credentials verified</div>
