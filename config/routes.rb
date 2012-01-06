@@ -84,14 +84,16 @@ Lawdingo::Application.routes.draw do
   match '/search/carsousel_images' =>'search#get_homepage_lawyers'
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
+  match '/results' => "users#home", :as => :results
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
-  root :to => 'users#home'
+  #root :to => 'users#home'
+  root :to => 'users#landing_page'
 
   # Next home page temporary route
-  match '/next' => "users#next"
+  #match '/next' => "users#next"
 
   # See how all your routes lay out with "rake routes"
 

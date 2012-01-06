@@ -36,7 +36,7 @@
       <h1>Legal advice over video chat</h1>
       <h2>Hassle-free legal counsel from the comfort of your home or office.</h2>
 
-      <%= form_tag root_path, :method => :get do %>
+      <%= form_tag results_path, :method => :get do %>
         <div class="inp">
           <%= label_tag "select_state", "Relevant state" %>
           <%= select_tag "select_state", options_for_select(options_states_arr) %>
