@@ -28,7 +28,7 @@
 
       pas_names = pas.map { |area| area.name.downcase  }
       pas_names_last = pas_names.pop
-      pas_names_list = "#{pas_names.join(', ')} and #{pas_names_last}"
+      pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
       %>
     <div class="info">
       <h3><%= "#{lawyer.full_name}" %></h3>
@@ -38,7 +38,7 @@
           <li>Licensed in <%= licenced_states %>.</li>
         <% end %>
         <% unless lawyer.practice_areas.blank? %>
-          <li class="last-child">Advises on <%= pas_names_list %> law.</li>
+          <li class="last-child">Advises on <%= @practice_area.present? ? @practice_area.name.downcase : "#{pas_names_list} law" %>. </li>
         <% end %>
       </ul>
 

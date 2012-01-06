@@ -8,7 +8,7 @@ Recommend Lawdingo to great lawyers you know.
 </div>
 <% else %>
 <% @lawyers.each{|lawyer| %>
-    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+  <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
 <% } %>
 
 <% end %>
