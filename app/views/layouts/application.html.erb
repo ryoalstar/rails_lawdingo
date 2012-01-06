@@ -56,11 +56,6 @@
 
         <!-- CONTENT -->
         <div id="container">
-        <% if flash[:notice] %>
-          <!--div class="notice">
-            <%= flash[:notice].html_safe %>
-          </div-->
-        <% end %>
        <%= yield %>
 </div>
         <!-- END CONTENT -->
@@ -70,16 +65,6 @@
 <!--div style="border:solid 1px #b8b8b8; background-color: #efefef;margin:0 auto;width:960px;"-->
 <div style="margin:0 auto;width:960px;height:410px;">
 <strong><a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a></strong>
-<!--div id="flash_div">
-
-	            <object id='mySwf' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' height='410' width='960'>
-	              <param name='src' value='/swf/videochat.swf'/>
-	              <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
-	              <param name="allowScriptAccess" value="always" />
-	              <param name="wmode" value="transparent" />
-	              <embed name='mySwf' src='/swf/videochat.swf' allowScriptAccess='always' wmode='transparent' height='410' width='960' FlashVars="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>" ></embed>
-	            </object>
-	 </div-->
 	 <div id="flash_div">
     <object id="mySwf" name="mySwf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="960" height="410">
         <param name='movie' value="/swf/videochat.swf"/>
@@ -97,7 +82,7 @@
       </div>
   </div>
 </div>
-<script type="text/javascript">
+<%= javascript_tag %>
 var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
         if(playerVersion.major < 10 || (playerVersion.major == 10 && playerVersion.minor < 3))
         {
@@ -105,7 +90,7 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
             $.prompt( output )
         }
 
-</script>
+<% end %>
       <% end %>
 
         <!-- FOOTER -->
@@ -157,10 +142,9 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
 	    </div>
 	    <%= submit_tag("Start Paid Session", :class => "button blue small_font") %>
 	    <% end %>
-            <!--a href="" class="button blue small_font" onclick="close_dialogs();">Start paid session</a-->
     </div>
-    <script type = text/javascript>
 
+<% javascript_tag %>
       $(document).ready(function(){
         var timer = $.timer(function() {
           $.ajax({
@@ -173,7 +157,7 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
         timer.set({ time : 60000, autostart : true });
       });
 
-    </script>
+<% end %>
     </body>
 </html>
 
