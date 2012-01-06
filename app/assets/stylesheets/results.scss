@@ -1,3 +1,13 @@
+@mixin inline-block {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
 #results {
     .row {
         min-height: 98px;
@@ -27,14 +37,37 @@
                 display: inline;
             }
 
-            .verified {
-                background: url(certified.png) no-repeat left center transparent;
-                color: #6c6c6c;
-                font-size: 0.8em;
-                height: 22px;
-                line-height: 22px;
-                padding-left: 25px;
-                margin-top: 6px;
+            .action-button {
+              font-size: 10px;
+            }
+
+            ul.verified {
+              width: 100%;
+              position: relative;
+              zoom: 1;
+              display: block;
+              letter-spacing: 0;  
+              font-size: 15px;
+              color: #222;
+              margin: 6px 0;
+
+              li {              
+                &.last-child {
+                  margin-left: 5px;
+                }
+
+                @include inline-block;
+                vertical-align: top;
+                letter-spacing: normal;
+                background: url(certified.png) no-repeat left top transparent;
+                padding: 0 0 0 29px;
+                min-height: 22px;
+                // width: 44%;
+              }
+            }
+
+            .df-verified {
+                
             }
         }
     }

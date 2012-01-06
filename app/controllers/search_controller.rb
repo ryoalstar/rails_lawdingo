@@ -29,6 +29,7 @@ class SearchController < ApplicationController
       if sp_id == 0
         @pa_lawyers = PracticeArea.find(pa_id).lawyers.approved_lawyers
       else
+        @practice_area = PracticeArea.find(sp_id)
         @pa_lawyers = PracticeArea.find(sp_id).lawyers.approved_lawyers
       end
       @lawyers = @state_lawyers & @pa_lawyers
