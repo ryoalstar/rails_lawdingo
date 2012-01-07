@@ -27,9 +27,10 @@ class SearchController < ApplicationController
       @lawyers = @state_lawyers
     else
       if sp_id == 0
+        @selected_practice_area = "general #{PracticeArea.find(pa_id).name.downcase}"
         @pa_lawyers = PracticeArea.find(pa_id).lawyers.approved_lawyers
       else
-        @practice_area = PracticeArea.find(sp_id)
+        @selected_practice_area = PracticeArea.find(sp_id).name.downcase
         @pa_lawyers = PracticeArea.find(sp_id).lawyers.approved_lawyers
       end
       @lawyers = @state_lawyers & @pa_lawyers
