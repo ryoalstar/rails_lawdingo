@@ -35,10 +35,10 @@
       <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>
       <ul class="verified">
         <% unless lawyer.bar_memberships.blank? %>
-          <li>Licensed in <%= licenced_states %>.</li>
+          <li>Licensed in <%= licenced_states %></li>
         <% end %>
         <% unless lawyer.practice_areas.blank? %>
-          <li class="last-child">Advises on <%= @practice_area.present? ? @practice_area.name.downcase : "#{pas_names_list} law" %>. </li>
+          <li class="last-child">Advises on <%= @practice_area.present? ? @practice_area.name.downcase : "#{pas_names_list} law" %></li>
         <% end %>
       </ul>
 
