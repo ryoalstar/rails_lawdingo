@@ -48,7 +48,7 @@ class SearchController < ApplicationController
      images_hash = Hash.new
      images_hash["url"] = image.photo.url(:large)
      images_hash["title"] = "Attorney #{lawyer.full_name}"
-     images_hash["description"] = practice_area_text + "Free consultation, then $#{lawyer.rate}/minute"
+     images_hash["description"] = practice_area_text + "Free consultation, then $#{lawyer.rate}0/minute"
      list<< images_hash
      }
      render :text =>list.to_json, :layout=>false

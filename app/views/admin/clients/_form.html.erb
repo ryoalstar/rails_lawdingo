@@ -14,8 +14,10 @@
 
   <%= f.hidden_field :user_type, :value =>@user[:user_type] %>
 
-  <div class="f_label"> Name : </div>
-  <%= f.text_field :full_name %> <br/>
+  <div class="f_label"> First Name : </div>
+  <%= f.text_field :first_name %> <br/>
+  <div class="f_label"> Last Name : </div>
+  <%= f.text_field :last_name %> <br/>
 
   <div class="f_label">Email:</div>
   <%= f.text_field :email %><br/>
@@ -23,11 +25,9 @@
   <div class="f_label">Password:</div>
   <%= f.password_field :password %><br/>
 
-  <div class="f_label">Photo: </div>
-  <%= f.file_field :photo %> <br/>
-
   <div style="margin: 10px 10px 10px 270px;">
     <%= f.submit @user.new_record? ? 'Create Client Account' : 'Update Client Account' %>
     &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
   </div>
 <% end %>
+

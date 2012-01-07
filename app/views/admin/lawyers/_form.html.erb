@@ -14,8 +14,10 @@
 
   <%= f.hidden_field :user_type, :value =>@user[:user_type] %>
 
-  <div class="f_label"> Name : </div>
-  <%= f.text_field :full_name %> <br/>
+  <div class="f_label"> First Name : </div>
+  <%= f.text_field :first_name %> <br/>
+  <div class="f_label"> Last Name : </div>
+  <%= f.text_field :last_name %> <br/>
 
   <div class="f_label">Email:</div>
   <%= f.text_field :email %><br/>
@@ -52,7 +54,7 @@
 
   <div class="f_label">Pay-pal Email:</div>
   <%= f.text_field :payment_email %><br/>
-  
+
   <div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/>
   <div style="margin: 10px 10px 10px 270px;">
     <%= f.submit @user.new_record? ? 'Create new Attorney Account' : 'Update Attorney Account' %>
@@ -70,3 +72,4 @@
     margin-right: 15px;
   }
 </style>
+

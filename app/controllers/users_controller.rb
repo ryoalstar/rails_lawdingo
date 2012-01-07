@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :next]
+  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -70,13 +70,13 @@ class UsersController < ApplicationController
       # to populize the select field
       @selected_pa_specialities_str = []
       @selected_pa_specialities_str << ["General #{selected_pa.name}", 0]
-      selected_pa.specialities.each do |spec| 
+      selected_pa.specialities.each do |spec|
         @selected_pa_specialities_str << [spec.name, spec.id]
       end
-    end 
+    end
   end
 
-  def next
+  def landing_page
   end
 
   def show
@@ -129,7 +129,7 @@ class UsersController < ApplicationController
     user_type = params[:user_type]
     @user     = user_type == User::LAWYER_TYPE ? Lawyer.new(params[:lawyer]) : User.new(params[:user])
     @user.user_type = user_type
-    
+
     if @user.user_type == User::LAWYER_TYPE
       # per minute rate from hourly
       @user.rate = (params[:lawyer][:rate].to_f / 60.to_f).round(2)

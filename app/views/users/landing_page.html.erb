@@ -16,7 +16,7 @@
   lawyer = default_image.lawyer
   practice_area_text=""
   practice_area_text = "Advising on #{lawyer.parent_practice_area_string}. " unless lawyer.parent_practice_area_string.empty?
-  description = practice_area_text + "Free consultation, then #{lawyer.rate}/minute."
+  description = practice_area_text + "Free consultation, then $#{lawyer.rate}0/minute."
 %>
 
 <div id="page" class="home">
@@ -36,7 +36,7 @@
       <h1>Legal advice over video chat</h1>
       <h2>Hassle-free legal counsel from the comfort of your home or office.</h2>
 
-      <%= form_tag root_path, :method => :get do %>
+      <%= form_tag results_path, :method => :get do %>
         <div class="inp">
           <%= label_tag "select_state", "Relevant state" %>
           <%= select_tag "select_state", options_for_select(options_states_arr) %>

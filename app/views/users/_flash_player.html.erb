@@ -1,5 +1,6 @@
-<script type="text/javascript">
-    swfobject.registerObject("mySwf", "11.2.0");
+<%= javascript_tag do %>
+    swfobject.registerObject("mySwf", "10.2.0");
+<% end %>
 </script>
 <div id="flash_message" style="margin-left:140px;padding-left:100px;font-size:1.8em;text-align:center;margin-right:240px;">
 </div>
@@ -18,15 +19,15 @@
         <!--<![endif]-->
       </object>
 </div>
-<script>
+<%= javascript_tag do %>
 $(document).ready(function(){
 var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
-        if(playerVersion.major < 11 || (playerVersion.major == 10 && playerVersion.minor < 3))
+        if(playerVersion.major < 10 || (playerVersion.major == 10 && playerVersion.minor < 3))
         {
             var output = "<p>You have Flash player " + playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release + " installed. To use Lawdingo you'll just need to upgrade to Flash 11. It's free and easy</p>";
           $('#flash_message').html(output);
           $('#flash_message').css('margin-top', '10%');
         }
       });
-</script>
+<% end %>
 
