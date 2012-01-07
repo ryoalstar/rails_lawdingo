@@ -7,7 +7,7 @@
       <%= javascript_include_tag 'site', 'users', 'jquery.timer','swfobject','jquery-impromptu.3.2'%>
       <%= javascript_include_tag "https://js.stripe.com/v1/", "payment" %>
       <% if current_user && current_user.user_type == 'LAWYER' %>
-        <script type = "text/javascript"> swfobject.registerObject("mySwf", "10.0.0");</script>
+        <script type = "text/javascript"> swfobject.registerObject("mySwf", "10.2.0");</script>
       <% end %>
       <%= csrf_meta_tags %>
       <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
@@ -49,7 +49,6 @@
                 <% else %>
                   <%= link_to image_tag("logo.png", :alt => 'Lawdingo'), root_path, :title=>'Home', :class => 'home-link' %>
                 <% end %>
-                <%#= AppParameter.service_homepage_tagline %>
             </div>
         </div>
         <!-- END HEADER -->
@@ -62,7 +61,6 @@
     <% if user and user.user_type == 'LAWYER' %>
 
 <div id="outer_div" style="position:absolute; width:960px; height:800px; left: -2000px;">
-<!--div style="border:solid 1px #b8b8b8; background-color: #efefef;margin:0 auto;width:960px;"-->
 <div style="margin:0 auto;width:960px;height:410px;">
 <strong><a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a></strong>
 	 <div id="flash_div">
