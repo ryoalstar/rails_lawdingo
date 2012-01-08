@@ -44,7 +44,7 @@ class SearchController < ApplicationController
      practice_area_text = ""
      homepage_images.each{|image|
      lawyer = image.lawyer
-     practice_area_text = "Advising on #{lawyer.practice_areas_listing}. " unless lawyer.parent_practice_area_string.empty?
+     practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
      images_hash = Hash.new
      images_hash["url"] = image.photo.url(:large)
      images_hash["title"] = "Attorney #{lawyer.full_name}"
