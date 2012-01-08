@@ -150,7 +150,7 @@ class UsersController < ApplicationController
       elsif @user.is_client?
         session[:user_id] = @user.id
         #redirect_to :action => :payment_info
-        redirect_to root_path
+        redirect_to lawyers_path
         # @card_detail = CardDetail.new
         # render :action => 'payment_info' and return
       else
