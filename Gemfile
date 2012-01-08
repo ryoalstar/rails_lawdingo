@@ -37,6 +37,7 @@ gem 'client_side_validations'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
+  gem 'shoulda'
   # Pretty printed test output
   gem 'turn', :require => false
 end
