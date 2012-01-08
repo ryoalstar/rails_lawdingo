@@ -90,6 +90,7 @@ Lawdingo::Application.routes.draw do
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
   #root :to => 'users#home'
+  match '/lawyers' => 'users#home'
   root :to => 'users#landing_page'
 
   # Next home page temporary route

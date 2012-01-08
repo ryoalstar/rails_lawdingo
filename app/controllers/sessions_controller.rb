@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       reset_user_session(user)
       login_in_user(user)
       if user.is_client?
-        home_path = root_path
+        home_path = lawyers_path
       elsif user.is_lawyer?
         # redirect the lawyer to the session summary page
         home_path = user_path(current_user, :t=>'l')
