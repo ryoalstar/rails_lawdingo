@@ -48,6 +48,18 @@ class Lawyer < User
     total_duration
   end
 
+  def practice_areas_names
+    self.practice_areas.parent_practice_areas.map do |area|
+      area.name.downcase
+    end
+  end
+
+  def practice_areas_listing
+    area_names = self.practice_areas_names
+    last_area_name = area_names.pop
+    area_names.empty? ? last_area_name : "#{area_names.join(', ')} and #{last_area_name}"
+  end
+
   def parent_practice_area_string
     ppa = self.practice_areas.parent_practice_areas.map{|p| p.name}
     ppa.join(',')

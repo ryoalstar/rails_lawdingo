@@ -15,7 +15,7 @@
   default_image = HomepageImage.first
   lawyer = default_image.lawyer
   practice_area_text=""
-  practice_area_text = "Advising on #{practice_areas_listing(lawyer)}. "
+  practice_area_text = "Advising on #{lawyer.practice_areas_listing}. "
   description = practice_area_text + "Free consultation, then $#{lawyer.rate}0/minute."
 %>
 
