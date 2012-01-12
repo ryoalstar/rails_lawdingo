@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105023501) do
+ActiveRecord::Schema.define(:version => 20120111144143) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -24,17 +24,6 @@ ActiveRecord::Schema.define(:version => 20120105023501) do
     t.integer  "lawyer_id"
     t.string   "bar_id"
     t.integer  "state_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "card_details", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "card_type"
-    t.string   "card_number"
-    t.string   "expire_month"
-    t.string   "expire_year"
-    t.string   "card_verification"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -116,18 +105,18 @@ ActiveRecord::Schema.define(:version => 20120105023501) do
     t.string   "hashed_password"
     t.string   "address"
     t.string   "skype"
-    t.float    "balance",              :default => 0.0
-    t.boolean  "is_online",            :default => false
-    t.boolean  "is_busy",              :default => false
+    t.float    "balance",               :default => 0.0
+    t.boolean  "is_online",             :default => false
+    t.boolean  "is_busy",               :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                               :null => false
-    t.boolean  "is_approved",          :default => false
+    t.string   "user_type",                                :null => false
+    t.boolean  "is_approved",           :default => false
     t.text     "undergraduate_school"
     t.text     "law_school"
     t.text     "alma_maters"
     t.string   "law_firm"
-    t.float    "rate",                 :default => 0.0
+    t.float    "rate",                  :default => 0.0
     t.string   "payment_email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -137,10 +126,11 @@ ActiveRecord::Schema.define(:version => 20120105023501) do
     t.datetime "photo_updated_at"
     t.string   "personal_tagline"
     t.string   "bar_ids"
-    t.boolean  "has_payment_info",     :default => false
-    t.string   "peer_id",              :default => "0"
+    t.boolean  "has_payment_info",      :default => false
+    t.string   "peer_id",               :default => "0"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "stripe_customer_token"
   end
 
 end

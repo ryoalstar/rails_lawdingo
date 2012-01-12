@@ -13,12 +13,6 @@ class Conversation < ActiveRecord::Base
     billable_time   = input_params[:billable_time] || "0"
     lawdingo_charge = AppParameter.service_charge_value
 
-    #client_id       = 2
-    #lawyer_id       = 1
-    #start_date      = Time.now
-    #end_date        = Time.now + 1888
-    #billable_time   = ((end_date - start_date)/60).round
-
     begin
       lawyer = Lawyer.find(lawyer_id)
     rescue
@@ -34,7 +28,7 @@ class Conversation < ActiveRecord::Base
       conversation = self.create(:client_id =>client_id, :lawyer_id =>lawyer_id, :lawyer_rate =>billing_rate,
         :start_date =>start_date, :end_date =>end_date,:billable_time =>billable_time,
         :lawdingo_charge =>lawdingo_charge, :billed_amount =>billed_amount, :paid_to_lawyer =>false )
-    else
+  else
       conversation = nil
     end
     conversation
@@ -75,7 +69,7 @@ class Conversation < ActiveRecord::Base
     end
     if user
       if self.billable_time > 0
-        payment_obj = self.class.process_card user.card_detail, self.id, self.billed_amount
+        payment_obj = self.class.process_card user.get_stripe_customer_id, self.id, self.billed_amount
       end
       # change payment status
       self.update_attributes(:has_been_charged => true, :payment_params =>payment_obj.to_json) if payment_obj
@@ -83,25 +77,14 @@ class Conversation < ActiveRecord::Base
   end
 
   # actual process for payment
-  def self.process_card card_detail, conversation_id, billed_amount
+  def self.process_card customer_id, conversation_id, billed_amount
     begin
       # create the charge on Stripe's servers - this will charge the user's card
       charge = Stripe::Charge.create(
-        :card => {
-          :number           => card_detail.card_number,
-          :exp_month        => card_detail.expire_month,
-          :exp_year         => card_detail.expire_year,
-          :cvc              => card_detail.card_verification,
-          #:name             => card_detail.first_name + ' ' + card_detail.last_name,
-          #:addresss_line1   => card_detail.street_address ,
-          #:address_zip      => card_detail.postal_code,
-          #:address_state    => card_detail.state ,
-          #:address_country  => card_detail.country,
-        },
-        :amount             => (billed_amount * 100).to_i, # amount in cents
-        :currency           => "usd",
-        :description        => "Charge for conversation with id: #{conversation_id}"
-      )
+            :amount => (billed_amount * 100).to_i, # amount in cents
+            :currency => "usd",
+            :customer => customer_id
+        )
     rescue Exception =>exp
       charge = nil
       logger.error("Unable to charge conversation with id: #{conversation_id}\n" + exp.message)

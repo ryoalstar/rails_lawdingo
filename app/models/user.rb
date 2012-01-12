@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
 
-  has_one :card_detail
-
   validates :first_name, :last_name, :email, :user_type, :presence =>true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
@@ -36,6 +34,18 @@ class User < ActiveRecord::Base
 
   def is_client?
     self[:user_type] == self.class::CLIENT_TYPE
+  end
+
+  def save_stripe_customer_id token_id
+    status = false
+    if self.update_attribute(:stripe_customer_token, token_id)
+      status = true
+    end
+    status
+  end
+
+  def get_stripe_customer_id
+    self.stripe_customer_token
   end
 
   def is_lawyer?

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def index
     @tab  = params[:t] ? params[:t] : User::SESSION_TAB
     if User::PAYMENT_TAB == @tab
-      @card_detail = current_user.card_detail || CardDetail.new
+      #@card_detail = current_user.card_detail || CardDetail.new
     elsif User::SESSION_TAB == @tab
       @conversations = current_user.corresponding_user.conversations
     end
@@ -91,7 +91,6 @@ class UsersController < ApplicationController
         if !request.ssl?
           redirect_to :protocol => 'https', :t => 'm'
         end
-        @card_detail = current_user.card_detail || CardDetail.new
       elsif User::ACCOUNT_TAB == @tab && @user.is_lawyer?
         @filled_states = @user.states
         unless @filled_states.blank?
@@ -252,24 +251,44 @@ class UsersController < ApplicationController
 
   def payment_info
 #    redirect_to root_path and return if current_user.card_detail
+    token = params[:stripe_card_token]
     if request.method == "POST"
-      @card_detail = current_user.card_detail || CardDetail.new(:user_id =>current_user.id)
-      if @card_detail.update_attributes(params[:card_detail])
+      customer = Stripe::Customer.create(
+        :card => token,
+        :description => current_user.email
+      )
+      if current_user.stripe_customer_token.present?
+        curl_cmd = "curl https://api.stripe.com/v1/customers/#{current_user.stripe_customer_token} \
+              -u #{Stripe.api_key}: -X DELETE"
+        system curl_cmd
+      end
+      if customer && current_user.save_stripe_customer_id(customer.id)
         redirect_to user_path(current_user), :notice => 'Thank you for completing your payment info' and return
       else
         redirect_to root_path and return
       end
     else
-      @card_detail = CardDetail.new
+      #@card_detail = CardDetail.new
     end
   end
 
   def update_payment_info
-   @card_detail = current_user.card_detail || CardDetail.new(:user_id =>current_user.id)
    @status = false
-   @status = @card_detail.update_attributes(:card_number => params[:card_number], :expire_month => params[:expire_month], :expire_year => params[:expire_year], :card_verification=> params[:scode])
+   token = params[:stripe_card_token]
+   customer = Stripe::Customer.create(
+        :card => token,
+        :description => current_user.email
+      )
+   if current_user.stripe_customer_token.present?
+    curl_cmd = "curl https://api.stripe.com/v1/customers/#{current_user.stripe_customer_token} \
+              -u #{Stripe.api_key}: -X DELETE"
+    system curl_cmd
+   end
+   if customer && current_user.save_stripe_customer_id(customer.id)
+    @status = true
+   end
    @err_msg = ''
-    errors = @card_detail.errors
+    errors = current_user.errors
     if errors.size > 0
       @err_msg += '<div class="error_explanation"><h4 class="error">Please fix the following errors:</h4><ul><class="errors">'
       errors.full_messages.each do |error|
@@ -281,17 +300,8 @@ class UsersController < ApplicationController
 
   def has_payment_info
     @user = User.find(params[:user_id])
-    status = @user.has_payment_info? ? '1' : '0'
+    status = @user.stripe_customer_token.present? ? '1' : '0'
     render :text => status, :layout => false
-  end
-
-  def update_card_detail
-    @card_detail = current_user.card_detail || CardDetail.new(:user_id =>current_user.id)
-    status       = @card_detail.update_attributes(params[:card_detail])
-    unless params[:return_url].blank?
-      @msg = status ? 'Account Updated Successfully' : nil
-      render :action =>:show and return
-    end
   end
 
   def onlinestatus

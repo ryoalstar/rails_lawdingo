@@ -1,5 +1,3 @@
-<%= javascript_include_tag "https://js.stripe.com/v1/", "payment" %>
-
     <h1>Update payment information</h1>
     <div>
       <div class="error_explanation">
@@ -10,15 +8,16 @@
           <% end %>
         </ul>
       </div>
-      <%= form_for @card_detail, :url => {:action => 'payment_info'}, :html => {:id => 'payment-form'}  do |f| %>
+      <%= form_tag card_detail_path, :id => 'payment-form' do %>
+        <%= hidden_field_tag :form_type, "html" %>
         <%= hidden_field_tag :stripe_card_token %>
           <fieldset class="personal-info">
               <%= image_tag("creditcards.png") %>
-              <%= f.text_field :card_number ,{:placeholder=>"Credit Card Number"} %>
+              <input type="text" name="card_number" autocomplete="off" placeholder="Credit card number" maxlength="26" size="26" id="card_detail_card_number"></input>
               <div class="label">Expires On</div>
               <%= select_month nil, {add_month_numbers: true}, {name: "card_detail[expire_month]", id: "card_month"} %>
   <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: "card_detail[expire_year]", id: "card_year"} %>
-              <%= f.text_field :card_verification ,{:maxlength => 4} %>
+              <input id="card_detail_card_verification" type="password" size="9" autocomplete="off" name="scode" maxlength="4"></input>
               <div src="question.png" class="help-text" tooltip="The three or four digit code on the back of your card."></div>
           </fieldset>
           <div class="clear"></div>

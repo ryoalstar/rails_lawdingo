@@ -105,6 +105,7 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
         </div>
         <!-- END FOOTER -->
         <div id="dialog-overlay"></div>
+    <% if current_user && current_user.user_type == 'CLIENT' && params[:action] != 'show' %>
         <div id="paid_schedule_session" class="dialog-window">
         <ul>
         <div class="error_explanation">
@@ -114,33 +115,32 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
         </ul>
       </div>
       </ul>
-
         <%= form_tag("/updatePaymentInfo", :id => 'payment-form', :remote =>true) do %>
           <%= hidden_field_tag :stripe_card_token %>
           <%= hidden_field_tag :form_type, "ajax" %>
             <h3 class="paid_model_header">Paid session has been requested. To confirm this, you'll need to have payment info on file.</h3>
 	    <label>Credit card number:</label><br/>
 	    <input type="text" name="card_number" autocomplete="off" placeholder="Credit card number" maxlength="26" size="26" id="card_detail_card_number"></input>
-	    <div id="security_wrapper">
-		<div id="exp_group">
-			<label>Expiration:</label><br/>
-			<select id="card_month" name = "expire_month">
-			<% for i in 0..11 %>
-			  <option <%= "selected='selected'" if i==0 %> value="<%= i+1 %>"><%= i+1 %></option>
-			<% end %>
-			</select>
-			<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+5}, {name: "expire_year", id: "card_year"} %>
-		</div>
-		<div id="sec_group">
-			<label>Security code:</label><br/>
-			<input id="card_detail_card_verification" type="password" size="9" autocomplete="off" name="scode" maxlength="4"></input>
-			<div src="question.png" class="help-text" tooltip="The three or four digit code on the back of your card."></div>
-		</div>
-
-	    </div>
+	   <div id="security_wrapper">
+		  <div id="exp_group">
+			  <label>Expiration:</label><br/>
+			  <select id="card_month" name = "expire_month">
+			  <% for i in 0..11 %>
+			    <option <%= "selected='selected'" if i==0 %> value="<%= i+1 %>"><%= i+1 %></option>
+			  <% end %>
+			  </select>
+			  <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+5}, {name: "expire_year", id: "card_year"} %>
+		  </div>
+		  <div id="sec_group">
+			  <label>Security code:</label><br/>
+			  <input id="card_detail_card_verification" type="password" size="9" autocomplete="off" name="scode" maxlength="4"></input>
+			  <div src="question.png" class="help-text" tooltip="The three or four digit code on the back of your card."></div>
+		  </div>
+	  </div>
 	    <%= submit_tag("Start Paid Session", :class => "button blue small_font") %>
 	    <% end %>
     </div>
+    <% end %>
 
 <%= javascript_tag do %>
       $(document).ready(function(){
