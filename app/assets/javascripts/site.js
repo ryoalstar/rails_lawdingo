@@ -7,6 +7,11 @@ function CloseCall()
     closecall();
 }
 
+function notifyUser(msg)
+{
+  $.prompt(msg)
+}
+
 function showFlash()
 {
   // Centering video chat box wrapper

@@ -79,6 +79,9 @@ class UsersController < ApplicationController
   end
 
   def landing_page
+    if current_user and current_user.is_lawyer?
+      redirect_to users_path(:t=>'l')
+    end
   end
 
   def show
