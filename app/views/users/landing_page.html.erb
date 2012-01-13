@@ -16,7 +16,7 @@
   lawyer = default_image.lawyer
   practice_area_text=""
   practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. "
-  description = practice_area_text + "Free consultation, then $#{lawyer.rate}0/minute."
+  description = practice_area_text + "Free consultation, then #{number_to_currency lawyer.rate}/minute."
 %>
 
 <div id="page" class="home">

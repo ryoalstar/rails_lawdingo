@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper # Number helpers available inside controller method
+
 class SearchController < ApplicationController
   def populate_specialities
     @practice_area = PracticeArea.find(params[:pid])
@@ -48,7 +50,8 @@ class SearchController < ApplicationController
      images_hash = Hash.new
      images_hash["url"] = image.photo.url(:large)
      images_hash["title"] = "Attorney #{lawyer.full_name}"
-     images_hash["description"] = practice_area_text + "Free consultation, then $#{lawyer.rate}0/minute"
+
+     images_hash["description"] = practice_area_text + "Free consultation, then #{number_to_currency lawyer.rate}/minute"
      list<< images_hash
      }
      render :text =>list.to_json, :layout=>false
