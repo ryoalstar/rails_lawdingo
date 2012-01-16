@@ -38,7 +38,7 @@
                     full_name = user.full_name
                   %>
                     Logged in as<%= link_to full_name, user_path(user.id), :title =>'Account Profile!' %>
-                    | <%= link_to "Logout", logout_path, :title =>'Logout from the app!' %>
+                    | <%= link_to "Log out", logout_path, :title =>'Logout from the app!' %>
                   <% else %>
                     <%= link_to "Log In", login_path  %> <%= link_to "Sign Up", new_user_path %>
                     Lawyers: <%= link_to "Apply Here", new_user_path(:ut=>1) %>
