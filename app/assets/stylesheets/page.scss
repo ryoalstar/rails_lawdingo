@@ -208,7 +208,14 @@
             padding: 50px 0px;
         }
 
-        .image-carousel { float: right; }
+        .image-carousel { 
+          float: right;
+
+          .carousel-image {
+            text-align: center;
+          }
+        }
+
         #splash {
             float: left;
             width: 50%;
