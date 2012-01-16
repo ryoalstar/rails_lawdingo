@@ -11,20 +11,41 @@ module LawyersHelper
     end
 
     # State
-    if params[:select_state].present? && params[:select_state].to_i != 0
-      state = State.find(params[:select_state].to_i)
+    
+    # Depends on if the request came from the landing page or from 
+    # filter_result ajax function
+    if params[:select_state].present?
+      state_id = params[:select_state].to_i
+    elsif params[:state].present?
+      state_id = params[:state].to_i
+    end
+
+    if state_id.present? && state_id != 0
+      state = State.find(state_id)
       state = " #{state.name}"
     end
 
     # Practice area
-    if params[:select_pa].present? && params[:select_pa].to_i != 0
-      area = PracticeArea.find(params[:select_pa].to_i)
+    if params[:select_pa].present?
+      area_id = params[:select_pa].to_i
+    elsif params[:pa].present?
+      area_id = params[:pa].to_i
+    end
+
+    if area_id.present? && area_id != 0
+      area = PracticeArea.find(area_id)
       area = " #{area.name}"
     end
 
     # Speciality
-    if params[:select_sp].present? && params[:select_sp].to_i != 0
-      speciality = PracticeArea.find(params[:select_sp].to_i)
+    if params[:select_sp].present?
+      speciality_id = params[:select_sp].to_i
+    elsif params[:sp].present?
+      speciality_id = params[:sp].to_i
+    end
+
+    if speciality_id.present? && speciality_id != 0
+      speciality = PracticeArea.find(speciality_id)
       speciality = " on #{speciality.name}"
     end
 

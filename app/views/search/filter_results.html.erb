@@ -7,6 +7,9 @@ Recommend Lawdingo to great lawyers you know.
 </p>
 </div>
 <% else %>
+  <div class="selected-lawyers-caption">
+    <%= selected_lawyers_caption %>
+  </div>
 <% @lawyers.each{|lawyer| %>
   <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
 <% } %>
