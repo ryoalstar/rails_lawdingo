@@ -10,38 +10,42 @@
   options_pa_arr = []
   options_pa_arr << ['All types', 0]
   PracticeArea.parent_practice_areas.order(:name).each { |pa|
-    options_pa_arr << [pa.name, pa.id]
-  }
+  options_pa_arr << [pa.name, pa.id]
+}
 %>
-  <div id="page">
-          <div>
-                <!-- FILTERS -->
-                <div id="filters">
+<div id="page">
+        <div>
+              <!-- FILTERS -->
+              <div id="filters">
 
-                    <span style="color:black; margin-right: 1em; font-weight:bold;">Find the right lawyer.</span>  State:
-                    <span>
-                    <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
-                    </span>
-                    Type of law:
-                    <span>
-                    <%= select_tag('select_pa', options_for_select(options_pa_arr, @selected_pa_str)) %>
-                    </span>
-                    <span style="padding-left:5px;" id='specialities_container'>
-                      Specific need: 
-                      <% if @selected_pa_str.present? %>
-                        <%= select_tag('select_sp', options_for_select(@selected_pa_specialities_str, @selected_sp_str)) %>
-                      <% else %>
-                        <%= select_tag('select_sp', options_for_select([["none", 0], @selected_sp_str])) %>
-                      <% end %>
-                    </span>
+                  <span style="color:black; margin-right: 1em; font-weight:bold;">Find the right lawyer.</span>  State:
+                  <span>
+                  <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
+                  </span>
+                  Type of law:
+                  <span>
+                  <%= select_tag('select_pa', options_for_select(options_pa_arr, @selected_pa_str)) %>
+                  </span>
+                  <span style="padding-left:5px;" id='specialities_container'>
+                    Specific need: 
+                    <% if @selected_pa_str.present? %>
+                      <%= select_tag('select_sp', options_for_select(@selected_pa_specialities_str, @selected_sp_str)) %>
+                    <% else %>
+                      <%= select_tag('select_sp', options_for_select([["none", 0], @selected_sp_str])) %>
+                    <% end %>
+                  </span>
 
-                </div>
-                <!-- END FILTERS -->
+              </div>
+              <!-- END FILTERS -->
 
-                <!-- RESULTS -->
-                <div id="results">
-                      <% @lawyers.each{|lawyer| %>
-                    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+              <div id="selected_lawyers_caption">
+                <%= selected_lawyers_caption %>  
+              </div>
+
+              <!-- RESULTS -->
+              <div id="results">
+                    <% @lawyers.each{|lawyer| %>
+                  <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
                   <% } %>
 
 

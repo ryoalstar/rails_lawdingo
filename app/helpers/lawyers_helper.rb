@@ -1,4 +1,36 @@
 module LawyersHelper
+  def selected_lawyers_caption
+    state = ""
+    area = ""
+    speciality = ""
+
+    # Lawyers count
+    if @lawyers.present?
+      lawyers_count = @lawyers.count.to_s
+      lawyers_str = @lawyers.count > 1 ? "lawyers" : "lawyer"
+    end
+
+    # State
+    if params[:select_state].present? && params[:select_state].to_i != 0
+      state = State.find(params[:select_state].to_i)
+      state = " #{state.name}"
+    end
+
+    # Practice area
+    if params[:select_pa].present? && params[:select_pa].to_i != 0
+      area = PracticeArea.find(params[:select_pa].to_i)
+      area = " #{area.name}"
+    end
+
+    # Speciality
+    if params[:select_sp].present? && params[:select_sp].to_i != 0
+      speciality = PracticeArea.find(params[:select_sp].to_i)
+      speciality = " on #{speciality.name}"
+    end
+
+    "There are #{lawyers_count}#{state}#{area} #{lawyers_str} who can offer you legal advice#{speciality} right now."
+  end
+
   def practice_areas_listing(lawyer)
     areas = lawyer.practice_areas.parent_practice_areas unless lawyer.practice_areas.blank?
     areas_names = areas.map do |area|
