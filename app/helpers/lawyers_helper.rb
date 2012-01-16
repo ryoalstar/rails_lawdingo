@@ -8,6 +8,7 @@ module LawyersHelper
     if @lawyers.present?
       lawyers_count = @lawyers.count.to_s
       lawyers_str = @lawyers.count > 1 ? "lawyers" : "lawyer"
+      lawyers_verb = @lawyers.count > 1 ? "are" : "is"
     end
 
     # State
@@ -34,7 +35,7 @@ module LawyersHelper
 
     if area_id.present? && area_id != 0
       area = PracticeArea.find(area_id)
-      area = " #{area.name}"
+      area = " #{area.name.downcase}"
     end
 
     # Speciality
@@ -46,10 +47,12 @@ module LawyersHelper
 
     if speciality_id.present? && speciality_id != 0
       speciality = PracticeArea.find(speciality_id)
-      speciality = " on #{speciality.name}"
+      speciality = " on #{speciality.name.downcase}"
     end
 
-    "There are #{lawyers_count}#{state}#{area} #{lawyers_str} who can offer you legal advice#{speciality} right now."
+    if lawyers_count
+      "There #{lawyers_verb} #{lawyers_count}#{state}#{area} #{lawyers_str} who can offer you legal advice#{speciality} right now."
+    end
   end
 
   def practice_areas_listing(lawyer)
