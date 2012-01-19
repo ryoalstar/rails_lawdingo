@@ -1,0 +1,30 @@
+<div>
+  <div style="border:solid black;height:100px;width:100px;float:left;"></div>
+
+  <div style="height:100px;font-size:1.99em;float:right;">
+  <span><strong><%= @lawyer.full_name %> </strong></span>
+  <br/>
+  <br/>
+  <span>Dialling..</span>
+  <br/>
+  <span>First two minutes are free</span>
+  <br/>
+  <input type='button' value="Hangup" onlcick="hangupCall('<%= @call.sid %>');return false;" />
+  </div>
+</div>
+<%= javascript_tag do %>
+  $(document).ready(function() {
+  });
+
+  function hangupCall(call_sid)
+  {
+    $.ajax({
+        url: "twilio/endcall",
+        type:'get',
+        data:{call_id: call_sid},
+        success: function(response){
+        }
+    });
+  }
+<% end %>
+

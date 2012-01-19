@@ -118,7 +118,8 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
         <%= form_tag("/updatePaymentInfo", :id => 'payment-form', :remote =>true) do %>
           <%= hidden_field_tag :stripe_card_token %>
           <%= hidden_field_tag :form_type, "ajax" %>
-            <h3 class="paid_model_header">Paid session has been requested. To confirm this, you'll need to have payment info on file.</h3>
+          <%= hidden_field_tag :attorney_id %>
+            <h3 class="paid_model_header">To start a phone consultation, you'll need to have payment information on file. The first two minutes of the call are free.</h3>
 	    <label>Credit card number:</label><br/>
 	    <input type="text" name="card_number" autocomplete="off" placeholder="Credit card number" maxlength="26" size="26" id="card_detail_card_number"></input>
 	   <div id="security_wrapper">

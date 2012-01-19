@@ -51,6 +51,7 @@
     <% @user.rate = nil if @user.new_record? %>
     <% @user.rate = number_with_precision @user.rate, :precision => 2 %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
+    <%= f.text_field :phone ,{:placeholder => "Phone"} %><span class="rate_hint">Complete number including country codes</span><br/>
     <%= f.text_field :payment_email ,{:placeholder=>"Paypal email (for payments)",:class=>"paypal"} %><br/>
     <%= f.text_area :personal_tagline ,{:placeholder=>"Professional summary (100 chars)", :class=>"summary",:maxlength => 100, :rows=>2} %>
     <div style="font-size:14px;">Upload a photo</div>

@@ -12,8 +12,8 @@ module LawyersHelper
     end
 
     # State
-    
-    # Depends on if the request came from the landing page or from 
+
+    # Depends on if the request came from the landing page or from
     # filter_result ajax function
     if params[:select_state].present?
       state_id = params[:select_state].to_i
@@ -65,6 +65,14 @@ module LawyersHelper
     areas_names.empty? ? last_area_name : "#{areas_names.join(', ')} and #{last_area_name}"
   end
 
+  def free_message lawyer
+    if !lawyer.is_online && lawyer.phone.present?
+      msg = "two minutes free, then:"
+    else
+      msg = "free consultation, then:"
+    end
+  end
+
   def start_or_schedule_button(lawyer)
     if lawyer.is_online? && !lawyer.is_busy
       if logged_in?
@@ -74,10 +82,20 @@ module LawyersHelper
       end
     else
       if logged_in?
-        link_to "Schedule Consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button blue"
+        if lawyer.phone.present?
+          if current_user.stripe_customer_token.present?
+            link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button blue"
+          else
+            link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id }, :class => "dialog-opener button blue"
+          end
+
+        else
+          link_to "Schedule Consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button blue"
+        end
       else
-        link_to "Schedule Consultation", new_user_path, :class => "button blue"
+        link_to lawyer.phone.present? ? 'Start Phone Consulstation' : 'Schedule Consultation', new_user_path, :class => "button blue"
       end
     end
   end
 end
+

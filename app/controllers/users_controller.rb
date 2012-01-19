@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page]
+  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :twilio_return_voice]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -290,7 +290,11 @@ class UsersController < ApplicationController
    if customer && current_user.save_stripe_customer_id(customer.id)
     @status = true
    end
-   @err_msg = ''
+
+   unless params[:attorney_id].blank?
+     render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
+   else
+     @err_msg = ''
     errors = current_user.errors
     if errors.size > 0
       @err_msg += '<div class="error_explanation"><h4 class="error">Please fix the following errors:</h4><ul><class="errors">'
@@ -299,12 +303,40 @@ class UsersController < ApplicationController
     end
       @err_msg += '</ul></div>'
     end
+   end
+
   end
 
   def has_payment_info
     @user = User.find(params[:user_id])
     status = @user.stripe_customer_token.present? ? '1' : '0'
     render :text => status, :layout => false
+  end
+
+  def start_phone_call
+    @lawyer = Lawyer.find(params[:id])
+    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+   # make a new outgoing call
+    @call = @client.account.calls.create(
+      :From => TWILIO_FROM,
+      :To => '+16462397326',
+      :Url => twilio_voice_url,
+      :FallBackUrl => twilio_fallback_url,
+      :StatusCallback => twilio_callback_url,
+      :user_id => current_user.id,
+      :lawyer_id => @lawyer.id
+    )
+    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'Dailing')
+#    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
+#    capability = Twilio::Util::Capability.new ACCOUNT_SID, AUTH_TOKEN
+#    capability.allow_client_outgoing 'AP89a0180a1a4ddf1da954efca349b7a20', params
+#    @token = capability.generate
+  end
+
+  def end_phone_call
+    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+    @call = @client.account.calls.get(params[:call_id])
+    @call.hangup
   end
 
   def onlinestatus

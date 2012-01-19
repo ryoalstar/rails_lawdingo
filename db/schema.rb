@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111144143) do
+ActiveRecord::Schema.define(:version => 20120118180644) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(:version => 20120111144143) do
     t.integer  "lawyer_id"
     t.string   "bar_id"
     t.integer  "state_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "calls", :force => true do |t|
+    t.integer  "client_id"
+    t.integer  "lawyer_id"
+    t.string   "sid"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -131,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20120111144143) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "stripe_customer_token"
+    t.string   "phone"
   end
 
 end

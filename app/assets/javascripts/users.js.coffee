@@ -22,3 +22,7 @@ jQuery ->
     else
       ($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toFixed(2)}/minute."
 
+  ($ "a#start_phone_session_button").bind "click", ->
+    lawyerid = ($ @).data('attorneyid')
+    $("#attorney_id").val(lawyerid)
+

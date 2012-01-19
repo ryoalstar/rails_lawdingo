@@ -1,5 +1,6 @@
 class Client < User
   has_many :conversations
+  has_many :calls
 
   def total_spending
     sum = 0.0
@@ -26,3 +27,4 @@ class Client < User
   end
 
 end
+
