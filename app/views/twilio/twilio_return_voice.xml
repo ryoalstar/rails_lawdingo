@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- page located at http://example.com/complex_gather.xml -->
 <Response>
-  <Gather numDigits="1" action="/process_gather" method="GET">
+  <Gather numDigits="1" action="/twilio/process_gather" method="GET">
   <Say voice="woman">
     This is Lawdingo. A client would like to start a paid phone consultation with you. The first two minutes will be free. Press 1 followed by a number sign to accept this call and be connected or hang up to ignore it.
   </Say>
   </Gather>
   <Say voice="woman">We didn't receive any input. Goodbye!</Say>
   <Redirect method="GET">
-  /process_gather?Digits=TIMEOUT
+  /twilio/process_gather?Digits=TIMEOUT
   </Redirect>
 </Response>
 
