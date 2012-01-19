@@ -326,7 +326,7 @@ class UsersController < ApplicationController
       :user_id => current_user.id,
       :lawyer_id => @lawyer.id
     )
-    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'Dailing')
+    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing')
 #    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
 #    capability = Twilio::Util::Capability.new ACCOUNT_SID, AUTH_TOKEN
 #    capability.allow_client_outgoing 'AP89a0180a1a4ddf1da954efca349b7a20', params
