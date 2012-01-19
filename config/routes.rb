@@ -80,7 +80,7 @@ Lawdingo::Application.routes.draw do
   match '/twilio/phonecall' => 'users#start_phone_call', :as => :phonecall
   match '/twilio/endcall' => 'users#end_phone_call', :as => :endcall
   match '/twilio/voice' => 'twilio#twilio_return_voice', :as => :twilio_voice
-  match 'twilio/process_gather' => 'twilio#process_gather', :as => :process_gather
+  match '/twilio/process_gather' => 'twilio#process_gather', :as => :process_gather
   match '/twilio/fallback' => 'twilio#fallback', :as => :twilio_fallback
   match '/twilio/callback' => 'twilio#callbackstatus', :as => :twilio_callback
   match '/search/populate_specialities' => 'search#populate_specialities'
