@@ -1,7 +1,7 @@
 class TwilioController < ApplicationController
 
   def twilio_return_voice
-    render :file=>"users/twilio_return_voice.xml", :content_type => 'application/xml', :layout => false
+    render :file=>"twilio/twilio_return_voice.xml", :content_type => 'application/xml', :layout => false
   end
 
   def process_gathers
