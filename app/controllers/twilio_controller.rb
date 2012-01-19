@@ -4,7 +4,7 @@ class TwilioController < ApplicationController
     render :file=>"twilio/twilio_return_voice.xml", :content_type => 'application/xml', :layout => false
   end
 
-  def process_gathers
+  def process_gather
     call = Call.find_by_sid(params[:CallSid])
     if params[:Digits].to_i == 1
       call.update_attribute(:status,'connected')
