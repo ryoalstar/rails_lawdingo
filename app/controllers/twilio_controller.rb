@@ -11,7 +11,7 @@ class TwilioController < ApplicationController
     else
       call.update_attribute(:status, 'rejected')
     end
-    render :text => '1', :layout => false
+    render :file=>"twilio/process_gather.xml", :content_type => 'application/xml', :layout => false
   end
 
   def call_end_url
