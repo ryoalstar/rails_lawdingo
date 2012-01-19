@@ -318,8 +318,8 @@ class UsersController < ApplicationController
     @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
    # make a new outgoing call
     @call = @client.account.calls.create(
-      :From => TWILIO_FROM,
-      :To => '+16462397326',
+      :From => 1-415-234-3464,
+      :To => @lawyer.phone,
       :Url => twilio_voice_url,
       :FallBackUrl => twilio_fallback_url,
       :StatusCallback => twilio_callback_url,
