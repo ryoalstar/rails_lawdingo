@@ -84,16 +84,17 @@ module LawyersHelper
       if logged_in?
         if lawyer.phone.present?
           if current_user.stripe_customer_token.present?
-            link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button blue"
+            link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button"
           else
-            link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id }, :class => "dialog-opener button blue"
+            link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id }, :class => "button"
           end
 
         else
           link_to "Schedule Consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button blue"
         end
       else
-        link_to lawyer.phone.present? ? 'Start Phone Consulstation' : 'Schedule Consultation', new_user_path, :class => "button blue"
+        btn_class = lawyer.phone.present? ? 'button' : 'button blue'
+        link_to lawyer.phone.present? ? 'Start Phone Consulstation' : 'Schedule Consultation', new_user_path, :class => btn_class
       end
     end
   end

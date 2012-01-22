@@ -38,7 +38,7 @@
     <% @user.rate = nil if @user.new_record? %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Hourly rate"} %><span class="rate_hint">Will be quoted by the min.</span><br/>
     <%# <%= f.text_field :payment_email ,{:placeholder=>"Paypal email (for payments)",:class=>"paypal"} %1><br/> %>
-    <%= f.text_field :phone ,{:placeholder => "Phone"} %><span class="rate_hint">Complete number including country codes</span><br/>
+    <%= f.text_field :phone ,{:placeholder => "Your direct phone number"} %>
     <%= f.text_area :personal_tagline ,{:placeholder=>"Professional summary (100 chars)", :class=>"summary",:maxlength => 100, :rows=>2} %>
     <div class="file_select_wrapper">
       <div class="file_select_button button gray no-inner-shadow">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- page located at http://example.com/complex_gather.xml -->
 <Response>
   <Say voice="woman">
     You have pressed 1. Now the call will be connected.
   </Say>
+  <Dial><%= @to %></Dial>
 </Response>
 
