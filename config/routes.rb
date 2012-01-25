@@ -78,11 +78,13 @@ Lawdingo::Application.routes.draw do
   match '/ScheduleSession' => 'users#send_email_to_lawyer', :as => :schedule_session
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
   match '/twilio/phonecall' => 'users#start_phone_call', :as => :phonecall
+  match '/twilio/createcall' => 'users#create_phone_call', :as => :create_call
   match '/twilio/endcall' => 'users#end_phone_call', :as => :endcall
   match '/twilio/voice' => 'twilio#twilio_return_voice', :as => :twilio_voice
   match '/twilio/process_gather' => 'twilio#process_gather', :as => :process_gather
   match '/twilio/fallback' => 'twilio#fallback', :as => :twilio_fallback
   match '/twilio/callback' => 'twilio#callbackstatus', :as => :twilio_callback
+  match '/twilio/dial_callback' => 'twilio#dial_callback', :as =>:dial_callback
   match '/search/populate_specialities' => 'search#populate_specialities'
   # Temporary route for the next home page
   match '/search/populate_specialities_next' => 'search#populate_specialities_next'

@@ -3,7 +3,7 @@
   <Say voice="woman">
     You have pressed 1. Now the call will be connected.
   </Say>
-  <Dial callerId="+14157994529">+16462397326</Dial>
+  <Dial action="/twilio/dial_callback" method="GET"><%= @call.from %></Dial>
   <Say>Goodbye</Say>
 </Response>
 

@@ -314,24 +314,27 @@ class UsersController < ApplicationController
   end
 
   def start_phone_call
-    @lawyer = Lawyer.find(params[:id])
-#    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-#   # make a new outgoing call
-#    @call = @client.account.calls.create(
-#      :From => '(415) 799-4529',
-#      :To => @lawyer.phone,
-#      :Url => twilio_voice_url,
-#      :FallBackUrl => twilio_fallback_url,
-#      :StatusCallback => twilio_callback_url,
-#      :user_id => current_user.id,
-#      :lawyer_id => @lawyer.id
-#    )
-#    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
-    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
-    capability = Twilio::Util::Capability.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-    capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
-    capability.allow_client_incoming 'nik'
-    @token = capability.generate
+  end
+
+  def create_phone_call
+    @lawyer = Lawyer.find(params[:lawyer_id])
+    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+    #@client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+   # make a new outgoing call
+    @call = @client.account.calls.create(
+      :From => TWILIO_FROM,
+      :To => @lawyer.phone,
+      :Url => twilio_voice_url(:cn => params[:client_number]),
+      :FallBackUrl => twilio_fallback_url,
+      :StatusCallback => twilio_callback_url,
+      :user_id => current_user.id
+    )
+    Call.create(:client_id => current_user.id, :from => params[:client_number], :to =>@lawyer.phone, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
+#    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
+#    capability = Twilio::Util::Capability.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+#    capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
+#    capability.allow_client_incoming 'nik'
+#    @token = capability.generate
   end
 
   def end_phone_call
@@ -344,11 +347,12 @@ class UsersController < ApplicationController
   def check_call_status
     @call = Call.find_by_sid(params[:call_id])
     @call_status = @call.status
-    if @call_status == 'completed'
-      render :js => "window.location = '#{users_path}'"
+    if @call_status == 'dialing' || @call_status == 'connected'
+    elsif @call_status == 'completed'
+      render :js => "window.location = '#{users_path}'", :notice => "Your call is completed"
       return
-    elsif @call_status == 'rejected'
-      render :js => "window.location = '#{root_path}'"
+    else
+      render :js => "window.location = '#{root_path}'", :notice => "You could not connect to the lawyer"
       return
     end
   end
