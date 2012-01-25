@@ -90,6 +90,8 @@ Lawdingo::Application.routes.draw do
   match '/search/carsousel_images' =>'search#get_homepage_lawyers'
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
+  match '/CheckCallStatus' => 'users#check_call_status'
+  match '/UpdateCallStatus' => 'users#update_call_status'
   match '/results' => "users#home", :as => :results
 
   # You can have the root of your site routed with "root"

@@ -318,7 +318,7 @@ class UsersController < ApplicationController
     @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
    # make a new outgoing call
     @call = @client.account.calls.create(
-      :From => '1-415-234-3464',
+      :From => '(415) 799-4529',
       :To => @lawyer.phone,
       :Url => twilio_voice_url,
       :FallBackUrl => twilio_fallback_url,
@@ -326,10 +326,10 @@ class UsersController < ApplicationController
       :user_id => current_user.id,
       :lawyer_id => @lawyer.id
     )
-    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing')
+    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
 #    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
-#    capability = Twilio::Util::Capability.new ACCOUNT_SID, AUTH_TOKEN
-#    capability.allow_client_outgoing 'AP89a0180a1a4ddf1da954efca349b7a20', params
+#    capability = Twilio::Util::Capability.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+#    capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
 #    @token = capability.generate
   end
 
@@ -337,6 +337,27 @@ class UsersController < ApplicationController
     @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
     @call = @client.account.calls.get(params[:call_id])
     @call.hangup
+    render :text => "", :layout => false
+  end
+
+  def check_call_status
+    @call = Call.find_by_sid(params[:call_id])
+    @call_status = @call.status
+    if @call_status == 'completed'
+      render :js => "window.location = '#{users_path}'"
+      return
+    elsif @call_status == 'rejected'
+      render :js => "window.location = '#{root_path}'"
+      return
+    end
+  end
+
+  def update_call_status
+    @call = Call.find_by_sid(params[:call_id])
+    if params[:sb] && params[:sb].to_i == 1
+      @call.update_attributes(:billing_start_time => Time.now, :status => 'billed')
+    end
+    render :text => "", :layout =>false
   end
 
   def onlinestatus

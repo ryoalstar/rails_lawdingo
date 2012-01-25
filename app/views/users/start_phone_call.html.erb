@@ -1,4 +1,4 @@
-<div>
+<div id="dialing_div">
   <div style="border:solid black;height:100px;width:100px;float:left;"></div>
 
   <div style="height:100px;font-size:1.99em;float:right;">
@@ -9,17 +9,78 @@
   <br/>
   <span>First two minutes are free</span>
   <br/>
-  <input type='button' value="Hangup" onlcick="hangupCall('<%= @call.sid %>');return false;" />
+  <input type='button' value="Hangup" onclick="hangupCall('<%= @call.sid %>');return false;" />
   </div>
 </div>
+<div id="connected_free_time_div">
+  <div style="border:solid black;height:100px;width:100px;float:left;"></div>
+  <div style="height:100px;font-size:1.99em;float:right;">
+  <span><strong><%= @lawyer.full_name %> </strong></span><br/>
+  <span id="call_status_span"><strong>Call connected</strong></span><br/>
+  <span id="free_text_span">Free time remaining: </span><span id="time_span">5:00</span><br/>
+  <span>Rate: <%= number_to_currency @lawyer.rate %>/minute</span><br/>
+  <span>Lawdingo fee: <%= number_to_currency AppParameter.service_charge_value %>/minute</span><br/>
+  <span >Billed time:</span><span id="billed_time_span">0 minutes</span>
+  <br/>
+  <input type='button' value="Hangup" onclick="hangupCall('<%= @call.sid %>');return false;" />
+  </div>
+</div>
+
 <%= javascript_tag do %>
-  $(document).ready(function() {
+  var callStatusTimer = $.timer(function() {
+      $.ajax({
+        url: "/CheckCallStatus",
+        type:'post',
+        data:{call_id: '1111'},
+        success: function(response){
+          }
+      });
+    });
+  count = 10;
+  var freeCallTimer = $.timer(function() {
+    --count;
+    if(count <= 0)
+    {
+      freeCallTimer.pause();
+      $.ajax({
+        url: "/UpdateCallStatus",
+        type:'post',
+        data:{call_id: '1111', sb:'1'},
+        success: function(response){
+          }
+      });
+    }
+    else
+    {
+      seconds = count%60;
+      seconds_string = (seconds.toString().length >1) ? seconds.toString() : '0' + seconds.toString();
+      minutes = parseInt(count/60);
+      timeString = minutes.toString() + ':' + seconds_string;
+      $('#time_span').html(timeString);
+    }
   });
+
+    billingCounter = 0;
+    var billingCallTimer = $.timer(function() {
+      ++billingCounter;
+      seconds = billingCounter%60;
+      minutes = parseInt(billingCounter/60);
+      minutes = (seconds == 0) ? minutes : minutes+1;
+      timeString = minutes.toString() + " minute(s)";
+      $('#billed_time_span').html(timeString);
+    });
+
+  $(document).ready(function(){
+        $('#connected_free_time_div').hide();
+        callStatusTimer.set({ time : 1000, autostart : true });
+        freeCallTimer.set({ time : 1000, autostart : false });
+        billingCallTimer.set({ time : 1000, autostart : false });
+      });
 
   function hangupCall(call_sid)
   {
     $.ajax({
-        url: "twilio/endcall",
+        url: "/twilio/endcall",
         type:'get',
         data:{call_id: call_sid},
         success: function(response){

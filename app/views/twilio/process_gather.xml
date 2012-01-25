@@ -3,6 +3,7 @@
   <Say voice="woman">
     You have pressed 1. Now the call will be connected.
   </Say>
-  <Dial><%= @to %></Dial>
+  <Dial>(646) 239-7326</Dial>
+  <Say>Goodbye</Say>
 </Response>
 
