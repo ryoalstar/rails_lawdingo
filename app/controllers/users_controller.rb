@@ -315,22 +315,22 @@ class UsersController < ApplicationController
 
   def start_phone_call
     @lawyer = Lawyer.find(params[:id])
-    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-   # make a new outgoing call
-    @call = @client.account.calls.create(
-      :From => '(415) 799-4529',
-      :To => @lawyer.phone,
-      :Url => twilio_voice_url,
-      :FallBackUrl => twilio_fallback_url,
-      :StatusCallback => twilio_callback_url,
-      :user_id => current_user.id,
-      :lawyer_id => @lawyer.id
-    )
-    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
-#    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
-#    capability = Twilio::Util::Capability.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-#    capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
-#    @token = capability.generate
+#    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+#   # make a new outgoing call
+#    @call = @client.account.calls.create(
+#      :From => '(415) 799-4529',
+#      :To => @lawyer.phone,
+#      :Url => twilio_voice_url,
+#      :FallBackUrl => twilio_fallback_url,
+#      :StatusCallback => twilio_callback_url,
+#      :user_id => current_user.id,
+#      :lawyer_id => @lawyer.id
+#    )
+#    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
+    params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
+    capability = Twilio::Util::Capability.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+    capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
+    @token = capability.generate
   end
 
   def end_phone_call
