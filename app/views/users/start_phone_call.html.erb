@@ -23,6 +23,11 @@
 
       });
 
+      Twilio.Device.incoming(function (conn) {
+        // accept the incoming connection and start two-way audio
+        conn.accept();
+      });
+
       function call() {
         // get the phone number or client to connect the call to
         params = {"PhoneNumber": "+16462397326"};

@@ -329,7 +329,8 @@ class UsersController < ApplicationController
 #    Call.create(:client_id => current_user.id, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
     params = {:user_id => current_user.id, :lawyer_id => @lawyer.id}
     capability = Twilio::Util::Capability.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-    #capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
+    capability.allow_client_outgoing 'AP3c23fa6a8a154d958415c5f7b9d58dca', params
+    capability.allow_client_incoming 'nik'
     @token = capability.generate
   end
 
