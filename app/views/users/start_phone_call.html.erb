@@ -31,7 +31,7 @@
       $.ajax({
         url: "/CheckCallStatus",
         type:'post',
-        data:{call_id: '1111'},
+        data:{call_id: '<%= @call.sid %>'},
         success: function(response){
           }
       });
@@ -45,7 +45,7 @@
       $.ajax({
         url: "/UpdateCallStatus",
         type:'post',
-        data:{call_id: '1111', sb:'1'},
+        data:{call_id: '<%= @call.sid %>', sb:'1'},
         success: function(response){
           }
       });
