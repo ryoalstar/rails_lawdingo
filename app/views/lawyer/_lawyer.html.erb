@@ -2,11 +2,9 @@
   <%= hidden_field(:current, :lid) %>
     <!-- CALL TO ACTION -->
     <div class="action">
-       <!--div class="free">free initial consultation, then:</div-->
-       <div class="free"><%= free_message(lawyer) %></div>
-        <div class="price">
-            <span class="amt"><%= number_to_currency lawyer.rate %></span><span class="rate">/min</span><span class="xtra">+<%= number_to_currency @app_charge || AppParameter.service_charge_value %>/min fees</span>
-        </div>
+      <!--div class="free">free initial consultation, then:</div-->
+      <div class="free"><%= free_message(lawyer) %></div>
+      <div class="price">then <%= number_to_currency lawyer.rate %>/minute</div>
     </div>
     <!-- END CALL TO ACTION -->
     <%= image_tag(lawyer.photo.url(:thumb)) %>
