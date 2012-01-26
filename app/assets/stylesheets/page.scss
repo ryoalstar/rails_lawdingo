@@ -220,6 +220,7 @@
             float: left;
             width: 50%;
             padding: 60px 0px 0px 12px;
+            text-align: center;
         }
     }
 
@@ -489,12 +490,20 @@
 
 #splash {
     h1, h2 {
-        font-weight: normal;
+        font-weight: bold;
         margin: 2px 0px;
     }
 
-    h1 { font-size: 3.2em; }
-    h2 { font-size: 2.2em; }
+    h1 { font-size: 2.75em; }
+    h2 { font-size: 1.967em; }
+    p  { font-size: 1.633em; }
+    small { display: block; font-size: 1.333em; margin-top: 1.4em; }
+
+    a.button {
+      font-weight: bold;
+      font-size: 2em;
+      margin: 1.75em 0 0em 0;
+    }
 
     .inp {
         width: 30%;

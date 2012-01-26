@@ -66,11 +66,12 @@ module LawyersHelper
   end
 
   def free_message lawyer
-    if !lawyer.is_online && lawyer.phone.present?
-      msg = "two minutes free, then:"
-    else
-      msg = "free consultation, then:"
-    end
+    # if !lawyer.is_online && lawyer.phone.present?
+    #   msg = "two minutes free, then:"
+    # else
+    #   msg = "free consultation, then:"
+    # end
+    "#{lawyer.free_consultation_duration} minutes free"
   end
 
   def start_or_schedule_button(lawyer)

@@ -85,6 +85,7 @@ Lawdingo::Application.routes.draw do
   match '/twilio/fallback' => 'twilio#fallback', :as => :twilio_fallback
   match '/twilio/callback' => 'twilio#callbackstatus', :as => :twilio_callback
   match '/twilio/dial_callback' => 'twilio#dial_callback', :as =>:dial_callback
+  match '/search' => 'users#search'
   match '/search/populate_specialities' => 'search#populate_specialities'
   # Temporary route for the next home page
   match '/search/populate_specialities_next' => 'search#populate_specialities_next'
