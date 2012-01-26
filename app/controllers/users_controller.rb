@@ -352,7 +352,7 @@ class UsersController < ApplicationController
   def check_call_status
     @call = Call.find_by_sid(params[:call_id])
     @call_status = @call.status
-    if @call_status == 'dialing' || @call_status == 'connected'
+    if @call_status == 'dialing' || @call_status == 'connected' || @call_status == 'billed'
     elsif @call_status == 'completed'
       render :js => "window.location = '#{users_path}'", :notice => "Your call is completed"
       return
