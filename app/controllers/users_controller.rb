@@ -445,13 +445,11 @@ class UsersController < ApplicationController
   def register_for_videochat
     u_id = params[:username] if params[:username]
     peer_id = params[:identity] if params[:identity]
-    begin
-      @user = User.find(u_id)
-      @user.peer_id = peer_id
-      if @user.save
-        render :file=>"users/success.xml", :content_type => 'application/xml', :layout => false
-      end
-    rescue
+    @user = User.find(u_id)
+    @user.peer_id = peer_id
+    if @user.save
+      render :file=>"users/success.xml", :content_type => 'application/xml', :layout => false
+    else
       render :file=>"users/failure.xml", :content_type => 'application/xml', :layout => false
     end
   end
