@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :twilio_return_voice, :search]
+  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
 
@@ -292,7 +292,7 @@ class UsersController < ApplicationController
    end
 
    unless params[:attorney_id].blank?
-     render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
+     render :js => "window.location = '#{phonecall_pathcall_path(:id => params[:attorney_id])}'" and return
    else
      @err_msg = ''
     errors = current_user.errors
@@ -322,15 +322,18 @@ class UsersController < ApplicationController
       @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
       #@client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
      # make a new outgoing call
+     begin
       @call = @client.account.calls.create(
         :From => TWILIO_FROM,
         :To => @lawyer.phone,
         :Url => twilio_voice_url(:cn => params[:client_number]),
         :FallBackUrl => twilio_fallback_url,
         :StatusCallback => twilio_callback_url,
-        :user_id => current_user.id
       )
       Call.create(:client_id => current_user.id, :from => params[:client_number], :to =>@lawyer.phone, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
+     rescue
+       redirect_to phonecall_path(:id=>params[:lawyer_id]), :notice => "Error: making a call"
+     end
     else
       redirect_to phonecall_path(:id=>params[:lawyer_id]), :notice => "Please enter you phone number"
     end
