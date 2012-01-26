@@ -292,7 +292,7 @@ class UsersController < ApplicationController
    end
 
    unless params[:attorney_id].blank?
-     render :js => "window.location = '#{phonecall_pathcall_path(:id => params[:attorney_id])}'" and return
+     render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
    else
      @err_msg = ''
     errors = current_user.errors
