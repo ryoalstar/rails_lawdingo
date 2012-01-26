@@ -48,6 +48,21 @@
       <a href="#bar_membership" id="barids_editor" class="dialog-opener">(edit)</a>
       <div id="div_practice_areas" style="font-size:1em;"><%= pas_text %></div>
       <a href="#practices" id="practice_areas_editor" class="dialog-opener">(edit)</a>
+    <div>
+      <%= f.select(:free_consultation_duration, [
+        ["Free consultation duration", "0"],
+        ["2 minutes", "2"],
+        ["5 minutes", "5"],
+        ["10 minutes", "10"],
+        ["15 minutes", "15"],
+        ["20 minutes", "20"],
+        ["30 minutes", "30"],
+        ["45 minutes", "45"],
+        ["60 minutes", "60"],
+        ["90 minutes", "90"]
+      ])%>
+    </div>
+
     <% @user.rate = nil if @user.new_record? %>
     <% @user.rate = number_with_precision @user.rate, :precision => 2 %>
     <%= f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"} %><br/>
