@@ -40,16 +40,16 @@ class TwilioController < ApplicationController
 
   def callbackstatus
     @call = Call.find_by_sid(params[:CallSid])
-    @call.update_attribute(:end_date, Time.now)
+    @call.update_attributes(:end_date => Time.now, :call_duration =>params[:CallDuration], :status => 'completed')
     input_params = Hash.new
     input_params[:client_id] = @call.client_id
     input_params[:lawyer_id] = @call.lawyer_id
     input_params[:start_date] = @call.start_date
     input_params[:end_date] = @call.end_date
-    billable_time = @call.billing_start_time.present? ? (@call.end_date - @call.billing_start_time).ceil : 0
-    input_params[:billable_time] = billable_time
+    billable_time = @call.billing_start_time.present? ? (@call.end_date - @call.billing_start_time) : 0
+    input_params[:billable_time] = (billable_time/60).ceil
     conversation = Conversation.create_conversation(input_params)
-    @call.update_attribute(:status, 'completed')
+#    @call.update_attribute(:status, 'completed')
     render :text => "", :layout => false
   end
 

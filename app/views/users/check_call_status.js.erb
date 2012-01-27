@@ -1,9 +1,9 @@
-<% if @call_status == 'dialing' %>
-<% elsif @call_status == 'connected' %>
+<% if @call.status == 'dialing' %>
+<% elsif @call.status == 'connected' %>
   $('#dialing_div').hide();
   $('#connected_free_time_div').show();
   freeCallTimer.play();
-<% elsif @call_status == 'billed' %>
+<% elsif @call.status == 'billed' %>
   $('#call_status_span').html("<strong>Billing started</strong>");
   $('#free_text_span').hide();
   $('#time_span').hide();
