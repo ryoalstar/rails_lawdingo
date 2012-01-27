@@ -326,7 +326,7 @@ class UsersController < ApplicationController
       @call = @client.account.calls.create(
         :From => TWILIO_FROM,
         :To => @lawyer.phone,
-        :Url => twilio_voice_url(:cn => params[:client_number]),
+        :Url => twilio_voice_url(:cn => params[:client_number], :free_duration => @lawyer.free_consultation_duration),
         :FallBackUrl => twilio_fallback_url,
         :StatusCallback => twilio_callback_url,
       )

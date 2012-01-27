@@ -2,7 +2,7 @@
 <Response>
   <Gather numDigits="1" action="/twilio/process_gather" method="GET">
   <Say voice="woman">
-    This is Lawdingo. A client would like to start a paid phone consultation with you. The first five minutes will be free. please dial 1 followed by the pound sign to accept this call and be connected or hang up to ignore it.
+    <%= "This is Lawdingo. A client would like to start a paid phone consultation with you. The first #{params[:free_duration]} minutes will be free. please dial 1 followed by the pound sign to accept this call and be connected or hang up to ignore it." %>
   </Say>
   </Gather>
   <Say voice="woman">We didn't receive any input. Goodbye!</Say>
