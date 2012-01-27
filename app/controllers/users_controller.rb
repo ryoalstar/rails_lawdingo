@@ -118,7 +118,7 @@ class UsersController < ApplicationController
 
   def new
     redirect_to root_path and return if current_user
-    user_type   = params[:ut] || '0'
+    user_type  = params[:ut] || '1'
     if user_type == '0'
       @user       = User.new(:user_type => User::CLIENT_TYPE  )
     else

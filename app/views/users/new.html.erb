@@ -6,10 +6,10 @@
 
             <span class="pre-clause">To speak to an attorney you must first...</span>
             <h1>Sign up for Lawdingo</h1>
-            <h3>Lawyers, <%= link_to "apply here", new_user_path(:ut=>1) %>. Members, <%= link_to "log in", login_path %>.</h3>
+            <h3>Lawyers, <%= link_to "apply here", new_lawyer_path %>. Members, <%= link_to "log in", login_path %>.</h3>
               <% else %>
              <h1>Lawdingo Lawyer Application</h1>
-            <h3>New members, <%= link_to "sign up", new_user_path %>. Members, <%= link_to "log in", login_path %>.</h3>
+            <h3>New members, <%= link_to "sign up", new_user_path(:ut => 0) %>. Members, <%= link_to "log in", login_path %>.</h3>
               <%end%>
             <div>
 

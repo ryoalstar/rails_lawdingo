@@ -1,6 +1,6 @@
 <div class="signup" id="page">
        <h1>Sign In</h1>
-            <h3>Lawyers, <%= link_to 'apply', new_user_path(:ut=>1) %>. New members, <%= link_to 'sign up', new_user_path %>.</h3>
+            <h3>Lawyers, <%= link_to 'apply', new_lawyer_path %>. New members, <%= link_to 'sign up', new_user_path(:ut=>0) %>.</h3>
 <div>
 <%= form_tag sessions_path, :validate => true do %>
   <% if @msg %>

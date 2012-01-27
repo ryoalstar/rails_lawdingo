@@ -36,7 +36,7 @@
           }
       });
     });
-  count = 300;
+  count = '<%= @lawyer.free_cosultation_duration %>';
   var freeCallTimer = $.timer(function() {
     --count;
     if(count <= 0)
