@@ -79,7 +79,7 @@ module LawyersHelper
       if logged_in?
         link_to "Start Video Consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => 'button'
       else
-        link_to "Start Video Consultation", new_user_path, :title => "Start Video Consultation", :class => 'button'
+        link_to "Start Video Consultation", new_user_path(:ut => 0), :title => "Start Video Consultation", :class => 'button'
       end
     else
       if logged_in?
@@ -95,7 +95,7 @@ module LawyersHelper
         end
       else
         btn_class = lawyer.phone.present? ? 'button' : 'button blue'
-        link_to lawyer.phone.present? ? 'Start Phone Consulstation' : 'Schedule Consultation', new_user_path, :class => btn_class
+        link_to lawyer.phone.present? ? 'Start Phone Consulstation' : 'Schedule Consultation', new_user_path(:ut => 0), :class => btn_class
       end
     end
   end
