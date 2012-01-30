@@ -43,6 +43,9 @@
 
       <div class="action-button">
         <%= start_or_schedule_button(lawyer) %>
+        <% if lawyer.is_online && lawyer.phone.present? %>
+          <%= start_phone_consultation(lawyer) %>
+        <% end %>
       </div>
     </div>
     <div class="clear"></div>

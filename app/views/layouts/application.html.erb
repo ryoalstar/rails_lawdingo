@@ -138,7 +138,7 @@ var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript o
 			  <div src="question.png" class="help-text" tooltip="The three or four digit code on the back of your card."></div>
 		  </div>
 	  </div>
-	    <%= submit_tag("Start Paid Session", :class => "button blue small_font") %>
+	    <%= submit_tag("Start Paid Session", :id => 'payment_overlay_submit_button', :class => "button blue small_font") %>
 	    <% end %>
     </div>
     <% end %>

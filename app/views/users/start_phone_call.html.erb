@@ -1,10 +1,23 @@
 <div id="page" class="signup">
 <div>
-<%= form_tag create_call_path(:lawyer_id =>params[:id]) do %>
+<%= form_tag create_call_path(:lawyer_id =>params[:id]), :id=>"phone_input_form" do %>
     <span class="rate_hint" style="color:black;">Your Phone Number</span><br/>
-    <input type="text" name="client_number" placeholder="Phone number" />
-    <%= submit_tag "continue", :class=>"button" %>
+    <input type="text" id="client_number" name="client_number" placeholder="Phone number" />
+    <%= submit_tag "Continue", :class=>"button" %>
 <% end %>
 </div>
 </div>
+<%= javascript_tag do %>
+/*$('#phone_input_form').submit(function() {
+  var phone_reg_ex = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/
+  var phone = $('#client_number').val();
+  if (phone_reg_ex.test(phone)) {
+    $.prompt("valid phone number");
+    return true;
+  } else {
+    $.prompt("Invalid phone number");
+    return false;
+ }
+});*/
+<% end %>
 
