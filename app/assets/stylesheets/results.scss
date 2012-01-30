@@ -53,14 +53,14 @@
 
               li {              
                 &.last-child {
-                  margin-left: 5px;
+                  margin-left: 1.333em;
                 }
 
                 @include inline-block;
                 vertical-align: top;
                 letter-spacing: normal;
-                background: url(certified.png) no-repeat left top transparent;
-                padding: 0 0 0 29px;
+                // background: url(certified.png) no-repeat left top transparent;
+                // padding: 0 0 0 29px;
                 min-height: 22px;
                 // width: 44%;
               }
