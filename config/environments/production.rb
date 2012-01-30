@@ -1,6 +1,6 @@
 require 'rack/ssl'
 Lawdingo::Application.configure do
- 
+
 
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -19,7 +19,7 @@ Lawdingo::Application.configure do
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx 
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -51,7 +51,8 @@ Lawdingo::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
-  #config.force_ssl = false
+
+  config.force_ssl = true
 
 end
+

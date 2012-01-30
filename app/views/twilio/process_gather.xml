@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say voice="woman">
-    You have pressed 1. Now the call will be connected.
+    Cool. We’ll now connect you with the client.
   </Say>
   <Dial action="/twilio/dial_callback" method="GET"><%= @call.from %></Dial>
   <Say>Goodbye</Say>

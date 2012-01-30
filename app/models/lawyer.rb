@@ -11,7 +11,7 @@ class Lawyer < User
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
-  scope :approved_lawyers, lambda { where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc") }
+  scope :approved_lawyers, lambda { where("user_type = '#{User::LAWYER_TYPE}' and is_approved is true").order("is_online desc, phone desc") }
 
   def self.approved_lawyers_states
     states = []
