@@ -1,26 +1,29 @@
-
 <% is_client = @user.is_client? %>
 
-        <div id="page" class="signup">
-            <% if is_client %>
 
-            <span class="pre-clause">To speak to an attorney you must first...</span>
-            <h1>Sign up for Lawdingo</h1>
-            <h3>Lawyers, <%= link_to "apply here", new_lawyer_path %>. Members, <%= link_to "log in", login_path %>.</h3>
-              <% else %>
-             <h1>Lawdingo Lawyer Application</h1>
-            <h3>New members, <%= link_to "sign up", new_user_path(:ut => 0) %>. Members, <%= link_to "log in", login_path %>.</h3>
-              <%end%>
-            <div>
+<div id="page" class="signup">
+  <% if params[:notice].present? %>
+    <p class="notice">
+      To connect with a lawyer, simply sign up or sign in with Lawdingo.
+    </p>
+  <% end %>
 
+  <% if is_client %>
+    <h1 class="form-header">Start using Lawdingo</h1>
+  <% else %>
+    <h1 class="form-header">Apply as a Lawyer</h1>
+  <% end %>
 
- <%= render 'form' %>
+  <div class="form-wrapper">
+    <%= render 'form' %>
+  </div>
 
-          <% unless params[:ut].present? %>
-           <span class="fine-print">By clicking "Join Lawdingo" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
-          <% else %>
-           <span class="fine-print">By clicking "Apply as Lawyer" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
-          <% end %>
-       </div>
-        </div>
+  <div class="form-wrapper signin">
+    <p>Already a Lawdingo member? <%= link_to "Log in", login_path %> now.</p>
+  </div>
+
+  <% if is_client %>
+    <h3>Lawyers, <%= link_to "apply here", new_lawyer_path %>.</h3>
+  <% end %>
+</div>
 

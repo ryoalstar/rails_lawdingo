@@ -79,7 +79,7 @@ module LawyersHelper
       if logged_in?
         link_to "Start Video Consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => 'button'
       else
-        link_to "Start Video Consultation", new_user_path(:ut => 0), :title => "Start Video Consultation", :class => 'button'
+        link_to "Start Video Consultation", new_user_path(ut: 0, notice: true), :title => "Start Video Consultation", :class => 'button'
       end
     else
       if logged_in?

@@ -1,17 +1,27 @@
 <div class="signup" id="page">
-       <h1>Sign In</h1>
-            <h3>Lawyers, <%= link_to 'apply', new_lawyer_path %>. New members, <%= link_to 'sign up', new_user_path(:ut=>0) %>.</h3>
-<div>
-<%= form_tag sessions_path, :validate => true do %>
-  <% if @msg %>
-    <div class="error_explanation">
-      <h4 class="error">Incorrect email or password.</h4>
+  <h1 class="form-header">Log In</h1>
+  <div class="form-wrapper">
+  <%= form_tag sessions_path, :validate => true do %>
+    <div class="form-inner">
+      <% if @msg %>
+        <div class="error_explanation">
+          <h4 class="error">Incorrect email or password.</h4>
+        </div>
+      <% end %>
+
+      <%= text_field_tag :email, params[:email], :placeholder=>"Email address" ,:class=>"email" %>
+      <%= password_field_tag :password ,nil ,:placeholder=>"Password" ,:class=>"passw" %>
+    </div>
+
+    <div class="actions" style="margin: 0 !important;">
+      <div class="form-inner">
+        <%= submit_tag 'Log In' ,:class=>"button" %>
+      </div>
     </div>
   <% end %>
-  <%= text_field_tag :email, params[:email], :placeholder=>"Email address" ,:class=>"email" %>
-  <%= password_field_tag :password ,nil ,:placeholder=>"Password" ,:class=>"passw" %>
-  <%= submit_tag 'Log In' ,:class=>"button" %>
-<% end %>
-</div>
-</div>
+  </div>
 
+  <div class="form-wrapper signin">
+    <p>New to Lawdingo? <%= link_to "Sign up", new_user_path(ut: 0) %> now.</p>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+<div class="form-inner">
 <%=raw flash[:error] %>
 
 <% errors = @user.errors %>
@@ -121,8 +122,19 @@
     <a class="button blue" style="width: 100px; text-align: center;" onclick="setPracticeAreas();">Done</a>
 </div>
 <% end %>
-
-  <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
+</div>
+<div class="actions">
+  <div class="form-inner">
+    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
+    <div class="form-notice">
+      <% unless params[:ut].present? %>
+        <span class="fine-print">By clicking "Join Lawdingo" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
+      <% else %>
+        <span class="fine-print">By clicking "Apply as Lawyer" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
+      <% end %>
+    </div>
+  </div>
+</div>
 <% end %>
 <script type="text/javascript">
   $(document).ready(function(){
