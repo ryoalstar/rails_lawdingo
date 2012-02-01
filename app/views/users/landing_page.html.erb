@@ -1,5 +1,7 @@
 <%
-  default_image = HomepageImage.first
+  index = [*0..HomepageImage.count-1].sample
+  hms = HomepageImage.all
+  default_image = hms[index]
   lawyer = default_image.lawyer
   practice_area_text=""
   practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. "
@@ -29,3 +31,4 @@
     <div class="clear"></div>
   </div>
 </div>
+
