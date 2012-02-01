@@ -1,4 +1,6 @@
 jQuery ->
+  ($ "a#close_notice").bind "click", -> ($ "p.notice").hide()
+
   ($ "a#barids_opener").bind "click", -> ($ "div#bar_membership").center()
   ($ "a#practice_areas_opener").bind "click", -> ($ "div#practices").center()
   ($ "a#start_phone_session_button").bind "click", -> ($ "div#paid_schedule_session").center()

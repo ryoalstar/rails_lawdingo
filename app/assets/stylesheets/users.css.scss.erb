@@ -18,6 +18,18 @@ p.notice {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+
+  a#close_notice {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(<%= asset_path "close_notice.png" %>);
+    text-indent: -9999999px;
+    color: #895F00;
+  }
 }
 
 .form-header {
