@@ -95,7 +95,7 @@ module LawyersHelper
         end
       else
         btn_class = lawyer.phone.present? ? 'button' : 'button blue'
-        link_to lawyer.phone.present? ? 'Start Phone Consultation' : 'Schedule Consultation', new_user_path(:ut => 0), :class => btn_class
+        link_to lawyer.phone.present? ? 'Start Phone Consultation' : 'Schedule Consultation', new_user_path(ut: 0, notice: true), :class => btn_class
       end
     end
   end
@@ -108,7 +108,7 @@ module LawyersHelper
       link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate },:class => "dialog-opener button"
     end
   else
-    link_to 'Start Phone Consultation', new_user_path(:ut => 0), :class => "button"
+    link_to 'Start Phone Consultation', new_user_path(ut: 0, notice: true), :class => "button"
   end
  end
 end
