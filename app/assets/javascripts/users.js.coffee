@@ -30,7 +30,8 @@ jQuery ->
     lawyerid = ($ @).data('attorneyid')
     free_consultation_duration = ($ @).data('fcd')
     lawyer_rate = ($ @).data('lrate')
+    lawyer_first_name = ($ @).data('fullname')
     $("#attorney_id").val(lawyerid)
-    $('.paid_model_header').html("The first #{free_consultation_duration} minutes with Harmeet are free. To start the phone call, though, we require payment info, as any time past #{free_consultation_duration} minutes is billed at $#{lawyer_rate}/minute.");
+    $('.paid_model_header').html("The first #{free_consultation_duration} minutes with #{lawyer_first_name} are free. To start the phone call, though, we require payment info, as any time past #{free_consultation_duration} minutes is billed at $#{lawyer_rate}/minute.");
     $('#payment_overlay_submit_button').val('Continue');
 
