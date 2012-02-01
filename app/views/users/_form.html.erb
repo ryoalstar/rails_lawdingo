@@ -127,7 +127,7 @@
   <div class="form-inner">
     <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button" %>
     <div class="form-notice">
-      <% unless params[:ut].present? %>
+      <% if params[:ut].present? %>
         <span class="fine-print">By clicking "Join Lawdingo" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
       <% else %>
         <span class="fine-print">By clicking "Apply as Lawyer" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>
