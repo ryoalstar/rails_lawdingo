@@ -82,6 +82,8 @@ class UsersController < ApplicationController
     if current_user and current_user.is_lawyer?
       redirect_to users_path(:t=>'l')
     end
+  
+    @title = AppParameter.find(2).value || "Free legal advice."
   end
 
   def show
