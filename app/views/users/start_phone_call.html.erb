@@ -1,7 +1,7 @@
 <div id="page" class="signup">
 <div>
 <%= form_tag create_call_path(:lawyer_id =>params[:id]), :id=>"phone_input_form" do %>
-    <span class="rate_hint" style="color:black;">Your Phone Number</span><br/>
+    <span class="phone-label">Your phone number:</span><br/>
     <input type="text" id="client_number" name="client_number" placeholder="Phone number" />
     <%= submit_tag "Continue", :class=>"button" %>
 <% end %>
