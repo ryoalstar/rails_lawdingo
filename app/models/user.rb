@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :user_type, :rate, :presence => true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
-
   attr_accessor :password
 
   has_attached_file :photo,
