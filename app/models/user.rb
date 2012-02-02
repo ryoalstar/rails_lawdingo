@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
 
-  validates :first_name, :last_name, :email, :user_type, :rate, :free_consultation_duration, :presence =>true
+  #validates :first_name, :last_name, :email, :user_type, :rate, :free_consultation_duration, :presence =>true
+  validates :first_name, :last_name, :email, :user_type, :rate, :presence =>true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
 

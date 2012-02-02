@@ -87,7 +87,7 @@ module LawyersHelper
           if current_user.stripe_customer_token.present?
             link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button"
           else
-            link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate },:class => "dialog-opener button"
+            link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button"
           end
 
         else
@@ -105,7 +105,7 @@ module LawyersHelper
     if current_user.stripe_customer_token.present?
       link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button"
     else
-      link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate },:class => "dialog-opener button"
+      link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button"
     end
   else
     link_to 'Start Phone Consultation', new_user_path(ut: 0, notice: true), :class => "button"

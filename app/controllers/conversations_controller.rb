@@ -19,7 +19,7 @@ class ConversationsController < ApplicationController
   # then the flash redirects to the review page for this conversation
   def create
     lawyer = User.find(params[:lawyer_id])
-    lawyer.update_attribute(:is_busy, 0)
+    lawyer.update_attribute(:is_busy, false)
     conversation = Conversation.create_conversation(params)
     if current_user && current_user.is_client?
       redirect_to conversation_summary_path(conversation)
