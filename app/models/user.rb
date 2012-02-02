@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
 
-  #validates :first_name, :last_name, :email, :user_type, :rate, :free_consultation_duration, :presence =>true
-  validates :first_name, :last_name, :email, :user_type, :rate, :presence =>true
+  # Validate free consultation duration only if it's lawyer signing up
+  validates_presence_of :free_consultation_duration, :if => :is_lawyer?
+
+  validates :first_name, :last_name, :email, :user_type, :rate, :presence => true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
 
@@ -97,7 +99,5 @@ class User < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
-
-
 end
 
