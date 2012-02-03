@@ -28,6 +28,7 @@ gem 'openssl-extensions', '1.1.0'
 gem 'openssl-nonblock', '0.2.1'
 gem 'client_side_validations'
 gem 'twilio-ruby'
+gem 'newrelic_rpm'
 # Use unicorn as the web server
 # gem 'unicorn'
 
