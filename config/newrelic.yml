@@ -3,9 +3,9 @@
 # Ruby, Java, .NET, PHP, and Python applications with deep visibility and low overhead.
 # For more information, visit www.newrelic.com.
 #
-# Generated February 02, 2012
+# Generated February 03, 2012
 #
-# This configuration file is custom generated for Adam Miribyan - Gmail.com
+# This configuration file is custom generated for Lawdingo
 
 # Here are the settings that are common to all environments:
 common: &default_settings
@@ -14,7 +14,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '5ba68cfaaa441c547b00885be95466c3d712e53e'
+  license_key: '9654f1363bd46c51d764739637e5e63d335e891b'
   
   # Agent Enabled (Ruby/Rails Only)
   # Use this setting to force the agent to run or not run.
@@ -33,7 +33,7 @@ common: &default_settings
   # "All UI" then specify a semicolon-separated list of up to three
   # distinct names.  If you comment this out, it defaults to the 
   # capitalized RAILS_ENV (i.e., Production, Staging, etc)
-  app_name: My Application
+  app_name: Lawdingo
 
   # When "true", the agent collects performance data about your 
   # application and reports this data to the New Relic service at
