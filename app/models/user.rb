@@ -16,12 +16,10 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   has_attached_file :photo,
-    :styles => { :medium => "232x", :thumb => "100x" }
-  #  :styles => { :medium => "232x162>", :thumb => "116x81>" }
-  #     ,:storage => :s3,
-  #    :s3_credentials => "#{Rails.root}/config/s3.yml",
-  #    :path => ":attachment/:id/:style.:extension",
-  #    :bucket => 'lawdingo'
+    :styles => { :medium => "232x", :thumb => "100x" },
+      :storage => :s3,
+      :s3_credentials => "#{Rails.root}/config/s3.yml",
+      :path => "system/:attachment/:id/:style.:extension"
 
   def self.authenticate email, password
     user = User.find_by_email(email)
