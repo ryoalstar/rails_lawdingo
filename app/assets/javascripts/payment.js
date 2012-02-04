@@ -15,7 +15,7 @@ $(document).ready(function() {
 			// this.value = default_value;
 		// }
 	// });
-});
+// });
 
   $("#payment-form").submit(function(event) {
     // disable the submit button to prevent repeated clicks
