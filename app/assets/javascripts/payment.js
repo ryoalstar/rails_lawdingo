@@ -3,19 +3,19 @@ $(document).ready(function() {
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
 
   // Add this behavior to all text fields
-  $("input[type=text]").each(function() {
-	var default_value = this.value;
-	$(this).focus(function() {
-		if(this.value == default_value) {
-			this.value = '';
-		}
-	});
-	$(this).blur(function() {
-		if(this.value == '') {
-			this.value = default_value;
-		}
-	});
-});
+  // $("input[type=text]").each(function() {
+	// var default_value = this.value;
+	// $(this).focus(function() {
+		// if(this.value == default_value) {
+			// this.value = '';
+		// }
+	// });
+	// $(this).blur(function() {
+		// if(this.value == '') {
+			// this.value = default_value;
+		// }
+	// });
+// });
 
   $("#payment-form").submit(function(event) {
     // disable the submit button to prevent repeated clicks

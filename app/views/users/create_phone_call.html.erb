@@ -1,30 +1,25 @@
-<div id="page">
-  <div id="results">
-    <div id="dialing_div" class="row" style="min-height:140px;">
-      <%= image_tag(@lawyer.photo.url(:thumb)) %>
-      <div class="info">
-        <span><strong><%= @lawyer.full_name %> </strong></span>
-        <br/>
-        <br/>
-        <span>Connecting...</span>
-        <br/>
-        <span>First two minutes are free</span>
-        <br/><br/>
-        <input type='button' value="Hangup" onclick="hangupCall('<%= 0 %>');return false;" class="button blue" style="font-size:1em;"/>
-      </div>
+<div class="call-container">
+  <div id="dialing_div" class="details">
+    <%= image_tag(@lawyer.photo.url(:thumb), class: "userpic") %>
+    <div class="info">
+      <h2><%= @lawyer.full_name %></h2>
+      <p>Connecting...</p>
+      <p>You'll get a call in a minute.</p>
+      <p>The first <%= @lawyer.free_consultation_duration %> minutes of the call will be free. </p>
+      <p>Thereafter, you'll be billed at <%= number_to_currency @lawyer.rate + AppParameter.service_charge_value %>/min.</p>
+      <input type='button' value="End call" onclick="hangupCall('<%= 0 %>');return false;" class="button gray" />
     </div>
-    <div id="connected_free_time_div" class="row" style="min-height:160px;">
-      <%= image_tag(@lawyer.photo.url(:thumb)) %>
-      <div class="info">
-        <span><strong><%= @lawyer.full_name %> </strong></span><br/>
-        <span id="call_status_span"><strong>Call connected</strong></span><br/>
-        <span id="free_text_span">Free time remaining: </span><span id="time_span">5:00</span><br/>
-        <span>Rate: <%= number_to_currency @lawyer.rate %>/minute</span><br/>
-        <span>Lawdingo fee: <%= number_to_currency AppParameter.service_charge_value %>/minute</span><br/>
-        <span >Billed time:</span><span id="billed_time_span"> 0 minutes</span>
-        <br/>
-        <input type='button' value="Hangup" onclick="hangupCall('<%= @call.sid %>');return false;" class="button blue" style="font-size:1em;" />
-      </div>
+  </div>
+  
+  <div id="connected_free_time_div" class="details"> 
+    <%= image_tag(@lawyer.photo.url(:thumb), class: "userpic") %>
+    <div class="info">
+      <h2><%= @lawyer.full_name %></h2>
+      <p id="call_status_span" class="strong">Call connected</p>
+      <p id="free_text_span">Free time remaining: <span id="time_span">5:00</span>.</p>
+      <p>Rate: <%= number_to_currency @lawyer.rate + AppParameter.service_charge_value %>/min.</p>
+      <p>Billed time: <span id="billed_time_span">0 minutes</span>.</p>
+      <input type='button' value="End call" onclick="hangupCall('<% @call.sid %>');return false;" class="button gray" />
     </div>
   </div>
 </div>

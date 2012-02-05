@@ -334,13 +334,12 @@ class UsersController < ApplicationController
       )
       Call.create(:client_id => current_user.id, :from => params[:client_number], :to =>@lawyer.phone, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
      rescue
-       redirect_to phonecall_path(:id=>params[:lawyer_id]), :notice => "Error: making a call"
+       redirect_to phonecall_path(:id=>params[:lawyer_id], number: params[:client_number]), :notice => "Error: making a call"
      end
     else
-      redirect_to phonecall_path(:id=>params[:lawyer_id]), :notice => "Please enter you phone number"
+      redirect_to phonecall_path(:id=>params[:lawyer_id], number: params[:client_number]), :notice => "Please enter you phone number"
     end
   end
-
 
   def end_phone_call
     @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
