@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     :styles => { :medium => "232x", :thumb => "100x" },
       :storage => :s3,
       :s3_credentials => "#{Rails.root}/config/s3.yml",
-      :path => "system/:attachment/:id/:style.:extension"
+      :path => "system/:attachment/:id/:style/:basename.:extension"
 
   def self.authenticate email, password
     user = User.find_by_email(email)
