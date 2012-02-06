@@ -17,7 +17,22 @@
 <div class="page" id="page">
   <div class="inline-wrapper">
     <div class="filters">
-      filters here
+      <div class="input">
+        <label for="select_state">Your state:</label>
+        <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
+      </div>
+      <div class="input">
+        <label for="select_pa">Legal need:</label>
+        <%= select_tag('select_pa', options_for_select(options_pa_arr, @selected_pa_str)) %>
+      </div>
+      <div class="input" id='specialities_container'>
+        <label for="">Specific need:</label>
+        <% if @selected_pa_str.present? %>
+          <%= select_tag('select_sp', options_for_select(@selected_pa_specialities_str, @selected_sp_str)) %>
+        <% else %>
+          <%= select_tag('select_sp', options_for_select([["none", 0], @selected_sp_str])) %>
+        <% end %>
+      </div>
     </div>
 
     <!-- FILTERS -->

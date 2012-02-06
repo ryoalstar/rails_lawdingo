@@ -66,6 +66,21 @@ body.users.home {
   }
 
   .page {
+    .filters {
+      padding-top: 44px;
+
+      .input {
+        display: block;
+        margin-bottom: 2.1667em;
+
+        label {
+          font-size: 1.5em;
+          margin-bottom: 2px;
+          display: block;
+        }
+      }
+    }
+
     .inline-wrapper {
       position: relative;
       zoom: 1;
