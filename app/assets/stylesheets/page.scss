@@ -58,6 +58,35 @@
     }
 }
 
+body.users.home {
+  #page > div {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .page {
+    .inline-wrapper {
+      position: relative;
+      zoom: 1;
+
+      .filters, .results {
+        @include inline-block;
+        vertical-align: top;
+        letter-spacing: normal;
+      }
+
+      .filters {
+        width: 20%;
+      }
+
+      .results {
+        width: 78%;
+      }
+    }
+  }
+}
+
 #page {
     background: url(page_gradient.png) repeat-x top center white;
     padding: 15px 0px 5px;
@@ -70,7 +99,6 @@
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-
     }
 
     .inner {

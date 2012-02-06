@@ -34,7 +34,7 @@
       <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>
       <ul class="verified">
         <% unless lawyer.bar_memberships.blank? %>
-          <li>&bull; Licensed in <%= licenced_states %></li>
+          <li class="first-child">&bull; Licensed in <%= licenced_states %></li>
         <% end %>
         <% unless lawyer.practice_areas.blank? %>
           <li class="last-child">&bull; Advises on <%= @selected_practice_area.present? ? @selected_practice_area : "#{pas_names_list} law" %></li>

@@ -18,7 +18,7 @@
         .action { float: right; }
         .info {
             color: #666;
-            width: 610px;
+            width: 430px;
             font-size: 1.6em;
             float: left;
             margin-left: 10px;
@@ -52,8 +52,12 @@
               margin: 6px 0;
 
               li {              
+                &.first-child {
+                  margin-right: 1.333em;
+                }
+
                 &.last-child {
-                  margin-left: 1.333em;
+                  // margin-left: 1.333em;
                 }
 
                 @include inline-block;
