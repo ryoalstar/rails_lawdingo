@@ -77,25 +77,25 @@ module LawyersHelper
   def start_or_schedule_button(lawyer)
     if lawyer.is_online? && !lawyer.is_busy
       if logged_in?
-        link_to "Start Video Consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => 'button'
+        link_to "start video consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => 'button gray'
       else
-        link_to "Start Video Consultation", new_user_path(ut: 0, notice: true), :title => "Start Video Consultation", :class => 'button'
+        link_to "start video consultation", new_user_path(ut: 0, notice: true), :title => "Start Video Consultation", :class => 'button gray'
       end
     else
       if logged_in?
         if lawyer.phone.present?
           if current_user.stripe_customer_token.present?
-            link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button"
+            link_to "start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button gray"
           else
-            link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button"
+            link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button gray"
           end
 
         else
-          link_to "Schedule Consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button blue"
+          link_to "schedule consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener button gray"
         end
       else
-        btn_class = lawyer.phone.present? ? 'button' : 'button blue'
-        link_to lawyer.phone.present? ? 'Start Phone Consultation' : 'Schedule Consultation', new_user_path(ut: 0, notice: true), :class => btn_class
+        btn_class = lawyer.phone.present? ? 'button gray' : 'button gray'
+        link_to lawyer.phone.present? ? 'start phone consultation' : 'schedule consultation', new_user_path(ut: 0, notice: true), :class => btn_class
       end
     end
   end
@@ -103,12 +103,12 @@ module LawyersHelper
  def start_phone_consultation(lawyer)
    if logged_in?
     if current_user.stripe_customer_token.present?
-      link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button"
+      link_to "start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button gray"
     else
-      link_to "Start Phone Consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button"
+      link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button gray"
     end
   else
-    link_to 'Start Phone Consultation', new_user_path(ut: 0, notice: true), :class => "button"
+    link_to 'start phone consultation', new_user_path(ut: 0, notice: true), :class => "button gray"
   end
  end
 end
