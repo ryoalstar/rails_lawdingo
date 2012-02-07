@@ -111,5 +111,13 @@ module LawyersHelper
     link_to 'start phone consultation', new_user_path(ut: 0, notice: true), :class => "button gray"
   end
  end
+
+ def status_message(lawyer)
+   if lawyer.is_online?
+     "online now"
+   elsif lawyer.phone.present?
+     "available by phone now"
+   end
+ end
 end
 

@@ -30,7 +30,10 @@
       pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
       %>
     <div class="info">
-      <h3><%= "#{lawyer.full_name}" %></h3>
+      <h3>
+        <%= "#{lawyer.full_name}" %>
+        <span class="status"><%= status_message(lawyer) %></span>
+      </h3>
       <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>
       <ul class="verified">
         <% unless lawyer.bar_memberships.blank? %>

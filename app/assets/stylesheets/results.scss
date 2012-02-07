@@ -37,58 +37,67 @@
         }
 
         .info {
-            color: #666;
-            width: 430px;
-            font-size: 1.6em;
-            float: left;
-            margin-left: 10px;
+          color: #666;
+          width: 430px;
+          font-size: 1.6em;
+          float: left;
+          margin-left: 10px;
 
-            .tagline, .specialities {
-              color: black;
-            }
+          .status {
+            @include inline-block;
+            font-size: 0.666em;
+            font-weight: normal;
+            font-style: italic;
+            color: #888;
+            margin-left: 0.5em;
+          }
 
-            .tagline {
-              font-style: italic;
-            }
+          .tagline, .specialities {
+            color: black;
+          }
 
-            h3 {
-                color: #000;
-                margin: 0px;
-                display: inline;
-            }
-            
-            ul.verified {
-              width: 100%;
-              position: relative;
-              zoom: 1;
-              display: block;
-              letter-spacing: 0;  
-              font-size: 15px;
-              color: #222;
-              margin: 6px 0;
+          .tagline {
+            font-style: italic;
+          }
 
-              li {              
-                &.first-child {
-                  margin-right: 1.333em;
-                }
+          h3 {
+              color: #000;
+              margin: 0px;
+              display: inline;
+          }
+          
+          ul.verified {
+            width: 100%;
+            position: relative;
+            zoom: 1;
+            display: block;
+            letter-spacing: 0;  
+            font-size: 15px;
+            color: #222;
+            margin: 6px 0;
 
-                &.last-child {
-                  // margin-left: 1.333em;
-                }
-
-                @include inline-block;
-                vertical-align: top;
-                letter-spacing: normal;
-                // background: url(certified.png) no-repeat left top transparent;
-                // padding: 0 0 0 29px;
-                min-height: 22px;
-                // width: 44%;
+            li {              
+              &.first-child {
+                margin-right: 1.333em;
               }
-            }
 
-            .df-verified {
-                
+              &.last-child {
+                // margin-left: 1.333em;
+              }
+
+              @include inline-block;
+              vertical-align: top;
+              letter-spacing: normal;
+              // background: url(certified.png) no-repeat left top transparent;
+              // padding: 0 0 0 29px;
+              min-height: 22px;
+              // width: 44%;
             }
+          }
+
+          .df-verified {
+              
+          }
         }
     }
 }
