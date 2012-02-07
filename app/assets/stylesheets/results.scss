@@ -22,13 +22,13 @@
           letter-spacing: 0;
           zoom: 1;
           font-size: 10px;
-          margin-left: 112px;
           width: 100%;
 
           a {
             @include inline-block;
             vertical-align: top;
             letter-spacing: normal;
+            font-size: 1.3em;
 
             &:first-child {
               margin-right: 1.25em;
