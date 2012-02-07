@@ -85,6 +85,7 @@ body.users.home {
 
     .inline-wrapper {
       position: relative;
+      overflow: hidden;
       zoom: 1;
 
       .filters, .results {
@@ -94,11 +95,12 @@ body.users.home {
       }
 
       .filters {
-        width: 20%;
+        width: 18%;
       }
 
       .results {
-        width: 78%;
+        width: 80%;
+        float: right;
       }
     }
   }
@@ -577,4 +579,21 @@ body.users.home {
   text-align: center;
   padding: 0.55em;
   border-bottom: 1px solid #CFCFCF;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+ 
+html[xmlns] .clearfix {
+  display: block;
+}
+ 
+* html .clearfix {
+  height: 1%;
 }

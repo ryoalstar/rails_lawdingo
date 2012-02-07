@@ -40,13 +40,13 @@
           <li class="last-child">&bull; Advises on <%= @selected_practice_area.present? ? @selected_practice_area : "#{pas_names_list} law" %></li>
         <% end %>
       </ul>
-
-      <div class="action-button">
-        <%= start_or_schedule_button(lawyer) %>
-        <% if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present? %>
-          <%= start_phone_consultation(lawyer) %>
-        <% end %>
-      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="action-buttons">
+      <%= start_or_schedule_button(lawyer) %>
+      <% if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present? %>
+        <%= start_phone_consultation(lawyer) %>
+      <% end %>
     </div>
     <div class="clear"></div>
     <!-- END RESULT INFO -->

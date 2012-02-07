@@ -16,6 +16,26 @@
         &:last-child { border: none; }
         img { border: solid 1px #cecece; float: left; }
         .action { float: right; }
+        
+        .action-buttons {
+          position: relative;
+          letter-spacing: 0;
+          zoom: 1;
+          font-size: 10px;
+          margin-left: 112px;
+          width: 100%;
+
+          a {
+            @include inline-block;
+            vertical-align: top;
+            letter-spacing: normal;
+
+            &:last-child {
+              margin-left: 1.25em;
+            }
+          }
+        }
+
         .info {
             color: #666;
             width: 430px;
@@ -36,11 +56,7 @@
                 margin: 0px;
                 display: inline;
             }
-
-            .action-button {
-              font-size: 10px;
-            }
-
+            
             ul.verified {
               width: 100%;
               position: relative;
