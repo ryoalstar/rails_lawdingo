@@ -7,7 +7,7 @@
       <div class="price">then <%= number_to_currency (lawyer.rate + AppParameter.service_charge_value) %>/minute</div>
     </div>
     <!-- END CALL TO ACTION -->
-    <%= image_tag(lawyer.photo.url(:thumb)) %>
+    <%= link_to_unless_current image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug) %>
 
     <!-- RESULT INFO -->
     <% bms = []
@@ -31,7 +31,7 @@
       %>
     <div class="info">
       <h3>
-        <%= "#{lawyer.full_name}" %>
+        <%= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug) %>
         <span class="status"><%= status_message(lawyer) %></span>
       </h3>
       <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>

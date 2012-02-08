@@ -64,5 +64,9 @@ class Lawyer < User
     ppa = self.practice_areas.parent_practice_areas.map{|p| p.name}
     ppa.join(',')
   end
+
+  def slug
+    "#{full_name.parameterize}"
+  end
 end
 
