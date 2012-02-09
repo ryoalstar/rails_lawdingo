@@ -68,5 +68,27 @@ class Lawyer < User
   def slug
     "#{full_name.parameterize}"
   end
+
+  def licenced_states
+    states = []
+    bar_memberships.each do |membership|
+      states << membership.state.abbreviation
+    end
+    states
+  end
+
+  def areas_human_list
+    pas = []
+    pas = practice_areas.parent_practice_areas unless practice_areas.blank?
+    pas_string = ""
+    pas.each{|pa|
+      pas_string += pa.name + ', '
+    }
+    pas_string.chomp!(', ')
+
+    pas_names = pas.map { |area| area.name.downcase  }
+    pas_names_last = pas_names.pop
+    pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
+  end
 end
 

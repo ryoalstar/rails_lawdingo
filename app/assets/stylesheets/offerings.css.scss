@@ -1,0 +1,53 @@
+@mixin inline-block {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+body.offerings {
+  .offerings > div:first-child {
+    padding: 30px 60px;
+    font-size: 1.4em;
+    min-height: 350px;
+  }
+
+  .offerings {
+    position: relative;
+    zoom: 1;
+  }
+
+  #offerings, #new_offering {
+    @include inline-block;
+    vertical-align: top;
+    width: 48%;
+  }
+
+  div#new_offering {
+    overflow: hidden;
+    border-left: 2px solid #888;
+    padding-left: 1.4em;
+  }
+
+  .simple_form {
+    label {
+      display: block;
+      word-spacing: nowrap;
+
+      &:after {
+        content: ':'
+      }
+    }
+
+    .input {
+      margin-bottom: 1em;
+    }
+
+    textarea#offering_description {
+      height: 60px;
+    }
+  }
+}

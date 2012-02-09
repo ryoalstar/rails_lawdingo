@@ -1,0 +1,29 @@
+<div id="page" class="offerings">
+  <div>
+    <div style="font-size: 14px; margin: 0 8px 10px 0; font-weight: bold;">
+      <%= link_to_unless_current "Account information", user_path(@lawyer, :t =>User::ACCOUNT_TAB) %> |
+      <%= link_to_unless_current "Summary of sessions", user_path(@lawyer, :t =>User::SESSION_TAB) %> |
+      <%= link_to_unless_current "Fixed-price offerings", user_offerings_path(@lawyer) %>
+    </div>
+    <div id="offerings">
+      <h3>My fixed-free offerings:</h3>
+      <% if @lawyer.offerings.any? %>
+        <ul>
+          <%= render @lawyer.offerings %>
+        </ul>
+      <% else %>
+        <p>None created yet.</p>
+      <% end %>
+    </div>
+    <div id="new_offering">
+      <h3>Add a fixed-fee offer:</h3>
+      <%= simple_form_for [@lawyer, @offering] do |f| %>
+        <%= f.association :offering_type, label: "Type of fixed-price offering", include_blank: false %>
+        <%= f.input :name, label: "Name of fixed-price job" %>
+        <%= f.input :description, label: "Description of what specifically is involved and deliverable" %>
+        <%= f.input :fee, label: "Fixed fee charged for this" %>
+        <%= f.submit "Add fixed-fee offering", class: "button", style: "font-size: 1.0833em;" %>
+      <% end %>
+    </div>
+  </div>
+</div>

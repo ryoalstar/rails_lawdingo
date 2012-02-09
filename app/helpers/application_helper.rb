@@ -27,5 +27,11 @@ module ApplicationHelper
     t_str
   end
 
+  def title(page_title)
+    content_for :title do
+      page_title
+    end
+  end
+
 end
 

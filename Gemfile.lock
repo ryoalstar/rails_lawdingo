@@ -109,6 +109,9 @@ GEM
       railties (~> 3.1.0.rc6)
       sass (>= 3.1.4)
     shoulda (2.11.3)
+    simple_form (1.5.2)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sprockets (2.0.0)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -151,6 +154,7 @@ DEPENDENCIES
   rails (= 3.1.0.rc8)
   sass-rails (~> 3.1.0.rc)
   shoulda
+  simple_form
   stripe
   therubyracer
   turn

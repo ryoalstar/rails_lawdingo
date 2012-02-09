@@ -6,8 +6,9 @@ txt_color = ['black','blue']
 %>
 <div>
   <div style="font-size:14px;margin-right:8px;margin-bottom:10px;font-weight:bold;">
-      <%= link_to "Account information", user_path(user, :t =>User::ACCOUNT_TAB), :style =>"color:#{txt_color[ tab == User::ACCOUNT_TAB ? 0 : 1]};text-decoration:none;" %> |
-      <%= link_to "Summary of sessions", user_path(user, :t =>User::SESSION_TAB), :style =>"color:#{txt_color[ tab == User::SESSION_TAB ? 0 : 1]};text-decoration:none;" %>
+      <%= link_to_unless_current "Account information", user_path(user, :t => User::ACCOUNT_TAB) %> |
+      <%= link_to_unless_current "Summary of sessions", user_path(user, :t => User::SESSION_TAB) %> |
+      <%= link_to_unless_current "Fixed-price offerings", user_offerings_path(user) %>
   </div>
     <% if tab == User::ACCOUNT_TAB %>
       <%#= render :partial =>"/users/account_info", :locals => {:user => user} %>

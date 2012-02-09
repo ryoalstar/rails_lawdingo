@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   validates :password, :presence => { :on => :create }
   attr_accessor :password
 
+  has_many :offerings, foreign_key: :lawyer_id
+
   has_attached_file :photo,
     :styles => { :medium => "232x", :thumb => "100x" },
       :storage => :s3,
