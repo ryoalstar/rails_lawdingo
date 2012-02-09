@@ -6,7 +6,7 @@
       <%= link_to_unless_current "Fixed-price offerings", user_offerings_path(@lawyer) %>
     </div>
     <div id="offerings">
-      <h3>My fixed-free offerings:</h3>
+      <h3>My fixed-fee offerings:</h3>
       <% if @lawyer.offerings.any? %>
         <ul>
           <%= render @lawyer.offerings %>
