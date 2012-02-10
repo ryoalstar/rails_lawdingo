@@ -21,7 +21,7 @@
         <%= f.association :offering_type, label: "Type of fixed-price offering", include_blank: false %>
         <%= f.input :name, label: "Name of fixed-price job" %>
         <%= f.input :description, label: "Description of what specifically is involved and deliverable" %>
-        <%= f.input :fee, label: "Fixed fee charged for this" %>
+        <%= f.input :fee, label: "Fixed fee charged for this", as: :string, input_html: { value: "" } %>
         <%= f.submit "Add fixed-fee offering", class: "button", style: "font-size: 1.0833em;" %>
       <% end %>
     </div>

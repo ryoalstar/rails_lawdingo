@@ -18,6 +18,10 @@ body.offerings {
   .offerings {
     position: relative;
     zoom: 1;
+
+    li.offering {
+      font-weight: bold;
+    }
   }
 
   #offerings, #new_offering {
@@ -33,6 +37,24 @@ body.offerings {
   }
 
   .simple_form {
+    .input {
+      &.string input,
+      &.text textarea {
+        width: 300px;
+        font-family: arial, verdana, tahoma;
+        border: 1px solid #B8B8B8;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        font-size: 0.833em;
+        padding: 8px;
+      }
+
+      &.text {
+        width: 400px;
+      }
+    }
+
     label {
       display: block;
       word-spacing: nowrap;
