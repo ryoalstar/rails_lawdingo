@@ -15,7 +15,7 @@ Lawdingo::Application.routes.draw do
 
   match '/apply' => "users#new", :as => :new_lawyer
   resources :users do
-    resources :offerings
+    resources :offerings, shallow: true
     put 'image_upload'
     get 'chat_session'
     get 'onlinestatus'

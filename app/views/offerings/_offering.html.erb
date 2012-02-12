@@ -1,3 +1,24 @@
-<%= content_tag_for :li, offering do %>
-  <%= offering.name %>
-<% end %>
+<div class="row offering" id="offering_<%= offering.id %>">
+  <%= hidden_field(:current, :lid) %>
+    <div class="action">
+      <div class="free"><%= "#{number_to_currency(offering.fee, precision: 0)} flat free" %></div>
+      <div class="price">free consultation</div>
+    </div>
+
+    <%= link_to_unless_current image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug) %>
+   <div class="info">
+      <h3>
+        <%= link_to_unless_current "#{offering.name}", offering %>
+      </h3>
+      <p>Category: <%= offering.offering_type.name %></p>
+      <p>Delivered by: <%= link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug) %> <span class="status"><%= status_message(lawyer) %></span></p>
+      <div class="action-buttons">
+        <%= start_or_schedule_button(lawyer) %>
+        <% if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present? %>
+          <%= start_phone_consultation(lawyer) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <!-- END RESULT INFO -->
+</div>

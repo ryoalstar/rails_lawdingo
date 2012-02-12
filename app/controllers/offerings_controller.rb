@@ -1,9 +1,13 @@
 class OfferingsController < ApplicationController
-  before_filter :authenticate, :ensure_self_account
+  before_filter :authenticate, :ensure_self_account, except: :show
 
   def index
     @lawyer = User.find(params[:user_id])
     @offering = @lawyer.offerings.new
+  end
+
+  def show
+    @offering = Offering.find(params[:id])
   end
 
   def create

@@ -9,7 +9,11 @@
       <h3>My fixed-fee offerings:</h3>
       <% if @lawyer.offerings.any? %>
         <ul>
-          <%= render @lawyer.offerings %>
+          <% @lawyer.offerings.each do |offering| %>
+            <%= content_tag_for :li, offering do %>
+              <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id.to_i %>
+            <% end %>
+          <% end %>
         </ul>
       <% else %>
         <p>None created yet.</p>
