@@ -8,20 +8,24 @@
   *vertical-align: auto;
 }
 
-body.offerings {
-  div.offering {
-    p {
-      color: black;
-      font-size: 0.9em;
-      margin: 0;
-      line-height: 1.5;
-    }
+div.offering {
+  p {
+    color: black;
+    font-size: 0.9em;
+    margin: 0;
+    line-height: 1.5;
 
-    .action-buttons {
-      margin-top: 0.25em;
+    &.description {
+      font-style: italic;
     }
   }
 
+  .action-buttons {
+    margin-top: 0.25em;
+  }
+}
+
+body.offerings {
   .offerings > div:first-child {
     padding: 30px 60px;
     font-size: 1.4em;
