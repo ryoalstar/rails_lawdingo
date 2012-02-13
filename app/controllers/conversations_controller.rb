@@ -24,7 +24,7 @@ class ConversationsController < ApplicationController
     if current_user && current_user.is_client?
       redirect_to conversation_summary_path(conversation)
     else
-      redirect_to redirect_to users_path(:t=>'l')
+      redirect_to users_path(:t=>'l')
     end
 #    render :text => conversation ? conversation.id.to_s : "0"
   end
