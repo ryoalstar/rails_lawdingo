@@ -1,12 +1,10 @@
-<label for="select_sp">Specific need:</label>
 <% unless @practice_area_specialities.blank? %>
-<%= select_tag :select_sp, raw("<option value=0>General #{@practice_area.name}</option>") + options_from_collection_for_select(@practice_area_specialities, :id, :name) -%>
-<% else %>
-<%= select_tag('select_sp', options_for_select([["none", 0]])) %>
+  <li class="practice_area selected">
+    <%= link_to "General #{@practice_area.name}" %>
+  </li>
+  <% @practice_area_specialities.each do |spec| %>
+    <%= content_tag_for :li, spec, data: { id: spec.id } do %>
+      <% link_to spec.name, "##{spec.name.parameterize}" %>
+    <% end %>
+  <% end %>
 <% end %>
-<script>
-$("#select_sp").change(function(){
-    filterResults();
-  });
-</script>
-

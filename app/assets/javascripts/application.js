@@ -10,5 +10,6 @@
 //= require rails.validations
 //= require jquery.numeric
 //= require offerings
+//= require filters
 // require_tree .
 

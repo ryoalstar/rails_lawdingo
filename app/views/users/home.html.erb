@@ -6,55 +6,45 @@
       options_states_arr << [state.name, state.id]
     end
   }
-
-  options_pa_arr = []
-  options_pa_arr << ['All types', 0]
-  PracticeArea.parent_practice_areas.order(:name).each { |pa|
-  options_pa_arr << [pa.name, pa.id]
-}
 %>
 
 <div class="page" id="page">
   <div class="inline-wrapper clearfix">
     <div class="filters">
       <div class="input">
-        <label for="select_state">Your state:</label>
+        <label for="select_state">Where are ya?</label>
         <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
       </div>
-      <div class="input">
-        <label for="select_pa">Legal need:</label>
-        <%= select_tag('select_pa', options_for_select(options_pa_arr, @selected_pa_str)) %>
-      </div>
-      <div class="input" id='specialities_container'>
-        <label for="">Specific need:</label>
-        <% if @selected_pa_str.present? %>
-          <%= select_tag('select_sp', options_for_select(@selected_pa_specialities_str, @selected_sp_str)) %>
-        <% else %>
-          <%= select_tag('select_sp', options_for_select([["none", 0], @selected_sp_str])) %>
-        <% end %>
-      </div>
-    </div>
 
-    <!-- FILTERS -->
-    <div id="filters" style="display: none;">
-      <span style="color:black; margin-right: 1em; font-weight:bold;">Find the right lawyer.</span>  State:
-      <span>
-        <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
-      </span>
-      Type of law:
-      <span>
-        <%= select_tag('select_pa', options_for_select(options_pa_arr, @selected_pa_str)) %>
-      </span>
-      <span style="padding-left:5px;" id='specialities_container'>
-        Specific need: 
-        <% if @selected_pa_str.present? %>
-          <%= select_tag('select_sp', options_for_select(@selected_pa_specialities_str, @selected_sp_str)) %>
-        <% else %>
-          <%= select_tag('select_sp', options_for_select([["none", 0], @selected_sp_str])) %>
+      <div class="filters-section" id="areas_filter">
+        <input type="text" name="select_pa" id="select_pa" value="0" style="display: none;" />
+        <h3>Type of lawyer?</h3>
+        <ul class="areas">
+          <li class="practice_area selected">
+            <%= link_to "All types", "#all-types" %>
+          </li>
+        <% PracticeArea.parent_practice_areas.order(:name).each do |area| %>
+          <%= content_tag_for :li, area, data: { id: area.id } do %>
+            <%= link_to area.name, "##{area.name.parameterize}" %>
+          <% end %>
         <% end %>
-      </span>
+        </ul>
+      </div>
+
+      <div class="filters-section">
+        <h3>I need:</h3>
+        <ul>
+          <li class="selected"><%= link_to "Legal advice", "#legal-advice" %></li>
+          <li><%= link_to "A legal service", "#legal-service" %></li>
+        </ul>
+      </div>
+
+      <div class="filters-section" style="display: none;" id="specialities_filter">
+        <input type="text" name="select_sp" id="select_sp" value="0" style="display: none;" />
+        <h3>Advice on... ?</h3>
+        <ul class="specialities"></ul>
+      </div>
     </div>
-    <!-- END FILTERS -->
 
     <!-- RESULTS -->
     <div class="results" id="results">
@@ -102,52 +92,4 @@ function sendMessage(){
     alert('You can not send the blank message');
   }
 }
-
-
-$(document).ready(function() {
-    // Do not hide specialities selector if one is selected 
-    // and filter results 
-    <% unless @selected_sp_str.present? %>
-      $('#specialities_container').hide();
-    <% end %>
-
-    <%# <% if @selected_state_str.present? || @selected_pa_str.present? %1> %>
-    <%#   filterResults(); %>
-    <%# <% end %1> %>
-
-    $('#select_pa').change(function() {
-      if($("#select_pa").val() != 0){
-        $.ajax({url: '/search/populate_specialities',
-          data: 'pid=' + $("#select_pa").val(),
-          success: function(data)
-          {
-            $("#specialities_container").html(data);
-            $('#specialities_container').show();
-            filterResults();
-          }});
-        }
-        else
-        {
-          $('#specialities_container').hide();
-          filterResults();
-        }
-
-    });
-  });
-
-  var filterResults = function(){
-    $.ajax({
-      url: 'search/filter_results',
-      data: {state:$("#select_state").val(),pa:$("#select_pa").val(), sp:$("#select_sp").val()},
-      success: function(data){
-        $('#results').html(data);
-      }
-    });
-  }
-
-  $("#select_state").change(function(){
-    filterResults();
-  });
-
 </script>
-
