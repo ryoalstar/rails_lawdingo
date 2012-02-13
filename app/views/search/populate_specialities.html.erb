@@ -1,5 +1,5 @@
 <% unless @practice_area_specialities.blank? %>
-  <li class="practice_area selected">
+  <li class="practice_area selected" data-id="0">
     <%= link_to "General #{@practice_area.name}" %>
   </li>
   <% @practice_area_specialities.each do |spec| %>

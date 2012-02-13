@@ -20,7 +20,7 @@
         <input type="text" name="select_pa" id="select_pa" value="0" style="display: none;" />
         <h3>Type of lawyer?</h3>
         <ul class="areas">
-          <li class="practice_area selected">
+          <li class="practice_area selected" data-id="0">
             <%= link_to "All types", "#all-types" %>
           </li>
         <% PracticeArea.parent_practice_areas.order(:name).each do |area| %>
