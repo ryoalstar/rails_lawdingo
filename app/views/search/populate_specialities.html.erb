@@ -4,7 +4,7 @@
   </li>
   <% @practice_area_specialities.each do |spec| %>
     <%= content_tag_for :li, spec, data: { id: spec.id } do %>
-      <% link_to spec.name, "##{spec.name.parameterize}" %>
+      <% link_to spec.name, "#" %>
     <% end %>
   <% end %>
 <% end %>

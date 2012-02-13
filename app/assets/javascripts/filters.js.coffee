@@ -2,6 +2,16 @@ jQuery ->
   # Filter by state
   ($ "#select_state").change -> refreshResults()
 
+  # Filter by type
+  ($ "#types_filter li a").click (event) ->
+    event.preventDefault()
+    li = ($ this).parent("li")
+
+    ($ "input#select_type").attr "value", li.data("type")
+
+    markSelected(li)
+    refreshResults()
+
   # Filter by specialities
   ($ "#specialities_filter li.practice_area a").live "click", (event) ->
     event.preventDefault()
@@ -48,6 +58,7 @@ refreshResults = ->
       state: ($ "#select_state").val()
       pa: ($ "input#select_pa").val()
       sp: ($ "input#select_sp").val()
+      type: ($ "input#select_type").val()
     success: (data) -> ($ "#results").html(data)
   )
     
