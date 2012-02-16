@@ -43,7 +43,7 @@ class SearchController < ApplicationController
       end
       render action: "filter_lawyer_results", layout: false 
     elsif type == "offering"
-      unless [41, 43].include?(pa_id.to_i)
+      unless [41, 43].include?(pa_id.to_i) and PracticeArea.find(pa_id).offerings.any?
         @offerings = []
         @state_lawyers.each do |lawyer|
           if lawyer.offerings.any?
