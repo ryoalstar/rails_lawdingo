@@ -9,7 +9,9 @@ jQuery ->
 
     ($ "input#select_type").attr "value", li.data("type")
 
-    ($ "#specialities_filter").hide()
+    if li.data("type") is "offering" then ($ "#specialities_filter").hide()
+    else ($ "#specialities_filter").show()
+
     markSelected(li)
     refreshResults()
 

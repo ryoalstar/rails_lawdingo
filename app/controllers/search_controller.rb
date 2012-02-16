@@ -43,13 +43,17 @@ class SearchController < ApplicationController
       end
       render action: "filter_lawyer_results", layout: false 
     elsif type == "offering"
-      @offerings = []
-      @state_lawyers.each do |lawyer|
-        if lawyer.offerings.any?
-          lawyer.offerings.each do |offering|
-            @offerings << offering
+      unless [41, 43].include?(pa_id.to_i)
+        @offerings = []
+        @state_lawyers.each do |lawyer|
+          if lawyer.offerings.any?
+            lawyer.offerings.each do |offering|
+              @offerings << offering
+            end
           end
         end
+      else
+        @offerings = PracticeArea.find(pa_id).offerings
       end
       render action: "filter_offering_results", layout: false
     end
