@@ -1,4 +1,21 @@
 module LawyersHelper
+  def selected_offerings_caption
+    # Offerings
+    if @offerings.present?
+      offerings_count  = @offerings.count.to_s
+      offerings_str = @offerings.count > 1 ? "services" : "service"
+      offerings_verb = @offerings.count > 1 ? "are" : "is"
+    end
+
+    # Check if the practice area is selected for 
+    # filtering offers
+    if @offerings_practice_area.present?
+      "There #{offerings_verb} #{offerings_count} #{offerings_str} relating to <strong>#{@offerings_practice_area.name.downcase}</strong> that may be of interest to you.".html_safe
+    else
+      "There #{offerings_verb} #{offerings_count} #{offerings_str} that may be of interest to you."
+    end
+  end
+
   def selected_lawyers_caption
     state = ""
     area = ""

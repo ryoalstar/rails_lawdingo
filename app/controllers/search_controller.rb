@@ -53,7 +53,8 @@ class SearchController < ApplicationController
           end
         end
       else
-        @offerings = PracticeArea.find(pa_id).offerings
+        @offerings_practice_area = PracticeArea.find(pa_id)
+        @offerings = @offerings_practice_area.offerings
       end
       render action: "filter_offering_results", layout: false
     end
