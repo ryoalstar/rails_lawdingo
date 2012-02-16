@@ -9,6 +9,7 @@ jQuery ->
 
     ($ "input#select_type").attr "value", li.data("type")
 
+    ($ "#specialities_filter").hide()
     markSelected(li)
     refreshResults()
 
@@ -27,7 +28,10 @@ jQuery ->
     li = ($ this).parent("li")
 
     # Show specialities list unless Any type is selected
-    toggleSpecialitiesList(li.data("id"))
+    if ($ "input#select_type").val() is "lawyer"
+      toggleSpecialitiesList(li.data("id"))
+    else
+      ($ "#specialities_filter").hide()
 
     ($ "input#select_pa").attr "value", li.data("id")
     ($ "input#select_sp").attr "value", 0 # reset speciality to General
@@ -44,6 +48,7 @@ toggleSpecialitiesList = (value) ->
         ($ "#specialities_filter ul").html(data)
         ($ "#specialities_filter").show()
     )
+    ($ "#specialities_filter").show()
   else
     ($ "#specialities_filter").hide()
 
