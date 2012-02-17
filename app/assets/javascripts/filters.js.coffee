@@ -10,8 +10,10 @@ jQuery ->
     ($ "input#select_type").attr "value", li.data("type")
 
     if li.data("type") is "offering" then ($ "#specialities_filter").hide()
-    else ($ "#specialities_filter").show()
-
+    else
+      console.log "lawyer type!"
+      toggleSpecialitiesList $("input#select_pa").val()
+    
     markSelected(li)
     refreshResults()
 
@@ -42,7 +44,7 @@ jQuery ->
     refreshResults()
 
 toggleSpecialitiesList = (value) ->
-  if value != 0
+  if parseInt(value) != 0
     $.ajax(
       url: "search/populate_specialities"
       data: "pid=#{value}"
