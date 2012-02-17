@@ -11,7 +11,7 @@
         <ul>
           <% @lawyer.offerings.each do |offering| %>
             <%= content_tag_for :li, offering do %>
-              <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id.to_i %>
+              <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id.to_i unless offering.id.to_i == 0 %>
             <% end %>
           <% end %>
         </ul>
