@@ -3,8 +3,7 @@ jQuery ->
   ($ "#select_state").change -> refreshResults()
 
   # Filter by type
-  ($ "#types_filter li a").click (event) ->
-    event.preventDefault()
+  ($ "#types_filter li input[type='radio']").change ->
     li = ($ this).parent("li")
 
     ($ "input#select_type").attr "value", li.data("type")
@@ -18,8 +17,7 @@ jQuery ->
     refreshResults()
 
   # Filter by specialities
-  ($ "#specialities_filter li.practice_area a").live "click", (event) ->
-    event.preventDefault()
+  ($ "#specialities_filter li.practice_area input[type='radio']").live "change", ->
     li = ($ this).parent("li")
 
     ($ "input#select_sp").attr "value", li.data("id")
@@ -27,8 +25,7 @@ jQuery ->
     refreshResults()
 
   # Filter by practice areas
-  ($ "#areas_filter li.practice_area a").click (event) ->
-    event.preventDefault()
+  ($ "#areas_filter li.practice_area input[type='radio']").change ->
     li = ($ this).parent("li")
 
     # Show specialities list unless Any type is selected
@@ -57,6 +54,7 @@ toggleSpecialitiesList = (value) ->
     ($ "#specialities_filter").hide()
 
 markSelected = (item) ->
+  item.siblings().children("input").removeAttr "checked"
   item.siblings().removeClass "selected"
   item.addClass "selected"
 

@@ -12,37 +12,45 @@
   <div class="inline-wrapper clearfix">
     <div class="filters">
       <div class="input">
-        <label for="select_state">Where are ya?</label>
+        <label for="select_state" style="color: #ff9933; font-weight: bold;">Your state:</label>
         <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
+      </div>
+      
+      <div class="filters-section" id="types_filter">
+        <input type="text" name="select_type" id="select_type" value="lawyer" style="display: none;" />
+        <h3>Looking for:</h3>
+        <ul>
+          <li class="selected" data-type="lawyer">
+            <%= radio_button_tag "lawyer", "0", class: "selected" %>
+            <label for="lawyer_0">Legal advice</label>
+          </li>
+          <li data-type="offering">
+            <%= radio_button_tag "offering", "0" %>
+            <label for="offering_0">Fixed-price legal service</label>
+          </li>
+        </ul>
       </div>
 
       <div class="filters-section" id="areas_filter">
         <input type="text" name="select_pa" id="select_pa" value="0" style="display: none;" />
-        <h3>Type of lawyer?</h3>
+        <h3>Legal domain:<h3>
         <ul class="areas">
           <li class="practice_area selected" data-id="0">
-            <%= link_to "All types", "#" %>
+            <%= radio_button_tag "all-types", "0", class: "selected" %>
+            <label for="all-types_0">All types</label>
           </li>
         <% PracticeArea.parent_practice_areas.order(:name).each do |area| %>
           <%= content_tag_for :li, area, data: { id: area.id } do %>
-            <%= link_to area.name, "#" %>
+            <%= radio_button_tag "area-#{area.id}", "#{area.id}", false, id: "area_#{area.id.to_i}" %> 
+            <%= label_tag "area_#{area.id}", "#{area.name}" %>
           <% end %>
         <% end %>
         </ul>
       </div>
 
-      <div class="filters-section" id="types_filter">
-        <input type="text" name="select_type" id="select_type" value="lawyer" style="display: none;" />
-        <h3>I need:</h3>
-        <ul>
-          <li class="selected" data-type="lawyer"><%= link_to "Legal advice", "#" %></li>
-          <li data-type="offering"><%= link_to "A legal service", "#" %></li>
-        </ul>
-      </div>
-
       <div class="filters-section" style="display: none;" id="specialities_filter">
         <input type="text" name="select_sp" id="select_sp" value="0" style="display: none;" />
-        <h3>Advice on... ?</h3>
+        <h3>Specific need:</h3>
         <ul class="specialities"></ul>
       </div>
     </div>
