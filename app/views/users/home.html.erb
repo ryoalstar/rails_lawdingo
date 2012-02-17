@@ -13,7 +13,7 @@
     <div class="filters">
       <div class="input">
         <label for="select_state" style="color: #ff9933; font-weight: bold;">Your state:</label>
-        <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str)) %>
+        <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str), style: "margin-left: 5px;") %>
       </div>
       
       <div class="filters-section" id="types_filter">
