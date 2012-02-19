@@ -27,9 +27,9 @@
 
       <%= simple_form_for [@lawyer, @offering] do |f| %>
         <%= f.association :offering_type, label: "Type of fixed-price offer:", include_blank: false %>
-        <%= f.input :name, label: "Name of fixed-price offer:" %>
-        <%= f.input :description, label: "What specifically will you do and deliver?", hint: "e.g. \"Contract review — up to 3 pages\".".html_safe %>
-        <%= f.input :fee, label: "Fee typically charged", hint: "The typical ammount you charge for this.", as: :string, input_html: { value: "" } %>
+        <%= f.input :name, label: "Name of fixed-price offer:", hint: "e.g. \"Contract review — up to 3 pages\".".html_safe%>
+        <%= f.input :description, label: "What specifically will you do and deliver?" %>
+        <%= f.input :fee, label: "Fee typically charged:", hint: "The typical amount you charge for this.", as: :currency, input_html: { value: "" } %>
         <%= f.submit "Add fixed-fee offering", class: "button", style: "font-size: 1.0833em;" %>
       <% end %>
     </div>

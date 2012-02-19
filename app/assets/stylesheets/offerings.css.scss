@@ -66,12 +66,17 @@ body.offerings {
     padding-left: 1.4em;
   }
 
+  input#offering_fee {
+    width: 60px; 
+  }
+
   .simple_form {
     .input {
       position: relative;
       min-width: 400px;
 
       &.string input,
+      &.currency input,
       &.text textarea {
         width: 300px;
         font-family: arial, verdana, tahoma;
@@ -98,10 +103,6 @@ body.offerings {
       font-weight: bold;
       display: block;
       word-spacing: nowrap;
-
-      &:after {
-        content: ':'
-      }
     }
 
     .input {
