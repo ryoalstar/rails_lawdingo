@@ -16,16 +16,20 @@
           <% end %>
         </ul>
       <% else %>
-        <p>None created yet.</p>
+        <p style="color: #999;">[none inputted yet]</p>
       <% end %>
     </div>
     <div id="new_offering">
-      <h3>Add a fixed-fee offer:</h3>
+      <h3>
+        Add a fixed-fee offer:
+        <small>If there are common projects you routinely take on, describe them here.</small>
+      </h3>
+
       <%= simple_form_for [@lawyer, @offering] do |f| %>
-        <%= f.association :offering_type, label: "Type of fixed-price offering", include_blank: false %>
-        <%= f.input :name, label: "Name of fixed-price job" %>
-        <%= f.input :description, label: "Description of what specifically is involved and deliverable" %>
-        <%= f.input :fee, label: "Fixed fee charged for this", as: :string, input_html: { value: "" } %>
+        <%= f.association :offering_type, label: "Type of fixed-price offer:", include_blank: false %>
+        <%= f.input :name, label: "Name of fixed-price offer:" %>
+        <%= f.input :description, label: "What specifically will you do and deliver?", hint: "e.g. \"Contract review — up to 3 pages\".".html_safe %>
+        <%= f.input :fee, label: "Fee typically charged", hint: "The typical ammount you charge for this.", as: :string, input_html: { value: "" } %>
         <%= f.submit "Add fixed-fee offering", class: "button", style: "font-size: 1.0833em;" %>
       <% end %>
     </div>
