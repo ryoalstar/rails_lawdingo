@@ -4,6 +4,10 @@ class OfferingsController < ApplicationController
     @offering = @lawyer.offerings.new
   end
 
+  def show
+    @offering = Offering.find(params[:id])
+  end
+
   def create
     @lawyer = User.find(params[:user_id])
     @offering = @lawyer.offerings.new(params[:offering])
