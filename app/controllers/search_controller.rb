@@ -72,7 +72,13 @@ class SearchController < ApplicationController
         @offerings_practice_area = PracticeArea.find(pa_id)
 
         if @offerings_practice_area.present?
-          @offerings = @offerings_practice_area.offerings
+          @offerings = []
+
+          @offerings_practice_area.offerings.each do |offering|
+            if offering.lawyer.is_approved
+              @offerings << offering
+            end
+          end
         else
           @offerings = []
         end
