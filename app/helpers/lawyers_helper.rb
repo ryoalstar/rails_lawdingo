@@ -7,7 +7,7 @@ module LawyersHelper
       offerings_verb = @offerings.count > 1 ? "are" : "is"
     end
 
-    # Check if the practice area is selected for 
+    # Check if the practice area is selected for
     # filtering offers
     if @offerings_practice_area.present?
       "There #{offerings_verb} #{offerings_count} #{offerings_str} relating to <strong>#{@offerings_practice_area.name.downcase}</strong> that may be of interest to you.".html_safe
@@ -92,7 +92,7 @@ module LawyersHelper
   end
 
   def start_or_schedule_button(lawyer)
-    if lawyer.is_online? && !lawyer.is_busy
+    if lawyer.is_online && !lawyer.is_busy
       if logged_in?
         link_to "start video consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => 'button gray'
       else
@@ -130,9 +130,9 @@ module LawyersHelper
  end
 
  def status_message(lawyer)
-   if lawyer.is_online?
+   if lawyer.is_online
      "online now"
-   elsif lawyer.phone.present?
+ elsif lawyer.phone.present?
      "available by phone now"
    end
  end

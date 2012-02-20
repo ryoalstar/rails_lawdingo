@@ -6,7 +6,8 @@ class Util
       i = 0
       lawyers.each {|lawyer|
         status = (Time.now - lawyer.last_online.to_time)/60 < 2 ? true : false
-        lawyer.update_attribute(:is_online, status)
+        update_status = lawyer.update_attribute(:is_online, status)
+        puts "id: #{lawyer.id} status: #{status} update_status: #{update_status}"
         if !status && lawyer.is_busy?
           lawyer.update_attribute(:is_busy, false)
         end
