@@ -15,7 +15,7 @@
                 <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id %>
                 <div class="controls">
                   <%= link_to "Edit", { controller: "offerings", action: "edit", id: offering.id }, class: "edit" %>
-                  <%= link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", class: "delete" %>
+                  <%= link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", confirm: "Are you sure?", class: "delete" %>
                 </div>
               <% end %>
             <% end %>
