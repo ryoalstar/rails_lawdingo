@@ -2,6 +2,7 @@ class OfferingsController < ApplicationController
   def index
     @lawyer = User.find(params[:user_id])
     @offering = @lawyer.offerings.new
+    @offering.fee = ""
   end
 
   def show
