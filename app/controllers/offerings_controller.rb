@@ -19,6 +19,29 @@ class OfferingsController < ApplicationController
     end
   end
 
+  def edit
+    @offering = Offering.find(params[:id])
+    
+    render layout: false
+  end
+
+  def update
+    @offering = Offering.find(params[:id])
+    
+    if @offering.update_attributes(params[:offering])
+      redirect_to user_offerings_path(@offering.user)
+    else
+      redirect_to user_offerings_path(@offering.user), notice: "Error in updating an offering"
+    end
+  end
+
+  def destroy
+    @offering = Offering.find(params[:id])
+    @offering.destroy
+
+    redirect_to user_offerings_path(@offering.user)
+  end
+
   private
 
     def ensure_self_account

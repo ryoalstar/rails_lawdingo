@@ -8,10 +8,16 @@
     <div id="offerings">
       <h3>My fixed-fee offerings:</h3>
       <% if @lawyer.offerings.any? %>
-        <ul>
+        <ul class="offerings-list">
           <% @lawyer.offerings.each do |offering| %>
-            <%= content_tag_for :li, offering do %>
-              <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id.to_i unless offering.id.to_i == 0 %>
+            <% unless offering.id.to_i == 0 %>
+              <%= content_tag_for :li, offering, data: {id: offering.id} do %>
+                <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id %>
+                <div class="controls">
+                  <%= link_to "Edit", { controller: "offerings", action: "edit", id: offering.id }, class: "edit" %>
+                  <%= link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", class: "delete" %>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
         </ul>
@@ -20,18 +26,7 @@
       <% end %>
     </div>
     <div id="new_offering">
-      <h3>
-        Add a fixed-fee offer:
-        <small>If there are common projects you routinely take on, describe them here.</small>
-      </h3>
-
-      <%= simple_form_for [@lawyer, @offering] do |f| %>
-        <%= f.association :offering_type, label: "Type of fixed-price offer:", include_blank: false %>
-        <%= f.input :name, label: "Name of fixed-price offer:", hint: "e.g. \"Contract review — up to 3 pages\".".html_safe%>
-        <%= f.input :description, label: "What specifically will you do and deliver?" %>
-        <%= f.input :fee, label: "Fee typically charged:", hint: "The typical amount you charge for this.", as: :currency, input_html: { value: "" } %>
-        <%= f.submit "Add fixed-fee offering", class: "button", style: "font-size: 1.0833em;" %>
-      <% end %>
+      <%= render template: "offerings/new" %>
     </div>
   </div>
 </div>

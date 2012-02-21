@@ -114,3 +114,33 @@ body.offerings {
     }
   }
 }
+
+ul.offerings-list {
+  li {
+    display: block;
+    position: relative;
+    margin: 0 0 0.75em 0; 
+    width: 100%;
+    padding: 4px;
+
+    &.selected {
+      a {
+        color: #222 !important;
+      }
+    }
+
+    .controls {
+      display: inline-block;
+      margin-left: 1em;
+      font-size: 0.75em;
+
+      a {
+        color: #222;
+        background-color: #F7EEC6;
+        padding: 1px 3px;
+        border-radius: 3px;
+        margin-right: 0.5em;
+      }
+    }
+  }
+}
