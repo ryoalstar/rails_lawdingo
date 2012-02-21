@@ -21,3 +21,5 @@ jQuery ->
       success: (data) -> ($ "div#new_offering").html(data)
     )
 
+    # Highlight new form
+    ($ "div#new_offering").effect("highlight", {}, 1000)
