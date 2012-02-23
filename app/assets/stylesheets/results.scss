@@ -131,28 +131,29 @@
   font-size: 1.5em;
 
   h3 {
+    color: #ff9933;
     font-size: 1em;
-    font-weight: normal;
+    font-weight: bold;
     margin: 0 0 0.5em 0;
   }
 
   li {
     line-height: 1.5;
 
-    &.selected {
-      font-weight: bold;
-      &:before {
-        content: "> ";
-      }
-      
-      a {
-        color: black;
-        text-decoration: none;
+    input[type="radio"] {
+      margin: 0 0 0 10px;
+    }
 
-        &:hover {
-          color: black;
-        }
-      }
+    label {
+      font-weight: normal;
+      color: #2491ff;
+    }
+
+    &.selected {
+      label {
+        font-weight: bold;
+        color: black;
+      } 
     }
   }
 }

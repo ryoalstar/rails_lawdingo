@@ -3,31 +3,30 @@
     <div style="font-size: 14px; margin: 0 8px 10px 0; font-weight: bold;">
       <%= link_to_unless_current "Account information", user_path(@lawyer, :t =>User::ACCOUNT_TAB) %> |
       <%= link_to_unless_current "Summary of sessions", user_path(@lawyer, :t =>User::SESSION_TAB) %> |
-      <%= link_to_unless_current "Fixed-price offerings", user_offerings_path(@lawyer) %>
+      <%= link_to_unless_current "Fixed-price offers", user_offerings_path(@lawyer) %>
     </div>
     <div id="offerings">
-      <h3>My fixed-fee offerings:</h3>
+      <h3>My fixed-price offers:</h3>
       <% if @lawyer.offerings.any? %>
-        <ul>
+        <ul class="offerings-list">
           <% @lawyer.offerings.each do |offering| %>
-            <%= content_tag_for :li, offering do %>
-              <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id.to_i %>
+            <% unless offering.id.to_i == 0 %>
+              <%= content_tag_for :li, offering, data: {id: offering.id} do %>
+                <%= link_to offering.name, controller: "offerings", action: "show", id: offering.id %>
+                <div class="controls">
+                  <%= link_to "Edit", { controller: "offerings", action: "edit", id: offering.id }, class: "edit" %>
+                  <%= link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", confirm: "Are you sure?", class: "delete" %>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
         </ul>
       <% else %>
-        <p>None created yet.</p>
+        <p style="color: #999;">[none inputted yet]</p>
       <% end %>
     </div>
     <div id="new_offering">
-      <h3>Add a fixed-fee offer:</h3>
-      <%= simple_form_for [@lawyer, @offering] do |f| %>
-        <%= f.association :offering_type, label: "Type of fixed-price offering", include_blank: false %>
-        <%= f.input :name, label: "Name of fixed-price job" %>
-        <%= f.input :description, label: "Description of what specifically is involved and deliverable" %>
-        <%= f.input :fee, label: "Fixed fee charged for this", as: :string, input_html: { value: "" } %>
-        <%= f.submit "Add fixed-fee offering", class: "button", style: "font-size: 1.0833em;" %>
-      <% end %>
+      <%= render template: "offerings/new" %>
     </div>
   </div>
 </div>

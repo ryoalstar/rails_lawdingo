@@ -3,18 +3,21 @@ jQuery ->
   ($ "#select_state").change -> refreshResults()
 
   # Filter by type
-  ($ "#types_filter li a").click (event) ->
-    event.preventDefault()
+  ($ "#types_filter li input[type='radio']").change ->
     li = ($ this).parent("li")
 
     ($ "input#select_type").attr "value", li.data("type")
 
+    if li.data("type") is "offering" then ($ "#specialities_filter").hide()
+    else
+      console.log "lawyer type!"
+      toggleSpecialitiesList $("input#select_pa").val()
+    
     markSelected(li)
     refreshResults()
 
   # Filter by specialities
-  ($ "#specialities_filter li.practice_area a").live "click", (event) ->
-    event.preventDefault()
+  ($ "#specialities_filter li.practice_area input[type='radio']").live "change", ->
     li = ($ this).parent("li")
 
     ($ "input#select_sp").attr "value", li.data("id")
@@ -22,12 +25,14 @@ jQuery ->
     refreshResults()
 
   # Filter by practice areas
-  ($ "#areas_filter li.practice_area a").click (event) ->
-    event.preventDefault()
+  ($ "#areas_filter li.practice_area input[type='radio']").change ->
     li = ($ this).parent("li")
 
     # Show specialities list unless Any type is selected
-    toggleSpecialitiesList(li.data("id"))
+    if ($ "input#select_type").val() is "lawyer"
+      toggleSpecialitiesList(li.data("id"))
+    else
+      ($ "#specialities_filter").hide()
 
     ($ "input#select_pa").attr "value", li.data("id")
     ($ "input#select_sp").attr "value", 0 # reset speciality to General
@@ -36,7 +41,7 @@ jQuery ->
     refreshResults()
 
 toggleSpecialitiesList = (value) ->
-  if value != 0
+  if parseInt(value) != 0
     $.ajax(
       url: "search/populate_specialities"
       data: "pid=#{value}"
@@ -44,10 +49,12 @@ toggleSpecialitiesList = (value) ->
         ($ "#specialities_filter ul").html(data)
         ($ "#specialities_filter").show()
     )
+    ($ "#specialities_filter").show()
   else
     ($ "#specialities_filter").hide()
 
 markSelected = (item) ->
+  item.siblings().children("input").removeAttr "checked"
   item.siblings().removeClass "selected"
   item.addClass "selected"
 

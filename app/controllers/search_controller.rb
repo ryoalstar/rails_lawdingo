@@ -43,14 +43,47 @@ class SearchController < ApplicationController
       end
       render action: "filter_lawyer_results", layout: false 
     elsif type == "offering"
-      @offerings = []
-      @state_lawyers.each do |lawyer|
-        if lawyer.offerings.any?
-          lawyer.offerings.each do |offering|
-            @offerings << offering
+      # unless [41, 43].include?(pa_id.to_i) and PracticeArea.find(pa_id).offerings.any?
+      #   @offerings = []
+      #   @state_lawyers.each do |lawyer|
+      #     if lawyer.offerings.any?
+      #       lawyer.offerings.each do |offering|
+      #         @offerings << offering
+      #       end
+      #     end
+      #   end
+      # else
+      #   @offerings_practice_area = PracticeArea.find(pa_id)
+      #   @offerings = @offerings_practice_area.offerings
+      # end
+
+      # If all types selected show all fixed-price offers
+      if pa_id == 0
+        @offerings = []
+        @state_lawyers.each do |lawyer|
+          if lawyer.offerings.any?
+            lawyer.offerings.each do |offering|
+              @offerings << offering
+            end
           end
         end
+      # unless show offers related to the selected area
+      else
+        @offerings_practice_area = PracticeArea.find(pa_id)
+
+        if @offerings_practice_area.present?
+          @offerings = []
+
+          @offerings_practice_area.offerings.each do |offering|
+            if offering.lawyer.is_approved
+              @offerings << offering
+            end
+          end
+        else
+          @offerings = []
+        end
       end
+
       render action: "filter_offering_results", layout: false
     end
   end

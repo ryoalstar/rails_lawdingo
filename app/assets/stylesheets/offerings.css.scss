@@ -26,6 +26,19 @@ div.offering {
 }
 
 body.offerings {
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 0.5em 0;
+    line-height: 1;
+
+    &>small {
+      font-size: 12px;
+      display: inline-block;
+      font-weight: normal;
+    }
+  }
+
   .offerings > div:first-child {
     padding: 30px 60px;
     font-size: 1.4em;
@@ -50,12 +63,20 @@ body.offerings {
   div#new_offering {
     overflow: hidden;
     border-left: 2px solid #888;
-    padding-left: 1.4em;
+    padding: 5px 5px 5px 1.4em;
+  }
+
+  input#offering_fee {
+    width: 60px; 
   }
 
   .simple_form {
     .input {
+      position: relative;
+      min-width: 400px;
+
       &.string input,
+      &.currency input,
       &.text textarea {
         width: 300px;
         font-family: arial, verdana, tahoma;
@@ -70,15 +91,18 @@ body.offerings {
       &.text {
         width: 400px;
       }
+
+      .hint {
+        display: inline-block;
+        width: 100%;
+        font-size: 12px;
+      }
     }
 
     label {
+      font-weight: bold;
       display: block;
       word-spacing: nowrap;
-
-      &:after {
-        content: ':'
-      }
     }
 
     .input {
@@ -87,6 +111,36 @@ body.offerings {
 
     textarea#offering_description {
       height: 60px;
+    }
+  }
+}
+
+ul.offerings-list {
+  li {
+    display: block;
+    position: relative;
+    margin: 0 0 0.75em 0; 
+    width: 100%;
+    padding: 4px;
+
+    &.selected {
+      a {
+        color: #222 !important;
+      }
+    }
+
+    .controls {
+      display: inline-block;
+      margin-left: 1em;
+      font-size: 0.75em;
+
+      a {
+        color: #222;
+        background-color: #F7EEC6;
+        padding: 1px 3px;
+        border-radius: 3px;
+        margin-right: 0.5em;
+      }
     }
   }
 }

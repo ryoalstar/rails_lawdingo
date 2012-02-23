@@ -1,7 +1,7 @@
 <div class="row offering" id="offering_<%= offering.id %>">
   <%= hidden_field(:current, :lid) %>
     <div class="action">
-      <div class="free"><%= "#{number_to_currency(offering.fee, precision: 0)} flat free" %></div>
+      <div class="free"><%= "#{number_to_currency(offering.fee, precision: 0)} flat fee" %></div>
       <div class="price">free consultation</div>
     </div>
 
