@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     if current_user and current_user.is_lawyer?
       redirect_to users_path(:t=>'l')
     end
-  
+
     @title = AppParameter.find(2).value || "Free legal advice."
   end
 
@@ -328,7 +328,7 @@ class UsersController < ApplicationController
       @call = @client.account.calls.create(
         :From => TWILIO_FROM,
         :To => @lawyer.phone,
-        :Url => twilio_voice_url(:cn => params[:client_number], :free_duration => @lawyer.free_consultation_duration),
+        :Url => twilio_voice_url(:cn => params[:client_number], :free_duration => @lawyer.free_consultation_duration, :lrate => @lawyer.rate),
         :FallBackUrl => twilio_fallback_url,
         :StatusCallback => twilio_callback_url,
       )
