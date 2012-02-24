@@ -44,11 +44,7 @@
                     Lawyers: <%= link_to "Apply Here", new_lawyer_path %>
                   <% end %>
                 </div>
-                <% if current_user && current_user.is_lawyer? %>
-                  <%= link_to image_tag("logo.png", :alt => 'Lawdingo'), user_path(current_user, :t=>'l'), :title=>'Home', :class => 'home-link' %>
-                <% else %>
-                  <%= link_to image_tag("logo.png", :alt => 'Lawdingo'), root_path, :title=>'Home', :class => 'home-link' %>
-                <% end %>
+                <%= logo_url %>
             </div>
         </div>
         <!-- END HEADER -->

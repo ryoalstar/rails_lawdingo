@@ -33,5 +33,17 @@ module ApplicationHelper
     end
   end
 
+  def logo_url
+    if current_user
+      if current_user.is_lawyer?
+        link_to image_tag("logo.png", :alt => 'Lawdingo'), user_path(current_user, :t=>'l'), :title=>'Home', :class => 'home-link'
+      else
+        link_to image_tag("logo.png", :alt => 'Lawdingo'), lawyers_path, :title=>'Home', :class => 'home-link'
+      end
+    else
+      link_to image_tag("logo.png", :alt => 'Lawdingo'), root_path, :title=>'Home', :class => 'home-link'
+    end
+  end
+
 end
 

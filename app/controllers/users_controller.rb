@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
+  before_filter :current_user_home, :only => [:landing_page]
 
   #REMINDER: uncomment only in production
   #before_filter :force_ssl, :only => ['payment_info']
@@ -79,10 +80,6 @@ class UsersController < ApplicationController
   end
 
   def landing_page
-    if current_user and current_user.is_lawyer?
-      redirect_to users_path(:t=>'l')
-    end
-
     @title = AppParameter.find(2).value || "Free legal advice."
   end
 
@@ -473,6 +470,16 @@ class UsersController < ApplicationController
 
 
   private
+
+  def current_user_home
+    if current_user
+      if current_user.is_lawyer?
+        redirect_to users_path(:t=>'l')
+      else
+        redirect_to lawyers_path
+      end
+    end
+  end
 
   def ensure_self_account
     return false unless logged_in?
