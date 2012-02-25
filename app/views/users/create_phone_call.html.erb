@@ -10,8 +10,8 @@
       <input type='button' value="End call" onclick="hangupCall('<%= 0 %>');return false;" class="button gray" />
     </div>
   </div>
-  
-  <div id="connected_free_time_div" class="details"> 
+
+  <div id="connected_free_time_div" class="details">
     <%= image_tag(@lawyer.photo.url(:thumb), class: "userpic") %>
     <div class="info">
       <h2><%= @lawyer.full_name %></h2>
@@ -81,7 +81,7 @@
     $.ajax({
         url: "/twilio/endcall",
         type:'get',
-        data:{call_id: call_sid},
+        data:{call_id: '<%= @call.sid %>'},
         success: function(response){
         }
     });
