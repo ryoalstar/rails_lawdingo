@@ -16,6 +16,7 @@
     <div class="info">
       <h2><%= @lawyer.full_name %></h2>
       <p id="call_status_span" class="strong">Call connected</p>
+      <p id="count_up_timer">Total Time: <span id="count_up_time_span">0:00</span></p>
       <p id="free_text_span">Free time remaining: <span id="time_span">5:00</span>.</p>
       <p>Rate: <%= number_to_currency @lawyer.rate + AppParameter.service_charge_value %>/min.</p>
       <p>Billed time: <span id="billed_time_span">0 minutes</span>.</p>
@@ -69,10 +70,22 @@
       $('#billed_time_span').html(timeString);
     });
 
+    incrementCounter = 0;
+    var countUpTimer = $.timer(function() {
+      ++incrementCounter;
+      seconds = incrementCounter%60;
+      minutes = parseInt(incrementCounter/60);
+      minutesString = (minutes.toString().length > 1) ? minutes.toString() : '0'+minutes.toString();
+      secondsString = (seconds.toString().length > 1) ? seconds.toString() : '0'+seconds.toString();
+      timeString = minutesString + ":" + secondsString;
+      $('#count_up_time_span').html(timeString);
+    });
+
   $(document).ready(function(){
         $('#connected_free_time_div').hide();
         callStatusTimer.set({ time : 1000, autostart : true });
         freeCallTimer.set({ time : 1000, autostart : false });
+        countUpTimer.set({ time : 1000, autostart : false });
         billingCallTimer.set({ time : 1000, autostart : false });
       });
 
