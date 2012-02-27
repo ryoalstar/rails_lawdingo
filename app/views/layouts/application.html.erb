@@ -61,12 +61,12 @@
 <strong><a href="javascript:if(confirm('Are you sure?')){closecall();};" >Close</a></strong>
 	 <div id="flash_div">
     <object id="mySwf" name="mySwf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="960" height="410">
-        <param name='movie' value="/swf/videochat.swf"/>
+        <param name='movie' value="/swf/lvchat.swf"/>
         <param name='FlashVars' value="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&http_type=https://&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>"/>
         <param name="allowScriptAccess" value="always" />
         <param name="wmode" value="transparent" />
         <!--[if !IE]>-->
-        <object type="application/x-shockwave-flash" data="/swf/videochat.swf" allowScriptAccess='always' wmode='transparent' width="960" height="410" FlashVars="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&http_type=https://&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>">
+        <object type="application/x-shockwave-flash" data="/swf/lvchat.swf" allowScriptAccess='always' wmode='transparent' width="960" height="410" FlashVars="user_id=<%= user.id %>&user=<%= full_name %>&uemail=<%= user.email %>&lawyer_id=<%= user.id %>&lawyer=<%= full_name %>&lemail=<%= user.email %>&http_type=https://&hosturl=<%= request.env['HTTP_HOST'] %>&imgsrc=/images/phone.jpg&lrate=<%= user.rate %>&crate=<%= AppParameter.service_charge_value %>">
         <!--<![endif]-->
           <p style="text-align:center;"><a href="http://www.adobe.com/go/getflashplayer" class="button">Upgrade to Flash Player 11</a></p>
         <!--[if !IE]>-->
