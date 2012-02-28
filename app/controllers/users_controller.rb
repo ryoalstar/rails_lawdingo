@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def landing_page
-    @title = AppParameter.find(2).value || "Free legal advice."
+    #@title = AppParameter.find(2).value || "Free legal advice."
   end
 
   def show
