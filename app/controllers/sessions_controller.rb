@@ -36,19 +36,5 @@ class SessionsController < ApplicationController
 
   private
 
-  def login_in_user user
-    user.update_attributes(:is_online => true, :last_login => Time.now, :last_online => Time.now)
-    session[:user_id] = user.id
-  end
-
-  def logout_user
-    current_user.update_attributes(:is_online =>false, :is_busy =>false, :peer_id =>'0', :last_online => Time.now)
-    session[:user_id] = nil
-  end
-
-  def reset_user_session user
-    user.update_attributes(:is_online =>false, :is_busy =>false, :peer_id =>'0')
-  end
-
 end
 

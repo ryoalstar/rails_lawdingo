@@ -147,7 +147,9 @@ class UsersController < ApplicationController
           }
         end
         UserMailer.notify_lawyer_application(@user).deliver
-        redirect_to welcome_path and return
+        #redirect_to welcome_path and return
+        login_in_user(@user)
+        redirect_to user_offerings_path(@user, :ft => true) and return
       elsif @user.is_client?
         session[:user_id] = @user.id
         #redirect_to :action => :payment_info

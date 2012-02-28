@@ -25,6 +25,20 @@ class ApplicationController < ActionController::Base
     #logged_in? ? true : access_denied
   end
 
+  def login_in_user user
+    user.update_attributes(:is_online => true, :last_login => Time.now, :last_online => Time.now)
+    session[:user_id] = user.id
+  end
+
+  def logout_user
+    current_user.update_attributes(:is_online =>false, :is_busy =>false, :peer_id =>'0', :last_online => Time.now)
+    session[:user_id] = nil
+  end
+
+  def reset_user_session user
+    user.update_attributes(:is_online =>false, :is_busy =>false, :peer_id =>'0')
+  end
+
   def authenticate_admin
     logged_in_admin? ? true : access_denied
   end
@@ -40,6 +54,7 @@ class ApplicationController < ActionController::Base
   def access_denied
     redirect_to login_path, :notice => 'You have not logged in' and return false
   end
+
 
 end
 
