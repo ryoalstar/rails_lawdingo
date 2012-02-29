@@ -7,7 +7,7 @@ class PracticeArea < ActiveRecord::Base
 
   scope :parent_practice_areas, lambda { where(:parent_id => nil) }
   scope :child_practice_areas, lambda { where("parent_id is not null") }
-  scope :parent_practice_areas_having_lawyers, joins(:expert_areas).where(:parent_id => nil).select("distinct(practice_areas.id)")
-  scope :child_practice_areas_having_lawyers, joins(:expert_areas).where("parent_id is not null").select("distinct(practice_areas.id)")
+  scope :parent_practice_areas_having_lawyers, joins(:expert_areas, :lawyers).where(:parent_id => nil).select("distinct(practice_areas.id)")
+  scope :child_practice_areas_having_lawyers, joins(:expert_areas, :lawyers).where("parent_id is not null").select("distinct(practice_areas.id)")
 end
 
