@@ -3,7 +3,11 @@ include ActionView::Helpers::NumberHelper # Number helpers available inside cont
 class SearchController < ApplicationController
   def populate_specialities
     @practice_area = PracticeArea.find(params[:pid])
-    @practice_area_specialities = @practice_area.specialities.order(:name) rescue []
+    specialities_ids_lawyers = PracticeArea.child_practice_areas_having_lawyers.map(&:id)
+    practice_area_specialites_ids = @practice_area.specialities.map(&:id)
+    practice_area_specialites_lawyers_ids = specialities_ids_lawyers & practice_area_specialites_ids
+    @practice_area_specialities = PracticeArea.find(practice_area_specialites_lawyers_ids)
+#    @practice_area_specialities = @practice_area.specialities.order(:name) rescue []
     render :action => 'populate_specialities', :layout => false
   end
 
@@ -41,7 +45,7 @@ class SearchController < ApplicationController
         end
         @lawyers = @state_lawyers & @pa_lawyers
       end
-      render action: "filter_lawyer_results", layout: false 
+      render action: "filter_lawyer_results", layout: false
     elsif type == "offering"
       # unless [41, 43].include?(pa_id.to_i) and PracticeArea.find(pa_id).offerings.any?
       #   @offerings = []

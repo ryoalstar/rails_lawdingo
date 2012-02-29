@@ -6,6 +6,9 @@
       options_states_arr << [state.name, state.id]
     end
   }
+
+  practice_area_ids = PracticeArea.parent_practice_areas_having_lawyers.map(&:id)
+  practice_areas_lawyers = PracticeArea.find(practice_area_ids)
 %>
 
 <div class="page" id="page">
@@ -44,7 +47,7 @@
             <%= radio_button_tag "all-types", "0", class: "selected" %>
             <label for="all-types_0">All types</label>
           </li>
-        <% PracticeArea.parent_practice_areas.order(:name).each do |area| %>
+        <% practice_areas_lawyers.each do |area| %>
           <%= content_tag_for :li, area, data: { id: area.id } do %>
             <%= radio_button_tag "area-#{area.id}", "#{area.id}", false, id: "area_#{area.id.to_i}" %>
             <%= label_tag "area_#{area.id}", "#{area.name}" %>
