@@ -6,7 +6,7 @@
   practice_area_text=""
   practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. "
   description = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
-  title @title
+  title @tagline
 %>
 
 <div id="page" class="home">
@@ -23,7 +23,7 @@
     </div>
     <!-- Filtering form -->
     <div id="splash">
-      <h1><%= @title %></h1>
+      <h1><%= @tagline %></h1>
       <p>Skip the stodgy law office and shady online forums.</p>
       <p>Work with a real lawyer in real time.</p>
       <%= link_to "Browse Lawyers", lawyers_path, class: "button green" %>
