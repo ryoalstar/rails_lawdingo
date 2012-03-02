@@ -65,6 +65,7 @@ Lawdingo::Application.routes.draw do
     resources :clsessions
     resources :pages
     resources :homepage_images
+    resources :practice_areas
   end
 
   match 'modparam' =>'users#update_parameter', :as =>:update_parameter
