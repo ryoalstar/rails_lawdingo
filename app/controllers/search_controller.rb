@@ -19,10 +19,28 @@ class SearchController < ApplicationController
   end
 
   def filter_results
+    # Store selected filters in cookies
+    unless params[:state].blank? && params[:state] == 0
+      cookies[:state] = { value: params[:state].to_i, expires: 1.month.from_now }
+    end
+
+    unless params[:type].blank? && params[:type] == 0
+      cookies[:type] = { value: params[:type].to_i, expires: 1.month.from_now }
+    end
+
+    unless params[:pa].blank? && params[:pa] == 0
+      cookies[:area] = { value: params[:pa], expires: 1.month.from_now }
+    end
+
+    unless params[:sp].blank? && params[:sp] == 0
+      cookies[:spec] = { value: params[:sp], expires: 1.month.from_now }
+    end
+
     type = params[:type]
     state_id = params[:state].to_i
     pa_id = params[:pa].to_i
     sp_id = params[:sp].to_i
+
     @lawyers = []
     @state_lawyers = []
 

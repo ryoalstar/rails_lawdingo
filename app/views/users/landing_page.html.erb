@@ -17,7 +17,7 @@
         <%= image_tag default_image.photo.url(:large), :alt => "" %>
       </div>
       <div class="carousel-description">
-        <h4><%= "Attorney #{lawyer.full_name}" %></h4>
+        <h4><%= link_to "Attorney #{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug) %></h4>
         <span><%= description %></span>
       </div>
     </div>
