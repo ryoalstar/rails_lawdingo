@@ -55,6 +55,12 @@ class UsersController < ApplicationController
     if state_id.present? and state_id.to_i != 0
       selected_state = State.find(state_id)
       @selected_state_str = [selected_state.name, selected_state.id]
+    else
+      # Selecting user's state
+      if request.location.state_code.present?
+        selected_state = State.find_by_abbreviation request.location.state_code
+        @selected_state_str = [selected_state.name, selected_state.id]
+      end
     end
 
     if pa_id.present? and pa_id != 0
