@@ -1,4 +1,6 @@
 class OfferingsController < ApplicationController
+  before_filter :ensure_self_account
+
   def index
     @lawyer = User.find(params[:user_id])
     @offering = @lawyer.offerings.new
@@ -46,16 +48,10 @@ class OfferingsController < ApplicationController
   private
 
     def ensure_self_account
-      return false unless logged_in?
-      begin
-        @user = User.find params[:id]
-      rescue
-        redirect_to root_path, :notice =>"No User Found!" and return
-      end
+      @user = User.find params[:user_id]
 
-      if not (@user.id == current_user.id or logged_in_admin?)
-        redirect_to root_path, :notice =>"No Authorization!" and return
+      unless (logged_in?) and (@user.id == current_user.id) or logged_in_admin?
+        redirect_to root_path
       end
     end
 end
-
