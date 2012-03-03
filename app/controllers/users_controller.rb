@@ -58,8 +58,8 @@ class UsersController < ApplicationController
     else
       # Selecting user's state
       if request.location.state_code.present?
-        selected_state = State.find_by_abbreviation request.location.state_code
-        @selected_state_str = [selected_state.name, selected_state.id]
+        selected_state = State.find_by_abbreviation(request.location.state_code)
+        @selected_state_str = [selected_state.name, selected_state.id] if selected_state
       end
     end
 
