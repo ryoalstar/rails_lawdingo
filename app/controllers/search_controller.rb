@@ -119,7 +119,7 @@ class SearchController < ApplicationController
      practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
      images_hash = Hash.new
      images_hash["url"] = image.photo.url(:large)
-     images_hash["title"] = "Attorney #{lawyer.full_name}"
+     images_hash["title"] = link_to "Attorney #{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
 
      images_hash["description"] = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
      list<< images_hash
