@@ -1,4 +1,6 @@
 Lawdingo::Application.routes.draw do
+  get "password_resets/new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -22,6 +24,7 @@ Lawdingo::Application.routes.draw do
   end
 
   resources :sessions
+  resources :password_resets
   resources :conversations do
     get 'review'
     get 'summary'

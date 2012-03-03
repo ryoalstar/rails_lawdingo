@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :user_type, :rate, :presence => true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
-  attr_accessor :password
+  attr_accessor :password, :password_confirmation
+  #attr_accessible :email, :password, :password_confirmation
 
   has_many :offerings
 
@@ -28,6 +29,19 @@ class User < ActiveRecord::Base
     if user
       user = user.hashed_password == Digest::SHA1.hexdigest(password) ? user : nil
     end
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
   end
 
   def is_admin?
@@ -98,5 +112,6 @@ class User < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
 end
 

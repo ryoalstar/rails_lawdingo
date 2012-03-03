@@ -21,5 +21,11 @@ class UserMailer < ActionMailer::Base
       :subject => "New lawyer applied"
     )
   end
+
+  def password_reset(user)
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/logo.png")
+    @user = user
+    mail :to => user.email, :subject => "Password Reset"
+  end
 end
 

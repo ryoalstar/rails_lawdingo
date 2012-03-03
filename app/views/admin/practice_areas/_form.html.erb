@@ -1,5 +1,5 @@
 <% options_practice_areas = []
-   options_practice_areas << ['none', 0]
+   options_practice_areas << ['none', nil]
    @parent_practice_areas.order(:name).each { |pa|
     options_practice_areas << [pa.name, pa.id]
   }
