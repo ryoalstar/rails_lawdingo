@@ -1,4 +1,6 @@
 Lawdingo::Application.routes.draw do
+  resources :schools
+
   get "password_resets/new"
 
   # The priority is based upon order of creation:

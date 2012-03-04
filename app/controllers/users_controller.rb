@@ -215,6 +215,7 @@ class UsersController < ApplicationController
     if @user.is_lawyer?
       @user  = Lawyer.find(@user.id)
       status = @user.update_attributes(params[:lawyer])
+      @user.update_attribute :school_id, params[:lawyer][:school_id]
       @user.corresponding_user.practice_areas.delete_all
       unless params[:practice_areas].blank?
         practice_areas = params[:practice_areas]

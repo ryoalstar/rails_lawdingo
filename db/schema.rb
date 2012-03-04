@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216040244) do
+ActiveRecord::Schema.define(:version => 20120304102526) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -136,6 +136,14 @@ ActiveRecord::Schema.define(:version => 20120216040244) do
     t.datetime "updated_at"
   end
 
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.string   "rank"
+    t.integer  "rank_category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "states", :force => true do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -176,6 +184,9 @@ ActiveRecord::Schema.define(:version => 20120216040244) do
     t.string   "stripe_customer_token"
     t.string   "phone"
     t.integer  "free_consultation_duration"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.integer  "school_id"
   end
 
 end

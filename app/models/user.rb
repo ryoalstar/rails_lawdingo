@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   ADMIN_TYPE  = 'ADMIN'
   CLIENT_TYPE = 'CLIENT'
   LAWYER_TYPE = 'LAWYER'
@@ -17,6 +16,7 @@ class User < ActiveRecord::Base
   #attr_accessible :email, :password, :password_confirmation
 
   has_many :offerings
+  belongs_to :school
 
   has_attached_file :photo,
     :styles => { :medium => "232x", :thumb => "100x" },
