@@ -5,7 +5,6 @@ body.summary {
       min-width: 400px;
 
       &.string input,
-      &.currency input,
       &.text textarea {
         width: 300px;
         font-family: arial, verdana, tahoma;
@@ -13,7 +12,7 @@ body.summary {
         border-radius: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
-        font-size: 0.833em;
+        font-size: 1em;
         padding: 8px;
       }
 
