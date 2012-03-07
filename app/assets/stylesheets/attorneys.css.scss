@@ -1,7 +1,58 @@
+@mixin inline-block {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
 body.attorneys,
 body.offerings {
   #results {
     width: 760px;
     margin: 1.4em auto 3.33em auto;
+  }
+}
+
+body.attorneys {
+  #results > .row {
+    border: none;
+  }
+
+  .details {
+    margin: 3.5em 0 0 1em;
+
+    .columns {
+      position: relative;
+      zoom: 1;
+      width: 100%;
+      
+      .column {
+        @include inline-block;
+        vertical-align: top;
+        width: 40%;
+        margin-right: 4em;
+      }
+    }
+
+    h3 {
+      font-size: 1.83em;
+      margin: 0 0 0.833em 0;      
+    }
+
+    h4 {
+      font-size: 1.6em;
+      margin: 0.5em 0;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 2em;
+      font-size: 1.5em;
+      margin-bottom: 1em;
+      position: relative;
+    }
   }
 }

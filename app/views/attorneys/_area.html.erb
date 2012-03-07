@@ -1,0 +1,8 @@
+<%= content_tag :h4, area.name %>
+<% if area.specialities.any? %>
+<ul>
+<% area.specialities.each do |spec| %>
+  <%= content_tag :li, spec.name %>
+<% end %>
+</ul>
+<% end %>
