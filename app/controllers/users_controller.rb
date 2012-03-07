@@ -122,6 +122,9 @@ class UsersController < ApplicationController
   end
 
   def new
+    if params[:return_path]
+      session[:return_to] = params[:return_path]
+    end
     redirect_to root_path and return if current_user
     user_type  = params[:ut] || '1'
     if user_type == '0'
@@ -158,10 +161,14 @@ class UsersController < ApplicationController
         redirect_to user_offerings_path(@user, :ft => true) and return
       elsif @user.is_client?
         session[:user_id] = @user.id
-        #redirect_to :action => :payment_info
-        redirect_to lawyers_path
-        # @card_detail = CardDetail.new
-        # render :action => 'payment_info' and return
+        return_path = ""
+        if session[:return_to]
+          return_path = session[:return_to]
+          session[:return_to] = nil
+        else
+          return_path = lawyers_path
+        end
+        redirect_to return_path
       else
         redirect_to root_path
       end

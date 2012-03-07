@@ -52,6 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
+    session[:referred_url] = request.fullpath
     redirect_to login_path, :notice => 'You have not logged in' and return false
   end
 

@@ -10,15 +10,25 @@ class SessionsController < ApplicationController
     if user = User.authenticate(params[:email], params[:password])
       reset_user_session(user)
       login_in_user(user)
+      return_path = ""
       if user.is_client?
-        home_path = lawyers_path
+       if session[:return_to]
+        return_path = session[:return_to]
+        session[:return_to] = nil
+       else
+        return_path = lawyers_path
+       end
       elsif user.is_lawyer?
         # redirect the lawyer to the session summary page
-        home_path = user_path(current_user, :t=>'l')
+        return_path = user_path(current_user, :t=>'l')
       elsif user.is_admin?
-        home_path = user_path(user.id)
+        return_path = user_path(user.id)
       end
-      redirect_to home_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
+      if session[:referred_url]
+       return_path = session[:referred_url]
+       session[:referred_url] = nil
+      end
+      redirect_to return_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
     else
       @msg = "You have entered incorrect login credintial."
       render :action => 'new'
