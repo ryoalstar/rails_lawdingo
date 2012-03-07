@@ -1,0 +1,58 @@
+body.summary {
+  .simple_form {
+    .input {
+      position: relative;
+      min-width: 400px;
+
+      &.string input,
+      &.currency input,
+      &.text textarea {
+        width: 300px;
+        font-family: arial, verdana, tahoma;
+        border: 1px solid #B8B8B8;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        font-size: 0.833em;
+        padding: 8px;
+      }
+
+      &.text {
+        width: 400px;
+      }
+
+      .hint {
+        display: inline-block;
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      word-spacing: nowrap;
+    }
+
+    .input {
+      margin-bottom: 1em;
+    }
+
+    textarea#review_body {
+      height: 60px;
+    }
+
+    #rating_stars {
+      display: block;
+      margin-bottom: 1em;
+    }
+  }
+
+  .column.last-child {
+    margin: 0 !important;
+  }
+
+  .inner.session-complete {
+    width: 720px !important;
+  }
+}

@@ -1,4 +1,5 @@
 Lawdingo::Application.routes.draw do
+  resources :reviews
   resources :schools
 
   get "password_resets/new"

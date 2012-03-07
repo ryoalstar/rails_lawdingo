@@ -40,6 +40,7 @@ class ConversationsController < ApplicationController
   def summary
     begin
       @conversation = Conversation.find params[:conversation_id]
+      @review = @conversation.reviews.new
     rescue
       @conversation = nil
     end

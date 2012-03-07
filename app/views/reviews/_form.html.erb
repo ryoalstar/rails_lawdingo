@@ -1,0 +1,10 @@
+<%= simple_form_for @review, remote: true do |f| %>
+  <h3>Tell us about that session. Your review will be anonymous</h3>
+  <%= f.input :rating, as: :hidden, input_html: { value: 0 } %>
+  <%= f.input :conversation_id, as: :hidden, input_html: { value:  @conversation.id } %>
+  <%= f.input :purpose, label: "What did #{@conversation.lawyer.full_name} do for you?" %>
+  <%= f.label "Your rating of the session" %>
+  <div id="rating_stars"></div>
+  <%= f.input :body, label: "Write a review about how valuable this session was" %>
+  <%= f.submit "Submit review", class: "button" %>
+<% end %>

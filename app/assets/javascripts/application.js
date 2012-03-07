@@ -10,7 +10,9 @@
 //= require jquery-ui
 //= require rails.validations
 //= require jquery.numeric
+//= require jquery.raty
 //= require offerings
 //= require filters
+//= require reviews
 // require_tree .
 

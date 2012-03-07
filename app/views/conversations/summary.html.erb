@@ -2,9 +2,6 @@
             <div>
                 <div class="inner session-complete">
                     <div class="column">
-                        <h3>Session completed.</h3>
-                    </div>
-                    <div class="column">
                         <h3>Session summary:</h3>
                         <% if @conversation
                           lawyer = @conversation.lawyer
@@ -20,6 +17,12 @@
                         <% end %>
                         <%= link_to "<< Go home", root_path %>
                         <%= link_to 'View all my previous sessions >>', user_path(current_user,:t =>'l'), :title => 'View all my previous sessions' %>
+                    </div>
+                    <div class="column last-child">
+                      <%= render "reviews/form" %> 
+                      <div class="thank-you" style="display: none;">
+                        <h3>Thank you for your review!</h3>
+                      </div>
                     </div>
                     <% else %>
                       Nothing to show!
