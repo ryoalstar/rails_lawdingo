@@ -50,7 +50,7 @@
       <div class="tagline">
       <% if lawyer.personal_tagline.present? %>
         <% unless params[:controller] == "attorneys" %>
-          <%= truncate(lawyer.personal_tagline, length: 20, separator: ' ', omission: "... #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}").html_safe %>
+          <%= lawyer.personal_tagline.truncate(120, separator: ' ', omission: "... #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}").html_safe %>
         <% else %>
           <%= lawyer.personal_tagline %>
         <% end %>
