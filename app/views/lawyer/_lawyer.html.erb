@@ -47,7 +47,15 @@
         <% end %>
         </span>
       </h3>
-      <div class="tagline"><%= lawyer.personal_tagline.present? ? "“#{lawyer.personal_tagline}”" : "" %></div>
+      <div class="tagline">
+      <% if lawyer.personal_tagline.present? %>
+        <% unless params[:controller] == "attorneys" %>
+          <%= truncate(lawyer.personal_tagline, length: 20, separator: ' ', omission: "... #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}").html_safe %>
+        <% else %>
+          <%= lawyer.personal_tagline %>
+        <% end %>
+      <% end %>
+      </div>
       <ul class="verified">
         <% unless lawyer.bar_memberships.blank? %>
           <li class="first-child">&bull; Licensed in <%= licenced_states %></li>
