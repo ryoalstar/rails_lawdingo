@@ -5,6 +5,12 @@
       <!--div class="free">free initial consultation, then:</div-->
       <div class="free"><%= free_message(lawyer) %></div>
       <div class="price">then <%= number_to_currency (lawyer.rate + AppParameter.service_charge_value) %>/minute</div>
+      <% if lawyer.reviews.any? %>
+      <div class="rating-container">
+        <%= content_tag :div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i } %>
+        <%= content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "count" %>
+      </div>
+      <% end %>
     </div>
     <!-- END CALL TO ACTION -->
     <%= link_to_unless_current image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug) %>

@@ -11,3 +11,9 @@ jQuery ->
     readOnly: true
     start: -> ($ this).data("score")
   )
+
+  ($ ".action .rating").raty(
+    path: "/assets/raty"
+    readOnly: true
+    start: -> ($ this).data("score")
+  )
