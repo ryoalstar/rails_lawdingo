@@ -1,5 +1,5 @@
 <%= content_tag_for :li, review do %>
   <%= content_tag :div, "", class: "rating", data: { score: review.rating } %>
-  <%= content_tag :div, "#{number_to_human(review.conversation.duration)} minutes session about <strong>#{review.purpose.downcase}</strong>, #{review.created_at.strftime("%e/%m/%Y")}".html_safe, class: "title" %>
+  <%= content_tag :div, "#{distance_of_time_in_words(review.conversation.start_date, review.conversation.end_date)} session about <strong>#{review.purpose.downcase}</strong>, #{review.created_at.strftime("%e/%m/%Y")}".html_safe, class: "title" %>
   <%= content_tag :div, "“#{review.body}”".html_safe, class: "body" unless review.body.blank? %>
 <% end %> 
