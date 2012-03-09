@@ -5,6 +5,10 @@ module LawyersHelper
       offerings_count  = @offerings.count.to_s
       offerings_str = @offerings.count > 1 ? "services" : "service"
       offerings_verb = @offerings.count > 1 ? "are" : "is"
+    else
+      offerings_count = "no"
+      offerings_str = "services"
+      offerings_verb = "are"
     end
 
     # Check if the practice area is selected for
@@ -26,6 +30,10 @@ module LawyersHelper
       lawyers_count = @lawyers.count.to_s
       lawyers_str = @lawyers.count > 1 ? "lawyers" : "lawyer"
       lawyers_verb = @lawyers.count > 1 ? "are" : "is"
+    else
+      lawyers_count = "no"
+      lawyers_str = "lawyers"
+      lawyers_verb = "are"
     end
 
     # State

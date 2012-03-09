@@ -1,11 +1,7 @@
 <% if @lawyers.blank? %>
-<div style="font-size:1.8em;text-align:center;">
-<p>
-Sorry, no such lawyers!<br/>
-
-Recommend Lawdingo to great lawyers you know.
-</p>
-</div>
+  <div class="selected-lawyers-caption">
+    <%= selected_lawyers_caption %>
+  </div>
 <% else %>
   <div class="selected-lawyers-caption">
     <%= selected_lawyers_caption %>
