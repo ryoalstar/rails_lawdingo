@@ -55,3 +55,44 @@ body.summary {
     width: 720px !important;
   }
 }
+
+.reviews-container {
+  position: relative;
+  display: block;
+  margin-top: 3.5em;
+}
+
+ul.reviews {
+  position: relative;
+  display: block;
+  list-style-type: none !important;
+  padding-left: 1px !important;
+
+  .review {
+    position: relative;
+    padding-left: 0 !important;
+    margin: 1em 0;
+  }
+  
+  .rating, .title {
+    display: inline;    
+  }
+
+  .rating {
+    margin-right: 5px;
+  }
+
+  .title {
+    vertical-align: bottom;
+
+    strong {
+      vertical-align: bottom;
+    }
+  }
+
+  .body {
+    display: block;
+    position: relative;
+    margin-top: 0.5em;
+  }
+}

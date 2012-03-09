@@ -19,8 +19,14 @@
       </div>
       <% end %>
     </div>
-    <div class="reviews">
-      
+
+    <% if @attorney.reviews.any? %>
+    <div class="reviews-container">
+      <h3>Client reviews:</h3>
+      <ul class="reviews">
+        <%= render @attorney.reviews.order("created_at DESC") %>
+      </ul>
     </div>
+    <% end %>
   </div>
 </div>
