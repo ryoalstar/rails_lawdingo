@@ -8,8 +8,7 @@
   }
 
   practice_area_ids = PracticeArea.parent_practice_areas_having_lawyers.map(&:id)
-  practice_areas_lawyers = PracticeArea.find(practice_area_ids)
-  practice_areas_lawyers.sort_by(&:name)
+  practice_areas_lawyers = PracticeArea.find(practice_area_ids).sort_by(&:name)
 %>
 
 <div class="page" id="page">

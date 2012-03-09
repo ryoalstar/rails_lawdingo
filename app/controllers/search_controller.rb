@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     specialities_ids_lawyers = PracticeArea.child_practice_areas_having_lawyers.map(&:id)
     practice_area_specialites_ids = @practice_area.specialities.map(&:id)
     practice_area_specialites_lawyers_ids = specialities_ids_lawyers & practice_area_specialites_ids
-    @practice_area_specialities = PracticeArea.find(practice_area_specialites_lawyers_ids) rescue[]
+    @practice_area_specialities = PracticeArea.find(practice_area_specialites_lawyers_ids).sort_by(&:name) rescue[]
 #    @practice_area_specialities = @practice_area.specialities.order(:name) rescue []
     render :action => 'populate_specialities', :layout => false
   end
