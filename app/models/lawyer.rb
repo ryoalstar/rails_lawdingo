@@ -3,6 +3,7 @@ class Lawyer < User
   # validates :payment_email, :presence => true
 
   has_many :conversations
+  has_many :reviews
   has_many :bar_memberships
   has_many :states, :through => :bar_memberships
   has_many :expert_areas
