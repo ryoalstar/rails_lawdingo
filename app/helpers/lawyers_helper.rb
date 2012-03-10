@@ -11,12 +11,28 @@ module LawyersHelper
       offerings_verb = "are"
     end
 
+    # State
+    # Depends on if the request came from the landing page or from
+    # filter_result ajax function
+    if params[:select_state].present?
+      state_id = params[:select_state].to_i
+    elsif params[:state].present?
+      state_id = params[:state].to_i
+    end
+
+    if state_id.present? && state_id != 0
+      state = State.find(state_id)
+      state = " #{state.name}"
+    elsif @autoselected_state.present?
+      state = " #{@autoselected_state.name}"
+    end
+
     # Check if the practice area is selected for
     # filtering offers
     if @offerings_practice_area.present?
-      "There #{offerings_verb} #{offerings_count} #{offerings_str} relating to <strong>#{@offerings_practice_area.name.downcase}</strong> that may be of interest to you.".html_safe
+      "There #{offerings_verb} #{offerings_count} <strong>#{@offerings_practice_area.name.downcase}</strong>-related #{state} #{offerings_str} that may be of interest to you.".html_safe
     else
-      "There #{offerings_verb} #{offerings_count} #{offerings_str} that may be of interest to you."
+      "There #{offerings_verb} #{offerings_count} #{state} #{offerings_str} that may be of interest to you."
     end
   end
 
