@@ -53,12 +53,10 @@ class SearchController < ApplicationController
       @state_offerings = []
       @area_offerings = []
 
-      unless state_id == 0
-        @state_lawyers.each do |lawyer|
-          if lawyer.offerings.any?
-            lawyer.offerings.each do |offering|
-              @state_offerings << offering
-            end
+      @state_lawyers.each do |lawyer|
+        if lawyer.offerings.any?
+          lawyer.offerings.each do |offering|
+            @state_offerings << offering
           end
         end
       end
@@ -73,18 +71,12 @@ class SearchController < ApplicationController
             end
           end
         end
-      end
-
-      if @state_offerings.any? && @area_offerings.any?
-        @offerings = @area_offerings & @state_offerings
-      elsif @state_offerings.any?
-        @offerings = @state_offerings
-      elsif @area_offerings.any?
-        @offerings = @area_offerings
       else
-        @offerings = Offering.all
+        @area_offerings = Offering.all
       end
 
+      @offerings = @area_offerings & @state_offerings
+        
       render action: "filter_offering_results", layout: false
     end
   end
