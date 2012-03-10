@@ -29,8 +29,15 @@ class UsersController < ApplicationController
     sp_id = params[:select_sp].to_i
     @lawyers = []
     @state_lawyers = []
+
+    request.location.state_code.present?
+
     if state_id == 0
-      @state_lawyers = Lawyer.approved_lawyers
+      if request.location.state_code.present?
+        @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
+      else
+        @state_lawyers = Lawyer.approved_lawyers
+      end
     else
       @state_lawyers = State.find(state_id).lawyers.approved_lawyers
     end
