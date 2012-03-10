@@ -1,5 +1,5 @@
 class OfferingsController < ApplicationController
-  before_filter :ensure_self_account
+  before_filter :ensure_self_account, only: :index
 
   def index
     @lawyer = User.find(params[:user_id])

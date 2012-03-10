@@ -11,7 +11,7 @@
         <%= link_to_unless_current "#{offering.name}", offering %>
       </h3>
       <%= simple_format offering.description, class: "description" %>
-      <p>Category: <%= offering.offering_type.name %></p>
+      <p>Practice area: <%= offering.practice_area.name %></p>
       <p>Delivered by: <%= link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug) %> <span class="status"><%= status_message(lawyer) %></span></p>
       <div class="action-buttons">
         <%= start_or_schedule_button(lawyer) %>
