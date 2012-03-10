@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     request.location.state_code.present?
 
     if state_id == 0
-      if request.location.state_code.present?
+      if request.location.state_code.present? && State.find_by_abbreviation(request.location.state_code).any?
         @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
       else
         @state_lawyers = Lawyer.approved_lawyers
