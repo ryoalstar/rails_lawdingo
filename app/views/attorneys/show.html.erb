@@ -23,7 +23,7 @@
     <% if @attorney.reviews.any? %>
     <div class="reviews-container">
       <h3>Client reviews:</h3>
-      <ul class="reviews">
+      <ul class="reviews" id="reviews">
         <%= render @attorney.reviews.order("created_at DESC") %>
       </ul>
     </div>

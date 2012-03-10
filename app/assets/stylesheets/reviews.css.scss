@@ -96,3 +96,11 @@ ul.reviews {
     margin-top: 0.5em;
   }
 }
+
+a.rating-stars {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
