@@ -80,7 +80,7 @@ class SearchController < ApplicationController
           @offerings = []
 
           @offerings_practice_area.offerings.each do |offering|
-            if offering.lawyer.is_approved
+            if offering.user.is_approved
               @offerings << offering
             end
           end
