@@ -49,6 +49,8 @@ module LawyersHelper
     if state_id.present? && state_id != 0
       state = State.find(state_id)
       state = " #{state.name}"
+    elsif @autoselected_state.present?
+      state = " #{@autoselected_state.name}"
     end
 
     # Practice area

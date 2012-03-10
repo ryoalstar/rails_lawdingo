@@ -33,8 +33,13 @@ class UsersController < ApplicationController
     request.location.state_code.present?
 
     if state_id == 0
-      if request.location.state_code.present? && State.find_by_abbreviation(request.location.state_code).lawyers.any?
-        @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
+      if request.location.state_code.present? 
+        autoselected_state = State.find_by_abbreviation(request.location.state_code)
+        if autoselected_state.present?
+          @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
+        else
+          @state_lawyers = Lawyer.approved_lawyers
+        end
       else
         @state_lawyers = Lawyer.approved_lawyers
       end
@@ -67,6 +72,7 @@ class UsersController < ApplicationController
       if request.location.state_code.present?
         selected_state = State.find_by_abbreviation(request.location.state_code)
         @selected_state_str = [selected_state.name, selected_state.id] if selected_state
+        @autoselected_state = selected_state
       end
     end
 
