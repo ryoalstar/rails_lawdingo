@@ -128,10 +128,10 @@ module LawyersHelper
       if logged_in?
         if lawyer.phone.present?
           if current_user.stripe_customer_token.present?
-            link_to "start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button gray"
+            link_to "start live consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button gray"
           else
             # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button gray"
-            link_to "start phone consultation", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => "button gray"
+            link_to "start live consultation", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => "button gray"
           end
 
         else
@@ -139,7 +139,7 @@ module LawyersHelper
         end
       else
         if lawyer.phone.present?
-          link_to 'start phone consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => 'button gray'
+          link_to 'start live consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => 'button gray'
         else
           link_to 'schedule consultation', new_user_path(ut: 0, notice: true), :class => 'button gray'
         end
@@ -150,13 +150,13 @@ module LawyersHelper
  def start_phone_consultation(lawyer)
    if logged_in?
     if current_user.stripe_customer_token.present?
-      link_to "start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button gray"
+      link_to "start live consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "button gray"
     else
       # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener button gray"
-      link_to "start phone consultation", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => "button gray"
+      link_to "start live consultation", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => "button gray"
     end
   else
-    link_to 'start phone consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => "button gray"
+    link_to 'start live consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => "button gray"
   end
  end
 
