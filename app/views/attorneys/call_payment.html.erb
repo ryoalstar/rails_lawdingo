@@ -6,6 +6,13 @@
 
     <p>To start the call, though, you do need to have payment info on file in case the call goes longer.</p>
 
+    <div class="error_explanation">
+      <ul class="errors">
+        <li> <div id="stripe_errors" class ="stripe_error" style="color:red;"></div></li>
+        <li> <div class ="stripe_error" style="color:red;"></div></li>
+      </ul>
+    </div>
+
     <%= form_tag("/updatePaymentInfo", :id => 'payment-form', :remote =>true) do %>
       <div class="sealed" style="position: absolute; bottom: 3px; left: 150px;">
         <%= render "godaddy_seal" %>

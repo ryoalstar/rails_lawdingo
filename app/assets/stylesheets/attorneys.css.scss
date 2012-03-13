@@ -97,5 +97,10 @@ body.call_payment {
     .action-buttons {
       display: none;
     }
+
+    .stripe_error {
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+    }
   }
 }

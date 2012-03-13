@@ -322,7 +322,7 @@ class UsersController < ApplicationController
    unless params[:attorney_id].blank?
      render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
    else
-     @err_msg = ''
+    @err_msg = ''
     errors = current_user.errors
     if errors.size > 0
       @err_msg += '<div class="error_explanation"><h4 class="error">Please fix the following errors:</h4><ul><class="errors">'
