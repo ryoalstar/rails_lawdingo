@@ -18,6 +18,11 @@ class AttorneysController < ApplicationController
 
     @areas = pas_names_list
   end
+
+  def call_payment
+   @attorney = Lawyer.find(params[:id])
+
+  end
   
   private
 

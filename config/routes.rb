@@ -16,6 +16,7 @@ Lawdingo::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
+  match 'attorneys/:id/call-payment' => 'attorneys#call_payment', as: :call_payment
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
 
   match '/apply' => "users#new", :as => :new_lawyer

@@ -55,4 +55,43 @@ body.attorneys {
       position: relative;
     }
   }
+
+  .payment-details {
+    h2 {
+      font-size: 1.85em;
+      margin: 0 0 0.333em 0; 
+    }
+
+    p {
+      font-size: 1.6em;
+      margin: 0 0 1em 0;
+    }
+
+    form {
+      position: relative;
+      display: block;
+      font-size: 1.4em;
+
+      label {
+        display: block;
+      }
+    }
+  }  
+}
+
+body.call_payment {
+  #results {
+    .row {
+      display: block;
+      border-top: 1px solid #DDD;
+      border-bottom: 1px solid #DDD;
+      margin-bottom: 2em;
+    }
+
+    input[name="commit"] {
+      margin-top: 0.5em;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  }
 }
