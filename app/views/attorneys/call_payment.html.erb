@@ -20,7 +20,7 @@
 
       <%= hidden_field_tag :stripe_card_token %>
       <%= hidden_field_tag :form_type, "ajax" %>
-      <%= hidden_field_tag :attorney_id %>
+      <%= hidden_field_tag :attorney_id, @attorney.id %>
 
       <div style="margin-bottom: 0.75em;">
         <label for="card_number">Credit card number:</label>
@@ -48,3 +48,4 @@
    <% end %>
  </div>
 </div>
+
