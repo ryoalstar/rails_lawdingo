@@ -17,6 +17,13 @@ body.offerings {
 }
 
 body.attorneys {
+  .back-link {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 0.5em;
+    padding-left: 10px;
+  }
+
   #results > .row {
     border: none;
   }

@@ -1,6 +1,8 @@
 <% title "#{@attorney.full_name} — #{@attorney.licenced_states.join(', ')} lawyer advising on #{@attorney.areas_human_list} on Lawdingo" %>
 
 <div id="results">
+  <%= link_to "← Back to all lawyers", "javascript:history.back()", class: "back-link" %>
+
   <%= render partial: "lawyer/lawyer", locals: { lawyer: @attorney } %>
   <div class="details">
     <div class="columns">
