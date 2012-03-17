@@ -144,3 +144,27 @@ ul.offerings-list {
     }
   }
 }
+
+body.attorneys {
+  .offers-container {
+    margin: 1.25em 0 1.667em 0;
+
+    h3 {
+      margin: 0 0 0.133em 0; 
+    }
+  }
+
+  .hide_on_attorneys {
+    display: none;
+  }
+
+  .offering {
+    h3 {
+      font-size: 1.25555em;
+    }
+    
+    .info {
+      margin-left: 0 !important;
+    }
+  }
+}

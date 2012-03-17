@@ -27,6 +27,13 @@
       </div>
     </div>
 
+    <% if @attorney.offerings.any? %>
+    <div class="offers-container">
+      <%= content_tag :h3, "#{@attorney.first_name}'s fixed-price offers:" %>
+      <%= render collection: @attorney.offerings, partial: "offerings/offering", locals: { lawyer: @attorney } %>
+    </div>
+    <% end %>
+
     <% if @attorney.reviews.any? %>
     <div class="reviews-container">
       <h3>Client reviews:</h3>
