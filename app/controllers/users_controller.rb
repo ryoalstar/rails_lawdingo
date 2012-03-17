@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
+  before_filter :check_payment_info, :only => [:start_phone_call]
 
   #REMINDER: uncomment only in production
   #before_filter :force_ssl, :only => ['payment_info']
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
     request.location.state_code.present?
 
     if state_id == 0
-      if request.location.state_code.present? 
+      if request.location.state_code.present?
         autoselected_state = State.find_by_abbreviation(request.location.state_code)
         if autoselected_state.present?
           @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
@@ -545,6 +546,12 @@ class UsersController < ApplicationController
   # Backed up home page
   def search
 
+  end
+
+  def check_payment_info
+    unless current_user.stripe_customer_token.present?
+     redirect_to call_payment_path(params[:id]) and return
+    end
   end
 
 end
