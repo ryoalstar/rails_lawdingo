@@ -150,7 +150,9 @@
     background:-webkit-gradient(linear,center top,center bottom,from(white),to(#ebebeb));
     background:-moz-linear-gradient(top,white,#ebebeb);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffebebeb',GradientType=0);
-    color:#959595!important;
+    color: #666 !important;
+    font-weight: bold;
+    font-size: 14px !important;
     text-shadow:0 1px 1px white;
   }
 
