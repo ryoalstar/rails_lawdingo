@@ -9,15 +9,22 @@
         <%= render collection: @attorney.practice_areas.where(parent_id: nil).order("name"), partial: "attorneys/area", as: :area %>
       </div>
 
-      <% if @attorney.school.present? %>
       <div class="column background">
+        <% if @attorney.school.present? %>
         <%= content_tag :h3, "#{@attorney.first_name}'s background:" %>
         <h4>Law school</h4>
         <ul>
           <li><%= @attorney.school.name %></li>
         </ul>
+        <% end %>
+
+        <% if @attorney.license_year.present? %>
+        <h4>Years practicing law</h4>
+        <ul>
+            <li><%= pluralize years_practicing_law(@attorney), "year", "years" %></li>
+        </ul>
+        <% end %>
       </div>
-      <% end %>
     </div>
 
     <% if @attorney.reviews.any? %>
