@@ -65,6 +65,10 @@
 
     <!-- RESULTS -->
     <div class="results" id="results">
+      <div class="question-container">
+        <%= render partial: "questions/form", locals: { type: "lawyer" } %>
+      </div>
+
       <div class="selected-lawyers-caption">
         <%= selected_lawyers_caption %>
       </div>

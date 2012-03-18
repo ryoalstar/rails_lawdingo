@@ -24,6 +24,8 @@ class UsersController < ApplicationController
       redirect_to users_path(:t=>'l')
     end
 
+    @question = Question.new
+
     # Obtain lawyers according to sent GET params
     state_id = params[:select_state].to_i
     pa_id = params[:select_pa].to_i

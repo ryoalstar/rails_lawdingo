@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   #attr_accessible :email, :password, :password_confirmation
 
   has_many :offerings
+  has_many :questions
   belongs_to :school
 
   has_attached_file :photo,

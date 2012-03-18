@@ -23,6 +23,8 @@ class SearchController < ApplicationController
     state_id = params[:state].to_i
     pa_id = params[:pa].to_i
     sp_id = params[:sp].to_i
+    
+    @type = type.to_s
 
     @lawyers = []
     @state_lawyers = []

@@ -1,3 +1,7 @@
+<div class="question-container">
+  <%= render partial: "questions/form", locals: { type: "offering" } %>
+</div>
+
 <% if @offerings.blank? %>
   <div class="selected-lawyers-caption">
     <%= selected_offerings_caption %>

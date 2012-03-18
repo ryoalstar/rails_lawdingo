@@ -26,5 +26,12 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail :to => user.email, :subject => "Password Reset"
   end
+
+  def new_question_email(question)
+    @question = question
+    @type = @question.type == "lawyer" ? "advice" : "service"
+
+    mail(to: "nikhil.nirmel@gmail.com", subject: "Question ##{@question.id}")
+  end
 end
 
