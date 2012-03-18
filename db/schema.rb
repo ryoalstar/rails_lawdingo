@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310144219) do
+ActiveRecord::Schema.define(:version => 20120317223156) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120310144219) do
     t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "conversation_id"
   end
 
   create_table "card_details", :force => true do |t|
@@ -175,7 +176,7 @@ ActiveRecord::Schema.define(:version => 20120310144219) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.string   "personal_tagline"
+    t.text     "personal_tagline"
     t.string   "bar_ids"
     t.boolean  "has_payment_info",           :default => false
     t.string   "peer_id",                    :default => "0"
@@ -187,6 +188,7 @@ ActiveRecord::Schema.define(:version => 20120310144219) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.integer  "school_id"
+    t.integer  "license_year"
   end
 
 end

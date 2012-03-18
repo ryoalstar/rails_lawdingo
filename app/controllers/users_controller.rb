@@ -101,6 +101,7 @@ class UsersController < ApplicationController
 
   def landing_page
     @tagline = AppParameter.find(2).value || "Free legal advice."
+    @subtext = AppParameter.service_homepage_subtext
   end
 
   def show

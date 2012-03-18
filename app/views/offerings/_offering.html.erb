@@ -5,7 +5,7 @@
       <div class="price">free consultation</div>
     </div>
 
-    <%= link_to_unless_current image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug) %>
+    <%= link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug)) %>
    <div class="info">
       <h3>
         <%= link_to_unless_current "#{offering.name}", offering %>
@@ -14,7 +14,7 @@
       <% if offering.practice_area.present? %>
         <p>Practice area: <%= offering.practice_area.name %></p>
       <% end %>
-      <p>Delivered by: <%= link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug) %> <span class="status"><%= status_message(lawyer) %></span></p>
+      <p class="hide_on_attorneys">Delivered by: <%= link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug) %> <span class="status"><%= status_message(lawyer) %></span></p>
       <div class="action-buttons">
         <%= start_or_schedule_button(lawyer) %>
         <% if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present? %>

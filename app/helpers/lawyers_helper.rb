@@ -167,5 +167,11 @@ module LawyersHelper
      "available by phone now"
    end
  end
+
+ def years_practicing_law(lawyer)
+   if lawyer.license_year.present? && lawyer.license_year != 0
+     Time.now.year.to_i - lawyer.license_year.to_i + 1
+   end
+ end
 end
 

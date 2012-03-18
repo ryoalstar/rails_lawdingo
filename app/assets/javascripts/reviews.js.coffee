@@ -8,12 +8,14 @@ jQuery ->
 
   ($ "ul.reviews .review .rating").raty(
     path: "/assets/raty"
+    hintList: ['', '', '', '', '', '']
     readOnly: true
     start: -> ($ this).data("score")
   )
 
   ($ ".action .rating").raty(
     path: "/assets/raty"
+    hintList: ['', '', '', '', '', '']
     readOnly: true
     start: -> ($ this).data("score")
   )

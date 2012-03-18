@@ -13,5 +13,11 @@
 <% end %>
 <script>
 $('.dialog-opener').dialog();
+$ (".action .rating").raty({
+    path: "/assets/raty",
+    hintList: ['', '', '', '', '', ''],
+    readOnly: true,
+    start: function() {return $(this).data("score")}
+})
 </script>
 
