@@ -379,8 +379,8 @@ class UsersController < ApplicationController
     @call = Call.find_by_sid(params[:call_id])
     if @call.status == 'dialing' || @call.status == 'connected' || @call.status == 'billed'
     elsif @call.status == 'completed'
-      call_conversation = Conversation.find(@call.converation_id)
-      render :js => "window.location = '#{conversation_summary_path(conversation, :call_type =>'phonecall')}'", :notice => "Your call is completed"
+      call_conversation = Conversation.find(@call.conversation_id)
+      render :js => "window.location = '#{conversation_summary_path(call_conversation, :call_type =>'phonecall')}'", :notice => "Your call is completed"
       return
     else
       render :js => "window.location = '#{root_path}'", :notice => "You could not connect to the lawyer"
