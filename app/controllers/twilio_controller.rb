@@ -49,8 +49,7 @@ class TwilioController < ApplicationController
     billable_time = @call.billing_start_time.present? ? (@call.end_date - @call.billing_start_time) : 0
     input_params[:billable_time] = (billable_time/60).ceil
     conversation = Conversation.create_conversation(input_params)
-    @call.update_attribute(conversation_id,conversation.id)
-#    @call.update_attribute(:status, 'completed')
+    @call.update_attribute(:conversation_id,conversation.id)
     render :text => "", :layout => false
   end
 
