@@ -65,9 +65,11 @@
 
     <!-- RESULTS -->
     <div class="results" id="results">
+      <% if logged_in? %>
       <div class="question-container">
         <%= render partial: "questions/form", locals: { type: "lawyer" } %>
       </div>
+      <% end %>
 
       <div class="selected-lawyers-caption">
         <%= selected_lawyers_caption %>
