@@ -1,6 +1,6 @@
 <%= simple_form_for Question.new, remote: true do |f| %>
   <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
   <%= f.input :type, as: :hidden, input_html: { value: type } %>
-  <%= f.input :body, as: :string, label: false %>
-  <%= f.submit "Ask" %>
+  <%= f.input :body, label: false %>
+  <%= f.submit "Ask", class: "button green" %>
 <% end %>
