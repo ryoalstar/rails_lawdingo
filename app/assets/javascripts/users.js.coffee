@@ -1,4 +1,8 @@
 jQuery ->
+  ($ ".leveled-list input.parent-area").bind "click", ->
+    value = ($ this).attr("checked") is "checked" ? "true" : "false"
+    ($ ".sub[data-parent-id='#{($ this).data("id")}']").find("input").attr "checked", value
+
   ($ "a#close_notice").bind "click", -> ($ "p.notice").hide()
 
   ($ "a#barids_opener").bind "click", -> ($ "div#bar_membership").center()
