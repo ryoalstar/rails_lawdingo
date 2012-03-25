@@ -20,84 +20,27 @@ class UsersController < ApplicationController
   end
 
   def home
-    if current_user and current_user.is_lawyer?
-      redirect_to users_path(:t=>'l')
-    end
-
+    # if current_user and current_user.is_lawyer?
+    #   redirect_to users_path(:t=>'l')
+    # end
     @question = Question.new
 
-    # Obtain lawyers according to sent GET params
-    state_id = params[:select_state].to_i
-    pa_id = params[:select_pa].to_i
-    sp_id = params[:select_sp].to_i
-    @lawyers = []
-    @state_lawyers = []
+    @practice_areas = PracticeArea.parent_practice_areas
 
-    request.location.state_code.present?
+    @lawyers = Lawyer.approved_lawyers
+    # add some includes
+    @lawyers = @lawyers.includes(
+      [:practice_areas, {:bar_memberships => :state}, :reviews]
+    )
+    @states = State.with_approved_lawyers
 
-    if state_id == 0
-      if request.location.state_code.present?
-        autoselected_state = State.find_by_abbreviation(request.location.state_code)
-        if autoselected_state.present?
-          @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
-        else
-          @state_lawyers = Lawyer.approved_lawyers
-        end
-      else
-        @state_lawyers = Lawyer.approved_lawyers
-      end
-    else
-      @state_lawyers = State.find(state_id).lawyers.approved_lawyers
-    end
-    if pa_id == 0
-      @lawyers = @state_lawyers
-    else
-      if sp_id == 0
-        @selected_practice_area = "general #{PracticeArea.find(pa_id).name.downcase}"
-        @pa_lawyers = PracticeArea.find(pa_id).lawyers.approved_lawyers
-      else
-        @selected_practice_area = PracticeArea.find(sp_id).name.downcase
-        @pa_lawyers = PracticeArea.find(sp_id).lawyers.approved_lawyers
-      end
-      @lawyers = @state_lawyers & @pa_lawyers
-    end
+    add_service_type_scope
+    add_state_scope
+    add_practice_area_scope
 
-    # Filtering params from the next home page form
-    state_id = params[:select_state].to_i
-    pa_id = params[:select_pa].to_i
-    sp_id = params[:select_sp].to_i
-
-    if state_id.present? and state_id.to_i != 0
-      selected_state = State.find(state_id)
-      @selected_state_str = [selected_state.name, selected_state.id]
-    else
-      # Selecting user's state
-      if request.location.state_code.present?
-        selected_state = State.find_by_abbreviation(request.location.state_code)
-        @selected_state_str = [selected_state.name, selected_state.id] if selected_state
-        @autoselected_state = selected_state
-      end
-    end
-
-    if pa_id.present? and pa_id != 0
-      selected_pa = PracticeArea.find(pa_id)
-      @selected_pa_str = [selected_pa.name, selected_pa.id]
-
-      # Obtaining specialities of this practice area
-      if sp_id.present? and sp_id != 0
-        selected_sp = selected_pa.specialities.find_by_id(sp_id)
-        @selected_sp_str = [selected_sp.name, selected_sp.id]
-      else
-        @selected_sp_str = ["General #{selected_pa.name}", 0]
-      end
-
-      # Making an array of specialities
-      # to populize the select field
-      @selected_pa_specialities_str = []
-      @selected_pa_specialities_str << ["General #{selected_pa.name}", 0]
-      selected_pa.specialities.each do |spec|
-        @selected_pa_specialities_str << [spec.name, spec.id]
-      end
+    respond_to do |format|
+      format.html{render}
+      format.js{render}
     end
   end
 
@@ -558,5 +501,123 @@ class UsersController < ApplicationController
     end
   end
 
+  protected
+  # helper method to add the service_type
+  # scope to the main search
+  def add_service_type_scope
+    # handle the type of service offered
+    service_type = (params[:service_type] || "")
+
+    # legal services
+    if service_type.downcase == "legal-services"
+      @lawyers = @lawyers.offers_legal_services
+    # default is legal advice
+    else
+      @lawyers = @lawyers.offers_legal_advice
+    end
+  end
+  # helper method to add the state scope to the
+  # main search
+  def add_state_scope
+    # take California-lawyers and transform to California
+    state_name = (params[:state] || "").gsub(/\-lawyers?$/,'')
+    # return if we have the string 'all-states'
+    return if state_name.downcase == "all-states"
+    # remove any dashes
+    state_name = state_name.gsub(/\-/,' ')
+
+    # we try to auto-detect the state if possible
+    if state_name.blank? && request.location.state_code.present?
+      if state = State.find_by_abbreviation(request.location.state_code)
+        state_name = state.name
+      end
+    end
+    
+    # if we have a state, add our scope
+    if state_name.present?
+      @lawyers = @lawyers.practices_in_state(state_name)
+    end
+  end
+  # helper method to add the practice area scope to the 
+  # main search
+  def add_practice_area_scope
+    # if we have a practice area
+    if params[:practice_area].present?
+      @lawyers = @lawyers.offers_practice_area(params[:practice_area])
+    end
+  end
 end
 
+# Obtain lawyers according to sent GET params
+    # state_id = params[:select_state].to_i
+    # pa_id = params[:select_pa].to_i
+    # sp_id = params[:select_sp].to_i
+    # @lawyers = []
+    # @state_lawyers = []
+
+    # request.location.state_code.present?
+
+    # if state_id == 0
+    #   if request.location.state_code.present? 
+    #     autoselected_state = State.find_by_abbreviation(request.location.state_code)
+    #     if autoselected_state.present?
+    #       @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
+    #     else
+    #       @state_lawyers = Lawyer.approved_lawyers
+    #     end
+    #   else
+    #     @state_lawyers = Lawyer.approved_lawyers
+    #   end
+    # else
+    #   @state_lawyers = State.find(state_id).lawyers.approved_lawyers
+    # end
+    # if pa_id == 0
+    #   @lawyers = @state_lawyers
+    # else
+    #   if sp_id == 0
+    #     @selected_practice_area = "general #{PracticeArea.find(pa_id).name.downcase}"
+    #     @pa_lawyers = PracticeArea.find(pa_id).lawyers.approved_lawyers
+    #   else
+    #     @selected_practice_area = PracticeArea.find(sp_id).name.downcase
+    #     @pa_lawyers = PracticeArea.find(sp_id).lawyers.approved_lawyers
+    #   end
+    #   @lawyers = @state_lawyers & @pa_lawyers
+    # end
+
+    # # Filtering params from the next home page form
+    # state_id = params[:select_state].to_i
+    # pa_id = params[:select_pa].to_i
+    # sp_id = params[:select_sp].to_i
+
+    # if state_id.present? and state_id.to_i != 0
+    #   selected_state = State.find(state_id)
+    #   @selected_state_str = [selected_state.name, selected_state.id]
+    # else
+    #   # Selecting user's state
+    #   if request.location.state_code.present?
+    #     selected_state = State.find_by_abbreviation(request.location.state_code)
+    #     @selected_state_str = [selected_state.name, selected_state.id] if selected_state
+    #     @autoselected_state = selected_state
+    #   end
+    # end
+
+    # if pa_id.present? and pa_id != 0
+    #   selected_pa = PracticeArea.find(pa_id)
+    #   @selected_pa_str = [selected_pa.name, selected_pa.id]
+
+    #   # Obtaining specialities of this practice area
+    #   if sp_id.present? and sp_id != 0
+    #     selected_sp = selected_pa.specialities.find_by_id(sp_id)
+    #     @selected_sp_str = [selected_sp.name, selected_sp.id]
+    #   else
+    #     @selected_sp_str = ["General #{selected_pa.name}", 0]
+    #   end
+
+    #   # Making an array of specialities
+    #   # to populize the select field
+    #   @selected_pa_specialities_str = []
+    #   @selected_pa_specialities_str << ["General #{selected_pa.name}", 0]
+    #   selected_pa.specialities.each do |spec|
+    #     @selected_pa_specialities_str << [spec.name, spec.id]
+    #   end
+    # end

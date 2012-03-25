@@ -12,7 +12,32 @@ class Lawyer < User
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
-  scope :approved_lawyers, where(:user_type => User::LAWYER_TYPE, :is_approved => true).order("is_online desc, phone desc")
+  scope :approved_lawyers, 
+    where(:user_type => User::LAWYER_TYPE, :is_approved => true)
+      .order("is_online desc, phone desc")
+
+  scope :offers_legal_services,
+    includes(:offerings)
+      .where("offerings.id IS NOT NULL")
+
+  scope :offers_legal_advice,
+    includes(:practice_areas)
+      .where("practice_areas.id IS NOT NULL")
+
+  scope :practices_in_state, lambda{|name|
+    includes(:states)
+      .where(["states.name = ?", name])
+  }
+
+  scope :offers_practice_area, lambda{|name|
+    pa = PracticeArea.name_like(name).first
+    includes(:offerings, :practice_areas)
+      .where([
+        "practice_areas.id = :id OR offerings.practice_area_id = :id",
+        {:id => pa.present? ? pa.id : 0}
+      ])
+  }
+
 
   def self.approved_lawyers_states
     states = []

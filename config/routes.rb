@@ -115,6 +115,11 @@ Lawdingo::Application.routes.draw do
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
   #root :to => 'users#home'
+  
+  match '/lawyers/:service_type(/:state)' => 'users#home'
+  match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
+  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home'
+
   match '/lawyers' => 'users#home'
   root :to => 'users#landing_page'
 

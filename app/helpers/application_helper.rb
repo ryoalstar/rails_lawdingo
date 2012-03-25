@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  # is there a current_user
+  # this is here to help with stubbing on tests as well
+  def logged_in?
+    controller.logged_in?
+  end
+  # here for stubbing purposes
+  def current_user
+    controller.current_user
+  end
+
+
   def is_self_login? user_id
     current_user.id == user_id
   end

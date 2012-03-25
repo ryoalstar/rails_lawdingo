@@ -1,3 +1,5 @@
+//= require users/home
+
 jQuery ->
   # ($ ".leveled-list input.parent-area").bind "click", ->
   #  value = ($ this).attr("checked") is "checked" ? "true" : "false"

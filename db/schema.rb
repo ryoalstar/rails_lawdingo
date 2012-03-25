@@ -44,17 +44,6 @@ ActiveRecord::Schema.define(:version => 20120318142920) do
     t.integer  "conversation_id"
   end
 
-  create_table "card_details", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "card_type"
-    t.string   "card_number"
-    t.string   "expire_month"
-    t.string   "expire_year"
-    t.string   "card_verification"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "conversations", :force => true do |t|
     t.integer  "client_id",                           :null => false
     t.integer  "lawyer_id",                           :null => false
@@ -87,11 +76,20 @@ ActiveRecord::Schema.define(:version => 20120318142920) do
     t.datetime "updated_at"
   end
 
-  create_table "lawyers_practice_areas", :force => true do |t|
-    t.integer  "lawyer_id"
-    t.integer  "practice_area_id"
+  create_table "lawyers", :force => true do |t|
+    t.string   "full_name"
+    t.string   "email"
+    t.string   "skype"
+    t.string   "address"
+    t.text     "bar_memberships"
+    t.text     "areas_of_expertise"
+    t.text     "alma_maters"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "offering_types", :force => true do |t|
@@ -190,9 +188,9 @@ ActiveRecord::Schema.define(:version => 20120318142920) do
     t.string   "peer_id",                    :default => "0"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "stripe_customer_token"
     t.string   "phone"
     t.integer  "free_consultation_duration"
+    t.string   "stripe_customer_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.integer  "school_id"

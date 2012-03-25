@@ -2,6 +2,10 @@ development:
   bucket: bucket_dev
   access_key_id: AKIAIB2GYPDWTBK6FXTQ
   secret_access_key: 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
+test:
+  bucket: bucket_test
+  access_key_id: AKIAIB2GYPDWTBK6FXTQ
+  secret_access_key: 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
 production:
   bucket: bucket_pro
   access_key_id: AKIAIB2GYPDWTBK6FXTQ

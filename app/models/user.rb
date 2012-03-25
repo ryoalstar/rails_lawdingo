@@ -17,13 +17,14 @@ class User < ActiveRecord::Base
 
   has_many :offerings
   has_many :questions
-  belongs_to :school
+  belongs_to :school,
+    :touch => true
 
   has_attached_file :photo,
     :styles => { :medium => "232x", :thumb => "100x" },
-      :storage => :s3,
-      :s3_credentials => "#{Rails.root}/config/s3.yml",
-      :path => "system/:attachment/:id/:style/:basename.:extension"
+    :storage => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path => "system/:attachment/:id/:style/:basename.:extension"
 
   def self.authenticate email, password
     user = User.find_by_email(email)
