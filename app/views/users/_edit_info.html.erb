@@ -119,18 +119,18 @@
              PracticeArea.parent_practice_areas.each do |p| %>
           <li>
               <% if l_pas.include?(p) %>
-              <input type="checkbox" id="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>" checked/><%= p.name %>
+                <input type="checkbox" id="<%= p.name %>" data-name="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>" checked/><%= p.name %>
               <% else %>
-                <input type="checkbox" id="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>" /><%= p.name %>
+                <input type="checkbox" id="<%= p.name %>" data-name="<%= p.name %>" name="practice_areas[]" value="<%= p.id %>" /><%= p.name %>
               <% end %>
               <div class="sub">
                   <%= p.name %> specialities:
                   <ul>
                     <% p.specialities.each do |s| %>
                       <% if l_pas.include?(s) %>
-                      <li><input type="checkbox" id="<%= s.name %>" name="practice_areas[]" value="<%= s.id %>" checked/><%= s.name %></li>
+                        <li><input type="checkbox" id="<%= s.name %>" data-name="<% s.name %>" name="practice_areas[]" value="<%= s.id %>" checked/><%= s.name %></li>
                       <% else %>
-                      <li><input type="checkbox" id="<%= s.name %>" name="practice_areas[]"  value="<%= s.id %>"/><%= s.name %></li>
+                        <li><input type="checkbox" id="<%= s.name %>" data-name="<%= s.name %>" name="practice_areas[]"  value="<%= s.id %>"/><%= s.name %></li>
                       <% end %>
                     <% end %>
                   </ul>

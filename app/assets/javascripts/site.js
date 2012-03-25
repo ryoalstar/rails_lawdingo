@@ -77,7 +77,7 @@ function closecall()
 /*----------------------------------------*/
 
 function select_unselect_state(id) {
- if ($('#state_' + id).attr("checked") == "checked"){
+ if ($('#state_' + id).is(":checked")) {
    $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val($('#state_' + id).val());
  }
  // else {
