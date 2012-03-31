@@ -1,0 +1,7 @@
+<div class="selected-lawyers-caption">
+  <%= selected_lawyers_caption %>
+</div>
+
+<% @lawyers.each do |lawyer| -%>
+  <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+<% end -%>

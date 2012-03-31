@@ -1,15 +1,8 @@
-<%
-  options_states_arr = []
-  options_states_arr << ['Any State', 0]
-  State.all.each { |state|
-    if state.lawyers.approved_lawyers.count > 0
-      options_states_arr << [state.name, state.id]
-    end
-  }
-
-  practice_area_ids = PracticeArea.parent_practice_areas_having_lawyers.map(&:id)
-  practice_areas_lawyers = PracticeArea.find(practice_area_ids).sort_by(&:name)
-%>
+<%= javascript_tag do -%>
+  $(function(){
+    Home.initialize()
+  })
+<% end -%>
 
 <div class="page" id="page">
   <p class="notice" style="display: none;">
@@ -18,41 +11,61 @@
   </p>
 
   <div class="inline-wrapper clearfix">
-    <div class="filters">
-      <div class="input">
-        <label for="select_state" style="color: #ff9933; font-weight: bold;">Your state:</label>
-        <%= select_tag('select_state', options_for_select(options_states_arr, @selected_state_str), style: "margin-left: 10px;") %>
-      </div>
+    <form class="filters">
+      
+      <% cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do -%>
+        <div id="state">
+          <label for="state">Your state:</label>
+          <select name="state">
+            <option value="All-States" data-default="1">All</option>
+            <% @states.each do |state| -%>
+              <option value="<%= state.name.gsub(/\s+/,'-') %>-lawyers">
+                <%= state.name %>
+              </option>
+            <% end -%>
+          </select>
+        </div>
+      <% end -%>
 
-      <div class="filters-section" id="types_filter">
-        <input type="text" name="select_type" id="select_type" value="lawyer" style="display: none;" />
+      <div class="filters-section" id="service_type">
         <h3>Looking for:</h3>
         <ul>
-          <li class="selected" data-type="lawyer">
-            <%= radio_button_tag "lawyer", "0", class: "selected" %>
+          <li class="selected">
+            <%= radio_button_tag "service_type", "Legal-Advice", true, :class => "selected", "data-default" => "1" %>
             <label for="lawyer_0">Legal advice</label>
           </li>
-          <li data-type="offering">
-            <%= radio_button_tag "offering", "0" %>
-            <label for="offering_0">Fixed-price legal service</label>
+          <li >
+            <%= radio_button_tag "service_type", "Legal-Services", false %>
+            <label for="service_type">Fixed-price legal service</label>
           </li>
         </ul>
       </div>
 
-      <div class="filters-section" id="areas_filter">
-        <input type="text" name="select_pa" id="select_pa" value="0" style="display: none;" />
+      <div class="filters-section" id="practice_areas">
         <h3>Legal domain:<h3>
-        <ul class="areas">
-          <li class="practice_area selected" data-id="0">
-            <%= radio_button_tag "all-types", "0", class: "selected" %>
-            <label for="all-types_0">All types</label>
+        <ul class="practice-areas">
+          <li>
+            <%= radio_button_tag "practice_area", "All", :class => "selected", "data-default" => "1" %>
+            <label for="practice_area_All">All types</label>
           </li>
-        <% practice_areas_lawyers.each do |area| %>
-          <%= content_tag_for :li, area, data: { id: area.id } do %>
-            <%= radio_button_tag "area-#{area.id}", "#{area.id}", false, id: "area_#{area.id.to_i}" %>
-            <%= label_tag "area_#{area.id}", "#{area.name}" %>
+          <% @practice_areas.each do |area| %>
+            <% cache("practice_areas_form_#{area.id}_#{area.updated_at.to_i}") do %>
+              <li>
+                <%= radio_button_tag "practice_area", area.name.gsub(/\s+/,'-') %>
+                <%= label_tag "practice_area_#{area.name}", area.name %>
+                <% if area.children.with_approved_lawyers.present? %>
+                  <ul class="practice-areas children" style="display:none">
+                    <% area.children.with_approved_lawyers.each do |subarea| %>
+                      <li>
+                        <%= radio_button_tag "practice_area", subarea.name.gsub(/\s+/,'-'),  %>
+                        <%= label_tag "practice_area_#{subarea.name}", subarea.name %>
+                      </li>
+                    <% end -%>
+                  </ul>
+                <% end -%>
+              </li>
+            <% end -%>
           <% end %>
-        <% end %>
         </ul>
       </div>
 
@@ -61,23 +74,18 @@
         <h3>Specific need:</h3>
         <ul class="specialities"></ul>
       </div>
-    </div>
+    </form>
 
-    <!-- RESULTS -->
-    <div class="results" id="results">
-      <% if logged_in? %>
+
+    <% if logged_in? %>
       <div class="question-container">
         <%= render partial: "questions/form", locals: { type: "lawyer" } %>
       </div>
-      <% end %>
+    <% end %>
 
-      <div class="selected-lawyers-caption">
-        <%= selected_lawyers_caption %>
-      </div>
-
-      <% @lawyers.each{|lawyer| %>
-        <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
-      <% } %>
+    <!-- RESULTS -->
+    <div class="results" id="results">
+      <%= render(:partial => "search_results") %>
     </div>
   </div>
 </div>
