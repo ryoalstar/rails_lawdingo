@@ -1,7 +1,7 @@
 <%= content_tag :h4, area.name %>
 <% if area.specialities.any? %>
 <ul>
-<% area.specialities.order("name").each do |spec| %>
+<% lawyer.practice_areas.child_practice_areas.where(parent_id: area.id).order("name").each do |spec| %>
   <%= content_tag :li, spec.name %>
 <% end %>
 </ul>
