@@ -2,6 +2,17 @@ jQuery ->
   # ($ ".leveled-list input.parent-area").bind "click", ->
   #  value = ($ this).attr("checked") is "checked" ? "true" : "false"
   #  ($ ".sub[data-parent-id='#{($ this).data("id")}']").find("input").attr "checked", value
+  
+  # Practice areas checkboxes behavior
+  ($ "#leveled-list_practice_areas input.parent-area").bind "change", ->
+    input = ($ this)
+    parent_id = input.data "id"
+    checked = input.is ":checked"
+
+    unless checked
+      children_areas = input.parent().find("[data-parent-id='#{parent_id}']")
+      children_areas.each (index, element) -> ($ element).attr "checked", false
+
 
   ($ "a#close_notice").bind "click", -> ($ "p.notice").hide()
 
