@@ -120,6 +120,7 @@ class UsersController < ApplicationController
         login_in_user(@user)
         redirect_to user_offerings_path(@user, :ft => true) and return
       elsif @user.is_client?
+        UserMailer.notify_client_signup(@user).deliver
         session[:user_id] = @user.id
         return_path = ""
         if session[:return_to]
@@ -532,13 +533,13 @@ class UsersController < ApplicationController
         state_name = state.name
       end
     end
-    
+
     # if we have a state, add our scope
     if state_name.present?
       @lawyers = @lawyers.practices_in_state(state_name)
     end
   end
-  # helper method to add the practice area scope to the 
+  # helper method to add the practice area scope to the
   # main search
   def add_practice_area_scope
     # if we have a practice area
@@ -558,7 +559,7 @@ end
     # request.location.state_code.present?
 
     # if state_id == 0
-    #   if request.location.state_code.present? 
+    #   if request.location.state_code.present?
     #     autoselected_state = State.find_by_abbreviation(request.location.state_code)
     #     if autoselected_state.present?
     #       @state_lawyers = State.find_by_abbreviation(request.location.state_code).lawyers.approved_lawyers
@@ -621,3 +622,4 @@ end
     #     @selected_pa_specialities_str << [spec.name, spec.id]
     #   end
     # end
+

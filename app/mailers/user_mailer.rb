@@ -22,6 +22,22 @@ class UserMailer < ActionMailer::Base
     )
   end
 
+  def notify_client_signup(user)
+    @client = user
+    mail(
+      :to => "nav1982@gmail.com",
+      :subject => "New client signed up"
+    )
+  end
+
+  def session_notification(conversation)
+    @conversation = conversation
+    mail(
+      :to => "nav1982@gmail.com",
+      :subject => "New session created"
+    )
+  end
+
   def password_reset(user)
     @user = user
     mail :to => user.email, :subject => "Password Reset"

@@ -73,6 +73,7 @@ class Conversation < ActiveRecord::Base
       end
       # change payment status
       self.update_attributes(:has_been_charged => true, :payment_params =>payment_obj.to_json) if payment_obj
+      UserMailer.session_notification(self).deliver
     end
   end
 
