@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
   def notify_client_signup(user)
     @client = user
     mail(
-      :to => "nav1982@gmail.com",
+      :to => "nikhil.nirmel@gmail.com",
       :subject => "New client signed up"
     )
   end
@@ -33,7 +33,7 @@ class UserMailer < ActionMailer::Base
   def session_notification(conversation)
     @conversation = conversation
     mail(
-      :to => "nav1982@gmail.com",
+      :to => "nikhil.nirmel@gmail.com",
       :subject => "New session created"
     )
   end

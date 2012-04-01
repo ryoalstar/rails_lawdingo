@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+  <p>
+   New session has been created with the following details
+   </p>
+    <p>Client :<%= @conversation.client.full_name %></p>
+    <p>Lawyer :<%= @conversation.lawyer.full_name %></p>
+    <p>Billed time : <%= @conversation.billable_time %> minute(s)</p>
+    <p>Amount billed : <%= number_to_currency @conversation.billed_amount %>  </p>
+  <br/>
+  Thanks,<br/>
+  Lawdingo Team
+</body>
+</html>
+
