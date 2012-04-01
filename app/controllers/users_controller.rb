@@ -330,7 +330,7 @@ class UsersController < ApplicationController
       render :js => "window.location = '#{conversation_summary_path(call_conversation, :call_type =>'phonecall')}'", :notice => "Your call is completed"
       return
     else
-      render :js => "window.location = '#{root_path}'", :notice => "You could not connect to the lawyer"
+      render :js => "window.location = '#{root_path}'"
       return
     end
   end

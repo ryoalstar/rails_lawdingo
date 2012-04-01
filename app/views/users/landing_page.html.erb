@@ -10,6 +10,12 @@
 %>
 
 <div id="page" class="home">
+  <% if params[:reset_email_notice].present? %>
+    <p class="notice">
+      Thanks - please check your email for instructions on resetting your password.
+    <a href="#" id="close_notice">Close</a>
+  </p>
+  <% end %>
   <div>
     <!-- Image carousel block with a link to json file consisting of data about previewed lawyers -->
     <div class="image-carousel" dataurl="/search/carsousel_images">
