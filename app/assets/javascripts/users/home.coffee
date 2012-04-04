@@ -2,6 +2,10 @@ class Home
 
   initialize : ()->
     this.add_event_listeners()
+
+    if document.location.pathname != "/lawyers"
+      document.location.hash = "!#{document.location.pathname}"
+
     if document.location.hash == ""
       this.set_defaults()
     else
@@ -11,7 +15,6 @@ class Home
   submit : ()->
     $.ajax(this.current_search_url(),{
       complete : ()->
-        console.log(arguments)
       dataType : 'script'
 
     })
