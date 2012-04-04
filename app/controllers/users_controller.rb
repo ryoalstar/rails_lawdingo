@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   before_filter :current_user_home, :only => [:landing_page]
   before_filter :check_payment_info, :only => [:start_phone_call]
 
+  before_filter :redirect_to_state_page, :only => [:home]
+
   #REMINDER: uncomment only in production
   #before_filter :force_ssl, :only => ['payment_info']
   #before_filter :remove_ssl, :only => ['home']
@@ -503,6 +505,25 @@ class UsersController < ApplicationController
   end
 
   protected
+
+  # redirect the user to the state page
+  def redirect_to_state_page
+    # we already have params for the state name
+    return if self.get_state_name.present?
+    # we try to auto-detect the state if possible
+    if request.location.state_code.present?
+      if state = State.find_by_abbreviation(request.location.state_code)
+        state_name = state.name
+        return redirect_to(
+          :action => :home, 
+          :service_type => "Legal-Advice",
+          :practice_area => "All",
+          :state => "#{state_name.gsub(/\s/,'-')}-lawyers"
+        )
+      end
+    end
+  end
+
   # helper method to add the service_type
   # scope to the main search
   def add_service_type_scope
@@ -517,23 +538,12 @@ class UsersController < ApplicationController
       @lawyers = @lawyers.offers_legal_advice
     end
   end
+
   # helper method to add the state scope to the
   # main search
   def add_state_scope
-    # take California-lawyers and transform to California
-    state_name = (params[:state] || "").gsub(/\-lawyers?$/,'')
-    # return if we have the string 'all-states'
-    return if state_name.downcase == "all-states"
-    # remove any dashes
-    state_name = state_name.gsub(/\-/,' ')
-
-    # we try to auto-detect the state if possible
-    if state_name.blank? && request.location.state_code.present?
-      if state = State.find_by_abbreviation(request.location.state_code)
-        state_name = state.name
-      end
-    end
-
+    state_name = self.get_state_name
+    return if state_name.downcase == "all states"
     # if we have a state, add our scope
     if state_name.present?
       @lawyers = @lawyers.practices_in_state(state_name)
@@ -547,6 +557,14 @@ class UsersController < ApplicationController
       @lawyers = @lawyers.offers_practice_area(params[:practice_area])
     end
   end
+
+  # gives us the state name provided in the params
+  def get_state_name
+    # take California-lawyers and transform to California
+    state_name = (params[:state] || "").gsub(/\-lawyers?$/,'')
+    return state_name.gsub(/\-/,' ') 
+  end
+
 end
 
 # Obtain lawyers according to sent GET params

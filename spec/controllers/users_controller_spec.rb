@@ -98,8 +98,7 @@ describe UsersController do
 
     context "auto-selected state names" do
       
-      it "should auto-select a state if one is detected and none is
-        provided by the request" do
+      it "should redirect to the correct state if we can find one" do
 
         state = State.new
         state.stubs(:name => "California")
@@ -107,11 +106,15 @@ describe UsersController do
         State.expects(:find_by_abbreviation).with("CA").returns(state)
         request.location.stubs(:state_code => "CA")
 
-        Lawyer.expects(:approved_lawyers => Lawyer)
-        Lawyer.expects(:practices_in_state).with(state.name).returns(lawyers)
-
         get(:home)
 
+        response.should redirect_to({
+          :controller => :users, 
+          :action => :home,
+          :service_type => "Legal-Advice",
+          :practice_area => "All",
+          :state => "California-lawyers"
+        })
 
       end
 

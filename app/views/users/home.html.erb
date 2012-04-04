@@ -45,7 +45,7 @@
         <h3>Legal domain:<h3>
         <ul class="practice-areas">
           <li>
-            <%= radio_button_tag "practice_area", "All", :class => "selected", "data-default" => "1" %>
+            <%= radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1" %>
             <label for="practice_area_All">All types</label>
           </li>
           <% @practice_areas.each do |area| %>
