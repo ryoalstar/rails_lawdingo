@@ -32,7 +32,7 @@ gem "newrelic_rpm", "~>3.1.1"
 gem "simple_form"
 gem 'geocoder'
 gem 'letter_opener', group: :development
-gem "psych", "1.3.1"
+#gem "psych" 
 # Use unicorn as the web server
 # gem 'unicorn'
 

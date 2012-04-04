@@ -514,12 +514,7 @@ class UsersController < ApplicationController
     if request.location.state_code.present?
       if state = State.find_by_abbreviation(request.location.state_code)
         state_name = state.name
-        return redirect_to(
-          :action => :home, 
-          :service_type => "Legal-Advice",
-          :practice_area => "All",
-          :state => "#{state_name.gsub(/\s/,'-')}-lawyers"
-        )
+        return redirect_to("/lawyers/Legal-Advice/#{state_name.gsub(/\s/,'-')}-lawyers")
       end
     end
   end

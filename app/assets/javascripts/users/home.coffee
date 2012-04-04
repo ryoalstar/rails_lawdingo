@@ -61,7 +61,8 @@ class Home
     this.set_state_fields_val(hash[1])
     if hash[2]
       this.set_practice_area_fields_val(hash[2])    
-
+    else 
+      this.set_practice_area_fields_val("All")
 
   set_defaults : ()->
     this.set_service_type_fields_val(
