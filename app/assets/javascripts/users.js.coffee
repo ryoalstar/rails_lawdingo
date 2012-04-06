@@ -11,10 +11,10 @@ jQuery ->
     parent_id = input.data "id"
     checked = input.is ":checked"
 
-    unless checked
-      children_areas = input.parent().find("[data-parent-id='#{parent_id}']")
-      children_areas.each (index, element) -> ($ element).attr "checked", false
+    console.log checked
 
+    children_areas = input.parent().find("[data-parent-id='#{parent_id}'] input")
+    children_areas.each (index, element) -> ($ element).attr "checked", checked
 
   ($ "a#close_notice").bind "click", -> ($ "p.notice").hide()
 
