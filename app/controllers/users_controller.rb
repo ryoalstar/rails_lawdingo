@@ -382,8 +382,12 @@ class UsersController < ApplicationController
     rescue
       pobj    = nil
     end
-    pvalue = params[:value]
-    pvalue = pvalue.blank? ? pobj.value : pvalue.strip
+    # pvalue = params[:value]
+    # pvalue = pvalue.blank? ? pobj.value : pvalue.strip
+
+    pvalue = ""
+    pvalue = params[:value].to_s if params[:value].present?
+
     if pobj
       pobj.update_attribute(:value, pvalue)
       render :text =>'Successfully Updated!'
