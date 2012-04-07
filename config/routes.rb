@@ -1,4 +1,8 @@
 Lawdingo::Application.routes.draw do
+  post "/framey/callback" => "framey/videos#callback"
+
+  namespace :framey do resources :videos, :only => [ :index, :show, :new], :controller => "videos" end
+
   resources :questions
 
   resources :reviews
