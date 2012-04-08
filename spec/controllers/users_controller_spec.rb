@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe UsersController do
 
+  include Rails.application.routes.url_helpers
+
   let(:lawyers) do
     [Lawyer.new]
   end
@@ -58,8 +60,12 @@ describe UsersController do
     it "should use the practices_in_state scope when the state param
       is a valid state" do
 
+      cali = State.new(:name => "California")
+      State.stubs(:name_like).returns([cali])
+
+
       Lawyer.expects(:approved_lawyers => Lawyer)
-      Lawyer.expects(:practices_in_state).with("California").returns(lawyers)
+      Lawyer.expects(:practices_in_state).with(cali).returns(lawyers)
 
       get(:home, :state => "California-lawyers")
       assigns["lawyers"].should eql lawyers
@@ -67,16 +73,23 @@ describe UsersController do
     end
 
     it "replaces - with ' ' when provided with states" do
+      new_york = State.new(:name => "New York")
+      State.stubs(:name_like).returns([new_york])
+
       Lawyer.expects(:approved_lawyers => Lawyer)
-      Lawyer.expects(:practices_in_state).with("New York").returns(lawyers)
+      Lawyer.expects(:practices_in_state).with(new_york).returns(lawyers)
 
       get(:home, :state => "New-York-lawyers")
       assigns["lawyers"].should eql lawyers
     end
 
     it "allows for ' ' when provided with states" do
+
+      new_york = State.new(:name => "New York")
+      State.stubs(:name_like).returns([new_york])
+
       Lawyer.expects(:approved_lawyers => Lawyer)
-      Lawyer.expects(:practices_in_state).with("New York").returns(lawyers)
+      Lawyer.expects(:practices_in_state).with(new_york).returns(lawyers)
 
       get(:home, :state => "New York-lawyers")
       assigns["lawyers"].should eql lawyers
@@ -96,6 +109,20 @@ describe UsersController do
 
     end
 
+    it "assigns selected_state when a state is provided" do
+
+      s = State.new(:name => "New York")
+      State.expects(:name_like).with("New York").returns([s])
+
+      Lawyer.expects(:approved_lawyers => Lawyer)
+      Lawyer.expects(:practices_in_state).with(s).returns(lawyers)
+
+      get(:home, :state => "New York-lawyers")
+      assigns["lawyers"].should eql lawyers
+      assigns["selected_state"].should be s
+
+    end
+
     context "auto-selected state names" do
       
       it "should redirect to the correct state if we can find one" do
@@ -108,46 +135,50 @@ describe UsersController do
 
         get(:home)
 
-        response.should redirect_to({
+        response.should redirect_to(url_for({
+          :host => "test.host",
           :controller => :users, 
           :action => :home,
           :service_type => "Legal-Advice",
-          :practice_area => "All",
           :state => "California-lawyers"
-        })
+        }))
 
       end
 
       it "should not override the state provided by the request" do
 
-        state = State.new
-        state.stubs(:name => "California")
+        cali = State.new(:name => "California")
+        new_york = State.new(:name => "New York")
+        State.stubs(:name_like).returns([new_york])
 
-        State.stubs(:find_by_abbreviation).with("CA").returns(state)
+        State.stubs(:find_by_abbreviation).with("CA").returns(cali)
         request.location.stubs(:state_code => "CA")
 
         Lawyer.expects(:approved_lawyers => Lawyer)
-        Lawyer.expects(:practices_in_state).with("New York").returns(lawyers)
+        Lawyer.expects(:practices_in_state).with(new_york).returns(lawyers)
 
         get(:home, :state => "New-York")
 
       end
-
-
     end
-
 
   end
 
   it "should use the offers_practice_area scope when provided with 
     a practice area in the search" do
 
-      Lawyer.expects(:approved_lawyers => Lawyer)
-      Lawyer.expects(:offers_practice_area).with("Blah-Blah")
-        .returns(lawyers)
 
-      get(:home, :practice_area => "Blah-Blah")
-      assigns["lawyers"].should eql lawyers
+    pa = PracticeArea.new(:name => "Blah Blah")
+    PracticeArea.expects(:name_like).with("Blah-Blah").returns([pa])
+
+    Lawyer.expects(:approved_lawyers => Lawyer)
+    Lawyer.expects(:offers_practice_area).with(pa)
+      .returns(lawyers)
+
+    get(:home, :practice_area => "Blah-Blah")
+
+    assigns["selected_practice_area"].should be pa
+
   end
 
 

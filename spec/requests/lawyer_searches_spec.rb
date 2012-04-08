@@ -80,6 +80,10 @@ describe "LawyerSearches" do
 
       it "searches for a lawyer by practice area in Legal-Advice" do
 
+        unassigned_practice_area = FactoryGirl.create(
+          :practice_area, :name => "XYZ"
+        )
+
         visit(lawyers_path(
           :service_type => "Legal-Advice",
           :practice_area => lawyer.practice_areas.first.name.gsub(/\s+/,"-")
@@ -89,13 +93,17 @@ describe "LawyerSearches" do
         # we are not in NY
         visit(lawyers_path(
           :service_type => "Legal-Advice",
-          :practice_area => "gobbldygook"
+          :practice_area => unassigned_practice_area.name
         ))
         page.should_not have_content(lawyer.last_name)
 
       end
 
       it "searches for a lawyer by practice area in Legal-Services" do
+
+        unassigned_practice_area = FactoryGirl.create(
+          :practice_area, :name => "XYZ"
+        )
 
         visit(lawyers_path(
           :service_type => "Legal-Services",
@@ -106,7 +114,7 @@ describe "LawyerSearches" do
         # no such practice area
         visit(lawyers_path(
           :service_type => "Legal-Services",
-          :practice_area => "gobbldygook"
+          :practice_area => unassigned_practice_area.name
         ))
         page.should_not have_content(lawyer.last_name)
 

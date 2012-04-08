@@ -24,17 +24,24 @@ class Lawyer < User
     includes(:practice_areas)
       .where("practice_areas.id IS NOT NULL")
 
-  scope :practices_in_state, lambda{|name|
+  scope :practices_in_state, lambda{|state_or_name|
+    name = state_or_name.is_a?(State) ? state_or_name.name : state_or_name
     includes(:states)
       .where(["states.name = ?", name])
   }
 
-  scope :offers_practice_area, lambda{|name|
-    pa = PracticeArea.name_like(name).first
+  scope :offers_practice_area, lambda{|practice_area_or_name|
+    if practice_area_or_name.is_a?(PracticeArea)
+      pa = practice_area_or_name
+    else
+      pa = PracticeArea.name_like(practice_area_or_name).first 
+      pa ||= PracticeArea.new
+    end
     includes(:offerings, :practice_areas)
       .where([
-        "practice_areas.id = :id OR offerings.practice_area_id = :id",
-        {:id => pa.present? ? pa.id : 0}
+        "practice_areas.id IN (:ids) " + 
+        "OR offerings.practice_area_id IN (:ids)",
+        {:ids => [pa.id] + pa.children.collect(&:id)}
       ])
   }
 

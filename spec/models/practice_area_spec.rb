@@ -24,9 +24,28 @@ describe PracticeArea do
       scope.where_values.should eql(["#{Lawyer.table_name}.is_approved = 1"])
     end
 
-    it "should provide a scope for practice areas with names like x" do
-      scope = PracticeArea.name_like("My-Dasherized-name")
-      scope.where_values.should eql(["name LIKE 'My Dasherized name'"])
+    context ".name_like" do
+      
+      it "should provide a scope for practice areas with names like x" do
+        scope = PracticeArea.name_like("My-Dasherized-name")
+        scope.where_values.should eql([
+          "LOWER(name) REGEXP '^my[ \-\/]+dasherized[ \-\/]+name$'"
+        ])
+        lambda{scope.count}.should_not raise_error
+      end
+
+    end
+
+  end
+
+  context "delegation" do
+    
+    it "should delegate parent_name to its main_area's name" do
+      pa = PracticeArea.new
+      parent = PracticeArea.new(:name => "xyz")
+
+      pa.stubs(:main_area => parent)
+      pa.parent_name.should be parent.name
     end
 
   end

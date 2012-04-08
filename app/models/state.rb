@@ -9,6 +9,10 @@ class State < ActiveRecord::Base
     .where("#{Lawyer.table_name}.is_approved = ?", true)
     .group("#{table_name}.id")
 
+  scope :name_like, lambda{|name|
+    where("#{table_name}.name LIKE ?", name.strip)
+  }
+
   def self.import_csv
     CSV.foreach(FILE_PATH, :headers => true) do |row|
       state = row[0].to_s.split(',')

@@ -62,7 +62,7 @@
             <li class="first-child">&bull; Licensed in <%= licenced_states %></li>
           <% end %>
           <% unless lawyer.practice_areas.blank? %>
-            <li class="last-child">&bull; Advises on <%= @selected_practice_area.present? ? @selected_practice_area : "#{pas_names_list} law" %></li>
+            <li class="last-child">&bull; Advises on <%= @selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law" %></li>
           <% end %>
         </ul>
         <div class="action-buttons">

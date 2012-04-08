@@ -541,19 +541,22 @@ class UsersController < ApplicationController
   # helper method to add the state scope to the
   # main search
   def add_state_scope
-    state_name = self.get_state_name
-    return if state_name.downcase == "all states"
-    # if we have a state, add our scope
-    if state_name.present?
-      @lawyers = @lawyers.practices_in_state(state_name)
+    # store selected state for the view
+    @selected_state = State.name_like(self.get_state_name).first
+    if @selected_state.present?
+      @lawyers = @lawyers.practices_in_state(@selected_state)
     end
   end
+
   # helper method to add the practice area scope to the
   # main search
   def add_practice_area_scope
     # if we have a practice area
     if params[:practice_area].present?
-      @lawyers = @lawyers.offers_practice_area(params[:practice_area])
+      scope = PracticeArea.name_like(params[:practice_area])
+      if @selected_practice_area = scope.first
+        @lawyers = @lawyers.offers_practice_area(@selected_practice_area)
+      end
     end
   end
 

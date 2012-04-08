@@ -26,10 +26,21 @@ class PracticeArea < ActiveRecord::Base
   scope :parent_practice_areas, lambda { where(:parent_id => nil) }
   scope :child_practice_areas, lambda { where("parent_id is not null") }
   scope :parent_practice_areas_having_lawyers, joins(:expert_areas, :lawyers).where(:parent_id => nil).select("distinct(practice_areas.id)")
+  
   scope :child_practice_areas_having_lawyers, joins(:expert_areas, :lawyers).where("parent_id is not null").select("distinct(practice_areas.id)")
 
   scope :name_like, lambda{|name|
-    where("name LIKE ?", name.gsub(/-/,' '))
+    name_parts = name.split(/[^\w]+/)
+    quoted_name_parts = name_parts.collect{|n| 
+      self.connection.quote_string(n)
+    }
+    regex = quoted_name_parts.join("[ \-\/]+").downcase
+    where("LOWER(name) REGEXP '^#{regex}$'")
   }
+
+  # name of its parent practice area
+  def parent_name 
+    self.main_area.present? ? self.main_area.name : nil
+  end
 end
 
