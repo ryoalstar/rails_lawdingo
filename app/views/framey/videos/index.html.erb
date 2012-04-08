@@ -1,33 +1,19 @@
-<h1> Previously recorded videos </h1>
+<div id="page" class="framey-video">
+  <div>
+    <h2>Introduce yourself to prospective clients in a video of up to two minutes long.</h2>
 
-<% if !@videos.empty? %>
-	<% @videos.each do |video|%>
-	
-		<div class="framey_video_profile">
-			<span class="framey_video_thumbnail">
-			<a href="<%= framey_video_path(video.name)%>">	
-			<%= image_tag video.medium_thumbnail_url%>
-			</a>
-			</span>
-			<span class="framey_video_info">
-				<div class="framey_video_name">
-					Name: <a href="<%= framey_video_path(video.name)%>"><%= video.name %></a>
-				</div>
-				<div class="framey_video_duration">
-					Length: <%= video.duration %> seconds
-				</div>
-				<div class="framey_video_filesize">
-					Filesize: <%= video.filesize / 1024 %> KB
-				</div>
-				<div class="framey_video_date">
-					Created at: <%= video.created_at %>
-				</div>								
-			</span>
-		</div>
-		<hr/>
+    <div class="recorder-wrapper">
+      <input id="FrameyRecorder" type="video" data-params="{ api_key: '<%= Framey::API_KEY %>' }" />
+    </div>
+  </div>
+</div>
 
+<%= javascript_tag do %>
+  // Id of framey input[type="video"]
+  var recorderId = "FrameyRecorder";
 
-	<%end%>
-<% else %>
-	<h3>No videos were recorded, yet </h3>
+  // Set user id as a creator_id
+  Framey.observe(recorderId, "recordClicked", function(data) {
+    Framey.getRecorder(recorderId).setAllSessionData({"creator_id": <%= current_user.id.to_s if current_user.present? %>});
+  });
 <% end %>

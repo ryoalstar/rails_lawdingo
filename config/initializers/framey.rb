@@ -1,4 +1,4 @@
-module Framey  
+module Framey
   API_HOST = "http://framey.com"
   RUN_ENV = "production"
   API_KEY = "KRPEGMVYBINUYNE84FEYY5MLW"

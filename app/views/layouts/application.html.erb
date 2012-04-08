@@ -5,7 +5,7 @@
       <%= stylesheet_link_tag    "application" %>
       <%= javascript_include_tag "application" %>
       <%= javascript_include_tag 'site', 'users', 'twipsy', 'hints', 'jquery.timer','swfobject','jquery-impromptu.3.2'%>
-      <%= javascript_include_tag "https://js.stripe.com/v1/", "payment" %>
+      <%= javascript_include_tag "http://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment" %>
       <% if current_user && current_user.user_type == 'LAWYER' %>
         <script type = "text/javascript"> swfobject.registerObject("mySwf", "10.2.0");</script>
       <% end %>
