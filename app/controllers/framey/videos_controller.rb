@@ -4,9 +4,7 @@ module Framey
     end
 
     def callback
-      render text: "" and return unless request.post? && params[:video].present?
-
-      video = Video.create!({
+      Video.create!({
         name: params[:video][:name],
         filesize: params[:video][:filesize],
         duration: params[:video][:duration],

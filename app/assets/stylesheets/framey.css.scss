@@ -1,8 +1,10 @@
 .framey-video {
-  div {
-    text-align: center;
+  &>div:first-child {
+    padding: 30px 60px;
+    font-size: 1.4em;
 
     .recorder-wrapper {
+      text-align: center;
       display: block;
       position: relative;
       margin: 2em 0;
