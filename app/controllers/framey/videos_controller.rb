@@ -1,6 +1,18 @@
 module Framey
   class VideosController < ApplicationController
+    before_filter :authenticate
+
     def index
+      @lawyer = Lawyer.find(current_user.id)
+      @video = Framey::Video.find_by_creator_id(@lawyer) if @lawyer.has_video?
+    end
+
+    def destroy
+      @video = Framey::Video.find(params[:id])
+
+      if @video.destroy
+        redirect_to framey_videos_path
+      end
     end
 
     def callback

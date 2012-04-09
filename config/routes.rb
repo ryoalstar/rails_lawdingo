@@ -1,6 +1,6 @@
 Lawdingo::Application.routes.draw do
   namespace :framey do
-    resources :videos, only: :index
+    resources :videos
   end
   post "framey/callback" => "framey/videos#callback"
 

@@ -115,5 +115,9 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def has_video?
+    video = Framey::Video.find_by_creator_id(self.id)
+    video.present?
+  end
 end
 

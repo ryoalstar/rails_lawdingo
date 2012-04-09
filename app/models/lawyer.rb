@@ -38,7 +38,6 @@ class Lawyer < User
       ])
   }
 
-
   def self.approved_lawyers_states
     states = []
 
@@ -116,5 +115,6 @@ class Lawyer < User
     pas_names_last = pas_names.pop
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
-end
 
+
+end

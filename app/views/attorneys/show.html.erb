@@ -5,6 +5,16 @@
 
   <%= render partial: "lawyer/lawyer", locals: { lawyer: @attorney } %>
   <div class="details">
+    <% if @attorney.has_video? %>
+    <div id="intro_video">
+      <%= content_tag :h3, "#{@attorney.first_name}'s self-introduction video:" %>
+      <%= render_player({
+          video_url: @video.flv_url,
+          thumbnail_url: @video.large_thumbnail_url,
+      }) %>
+    </div>
+    <% end %>
+
     <div class="columns">
       <div class="column areas">
         <%= content_tag :h3, "#{@attorney.first_name}'s key practice areas:" %>
