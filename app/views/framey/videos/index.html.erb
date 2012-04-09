@@ -6,7 +6,10 @@
 
     <% unless @lawyer.has_video? %>
       <div class="recorder-wrapper">
-        <input id="FrameyRecorder" type="video" data-params="{ api_key: '<%= Framey::API_KEY %>' }" />
+        <input id="FrameyRecorder" type="video" data-params="{ 
+          api_key: '<%= Framey::API_KEY,
+          max_time: 120
+        %>' }" />
       </div>
     <% else %>
       <div class="player-wrapper">
