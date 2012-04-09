@@ -1,6 +1,6 @@
 module Framey
   class VideosController < ApplicationController
-    before_filter :authenticate
+    before_filter :authenticate, only: [:index, :destroy]
 
     def index
       @lawyer = Lawyer.find(current_user.id)
