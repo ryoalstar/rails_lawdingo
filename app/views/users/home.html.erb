@@ -77,7 +77,7 @@
     </form>
 
     <% if logged_in? %>
-      <div id="generail_question" class="question-container">
+      <div id="generail_question" class="question-container" style="display: none;">
         <%= render partial: "questions/form", locals: { type: "lawyer" } %>
       </div>
     <% end %>
