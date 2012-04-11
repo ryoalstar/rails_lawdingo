@@ -515,7 +515,7 @@ class UsersController < ApplicationController
     # we already have params for the state name
     return if self.get_state_name.present?
     # we try to auto-detect the state if possible
-    if request.location.state_code.present?
+    if request.location.present? && request.location.state_code.present?
       if state = State.find_by_abbreviation(request.location.state_code)
         state_name = state.name
         return redirect_to("/lawyers/Legal-Advice/#{state_name.gsub(/\s/,'-')}-lawyers")
