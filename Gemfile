@@ -32,6 +32,7 @@ gem "newrelic_rpm", "~>3.1.1"
 gem "simple_form"
 gem 'geocoder'
 gem 'letter_opener', group: :development
+gem 'framey'
 #gem "psych" 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -42,7 +43,7 @@ gem 'letter_opener', group: :development
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
-  gem 'ruby-debug19', :require => "ruby-debug"
+#  gem 'ruby-debug19', :require => "ruby-debug"
 end 
 
 group :test do
@@ -55,7 +56,7 @@ group :test do
   gem "mocha"
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
-  gem 'ruby-debug19', :require => 'ruby-debug'
+#  gem 'ruby-debug19', :require => 'ruby-debug'
   gem "spork"
 end
 

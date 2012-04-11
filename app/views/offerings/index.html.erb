@@ -6,11 +6,8 @@
 <% end %>
 <div id="page" class="offerings">
   <div>
-    <div style="font-size: 14px; margin: 0 8px 10px 0; font-weight: bold;">
-      <%= link_to_unless_current "Account information", user_path(@lawyer, :t =>User::ACCOUNT_TAB) %> |
-      <%= link_to_unless_current "Summary of sessions", user_path(@lawyer, :t =>User::SESSION_TAB) %> |
-      <%= link_to_unless_current "Fixed-price offers", user_offerings_path(@lawyer) %>
-    </div>
+    <%= render partial: "lawyer/menu", locals: { lawyer: current_user } %>
+
     <div id="offerings">
       <h3>My fixed-price offers:</h3>
       <% if @lawyer.offerings.any? %>

@@ -36,7 +36,7 @@ Lawdingo::Application.configure do
   config.assets.debug = true
   
   #  config.force_ssl = true
-  config.after_initialize do
-    Debugger.start
-  end
+  # config.after_initialize do
+    # Debugger.start
+  # end
 end

@@ -8,7 +8,8 @@ txt_color = ['black','blue']
   <div style="font-size:14px;margin-right:8px;margin-bottom:10px;font-weight:bold;">
       <%= link_to_unless_current "Account information", user_path(user, :t => User::ACCOUNT_TAB) %> |
       <%= link_to_unless_current "Summary of sessions", user_path(user, :t => User::SESSION_TAB) %> |
-      <%= link_to_unless_current "Fixed-price offers", user_offerings_path(user) %>
+      <%= link_to_unless_current "Fixed-price offers", user_offerings_path(user) %> |
+      <%= link_to_unless_current "Intro video", framey_videos_path %>
   </div>
     <% if tab == User::ACCOUNT_TAB %>
       <%#= render :partial =>"/users/account_info", :locals => {:user => user} %>

@@ -12,7 +12,7 @@
 
   <div class="inline-wrapper clearfix">
     <form class="filters">
-      
+
       <% cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do -%>
         <div id="state">
           <label for="state">Your state:</label>
@@ -75,7 +75,6 @@
         <ul class="specialities"></ul>
       </div>
     </form>
-
 
     <% if logged_in? %>
       <div class="question-container">
