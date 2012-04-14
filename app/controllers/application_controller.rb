@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_admin, :logged_in_admin?, :log_in_user, :log_out_user
+  helper_method :current_admin, :logged_in?, :logged_in_admin?, :log_in_user, :log_out_user
 
   def log_in_user user_id
     session[:user_id] = user_id
@@ -55,7 +55,4 @@ class ApplicationController < ActionController::Base
     session[:referred_url] = request.fullpath
     redirect_to login_path, :notice => 'You have not logged in' and return false
   end
-
-
 end
-
