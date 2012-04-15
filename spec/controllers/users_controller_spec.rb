@@ -167,7 +167,6 @@ describe UsersController do
   it "should use the offers_practice_area scope when provided with 
     a practice area in the search" do
 
-
     pa = PracticeArea.new(:name => "Blah Blah")
     PracticeArea.expects(:name_like).with("Blah-Blah").returns([pa])
 
@@ -181,11 +180,34 @@ describe UsersController do
 
   end
 
-
   it "should build a list of all practice areas for the search" do
     practice_areas = [PracticeArea.new]
     PracticeArea.expects(:parent_practice_areas => practice_areas)
     get(:home)
     assigns["practice_areas"].should eql practice_areas
+  end
+
+  context "on sign up" do
+    context "when a pending question exists" do
+      before :each do
+        @question = FactoryGirl.create(:question, user_id: nil)
+        @stefan = FactoryGirl.build(:user, email: "stefan@lawdingo.com")
+        session[:question_id] = @question.id
+      end
+
+      it "should update question user data" do
+        post :create, user: @stefan.attributes
+        @question.user_id.should == @stefan.id
+      end
+
+      # it "should notify admin by email" do
+      #   expect {
+      #     post :create, user: @stefan.attributes
+      #   }.to change(ActionMailer::Base.deliveries, :size).by(1)
+
+      #   question_email = ActionMailer::Base.deliveries.last
+      #   question_email.subject.should match /Question ##{@question.id}/
+      # end
+    end
   end
 end

@@ -122,6 +122,16 @@ class UsersController < ApplicationController
         login_in_user(@user)
         redirect_to user_offerings_path(@user, :ft => true) and return
       elsif @user.is_client?
+        # If there is a pending question
+        if session[:question_id].present?
+          # Add user details for a question
+          @pending_question = Question.find(session[:question_id])
+          @pending_question.update_attribute(:user_id, @user.id)
+
+          # Send notification to admin
+          UserMailer.new_question_email(@pending_question).deliver
+        end
+
         UserMailer.notify_client_signup(@user).deliver
         session[:user_id] = @user.id
         return_path = ""
