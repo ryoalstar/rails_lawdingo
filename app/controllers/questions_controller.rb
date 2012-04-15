@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  def create 
+  def create
     @question = Question.new(params[:question])
     @question.save
 
