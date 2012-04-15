@@ -55,4 +55,13 @@ class ApplicationController < ActionController::Base
     session[:referred_url] = request.fullpath
     redirect_to login_path, :notice => 'You have not logged in' and return false
   end
+
+  def send_pending_question(question_id, user)
+    if question_id.present?
+      question = Question.find(question_id)
+      question.update_attribute(:user_id, user.id)
+
+      UserMailer.new_question_email(question).deliver
+    end
+  end
 end

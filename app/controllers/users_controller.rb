@@ -124,12 +124,7 @@ class UsersController < ApplicationController
       elsif @user.is_client?
         # If there is a pending question
         if session[:question_id].present?
-          # Add user details for a question
-          @pending_question = Question.find(session[:question_id])
-          @pending_question.update_attribute(:user_id, @user.id)
-
-          # Send notification to admin
-          UserMailer.new_question_email(@pending_question).deliver
+          send_pending_question(session[:question_id], @user)
         end
 
         UserMailer.notify_client_signup(@user).deliver

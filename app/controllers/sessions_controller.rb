@@ -12,6 +12,11 @@ class SessionsController < ApplicationController
       login_in_user(user)
       return_path = ""
       if user.is_client?
+        # If there is a pending question
+        if session[:question_id].present?
+          send_pending_question(session[:question_id], user)
+        end
+
        if session[:return_to]
         return_path = session[:return_to]
         session[:return_to] = nil
