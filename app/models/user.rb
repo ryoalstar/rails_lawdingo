@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
     :styles => { :medium => "232x", :thumb => "100x" },
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :s3_protocol => "https",
     :path => "system/:attachment/:id/:style/:basename.:extension"
 
   def self.authenticate email, password
