@@ -33,6 +33,7 @@ gem "simple_form"
 gem 'geocoder'
 gem 'letter_opener', group: :development
 gem 'framey'
+gem 'oauth'
 #gem "psych" 
 # Use unicorn as the web server
 # gem 'unicorn'
