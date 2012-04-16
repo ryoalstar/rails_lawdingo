@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120408010846) do
+ActiveRecord::Schema.define(:version => 20120416012520) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20120408010846) do
     t.datetime "password_reset_sent_at"
     t.integer  "school_id"
     t.integer  "license_year"
+    t.string   "yelp_business_id"
   end
 
 end
