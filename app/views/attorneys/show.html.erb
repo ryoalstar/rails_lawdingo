@@ -39,7 +39,7 @@
 
         <% if @attorney.yelp_business_id.present? %>
           <h4>Yelp rating</h4>
-          <div class="yelp-wrapper">
+          <div class="yelp-rating-container">
             <%= image_tag @attorney.yelp[:rating_img_url] %>
             <span class="reviews-count">Based on <%= pluralize @attorney.yelp[:review_count], "review", "reviews" %></span>
           </div>
@@ -61,6 +61,23 @@
         <%= render @attorney.reviews.order("created_at DESC") %>
       </ul>
     </div>
+    <% end %>
+
+    <% if @attorney.yelp_business_id.present? %>
+      <div class="yelp-reviews-container">
+        <h3>Latest Yelp reviews:</h3>
+        <ul class="yelp-reviews" id="yelp_reviews">
+          <% @attorney.yelp[:reviews].each do |review| %>
+            <%= content_tag :li, class: "yelp-review", id: review["id"] do %>
+              <%= content_tag :div, image_tag(review["user"]["image_url"]), class: "photo" %>
+              <div class="details">
+                <%= content_tag :div, image_tag(review["rating_image_url"]), class: "rating" %>
+                <%= content_tag :p, yelp_review_excerpt(review, @attorney) %>
+                <%= content_tag :span, yelp_review_posted_by(review), class: "footnote" %>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
     <% end %>
   </div>
 </div>

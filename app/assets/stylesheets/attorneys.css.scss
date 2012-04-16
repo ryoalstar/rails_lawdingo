@@ -31,7 +31,7 @@ body.attorneys {
   .details {
     margin: 3.5em 0 0 1em;
 
-    .yelp-wrapper {
+    .yelp-rating-container {
       display: block;
       position: relative;
       padding-left: 1.3em;
@@ -40,6 +40,49 @@ body.attorneys {
         display: block;
         font-size: 1.25em;
         line-height: 1.4;
+      }
+    }
+
+    .yelp-reviews-container {
+      display: block;
+      position: relative;
+      margin: 1.75em 0 1.667em 0;
+    }
+
+    .yelp-reviews {
+      display: block;
+      position: relative;
+      list-style: none;
+      padding-left: 1.25em;
+
+      li {
+        position: relative;
+        text-align: left;
+        width: 100%;
+        margin: 1.4em 0;
+
+        .photo, .details {
+          display: inline-block;
+          vertical-align: top;
+        }
+
+        .photo {
+          width: 100px;
+          margin-right: 18px;
+        }
+
+        .details {
+          width: 80%;
+          margin: 0;
+
+          p {
+            margin: 5px 0;
+          }
+
+          .footnote {
+            font-size: 0.75em;
+          }
+        }
       }
     }
 
