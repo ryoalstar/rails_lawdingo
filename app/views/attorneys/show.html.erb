@@ -36,6 +36,14 @@
             <li><%= pluralize years_practicing_law(@attorney), "year", "years" %></li>
         </ul>
         <% end %>
+
+        <% if @attorney.yelp_business_id.present? %>
+          <h4>Yelp rating</h4>
+          <div class="yelp-wrapper">
+            <%= image_tag @attorney.yelp[:rating_img_url] %>
+            <span class="reviews-count">Based on <%= pluralize @attorney.yelp[:review_count], "review", "reviews" %></span>
+          </div>
+        <% end %>
       </div>
     </div>
 

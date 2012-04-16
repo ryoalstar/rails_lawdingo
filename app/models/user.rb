@@ -120,5 +120,10 @@ class User < ActiveRecord::Base
     video = Framey::Video.find_by_creator_id(self.id)
     video.present?
   end
+
+  def yelp
+    yelp_connection = Yelp::Connection.new
+    yelp_connection.find_by_id(self.yelp_business_id)
+  end
 end
 
