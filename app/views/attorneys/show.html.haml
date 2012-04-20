@@ -1,52 +1,179 @@
 - title "#{@attorney.full_name} — #{@attorney.licenced_states.join(', ')} lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
-#results
-  = link_to "← Back to all lawyers", "javascript:history.back()", class: "back-link"
-  = render partial: "lawyer/lawyer", locals: { lawyer: @attorney }
-  .details
-    - if @attorney.has_video?
-      #intro_video
-        = content_tag :h3, "#{@attorney.first_name}'s self-introduction video:"
-        = render_player({                                |
-              video_url: @video.flv_url,                 |
-              thumbnail_url: @video.large_thumbnail_url, |
-          })                                             |
-    .columns
-      .column.areas
-        = content_tag :h3, "#{@attorney.first_name}'s key practice areas:"
-        = render collection: @attorney.practice_areas.where(parent_id: nil).order("name"), partial: "attorneys/area", as: :area, locals: { lawyer: @attorney }
-      .column.background
-        - if @attorney.school.present?
-          = content_tag :h3, "#{@attorney.first_name}'s background:"
-          %h4 Law school
-          %ul
-            %li= @attorney.school.name
-        - if @attorney.license_year.present?
-          %h4 Years practicing law
-          %ul
-            %li= pluralize years_practicing_law(@attorney), "year", "years"
-        - if @attorney.yelp_business_id.present?
-          %h4 Yelp rating
-          .yelp-rating-container
-            = image_tag @attorney.yelp[:rating_img_url]
-            %span.reviews-count
-              Based on #{pluralize @attorney.yelp[:review_count], "review", "reviews"}
-    - if @attorney.offerings.any?
-      .offers-container
-        = content_tag :h3, "#{@attorney.first_name}'s fixed-price offers:"
-        = render collection: @attorney.offerings, partial: "offerings/offering", locals: { lawyer: @attorney }
-    - if @attorney.reviews.any?
-      .reviews-container
-        %h3 Client reviews:
-        %ul#reviews.reviews
-          = render @attorney.reviews.order("created_at DESC")
-    - if @attorney.yelp_business_id.present?
-      .yelp-reviews-container
-        %h3 Latest Yelp reviews:
-        %ul#yelp_reviews.yelp-reviews
-          - @attorney.yelp[:reviews].each do |review|
-            = content_tag :li, class: "yelp-review", id: review["id"] do
-            = content_tag :div, image_tag(review["user"]["image_url"]), class: "photo"
-            .details
-              = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
-              = content_tag :p, yelp_review_excerpt(review, @attorney)
-              = content_tag :span, yelp_review_posted_by(review), class: "footnote"
+#inline-wrapper
+  .left-bars-block
+    .left-bar.status
+      .left-bar-section
+        %h3= content_tag :h3, "Talk to #{@attorney.first_name}"
+        %p 
+          - if @attorney.is_online
+            = image_tag('video_icon_active.png', :alt => '')
+            %span Avaiable by video chat now
+          - else 
+            = image_tag('video_icon.png', :alt => '')
+            %span Not avaiable by video now
+        %p
+          - if @attorney.phone.present? 
+            = image_tag('voice_icon.png', :alt => '')
+            %span Avaiable by phone now
+          - else
+            = image_tag('voice_icon.png', :alt => '')
+            %span Not avaiable by phone now
+        %p
+          = image_tag('note_icon.png', :alt => '')
+          %span Send a note or ask a question
+        %p 
+          = image_tag('schedule_icon.png', :alt => '')
+          %span Schedule a consultation
+    .left-bar
+      .left-bar-section.info-header
+        %h2 Need-to-know Info
+      .left-bar-section.info
+        %div
+          = content_tag :h3, "#{@attorney.first_name}'s key practice areas:"
+          = render collection: @attorney.practice_areas.where(parent_id: nil).order("name"), partial: "attorneys/area", as: :area, locals: { lawyer: @attorney }
+        .person_info
+          - if @attorney.school.present?
+            = content_tag :h3, "#{@attorney.first_name}'s background:"
+            %p Law school
+            %ul
+              %li= @attorney.school.name
+          - if @attorney.license_year.present?
+            %p Years practicing law
+            %ul
+              %li= pluralize years_practicing_law(@attorney), "year", "years"
+          - if @attorney.yelp_business_id.present?
+            %p Yelp rating
+            .yelp-rating-container
+              .stars
+                = image_tag @attorney.yelp[:rating_img_url]
+              %p.small
+                Based on #{pluralize @attorney.yelp[:review_count], "review", "reviews"}
+          -#%p Lawdingo rating
+            = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"\
+            = content_tag :a, yelp_review_excerpt(review, @attorney), class: "reviews"\
+  - bms = []
+  - bms = @attorney.bar_memberships unless @attorney.bar_memberships.blank?
+  - licenced_states = ""
+  - bms.each{ |bm|
+  - licenced_states += bm.state.abbreviation + ', '
+  - }
+  - licenced_states.chomp!(', ')
+  - pas = []
+  - pas = @attorney.practice_areas.parent_practice_areas unless @attorney.practice_areas.blank?
+  - pas_string = ""
+  - pas.each{|pa|
+  - pas_string += pa.name + ', '
+  - }
+  - pas_string.chomp!(', ')
+  - pas_names = pas.map { |area| area.name.downcase  }
+  - pas_names_last = pas_names.pop
+  - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"     
+  .main_content
+    .bio-block
+      .left_border
+      .avatar     
+        = link_to image_tag(@attorney.photo.url(:thumb)), attorney_path(@attorney, slug: @attorney.slug)
+      .middle
+        %h1= link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
+        %h3
+          - unless @attorney.bar_memberships.blank?
+            Licensed in #{licenced_states}
+        %p= @attorney.personal_tagline
+  .main_content
+    .profile_info
+      .header_content
+        .left
+          %h2 Ask a question:
+          %textarea{:placeholder => 'Type your question here'}
+          %a{:href => '#'} Ask
+        .right
+          %p Available appointments
+          %table
+            %tr
+              %td
+                %a.first_date{:href => '#'} Today
+              %td
+                %a.second_date{:href => '#'} Fri, 11/21
+              %td
+                %a.third_date{:href => '#'} Fri, 11/21
+              %td
+                %a.fourth_date{:href => '#'} Fri, 11/21    
+            %tr
+              %td
+                %a{:href=>'#'} 4:30pm
+              %td
+                %a{:href=>'#'} 9:00am
+              %td
+                %a{:href=>'#'} 4:30pm
+              %td
+                %a{:href=>'#'} 9:00am                
+            %tr
+              %td
+                %a{:href=>'#'} 5:00pm
+              %td
+                %a{:href=>'#'} 9:30am
+              %td
+                %a{:href=>'#'} 4:30pm
+              %td
+                %a{:href=>'#'} 9:00am                
+            %tr
+              %td
+                %a{:href=>'#'} 5:30pm
+              %td
+                %a{:href=>'#'} 8:30am
+              %td
+                %a{:href=>'#'} 4:30pm
+              %td
+                %a{:href=>'#'} 9:00am                
+            %tr
+              %td
+                %a{:href=>'#'} more
+              %td
+                %a{:href=>'#'} more  
+              %td
+                %a{:href=>'#'} 4:30pm
+              %td
+                %a{:href=>'#'} 9:00am                                                   
+          
+          %a.appointments{:href => '#'}
+            See All Appointements
+      .main-content
+        .video-block
+          - if @attorney.has_video?
+            #intro_video.video-block
+              = content_tag :h3, "#{@attorney.first_name}'s self-introduction video:"
+              = render_player({                                |
+                    video_url: @video.flv_url,                 |
+                    thumbnail_url: @video.large_thumbnail_url, |
+                })
+        -#.practice-block
+          %h4 More about practice:
+          %p Strip steak tongue salami biltong. Pancetta ground round short ribies tail streips siteak. Tongue pig beef ris strip steak fnekiefurter kielbasa. Pork t-bone venison, ham hiock shank ball tip pork belly. Spare ribes ham  filet mignon chicken flank pork belly tri-tip shank speck. Kielbasa fatback jerky, haam t-bone leberkeuas tongue. Pork belly beef ribs ham, chicken venison ham hock swine burger ground round shank ribeye.          
+        .main-info
+          - if @attorney.offerings.any?
+            %h4 Latest Yelp reviews:
+            = content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
+            = content_tag :h3, "#{@attorney.first_name}'s fixed-price offers:"
+            = render collection: @attorney.offerings, partial: "offerings/offering", locals: { lawyer: @attorney }
+          - if @attorney.yelp_business_id.present?
+            %h4.yelp Latest yelp reviews:
+            - @attorney.yelp[:reviews].each do |review|
+              = content_tag :li, class: "yelp-review", id: review["id"] do
+                = content_tag :div, image_tag(review["user"]["image_url"]), class: "photo"
+                .details
+                  = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
+                  = content_tag :p, yelp_review_excerpt(review, @attorney)
+                  = content_tag :span, yelp_review_posted_by(review), class: "footnote"
+          .client-reviews
+            %h4 Lawdingo client reviews:
+            #reviews.reviews
+              = render @attorney.reviews.order("created_at DESC")
+            
+
+
+
+
+
+
+
+

@@ -511,6 +511,16 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 				}
 			}
 		}
+		.left-bar.status{
+			.left-bar-section{
+				p{
+					padding-bottom:5px;
+					span{
+						vertical-align: -10%;
+					}
+				}
+			}
+		}
 		.left-bar{
 			padding:12px 0;
 			width:246px;
@@ -574,7 +584,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					font-size:13px;
 					margin-bottom: 3px;
 					span{
-						vertical-align: 50%;
+
 					}
 				}
 				a.advice{
@@ -972,6 +982,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							box-shadow: inset 0px 1px 2px #e3e3e3;
 						}
 						a{
+							font-size: 16px;
 							padding:6px 93px;
 							background:url(ask_button_bg.png) repeat-x;
 							text-decoration:none;
@@ -1000,7 +1011,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						table{
 							width: 420px;
 							margin-bottom: 10px;
-							
+							height: 122px;
 							tr{
 								a{
 									text-decoration:none;
@@ -1069,6 +1080,9 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							font-size:13px;
 							border-bottom:1px dotted #BBC1C4;
 						}
+						a.appointments:hover{
+							border-bottom:0;
+						}
 					}
 				}
 			}
@@ -1088,10 +1102,15 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 				float: left;
 				height:163px;
 				width:690px;
-				padding:17px 15px 15px 17px;
+				padding:20px 15px 20px 17px;
 				-moz-border-radius: 5px;
 			  -webkit-border-radius: 5px;
 				margin-top:0;
+				.avatar{
+					img{
+						width: 150px;
+					}
+				}
 				.left_border{
 					background:url(bio_block_left_border.png);
 					width:10px;
