@@ -1,5 +1,14 @@
 
 $(document).ready(function(){
+	$('.avatar img, .image-carousel img').each(function(){
+		var imgsrc = $(this).attr('src');
+		var imgcheck = imgsrc.width;
+
+
+		$(this).error(function() {
+		  $(this).attr('src', '/assets/profile_m.gif');
+		});
+	});
 	
 	$("input[name='practice_area']").imageTick({
 		tick_image_path: "/assets/radio_selected.png",

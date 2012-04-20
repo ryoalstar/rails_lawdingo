@@ -185,6 +185,12 @@ body.users.landing_page, body.users.home{
 						-moz-box-shadow: 0px 7px 11px #B6B6B6;
 						-webkit-box-shadow: 0px 7px 11px #B6B6B6;
 						box-shadow: 0px 7px 11px #B6B6B6;
+						.image-carousel{
+							width:100%;
+							img{
+								width:200px;
+							}
+						}
 						.carousel-description{
 							margin:17px 15px 10px 11px;
 							float:left;
@@ -1063,11 +1069,14 @@ body.users.landing_page, body.users.home{
 				}
 			}
 			.avatar{
-				padding: 8px 7px 0 5px;
+				padding: 5px 5px 5px 5px;
 				float: left;
 				border:1px solid #aaafb8;
 				-moz-border-radius: 5px;
 			  -webkit-border-radius: 5px;
+				img{
+					width: 100px;
+				}
 			}
 			.bio-block{
 				background:#fdfdfd;
