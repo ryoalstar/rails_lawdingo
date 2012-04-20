@@ -187,12 +187,16 @@ body.users.landing_page, body.users.home{
 						box-shadow: 0px 7px 11px #B6B6B6;
 						.image-carousel{
 							width:100%;
-							img{
-								width:200px;
+							.carousel-image{
+								text-align: center;
+								height: 253px;
+								img{
+									width:200px;
+								}
 							}
 						}
 						.carousel-description{
-							margin:17px 15px 10px 11px;
+							margin:23px 15px 10px 11px;
 							float:left;
 							p{
 								color:#3f3f3f;
