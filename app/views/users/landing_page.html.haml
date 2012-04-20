@@ -1,0 +1,81 @@
+- index = [*0..HomepageImage.count-1].sample
+- hms = HomepageImage.all
+- default_image = hms[index]
+- lawyer = default_image.lawyer
+- practice_area_text=""
+- practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. "
+- description = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
+- #title @tagline
+- if params[:reset_email_notice].present?
+  %p.notice
+    Thanks - please check your email for instructions on resetting your password.
+    %a#close_notice{:href => "#"} Close
+    / Image carousel block with a link to json file consisting of data about previewed lawyers
+    -#.image-carousel{:dataurl => "/search/carsousel_images"}
+      .carousel-image
+        = image_tag default_image.photo.url(:large), :alt => ""
+      .carousel-description
+        %h4= link_to "Attorney #{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+        %span= description
+    / Filtering form
+#top_content
+  #center_area
+    .white_glow
+      .start_off_info
+        = image_tag('start_off_info.png', :alt => '')
+        %h1= @tagline
+        %p= @subtext[:first]
+        / %p= @subtext[:second]
+        = link_to "", lawyers_path, class: "browse_lawyers_button"
+        -#%small
+          Lawyer? #{link_to "Apply here!", new_lawyer_path}
+      .slider
+        .image-carousel{:dataurl => "/search/carsousel_images"}
+          .carousel-image
+            = image_tag default_image.photo.url(:large), :alt => ""
+          .carousel-description
+            .ratings
+              %h4= link_to "Attorney #{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+              .stars
+                %span.star_rating.on
+                %span.star_rating
+                %span.star_rating
+                %span.star_rating
+                %span.star_rating
+              %p.desc= description
+              %a.free{:href=> "#"}
+                %p 20 minutes free
+                %p.small then $2.50/minute
+              %a.reviews{:href => '#'}
+                Read reviews (25)
+#bottom_content
+  .left_bar
+    %h2 How does it work?
+    .feature
+      = image_tag('feature_1.png', :alt => '')  
+      .feature_description
+        %h3 1- Browse and choose a lawyer
+        %p Chuck turducken corned beef. Capicola turkey meatloaf shoulder.
+    .feature
+      = image_tag('feature_2.png', :alt => '')  
+      .feature_description
+        %h3 2- Talk to them for free
+        %p Pig shankle short loin ham hock pork chop jowl, venison spare ribs leberkas.
+    .feature
+      = image_tag('feature_3.png', :alt => '')  
+      .feature_description
+        %h3 3- Pay for long consultation only
+        %p Short ribs strip steak frankfurter, cornerd beef vension fatback speck pastrami.              
+  .right_bar
+    %h2 Introduction video
+    = image_tag('video.png', :alt => '')  
+    .testimonials
+      %h2 Testimonials
+      .avatar
+        = image_tag('ava.png', :alt => '')
+        %p Johne Dwayne
+      .testimonial_description
+        %p
+          //%span.open_quotes
+          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+          //%span.close_quotes

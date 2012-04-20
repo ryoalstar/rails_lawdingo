@@ -1,0 +1,133 @@
+- cache("lawyer_view_#{lawyer.id}_#{lawyer.updated_at.to_i}") do
+  .row{:id => "lawyer_#{lawyer.id}"}
+    = hidden_field(:current, :lid)
+    / CALL TO ACTION
+    .left.row_block
+      .avatar
+        = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
+      .stars
+        = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+      = link_to_unless_current content_tag(:div, "", class: "review", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+      = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
+    - bms = []
+    - bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
+    - licenced_states = ""
+    - bms.each{ |bm|
+    - licenced_states += bm.state.abbreviation + ', '
+    - }
+    - licenced_states.chomp!(', ')
+    - pas = []
+    - pas = lawyer.practice_areas.parent_practice_areas unless lawyer.practice_areas.blank?
+    - pas_string = ""
+    - pas.each{|pa|
+    - pas_string += pa.name + ', '
+    - }
+    - pas_string.chomp!(', ')
+    - pas_names = pas.map { |area| area.name.downcase  }
+    - pas_names_last = pas_names.pop
+    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"        
+    .middle.row_block
+      %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+      .online_icons
+        - if lawyer.is_online
+          %span.video.online
+        - else
+          %span.video.offline
+        - if lawyer.phone.present? 
+          %span.voice.online
+        - else 
+          %span.voice.offline
+        .video_chat.online.tooltip Available for video chat
+        .voice_chat.online.tooltip Available for voice chat
+        .video_chat.offline.tooltip Not available by video now
+        .voice_chat.offline.tooltip Not available by phone now
+      .description
+        - if lawyer.personal_tagline.present?
+          %p
+            - unless params[:controller] == "attorneys"
+              = lawyer.personal_tagline.truncate(120, separator: ' ', omission: "... #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}").html_safe
+            - else
+              = lawyer.personal_tagline
+        %ul
+          - unless lawyer.bar_memberships.blank?
+            %li
+              Licensed in #{licenced_states}
+          - unless lawyer.practice_areas.blank?
+            %li
+              Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law"}
+        %a.free{:href=> "#"}
+          %p= free_message(lawyer)
+          %p.small 
+            then 
+            = number_to_currency (lawyer.rate + AppParameter.service_charge_value)
+            \/minute
+        .button_tooltip
+          %ul
+            %li
+              = start_or_schedule_button(lawyer)
+              - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+                = start_phone_consultation(lawyer)
+            -#%li.disabled 
+              %a Video consultation
+    .right.row_block
+      %p Available appointments
+      %table
+        %tr
+          %th
+            %a.first_date{:href => '#'} Today
+          %th
+            %a.second_date{:href => '#'} Fri, 11/21
+        %tr
+          %td
+            %a{:href=>'#'} 4:30pm
+          %td
+            %a{:href=>'#'} 9:00am
+        %tr
+          %td
+            %a{:href=>'#'} 5:00pm
+          %td
+            %a{:href=>'#'} 9:30am
+        %tr
+          %td
+            %a{:href=>'#'} 5:30pm
+          %td
+            %a{:href=>'#'} 8:30am
+        %tr
+          %td
+            %a{:href=>'#'} more
+          %td
+            %a{:href=>'#'} more                                     
+        
+      %a.appointments{:href => '#'}
+        All available appointments        
+        
+        
+        
+        
+        
+      
+
+  
+:javascript
+  $ (".row .rating").raty({
+      path: "/assets/raty",
+      hintList: ['', '', '', '', '', ''],
+      readOnly: true,
+      start: function() {return $(this).data("score")}
+  })
+  function equalHeight(group) {
+    tallest = 0;
+    group.each(function() {
+       thisHeight = $(this).height();
+       if(thisHeight > tallest) {
+          tallest = thisHeight;
+       }
+    });
+    group.height(tallest);
+  }
+  $(document).ready(function() {
+    $('.row').each(function(){
+      
+      equalHeight($(this).find(".row_block"));
+    });
+  });

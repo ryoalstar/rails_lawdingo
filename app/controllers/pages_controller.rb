@@ -21,6 +21,18 @@ class PagesController < ApplicationController
 
   def terms_of_use
   end
+  
+  def markup
+    render "markup", :layout => 'new_markup'
+  end
+
+  def lawyers
+    render "lawyers", :layout => 'new_markup'
+  end
+
+  def profile
+    render "profile", :layout => 'new_markup'
+  end
 
 end
 

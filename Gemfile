@@ -34,6 +34,7 @@ gem 'geocoder'
 gem 'letter_opener', group: :development
 gem 'framey'
 gem 'oauth'
+gem 'haml-rails'
 #gem "psych" 
 # Use unicorn as the web server
 # gem 'unicorn'

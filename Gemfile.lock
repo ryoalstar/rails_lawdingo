@@ -71,6 +71,12 @@ GEM
     framey (1.2.7)
       httparty
     geocoder (1.1.1)
+    haml (3.1.4)
+    haml-rails (0.3.4)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      haml (~> 3.0)
+      railties (~> 3.0)
     hike (1.2.1)
     httparty (0.8.1)
       multi_json
@@ -208,6 +214,7 @@ DEPENDENCIES
   factory_girl_rails
   framey
   geocoder
+  haml-rails
   jquery-rails
   letter_opener
   mocha

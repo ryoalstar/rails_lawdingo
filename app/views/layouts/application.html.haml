@@ -1,0 +1,131 @@
+!!!
+%html
+  %head
+    %title= content_for?(:title) ? yield(:title) : "Lawdingo: Ask a Lawyer Online Now - Free Consultations for Your Legal Questions"
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = javascript_include_tag 'site', 'users', 'twipsy', 'hints', 'jquery.timer','swfobject','jquery-impromptu.3.2'
+    = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment"
+    - if current_user && current_user.user_type == 'LAWYER'
+      :javascript
+        swfobject.registerObject("mySwf", "10.2.0");    = csrf_meta_tags
+    = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
+    - if ENV['RAILS_ENV'] == 'production'
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-3494749-4']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+  %body#lawdingo{:class => params.values_at(:controller, :action).join(' '), :onload => ""}
+    / HEADER
+    #header
+      .wrapper
+        .links
+          %ul
+            - if logged_in?
+            - user = current_user
+            - full_name = user.full_name
+              %li
+                Logged in as#{link_to full_name, user_path(user.id), :title =>'Account Profile!'}
+                | #{link_to "Log out", logout_path, :title =>'Logout from the app!'}
+            - else
+              %li
+                = link_to "Login", login_path
+                = link_to "Signup", new_user_path(:ut=>0), :class => 'signup'
+              %li
+                =link_to "", new_lawyer_path, :class => 'lawyers_signup'
+        %a.logo{:href => '/'}
+          = image_tag('logo_new.png', :alt => 'Home')
+    / END HEADER
+    / CONTENT
+    #container
+      = yield
+    / END CONTENT
+    - if user and user.user_type == 'LAWYER'
+      #outer_div{:style => "position:absolute; width:960px; height:800px; left: -2000px;"}
+        %div{:style => "margin:0 auto;width:960px;height:410px;"}
+          %strong
+            %a{:href => "javascript:if(confirm('Are you sure?')){closecall();};"} Close
+          #flash_div
+            %object#mySwf{:classid => "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", :height => "410", :name => "mySwf", :width => "960"}
+              %param{:name => "movie", :value => "/swf/videochat.swf"}/
+              %param{:name => "FlashVars", :value => "user_id=#{user.id}&user=#{full_name}&uemail=#{user.email}&lawyer_id=#{user.id}&lawyer=#{full_name}&lemail=#{user.email}&http_type=https://&hosturl=#{request.env['HTTP_HOST']}&imgsrc=/images/phone.jpg&lrate=#{user.rate}&crate=#{AppParameter.service_charge_value}"}/
+              %param{:name => "allowScriptAccess", :value => "always"}/
+              %param{:name => "wmode", :value => "transparent"}/
+              / [if !IE]>
+              %object{:FlashVars => "user_id=#{user.id}&user=#{full_name}&uemail=#{user.email}&lawyer_id=#{user.id}&lawyer=#{full_name}&lemail=#{user.email}&http_type=https://&hosturl=#{request.env['HTTP_HOST']}&imgsrc=/images/phone.jpg&lrate=#{user.rate}&crate=#{AppParameter.service_charge_value}", :allowScriptAccess => "always", :data => "/swf/videochat.swf", :height => "410", :type => "application/x-shockwave-flash", :width => "960", :wmode => "transparent"}
+                / <![endif]
+                %p{:style => "text-align:center;"}
+                  %a.button{:href => "http://www.adobe.com/go/getflashplayer"} Upgrade to Flash Player 11
+                / [if !IE]>
+              / <![endif]
+      = javascript_tag do
+        var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
+        if(playerVersion.major < 10 || (playerVersion.major == 10 && playerVersion.minor < 3))
+        {
+        var output = "You have Flash player " + playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release + " installed. To use Lawdingo you'll just need to upgrade to Flash 11. It's free and easy
+        = succeed "\";" do
+          %a{:href => "\\\"http://www.adobe.com/go/getflashplayer\\"} Upgrade to Flash Player 11
+        $.prompt( output )
+        }
+    / FOOTER
+    #footer
+      .footer_content
+        %span.left &copy; Lawdingo
+        %ul
+          %li= link_to "About", about_page_path
+          %li= link_to "Contact", "mailto:sup@lawdingo.com"
+          %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank'
+          %li= link_to "Terms & Privacy", terms_page_path, :target=>'_blank'
+    / END FOOTER
+    #dialog-overlay
+    - if current_user && current_user.user_type == 'CLIENT' && params[:action] != 'show'
+      #paid_schedule_session.dialog-window
+        %ul
+          .error_explanation
+            %ul.errors
+              %li
+                #stripe_errors.stripe_error{:style => "color:red;"}
+              %li
+                .stripe_error{:style => "color:red;"}
+        = form_tag("/updatePaymentInfo", :id => 'payment-form', :remote =>true) do
+          .sealed{:style => "position: absolute; bottom: 24px; right: 22px;"}
+            = render "godaddy_seal"
+          = hidden_field_tag :stripe_card_token
+          = hidden_field_tag :form_type, "ajax"
+          = hidden_field_tag :attorney_id
+          %h3.paid_model_header To start a phone consultation, you'll need to have payment information on file. The first two minutes of the call are free.
+          %label Credit card number:
+          %br/
+          %input#card_detail_card_number{:autocomplete => "off", :maxlength => "26", :name => "card_number", :placeholder => "Credit card number", :size => "26", :type => "text"}
+          #security_wrapper
+            #exp_group
+              %label Expiration:
+              %br/
+              %select#card_month{:name => "expire_month"}
+                - for i in 0..11
+                  <option #{"selected='selected'" if i==0} value="#{i+1}">#{i+1}
+              = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+5}, {name: "expire_year", id: "card_year"}
+            #sec_group
+              %label Security code:
+              %br/
+              %input#card_detail_card_verification{:autocomplete => "off", :maxlength => "4", :name => "scode", :size => "9", :type => "password"}
+              .help-text{:src => "question.png", :tooltip => "The three or four digit code on the back of your card."}
+          = submit_tag("Start Paid Session", :id => 'payment_overlay_submit_button', :class => "button blue small_font")
+    = javascript_tag do
+      $(document).ready(function(){
+      var timer = $.timer(function() {
+      $.ajax({
+      url: "/UpdateOnlineStatus",
+      type:'post',
+      success: function(response){
+      }
+      });
+      });
+      timer.set({ time : 20000, autostart : true });
+      });

@@ -14,5 +14,13 @@
 //= require offerings
 //= require filters
 //= require reviews
+//= require jquery.bxSlider
+//= require jquery.easing.1.3
+//= require jquery.imagetick
+//= require jquery.ui.core
+//= require jquery.ui.widget
+//= require jquery.ui.mouse
+//= require jquery.ui.slider
+//= require new_markup
 // require_tree .
 

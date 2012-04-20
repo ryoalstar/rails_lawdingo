@@ -28,9 +28,10 @@ class Home
 
     this.service_type_fields().click((e)=>
       this.set_service_type_fields_val(
-        $(e.target).val()
+        $(e.target).attr('data-val')
       )
       this.submit()
+      false
     )
     this.practice_area_fields().click((e)=>
       this.set_practice_area_fields_val(
@@ -63,12 +64,13 @@ class Home
       this.set_practice_area_fields_val(hash[2])    
     else 
       this.set_practice_area_fields_val("All")
-
+      
   set_defaults : ()->
+    
     this.set_service_type_fields_val(
       this.service_type_fields()
         .filter("[data-default=1]")
-        .val()
+        .attr('data-val')    
     )
 
     this.set_state_fields_val(
@@ -97,29 +99,29 @@ class Home
 
   service_type_fields : ()->
     this.form()
-      .find("div#service_type input:radio")
+      .find("div#service_type .service_type")
 
   set_practice_area_fields_val : (val)->
     @practice_area = val
-
-    this.form().find("ul.children").hide()
+    
+    this.form().find(".children").hide()
 
     $field = this.practice_area_fields()
       .filter("[value='#{val}']")
       .attr("checked", true)
     
-    $field.parents("ul.practice-areas")
+    $field.parents(".practice-areas")
       .show()
 
-    $field.parent()
-      .find("ul.children").show()
+    $field.parent().next().show()
 
 
   set_service_type_fields_val : (val)->
     @service_type = val
     this.service_type_fields()
-      .filter("[value='#{val}']")
-      .attr("checked", true)
+      .removeClass('selected')
+      .filter("[data-val='#{val}']")
+      .addClass("selected")
 
   practice_area_fields : ()->
     this.form()
