@@ -30,6 +30,7 @@
         -#%small
           Lawyer? #{link_to "Apply here!", new_lawyer_path}
       .slider
+        = image_tag('slider_featured.png', :alt => '', :class => 'green_line')
         .image-carousel{:dataurl => "/search/carsousel_images"}
           .carousel-image
             = image_tag default_image.photo.url(:large), :alt => ""

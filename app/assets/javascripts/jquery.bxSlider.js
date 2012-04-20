@@ -44,9 +44,9 @@
 			autoHover: false,										// true, false - if true show will pause on mouseover
 			autoDelay: 0,                       // integer - in ms, the amount of time before starting the auto show
 			pause: 3000,												// integer - in ms, the duration between each slide transition
-			startText: 'start',									// string - text displayed for 'start' control
+			startText: '',									// string - text displayed for 'start' control
 			startImage: '',											// string - filepath of image used for 'start' control. ex: 'images/start.jpg'
-			stopText: 'stop',										// string - text displayed for 'stop' control
+			stopText: '',										// string - text displayed for 'stop' control
 			stopImage: '',											// string - filepath of image used for 'stop' control. ex: 'images/stop.jpg'
 			ticker: false,											// true, false - continuous motion ticker mode (think news ticker)
 																					// note: autoControls, autoControlsSelector, and autoHover apply to ticker!

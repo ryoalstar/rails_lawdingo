@@ -216,20 +216,9 @@ $(function(){
         var cont = $('<div class="controls"></div>');
         var prev = $('<a class="prev icn">prev</a>'); prev.click( prev_image );
         var next = $('<a class="next icn">next</a>'); next.click( next_image );
-        var play  = $('<a class="play icn">play</a>'); play.click( function(){
-            self.interv = setInterval( next_image, 1000 );
-            play.css('display','none');
-            pause.css('display','inline-block');
-        });
-        var pause = $('<a class="pause icn">pause</a>'); pause.click( function(){
-            clearInterval( self.interv );
-            play.css('display','inline-block');
-            pause.css('display','none');
-        });
+       
 
         cont.append( prev );
-        cont.append( pause );
-        cont.append( play );
         cont.append( next );
         self.find('.carousel-image').append(cont);
 
