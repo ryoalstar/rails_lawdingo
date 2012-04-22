@@ -9,6 +9,16 @@
       <div class="rating-container">
         <%= link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars" %>
         <%= content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "count" %>
+        <%= javascript_tag do -%>
+          $(".row#lawyer_<%= lawyer.id %> .rating").raty({
+            path: "/assets/raty",
+            hintList: ['', '', '', '', '', ''],
+            readOnly: true,
+            start: function() {
+              return $(this).data("score")
+            }
+          });
+        <% end -%>
       </div>
       <% end %>
     </div>
