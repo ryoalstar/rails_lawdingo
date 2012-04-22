@@ -120,6 +120,14 @@ class Home
     this.service_type_fields()
       .filter("[value='#{val}']")
       .attr("checked", true)
+    
+    if val == "Legal-Services"
+      @practice_area_fields().parent().find("ul.children").hide()
+    else
+      $field = @practice_area_fields().filter("[checked='checked']")
+      console.log $field.parent().find("ul.children")
+      $field.parents("ul.practice-areas").show()
+      $field.parent().find("ul.children").show()
 
   practice_area_fields : ()->
     this.form()
