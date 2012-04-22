@@ -36,9 +36,9 @@ class UsersController < ApplicationController
     )
     @states = State.with_approved_lawyers
 
-    add_service_type_scope
     add_state_scope
     add_practice_area_scope
+    add_service_type_scope
 
     respond_to do |format|
       format.html{render}

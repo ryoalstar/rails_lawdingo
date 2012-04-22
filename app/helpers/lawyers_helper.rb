@@ -1,40 +1,40 @@
 module LawyersHelper
-  def selected_offerings_caption
-    # Offerings
-    if @offerings.present?
-      offerings_count  = @offerings.count.to_s
-      offerings_str = @offerings.count > 1 ? "services" : "service"
-      offerings_verb = @offerings.count > 1 ? "are" : "is"
-    else
-      offerings_count = "no"
-      offerings_str = "services"
-      offerings_verb = "are"
-    end
+  # def selected_offerings_caption
+  #   # Offerings
+  #   if @offerings.present?
+  #     offerings_count  = @offerings.count.to_s
+  #     offerings_str = @offerings.count > 1 ? "services" : "service"
+  #     offerings_verb = @offerings.count > 1 ? "are" : "is"
+  #   else
+  #     offerings_count = "no"
+  #     offerings_str = "services"
+  #     offerings_verb = "are"
+  #   end
 
-    # State
-    # Depends on if the request came from the landing page or from
-    # filter_result ajax function
-    if params[:select_state].present?
-      state_id = params[:select_state].to_i
-    elsif params[:state].present?
-      state_id = params[:state].to_i
-    end
+  #   # State
+  #   # Depends on if the request came from the landing page or from
+  #   # filter_result ajax function
+  #   if params[:select_state].present?
+  #     state_id = params[:select_state].to_i
+  #   elsif params[:state].present?
+  #     state_id = params[:state].to_i
+  #   end
 
-    if state_id.present? && state_id != 0
-      state = State.find(state_id)
-      state = " #{state.name}"
-    elsif @autoselected_state.present?
-      state = " #{@autoselected_state.name}"
-    end
+  #   if state_id.present? && state_id != 0
+  #     state = State.find(state_id)
+  #     state = " #{state.name}"
+  #   elsif @autoselected_state.present?
+  #     state = " #{@autoselected_state.name}"
+  #   end
 
-    # Check if the practice area is selected for
-    # filtering offers
-    if @offerings_practice_area.present?
-      "There #{offerings_verb} #{offerings_count} <strong>#{@offerings_practice_area.name.downcase}</strong>-related #{state} #{offerings_str} that may be of interest to you.".html_safe
-    else
-      "There #{offerings_verb} #{offerings_count} #{state} #{offerings_str} that may be of interest to you."
-    end
-  end
+  #   # Check if the practice area is selected for
+  #   # filtering offers
+  #   if @offerings_practice_area.present?
+  #     "There #{offerings_verb} #{offerings_count} <strong>#{@offerings_practice_area.name.downcase}</strong>-related #{state} #{offerings_str} that may be of interest to you.".html_safe
+  #   else
+  #     "There #{offerings_verb} #{offerings_count} #{state} #{offerings_str} that may be of interest to you."
+  #   end
+  # end
 
   # def selected_lawyers_caption
   #   state = ""
@@ -173,6 +173,16 @@ module LawyersHelper
       "#{parent_practice_area_string} #{lawyers_string} " + 
       "who can offer you legal advice#{child_practice_area_string} " +
       "right now."
+  end
+
+  def selected_offerings_caption
+    is_are = @offerings.count == 1 ? "is" : "are"
+    ct = @offerings.count == 0 ? "no" : @offerings.count.to_s
+    service_string = @offerings.count == 1 ? "service" : "services"
+
+    return "There #{is_are} #{ct}#{selected_state_string}" + 
+      "#{parent_practice_area_string} #{service_string} " + 
+      "that may be of interest to you."
   end
 
   def selected_state_string
