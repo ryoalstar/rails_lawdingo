@@ -55,7 +55,7 @@
                 <%= label_tag "practice_area_#{area.name}", area.name %>
                 <% if area.children.with_approved_lawyers.present? %>
                   <ul class="practice-areas children" style="display:none">
-                    <% area.children.with_approved_lawyers.each do |subarea| %>
+                    <% area.children.with_approved_lawyers.order("name ASC").each do |subarea| %>
                       <li>
                         <%= radio_button_tag "practice_area", subarea.name.gsub(/[^\w]+/,'-'),  %>
                         <%= label_tag "practice_area_#{subarea.name}", subarea.name %>
