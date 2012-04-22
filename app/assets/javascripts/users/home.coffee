@@ -112,7 +112,7 @@ class Home
       .show()
 
     $field.parent()
-      .find("ul.children").show()
+      .find("ul.children").show() unless @service_type == "Legal-Services"
 
 
   set_service_type_fields_val : (val)->
