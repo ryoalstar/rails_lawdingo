@@ -533,10 +533,12 @@ class UsersController < ApplicationController
   def add_service_type_scope
     # handle the type of service offered
     service_type = (params[:service_type] || "")
+    @service_type = service_type.downcase
 
     # legal services
     if service_type.downcase == "legal-services"
-      @lawyers = @lawyers.offers_legal_services
+      # @lawyers = @lawyers.offers_legal_services
+      @offerings = Offering.find(:all, conditions: { user_id: @lawyers.offers_legal_services.map(&:id) })
     # default is legal advice
     else
       @lawyers = @lawyers.offers_legal_advice
