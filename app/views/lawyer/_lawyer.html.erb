@@ -1,4 +1,4 @@
-<% cache("lawyer_view_#{lawyer.id}_#{lawyer.updated_at.to_i}") do -%>
+<%# <% cache("lawyer_view_#{lawyer.id}_#{lawyer.updated_at.to_i}") do -%> %>
   <div class="row" id="lawyer_<%= lawyer.id %>">
     <%= hidden_field(:current, :lid) %>
       <!-- CALL TO ACTION -->
@@ -75,4 +75,4 @@
       <div class="clear"></div>
       <!-- END RESULT INFO -->
   </div>
-<% end -%>
+<%# <% end -%> %>
