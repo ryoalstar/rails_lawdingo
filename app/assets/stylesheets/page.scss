@@ -22,40 +22,113 @@
     }
 }
 
-#header {
-    height: 60px;
-    border-bottom: solid 1px #b8b8b8;
-    background: url(header_gradient.png) repeat-x bottom center white;
-    font-size: 1.8em;
-    text-align: center;
-    color: #666;
 
-    .home-link { float: left; }
-    .links {
-        float: right;
-        a {
-            margin: 0px 12px;
-            &:last-child { margin-left: 2px; }
-        }
-    }
 
-    &>div {
-        line-height: 64px;
-        img { vertical-align: middle; }
-    }
-
-    #slogan {
-        font-size: 0.9em;
-        display: inline-block;
-        line-height: normal;
-        text-align: center;
-        margin: 15px 0px;
-        span {
-            display: block;
-            font-size: 0.8em;
-            font-style: italic;
-        }
-    }
+#header{
+	height:73px;
+	margin-bottom: 2px;
+	background: url(header_bg.png) repeat-x;
+	text-align: center;
+	.wrapper{
+		width:990px;
+		margin:0 auto;
+		line-height: 64px;
+		.logo{
+			float:left;
+			line-height: 10px;
+			img{
+				margin-top: 15px;
+			}
+		}
+		.links{
+			float:right;
+			ul{
+				list-style:none;
+				margin-top: 4px; 
+				li{
+					float:left;
+					a{
+						color:white;
+						padding:2px 11px 6px 11px;
+						text-decoration:none;
+						font-size:14px;
+						margin: 0px 5px;
+					}
+					a:hover, a.selected{
+						background:url(login_button_selected.png) no-repeat;
+					}
+					a.signup:hover{
+						background:url(signup_hover.png) no-repeat;
+					}
+					a.lawyers_signup{
+						background:url(signup_button_full.png) no-repeat 0px -1px;
+						height:32px;
+						display:block;
+						width:160px;
+						margin-left:27px;
+						margin-top:16px;
+						padding-right: 0;
+						margin-right: 0;
+						padding:0;
+					}
+					a.lawyers_signup:hover{
+						background:url(signup_button_full.png) no-repeat 0px -32px;
+					}
+					a.lawyers_signup:active{
+						background:url(signup_button_full.png) no-repeat 0px -63px;
+					}
+				}
+			}
+		}
+	}
+}
+#footer{
+	height:84px;
+	width:100%;
+	float:left;
+	background: url(footer_bg.png);
+	padding-bottom:0;
+	.footer_content{
+		margin:0 auto;
+		width:990px;
+		padding-top: 30px;
+		span{
+			font-size: 14px;
+			margin:5px 0px 0px 4px;
+			color:#1a1a1a;
+			display:block;
+			float:left;
+		}
+		ul{
+			margin-top: 1px;
+			list-style-type:none;
+			float:right;
+			margin:0;
+			padding:0;
+			li:last-child{
+				padding-right: 0;
+			}
+			li{
+				display:block;
+				float:left;
+				padding:0 12px;
+				a{
+					color:#505050;
+					text-decoration:none;
+					display:block;
+					font-size: 14px;
+					padding:3px 10px;
+				}
+				a.selected, a:hover{
+					color:white;
+					display:block;
+					background:#8795a5;
+				  -moz-border-radius: 15px;
+				  -webkit-border-radius: 15px;
+				}
+			}
+		}
+	}
 }
 
 body.users.home {
@@ -107,7 +180,7 @@ body.users.home {
 }
 
 #page {
-    background: url(page_gradient.png) repeat-x top center white;
+		background: url(content_bg.png) repeat;
     padding: 15px 0px 5px;
     min-height: 400px;
     > div {
@@ -505,26 +578,7 @@ body.users.home {
 
 
 
-#footer {
-    font-size: 1.25em;
-    padding-bottom: 20px;
-    .copyright { float: left; }
 
-    ul.links {
-        margin: 0px;
-        padding: 0px;
-        list-style: none;
-        float: right;
-
-        li {
-            display: inline;
-            margin-right: 10px;
-            &:after { content: '|'; margin-left: 10px;}
-            &:last-child:after { content: none; }
-        }
-    }
-
-}
 
 #schedule_session {
     width: 500px;

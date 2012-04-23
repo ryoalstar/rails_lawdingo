@@ -35,12 +35,12 @@
                 | #{link_to "Log out", logout_path, :title =>'Logout from the app!'}
             - else
               %li
-                = link_to "Login", login_path
-                = link_to "Signup", new_user_path(:ut=>0), :class => 'signup'
+                = link_to "Log in", login_path
+                = link_to "Sign up", new_user_path(:ut=>0), :class => 'signup'
               %li
                 =link_to "", new_lawyer_path, :class => 'lawyers_signup'
         %a.logo{:href => '/'}
-          = image_tag('logo_new.png', :alt => 'Home')
+          = image_tag('Logo_white_small.png', :alt => 'Home')
     / END HEADER
     / CONTENT
     #container
