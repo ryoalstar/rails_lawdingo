@@ -31,16 +31,16 @@ gem 'twilio-ruby'
 gem "newrelic_rpm", "~>3.1.1"
 gem "simple_form"
 gem 'geocoder'
-gem 'letter_opener', group: :development
+gem 'letter_opener'
 gem 'framey'
 gem 'oauth'
 gem 'haml-rails'
 #gem "psych" 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
