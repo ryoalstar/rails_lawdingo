@@ -164,10 +164,9 @@
                   = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
                   = content_tag :p, yelp_review_excerpt(review, @attorney)
                   = content_tag :span, yelp_review_posted_by(review), class: "footnote"
+          %h4 Lawdingo client reviews:        
           .client-reviews
-            %h4 Lawdingo client reviews:
-            #reviews.reviews
-              = render @attorney.reviews.order("created_at DESC")
+            = render @attorney.reviews.order("created_at DESC")
             
 
 

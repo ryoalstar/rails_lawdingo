@@ -59,20 +59,21 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							background:url(signup_hover.png) no-repeat;
 						}
 						a.lawyers_signup{
-							background:url(signup_button.png) no-repeat;
+							background:url(signup_button_full.png) no-repeat 0px -1px;
 							height:32px;
 							display:block;
-							width:150px;
+							width:160px;
 							margin-left:27px;
-							margin-top:17px;
+							margin-top:16px;
 							padding-right: 0;
 							margin-right: 0;
+							padding:0;
 						}
 						a.lawyers_signup:hover{
-							background:url(signup_button_hover.png) no-repeat;
+							background:url(signup_button_full.png) no-repeat 0px -32px;
 						}
 						a.lawyers_signup:active{
-							background:url(signup_button_selected.png) no-repeat;
+							background:url(signup_button_full.png) no-repeat 0px -63px;
 						}
 					}
 				}
@@ -84,6 +85,35 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 		width: 100%;
 		padding-bottom: 102px;
 		background: url(content_bg.png) repeat;
+		a.free{
+			display:block;
+			float:left;
+			width:170px;
+			height:40px;
+			background:url(free_button.png) no-repeat;
+			text-decoration:none;
+			margin-top:20px;
+			p{
+				width: 100%;
+				font-size:17px !important;
+				color:white !important;
+				text-align:center;
+				margin:0px;
+				margin-top:0px !important;
+			}
+			p:first-child{
+				margin-top:2px !important;
+			}
+			p.small{
+				font-size:13px !important;
+			}
+		}
+		a.free:hover{
+			background:url(free_button_hover.png) no-repeat;
+		}
+		a.free:active{
+			background:url(free_button_selected.png) no-repeat;
+		}
 		.stars{
 			margin-top:20px;
 			float:left;		
@@ -162,13 +192,13 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							height:44px;
 							display:block;
 							margin-left: 130px;
-							background: url(browse_lawyers_button.png);
+							background: url(browse_lawyers_button_full.png) no-repeat 0px 0px;
 						}
 						a.browse_lawyers_button:hover{
-							background: url(browse_lawyers_button_hover.png);
+							background: url(browse_lawyers_button_full.png) no-repeat 0px -46px;
 						}
 						a.browse_lawyers_button:active{
-							background: url(browse_lawyers_button_selected.png);
+							background: url(browse_lawyers_button_full.png) no-repeat 0px -92px;
 						}
 					}
 					.slider{
@@ -185,6 +215,11 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						-moz-box-shadow: 0px 7px 11px #B6B6B6;
 						-webkit-box-shadow: 0px 7px 11px #B6B6B6;
 						box-shadow: 0px 7px 11px #B6B6B6;
+						.green_line{
+						  position:absolute;
+						  margin-left: 280px;
+							z-index: 10;
+						}
 						.image-carousel{
 							width:100%;
 							.carousel-image{
@@ -204,34 +239,6 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 								margin-top: 5px;
 								word-spacing: -1px;
 								line-height: 19px;
-							}
-							a.free{
-								display:block;
-								float:left;
-								width:170px;
-								height:40px;
-								background:url(free_button.png) no-repeat;
-								text-decoration:none;
-								margin-top:20px;
-								p{
-									width: 100%;
-									font-size:17px;
-									color:white;
-									text-align:center;
-									margin:0;
-								}
-								p:first-child{
-									margin-top:2px;
-								}
-								p.small{
-									font-size:13px;
-								}
-							}
-							a.free:hover{
-								background:url(free_button_hover.png) no-repeat;
-							}
-							a.free:active{
-								background:url(free_button_selected.png) no-repeat;
 							}
 							.reviews{
 								display:block;
@@ -858,7 +865,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							border-right: 1px solid #e1e1e1;
 							margin:0;
 						}
-						.review.first{
+						.review:first-child{
 							border-top:1px solid #e1e1e1;
 							border-left: 1px solid #e1e1e1;
 							border-right: 1px solid #e1e1e1;
@@ -869,7 +876,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							border-top-left-radius: 5px;
 							border-top-right-radius: 5px;
 						}
-						.review.last{
+						.review:last-child{
 							border-bottom:1px solid #e1e1e1;
 							border-left: 1px solid #e1e1e1;
 							border-right: 1px solid #e1e1e1;
@@ -883,6 +890,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						.left{
 							float:left;
 							p{
+								max-width: 500px;
 								margin: 10px 0;
 								word-spacing: -1px;
 							}
@@ -1315,34 +1323,6 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							font-size:13px;
 							color:#3f3f3f;
 						}
-					}
-					.free{
-						display:block;
-						float:left;
-						width:170px;
-						height:40px;
-						margin-left: 5px;
-						background:url(free_button.png) no-repeat;
-						text-decoration:none;
-						p{
-							font-size:17px;
-							color:white;
-							text-align:center;
-							margin:0;
-							line-height: normal;
-						}
-						p.first{
-							margin-top:2px;
-						}
-						p.small{
-							font-size:13px;
-						}
-					}
-					a.free:hover{
-						background:url(free_button_hover.png) no-repeat;
-					}
-					a.free:active{
-						background:url(free_button_selected.png) no-repeat;
 					}
 					.button_tooltip{
 						position:absolute;

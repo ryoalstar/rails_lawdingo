@@ -1,5 +1,10 @@
-<%= content_tag_for :li, review do %>
-  <%= content_tag :div, "", class: "rating", data: { score: review.rating } %>
-  <%= content_tag :div, "#{(review.conversation.duration / 60).round} minute session about <strong>#{review.purpose.downcase}</strong>, #{review.created_at.strftime("%e/%m/%Y")}".html_safe, class: "title" %>
-  <%= content_tag :div, "“#{review.body}”".html_safe, class: "body" unless review.body.blank? %>
+<%= content_tag_for :div, review do %>
+  <div class="left">
+    <%= content_tag :p, "#{(review.conversation.duration / 60).round} minute session about <strong>#{review.purpose.downcase}</strong> “#{review.body}”".html_safe, class: "" %>
+    
+  </div>
+  <div class="right">
+    <%= content_tag :p, "#{review.created_at.strftime("%e/%m/%Y")}".html_safe, class: "" %>
+    <%= content_tag :div, "", class: "stars", data: { score: review.rating } %>
+  </div>
 <% end %> 
