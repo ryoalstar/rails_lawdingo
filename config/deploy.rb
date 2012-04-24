@@ -31,7 +31,7 @@ set(:current_revision)  { capture("cd #{current_path}; git rev-parse --short HEA
 set(:latest_revision)   { capture("cd #{current_path}; git rev-parse --short HEAD").strip }
 set(:previous_revision) { capture("cd #{current_path}; git rev-parse --short HEAD@{1}").strip }
 
-default_environment["RAILS_ENV"] = 'development'
+default_environment["RAILS_ENV"] = 'production'
 default_run_options[:pty] = true
 
 # Use our ruby-1.9.2-p290@bulova gemset
