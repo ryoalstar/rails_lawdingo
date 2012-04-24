@@ -109,7 +109,7 @@ class SearchController < ApplicationController
      images_hash["rating"] = "<img src='/assets/raty/star-#{star[1]}.png' alt='1' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[2]}.png' alt='2' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[3]}.png' alt='3' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[4]}.png' alt='4' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[5]}.png' alt='5' title='not rated yet'>"
      images_hash["reviews"] = "#{lawyer.reviews.count} reviews"
      images_hash["link_reviews"] = "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews".html_safe
-     
+     images_hash["start_live_conversation"] = "/users/new?notice=true&return_path=%2Ftwilio%2Fphonecall%3F#{lawyer.id}%3D9&ut=0"
     
      
      

@@ -1,7 +1,6 @@
 - cache("lawyer_view_#{lawyer.id}_#{lawyer.updated_at.to_i}") do
   .row{:id => "lawyer_#{lawyer.id}"}
     = hidden_field(:current, :lid)
-    / CALL TO ACTION
     .left.row_block
       .avatar
         = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
@@ -65,8 +64,9 @@
           %ul
             %li
               = start_or_schedule_button(lawyer)
-              - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
-                = start_phone_consultation(lawyer)
+            - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+              %li
+              = start_phone_consultation(lawyer)
             -#%li.disabled 
               %a Video consultation
     .right.row_block
