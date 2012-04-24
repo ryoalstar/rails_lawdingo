@@ -36,17 +36,21 @@
             = image_tag default_image.photo.url(:large), :alt => ""
           .carousel-description
             .ratings
-              %h4= link_to "Attorney #{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+              %h4
               .stars
                 %span.star_rating.on
                 %span.star_rating
                 %span.star_rating
                 %span.star_rating
                 %span.star_rating
-              %p.desc= description
-              %a.free{:href=> "#"}
-                %p 20 minutes free
-                %p.small then $2.50/minute
+            %p.desc
+            %p
+            %a.free{:href=> "#"}
+              %p.rate= lawyer.full_name
+              %p.small 
+                then 
+                = number_to_currency (lawyer.rate + AppParameter.service_charge_value)
+                \/minute
               %a.reviews{:href => '#'}
                 Read reviews (25)
 #bottom_content

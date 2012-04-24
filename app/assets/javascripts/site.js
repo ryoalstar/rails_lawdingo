@@ -207,6 +207,9 @@ $(function(){
             self.find('.carousel-image img').attr('alt', self.images[self.current_image]['title']);
             self.find('.carousel-description h4').html( self.images[self.current_image]['title'] );
             self.find('.carousel-description p.desc').html( self.images[self.current_image]['description'] );
+            self.find('.carousel-description p.rate').html( self.images[self.current_image]['rate'] );
+            
+            
         }
 
         function next_image(){ goto_image( self.current_image<self.images.length-1? self.current_image+1: 0 ) }
