@@ -38,17 +38,14 @@
             .ratings
               %h4= link_to "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
               .stars
-                %span.star_rating.on
-                %span.star_rating
-                %span.star_rating
-                %span.star_rating
-                %span.star_rating
+                = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+                
             %p.desc= description
             %a.free{:href=> "#"}
               %p.rate= "#{lawyer.free_consultation_duration} minutes free"
               %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
-              %a.reviews{:href => '#'}
-                Read reviews (25)
+              %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"}
+                %span.number_rev= "#{lawyer.reviews.count} reviews"
 #bottom_content
   .left_bar
     %h2 How it works:
@@ -80,3 +77,28 @@
           //%span.open_quotes
           At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
           //%span.close_quotes
+          
+          
+:javascript
+  $ (".rating").raty({
+      path: "/assets/raty",
+      hintList: ['', '', '', '', '', ''],
+      readOnly: true,
+      start: function() {return $(this).data("score")}
+  })
+  function equalHeight(group) {
+    tallest = 0;
+    group.each(function() {
+       thisHeight = $(this).height();
+       if(thisHeight > tallest) {
+          tallest = thisHeight;
+       }
+    });
+    group.height(tallest);
+  }
+  $(document).ready(function() {
+    $('.row').each(function(){
+
+      equalHeight($(this).find(".row_block"));
+    });
+  });

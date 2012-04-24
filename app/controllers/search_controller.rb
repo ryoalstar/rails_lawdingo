@@ -96,6 +96,22 @@ class SearchController < ApplicationController
      images_hash["description"] = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
      images_hash["small"]="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
      images_hash["rate"]="#{lawyer.free_consultation_duration} minutes free"
+     star=[]  
+     star[1]='off'
+     star[2]='off'
+     star[3]='off'
+     star[4]='off'
+     star[5]='off'
+     a=lawyer.reviews.average(:rating).to_i
+     a.times do |i|
+       star[i+1]='on'
+     end   
+     images_hash["rating"] = "<img src='/assets/raty/star-#{star[1]}.png' alt='1' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[2]}.png' alt='2' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[3]}.png' alt='3' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[4]}.png' alt='4' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[5]}.png' alt='5' title='not rated yet'>"
+     images_hash["reviews"] = "#{lawyer.reviews.count} reviews"
+     images_hash["link_reviews"] = "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews".html_safe
+     
+    
+     
      
      list << images_hash
      }
