@@ -212,6 +212,7 @@ $(function(){
             self.find('.carousel-description .rating').html( self.images[self.current_image]['rating'] );
             self.find('.carousel-description span.number_rev').html( self.images[self.current_image]['reviews'] );
             self.find('.carousel-description a.reviews').attr('href', self.images[self.current_image]['link_reviews'] );
+            self.find('.carousel-description a.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
             
             
             

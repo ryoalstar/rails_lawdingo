@@ -133,6 +133,52 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 		width: 100%;
 		padding-bottom: 102px;
 		background: url(content_bg.png) repeat;
+		.button_tooltip{
+			position:absolute;
+			background:#f4f4f4;
+			//border: 8px solid transparent;
+	    box-shadow: 0 0 8px #000000;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			position: absolute;
+			margin-left: 169px;
+			margin-top: -35px;
+			display:none;
+			width: 145px;
+			ul{
+				padding:0px;
+				margin:0;
+				li:first-child{
+					padding-top:7px;
+				}
+				li:last-child{
+					padding-bottom:10px;
+				}
+				li{
+					padding: 0px 10px;
+					list-style-type: none;
+					list-style-image: none;
+					a{
+						font-size:12px;
+						color:#3f3f3f;
+						cursor:pointer;
+					}
+				}
+				li.disabled, li.disabled:hover{
+					background:none;
+					a{
+						cursor:default;
+						color:#a7a6a6;
+					}
+				}
+				li.selected, li:hover{
+					background:url(call_button_bg.png) repeat-x;
+					a{
+						color:#fff;
+					}
+				}
+			}
+		}
 		a.free{
 			display:block;
 			float:left;
@@ -1324,52 +1370,6 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							list-style-image:url(li_list_img.png);
 							font-size:13px;
 							color:#3f3f3f;
-						}
-					}
-					.button_tooltip{
-						position:absolute;
-						background:#f4f4f4;
-						//border: 8px solid transparent;
-				    box-shadow: 0 0 8px #000000;
-						-moz-border-radius: 5px;
-						-webkit-border-radius: 5px;
-						position: absolute;
-						margin-left: 169px;
-						margin-top: -35px;
-						display:none;
-						width: 145px;
-						ul{
-							padding:0px;
-							margin:0;
-							li:first-child{
-								padding-top:7px;
-							}
-							li:last-child{
-								padding-bottom:10px;
-							}
-							li{
-								padding: 0px 10px;
-								list-style-type: none;
-								list-style-image: none;
-								a{
-									font-size:12px;
-									color:#3f3f3f;
-									cursor:pointer;
-								}
-							}
-							li.disabled, li.disabled:hover{
-								background:none;
-								a{
-									cursor:default;
-									color:#a7a6a6;
-								}
-							}
-							li.selected, li:hover{
-								background:url(call_button_bg.png) repeat-x;
-								a{
-									color:#fff;
-								}
-							}
 						}
 					}
 				}

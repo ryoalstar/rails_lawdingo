@@ -44,8 +44,22 @@
             %a.free{:href=> "#"}
               %p.rate= "#{lawyer.free_consultation_duration} minutes free"
               %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
-              %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"}
-                %span.number_rev= "#{lawyer.reviews.count} reviews"
+            .button_tooltip
+              %ul
+                %li 
+                  %a.shedule{:href => "/users/new?notice=true&return_path=%2Ftwilio%2Fphonecall%3F#{lawyer.id}%3D9&ut=0"}
+                    %span= 'Start live conversation'
+                - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+                  %li.phone
+                    = start_phone_consultation(lawyer)
+                %li.disabled 
+                  %a Video consultation  
+                %li
+                  %a Ask a (text) question
+                %li
+                  %a Schedule consultation
+            %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"}
+              %span.number_rev= "#{lawyer.reviews.count} reviews"
 #bottom_content
   .left_bar
     %h2 How it works:
