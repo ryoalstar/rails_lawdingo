@@ -146,16 +146,14 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 			display:none;
 			width: 145px;
 			ul{
-				padding:0px;
+				padding:10px 0px;
 				margin:0;
 				li:first-child{
-					padding-top:7px;
 				}
 				li:last-child{
-					padding-bottom:10px;
 				}
 				li{
-					padding: 0px 10px;
+					padding: 5px 10px;
 					list-style-type: none;
 					list-style-image: none;
 					a{
@@ -174,6 +172,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 				li.selected, li:hover{
 					background:url(call_button_bg.png) repeat-x;
 					a{
+						text-decoration:none;
 						color:#fff;
 					}
 				}
@@ -459,7 +458,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 	}
 	#inline-wrapper{
 		width:990px;
-		margin:30px auto;
+		margin:21px auto;
 		form.filters{
 			width:246px;
 		}
@@ -708,6 +707,10 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					label{
 						vertical-align: -20%;
 						cursor:pointer;
+						border-bottom: 1px dotted #000;
+					}
+					label:hover{
+						border-bottom:0;
 					}
 					img{
 						cursor:pointer;

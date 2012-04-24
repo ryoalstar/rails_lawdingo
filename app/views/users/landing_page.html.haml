@@ -52,11 +52,9 @@
                 - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
                   %li.phone
                     = start_phone_consultation(lawyer)
-                %li.disabled 
-                  %a Video consultation  
-                %li
+                -#%li
                   %a Ask a (text) question
-                %li
+                -#%li
                   %a Schedule consultation
             %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"}
               %span.number_rev= "#{lawyer.reviews.count} reviews"
