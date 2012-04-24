@@ -11,7 +11,7 @@ set :branch,          "repos/markup_integration"
 set :application,     'lawdingo'
 set :migrate_target,  :current
 set :ssh_options,     { :forward_agent => true }
-set :rails_env,       "development"
+set :rails_env,       "production"
 set :deploy_to,       "/var/www/lawdingo/"
 set :normalize_asset_timestamps, false
 
