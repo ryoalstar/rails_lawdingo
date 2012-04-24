@@ -144,6 +144,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 			p{
 				width: 100%;
 				font-size:17px !important;
+				color:white !important;
 				text-align:center;
 				margin:0px;
 				margin-top:0px !important;
@@ -278,7 +279,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							}
 						}
 						.carousel-description{
-							margin:23px 10px 10px 10px;
+							margin:23px 15px 10px 11px;
 							float:left;
 							p{
 								color:#3f3f3f;
@@ -299,7 +300,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 								padding: 0px 9px 4px 19px;
 							}
 							.ratings{
-								width:344px;
+								width:338px;
 								float:left;
 								h4{
 									font-size:20px;
@@ -308,7 +309,6 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 									display:block;
 									float:left;
 									margin-top:19px;
-									margin-bottom: 5px;
 								}
 								.stars{
 									margin-top:19px;
@@ -561,7 +561,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 			}
 			.left-bar-section.first{
 				padding-top:0px;
-				padding-bottom:11px;
+				padding-bottom:15px;
 				padding-left:0;
 				width:100%;
 			}

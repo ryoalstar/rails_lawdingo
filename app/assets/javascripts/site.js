@@ -208,6 +208,8 @@ $(function(){
             self.find('.carousel-description h4').html( self.images[self.current_image]['title'] );
             self.find('.carousel-description p.desc').html( self.images[self.current_image]['description'] );
             self.find('.carousel-description p.rate').html( self.images[self.current_image]['rate'] );
+            self.find('.carousel-description p.small').html( self.images[self.current_image]['small'] );
+            
             
             
         }
