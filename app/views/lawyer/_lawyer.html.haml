@@ -40,6 +40,7 @@
         .voice_chat.online.tooltip Available for voice chat
         .video_chat.offline.tooltip Not available by video now
         .voice_chat.offline.tooltip Not available by phone now
+      .clear
       .description
         - if lawyer.personal_tagline.present?
           %p
@@ -97,7 +98,7 @@
             %a{:href=>'#'} more
           %td
             %a{:href=>'#'} more                                     
-        
+      .clear  
       %a.appointments{:href => '#'}
         All available appointments        
         
@@ -109,14 +110,14 @@
 
   
 :javascript
-  $ (".row .rating").raty({
+  $(".row .rating").raty({
       path: "/assets/raty",
       hintList: ['', '', '', '', '', ''],
       readOnly: true,
       start: function() {return $(this).data("score")}
-  })
+  });
   function equalHeight(group) {
-    tallest = 0;
+    var tallest = 0;
     group.each(function() {
        thisHeight = $(this).height();
        if(thisHeight > tallest) {
