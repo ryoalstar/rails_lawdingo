@@ -71,6 +71,9 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							padding-right: 0;
 							margin-right: 0;
 							padding:0;
+							-moz-border-radius:0;
+							-webkit-border-radius:0;
+							border-radius:0;
 						}
 						a.lawyers_signup:hover{
 							background-position:0px -32px;
