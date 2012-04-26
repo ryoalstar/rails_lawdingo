@@ -11,7 +11,8 @@ module Yelp
     attr_reader :access_token
 
     def initialize
-      @consumer = OAuth::Consumer.new(CONSUMER_KEY, CONSUMER_SECRET, { site: "http://#{API_HOST}", proxy: "http://proxy.vscht.cz:3128/" })
+      # @consumer = OAuth::Consumer.new(CONSUMER_KEY, CONSUMER_SECRET, { site: "http://#{API_HOST}", proxy: "http://proxy.vscht.cz:3128/" })
+      @consumer = OAuth::Consumer.new(CONSUMER_KEY, CONSUMER_SECRET, { site: "http://#{API_HOST}" })
       @access_token = OAuth::AccessToken.new(@consumer, TOKEN, TOKEN_SECRET)
     end
 

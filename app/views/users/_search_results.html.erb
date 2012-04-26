@@ -1,5 +1,17 @@
+<% if @service_type == "legal-services" %>
+  <div class="selected-lawyers-caption">
+    <%= selected_offerings_caption %>
+  </div>
 
+  <% @offerings.each do |offering| %>
+    <%= render partial: 'offerings/offering', locals: { lawyer: Lawyer.find(offering.user_id), offering: offering } %>
+  <% end %>
+<% else %>
+  <div class="selected-lawyers-caption">
+    <%= selected_lawyers_caption %>
+  </div>
 
-<% @lawyers.each do |lawyer| -%>
-  <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
-<% end -%>
+  <% @lawyers.each do |lawyer| -%>
+    <%= render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} %>
+  <% end -%>
+<% end %>

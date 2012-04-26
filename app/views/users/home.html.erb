@@ -1,0 +1,129 @@
+<%= javascript_tag do -%>
+  $(function(){
+    Home.initialize()
+  })
+<% end -%>
+
+<div class="page" id="page">
+  <p class="notice" style="display: none;">
+    Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
+    <a href="#" id="close_notice">Close</a>
+  </p>
+
+  <div class="inline-wrapper clearfix">
+    <form class="filters">
+
+      <% cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do -%>
+        <div id="state">
+          <label for="state">Your state:</label>
+          <select name="state">
+            <option value="All-States" data-default="1">All</option>
+            <% @states.each do |state| -%>
+              <option value="<%= state.name.gsub(/\s+/,'-') %>-lawyers">
+                <%= state.name %>
+              </option>
+            <% end -%>
+          </select>
+        </div>
+      <% end -%>
+
+      <div class="filters-section" id="service_type">
+        <h3>Looking for:</h3>
+        <ul>
+          <li>
+            <%= radio_button_tag "service_type", "Legal-Advice", true, :class => "selected", "data-default" => "1" %>
+            <label for="lawyer_0">Legal advice</label>
+          </li>
+          <li>
+            <%= radio_button_tag "service_type", "Legal-Services", false %>
+            <label for="service_type">Fixed-price legal service</label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="filters-section" id="practice_areas">
+        <h3>Legal domain:<h3>
+        <ul class="practice-areas">
+          <li>
+            <%= radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1" %>
+            <label for="practice_area_All">All types</label>
+          </li>
+          <% @practice_areas.each do |area| %>
+            <li>
+              <%= radio_button_tag "practice_area", area.name.gsub(/[^\w]+/,'-') %>
+              <%= label_tag "practice_area_#{area.name}", area.name %>
+              <% if area.children.with_approved_lawyers.present? %>
+                <ul class="practice-areas children" style="display:none">
+                  <% area.children.with_approved_lawyers.each do |subarea| %>
+                    <li>
+                      <%= radio_button_tag "practice_area", subarea.name.gsub(/[^\w]+/,'-'),  %>
+                      <%= label_tag "practice_area_#{subarea.name}", subarea.name %>
+                    </li>
+                  <% end -%>
+                </ul>
+              <% end -%>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="filters-section" style="display: none;" id="specialities_filter">
+        <input type="text" name="select_sp" id="select_sp" value="0" style="display: none;" />
+        <h3>Specific need:</h3>
+        <ul class="specialities"></ul>
+      </div>
+    </form>
+
+    <% if flash[:notice].present? %>
+      <p class="notice">
+        <%= flash[:notice] %>
+        <a href="#" id="close_notice">Close</a>
+      </p>
+    <% end %>
+
+    <div id="generail_question" class="question-container">
+      <%= render partial: "questions/form", locals: { type: "lawyer" } %>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results" id="results">
+      <%= render(:partial => "search_results") %>
+    </div>
+  </div>
+</div>
+
+<div id="schedule_session" class="dialog-window">
+            <h3 id='overlay_user_name'></h3>
+            <span class="lawyer_name">Lawyer</span> is currently away or in a Lawdingo video consultation. Please send the lawyer a message with some times that would work for you to connect on Lawdingo.
+            <textarea id='txt_msg' name ='txt_msg'></textarea>
+            <span class="fine-print">Please do not include any private or confidential information here.</span>
+            <hr>
+            <a href="javascript:void(0)" class="button blue" onclick="sendMessage();return false;">Send Message</a>
+</div>
+
+<script type="text/javascript">
+function sendMessage(){
+  close_dialogs();
+  var msg = $('textarea#txt_msg').val();
+  var l1 = $("#current_lid").val();
+  if(msg != "")
+  {
+    $.ajax({
+        url: "/ScheduleSession",
+        type:'post',
+        data:{email_msg: msg,l2: l1},
+        success: function(response){
+              if(response == '1')
+                alert('Your message has been sent.');
+              else{
+                alert('Problem sending message. You may not be logged in');
+              }
+            }
+    });
+  }else
+  {
+    alert('You can not send the blank message');
+  }
+}
+</script>
+

@@ -1,4 +1,5 @@
 class PracticeArea < ActiveRecord::Base
+  default_scope order("name ASC")
   
   has_many :specialities, 
     :class_name => "PracticeArea", 

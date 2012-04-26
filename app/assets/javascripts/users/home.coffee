@@ -113,15 +113,22 @@ class Home
     $field.parents(".practice-areas")
       .show()
 
-    $field.parent().next().show()
+    $field.parent().next().show() unless @service_type == "Legal-Services"
 
 
   set_service_type_fields_val : (val)->
     @service_type = val
     this.service_type_fields()
-      .removeClass('selected')
       .filter("[data-val='#{val}']")
       .addClass("selected")
+    
+    if val == "Legal-Services"
+      @practice_area_fields().parent().find(".children").hide()
+    else
+      $field = @practice_area_fields().filter("[checked='checked']")
+      console.log $field.parent().find(".children")
+      $field.parents(".practice-areas").show()
+      $field.parent().find(".children").show()
 
   practice_area_fields : ()->
     this.form()
