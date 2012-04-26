@@ -31,13 +31,13 @@
             %label{:for => "practice_area_All"} All types
           - @practice_areas.each do |area|
             %p
-              = radio_button_tag "practice_area", area.name.gsub(/[^\w]+/,'-')
+              = radio_button_tag "practice_area", area.name.gsub(/[^\w]+/,'_')
               = label_tag "practice_area_#{area.name}", area.name
             - if area.children.with_approved_lawyers.present?
               .practice-areas.children{:style => "display:none"}
                 - area.children.with_approved_lawyers.each do |subarea|
                   %p
-                    = radio_button_tag "practice_area", subarea.name.gsub(/[^\w]+/,'-')
+                    = radio_button_tag "practice_area", subarea.name.gsub(/[^\w]+/,'_')
                     = label_tag "practice_area_#{subarea.name}", subarea.name
       -#specialities_filter.filters-section{:style => "display: none;"}
         %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
