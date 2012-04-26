@@ -119,6 +119,8 @@ class Home
   set_service_type_fields_val : (val)->
     @service_type = val
     this.service_type_fields()
+
+      .removeClass('selected')
       .filter("[data-val='#{val}']")
       .addClass("selected")
     

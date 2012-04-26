@@ -47,13 +47,16 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						float:left;
 						a{
 							color:white;
-							padding:2px 11px 6px 11px;
+							padding:2px 11px 3px 11px;
 							text-decoration:none;
 							font-size:14px;
 							margin: 0px 5px;
 						}
 						a:hover, a.selected{
-							background:url(login_button_selected.png) no-repeat;
+							background:url(login_button_selected_bg.png) repeat-x;
+							-moz-border-radius:15px;
+							-webkit-border-radius:15px;
+							border-radius:15px;
 						}
 						a.signup:hover{
 							background:url(signup_hover.png) no-repeat;
@@ -70,10 +73,10 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							padding:0;
 						}
 						a.lawyers_signup:hover{
-							background:url(signup_button_full.png) no-repeat 0px -32px;
+							background-position:0px -32px;
 						}
 						a.lawyers_signup:active{
-							background:url(signup_button_full.png) no-repeat 0px -63px;
+							background-position:0px -63px;
 						}
 					}
 				}
@@ -202,10 +205,10 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 			}
 		}
 		a.free:hover{
-			background:url(free_button_full.png) no-repeat 0px -43px;
+			background-position: 0px -43px;
 		}
 		a.free:active{
-			background:url(free_button_full.png) no-repeat 0px -85px;
+			background-position: 0px -85px;
 		}
 		.stars{
 			margin-top:20px;
@@ -289,10 +292,10 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							background: url(browse_lawyers_button_full.png) no-repeat 0px 0px;
 						}
 						a.browse_lawyers_button:hover{
-							background: url(browse_lawyers_button_full.png) no-repeat 0px -46px;
+							background-position: 0px -46px;
 						}
 						a.browse_lawyers_button:active{
-							background: url(browse_lawyers_button_full.png) no-repeat 0px -92px;
+							background-position: 0px -92px;
 						}
 					}
 					.slider{
@@ -339,6 +342,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 								line-height: 19px;
 							}
 							.reviews{
+								cursor:pointer;
 								display:block;
 								float:right;
 								background: url(reviews_clouds.png) no-repeat 0px 3px;
@@ -348,6 +352,9 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 								text-decoration:none;
 								margin-top:30px;
 								padding: 0px 9px 4px 19px;
+							}
+							.reviews:hover{
+								border:0;
 							}
 							.ratings{
 								width:338px;
@@ -412,7 +419,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						h3{
 							margin-top: 12px;
 							word-spacing: 2px;
-							margin-bottom:0;
+							margin-bottom:10px;
 						}
 					}
 				}
@@ -503,6 +510,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					}
 				}
 				.reviews{
+					cursor:pointer;
 					display:block;
 					background: url(reviews_clouds.png) no-repeat 0px 3px;
 					border-bottom:1px dotted #c3c6c7;
@@ -511,6 +519,9 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					text-decoration:none;
 					float:left;
 					padding: 0px 0px 4px 20px;
+				}
+				.reviews:hover{
+					border:0;
 				}
 				.stars{
 					margin-top:11px;
@@ -1221,6 +1232,12 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					word-spacing: 2px;
 					margin-bottom: 18px;
 				}
+				p.notice{
+					line-height: 36px;
+					margin-left: 35px;
+					margin-top: 17px;
+					text-align: center;
+				}
 				input.string.optional{
 					display:block;
 					float:left;
@@ -1248,10 +1265,10 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					border:0;
 				}
 				input[type="submit"]:hover{
-					background:url(ask_submit_full.png) no-repeat 0px -50px;
+					background-position: 0px -50px;
 				}
 				input[type="submit"]:active{
-					background:url(ask_submit_full.png) no-repeat 0px -99px;
+					background-position: 0px -99px;
 				}
 			}
 		}
@@ -1269,6 +1286,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 				width: 118px;
 				padding:17px 0 0px 17px;
 				.reviews{
+					cursor:pointer;
 					display:block;
 					background: url(reviews_clouds.png) no-repeat 2px 4px;
 					border-bottom:1px dotted #c3c6c7;
@@ -1280,6 +1298,9 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					margin-left: 10px;
 					padding: 0px 0px 4px 21px;
 				}		
+				.reviews:hover{
+					border:0;
+				}
 			}
 			.middle{
 				float:left;

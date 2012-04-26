@@ -106,9 +106,14 @@ class SearchController < ApplicationController
      a.times do |i|
        star[i+1]='on'
      end   
-     images_hash["rating"] = "<img src='/assets/raty/star-#{star[1]}.png' alt='1' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[2]}.png' alt='2' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[3]}.png' alt='3' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[4]}.png' alt='4' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[5]}.png' alt='5' title='not rated yet'>"
+     if a != 0
+       images_hash["rating"] = "<img src='/assets/raty/star-#{star[1]}.png' alt='1' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[2]}.png' alt='2' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[3]}.png' alt='3' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[4]}.png' alt='4' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[5]}.png' alt='5' title='not rated yet'>"
+     else
+       images_hash["rating"] = ""
+     end
+     images_hash["test"] = lawyer.reviews.count
      images_hash["reviews"] = "#{lawyer.reviews.count} reviews"
-     images_hash["link_reviews"] = "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews".html_safe
+     images_hash["link_reviews"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews' class = 'reviews'><span class = 'number_rev'></span></a>"
      images_hash["start_live_conversation"] = "/users/new?notice=true&return_path=%2Ftwilio%2Fphonecall%3F#{lawyer.id}%3D9&ut=0"
     
      
