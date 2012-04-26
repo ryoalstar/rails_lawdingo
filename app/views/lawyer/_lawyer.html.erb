@@ -1,0 +1,86 @@
+<div class="row" id="lawyer_<%= lawyer.id %>">
+  <%= hidden_field(:current, :lid) %>
+    <!-- CALL TO ACTION -->
+    <div class="action">
+      <!--div class="free">free initial consultation, then:</div-->
+      <div class="free"><%= free_message(lawyer) %></div>
+      <div class="price">then <%= number_to_currency (lawyer.rate + AppParameter.service_charge_value) %>/minute</div>
+      <% if lawyer.reviews.count > 0 %>
+      <div class="rating-container">
+        <%= link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars" %>
+        <%= content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "count" %>
+        <%= javascript_tag do -%>
+          $(".row#lawyer_<%= lawyer.id %> .rating").raty({
+            path: "/assets/raty",
+            hintList: ['', '', '', '', '', ''],
+            readOnly: true,
+            start: function() {
+              return $(this).data("score")
+            }
+          });
+        <% end -%>
+      </div>
+      <% end %>
+    </div>
+    <!-- END CALL TO ACTION -->
+    <%= link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug) %>
+
+    <!-- RESULT INFO -->
+    <% bms = []
+    bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
+      licenced_states = ""
+      bms.each{ |bm|
+        licenced_states += bm.state.abbreviation + ', '
+      }
+      licenced_states.chomp!(', ')
+      pas = []
+      pas = lawyer.practice_areas.parent_practice_areas unless lawyer.practice_areas.blank?
+      pas_string = ""
+      pas.each{|pa|
+        pas_string += pa.name + ', '
+      }
+      pas_string.chomp!(', ')
+
+      pas_names = pas.map { |area| area.name.downcase  }
+      pas_names_last = pas_names.pop
+      pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
+      %>
+    <div class="info">
+      <h3>
+        <%= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug) %>
+        <span class="status">
+        <%#= status_message(lawyer) %>
+        <% if lawyer.is_online %>
+          online now
+        <% elsif lawyer.phone.present? %>
+          available by phone now
+        <% end %>
+        </span>
+      </h3>
+      <div class="tagline">
+      <% if lawyer.personal_tagline.present? %>
+        <% unless params[:controller] == "attorneys" %>
+          <%= lawyer.personal_tagline.truncate(120, separator: ' ', omission: "... #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}").html_safe %>
+        <% else %>
+          <%= lawyer.personal_tagline %>
+        <% end %>
+      <% end %>
+      </div>
+      <ul class="verified">
+        <% unless lawyer.bar_memberships.blank? %>
+          <li class="first-child">&bull; Licensed in <%= licenced_states %></li>
+        <% end %>
+        <% unless lawyer.practice_areas.blank? %>
+          <li class="last-child">&bull; Advises on <%= @selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law" %></li>
+        <% end %>
+      </ul>
+      <div class="action-buttons">
+        <%= start_or_schedule_button(lawyer) %>
+        <% if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present? %>
+          <%= start_phone_consultation(lawyer) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <!-- END RESULT INFO -->
+</div>

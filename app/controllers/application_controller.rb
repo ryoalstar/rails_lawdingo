@@ -62,6 +62,8 @@ class ApplicationController < ActionController::Base
       question.update_attribute(:user_id, user.id)
 
       UserMailer.new_question_email(question).deliver
+
+      session[:question_id] = nil
     end
   end
 end
