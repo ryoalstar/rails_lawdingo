@@ -66,7 +66,7 @@
               = start_or_schedule_button(lawyer)
             - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
               %li
-              = start_phone_consultation(lawyer)
+                = start_phone_consultation(lawyer)
             -#%li.disabled 
               %a Video consultation
     .right.row_block
