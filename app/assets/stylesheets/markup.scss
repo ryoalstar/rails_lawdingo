@@ -689,7 +689,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					-moz-border-radius: 0 5px 5px 0;
 				  -webkit-border-radius: 0 5px 5px 0;	
 				}
-				a.advice.selected, a.service.selected, a.service:hover, a.advice:hover{
+				a.advice.selected, a.service.selected{
 					background:url(advice_button_selected.png) repeat-x;
 				}
 				input.search{
