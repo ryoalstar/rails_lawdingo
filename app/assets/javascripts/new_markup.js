@@ -5,7 +5,7 @@ $(document).ready(function(){
 		var imgcheck = imgsrc.width;
 
 
-		$(this).error(function() {
+		$(this).live("error", function() {
 		  $(this).attr('src', '/assets/profile_m.gif');
 		});
 	});
@@ -43,10 +43,10 @@ $(document).ready(function(){
 
 	
 	
-	$(".free").mouseover(function(){
+	$(".free").live('mouseover', function(){
 	    $(this).nextAll(".button_tooltip").fadeIn('slow');
 	});
-	$(".button_tooltip a").click(function(){
+	$(".button_tooltip a").live('click', function(){
 	    $(".button_tooltip").fadeOut('slow');
 	});
 	$( "#slider-range-min" ).slider({

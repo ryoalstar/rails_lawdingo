@@ -38,8 +38,8 @@
             .ratings
               %h4= link_to "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
               .stars
-                = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
-                
+                - if  lawyer.reviews.average(:rating).to_i !=0 
+                  = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
             %p.desc= description
             %a.free{:href=> "#"}
               %p.rate= "#{lawyer.free_consultation_duration} minutes free"
@@ -52,33 +52,33 @@
                 - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
                   %li.phone
                     = start_phone_consultation(lawyer)
-                %li.disabled 
-                  %a Video consultation  
-                %li
+                -#%li
                   %a Ask a (text) question
-                %li
+                -#%li
                   %a Schedule consultation
-            %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"}
-              %span.number_rev= "#{lawyer.reviews.count} reviews"
+            .rev_for_js
+              - if lawyer.reviews.count.to_i != 0
+                %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
+                  %span.number_rev= "#{lawyer.reviews.count} reviews"
 #bottom_content
   .left_bar
     %h2 How it works:
     .feature
       = image_tag('feature_1.png', :alt => '')  
       .feature_description
-        %h3 1- Browse and choose a lawyer
-        %p Chuck turducken corned beef. Capicola turkey meatloaf shoulder.
+        %h3 Find the right lawyer for you
+        %p Use filters to match your need to their experience. See availability and price.
     .feature
       = image_tag('feature_2.png', :alt => '')  
       .feature_description
-        %h3 2- Talk to them for free
-        %p Pig shankle short loin ham hock pork chop jowl, venison spare ribs leberkas.
+        %h3 Talk to them online for free
+        %p Schedule a session or talk immediately in a video or phone consultation. Free.
     .feature
       = image_tag('feature_3.png', :alt => '')  
       .feature_description
-        %h3 3- Pay for long consultation only
-        %p Short ribs strip steak frankfurter, cornerd beef vension fatback speck pastrami.              
-  .right_bar
+        %h3 Pay for advice or services
+        %p After the free session, simply pay for extended legal advice by the minute.  
+  -#.right_bar
     %h2 Introduction video
     = image_tag('video.png', :alt => '')  
     .testimonials

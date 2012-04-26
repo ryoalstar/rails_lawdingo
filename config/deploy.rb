@@ -7,11 +7,11 @@ set :whenever_command, "bundle exec whenever"
 
 set :scm,             :git
 set :repository,      "gitorious@repos.itima.ru:odesk-projects/lawdingo.git"
-set :branch,          "origin/master"
+set :branch,          "repos/markup_integration"
 set :application,     'lawdingo'
 set :migrate_target,  :current
 set :ssh_options,     { :forward_agent => true }
-set :rails_env,       "development"
+set :rails_env,       "production"
 set :deploy_to,       "/var/www/lawdingo/"
 set :normalize_asset_timestamps, false
 
@@ -31,7 +31,7 @@ set(:current_revision)  { capture("cd #{current_path}; git rev-parse --short HEA
 set(:latest_revision)   { capture("cd #{current_path}; git rev-parse --short HEAD").strip }
 set(:previous_revision) { capture("cd #{current_path}; git rev-parse --short HEAD@{1}").strip }
 
-default_environment["RAILS_ENV"] = 'development'
+default_environment["RAILS_ENV"] = 'production'
 default_run_options[:pty] = true
 
 # Use our ruby-1.9.2-p290@bulova gemset

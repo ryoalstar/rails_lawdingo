@@ -49,13 +49,16 @@
 					float:left;
 					a{
 						color:white;
-						padding:2px 11px 6px 11px;
+						padding:2px 11px 3px 11px;
 						text-decoration:none;
 						font-size:14px;
 						margin: 0px 5px;
 					}
 					a:hover, a.selected{
-						background:url(login_button_selected.png) no-repeat;
+						background:url(login_button_selected_bg.png) repeat-x;
+						-moz-border-radius:15px;
+						-webkit-border-radius:15px;
+						border-radius:15px;
 					}
 					a.signup:hover{
 						background:url(signup_hover.png) no-repeat;

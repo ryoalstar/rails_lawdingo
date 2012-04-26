@@ -30,20 +30,24 @@
             = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
             %label{:for => "practice_area_All"} All types
           - @practice_areas.each do |area|
-            - cache("practice_areas_form_#{area.id}_#{area.updated_at.to_i}") do
-              %p
-                = radio_button_tag "practice_area", area.name.gsub(/[^\w]+/,'-')
-                = label_tag "practice_area_#{area.name}", area.name
-              - if area.children.with_approved_lawyers.present?
-                .practice-areas.children{:style => "display:none"}
-                  - area.children.with_approved_lawyers.each do |subarea|
-                    %p
-                      = radio_button_tag "practice_area", subarea.name.gsub(/[^\w]+/,'-')
-                      = label_tag "practice_area_#{subarea.name}", subarea.name
-      .left-bar-section
+            %p
+              = radio_button_tag "practice_area", area.name.gsub(/[^\w]+/,'-')
+              = label_tag "practice_area_#{area.name}", area.name
+            - if area.children.with_approved_lawyers.present?
+              .practice-areas.children{:style => "display:none"}
+                - area.children.with_approved_lawyers.each do |subarea|
+                  %p
+                    = radio_button_tag "practice_area", subarea.name.gsub(/[^\w]+/,'-')
+                    = label_tag "practice_area_#{subarea.name}", subarea.name
+      -#specialities_filter.filters-section{:style => "display: none;"}
+        %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
+        %h3 Specific need:
+        %ul.specialities
+
+      -#.left-bar-section
         %h3 Search
         %input.search{:placeholder => "Enter any key"}   
-      .left-bar-section
+      -#.left-bar-section
         %h3 Minimum free minutes:
         %p.hidden
           %label{:for => "minimum_free_minutes"} Minimum free minutes:
@@ -59,7 +63,7 @@
           %span.thirty 30 
           %span.sixty 60 
           %span.ninety 90
-      .left-bar-section
+      -#.left-bar-section
         %h3 Minimum Client rating
         %p.hidden
           %label{:for => "minimum_client_rating"} Minimum Client rating:
@@ -77,7 +81,7 @@
             %span 4
           .star.star_5
             %span 5    
-      .left-bar-section
+      -#.left-bar-section
         %h3 Hourly rate:
         %p.hidden
           %label{:for => "hourly_rate"} Hourly rate:
@@ -89,7 +93,7 @@
           %span.h-rate-2 $$
           %span.h-rate-3 $$$
           %span.h-rate-4 $$$$
-      .left-bar-section
+      -#.left-bar-section
         %h3 Law school quality:
         %p.hidden
           %label{:for => "law_school_quality"} Law school quality:
@@ -106,7 +110,7 @@
       = flash[:notice]
       %a#close_notice{:href => "#"} Close
   .main_content
-    .question
+    #generail_question.question
       %h2.selected-lawyers-caption= selected_lawyers_caption
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS

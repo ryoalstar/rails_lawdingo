@@ -1,5 +1,7 @@
 require 'csv'
 class State < ActiveRecord::Base
+  default_scope order("name ASC")
+
   has_many :bar_memberships
   has_many :lawyers, :through => :bar_memberships
   FILE_PATH = "#{Rails.root}/states.csv"

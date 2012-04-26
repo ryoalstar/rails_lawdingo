@@ -209,11 +209,19 @@ $(function(){
             self.find('.carousel-description p.desc').html( self.images[self.current_image]['description'] );
             self.find('.carousel-description p.rate').html( self.images[self.current_image]['rate'] );
             self.find('.carousel-description p.small').html( self.images[self.current_image]['small'] );
-            self.find('.carousel-description .rating').html( self.images[self.current_image]['rating'] );
-            self.find('.carousel-description span.number_rev').html( self.images[self.current_image]['reviews'] );
-            self.find('.carousel-description a.reviews').attr('href', self.images[self.current_image]['link_reviews'] );
+            self.find('.carousel-description .stars').html( self.images[self.current_image]['rating'] );
             self.find('.carousel-description a.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
-            
+            if ( self.images[self.current_image]['test'] != 0)
+						{
+							self.find('.carousel-description .rev_for_js').html( self.images[self.current_image]['link_reviews'] );
+							self.find('.carousel-description .rev_for_js span.number_rev').html( self.images[self.current_image]['reviews'] );
+							
+						}
+						else
+						{
+							self.find('.carousel-description span.number_rev').hide();
+							self.find('.carousel-description a.reviews').hide();
+						}
             
             
         }
