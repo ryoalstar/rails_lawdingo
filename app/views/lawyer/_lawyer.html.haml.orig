@@ -29,19 +29,11 @@
     %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
     .online_icons
       - if lawyer.is_online
-        = start_or_video_button_p(lawyer)
         %span.video.online
       - else
         %span.video.offline
       - if lawyer.phone.present? 
-        %a{:href =>start_phone_consultation_p(lawyer)}
         %span.voice.online
-        :javascript
-          $(function() {
-            $('span.voice.online').live('click', function(e) {
-              $(this).prevAll().trigger('click');
-            });
-          });
       - else 
         %span.voice.offline
       .video_chat.online.tooltip Available for video chat
@@ -75,6 +67,59 @@
             = start_or_schedule_button(lawyer)
           - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
             %li
+<<<<<<< HEAD
+              Licensed in #{licenced_states}
+          - unless lawyer.practice_areas.blank?
+            %li
+              Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law"}
+        %a.free{:href=> "#"}
+          %p= free_message(lawyer)
+          %p.small 
+            then 
+            = number_to_currency (lawyer.rate + AppParameter.service_charge_value)
+            \/minute
+        .button_tooltip
+          %ul
+            %li
+              = start_or_schedule_button(lawyer)
+            - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+              %li
+                = start_phone_consultation(lawyer)
+            -#%li.disabled 
+              %a Video consultation
+    .right.row_block
+      %p Available appointments
+      %table
+        %tr
+          %th
+            %a.first_date{:href => '#'} Today
+          %th
+            %a.second_date{:href => '#'} Fri, 11/21
+        %tr
+          %td
+            %a{:href=>'#'} 4:30pm
+          %td
+            %a{:href=>'#'} 9:00am
+        %tr
+          %td
+            %a{:href=>'#'} 5:00pm
+          %td
+            %a{:href=>'#'} 9:30am
+        %tr
+          %td
+            %a{:href=>'#'} 5:30pm
+          %td
+            %a{:href=>'#'} 8:30am
+        %tr
+          %td
+            %a{:href=>'#'} more
+          %td
+            %a{:href=>'#'} more                                     
+        
+      %a.appointments{:href => '#'}
+        All available appointments        
+        
+=======
               = start_phone_consultation(lawyer)
           -#%li.disabled 
             %a Video consultation
@@ -110,6 +155,7 @@
     %a.appointments{:href => '#'}
       All available appointments        
       
+>>>>>>> b2c38d40d20d7567f081a03e2a199239ad49747f
         
         
         
