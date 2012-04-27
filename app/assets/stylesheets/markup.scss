@@ -1330,19 +1330,33 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						float:left;
 						margin-right:5px;
 						cursor:pointer;
+						background:url(chat_icons_full.png) no-repeat;
 					}
 					span.video{
-						background:url(video_icon.png);
+						background-position: 0px -2px;
 					}
 					span.video.online{
-						background:url(video_icon_active.png);
+						background-position: 0px -32px;
+					}
+					span.video:hover{
+						 background-position: 0px -32px;
+					}
+					span.video:active{
+						background-position: 0px -62px;
 					}
 					span.voice{
-						background:url(voice_icon.png);
+						background-position: 0px -2px;
 					}
 					span.voice.online{
-						background:url(voice_icon_active.png);
-					}					
+						background-position: -32px -32px;
+					}
+					span.voice:hover{
+						background-position: -32px -32px;
+					}	
+					span.voice:active{
+						background-position: -32px -62px;
+					}				
+
 					.tooltip{
 						width:138px;
 						height:29px;
