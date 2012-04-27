@@ -71,6 +71,9 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							padding-right: 0;
 							margin-right: 0;
 							padding:0;
+							-moz-border-radius:0;
+							-webkit-border-radius:0;
+							border-radius:0;
 						}
 						a.lawyers_signup:hover{
 							background-position:0px -32px;
@@ -188,7 +191,6 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 			height:40px;
 			background:url(free_button_full.png) no-repeat 0px -1px;
 			text-decoration:none;
-			margin-top:20px;
 			p{
 				width: 100%;
 				font-size:17px !important;
@@ -324,7 +326,8 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 								text-align: center;
 								height: 253px;
 								img{
-									width:200px;
+									max-height:253px;
+									max-width:358px;
 								}
 							}
 						}
@@ -687,7 +690,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					-moz-border-radius: 0 5px 5px 0;
 				  -webkit-border-radius: 0 5px 5px 0;	
 				}
-				a.advice.selected, a.service.selected, a.service:hover, a.advice:hover{
+				a.advice.selected, a.service.selected{
 					background:url(advice_button_selected.png) repeat-x;
 				}
 				input.search{
@@ -1284,7 +1287,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 			.left{
 				float:left;
 				width: 118px;
-				padding:17px 0 0px 17px;
+				padding:17px 10px 0px 17px;
 				.reviews{
 					cursor:pointer;
 					display:block;
@@ -1327,19 +1330,33 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						float:left;
 						margin-right:5px;
 						cursor:pointer;
+						background:url(chat_icons_full.png) no-repeat;
 					}
 					span.video{
-						background:url(video_icon.png);
+						background-position: 0px -2px;
 					}
 					span.video.online{
-						background:url(video_icon_active.png);
+						background-position: 0px -32px;
+					}
+					span.video:hover{
+						 background-position: 0px -32px;
+					}
+					span.video:active{
+						background-position: 0px -62px;
 					}
 					span.voice{
-						background:url(voice_icon.png);
+						background-position: 0px -2px;
 					}
 					span.voice.online{
-						background:url(voice_icon_active.png);
-					}					
+						background-position: -32px -32px;
+					}
+					span.voice:hover{
+						background-position: -32px -32px;
+					}	
+					span.voice:active{
+						background-position: -32px -62px;
+					}				
+
 					.tooltip{
 						width:138px;
 						height:29px;
