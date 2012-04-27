@@ -79,6 +79,11 @@
               = start_phone_consultation(lawyer)
           -#%li.disabled 
             %a Video consultation
+          %li{:href => "#"}
+            Ask a (text) question
+          %li
+            = start_or_schedule_button_p(lawyer)
+            
   -#.right.row_block
     %p Available appointments
     %table
