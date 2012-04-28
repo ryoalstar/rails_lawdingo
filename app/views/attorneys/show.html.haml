@@ -54,6 +54,7 @@
               %p 
                 Lawdingo rating
                 = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: @attorney.reviews.average(:rating).to_i }), attorney_path(@attorney, slug: @attorney.slug, anchor: "reviews"), class: "rating-stars"
+              %br/
               %p.small
                 Based on #{@attorney.reviews.count.to_i} reviews
   - bms = []
