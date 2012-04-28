@@ -210,7 +210,32 @@ $(function(){
             self.find('.carousel-description p.rate').html( self.images[self.current_image]['rate'] );
             self.find('.carousel-description p.small').html( self.images[self.current_image]['small'] );
             self.find('.carousel-description .stars').html( self.images[self.current_image]['rating'] );
-            self.find('.carousel-description a.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
+            //self.find('.carousel-description li.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
+					  if (self.images[self.current_image]["start_video_conversation"] !== undefined) {
+			      	  self.find('.carousel-description li.shedule')
+										.html(self.images[self.current_image]["start_video_conversation"])
+										.show();
+		      	} else {
+		      	  	self.find('.carousel-description li.shedule').html('').hide();
+						}
+						
+						if (self.images[self.current_image]["start_phone_conversation"] !== undefined) {
+								self.find('.carousel-description li.phone')
+										.html(self.images[self.current_image]["start_phone_conversation"])
+										.show();
+						} else {
+							  self.find('.carousel-description li.phone').html('').hide();
+						}
+						
+						if (self.images[self.current_image]["send_text_question"] !== undefined) {
+			      		self.find('.carousel-description li.text')
+										.html(self.images[self.current_image]["send_text_question"])
+										.show();
+						} else {
+								self.find('.carousel-description li.text').html('').hide();
+						}
+            //self.find('.carousel-description a.phone').attr('href', self.images[self.current_image]['start_live_conversation'] );
+            //self.find('.carousel-description a.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
             if ( self.images[self.current_image]['test'] != 0)
 						{
 							self.find('.carousel-description .rev_for_js').html( self.images[self.current_image]['link_reviews'] );
@@ -222,7 +247,6 @@ $(function(){
 							self.find('.carousel-description span.number_rev').hide();
 							self.find('.carousel-description a.reviews').hide();
 						}
-            
             
         }
 

@@ -536,7 +536,7 @@ class UsersController < ApplicationController
     @service_type = service_type.downcase
 
     # legal services
-    if service_type.downcase == "legal-services"
+    if @service_type == "legal-services"
       # @lawyers = @lawyers.offers_legal_services
       @offerings = Offering.find(:all, conditions: { user_id: @lawyers.offers_legal_services.map(&:id) })
     # default is legal advice

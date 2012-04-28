@@ -37,12 +37,6 @@
       - if lawyer.phone.present? 
         %a{:href =>start_phone_consultation_p(lawyer)}
         %span.voice.online
-        :javascript
-          $(function() {
-            $('span.voice.online').live('click', function(e) {
-              $(this).prevAll().trigger('click');
-            });
-          });
       - else 
         %span.voice.offline
       .video_chat.online.tooltip Available for video chat
@@ -71,18 +65,16 @@
           = number_to_currency (lawyer.rate + AppParameter.service_charge_value)
           \/minute
       .button_tooltip
-        %ul
-          %li
-            = start_or_schedule_button(lawyer)
-          - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+        .button-content
+          %ul
             %li
-              = start_phone_consultation(lawyer)
-          -#%li.disabled 
-            %a Video consultation
-          %li{:href => "#"}
-            Ask a (text) question
-          %li
-            = start_or_schedule_button_p(lawyer)
+              = start_or_schedule_button(lawyer)
+            - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+              %li
+                = start_phone_consultation(lawyer)
+            %li
+              = start_or_schedule_button_text(lawyer)
+            
             
   -#.right.row_block
     %p Available appointments
@@ -144,5 +136,5 @@
     $('.row').each(function(){
       
       equalHeight($(this).find(".row_block"));
-    });*/
-  });
+    });
+  });*/

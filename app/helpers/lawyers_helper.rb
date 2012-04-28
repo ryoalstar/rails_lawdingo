@@ -111,9 +111,9 @@ module LawyersHelper
   def start_or_schedule_button(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "start video consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => ''
+        link_to "Start video consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => ''
       else
-        link_to "start video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Start Video Consultation", :class => ''
+        link_to "Start video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Start Video Consultation", :class => ''
       end
     else
       if logged_in?
@@ -138,12 +138,22 @@ module LawyersHelper
     end
   end
   
-  def start_or_schedule_button_p(lawyer)
+  def start_or_schedule_button_text(lawyer)
     if logged_in?
-      link_to "Schedule consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+      link_to "Ask a (text) question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      link_to "Schedule consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Start Schedule consultation", :class => ''
+      link_to "Ask a (text) question", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Start Schedule consultation", :class => ''
     end
+  end
+  
+  def start_video_button(lawyer)
+    if lawyer.is_online && !lawyer.is_busy
+      if logged_in?
+        link_to "Start video consultation", user_chat_session_path(lawyer), :title => "Start Video Consultation", :class => ''
+      else
+        link_to "Start video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Start Video Consultation", :class => ''
+      end
+   end
   end
   
   def start_or_video_button_p(lawyer)
@@ -183,6 +193,18 @@ module LawyersHelper
    end
  end
 
+ def start_phone_consultation_path(lawyer)
+    if logged_in?
+     if current_user.stripe_customer_token.present?
+       phonecall_path(lawyer)
+     else
+       call_payment_path(lawyer)
+     end
+   else
+     new_user_path(:ut => 0, :notice => true, :return_path => phonecall_path(lawyer))
+   end
+ end
+ 
  def status_message(lawyer)
    if lawyer.is_online
      "online now"

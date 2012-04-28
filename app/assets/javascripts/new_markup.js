@@ -43,11 +43,19 @@ $(document).ready(function(){
 
 	
 	
-	$(".free").live('mouseover', function(){
-	    $(this).nextAll(".button_tooltip").fadeIn('slow');
+	$(".free").live('mouseenter', function(){
+			$(".button_tooltip").hide();
+	    $(this).nextAll(".button_tooltip").show();
 	});
-	$(".button_tooltip a").live('click', function(){
-	    $(".button_tooltip").fadeOut('slow');
+/*	$(".free").live('mouseout', function(){
+		  $(this).nextAll(".button_tooltip:visible").hide();
+	});*/
+	/*$(".button_tooltip *").live('mouseover', function() {
+		$(this).parent().show();
+	})*/
+	
+	$(".button_tooltip").live('mouseleave', function() {
+			$(this).hide();
 	});
 	$( "#slider-range-min" ).slider({
 	  range: "min",

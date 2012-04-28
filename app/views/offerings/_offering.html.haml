@@ -1,23 +1,57 @@
-= content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
-= content_tag :h3, "#{@attorney.first_name}'s fixed-price offers:" do
-  = content_tag :span, "#{number_to_currency(offering.fee, precision: 0)} flat fee"
-= hidden_field(:current, :lid)
-.action
-  .price
-= link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))
-.info
-  %h3
-    = link_to_unless_current "#{offering.name}", offering
-  = simple_format offering.description, class: "description"
-  - if offering.practice_area.present?
-    %p.last
-      %strong Practice area: #{offering.practice_area.name}
-  %p.hide_on_attorneys
-    Delivered by: #{link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug)}
-    %span.status= status_message(lawyer)
-  -#.action-buttons
-    = start_or_schedule_button(lawyer)
-    - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
-      = start_phone_consultation(lawyer)
-.clear
-/ END RESULT INFO
+.row.offering{:id => "offering_#{offering.id}"}
+  .left.row_block
+    .avatar
+      = link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))
+    .stars
+      - if lawyer.reviews.average(:rating).to_i > 0
+        = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+    - if lawyer.reviews.count > 0
+      = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
+    .clear      
+  .middle.row_block  
+    %h1= link_to_unless_current "#{offering.name}", offering
+    .online_icons
+      - if lawyer.is_online
+        = start_or_video_button_p(lawyer)
+        %span.video.online
+      - else
+        %span.video.offline
+      - if lawyer.phone.present? 
+        %a{:href =>start_phone_consultation_p(lawyer)}
+        %span.voice.online
+      - else 
+        %span.voice.offline
+      .video_chat.online.tooltip Available for video chat
+      .voice_chat.online.tooltip Available for voice chat
+      .video_chat.offline.tooltip Not available by video now
+      .voice_chat.offline.tooltip Not available by phone now
+    .clear  
+    .description  
+      = simple_format offering.description, class: "description"
+      - if offering.practice_area.present?
+        %p
+          Practice area: #{offering.practice_area.name}
+      %p.hide_on_attorneys
+        Delivered by: #{link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug)}
+        %span.status= status_message(lawyer)          
+      %a.free{:href=> "#"}
+        %p= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
+        %p.small 
+          free consultation
+      .button_tooltip
+        .button-content
+          %ul
+            %li
+              = start_or_schedule_button(lawyer)
+            - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+              %li
+                = start_phone_consultation(lawyer)
+            %li
+              = start_or_schedule_button_text(lawyer)        
+:javascript
+  $(".row .rating").raty({
+      path: "/assets/raty",
+      hintList: ['', '', '', '', '', ''],
+      readOnly: true,
+      start: function() {return $(this).data("score")}
+  });    

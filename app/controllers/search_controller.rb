@@ -1,6 +1,8 @@
 include ActionView::Helpers::NumberHelper # Number helpers available inside controller method
 
 class SearchController < ApplicationController
+  include LawyersHelper
+  
   def populate_specialities
     @practice_area = PracticeArea.find(params[:pid])
     specialities_ids_lawyers = PracticeArea.child_practice_areas_having_lawyers.map(&:id)
@@ -83,44 +85,54 @@ class SearchController < ApplicationController
     end
   end
 
+  # <sarcasm> skinny controller, fat model? Yeah! </sarcasm>
+  # templates? Newer hear...
   def get_homepage_lawyers
      homepage_images = HomepageImage.all
      list = []
      practice_area_text = ""
-     homepage_images.each{|image|
-     lawyer = image.lawyer
-     practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
-     images_hash = Hash.new
-     images_hash["url"] = image.photo.url(:large)
-     images_hash["title"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.slug}'>#{lawyer.full_name}</a>".html_safe
-     images_hash["description"] = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
-     images_hash["small"]="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
-     images_hash["rate"]="#{lawyer.free_consultation_duration} minutes free"
-     star=[]  
-     star[1]='off'
-     star[2]='off'
-     star[3]='off'
-     star[4]='off'
-     star[5]='off'
-     a=lawyer.reviews.average(:rating).to_i
-     a.times do |i|
-       star[i+1]='on'
-     end   
-     if a != 0
-       images_hash["rating"] = "<img src='/assets/raty/star-#{star[1]}.png' alt='1' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[2]}.png' alt='2' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[3]}.png' alt='3' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[4]}.png' alt='4' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[5]}.png' alt='5' title='not rated yet'>"
-     else
-       images_hash["rating"] = ""
+     homepage_images.each do |image|
+       lawyer = image.lawyer
+       practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
+       images_hash = Hash.new
+       images_hash["url"] = image.photo.url(:large)
+       images_hash["title"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.slug}'>#{lawyer.full_name}</a>".html_safe
+       images_hash["description"] = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
+       images_hash["small"]="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
+       images_hash["rate"]="#{lawyer.free_consultation_duration} minutes free"
+       star=[]  
+       star[1]='off'
+       star[2]='off'
+       star[3]='off'
+       star[4]='off'
+       star[5]='off'
+       a=lawyer.reviews.average(:rating).to_i
+       a.times do |i|
+         star[i+1]='on'
+       end   
+       if a != 0
+         images_hash["rating"] = "<img src='/assets/raty/star-#{star[1]}.png' alt='1' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[2]}.png' alt='2' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[3]}.png' alt='3' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[4]}.png' alt='4' title='not rated yet'>&nbsp;<img src='/assets/raty/star-#{star[5]}.png' alt='5' title='not rated yet'>"
+       else
+         images_hash["rating"] = ""
+       end
+       images_hash["test"] = lawyer.reviews.count
+       images_hash["reviews"] = "#{lawyer.reviews.count} reviews"
+       images_hash["link_reviews"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews' class = 'reviews'><span class = 'number_rev'></span></a>"
+
+       images_hash["start_video_conversation"] = start_or_schedule_button(lawyer) 
+       images_hash["start_phone_conversation"] = start_phone_consultation(lawyer) if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+       images_hash["send_text_question"]       = start_or_schedule_button_text(lawyer)
+         
+       list << images_hash
      end
-     images_hash["test"] = lawyer.reviews.count
-     images_hash["reviews"] = "#{lawyer.reviews.count} reviews"
-     images_hash["link_reviews"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews' class = 'reviews'><span class = 'number_rev'></span></a>"
-     images_hash["start_live_conversation"] = "/users/new?notice=true&return_path=%2Ftwilio%2Fphonecall%3F#{lawyer.id}%3D9&ut=0"
-    
-     
-     
-     list << images_hash
-     }
      render :text => list.to_json, :layout=>false
+  end
+  
+  protected
+  
+  def link_to(*args)
+    puts args.inspect
+    self.class.helpers.link_to *args
   end
 end
 

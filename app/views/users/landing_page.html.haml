@@ -41,25 +41,25 @@
                 - if  lawyer.reviews.average(:rating).to_i !=0 
                   = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
             %p.desc= description
-            %a.free{:href=> "#"}
-              %p.rate= "#{lawyer.free_consultation_duration} minutes free"
-              %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
-            .button_tooltip
-              %ul
-                %li 
-                  %a.shedule{:href => "/users/new?notice=true&return_path=%2Ftwilio%2Fphonecall%3F#{lawyer.id}%3D9&ut=0"}
-                    %span= 'Start live conversation'
-                - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
-                  %li.phone
-                    = start_phone_consultation(lawyer)
-                -#%li
-                  %a Ask a (text) question
-                -#%li
-                  %a Schedule consultation
-            .rev_for_js
-              - if lawyer.reviews.count.to_i != 0
-                %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
-                  %span.number_rev= "#{lawyer.reviews.count} reviews"
+            #carousel-buttons
+              %a.free{:href=> "#"}
+                %p.rate= "#{lawyer.free_consultation_duration} minutes free"
+                %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
+              .button_tooltip
+                .button-content
+                  %ul
+                    
+                    %li.shedule
+                      = start_or_schedule_button(lawyer) # start_video_button(lawyer)
+                    - lo_callable = lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+                    %li.phone{:style => "display: #{lo_callable ? 'list-item' : 'none'}"}
+                      = start_phone_consultation(lawyer)
+                    %li.text
+                      = start_or_schedule_button_text(lawyer)
+              .rev_for_js
+                - if lawyer.reviews.count.to_i != 0
+                  %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
+                    %span.number_rev= "#{lawyer.reviews.count} reviews"
 #bottom_content
   .left_bar
     %h2 How it works:
