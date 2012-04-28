@@ -6,8 +6,8 @@ set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
 
 set :scm,             :git
-set :repository,      "gitorious@repos.itima.ru:odesk-projects/lawdingo.git"
-set :branch,          "repos/markup_integration"
+set :repository,      "git@github.com:yywt/videochat.git"
+set :branch,          "origin/master"
 set :application,     'lawdingo'
 set :migrate_target,  :current
 set :ssh_options,     { :forward_agent => true }
@@ -76,7 +76,7 @@ namespace :deploy do
 
 	desc "Update the deployed code."
 	task :update_code, :except => { :no_release => true } do
-		run "cd #{current_path}; git fetch repos; git reset --hard #{branch}"
+		run "cd #{current_path}; git fetch origin; git reset --hard #{branch}"
 		finalize_update
 	end
 
