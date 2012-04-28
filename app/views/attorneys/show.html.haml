@@ -48,6 +48,7 @@
                 = image_tag @attorney.yelp[:rating_img_url]
               %p.small
                 Based on #{pluralize @attorney.yelp[:review_count], "review", "reviews"}
+              .clear  
           - if @attorney.reviews.average(:rating).to_i > 0
             %p 
               Lawdingo rating
