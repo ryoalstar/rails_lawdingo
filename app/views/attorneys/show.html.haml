@@ -159,7 +159,7 @@
             %h4.yelp Latest yelp reviews:
             - @attorney.yelp[:reviews].each do |review|
               .comment-block
-                = content_tag :div, image_tag(review["user"]["image_url"]), class: "photo"
+                = image_tag(review["user"]["image_url"])
                 .comment_cloud
                   .left_border
                   .stars
