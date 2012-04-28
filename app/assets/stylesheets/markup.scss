@@ -77,9 +77,15 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 						}
 						a.lawyers_signup:hover{
 							background-position:0px -32px;
+								-moz-border-radius:0px;
+							-webkit-border-radius:0px;
+							border-radius:0px;
 						}
 						a.lawyers_signup:active{
 							background-position:0px -63px;
+							-moz-border-radius:0px;
+							-webkit-border-radius:0px;
+							border-radius:0px;
 						}
 					}
 				}
