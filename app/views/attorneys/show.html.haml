@@ -4,26 +4,29 @@
     .left-bar.status
       .left-bar-section
         %h3= content_tag :h3, "Talk to #{@attorney.first_name}"
-        %p 
-          - if @attorney.is_online
-            = image_tag('video_icon_active.png', :alt => '')
-            %span Avaiable by video chat now
-          - else 
-            = image_tag('video_icon.png', :alt => '')
-            %span Not avaiable by video now
-        %p
-          - if @attorney.phone.present? 
-            = image_tag('voice_icon_active.png', :alt => '')
-            %span Avaiable by phone now
-          - else
-            = image_tag('voice_icon.png', :alt => '')
-            %span Not avaiable by phone now
-        %p
-          = image_tag('note_icon.png', :alt => '')
-          %span Send a note or ask a question
-        %p 
-          = image_tag('schedule_icon.png', :alt => '')
-          %span Schedule a consultation
+        .online_icons
+          %p 
+            - if @attorney.is_online
+              %span.video.online= start_or_video_button_p(@attorney)
+              %span Avaiable by video chat now
+            - else 
+              %span.video.offline
+              %span Not avaiable by video now
+          %p
+            - if @attorney.phone.present? 
+              %span.voice.online= start_phone_consultation_p(@attorney)
+              %span Avaiable by phone now
+            - else
+              %span.voice.offline
+              %span Not avaiable by phone now
+          %p
+            %span.note= start_or_schedule_button_text_profile(@attorney)
+            %span Send a note or ask a question
+          %p 
+            %span.text
+            %span Schedule a consultation
+          
+          
     .left-bar
       .left-bar-section.info-header
         %h2 Need-to-know Info
@@ -157,6 +160,7 @@
           %p Strip steak tongue salami biltong. Pancetta ground round short ribies tail streips siteak. Tongue pig beef ris strip steak fnekiefurter kielbasa. Pork t-bone venison, ham hiock shank ball tip pork belly. Spare ribes ham  filet mignon chicken flank pork belly tri-tip shank speck. Kielbasa fatback jerky, haam t-bone leberkeuas tongue. Pork belly beef ribs ham, chicken venison ham hock swine burger ground round shank ribeye.          
         .main-info
           - if @attorney.offerings.any?
+            = content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
             = render collection: @attorney.offerings, partial: "offerings/offering_template", locals: { lawyer: @attorney }
           - if @attorney.yelp_business_id.present?
             %h4.yelp Latest yelp reviews:

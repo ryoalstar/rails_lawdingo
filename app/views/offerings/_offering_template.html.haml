@@ -1,4 +1,3 @@
-= content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
 = content_tag :h3, "#{@attorney.first_name}'s fixed-price offers:" do
   = content_tag :span, "#{number_to_currency(offering_template.fee, precision: 0)} flat fee"
 = hidden_field(:current, :lid)

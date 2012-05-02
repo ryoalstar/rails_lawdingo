@@ -1,9 +1,30 @@
 html, body{
 	margin:0;
 	font-family: Arial ,helvetica, verdana, tahoma;
+	height:100%;
+	background: url(content_bg.png) repeat;
 }
 .hidden{
 	display:none;
+}
+#wrapper-main{
+	min-height:100%; 
+	position:relative;
+	float: left;
+	width: 100%;
+}
+#container{
+	padding-bottom: 130px;
+	float: left;
+	width: 100%;
+}
+#footer{
+	height:84px;
+	position:absolute; 
+	bottom:0;
+}
+#container > div{
+	
 }
 body.users.landing_page, body.users.home, body.attorneys.show{
 	html {color:#000;}
@@ -97,6 +118,8 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 		width:100%;
 		float:left;
 		background: url(footer_bg.png);
+		position:absolute; 
+		bottom:0;
 		padding-bottom:0;
 		.footer_content{
 			margin:0 auto;
@@ -141,10 +164,87 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 		}
 	}	
 	#container{
-		float: left;
-		width: 100%;
-		padding-bottom: 102px;
-		background: url(content_bg.png) repeat;
+		.online_icons{
+			span.note, span.text{
+				width:26px;
+				height:26px;
+				display:block;
+				float:left;
+				margin-right:5px;
+				cursor:pointer;
+				background-position:1px 0px;
+				a{
+					height: 100%;
+					width: 100%;
+					display: inline-block;
+				}
+			}
+			span.note{
+				background:url(note_icon.png);
+			}
+			span.text{
+				background:url(schedule_icon.png);
+			}
+			span.video, span.voice{
+				width:26px;
+				height:26px;
+				display:block;
+				float:left;
+				margin-right:5px;
+				cursor:pointer;
+				background:url(chat_icons_full.png) no-repeat;
+			}
+			span.video{
+				background-position: 0px -2px;
+			}
+			span.video.online{
+				background-position: 0px -32px;
+			}
+			span.video.online:hover{
+				 background-position: 0px -32px;
+			}
+			span.video.online:active{
+				background-position: 0px -62px;
+			}
+			span.voice{
+				background-position: -32px -2px;
+			}
+			span.voice.online{
+				background-position: -32px -32px;
+			}
+			span.voice.online:hover{
+				background-position: -32px -32px;
+			}	
+			span.voice.online:active{
+				background-position: -32px -62px;
+			}
+			.tooltip{
+				width:138px;
+				height:29px;
+				display:none;
+				position:absolute;
+				background:url(tooltip_cloud.png) no-repeat;
+				color:white;
+				font-size:12px;
+				padding:4px 0px 0px 6px;
+				z-index: 10;
+			}
+			.tooltip.offline, .tooltip.online{
+				border:0;
+			}
+			.tooltip.video_chat{
+				margin-top: -34px;
+				margin-left: -55px;					
+			}
+			.tooltip.voice_chat{
+				margin-top: -34px;
+				margin-left: -27px;
+			}
+			.tooltip.offline{
+				font-size: 11px;
+				padding-left: 4px;
+			}
+		}
 		.button_tooltip{
 			position:absolute;
 			padding:4px;
@@ -512,6 +612,17 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					}
 					p{
 						margin-bottom:0;
+					}
+					.online_icons{
+						p{
+							float:left;
+							span{
+								vertical-align: -40%;
+							}
+							span.video, span.voice, span.text, span.note{
+								vertical-align:0%;
+							}
+						}
 					}
 				}
 			}
@@ -1343,6 +1454,7 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 				width:354px;
 				padding:15px 0 15px 0px;
 				h1{
+					max-width: 289px;
 					color:#0074d3;
 					font-size:20px;
 					font-weight:normal;
@@ -1356,64 +1468,13 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					float:right;
 					margin-top: 4px;
 					span.video, span.voice{
-						width:26px;
-						height:26px;
-						display:block;
-						float:left;
 						margin-right:5px;
 						cursor:pointer;
-						background:url(chat_icons_full.png) no-repeat;
-					}
-					span.video{
-						background-position: 0px -2px;
-					}
-					span.video.online{
-						background-position: 0px -32px;
-					}
-					span.video:hover{
-						 background-position: 0px -32px;
-					}
-					span.video:active{
-						background-position: 0px -62px;
-					}
-					span.voice{
-						background-position: -32px -2px;
-					}
-					span.voice.online{
-						background-position: -32px -32px;
-					}
-					span.voice:hover{
-						background-position: -32px -32px;
-					}	
-					span.voice:active{
-						background-position: -32px -62px;
-					}				
-
-					.tooltip{
-						width:138px;
-						height:29px;
-						display:none;
-						position:absolute;
-						background:url(tooltip_cloud.png) no-repeat;
-						color:white;
-						font-size:12px;
-						padding:4px 0px 0px 6px;
-						z-index: 10;
-					}
-					.tooltip.offline, .tooltip.online{
-						border:0;
-					}
-					.tooltip.video_chat{
-						margin-top: -34px;
-						margin-left: -55px;					
-					}
-					.tooltip.voice_chat{
-						margin-top: -34px;
-						margin-left: -27px;
-					}
-					.tooltip.offline{
-						font-size: 11px;
-						padding-left: 4px;
+						a{
+							height:100%;
+							width:100%;
+							display:inline-block;
+						}
 					}
 				}
 				.description{

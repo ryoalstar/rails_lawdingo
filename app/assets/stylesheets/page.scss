@@ -75,10 +75,16 @@
 						padding:0;
 					}
 					a.lawyers_signup:hover{
-						background:url(signup_button_full.png) no-repeat 0px -32px;
+						background-position:0px -32px;
+						-moz-border-radius:0px;
+						-webkit-border-radius:0px;
+						border-radius:0px;
 					}
 					a.lawyers_signup:active{
-						background:url(signup_button_full.png) no-repeat 0px -63px;
+						background-position:0px -63px;
+						-moz-border-radius:0px;
+						-webkit-border-radius:0px;
+						border-radius:0px;
 					}
 				}
 			}
@@ -183,9 +189,9 @@ body.users.home {
 }
 
 #page {
-		background: url(content_bg.png) repeat;
+		
     padding: 15px 0px 5px;
-		min-height: 559px;
+		
     > div {
         border: solid 1px #b8b8b8;
         background-color: #fff;
