@@ -634,6 +634,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 									text-decoration:none;
 									border-bottom:1px dotted #000;
 								}
+								a:hover{
+									border:0;
+								}
 							}
 							span.video, span.voice, span.text, span.note{
 								vertical-align:0%;
