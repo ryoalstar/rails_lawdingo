@@ -26,7 +26,13 @@ html, body{
 #container > div{
 	
 }
-body.users.landing_page, body.users.home, body.attorneys.show{
+body.offerings.show{
+	.main_content{
+		margin: 0 auto;
+		float:initial !important;
+	}
+}
+body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show{
 	html {color:#000;}
 	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td
 	{margin:0;padding:0;}
