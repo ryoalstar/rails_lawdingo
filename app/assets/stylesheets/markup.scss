@@ -632,10 +632,14 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 								a{
 									color:#464646;
 									text-decoration:none;
+									border-bottom:1px dotted #000;
 								}
 							}
 							span.video, span.voice, span.text, span.note{
 								vertical-align:0%;
+								a{
+									border-bottom:0;
+								}
 							}
 						}
 					}
