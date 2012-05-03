@@ -10,7 +10,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	if($("body.attorneys.show .main_content .profile_info .main-content .video-block").html("") && $("body.attorneys.show .main_content .profile_info .main-content .main-info").html("")){
+	if($("body.attorneys.show .main_content .profile_info .main-content .video-block").html().trim() === '' && $("body.attorneys.show .main_content .profile_info .main-content .main-info").html().trim() === ''){
 		$(".profile_info").hide();
 	}
 	
