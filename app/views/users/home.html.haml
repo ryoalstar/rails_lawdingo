@@ -110,7 +110,7 @@
       = flash[:notice]
       %a#close_notice{:href => "#"} Close
   .main_content
-    #generail_question.question
+    #generail_question.question.question-container
       %h2.selected-lawyers-caption= selected_lawyers_caption
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS
