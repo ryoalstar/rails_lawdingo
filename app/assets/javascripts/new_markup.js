@@ -9,11 +9,7 @@ $(document).ready(function(){
 		  $(this).attr('src', '/assets/profile_m.gif');
 		});
 	});
-	
-	if($("body.attorneys.show .main_content .profile_info .main-content .video-block").html().trim() === '' && $("body.attorneys.show .main_content .profile_info .main-content .main-info").html().trim() === ''){
-		$(".profile_info").hide();
-	}
-	
+		
 	
 	$("input[name='practice_area']").imageTick({
 		tick_image_path: "/assets/radio_selected.png",
@@ -111,5 +107,8 @@ $(document).ready(function(){
       $( "#law_school" ).val( "$" + ui.value );
     }
   });
-  $( "#law_school" ).val( "$" + $( "#law_school_quality" ).slider( "value" ) );     
+  $( "#law_school" ).val( "$" + $( "#law_school_quality" ).slider( "value" ) );    
+ 	if($("body.attorneys.show .main_content .profile_info .main-content .video-block").html().trim() === '' && $("body.attorneys.show .main_content .profile_info .main-content .main-info").html().trim() === ''){
+		$(".profile_info").hide();
+	}
 });
