@@ -107,8 +107,13 @@ $(document).ready(function(){
       $( "#law_school" ).val( "$" + ui.value );
     }
   });
-  $( "#law_school" ).val( "$" + $( "#law_school_quality" ).slider( "value" ) );    
- 	if($("body.attorneys.show .main_content .profile_info .main-content .video-block").html().trim() === '' && $("body.attorneys.show .main_content .profile_info .main-content .main-info").html().trim() === ''){
-		$(".profile_info").hide();
+  $( "#law_school" ).val( "$" + $( "#law_school_quality" ).slider( "value" ) );  
+
+	var $video = $('body.attorneys.show .main_content .profile_info .main-content .video-block');
+  var $info = $('body.attorneys.show .main_content .profile_info .main-content .main-info');
+	if(($($video).html() != null) && ($($info).html() != null)){
+ 		if($($video).html().trim() === '' && $($info).html().trim() === ''){
+			$(".profile_info").hide();
+		}
 	}
 });
