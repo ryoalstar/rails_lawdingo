@@ -193,6 +193,11 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 				margin-right:5px;
 				cursor:pointer;
 				background:url(chat_icons_full.png) no-repeat;
+				a{
+					height:100%;
+					width:100%;
+					display:inline-block;
+				}
 			}
 			span.video{
 				background-position: 0px -2px;
@@ -618,6 +623,10 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 							float:left;
 							span{
 								vertical-align: -40%;
+								a{
+									color:#464646;
+									text-decoration:none;
+								}
 							}
 							span.video, span.voice, span.text, span.note{
 								vertical-align:0%;
@@ -1470,11 +1479,6 @@ body.users.landing_page, body.users.home, body.attorneys.show{
 					span.video, span.voice{
 						margin-right:5px;
 						cursor:pointer;
-						a{
-							height:100%;
-							width:100%;
-							display:inline-block;
-						}
 					}
 				}
 				.description{
