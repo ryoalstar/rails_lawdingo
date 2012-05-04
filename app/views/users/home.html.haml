@@ -35,6 +35,7 @@
               = label_tag "practice_area_#{area.name}", area.name
             - if area.children.with_approved_lawyers.present?
               .practice-areas.children{:style => "display:none"}
+                %h3 Specific need?
                 - area.children.with_approved_lawyers.each do |subarea|
                   %p
                     = radio_button_tag "practice_area", subarea.name
@@ -110,7 +111,7 @@
       = flash[:notice]
       %a#close_notice{:href => "#"} Close
   .main_content
-    #generail_question.question
+    #generail_question.question.question-container
       %h2.selected-lawyers-caption= selected_lawyers_caption
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS

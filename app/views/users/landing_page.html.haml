@@ -22,7 +22,8 @@
   #center_area
     .white_glow
       .start_off_info
-        = image_tag('start_off_info.png', :alt => '')
+        %a{:href => "/lawyers"}
+          = image_tag('start_off_info.png', :alt => '')
         %h1= @tagline
         %p= @subtext[:first]
         / %p= @subtext[:second]
@@ -33,7 +34,8 @@
         = image_tag('slider_featured.png', :alt => '', :class => 'green_line')
         .image-carousel{:dataurl => "/search/carsousel_images"}
           .carousel-image
-            = image_tag default_image.photo.url(:large), :alt => ""
+            %a.profile_link{:href => attorney_path(lawyer, slug: lawyer.slug)}
+              = image_tag default_image.photo.url(:large), :alt => ""
           .carousel-description
             .ratings
               %h4= link_to "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
@@ -64,17 +66,20 @@
   .left_bar
     %h2 How it works:
     .feature
-      = image_tag('feature_1.png', :alt => '')  
+      %a{:href => "/lawyers"}
+        = image_tag('feature_1.png', :alt => '')  
       .feature_description
         %h3 Find the right lawyer for you
         %p Use filters to match your need to their experience. See availability and price.
     .feature
-      = image_tag('feature_2.png', :alt => '')  
+      %a{:href => "/lawyers"}
+        = image_tag('feature_2.png', :alt => '')  
       .feature_description
         %h3 Talk to them online for free
         %p Schedule a session or talk immediately in a video or phone consultation. Free.
     .feature
-      = image_tag('feature_3.png', :alt => '')  
+      %a{:href => "/lawyers"}
+        = image_tag('feature_3.png', :alt => '')  
       .feature_description
         %h3 Pay for advice or services
         %p After the free session, simply pay for extended legal advice by the minute.  

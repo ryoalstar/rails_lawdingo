@@ -8,20 +8,20 @@
           %p 
             - if @attorney.is_online
               %span.video.online= start_or_video_button_p(@attorney)
-              %span Avaiable by video chat now
+              %span= start_or_video_button_profile(@attorney)
             - else 
               %span.video.offline
               %span Not avaiable by video now
           %p
             - if @attorney.phone.present? 
               %span.voice.online= start_phone_consultation_p(@attorney)
-              %span Avaiable by phone now
+              %span= start_phone_consultation_profile(@attorney)
             - else
               %span.voice.offline
               %span Not avaiable by phone now
           %p
             %span.note= start_or_schedule_button_text_profile(@attorney)
-            %span Send a note or ask a question
+            %span= start_or_schedule_button_text_profile_text(@attorney)
           %p 
             %span.text
             %span Schedule a consultation
@@ -44,7 +44,7 @@
             %p Years practicing law
             %ul
               %li= pluralize years_practicing_law(@attorney), "year", "years"
-          - if @attorney.yelp_business_id.present?
+          - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:rating_img_url]
             %p Yelp rating
             .yelp-rating-container
               .stars
@@ -161,8 +161,8 @@
         .main-info
           - if @attorney.offerings.any?
             = content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
-            = render collection: @attorney.offerings, partial: "offerings/offering_template", locals: { lawyer: @attorney }
-          - if @attorney.yelp_business_id.present?
+            = render collection: @attorney.offerings, partial: "offerings/offering_template", locals: { lawyer: @attorney }          
+          - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:reviews]
             %h4.yelp Latest yelp reviews:
             - @attorney.yelp[:reviews].each do |review|
               .comment-block

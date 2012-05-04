@@ -1,5 +1,0 @@
-<% title "#{@offering.name} — Service offered by #{@offering.user.full_name} on Lawdingo" %>
-
-<div id="results">
-  <%= render partial: "offerings/offering", locals: { lawyer: Lawyer.find(@offering.user.id), offering: @offering } %>
-</div>
