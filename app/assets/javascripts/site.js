@@ -204,6 +204,7 @@ $(function(){
         function goto_image( i ){
             self.current_image = i;
             self.find('.carousel-image img').attr('src', self.images[self.current_image]['url']);
+						self.find('.carousel-image a').attr('href', self.images[self.current_image]['href']);
             self.find('.carousel-image img').attr('alt', self.images[self.current_image]['title']);
             self.find('.carousel-description h4').html( self.images[self.current_image]['title'] );
             self.find('.carousel-description p.desc').html( self.images[self.current_image]['description'] );
@@ -240,7 +241,6 @@ $(function(){
 						{
 							self.find('.carousel-description .rev_for_js').html( self.images[self.current_image]['link_reviews'] );
 							self.find('.carousel-description .rev_for_js span.number_rev').html( self.images[self.current_image]['reviews'] );
-							
 						}
 						else
 						{
