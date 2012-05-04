@@ -162,18 +162,19 @@
           - if @attorney.offerings.any?
             = content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
             = render collection: @attorney.offerings, partial: "offerings/offering_template", locals: { lawyer: @attorney }
-          - if @attorney.yelp_business_id.present?
-            %h4.yelp Latest yelp reviews:
-            - @attorney.yelp[:reviews].each do |review|
-              .comment-block
-                = image_tag(review["user"]["image_url"])
-                .comment_cloud
-                  .left_border
-                  .stars
-                    = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
-                  = content_tag :li, class: "yelp-review", id: review["id"] do            
-                    = content_tag :p, yelp_review_excerpt(review, @attorney)
-                    = content_tag :span, yelp_review_posted_by(review), class: "footnote"
+          - if @attorney.yelp[:reviews]
+            - if @attorney.yelp_business_id.present?
+              %h4.yelp Latest yelp reviews:
+              - @attorney.yelp[:reviews].each do |review|
+                .comment-block
+                  = image_tag(review["user"]["image_url"])
+                  .comment_cloud
+                    .left_border
+                    .stars
+                      = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
+                    = content_tag :li, class: "yelp-review", id: review["id"] do            
+                      = content_tag :p, yelp_review_excerpt(review, @attorney)
+                      = content_tag :span, yelp_review_posted_by(review), class: "footnote"
           - if @attorney.reviews.count.to_i > 0
             %h4 Lawdingo client reviews:        
             .client-reviews
