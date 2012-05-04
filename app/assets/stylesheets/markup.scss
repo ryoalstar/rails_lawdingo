@@ -30,6 +30,11 @@ body.offerings.show, body.attorneys.call_payment{
 	.main_content{
 		margin: 0 auto;
 		float:initial !important;
+		.payment-details{
+			h2{
+				color:#000;
+			}
+		}
 	}
 }
 body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show, body.attorneys.call_payment{
