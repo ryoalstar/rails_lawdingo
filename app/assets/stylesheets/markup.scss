@@ -323,6 +323,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			height:40px;
 			background:url(free_button_full.png) no-repeat 0px -1px;
 			text-decoration:none;
+			-moz-text-shadow: 1px 1px 1px #33a0ff;
+		  -webkit-text-shadow: 1px 1px 1px #33a0ff;
+		 text-shadow: 1px 1px 1px #33a0ff;
 			p{
 				width: 100%;
 				font-size:17px !important;
