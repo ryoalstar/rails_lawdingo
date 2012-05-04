@@ -1114,24 +1114,24 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							border-bottom-right-radius: 5px;
 							border-bottom-left-radius: 5px;
 						}
-						.left{
+						.right{
 							float:left;
 							p{
 								max-width: 500px;
-								margin: 10px 0;
+								margin:0;
 								word-spacing: -1px;
 							}
 						}
-						.right{
+						.left{
 							text-align:left;
-							float:right;
+							float:left;
 							width:110px;
 							p{
 								margin-bottom: 5px;
 							}
 						}
 						.stars{
-							margin:0;
+							margin:5px 0 0 0;
 						}
 					}
 					h4.yelp{
