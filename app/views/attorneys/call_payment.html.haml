@@ -32,4 +32,5 @@
               %label{:for => "scode"} Security code:
               %input#card_detail_card_verification{:autocomplete => "off", :maxlength => "4", :name => "scode", :size => "9", :type => "password"}
               .help-text{:src => "question.png", :tooltip => "The three or four digit code on the back of your card."}
+            .clear
           = submit_tag("Continue", :id => 'payment_overlay_submit_button', :class => "button blue small_font", style: "margin-top: 0.5em;")
