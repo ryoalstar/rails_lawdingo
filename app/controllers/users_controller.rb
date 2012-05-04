@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     # if current_user and current_user.is_lawyer?
     #   redirect_to users_path(:t=>'l')
     # end
+    #return render :json =>current_user
     @question = Question.new
 
     @practice_areas = PracticeArea.parent_practice_areas
@@ -110,6 +111,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
+
       if @user.user_type == User::LAWYER_TYPE
         unless params[:practice_areas].blank?
           practice_areas = params[:practice_areas]
@@ -402,8 +404,12 @@ class UsersController < ApplicationController
   end
 
   def send_email_to_lawyer
+
+
     if !current_user.nil?
+
       begin
+      #render :text => 'in current user block1', :layout => false
         @lawyer = User.find(params[:l2])
         msg = params[:email_msg]
         UserMailer.schedule_session_email(current_user, @lawyer.email, msg).deliver

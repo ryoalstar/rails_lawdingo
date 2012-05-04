@@ -140,7 +140,7 @@ module LawyersHelper
   
   def start_or_schedule_button_text(lawyer)
     if logged_in?
-      link_to "Ask a (text) question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+      link_to "Ask a (text) question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => "#{lawyer.first_name} #{lawyer.last_name}" }, :class => "dialog-opener "
     else
       link_to "Ask a (text) question", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Start Schedule consultation", :class => ''
     end

@@ -1,6 +1,6 @@
 class RemoveCardDetail < ActiveRecord::Migration
   def up
-    drop_table(CardDetail)
+    #drop_table(CardDetail)
     add_column :users, :stripe_customer_token, :string
   end
 
