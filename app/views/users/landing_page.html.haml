@@ -34,7 +34,7 @@
         = image_tag('slider_featured.png', :alt => '', :class => 'green_line')
         .image-carousel{:dataurl => "/search/carsousel_images"}
           .carousel-image
-            %a.profile_link{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"}
+            %a.profile_link{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}"}
               = image_tag default_image.photo.url(:large), :alt => ""
           .carousel-description
             .ratings
