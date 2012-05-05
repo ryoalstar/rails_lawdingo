@@ -120,8 +120,17 @@
       = render(:partial => "search_results")
 #schedule_session.dialog-window
   %h3#overlay_user_name
+    %br/
+    Ask Attorney
+    %h3
   %span.lawyer_name Lawyer
-  is currently away or in a Lawdingo video consultation. Please send the lawyer a message with some times that would work for you to connect on Lawdingo.
+  a question.
+  %br/
+  Have a question or comment for
+  %span.lawyer_name Lawyer
+  ? write it here, and
+  %span.lawyer_name Lawyer
+  will be able to email you back directly.
   %textarea#txt_msg{:name => "txt_msg"}
   %span.fine-print Please do not include any private or confidential information here.
   %hr
@@ -136,14 +145,16 @@
       $.ajax({
           url: "/ScheduleSession",
           type:'post',
-          data:{email_msg: msg,l2: l1},
+          data:{email_msg: msg, l2: l1, authenticity_token: $('[name="csrf-token"]').attr("content")},
           success: function(response){
-                if(response == '1')
-                  alert('Your message has been sent.');
-                else{
-                  alert('Problem sending message. You may not be logged in');
-                }
+          //alert(response);
+
+          if(response == '1')
+             alert('Your message has been sent.');
+           else{
+              alert('Problem sending message. You may not be logged in');
               }
+             }
       });
     }else
     {

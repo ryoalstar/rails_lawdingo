@@ -8,7 +8,8 @@
     = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment"
     - if current_user && current_user.user_type == 'LAWYER'
       :javascript
-        swfobject.registerObject("mySwf", "10.2.0");    = csrf_meta_tags
+        swfobject.registerObject("mySwf", "10.2.0");
+    = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
     = render :partial => 'layouts/ie_style'
     - if ENV['RAILS_ENV'] == 'production'
@@ -21,11 +22,35 @@
            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
+    :javascript
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    :javascript
+
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    #fb-root
+    :javascript
+      (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=291604570926807";
+         fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
   %body#lawdingo{:class => params.values_at(:controller, :action).join(' '), :onload => ""}
     #wrapper-main
       / HEADER
+
       #header
+        -#<a href="https://twitter.com/Lawdingo" class="twitter-follow-button" data-show-count="false">Follow @Lawdingo</a>
+
+
         .wrapper
+
           .links
             %ul
               - if logged_in?
@@ -78,11 +103,19 @@
       #footer
         .footer_content
           %span.left &copy; Lawdingo
+          %span.left
+            %a{href:"https://twitter.com/Lawdingo", class:"twitter-follow-button", "data-show-count" => "false"}
+          %span.left
+            %g:plusone {size: "small", annotation:"inline"}
           %ul
             %li= link_to "About", about_page_path
             %li= link_to "Contact", "mailto:sup@lawdingo.com"
             %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank'
             %li= link_to "Terms & Privacy", terms_page_path, :target=>'_blank'
+          %span.left
+            .fb-like{"data-href" => "http://lawdingo.com/", "data-send" => "false", "data-width" => "450",  "data-show-faces" => "false", "data-font" => "arial"}
+
+
       / END FOOTER
       #dialog-overlay
       - if current_user && current_user.user_type == 'CLIENT' && params[:action] != 'show'
