@@ -281,10 +281,9 @@ $(function(){
             if(isOverlayOpen) postponePayment();
         });
 
-        this.click( function(){
+        this.live("click", function(){
             $('#dialog-overlay').show();
             $( $(this).attr('href') ).show();
-            return false;
         });
 
     };
