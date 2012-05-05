@@ -20,3 +20,8 @@
 
 # Ignore database config 
 /config/database.yml
+
+
+/.idea
+/nbproject
+/db/*.sqlite*
