@@ -8,8 +8,10 @@ var my_images = [
 
 
 $(document).ready(function(){
-	$(my_images).each(function() { 
-		var image = $('<img />').attr('src', this);
+	$(my_images).each(function() { 	
+		var image = $('<img />').attr('src', this).hide();
+		$('body').append(image);
+		image.remove();
 	});
 	$('.avatar img, .image-carousel img').each(function(){
 		var imgsrc = $(this).attr('src');

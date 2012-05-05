@@ -136,12 +136,15 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			margin:0 auto;
 			width:990px;
 			padding-top: 30px;
-			span{
+			span.left{
 				font-size: 14px;
-				margin:5px 0px 0px 4px;
+				margin:5px 10px 0px 4px;
 				color:#1a1a1a;
 				display:block;
 				float:left;
+			}
+			span.gplus{
+				width: 100px;
 			}
 			ul{
 				margin-top: 1px;
