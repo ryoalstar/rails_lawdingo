@@ -60,7 +60,6 @@ class Home
     hash = document.location.hash.replace("#!/lawyers/","")
     hash = hash.split("/")
     this.set_service_type_fields_val(hash[0])
-    alert(hash[1])
     this.set_state_fields_val(hash[1])
     if hash[2]
       this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
