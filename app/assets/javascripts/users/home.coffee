@@ -7,7 +7,8 @@ class Home
       document.location.hash = "!#{document.location.pathname}"
 
     if document.location.hash == ""
-      this.set_defaults()
+      this.set_defaults(default_state)
+      this.submit()
     else
       this.read_hash()
       this.submit()
@@ -59,25 +60,28 @@ class Home
     hash = document.location.hash.replace("#!/lawyers/","")
     hash = hash.split("/")
     this.set_service_type_fields_val(hash[0])
+    alert(hash[1])
     this.set_state_fields_val(hash[1])
     if hash[2]
-      this.set_practice_area_fields_val(hash[2])    
+      this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
     else 
       this.set_practice_area_fields_val("All")
       
-  set_defaults : ()->
+  set_defaults : (default_state)->
     
     this.set_service_type_fields_val(
       this.service_type_fields()
         .filter("[data-default=1]")
         .attr('data-val')    
     )
-
-    this.set_state_fields_val(
-      this.state_fields().find(
-        "option[data-default=1]"
-      ).val()
-    )
+    if (default_state == "")
+      this.set_state_fields_val(
+          this.state_fields().find(
+            "option[data-default=1]"
+          ).val()
+      )
+    else
+      this.set_state_fields_val(default_state+'-lawyers')
 
     this.set_practice_area_fields_val(
       this.practice_area_fields()
@@ -109,11 +113,12 @@ class Home
     $field = this.practice_area_fields()
       .filter("[value='#{val}']")
       .attr("checked", true)
-    
+			
     $field.parents(".practice-areas")
       .show()
 
     $field.parent().next().show() unless @service_type == "Legal-Services"
+    $field
 
 
   set_service_type_fields_val : (val)->
