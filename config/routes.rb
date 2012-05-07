@@ -1,4 +1,5 @@
 Lawdingo::Application.routes.draw do
+  
   namespace :framey do
     resources :videos
   end
@@ -26,8 +27,18 @@ Lawdingo::Application.routes.draw do
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
 
   match '/apply' => "users#new", :as => :new_lawyer
+  
   resources :users do
+    # daily_hours for this user (lawyer)
+    resources :daily_hours, :only => [:index] do
+      # we use a put to update/create the entire collection
+      collection do
+        put "update"
+      end
+    end
+    
     resources :offerings, shallow: true
+
     put 'image_upload'
     get 'chat_session'
     get 'onlinestatus'

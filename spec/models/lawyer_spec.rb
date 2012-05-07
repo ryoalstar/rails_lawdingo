@@ -91,6 +91,17 @@ describe Lawyer do
     end
   end
 
+  context "#daily_hours" do
+
+    it "should provide an 'on_wday' method to find valid hours for a day" do
+      daily_hour = DailyHour.new(:wday => 1)
+      subject.daily_hours << daily_hour
+      subject.daily_hours.on_wday(1).should eql(daily_hour)
+      subject.daily_hours.on_wday(2).should be_nil
+
+    end
+
+  end
   
 
 end
