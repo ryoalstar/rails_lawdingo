@@ -6,7 +6,7 @@ development:
   database: videochat_development
   pool: 5
   username: root
-  password: 
+  password:
   host: localhost
   #socket: /Applications/MAMP/tmp/mysql/mysql.sock
 

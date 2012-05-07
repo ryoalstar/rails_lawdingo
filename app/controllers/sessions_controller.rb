@@ -9,14 +9,16 @@ class SessionsController < ApplicationController
 
   def create
     if user = User.authenticate(params[:email], params[:password])
+
       reset_user_session(user)
       login_in_user(user)
       return_path = ""
+
+      if session[:question_id].present?
+        send_pending_question(session[:question_id], user)
+      else
       if user.is_client?
         # If there is a pending question
-        if session[:question_id].present?
-          send_pending_question(session[:question_id], user)
-        end
 
        if session[:return_to]
         return_path = session[:return_to]
@@ -35,6 +37,7 @@ class SessionsController < ApplicationController
        session[:referred_url] = nil
       end
       redirect_to return_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
+      end
     else
       @msg = "You have entered incorrect login credintial."
       render :action => 'new'

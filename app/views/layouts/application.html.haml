@@ -34,12 +34,12 @@
     #fb-root
     :javascript
       (function(d, s, id) {
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) return;
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=291604570926807";
-         fjs.parentNode.insertBefore(js, fjs);
-         }(document, 'script', 'facebook-jssdk'));
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=363994853644871";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
 
   %body#lawdingo{:class => params.values_at(:controller, :action).join(' '), :onload => ""}
     #wrapper-main
@@ -113,7 +113,7 @@
             %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank'
             %li= link_to "Terms & Privacy", terms_page_path, :target=>'_blank'
           %span.left
-            .fb-like{"data-href" => "http://lawdingo.com/", "data-send" => "false", "data-width" => "450",  "data-show-faces" => "false", "data-font" => "arial"}
+            .fb-like{"data-href" => "http://www.facebook.com/lawtestpage", "data-send" => "false", "data-width" => "450",  "data-show-faces" => "false", "data-font" => "arial"}
 
 
       / END FOOTER

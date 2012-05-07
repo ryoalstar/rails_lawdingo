@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     #   redirect_to users_path(:t=>'l')
     # end
     #return render :json =>current_user
+
     @question = Question.new
 
     @practice_areas = PracticeArea.parent_practice_areas
