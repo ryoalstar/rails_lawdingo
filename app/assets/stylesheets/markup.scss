@@ -7,6 +7,20 @@ html, body{
 .hidden{
 	display:none;
 }
+
+// error styles
+div.error {
+	padding: 3px;
+	margin: 3px 0;
+	color: #D8000C;
+}
+input, select, textarea {
+	&.error {
+		color: #D8000C;
+		background-color: #FFBABA;
+	}
+}
+
 #wrapper-main{
 	min-height:100%; 
 	position:relative;
@@ -136,12 +150,15 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			margin:0 auto;
 			width:990px;
 			padding-top: 30px;
-			span{
+			span.left{
 				font-size: 14px;
-				margin:5px 0px 0px 4px;
+				margin:5px 10px 0px 4px;
 				color:#1a1a1a;
 				display:block;
 				float:left;
+			}
+			span.gplus{
+				width: 100px;
 			}
 			ul{
 				margin-top: 1px;
@@ -809,9 +826,12 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					padding-top: 1px;
 				}
 				.practice-areas.children{
-					padding-left: 20px;
 					h3{
 						margin-bottom:0;
+						padding-left: 3px;
+					}
+					.child{
+						padding-left: 20px;
 					}
 				}
 			}
@@ -1497,6 +1517,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					float:left;
 				}
 				.online_icons{
+					width: 62px;
 					float:right;
 					margin-top: 4px;
 					span.video, span.voice{

@@ -1,13 +1,22 @@
 class Lawyer < User
   # validates :payment_email, :bar_ids, :practice_areas, :presence =>true
   # validates :payment_email, :presence => true
-
-  has_many :conversations
-  has_many :reviews
+  
   has_many :bar_memberships
-  has_many :states, :through => :bar_memberships
+  has_many :conversations
+
+  has_many :daily_hours do
+    # find on a given wday
+    def on_wday(wday)
+      self.select{|dh| dh.wday == wday}.first    
+    end
+  end
+
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
+  has_many :reviews
+  has_many :states, :through => :bar_memberships
+  
   has_one :homepage_image, :dependent => :destroy
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }

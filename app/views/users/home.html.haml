@@ -1,4 +1,6 @@
 = javascript_tag do
+  var default_state = '#{@state_name || ''}';
+
   $(function(){
   Home.initialize()
   })
@@ -36,10 +38,11 @@
             - if area.children.with_approved_lawyers.present?
               .practice-areas.children{:style => "display:none"}
                 %h3 Specific need?
-                - area.children.with_approved_lawyers.each do |subarea|
-                  %p
-                    = radio_button_tag "practice_area", subarea.name
-                    = label_tag "practice_area_#{subarea.name}", subarea.name
+                .child
+                  - area.children.with_approved_lawyers.each do |subarea|
+                    %p
+                      = radio_button_tag "practice_area", subarea.name
+                      = label_tag "practice_area_#{subarea.name}", subarea.name
       -#specialities_filter.filters-section{:style => "display: none;"}
         %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
         %h3 Specific need:

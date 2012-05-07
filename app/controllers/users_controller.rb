@@ -6,8 +6,6 @@ class UsersController < ApplicationController
   before_filter :current_user_home, :only => [:landing_page]
   before_filter :check_payment_info, :only => [:start_phone_call]
 
-  before_filter :redirect_to_state_page, :only => [:home]
-
   #REMINDER: uncomment only in production
   #before_filter :force_ssl, :only => ['payment_info']
   #before_filter :remove_ssl, :only => ['home']
@@ -41,6 +39,13 @@ class UsersController < ApplicationController
     add_state_scope
     add_practice_area_scope
     add_service_type_scope
+    
+    # we try to auto-detect the state if possible
+    if self.get_state_name.blank? && request.location.present? && request.location.state_code.present?
+      if state = State.find_by_abbreviation(request.location.state_code)
+        @state_name = state.name
+      end
+    end
 
     respond_to do |format|
       format.html{render}
@@ -522,18 +527,6 @@ class UsersController < ApplicationController
 
   protected
 
-  # redirect the user to the state page
-  def redirect_to_state_page
-    # we already have params for the state name
-    return if self.get_state_name.present?
-    # we try to auto-detect the state if possible
-    if request.location.present? && request.location.state_code.present?
-      if state = State.find_by_abbreviation(request.location.state_code)
-        state_name = state.name
-        return redirect_to("/lawyers/Legal-Advice/#{state_name.gsub(/\s/,'-')}-lawyers")
-      end
-    end
-  end
 
   # helper method to add the service_type
   # scope to the main search

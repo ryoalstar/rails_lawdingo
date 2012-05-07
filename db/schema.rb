@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416012520) do
+ActiveRecord::Schema.define(:version => 20120506182817) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -44,6 +44,24 @@ ActiveRecord::Schema.define(:version => 20120416012520) do
     t.integer  "conversation_id"
   end
 
+  create_table "card_details", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
+    t.string   "card_type"
+    t.string   "card_number"
+    t.string   "expire_month"
+    t.string   "expire_year"
+    t.string   "card_verification"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "conversations", :force => true do |t|
     t.integer  "client_id",                           :null => false
     t.integer  "lawyer_id",                           :null => false
@@ -58,6 +76,13 @@ ActiveRecord::Schema.define(:version => 20120416012520) do
     t.boolean  "has_been_charged", :default => false
     t.text     "payment_params"
     t.float    "lawdingo_charge"
+  end
+
+  create_table "daily_hours", :force => true do |t|
+    t.integer "lawyer_id"
+    t.integer "wday"
+    t.integer "start_time"
+    t.integer "end_time"
   end
 
   create_table "expert_areas", :force => true do |t|
@@ -89,6 +114,28 @@ ActiveRecord::Schema.define(:version => 20120416012520) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lawyers", :force => true do |t|
+    t.string   "full_name"
+    t.string   "email"
+    t.string   "skype"
+    t.string   "address"
+    t.text     "bar_memberships"
+    t.text     "areas_of_expertise"
+    t.text     "alma_maters"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "offering_types", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -158,18 +205,18 @@ ActiveRecord::Schema.define(:version => 20120416012520) do
     t.string   "hashed_password"
     t.string   "address"
     t.string   "skype"
-    t.float    "balance",                                   :default => 0.0
-    t.boolean  "is_online",                                 :default => false
-    t.boolean  "is_busy",                                   :default => false
+    t.float    "balance",                    :default => 0.0
+    t.boolean  "is_online",                  :default => false
+    t.boolean  "is_busy",                    :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                                                    :null => false
-    t.boolean  "is_approved",                               :default => false
+    t.string   "user_type",                                     :null => false
+    t.boolean  "is_approved",                :default => false
     t.text     "undergraduate_school"
     t.text     "law_school"
     t.text     "alma_maters"
     t.string   "law_firm"
-    t.float    "rate",                                      :default => 0.0
+    t.float    "rate",                       :default => 0.0
     t.string   "payment_email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -177,10 +224,10 @@ ActiveRecord::Schema.define(:version => 20120416012520) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.text     "personal_tagline",           :limit => 255
+    t.text     "personal_tagline"
     t.string   "bar_ids"
-    t.boolean  "has_payment_info",                          :default => false
-    t.string   "peer_id",                                   :default => "0"
+    t.boolean  "has_payment_info",           :default => false
+    t.string   "peer_id",                    :default => "0"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "stripe_customer_token"

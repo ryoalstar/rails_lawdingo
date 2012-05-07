@@ -23,5 +23,5 @@
 //= require jquery.ui.slider
 //= require new_markup
 //= require selectivizr.js
-// require_tree .
+//= require_tree .
 

@@ -1,5 +1,18 @@
+var my_images = [
+'/assets/button_tooltip_border.png',
+'/assets/login_button_selected_bg.png',
+'/assets/tooltip_cloud.png',
+'/assets/call_button_bg.png'
+];
+
+
 
 $(document).ready(function(){
+	$(my_images).each(function() { 	
+		var image = $('<img />').attr('src', this).hide();
+		$('body').append(image);
+		image.remove();
+	});
 	$('.avatar img, .image-carousel img').each(function(){
 		var imgsrc = $(this).attr('src');
 		var imgcheck = imgsrc.width;

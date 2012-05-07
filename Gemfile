@@ -8,7 +8,7 @@ gem 'rake', '0.8.7'
 
 gem 'mysql2'
 
-gem 'sqlite3'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -47,6 +47,7 @@ gem 'capistrano'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
 #  gem 'ruby-debug19', :require => "ruby-debug"
+  gem 'sqlite3'
 end 
 
 group :test do
@@ -59,7 +60,7 @@ group :test do
   gem "mocha"
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
-#  gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem 'ruby-debug19', :require => 'ruby-debug'
   gem "spork"
 end
 
