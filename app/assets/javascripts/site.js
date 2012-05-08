@@ -284,6 +284,10 @@ $(function(){
         this.live("click", function(){
             $('#dialog-overlay').show();
             $( $(this).attr('href') ).show();
+            if($(this).attr("data-l-id") != undefined){
+                $("div#schedule_session span.lawyer_name").html($(this).attr("data-fullname"));
+                $("#current_selected_lawyer").attr("data-id", $(this).attr("data-l-id"));
+            }
         });
 
     };

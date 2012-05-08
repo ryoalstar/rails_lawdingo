@@ -7,6 +7,7 @@
 %p.notice{:style => "display: none;"}
   Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
   %a#close_notice{:href => "#"} Close
+#current_selected_lawyer
 #inline-wrapper
   %form.filters
     .left-bar
@@ -141,7 +142,7 @@
   function sendMessage(){
     close_dialogs();
     var msg = $('textarea#txt_msg').val();
-    var l1 = $("#current_lid").val();
+    var l1 = $("#current_selected_lawyer").attr("data-id");
     if(msg != "")
     {
       $.ajax({

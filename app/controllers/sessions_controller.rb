@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
        return_path = session[:referred_url]
        session[:referred_url] = nil
       end
-      redirect_to return_path, :notice => "Welcome <b> #{user.full_name} !</b> You have logged in successfully."
+      redirect_to return_path
       end
     else
       @msg = "You have entered incorrect login credintial."

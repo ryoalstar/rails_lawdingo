@@ -118,22 +118,6 @@ ActiveRecord::Schema.define(:version => 20120506182817) do
     t.datetime "updated_at"
   end
 
-  create_table "lawyers", :force => true do |t|
-    t.string   "full_name"
-    t.string   "email"
-    t.string   "skype"
-    t.string   "address"
-    t.text     "bar_memberships"
-    t.text     "areas_of_expertise"
-    t.text     "alma_maters"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-  end
-
   create_table "offering_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
