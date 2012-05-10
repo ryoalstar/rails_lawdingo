@@ -38,7 +38,7 @@
               = image_tag default_image.photo.url(:large), :alt => ""
           .carousel-description
             .ratings
-              %h4= link_to "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+              %h4= link_to "#{lawyer.first_name}", attorney_path(lawyer, slug: lawyer.slug)
               .stars
                 - if  lawyer.reviews.average(:rating).to_i !=0 
                   = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"

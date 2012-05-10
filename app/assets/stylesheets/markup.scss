@@ -290,7 +290,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			margin-left: 169px;
 			margin-top: -35px;
 			display:none;
-			width: 150px;
+			width: auto;
 			.button-content{
 				background:#f4f4f4;
 				width:100%;
@@ -901,11 +901,15 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					width:197px;
 					height:28px;
 					font-size:13px;
-					padding-left:10px;
+          padding: 5px 5px 5px 10px;
 					margin-top: 4px;
 					color:#404040;
 					border:0;
 					-webkit-appearance: none; 
+					-moz-appearance: none;
+          appearance: none;
+          overflow: hidden;
+          width: 120%;
 				}
 				p{
 					label{
