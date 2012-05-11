@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506182817) do
+ActiveRecord::Schema.define(:version => 20120511212828) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -46,13 +46,6 @@ ActiveRecord::Schema.define(:version => 20120506182817) do
 
   create_table "card_details", :force => true do |t|
     t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "street_address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "postal_code"
-    t.string   "country"
     t.string   "card_type"
     t.string   "card_number"
     t.string   "expire_month"
@@ -118,6 +111,13 @@ ActiveRecord::Schema.define(:version => 20120506182817) do
     t.datetime "updated_at"
   end
 
+  create_table "lawyers_practice_areas", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.integer  "practice_area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "offering_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20120506182817) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_national"
   end
 
   create_table "questions", :force => true do |t|

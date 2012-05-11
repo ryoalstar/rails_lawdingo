@@ -19,8 +19,13 @@
 
   <div class="f_label"> Name : </div>
   <%= f.text_field :name %> <br/>
+
   <div class="f_label"> Parent : </div>
-    <%= f.select :parent_id, options_for_select(options_practice_areas, selected=@practice_area.parent_id) %>
+  <%= f.select :parent_id, options_for_select(options_practice_areas, selected=@practice_area.parent_id) %> <br />
+
+  <div class="f_label"> National? : </div>
+  <%= f.check_box :is_national %> <br />
+
   <div style="margin: 10px 0px 10px 270px;">
     <%= f.submit @practice_area.new_record? ? 'Create new Practice Area' : 'Update Practice Area' %>
     &nbsp; &nbsp; or &nbsp; <%= link_to "Cancel", root_path %>
