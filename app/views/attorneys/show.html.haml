@@ -84,26 +84,7 @@
       .avatar     
         = link_to image_tag(@attorney.photo.url(:thumb)), attorney_path(@attorney, slug: @attorney.slug)
       .middle
-        %h1
-          = link_to_unless_current "#{@attorney.first_name}", attorney_path(@attorney, slug: @attorney.slug)
-        .price
-          %a.free{:href=> "#"}
-            %p= free_message(@attorney)
-            %p.small 
-              then 
-              = number_to_currency (@attorney.rate + AppParameter.service_charge_value)
-              \/minute
-          .button_tooltip
-            .button-content
-              %ul
-                %li
-                  = start_or_schedule_button(@attorney)
-                - if @attorney.is_online && !@attorney.is_busy && @attorney.phone.present?
-                  %li
-                    = start_phone_consultation(@attorney)
-                %li
-                  = start_or_schedule_button_text(@attorney)
-        .clear
+        %h1= link_to_unless_current "#{@attorney.first_name}", attorney_path(@attorney, slug: @attorney.slug)
         %h3
           - unless @attorney.bar_memberships.blank?
             Licensed in #{licenced_states}
