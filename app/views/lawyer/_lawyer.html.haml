@@ -27,7 +27,7 @@
   - pas_names_last = pas_names.pop
   - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"        
   .middle.row_block
-    %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+    %h1= link_to_unless_current "#{lawyer.first_name}", attorney_path(lawyer, slug: lawyer.slug)
     .online_icons
       - if lawyer.is_online
         %span.video.online= start_or_video_button_p(lawyer)
