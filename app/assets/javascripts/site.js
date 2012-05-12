@@ -355,9 +355,11 @@ $(function(){
 });
 
 jQuery.fn.center = function () {
-  this.css({"position": "absolute", "margin": "0"});
-  this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
-  this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+  this.css({"position": "fixed", "margin": "0"});
+  this.css("margin-top", ((this.outerHeight()) / 2 * (-1)) + "px");
+  this.css("margin-left", ((this.outerWidth()) / 2 * (-1)) + "px");
+  this.css("top", "50%");
+  this.css("left", "50%");
   return this;
 }
 
