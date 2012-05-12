@@ -100,13 +100,16 @@
 	.footer_content{
 		margin:0 auto;
 		width:990px;
-		padding-top: 30px;
+		padding-top: 10px;
 		span.left{
 			font-size: 14px;
 			margin:5px 10px 0px 4px;
 			color:#1a1a1a;
 			display:block;
 			float:left;
+		}
+		.top-offset-small{
+		  padding-top: 15px;
 		}
 		span.gplus{
 		  width:100px;
