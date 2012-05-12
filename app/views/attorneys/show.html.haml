@@ -2,8 +2,9 @@
 #inline-wrapper
   .left-bars-block
     .left-bar.status
+      .left-bar-section.info-header
+        = content_tag :h2, "Talk to #{@attorney.first_name}"
       .left-bar-section
-        %h3= content_tag :h3, "Talk to #{@attorney.first_name}"
         .online_icons
           %p 
             - if @attorney.is_online
