@@ -203,44 +203,65 @@ $(function(){
 
         function goto_image( i ){
             self.current_image = i;
-            self.find('.carousel-image img').attr('src', self.images[self.current_image]['url']);
-						self.find('.carousel-image a.profile_link').attr('href', self.images[self.current_image]['href']);
-            self.find('.carousel-image img').attr('alt', self.images[self.current_image]['title']);
-            self.find('.carousel-description h4').html( self.images[self.current_image]['title'] );
-            self.find('.carousel-description p.desc').html( self.images[self.current_image]['description'] );
-            self.find('.carousel-description p.rate').html( self.images[self.current_image]['rate'] );
-            self.find('.carousel-description p.small').html( self.images[self.current_image]['small'] );
-            self.find('.carousel-description .stars').html( self.images[self.current_image]['rating'] );
-            //self.find('.carousel-description li.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
-					  if (self.images[self.current_image]["start_video_conversation"] !== undefined) {
+            var carousel_info =  self.images[self.current_image];
+            var carousel_image = self.find('.carousel-image');
+            carousel_image.find('img').attr('src', carousel_info['url']);
+						carousel_image.find('a.profile_link').attr('href', carousel_info['href']);
+            carousel_image.find('img').attr('alt', carousel_info['title']);
+            self.find('.carousel-description h4').html( carousel_info['title'] );
+            self.find('.carousel-description p.desc').html( carousel_info['description'] );
+            self.find('.carousel-description p.rate').html( carousel_info['rate'] );
+            self.find('.carousel-description p.small').html( carousel_info['small'] );
+            self.find('.carousel-description .stars').html( carousel_info['rating'] );
+            self.find('.carousel-description span.note').html( carousel_info['start_or_schedule_button_text_profile'] );
+            
+        		if (carousel_info["start_or_video_button_p"] !== undefined) {
+						  self.find('.carousel-description span.video')
+						    .addClass("online").removeClass("offline")
+								.html(carousel_info["start_or_video_button_p"]);
+						} else {
+							  self.find('.carousel-description span.video').html('').addClass("offline").removeClass("online");
+						}
+						
+						if (carousel_info["start_phone_consultation_p"] !== undefined) {
+						  self.find('.carousel-description span.voice')
+						    .addClass("online").removeClass("offline")
+								.html(carousel_info["start_phone_consultation_p"]);
+						} else {
+							  self.find('.carousel-description span.voice').html('').addClass("offline").removeClass("online");
+						}        
+            
+            
+            //self.find('.carousel-description li.shedule').attr('href', carousel_info['start_live_conversation'] );
+					  if (carousel_info["start_video_conversation"] !== undefined) {
 			      	  self.find('.carousel-description li.shedule')
-										.html(self.images[self.current_image]["start_video_conversation"])
+										.html(carousel_info["start_video_conversation"])
 										.show();
 		      	} else {
 		      	  	self.find('.carousel-description li.shedule').html('').hide();
 						}
 						
-						if (self.images[self.current_image]["start_phone_conversation"] !== undefined) {
+						if (carousel_info["start_phone_conversation"] !== undefined) {
 								self.find('.carousel-description li.phone')
-										.html(self.images[self.current_image]["start_phone_conversation"])
+										.html(carousel_info["start_phone_conversation"])
 										.show();
 						} else {
 							  self.find('.carousel-description li.phone').html('').hide();
 						}
 						
-						if (self.images[self.current_image]["send_text_question"] !== undefined) {
+						if (carousel_info["send_text_question"] !== undefined) {
 			      		self.find('.carousel-description li.text')
-										.html(self.images[self.current_image]["send_text_question"])
+										.html(carousel_info["send_text_question"])
 										.show();
 						} else {
 								self.find('.carousel-description li.text').html('').hide();
 						}
-            //self.find('.carousel-description a.phone').attr('href', self.images[self.current_image]['start_live_conversation'] );
-            //self.find('.carousel-description a.shedule').attr('href', self.images[self.current_image]['start_live_conversation'] );
-            if ( self.images[self.current_image]['test'] != 0)
+            //self.find('.carousel-description a.phone').attr('href', carousel_info['start_live_conversation'] );
+            //self.find('.carousel-description a.shedule').attr('href', carousel_info['start_live_conversation'] );
+            if ( carousel_info['test'] != 0)
 						{
-							self.find('.carousel-description .rev_for_js').html( self.images[self.current_image]['link_reviews'] );
-							self.find('.carousel-description .rev_for_js span.number_rev').html( self.images[self.current_image]['reviews'] );
+							self.find('.carousel-description .rev_for_js').html( carousel_info['link_reviews'] );
+							self.find('.carousel-description .rev_for_js span.number_rev').html( carousel_info['reviews'] );
 						}
 						else
 						{
