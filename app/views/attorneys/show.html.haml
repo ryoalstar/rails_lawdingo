@@ -168,10 +168,7 @@
             = content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
             = render collection: @attorney.offerings, partial: "offerings/offering_template", locals: { lawyer: @attorney }          
           - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:reviews]
-            %h4.yelp
-              Latest
-              = link_to image_tag('yelp_logo_50x25.png'), "http://www.yelp.com"
-              reviews:
+            %h4.yelp= link_to image_tag('yelp_logo_50x25.png'), "http://www.yelp.com"
             - @attorney.yelp[:reviews].each do |review|
               .comment-block
                 = image_tag(review["user"]["image_url"])
