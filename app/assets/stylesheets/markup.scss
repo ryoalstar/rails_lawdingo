@@ -149,7 +149,12 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		.footer_content{
 			margin:0 auto;
 			width:990px;
-			padding-top: 30px;
+			padding-top: 10px;
+
+      .top-offset-small {
+        padding-top: 15px;
+      }
+
 			span.left{
 				font-size: 14px;
 				margin:5px 10px 0px 4px;
@@ -1674,3 +1679,8 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		}
 	}
 }
+
+.fan_box .connect_top {
+  padding: 0 !important;
+}
+
