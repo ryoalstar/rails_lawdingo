@@ -37,6 +37,9 @@
         %span.voice.online= start_phone_consultation_p(lawyer)
       - else 
         %span.voice.offline
+      %span.note= start_or_schedule_button_text_profile(lawyer)
+      %span.text
+      
       .video_chat.online.tooltip Available for video chat
       .voice_chat.online.tooltip Available for voice chat
       .video_chat.offline.tooltip Not available by video now
