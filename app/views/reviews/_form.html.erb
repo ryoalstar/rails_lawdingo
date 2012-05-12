@@ -6,7 +6,7 @@
   <%= f.input :purpose, label: "What did #{@conversation.lawyer.full_name} do for you?", input_html: { value: "Legal advice" } %>
   <%= f.label "Your rating of the session" %>
   <div id="rating_stars"></div>
-  <p> Your review of this session:</p>
+  %p Your review of this session:
   <%= f.input :body, label: false, placeholder: "Write a review about how valuable this session was" %>
   <%= f.submit "Submit review", class: "button" %>
 <% end %>
