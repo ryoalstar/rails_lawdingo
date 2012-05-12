@@ -493,6 +493,11 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						.carousel-description{
 							margin:23px 15px 10px 11px;
 							float:left;
+							.online_icons{
+							  width: 125px;
+      					float:right;
+      					margin-top: 16px;
+							}
 							.button_tooltip{
 								margin-top:0px;
 								margin-left: 7px;
@@ -510,6 +515,10 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 								margin-top: 141px;
 								width: 338px;
 								height: 40px;
+								.stars{
+								  margin-top:8px;
+								  float:right;
+								}
 							}
 							.reviews{
 								cursor:pointer;
@@ -520,7 +529,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 								font-size:14px;
 								color:#6d6d6d;
 								text-decoration:none;
-								margin-top:10px;
+								margin-top:2px;
 								padding: 0px 9px 4px 19px;
 							}
 							.reviews:hover{
@@ -1597,7 +1606,6 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					ul{
 						padding-left: 22px;
 						margin-top: 4px;
-						margin-bottom: 19px;
 						li{
 							list-style-image:url(li_list_img.png);
 							font-size:13px;

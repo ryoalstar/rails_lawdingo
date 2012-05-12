@@ -39,9 +39,17 @@
           .carousel-description
             .ratings
               %h4= link_to "#{lawyer.first_name}", attorney_path(lawyer, slug: lawyer.slug)
-              .stars
-                - if  lawyer.reviews.average(:rating).to_i !=0 
-                  = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+              .online_icons
+                - if lawyer.is_online
+                  %span.video.online= start_or_video_button_p(lawyer)
+                - else
+                  %span.video.offline
+                - if lawyer.phone.present? 
+                  %span.voice.online= start_phone_consultation_p(lawyer)
+                - else 
+                  %span.voice.offline
+                %span.note= start_or_schedule_button_text_profile(lawyer)
+                %span.text
             %p.desc= description
             #carousel-buttons
               %a.free{:href=> "#"}
@@ -58,6 +66,9 @@
                       = start_phone_consultation(lawyer)
                     %li.text
                       = start_or_schedule_button_text(lawyer)
+              .stars
+                - if  lawyer.reviews.average(:rating).to_i !=0 
+                  = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"        
               .rev_for_js
                 - if lawyer.reviews.count.to_i != 0
                   %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
