@@ -185,7 +185,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		.footer_content{
 			margin:0 auto;
 			width:990px;
-			padding-top: 18px;
+			padding-top: 10px;
 
       .top-offset-small {
         padding-top: 15px;
@@ -1791,31 +1791,3 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
   padding: 0 !important;
 }
 
-.national-area-notice {
-  position: relative;
-  display: block;
-  line-height: 1.4;
-
-  .state {
-    color: #222;
-    padding: 2px;
-    background-color: #F7EEC6;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  a.show-states-selector {
-    line-height: 1.1;
-    display: inline-block;
-    text-decoration: none;
-    border-bottom: 1px dotted #2491FF;
-    padding-bottom: 1px;
-    margin-top: 4px;
-
-    &:hover {
-      text-decoration: none;
-      border-bottom: none;
-    }
-  }
-}
