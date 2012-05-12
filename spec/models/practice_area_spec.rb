@@ -50,4 +50,10 @@ describe PracticeArea do
 
   end
 
+  context "is_national?" do
+    it "should return false if is_national attribute is nil" do
+      business = PracticeArea.new(name: "Business", is_national: nil)
+      business.is_national?.should be false
+    end
+  end
 end

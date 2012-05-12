@@ -34,7 +34,7 @@
             %label{:for => "practice_area_All"} All types
           - @practice_areas.each do |area|
             %p
-              = radio_button_tag "practice_area", area.name
+              = radio_button_tag "practice_area", area.name, data: { is_national: area.is_national?.to_s }
               = label_tag "practice_area_#{area.name}", area.name
             - if area.children.with_approved_lawyers.present?
               .practice-areas.children{:style => "display:none"}

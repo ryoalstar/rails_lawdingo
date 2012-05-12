@@ -43,5 +43,13 @@ class PracticeArea < ActiveRecord::Base
   def parent_name 
     self.main_area.present? ? self.main_area.name : nil
   end
+
+  def is_national?
+    if self.is_national == nil
+      false
+    else
+      self.is_national
+    end
+  end
 end
 
