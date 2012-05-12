@@ -1432,6 +1432,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						word-spacing: 0px;
 						letter-spacing: 0px;
 					}
+					p.tagline{
+					  font-style:italic;
+					}
 				}
 			}
 			.question{
@@ -1586,6 +1589,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						}
 					}
 					p{
+					  font-style:italic;
 						margin-top:13px;
 						font-size:13px;
 						color:#3f3f3f;
