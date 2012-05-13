@@ -36,6 +36,7 @@ gem 'letter_opener'
 gem 'framey'
 gem 'oauth'
 gem 'haml-rails'
+gem 'dynamic_sitemaps'
 #gem "psych" 
 # Use unicorn as the web server
 #gem 'unicorn'

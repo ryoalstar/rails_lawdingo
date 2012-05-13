@@ -20,7 +20,11 @@ class Home
 
     })
     document.location.hash = this.current_hash()
-
+    document.title = this.current_title()
+    new_meta = document.createElement('meta')
+    new_meta.name = 'Current'
+    new_meta.content = this.current_meta()
+    document.getElementsByTagName('head')[0].appendChild(new_meta)
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
@@ -52,10 +56,19 @@ class Home
       "/lawyers/#{@service_type}/#{@state}"
     else
       "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"
-
+      
   current_hash : ()->
     "!#{this.current_search_url()}"
-
+  current_title : ()->
+    service_type = @service_type.replace /-/, " "
+    state = @state.replace /-/, " "
+    practice_area = @practice_area.replace /-/, " "
+    "#{service_type} from #{state} #{practice_area} lawyers. Lawdingo: Ask a lawyer online now"
+  current_meta : ()->
+    service_type = @service_type.replace /-/, " "
+    state = @state.replace /-/, " "
+    practice_area = @practice_area.replace /-/, " "
+    "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."   
   read_hash : ()->
     hash = document.location.hash.replace("#!/lawyers/","")
     hash = hash.split("/")
