@@ -1,5 +1,7 @@
 Lawdingo::Application.routes.draw do
   
+  match 'sitemap.xml' => 'sitemaps#sitemap'
+
   namespace :framey do
     resources :videos
   end
