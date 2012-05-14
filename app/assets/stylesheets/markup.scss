@@ -1542,7 +1542,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					margin-top: 17px;
 					text-align: center;
 				}
-				input#question_body{
+				input.string.optional{
 				  color: #393C3D;
 					display:block;
 					float:left;
@@ -1561,10 +1561,10 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			    -webkit-box-shadow: inset 0px 1px 2px #e3e3e3;
 			    box-shadow: inset 0px 1px 2px #e3e3e3;
 				}
-				input#question_body:focus{
+				input.string.optional:focus{
 				  background-color:#fff;
 				}
-				input#question_body:-moz-placeholder{
+				input.string.optional:-moz-placeholder{
           color: #a8a8a8;
         }
 				input[type="submit"]{
