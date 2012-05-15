@@ -15,8 +15,8 @@
         %h2 Find the right lawyer
       #service_type.left-bar-section
         %h3 Looking for legal:
-        %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
-        %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
+        %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Legal Advice
+        %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Legal Service
       - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
         #state.left-bar-section
           %h3
