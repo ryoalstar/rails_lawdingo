@@ -84,7 +84,12 @@
       .avatar     
         = link_to image_tag(@attorney.photo.url(:thumb)), attorney_path(@attorney, slug: @attorney.slug)
       .middle
-        %h1= link_to_unless_current "#{@attorney.first_name}", attorney_path(@attorney, slug: @attorney.slug)
+        %h1
+          = link_to_unless_current "#{@attorney.first_name}", attorney_path(@attorney, slug: @attorney.slug)
+        .price
+          %h2= free_message(@attorney) 
+          = content_tag :h3, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute", class: "small"
+        .clear
         %h3
           - unless @attorney.bar_memberships.blank?
             Licensed in #{licenced_states}

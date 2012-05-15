@@ -7,7 +7,8 @@
       - if lawyer.reviews.average(:rating).to_i > 0
         = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
     - if lawyer.reviews.count > 0
-      = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
+      %a{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
+        = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
     .clear
   - bms = []
   - bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
