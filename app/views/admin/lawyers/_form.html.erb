@@ -42,6 +42,10 @@
 
   <div class="f_label">Per-minute Rate:</div>
   $<%= f.text_field :rate %>/minute<br/>
+
+  <div class="f_label">Practice Areas: </div>
+  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %><br/>
+
   <div class="f_label">Phone number:</div>
   <%= f.text_field :phone %><span class="rate_hint">Complete number including country codes</span><br/>
 

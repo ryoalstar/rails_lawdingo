@@ -138,9 +138,4 @@ $(document).ready(function(){
 
 	var $video = $('body.attorneys.show .main_content .profile_info .main-content .video-block');
   var $info = $('body.attorneys.show .main_content .profile_info .main-content .main-info');
-	if(($($video).html() != null) && ($($info).html() != null)){
- 		if($($video).html().trim() === '' && $($info).html().trim() === ''){
-			$(".profile_info").hide();
-		}
-	}
 });

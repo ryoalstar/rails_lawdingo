@@ -1,11 +1,13 @@
 class Client < User
+
+  # Associations
+  has_many :appointments
   has_many :conversations
   has_many :calls
 
+
   def total_spending
-    sum = 0.0
-    self.conversations.map{|con| sum += con.billed_amount }
-    sum
+    self.conversations.sum(:billed_amount)
   end
 
   # in seconds

@@ -22,6 +22,8 @@ gem "therubyracer"
 gem 'jquery-rails'
 gem "paperclip", "~>2.3.8"
 gem 'aws-s3'
+gem "rabl"
+gem "draper"
 #gem 'pg'
 gem 'stripe'
 gem 'rack-ssl', :require => 'rack/ssl'
@@ -59,10 +61,11 @@ group :test do
   gem "capybara"
   gem 'database_cleaner'
   gem "factory_girl_rails"
+  gem "guard-rspec"
   gem "mocha"
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
-  #gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'ruby-debug19', :require => 'ruby-debug'
   gem "spork"
 end
 
