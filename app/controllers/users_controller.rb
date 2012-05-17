@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
-  before_filter :check_payment_info, :only => [:start_phone_call]
+  #before_filter :check_payment_info, :only => [:start_phone_call]
 
   #REMINDER: uncomment only in production
   #before_filter :force_ssl, :only => ['payment_info']
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     add_state_scope
     add_practice_area_scope
     add_service_type_scope
-    
+
     # we try to auto-detect the state if possible
     if self.get_state_name.blank? && request.location.present? && request.location.state_code.present?
       if state = State.find_by_abbreviation(request.location.state_code)
@@ -268,6 +268,7 @@ class UsersController < ApplicationController
 
   def update_payment_info
    @status = false
+   @phone_call_payment_status = false
    token = params[:stripe_card_token]
    customer = Stripe::Customer.create(
         :card => token,
@@ -283,7 +284,8 @@ class UsersController < ApplicationController
    end
 
    unless params[:attorney_id].blank?
-     render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
+     #render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
+     @phone_call_payment_status = true
    else
     @err_msg = ''
     errors = current_user.errors
@@ -311,7 +313,6 @@ class UsersController < ApplicationController
     unless params[:client_number].blank?
       @lawyer = Lawyer.find(params[:lawyer_id])
       @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-      #@client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
      # make a new outgoing call
      begin
       @call = @client.account.calls.create(
@@ -353,7 +354,13 @@ class UsersController < ApplicationController
   def update_call_status
     @call = Call.find_by_sid(params[:call_id])
     if params[:sb] && params[:sb].to_i == 1
-      @call.update_attributes(:billing_start_time => Time.now, :status => 'billed')
+      if current_user.stripe_customer_token.present?
+       @call.update_attributes(:billing_start_time => Time.now, :status => 'billed')
+      else
+       @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+       @call = @client.account.calls.get(params[:call_id])
+       @call.hangup
+      end
     end
     render :text => "", :layout =>false
   end
@@ -571,7 +578,7 @@ class UsersController < ApplicationController
   def get_state_name
     # take California-lawyers and transform to California
     state_name = (params[:state] || "").gsub(/\-lawyers?$/,'')
-    return state_name.gsub(/\-/,' ') 
+    return state_name.gsub(/\-/,' ')
   end
 
 end

@@ -1,6 +1,10 @@
 <% if @status %>
-  updateFlash();
-  close_dialogs();
+  <% if @phone_call_payment_status %>
+    $('#payment_div').hide();
+  <% else %>
+    updateFlash();
+    close_dialogs();
+  <% end %>
 <% else %>
 $('.stripe_error').html(<%= escape_javascript(@err_msg) %>);
 <% end %>
