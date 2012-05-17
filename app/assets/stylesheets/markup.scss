@@ -9,132 +9,6 @@ html, body{
 .hidden{
 	display:none;
 }
-body.users.create_phone_call{
-  #wrapper-main{
-    #container{
-      .call-container{
-        #payment_div{
-          float: none !important;
-          margin: 0 auto;
-          padding-left: 63px;
-        }
-      }
-    }
-  }
-}
-.lawyer_notice{
-  color:red;
-  text-align:center;
-  font-size:16px !important;
-  font-weight:normal !important;
-}
-body.offerings.index .lawyer_notice{
-  padding-top:19px;
-}
-body.daily_hours.index{
-  #page{
-    padding-top:0;
-  }
-}
-.framey-video#page{
-  width:960px;
-  margin:0 auto;
-  padding-top:0;
-  .profile{
-    display: inline-block;
-    .left_menu{
-      display: inline-block;
-      float: left;
-      ul{
-        li{
-          font-size:15px;
-          font-weight:bold;
-          padding:15px 0;
-          a{
-            color: #2491FF;
-            font-size:15px;
-            text-decoration:none;
-            border:0;
-          }
-          a:hover{
-            text-decoration:underline;
-          }
-        }
-      }
-    }
-    .profile-block{
-      display: inline-block;
-      float:left;
-      width: 638px;
-      padding: 10px 0px 0 40px;
-      #offerings{
-        float:left;
-        display:inline-block;
-        width:220px;
-      }
-      #new_offering{
-        float: right;
-        display: inline-block;
-        width:320px;
-      }
-    }
-  }
-}
-body.users.show, body.daily_hours.index, body.offerings.index{
-  #page > div{
-    width:960px;
-    .profile{
-      display: inline-block;
-      .left_menu{
-        display: inline-block;
-        float: left;
-        ul{
-          li{
-            font-size:15px;
-            font-weight:bold;
-            padding:15px 0;
-            a{
-              color: #2491FF;
-              font-size:15px;
-              text-decoration:none;
-              border:0;
-            }
-            a:hover{
-              text-decoration:underline;
-            }
-          }
-        }
-      }
-      .profile-block{
-        display: inline-block;
-        float:left;
-        width: 638px;
-        padding: 10px 0px 0 40px;
-        #offerings{
-          float:left;
-          display:inline-block;
-          width:220px;
-        }
-        #new_offering{
-          float: right;
-          display: inline-block;
-          width:320px;
-        }
-      }
-    }
-  }
-}
-ul.tick{
-  li{
-    line-height: 25px;
-    list-style-image: url(li_list_img.png);
-    font-size: 13px;
-    color: #3F3F3F;
-  }
-}
-.center{
-  text-align:center;
-}
 body.attorneys.show{
   #wrapper-main{
    #container{
@@ -142,9 +16,6 @@ body.attorneys.show{
        .main_content{
          .bio-block{
            .middle{
-             h3{
-               margin-top:-13px;
-             }
              .price{
                a.free{
                  border-bottom:0;
@@ -153,12 +24,8 @@ body.attorneys.show{
                }
                .button_tooltip{
                  margin-left:25px;
-                 ul{
-                   li{
-                     a{
-                        border-bottom:0;
-                      }
-                   }
+                 a{
+                   border-bottom:0;
                  }
                }
              }
