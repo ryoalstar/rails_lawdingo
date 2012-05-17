@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
       :from => user.email,
       :to => lemail,
       :return_path => user.email,
-      :subject => "Lawdingo appointment request while you were offline"
+      :subject => "An inquiry from a client on Lawdingo"
     )
   end
 
