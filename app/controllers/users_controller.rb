@@ -305,6 +305,7 @@ class UsersController < ApplicationController
   end
 
   def start_phone_call
+    @lawyer = User.find(params[:id]) if params[:id].present?
   end
 
   def create_phone_call
