@@ -7,7 +7,12 @@ html, body{
 .hidden{
 	display:none;
 }
-
+body.users.start_phone_call{
+  p.notice{
+    margin-bottom:25px;
+    text-align:center;
+  }
+}
 // error styles
 div.error {
 	padding: 3px;
@@ -1222,6 +1227,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					}
 					h4.yelp{
 						margin-bottom: 18px;
+						img{
+						  margin-top: -10px;
+						}
 					}
 					.comment-block{
 						float:left;
