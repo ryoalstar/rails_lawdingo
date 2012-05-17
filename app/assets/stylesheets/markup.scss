@@ -269,6 +269,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				font-size:12px;
 				padding:4px 0px 0px 6px;
 				z-index: 10;
+				border-bottom:0;
 			}
 			.tooltip.offline, .tooltip.online{
 				border:0;
@@ -284,6 +285,19 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			.tooltip.offline{
 				font-size: 11px;
 				padding-left: 4px;
+			}
+			.tooltip.text_chat{
+			  background:url(appointment_toolitp.png) no-repeat;
+			  width:183px;
+				margin-top: -34px;
+				margin-left:11px;
+				padding-left:15px;			  
+			}
+			.tooltip.note_chat{
+			  margin-top: -34px;
+        margin-left: 6px;
+        border-bottom: 0;
+        padding-left: 19px;
 			}
 		}
 		.button_tooltip{

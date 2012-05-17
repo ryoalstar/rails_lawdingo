@@ -145,7 +145,7 @@ module LawyersHelper
     if logged_in?
       link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Schedule a consultation", :class => ''
+      link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
     end
   end
 

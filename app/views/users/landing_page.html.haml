@@ -50,6 +50,12 @@
                   %span.voice.offline
                 %span.note= start_or_schedule_button_text_profile(lawyer)
                 %span.text
+                .video_chat.online.tooltip Available for video chat
+                .voice_chat.online.tooltip Available for voice chat
+                .note_chat.tooltip Ask (text) question
+                .text_chat.tooltip No appointments available
+                .video_chat.offline.tooltip Not available by video now
+                .voice_chat.offline.tooltip Not available by phone now
             %p.desc= description
             #carousel-buttons
               %a.free{:href=> "#"}
