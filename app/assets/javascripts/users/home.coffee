@@ -20,7 +20,7 @@ class Home
 
     })
     document.location.hash = this.current_hash()
-    document.title = this.current_title()
+    document.title = this.current_title().replace /-lawyers/, ""
     new_meta = document.createElement('meta')
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
@@ -61,9 +61,9 @@ class Home
     "!#{this.current_search_url()}"
   current_title : ()->
     service_type = @service_type.replace /-/, " "
-    state = @state.replace /-/, " "
+    state = @state.replace /_/, " "
     practice_area = @practice_area.replace /-/, " "
-    "#{service_type} from #{state} #{practice_area} lawyers. Lawdingo: Ask a lawyer online now"
+    "#{service_type} from #{state} #{practice_area} Lawyers. Lawdingo: Ask a Lawyer Online Now"
   current_meta : ()->
     service_type = @service_type.replace /-/, " "
     state = @state.replace /-/, " "
