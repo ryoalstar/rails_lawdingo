@@ -73,6 +73,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		margin-bottom: 0px;
 		background: url(header_bg.png) repeat-x;
 		text-align: center;
+		a{
+		  border-bottom:0;
+		}
 		.wrapper{
 			width:990px;
 			margin:0 auto;
@@ -81,7 +84,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				float:left;
 				line-height: 10px;
 				img{
-					margin-top: 15px;
+					margin-top: 19px;
 				}
 			}
 			.links{
@@ -184,6 +187,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						display:block;
 						font-size: 14px;
 						padding:3px 10px;
+						border-bottom:0;
 					}
 					a.selected, a:hover{
 						color:white;
@@ -198,6 +202,11 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 	}	
 	#container{
 		.online_icons{
+		  span{
+		    a{
+		      border-bottom:0;
+		    }
+		  }
 			span.note, span.text{
 				width:26px;
 				height:26px;
@@ -372,6 +381,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				text-align:center;
 				margin:0px;
 				margin-top:0px !important;
+				font-style:normal !important;
 			}
 			p:first-child{
 				margin-top:2px !important;
@@ -453,6 +463,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						text-align:center;
 						color:#3b454f;
 						padding-left: 57px;
+						a{
+						  border-bottom:0;
+						}
 						h1{
 							margin-top: 12px;
 							word-spacing: 3px;
@@ -491,6 +504,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						-moz-box-shadow: 0px 7px 11px #B6B6B6;
 						-webkit-box-shadow: 0px 7px 11px #B6B6B6;
 						box-shadow: 0px 7px 11px #B6B6B6;
+						a{
+						  border-bottom:0;
+						}
 						.green_line{
 						  position:absolute;
 						  margin-left: 280px;
@@ -1589,6 +1605,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				.description{
 					float:left;
 					line-height: 24px;
+					a{
+					  border-bottom:0;
+					}
 					.button_tooltip{
 						margin-left: 6px;
 						margin-top: -35px;

@@ -93,10 +93,11 @@
         %h3
           - unless @attorney.bar_memberships.blank?
             Licensed in #{licenced_states}
-        %p.tagline
-          “
-          = @attorney.personal_tagline
-          ”
+        - if @attorney.personal_tagline.present?    
+          %p.tagline
+            “
+            = @attorney.personal_tagline
+            ”
   .main_content
     .profile_info
       -#.header_content

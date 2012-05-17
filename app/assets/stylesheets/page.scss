@@ -29,6 +29,9 @@
 	margin-bottom: 2px;
 	background: url(header_bg.png) repeat-x;
 	text-align: center;
+	a{
+	  border-bottom:0;
+	}
 	.wrapper{
 		width:990px;
 		margin:0 auto;
@@ -37,7 +40,7 @@
 			float:left;
 			line-height: 10px;
 			img{
-				margin-top: 15px;
+				margin-top: 19px;
 			}
 		}
 		.links{
@@ -132,6 +135,7 @@
 					text-decoration:none;
 					display:block;
 					font-size: 14px;
+					border-bottom:0;
 					padding:3px 10px;
 				}
 				a.selected, a:hover{
@@ -325,6 +329,10 @@ body.users.home {
                     font-size: 1.2em;
                     display: block;
                     margin: 12px 0px;
+                    border-bottom:0;
+                }
+                a{
+                  color: #2491ff;
                 }
             }
 

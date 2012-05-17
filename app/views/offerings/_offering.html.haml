@@ -28,7 +28,7 @@
     .clear  
     .description  
       = simple_format offering.description, class: "description"
-      - if offering.practice_area.present?
+      -# if offering.practice_area.present?
         %p
           Practice area: #{offering.practice_area.name}
       %p.hide_on_attorneys
