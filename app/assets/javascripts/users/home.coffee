@@ -164,7 +164,7 @@ class Home
     if !@practice_area 
       @practice_area="All"
     service_type = @service_type.replace /-/, " "
-    state = @state.replace /_/, " "
+    state = @state.replace /_/g, " "
     practice_area = @practice_area.replace /-/, " "
     "#{service_type} from #{state} #{practice_area} Lawyers. Lawdingo: Ask a Lawyer Online Now"
   current_meta : ()->
