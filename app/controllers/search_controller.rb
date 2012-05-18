@@ -96,7 +96,7 @@ class SearchController < ApplicationController
        practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
        images_hash = Hash.new
        images_hash["url"] = image.photo.url(:large)
-       images_hash["title"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.slug}'>#{lawyer.first_name}</a>".html_safe
+       images_hash["title"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.slug}'>#{lawyer.full_name}</a>".html_safe
        images_hash["description"] = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
        images_hash["small"]="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
        images_hash["rate"]="#{lawyer.free_consultation_duration} minutes free"

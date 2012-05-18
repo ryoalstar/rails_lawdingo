@@ -14,6 +14,9 @@ body.attorneys.show{
        .main_content{
          .bio-block{
            .middle{
+             h3{
+               margin-top:-13px;
+             }
              .price{
                a.free{
                  border-bottom:0;
@@ -613,6 +616,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 									display:block;
 									float:left;
 									margin-top:19px;
+									a:hover{
+									  text-decoration:underline;
+									}
 								}
 								.stars{
 									margin-top:19px;
@@ -682,6 +688,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				.avatar{
 					float:left;
 					margin-right:15px;
+					a{
+					  border-bottom:0;
+					}
 					p{
 						margin-top:6px;
 						text-align:center;
@@ -939,9 +948,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-right:1px solid #aaafb8;
 					border-bottom:1px solid #e6e9ed;
 					border-top:1px solid #aaafb8;
-					padding:7px 7px;
+					padding:7px 27px;
 					text-decoration:none;
-					color:#371C1C;
+					color:#5d656b;
 					font-size:12px;
 					background:url(advice_button.png) repeat-x;
 					display: block;
@@ -955,9 +964,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-right:1px solid #aaafb8;
 					border-bottom:1px solid #e6e9ed;
 					border-top:1px solid #aaafb8;
-					padding:7px 7px;
+					padding:7px 27px;
 					text-decoration:none;
-					color:#371C1C;
+					color:#5d656b;
 					font-size:12px;
 					background:url(advice_button.png) repeat-x;
 					display: block;
@@ -1453,6 +1462,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				border:1px solid #aaafb8;
 				-moz-border-radius: 5px;
 			  -webkit-border-radius: 5px;
+			  a{
+			    border-bottom:0;
+			  }
 				img{
 					width: 100px;
 				}
@@ -1468,6 +1480,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			  -webkit-border-radius: 5px;
 				margin-top:0;
 				.avatar{
+				  a{
+  			    border-bottom:0;
+  			  }
 					img{
 						width: 150px;
 					}
@@ -1620,7 +1635,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				width:354px;
 				padding:15px 0 15px 0px;
 				h1{
-					max-width: 289px;
+					max-width: 225px;
 					color:#0074d3;
 					font-size:20px;
 					font-weight:normal;
@@ -1628,6 +1643,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					display:block;
 					margin-bottom:0;
 					float:left;
+					a:hover{
+  				  text-decoration:underline;
+  				}
 				}
 				.online_icons{
 					width: 125px;
