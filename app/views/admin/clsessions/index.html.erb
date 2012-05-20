@@ -14,6 +14,7 @@ List of Recent Sessions!<hr/>
         <td> Rate </td>
         <td> Amount for Lawyer</td>
         <td> Amount Billed</td>
+        <td> Consultation Type</td>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@ List of Recent Sessions!<hr/>
           <td> <%= number_to_currency con.lawyer_rate %>/min </td>
           <td> <%= number_to_currency con.lawyer_earning %> </td>
           <td> <%= number_to_currency con.billed_amount %> </td>
+          <td> <%= con.consultation_type unless con.consultation_type.nil? %> </td>
         </tr>
       <% } %>
     </tbody>

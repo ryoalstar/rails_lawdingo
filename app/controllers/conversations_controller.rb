@@ -20,6 +20,12 @@ class ConversationsController < ApplicationController
   def create
     lawyer = User.find(params[:lawyer_id])
     lawyer.update_attribute(:is_busy, false)
+#    if params.has_key?("state")
+#      params.update({"consultation_type" => "video"})
+#    else
+#      params.update({"consultation_type" => ""})
+#    end
+    params.update({"consultation_type" => "video"})
     conversation = Conversation.create_conversation(params)
     if current_user && current_user.is_client?
       redirect_to conversation_summary_path(conversation)
