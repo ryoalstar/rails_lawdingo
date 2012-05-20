@@ -7,6 +7,19 @@ html, body{
 .hidden{
 	display:none;
 }
+body.users.create_phone_call{
+  #wrapper-main{
+    #container{
+      .call-container{
+        #payment_div{
+          float: none !important;
+          margin: 0 auto;
+          padding-left: 140px;
+        }
+      }
+    }
+  }
+}
 body.attorneys.show{
   #wrapper-main{
    #container{
