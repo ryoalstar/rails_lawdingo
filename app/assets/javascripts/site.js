@@ -327,33 +327,89 @@ $(function(){
         });
     };
 
-    $.fn.placeholder = function(){
-        this.each(function(){
-            var self = $(this);
+    (function($){
+      //feature detection
+      var hasPlaceholder = 'placeholder' in document.createElement('input');
 
-            if( 'placeholder' in $('<input>')[0] ) return;
+      //sniffy sniff sniff -- just to give extra left padding for the older
+      //graphics for type=email and type=url
+      var isOldOpera = $.browser.opera && $.browser.version < 10.5;
 
-            var rep = this.tagName.toLowerCase()=='textarea'?$('<textarea></textarea>'):$('<input type="text">');
-            rep.val( self.attr('placeholder') );
-            rep.attr( 'class', self.attr('class') );
-            rep.addClass( 'dummy-input' );
-            rep.insertAfter( self );
-            self.hide();
+      $.fn.placeholder = function(options) {
+        //merge in passed in options, if any
+        var options = $.extend({}, $.fn.placeholder.defaults, options),
+        //cache the original 'left' value, for use by Opera later
+        o_left = options.placeholderCSS.left;
 
-            rep.bind('focus', function(){
-                rep.hide();
-                self.show();
-               self.focus();
-            });
+        //first test for native placeholder support before continuing
+        //feature detection inspired by ye olde jquery 1.4 hawtness, with paul irish
+        return (hasPlaceholder) ? this : this.each(function() {
+      	  //TODO: if this element already has a placeholder, exit
 
-            self.bind('blur', function(){
-                if( self.val().length<=0 ){
-                    self.hide();
-                    rep.show();
-                }
-            });
+          //local vars
+          var $this = $(this),
+              inputVal = $.trim($this.val()),
+              inputWidth = $this.width(),
+              inputHeight = $this.height(),
+
+              //grab the inputs id for the <label @for>, or make a new one from the Date
+              inputId = (this.id) ? this.id : 'placeholder' + (+new Date()),
+              placeholderText = $this.attr('placeholder'),
+              placeholder = $('<label for='+ inputId +'>'+ placeholderText + '</label>');
+
+          //stuff in some calculated values into the placeholderCSS object
+          options.placeholderCSS['width'] = inputWidth;
+          options.placeholderCSS['height'] = inputHeight;
+          options.placeholderCSS['color'] = options.color;
+
+          // adjust position of placeholder 
+          options.placeholderCSS.left = (isOldOpera && (this.type == 'email' || this.type == 'url')) ?
+             '11%' : o_left;
+          placeholder.css(options.placeholderCSS);
+
+          //place the placeholder
+          $this.wrap(options.inputWrapper);
+          $this.attr('id', inputId).after(placeholder);
+
+          //if the input isn't empty
+          if (inputVal){
+            placeholder.hide();
+          };
+
+          //hide placeholder on focus
+          $this.focus(function(){
+            if (!$.trim($this.val())){
+              placeholder.hide();
+            };
+          });
+
+          //show placeholder if the input is empty
+          $this.blur(function(){
+            if (!$.trim($this.val())){
+              placeholder.show();
+            };
+          });
         });
-    };
+      };
+
+      //expose defaults
+      $.fn.placeholder.defaults = {
+        //you can pass in a custom wrapper
+        inputWrapper: '<span style="position:relative; display:block;"></span>',
+
+        //more or less just emulating what webkit does here
+        //tweak to your hearts content
+        placeholderCSS: {
+          'font':'16px', 
+          'color':'#393C3D', 
+          'position': 'absolute', 
+          'left':'5%',
+          'top':'8px', 
+          'overflow-x': 'hidden',
+    			'display': 'block'
+        }
+      };
+    })(jQuery);
 
     $('.button')
         .bind( 'mousedown', function(){ $(this).addClass('pressed');    })
