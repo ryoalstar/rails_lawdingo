@@ -33,6 +33,10 @@
         %h2 Need-to-know Info
       .left-bar-section.info
         %div
+          %h3 State bar memberships:
+          %ul
+            - @attorney.states.each do |state|
+              %li= state.name
           = content_tag :h3, "#{@attorney.first_name}'s key practice areas:"
           = render collection: @attorney.practice_areas.where(parent_id: nil).order("name"), partial: "attorneys/area", as: :area, locals: { lawyer: @attorney }
         .person_info
