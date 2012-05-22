@@ -22,6 +22,14 @@ body.users.create_phone_call{
     }
   }
 }
+ul.tick{
+  li{
+    line-height: 25px;
+    list-style-image: url(li_list_img.png);
+    font-size: 13px;
+    color: #3F3F3F;
+  }
+}
 body.attorneys.show{
   #wrapper-main{
    #container{
