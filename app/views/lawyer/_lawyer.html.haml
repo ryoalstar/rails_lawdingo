@@ -75,7 +75,7 @@
       .button_tooltip
         .button-content
           %ul
-            - if lawyer.phone.present? && logged_in?
+            - if lawyer.is_online && !lawyer.is_busy
               %li
                 = start_or_schedule_button(lawyer)
             - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
