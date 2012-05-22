@@ -289,12 +289,10 @@ $(function(){
 
     $.fn.dialog = function( ){
 
-        this.each( function(){
-            var dialog_div = $( $(this).attr('href') );
-            var close = $('<div class="dialog-close"></div>');
-            close.click( close_dialogs );
-            dialog_div.append( close );
-        });
+        var dialog_div = $( $(this).attr('href') );
+        var close = $('<div class="dialog-close"></div>');
+        close.click( close_dialogs );
+        dialog_div.append( close );
 
         $('#dialog-overlay').click( function(){
             $('.dialog-window').hide();
