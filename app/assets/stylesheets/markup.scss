@@ -38,8 +38,12 @@ body.attorneys.show{
                }
                .button_tooltip{
                  margin-left:25px;
-                 a{
-                   border-bottom:0;
+                 ul{
+                   li{
+                     a{
+                        border-bottom:0;
+                      }
+                   }
                  }
                }
              }
@@ -359,6 +363,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			}
 		}
 		.button_tooltip{
+		  text-align:left;
 			position:absolute;
 			padding:4px;
 			background: url(button_tooltip_border.png) repeat;
