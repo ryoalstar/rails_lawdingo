@@ -40,8 +40,12 @@ body.attorneys.show{
                }
                .button_tooltip{
                  margin-left:25px;
-                 a{
-                   border-bottom:0;
+                 ul{
+                   li{
+                     a{
+                        border-bottom:0;
+                      }
+                   }
                  }
                }
              }
