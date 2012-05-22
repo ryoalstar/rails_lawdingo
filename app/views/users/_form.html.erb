@@ -37,7 +37,6 @@
     </div>
     <%#= f.text_field :bar_ids,{:placeholder=>"Bar ID(s)"} %>
     <div class="user_free_consultation_duration">
-      <span class="duration_hint">free consultation offered</span>
       <%= f.select(:free_consultation_duration, [
         ["2 minutes", "2"],
         ["5 minutes", "5"],
@@ -49,6 +48,7 @@
         ["60 minutes", "60"],
         ["90 minutes", "90"],
       ], selected: 20)%>
+      <span class="duration_hint">free consultation offered</span>
     </div>
     <% @user.rate = nil if @user.new_record? %>
     <div class="user_rate">
