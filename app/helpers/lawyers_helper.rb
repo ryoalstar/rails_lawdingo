@@ -107,7 +107,7 @@ module LawyersHelper
     "#{lawyer.free_consultation_duration} minutes free"
   end
 
-  
+
   def start_or_schedule_button(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
@@ -118,15 +118,9 @@ module LawyersHelper
     else
       if logged_in?
         if lawyer.phone.present?
-          if current_user.stripe_customer_token.present?
-            link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
-          else
-            # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
-            link_to "Chat now by phone", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
-          end
-
-        #else
-         #link_to "schedule consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+          link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+        else
+          link_to "schedule consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
         end
       else
         if lawyer.phone.present?
@@ -137,7 +131,7 @@ module LawyersHelper
       end
     end
   end
-  
+
   def start_or_schedule_button_text(lawyer)
     if logged_in?
       link_to "Ask a (text) question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => "#{lawyer.first_name} #{lawyer.last_name}" }, :class => "dialog-opener "
@@ -145,8 +139,8 @@ module LawyersHelper
       link_to "Ask a (text) question", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Schedule a consultation", :class => ''
     end
   end
-  
-  
+
+
   def start_or_schedule_button_text_profile(lawyer)
     if logged_in?
       link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
@@ -154,15 +148,16 @@ module LawyersHelper
       link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
     end
   end
-  
+
   def start_or_schedule_button_text_profile_text(lawyer)
     if logged_in?
       link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      link_to "Send a note or ask a question", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Schedule a consultation", :class => ''
+      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
+      link_to "Send a note or ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug)), :title => "Schedule a consultation", :class => ''
     end
   end
-  
+
   def start_video_button(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
@@ -172,7 +167,7 @@ module LawyersHelper
       end
    end
   end
-  
+
   def start_or_video_button_p(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
@@ -182,7 +177,7 @@ module LawyersHelper
       end
    end
   end
-  
+
   def start_or_video_button_profile(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
@@ -192,59 +187,41 @@ module LawyersHelper
       end
    end
   end
-  
+
 
  def start_phone_consultation(lawyer)
    if logged_in?
-    if current_user.stripe_customer_token.present?
       link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
-    else
-      # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
-      link_to "Chat now by phone", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
-    end
   else
     link_to 'Chat now by phone', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
   end
  end
- 
+
  def start_phone_consultation_p(lawyer)
     if logged_in?
-     if current_user.stripe_customer_token.present?
+
        link_to "", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
-     else
-       # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
-       link_to "", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
-     end
    else
      link_to "", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
    end
  end
- 
+
  def start_phone_consultation_profile(lawyer)
     if logged_in?
-     if current_user.stripe_customer_token.present?
-       link_to "Avaiable by phone now", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
-     else
-       # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
-       link_to "Avaiable by phone now", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
-     end
+      link_to "Avaiable by phone now", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
    else
      link_to "Avaiable by phone now", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
    end
  end
- 
+
  def start_phone_consultation_path(lawyer)
     if logged_in?
-     if current_user.stripe_customer_token.present?
        phonecall_path(lawyer)
-     else
-       call_payment_path(lawyer)
-     end
    else
      new_user_path(:ut => 0, :notice => true, :return_path => phonecall_path(lawyer))
    end
  end
- 
+
  def status_message(lawyer)
    if lawyer.is_online
      "online now"
@@ -264,8 +241,8 @@ module LawyersHelper
     ct = @lawyers.count == 0 ? "no" : @lawyers.count.to_s
     lawyers_string = @lawyers.count == 1 ? "lawyer" : "lawyers"
 
-    return "There #{is_are} #{ct}#{selected_state_string}" + 
-      "#{parent_practice_area_string} #{lawyers_string} " + 
+    return "There #{is_are} #{ct}#{selected_state_string}" +
+      "#{parent_practice_area_string} #{lawyers_string} " +
       "who can offer you legal advice#{child_practice_area_string} " +
       "right now."
   end
@@ -275,8 +252,8 @@ module LawyersHelper
     ct = @offerings.count == 0 ? "no" : @offerings.count.to_s
     service_string = @offerings.count == 1 ? "service" : "services"
 
-    return "There #{is_are} #{ct}#{selected_state_string}" + 
-      "#{parent_practice_area_string} #{service_string} " + 
+    return "There #{is_are} #{ct}#{selected_state_string}" +
+      "#{parent_practice_area_string} #{service_string} " +
       "that may be of interest to you."
   end
 
@@ -285,7 +262,7 @@ module LawyersHelper
   end
 
   def parent_practice_area_string
-    if @selected_practice_area.present? 
+    if @selected_practice_area.present?
       if @selected_practice_area.parent_name.present?
         return " #{@selected_practice_area.parent_name.downcase}"
       else

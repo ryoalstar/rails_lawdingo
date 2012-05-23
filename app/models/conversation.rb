@@ -10,6 +10,7 @@ class Conversation < ActiveRecord::Base
     lawyer_id       = input_params[:lawyer_id]
     start_date      = input_params[:start_date]
     end_date        = input_params[:end_date]
+    consultation_type = input_params[:consultation_type]
     billable_time   = input_params[:billable_time] || "0"
     lawdingo_charge = AppParameter.service_charge_value
 
@@ -26,7 +27,7 @@ class Conversation < ActiveRecord::Base
       billed_amount = billable_time.to_f * (billing_rate + lawdingo_charge)
 
       conversation = self.create(:client_id =>client_id, :lawyer_id =>lawyer_id, :lawyer_rate =>billing_rate,
-        :start_date =>start_date, :end_date =>end_date,:billable_time =>billable_time,
+        :start_date =>start_date, :end_date =>end_date,:billable_time =>billable_time,:consultation_type => consultation_type,
         :lawdingo_charge =>lawdingo_charge, :billed_amount =>billed_amount, :paid_to_lawyer =>false )
   else
       conversation = nil
