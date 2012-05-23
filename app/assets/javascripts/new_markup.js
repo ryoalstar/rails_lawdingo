@@ -9,6 +9,9 @@ var my_images = [
 
 $(document).ready(function(){
   
+  $(".profile_info .client-reviews .review").first().addClass('first');
+  $(".profile_info .client-reviews .review").last().addClass('last');  
+  
 	$(my_images).each(function() { 	
 		var image = $('<img />').attr('src', this).hide();
 		$('body').append(image);

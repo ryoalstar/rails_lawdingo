@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   ACCOUNT_TAB = 'f'
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
+  PFOFILE_TAB = 'profile'
 
   # Validate free consultation duration only if it's lawyer signing up
   validates_presence_of :free_consultation_duration, :if => :is_lawyer?
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
     :touch => true
 
   has_attached_file :photo,
-    :styles => { :medium => "232x", :thumb => "100x" },
+    :styles => { :medium => "253x253>", :thumb => "102x127>" },
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :s3_protocol => "https",
