@@ -7,7 +7,7 @@ set :whenever_command, "bundle exec whenever"
 
 set :scm,             :git
 set :repository,      "gitorious@repos.itima.ru:odesk-projects/lawdingo.git"
-set :branch,          "origin/Ilya"
+set :branch,          "repos/Ilya"
 set :application,     'lawdingo'
 set :migrate_target,  :current
 set :ssh_options,     { :forward_agent => true }
