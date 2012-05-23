@@ -1,0 +1,11 @@
+%div{:style => "font-size: 14px; margin: 0 8px 10px 0; font-weight: bold;"}
+  = link_to_unless (controller.controller_name == 'daily_hours' || controller.controller_name == 'offerings' || controller.controller_name == 'videos'), "Profile info", user_path(lawyer, :t => User::ACCOUNT_TAB)
+  |
+  = link_to_unless_current "Summary of sessions", user_path(lawyer, :t => User::SESSION_TAB)
+  %hr/
+.left_menu
+  %ul
+    %li= link_to_unless_current "1. Account information", user_path(lawyer, :t => User::ACCOUNT_TAB) 
+    %li= link_to_unless_current "2. Set availability", user_daily_hours_path(lawyer)
+    %li= link_to_unless_current "3. Fixed-price offers", user_offerings_path(lawyer) 
+    %li= link_to_unless_current "4. Intro video", framey_videos_path  

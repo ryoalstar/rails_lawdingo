@@ -9,6 +9,10 @@
   %a#close_notice{:href => "#"} Close
 #current_selected_lawyer
 #inline-wrapper
+  - if flash[:notice].present?
+    %p.notice
+      = flash[:notice]
+      %a#close_notice{:href => "#"} Close
   %form.filters
     .left-bar
       .left-bar-section.first
@@ -116,10 +120,6 @@
           %span.law-school-2 B
           %span.law-school-3 A
           %span.law-school-4 A+
-  - if flash[:notice].present?
-    %p.notice
-      = flash[:notice]
-      %a#close_notice{:href => "#"} Close
   .main_content
     #generail_question.question.question-container
       %h2.selected-lawyers-caption= selected_lawyers_caption
@@ -130,18 +130,18 @@
 #schedule_session.dialog-window
   %h3#overlay_user_name
     %br/
-    %span Ask Attorney
+    %span Ask
     %span.lawyer_name
-    %span a question
+    %span a question.
   %br/
-  %span Have a question or comment for
-  %span.lawyer_name
-  %span ? Write it here, and
-  %span.lawyer_name Lawyer
-  will be able to email you back directly.
+  /%span Have a question or comment for
+  /%span.lawyer_name
+  /%span ? Write it here, and
+  /%span.lawyer_name Lawyer
+  /will be able to email you back directly.
   %textarea#txt_msg{:name => "txt_msg"}
-  %span.fine-print Please do not include any private or confidential information here.
-  %hr
+  %span.fine-print Sending a message does not form an attorney-client relationship.
+  %hr/
   %a.button.blue{:href => "javascript:void(0)", :onclick => "sendMessage();return false;"} Send Message
 :javascript
   function sendMessage(){

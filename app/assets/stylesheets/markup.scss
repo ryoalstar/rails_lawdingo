@@ -14,7 +14,109 @@ body.users.create_phone_call{
         #payment_div{
           float: none !important;
           margin: 0 auto;
-          padding-left: 140px;
+          padding-left: 63px;
+        }
+      }
+    }
+  }
+}
+.lawyer_notice{
+  color:red;
+  text-align:center;
+  font-size:16px !important;
+  font-weight:normal !important;
+}
+body.offerings.index .lawyer_notice{
+  padding-top:19px;
+}
+body.daily_hours.index{
+  #page{
+    padding-top:0;
+  }
+}
+.framey-video#page{
+  width:960px;
+  margin:0 auto;
+  padding-top:0;
+  .profile{
+    display: inline-block;
+    .left_menu{
+      display: inline-block;
+      float: left;
+      ul{
+        li{
+          font-size:15px;
+          font-weight:bold;
+          padding:15px 0;
+          a{
+            color: #2491FF;
+            font-size:15px;
+            text-decoration:none;
+            border:0;
+          }
+          a:hover{
+            text-decoration:underline;
+          }
+        }
+      }
+    }
+    .profile-block{
+      display: inline-block;
+      float:left;
+      width: 638px;
+      padding: 10px 0px 0 40px;
+      #offerings{
+        float:left;
+        display:inline-block;
+        width:220px;
+      }
+      #new_offering{
+        float: right;
+        display: inline-block;
+        width:320px;
+      }
+    }
+  }
+}
+body.users.show, body.daily_hours.index, body.offerings.index{
+  #page > div{
+    width:960px;
+    .profile{
+      display: inline-block;
+      .left_menu{
+        display: inline-block;
+        float: left;
+        ul{
+          li{
+            font-size:15px;
+            font-weight:bold;
+            padding:15px 0;
+            a{
+              color: #2491FF;
+              font-size:15px;
+              text-decoration:none;
+              border:0;
+            }
+            a:hover{
+              text-decoration:underline;
+            }
+          }
+        }
+      }
+      .profile-block{
+        display: inline-block;
+        float:left;
+        width: 638px;
+        padding: 10px 0px 0 40px;
+        #offerings{
+          float:left;
+          display:inline-block;
+          width:220px;
+        }
+        #new_offering{
+          float: right;
+          display: inline-block;
+          width:320px;
         }
       }
     }
@@ -27,6 +129,9 @@ ul.tick{
     font-size: 13px;
     color: #3F3F3F;
   }
+}
+.center{
+  text-align:center;
 }
 body.attorneys.show{
   #wrapper-main{
@@ -406,6 +511,8 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							font-size:12px;
 							color:#3f3f3f;
 							cursor:pointer;
+							border-bottom:0 !important;
+							font-weight:normal !important;
 						}
 					}
 					li.disabled, li.disabled:hover{
@@ -974,7 +1081,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-right:1px solid #aaafb8;
 					border-bottom:1px solid #e6e9ed;
 					border-top:1px solid #aaafb8;
-					padding:7px 27px;
+					padding:7px 24px;
 					text-decoration:none;
 					color:#5d656b;
 					font-size:12px;
@@ -990,7 +1097,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-right:1px solid #aaafb8;
 					border-bottom:1px solid #e6e9ed;
 					border-top:1px solid #aaafb8;
-					padding:7px 27px;
+					padding:7px 24px;
 					text-decoration:none;
 					color:#5d656b;
 					font-size:12px;
@@ -1180,14 +1287,23 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				margin-top:0;
 			}
 			.profile_info{
+			  margin-bottom: 23px;
 				width:722px;
 				float:left;
 				background:#fff;
 				border:1px solid #d0d2d5;
 				-moz-border-radius: 5px;
 			  -webkit-border-radius: 5px;
+			  h2{
+			    text-align:center;
+			    border-bottom:1px solid #D0D2D5;
+			    font-size:14px;
+			    color:#4D6B94;
+			    padding:12px 0;
+			    font-weight:bold;
+			  }
 				.main-content{
-					padding:43px 0px 18px 18px;
+					padding:10px 0px 18px 18px;
 					float:left;
 					width:97%;
 					.video-block{
@@ -1209,9 +1325,17 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					.main-info{
 						width:100%;
 						float:left;
+						.info{
+						  h3{
+						    a:hover{
+						      text-decoration:underline;
+						    }
+						  }
+						}
 						h4{
 							word-spacing: -2px;
 							margin-bottom:0;
+							margin-top: 10px;
 						}
 						h3{
 							margin: 12px 24px 7px 0px;
@@ -1226,7 +1350,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							margin-bottom: 8px;
 						}
 						p.last{
-							margin-bottom:35px;
+							margin-bottom:10px;
 						}
 					}
 					.client-reviews{
@@ -1247,7 +1371,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							border-right: 1px solid #e1e1e1;
 							margin:0;
 						}
-						.review:first-child{
+						.review.first{
 							border-top:1px solid #e1e1e1;
 							border-left: 1px solid #e1e1e1;
 							border-right: 1px solid #e1e1e1;
@@ -1258,7 +1382,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							border-top-left-radius: 5px;
 							border-top-right-radius: 5px;
 						}
-						.review:last-child{
+						.review.last{
 							border-bottom:1px solid #e1e1e1;
 							border-left: 1px solid #e1e1e1;
 							border-right: 1px solid #e1e1e1;
@@ -1500,7 +1624,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				background:#fdfdfd;
 				border:1px solid #d0d2d5;
 				float: left;
-				min-height: 163px;
+				min-height: 168px;
 				width:690px;
 				padding:20px 15px 20px 17px;
 				-moz-border-radius: 5px;
@@ -1751,6 +1875,15 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							list-style-image:url(li_list_img.png);
 							font-size:13px;
 							color:#3f3f3f;
+							a{
+  							font-weight:bold;
+  							color:#3f3f3f;
+  							border-bottom:1px dotted #bbc1c4;
+  						}
+  						a:hover{
+  							text-decoration:none;
+  							border-bottom:0;
+  						}
 						}
 					}
 				}

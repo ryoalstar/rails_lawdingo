@@ -44,23 +44,25 @@
         <%= hidden_field_tag :form_type, "ajax" %>
         <%= hidden_field_tag :stripe_card_token %>
         <%= hidden_field_tag :attorney_id, @lawyer.id %>
-        <h3 class="paid_model_header">To talk longer than <%= @lawyer.free_consultation_duration %> minutes, you will need to have payment information on file, or else the call will end</h3>
+        <h3 class="paid_model_header">To talk longer than <%= @lawyer.free_consultation_duration %> minutes, you will need to have payment information on file, or else the call will end.</h3>
           <fieldset class="personal-info">
               <%= image_tag("creditcards.png") %>
+              <div class="label">Credit card number:</div>
               <input type="text" name="card_number" autocomplete="off" placeholder="Credit card number" maxlength="26" size="26" id="card_detail_card_number"></input>
-              <div class="label">Expires On</div>
+              <div class="label">Expires On <span class="right">CCV Code:</span></div>
               <%= select_month nil, {add_month_numbers: true}, {name: "card_detail[expire_month]", id: "card_month"} %>
   <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: "card_detail[expire_year]", id: "card_year"} %>
               <input id="card_detail_card_verification" type="password" size="9" autocomplete="off" name="scode" maxlength="4"></input>
               <div src="question.png" class="help-text" tooltip="The three or four digit code on the back of your card."></div>
+              <button type="submit" class="button blue">Submit</button>
+              <div class="sealed" style="margin: 10px 0 0 10px;"><%= render "godaddy_seal" %></div>
           </fieldset>
           <div class="clear"></div>
           <div >
             <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
             </noscript>
           </div>
-          <button type="submit" class="button blue">Submit</button>
-          <div class="sealed" style="margin: 10px 0;"><%= render "godaddy_seal" %></div>
+          
       </form>
     </div>
 </div>
