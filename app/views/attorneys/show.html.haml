@@ -206,6 +206,7 @@
           - if @attorney.reviews.count.to_i > 0
             %h4 Lawdingo client reviews:        
             .client-reviews#reviews
+              %a{:name => 'reviews'}
               = render @attorney.reviews.order("created_at DESC")
             
 
