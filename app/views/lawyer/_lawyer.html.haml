@@ -65,6 +65,15 @@
         - unless lawyer.practice_areas.blank?
           %li
             Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law"}
+        - if lawyer.offerings.count > 0
+          - if lawyer.offerings.count == 1
+            %li 
+              Offers
+              %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee service
+          - else
+            %li 
+              Offers
+              %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee services
       %a.free{:href=> "#"}
         %p= free_message(lawyer)
         = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"

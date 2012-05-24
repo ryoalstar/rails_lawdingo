@@ -186,6 +186,7 @@
           %p Strip steak tongue salami biltong. Pancetta ground round short ribies tail streips siteak. Tongue pig beef ris strip steak fnekiefurter kielbasa. Pork t-bone venison, ham hiock shank ball tip pork belly. Spare ribes ham  filet mignon chicken flank pork belly tri-tip shank speck. Kielbasa fatback jerky, haam t-bone leberkeuas tongue. Pork belly beef ribs ham, chicken venison ham hock swine burger ground round shank ribeye.          
         .main-info
           - if @attorney.offerings.any?
+            %a#flat-fee{:name => 'flat-fee'}
             = content_tag :h4, "#{@attorney.first_name}'s Flat-fee Services (#{@attorney.offerings.count}):"
             = render collection: @attorney.offerings, partial: "offerings/offering_template", locals: { lawyer: @attorney }          
           - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:reviews]
