@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   ACCOUNT_TAB = 'f'
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
+  PFOFILE_TAB = 'profile'
 
   # Validate free consultation duration only if it's lawyer signing up
   validates_presence_of :free_consultation_duration, :if => :is_lawyer?

@@ -20,6 +20,93 @@ body.users.create_phone_call{
     }
   }
 }
+.framey-video#page{
+  width:960px;
+  margin:0 auto;
+  .profile{
+    display: inline-block;
+    .left_menu{
+      display: inline-block;
+      float: left;
+      ul{
+        li{
+          font-size:15px;
+          font-weight:bold;
+          padding:15px 0;
+          a{
+            color: #2491FF;
+            font-size:15px;
+            text-decoration:none;
+            border:0;
+          }
+          a:hover{
+            text-decoration:underline;
+          }
+        }
+      }
+    }
+    .profile-block{
+      display: inline-block;
+      float:left;
+      width: 638px;
+      padding: 10px 0px 0 40px;
+      #offerings{
+        float:left;
+        display:inline-block;
+        width:220px;
+      }
+      #new_offering{
+        float: right;
+        display: inline-block;
+        width:320px;
+      }
+    }
+  }
+}
+body.users.show, body.daily_hours.index, body.offerings.index{
+  #page > div{
+    width:960px;
+    .profile{
+      display: inline-block;
+      .left_menu{
+        display: inline-block;
+        float: left;
+        ul{
+          li{
+            font-size:15px;
+            font-weight:bold;
+            padding:15px 0;
+            a{
+              color: #2491FF;
+              font-size:15px;
+              text-decoration:none;
+              border:0;
+            }
+            a:hover{
+              text-decoration:underline;
+            }
+          }
+        }
+      }
+      .profile-block{
+        display: inline-block;
+        float:left;
+        width: 638px;
+        padding: 10px 0px 0 40px;
+        #offerings{
+          float:left;
+          display:inline-block;
+          width:220px;
+        }
+        #new_offering{
+          float: right;
+          display: inline-block;
+          width:320px;
+        }
+      }
+    }
+  }
+}
 ul.tick{
   li{
     line-height: 25px;

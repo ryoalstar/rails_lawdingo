@@ -1,7 +1,0 @@
-<div style="font-size: 14px; margin: 0 8px 10px 0; font-weight: bold;">
-  <%= link_to_unless_current "Account information", user_path(lawyer, :t =>User::ACCOUNT_TAB) %> |
-  <%= link_to_unless_current "Summary of sessions", user_path(lawyer, :t =>User::SESSION_TAB) %> |
-  <%= link_to_unless_current "Fixed-price offers", user_offerings_path(lawyer) %> |
-  <%= link_to_unless_current "Intro video", framey_videos_path %> |
-  <%= link_to_unless_current "Set availability", user_daily_hours_path(lawyer) %>
-</div>
