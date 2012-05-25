@@ -1270,14 +1270,23 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				margin-top:0;
 			}
 			.profile_info{
+			  margin-bottom: 23px;
 				width:722px;
 				float:left;
 				background:#fff;
 				border:1px solid #d0d2d5;
 				-moz-border-radius: 5px;
 			  -webkit-border-radius: 5px;
+			  h2{
+			    text-align:center;
+			    border-bottom:1px solid #D0D2D5;
+			    font-size:14px;
+			    color:#4D6B94;
+			    padding:12px 0;
+			    font-weight:bold;
+			  }
 				.main-content{
-					padding:43px 0px 18px 18px;
+					padding:10px 0px 18px 18px;
 					float:left;
 					width:97%;
 					.video-block{
@@ -1309,6 +1318,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						h4{
 							word-spacing: -2px;
 							margin-bottom:0;
+							margin-top: 10px;
 						}
 						h3{
 							margin: 12px 24px 7px 0px;
@@ -1323,7 +1333,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							margin-bottom: 8px;
 						}
 						p.last{
-							margin-bottom:35px;
+							margin-bottom:10px;
 						}
 					}
 					.client-reviews{
@@ -1344,7 +1354,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							border-right: 1px solid #e1e1e1;
 							margin:0;
 						}
-						.review:first-child{
+						.review.first{
 							border-top:1px solid #e1e1e1;
 							border-left: 1px solid #e1e1e1;
 							border-right: 1px solid #e1e1e1;
@@ -1355,7 +1365,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							border-top-left-radius: 5px;
 							border-top-right-radius: 5px;
 						}
-						.review:last-child{
+						.review.last{
 							border-bottom:1px solid #e1e1e1;
 							border-left: 1px solid #e1e1e1;
 							border-right: 1px solid #e1e1e1;
@@ -1597,7 +1607,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				background:#fdfdfd;
 				border:1px solid #d0d2d5;
 				float: left;
-				min-height: 163px;
+				min-height: 168px;
 				width:690px;
 				padding:20px 15px 20px 17px;
 				-moz-border-radius: 5px;
