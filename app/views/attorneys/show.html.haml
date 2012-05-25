@@ -41,6 +41,7 @@
           %div
             %h3 State bar memberships:
             %ul
+<<<<<<< HEAD
               - @attorney.states.each do |state|
                 %li= state.name
             = content_tag :h3, "#{@attorney.first_name}'s key practice areas:"
@@ -49,6 +50,56 @@
             - if @attorney.school.present?
               = content_tag :h3, "#{@attorney.first_name}'s background:"
               %p Law school
+=======
+              %li= pluralize years_practicing_law(@attorney), "year", "years"
+          - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:rating_img_url]
+            %p Yelp rating
+            .yelp-rating-container
+              .stars
+                = image_tag @attorney.yelp[:rating_img_url]
+              %p.small
+                Based on #{pluralize @attorney.yelp[:review_count], "review", "reviews"}
+              .clear
+            %br/  
+          - if @attorney.reviews.average(:rating).to_i > 0
+            .yelp-rating-container
+              %p 
+                Lawdingo rating
+                = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: @attorney.reviews.average(:rating).to_i }), attorney_path(@attorney, slug: @attorney.slug, anchor: "reviews"), class: "rating-stars"
+              %p.small
+                Based on #{@attorney.reviews.count.to_i} reviews
+  - bms = []
+  - bms = @attorney.bar_memberships unless @attorney.bar_memberships.blank?
+  - licenced_states = ""
+  - bms.each{ |bm|
+  - licenced_states += bm.state.abbreviation + ', '
+  - }
+  - licenced_states.chomp!(', ')
+  - pas = []
+  - pas = @attorney.practice_areas.parent_practice_areas unless @attorney.practice_areas.blank?
+  - pas_string = ""
+  - pas.each{|pa|
+  - pas_string += pa.name + ', '
+  - }
+  - pas_string.chomp!(', ')
+  - pas_names = pas.map { |area| area.name.downcase  }
+  - pas_names_last = pas_names.pop
+  - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"     
+  .main_content
+    .bio-block
+      .left_border
+      .avatar     
+        = image_tag(@attorney.photo.url(:thumb))
+      .middle
+        %h1
+          = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
+        .price
+          %a.free{:href=> "#"}
+            %p= free_message(@attorney)
+            = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute", class: "small"
+          .button_tooltip
+            .button-content
+>>>>>>> cce901d... un-hyperlinked lawyer image on profile page
               %ul
                 %li= @attorney.school.name
             - if @attorney.license_year.present?
