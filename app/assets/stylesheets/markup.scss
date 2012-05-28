@@ -7,6 +7,27 @@ html, body{
 .hidden{
 	display:none;
 }
+body.users.create_phone_call{
+  #wrapper-main{
+    #container{
+      .call-container{
+        #payment_div{
+          float: none !important;
+          margin: 0 auto;
+          padding-left: 140px;
+        }
+      }
+    }
+  }
+}
+ul.tick{
+  li{
+    line-height: 25px;
+    list-style-image: url(li_list_img.png);
+    font-size: 13px;
+    color: #3F3F3F;
+  }
+}
 body.attorneys.show{
   #wrapper-main{
    #container{
@@ -14,6 +35,9 @@ body.attorneys.show{
        .main_content{
          .bio-block{
            .middle{
+             h3{
+               margin-top:-13px;
+             }
              .price{
                a.free{
                  border-bottom:0;
@@ -22,8 +46,12 @@ body.attorneys.show{
                }
                .button_tooltip{
                  margin-left:25px;
-                 a{
-                   border-bottom:0;
+                 ul{
+                   li{
+                     a{
+                        border-bottom:0;
+                      }
+                   }
                  }
                }
              }
@@ -343,6 +371,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			}
 		}
 		.button_tooltip{
+		  text-align:left;
 			position:absolute;
 			padding:4px;
 			background: url(button_tooltip_border.png) repeat;
@@ -406,7 +435,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			text-decoration:none;
 			-moz-text-shadow: 1px 1px 1px #33a0ff;
 		  -webkit-text-shadow: 1px 1px 1px #33a0ff;
-		 text-shadow: 1px 1px 1px #33a0ff;
+		  text-shadow: 1px 1px 1px #33a0ff;
 			p{
 				width: 100%;
 				font-size:17px !important;
@@ -613,6 +642,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 									display:block;
 									float:left;
 									margin-top:19px;
+									a:hover{
+									  text-decoration:underline;
+									}
 								}
 								.stars{
 									margin-top:19px;
@@ -682,6 +714,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				.avatar{
 					float:left;
 					margin-right:15px;
+					a{
+					  border-bottom:0;
+					}
 					p{
 						margin-top:6px;
 						text-align:center;
@@ -1154,6 +1189,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				.main-content{
 					padding:43px 0px 18px 18px;
 					float:left;
+					width:97%;
 					.video-block{
 						margin-bottom: 10px;
 						float:left;
@@ -1453,6 +1489,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				border:1px solid #aaafb8;
 				-moz-border-radius: 5px;
 			  -webkit-border-radius: 5px;
+			  a{
+			    border-bottom:0;
+			  }
 				img{
 					width: 100px;
 				}
@@ -1468,6 +1507,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			  -webkit-border-radius: 5px;
 				margin-top:0;
 				.avatar{
+				  a{
+  			    border-bottom:0;
+  			  }
 					img{
 						width: 150px;
 					}
@@ -1620,7 +1662,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				width:354px;
 				padding:15px 0 15px 0px;
 				h1{
-					max-width: 289px;
+					max-width: 225px;
 					color:#0074d3;
 					font-size:20px;
 					font-weight:normal;
@@ -1628,6 +1670,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					display:block;
 					margin-bottom:0;
 					float:left;
+					a:hover{
+  				  text-decoration:underline;
+  				}
 				}
 				.online_icons{
 					width: 125px;

@@ -125,8 +125,8 @@ module LawyersHelper
       else
         if lawyer.phone.present?
           link_to 'Chat now by phone', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ''
-        else
-          link_to 'schedule consultation', new_user_path(ut: 0, notice: true), :class => ''
+        #else
+          #link_to 'schedule consultation', new_user_path(ut: 0, notice: true), :class => ''
         end
       end
     end

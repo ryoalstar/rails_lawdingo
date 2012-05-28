@@ -38,7 +38,7 @@
               = image_tag default_image.photo.url(:large), :alt => ""
           .carousel-description
             .ratings
-              %h4= link_to "#{lawyer.first_name}", attorney_path(lawyer, slug: lawyer.slug)
+              %h4= link_to "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
               .online_icons
                 - if lawyer.is_online
                   %span.video.online= start_or_video_button_p(lawyer)
@@ -77,7 +77,7 @@
                   = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"        
               .rev_for_js
                 - if lawyer.reviews.count.to_i != 0
-                  %a.reviews{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
+                  %a.reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
                     %span.number_rev= "#{lawyer.reviews.count} reviews"
 #bottom_content
   .left_bar

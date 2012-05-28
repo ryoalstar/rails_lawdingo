@@ -7,7 +7,7 @@
       - if lawyer.reviews.average(:rating).to_i > 0
         = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
     - if lawyer.reviews.count > 0
-      %a{:href => "/attorneys/#{lawyer.id}/#{lawyer.full_name}#reviews"} 
+      %a{:href => attorney_path(lawyer, slug: lawyer.slug)} 
         = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
     .clear
   - bms = []
@@ -28,7 +28,7 @@
   - pas_names_last = pas_names.pop
   - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"        
   .middle.row_block
-    %h1= link_to_unless_current "#{lawyer.first_name}", attorney_path(lawyer, slug: lawyer.slug)
+    %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
     .online_icons
       - if lawyer.is_online
         %span.video.online= start_or_video_button_p(lawyer)
@@ -67,16 +67,18 @@
             Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law"}
       %a.free{:href=> "#"}
         %p= free_message(lawyer)
-        %p.small 
+        = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
+        -#%p.small 
           then 
           = number_to_currency (lawyer.rate + AppParameter.service_charge_value)
           \/minute
       .button_tooltip
         .button-content
           %ul
-            %li
-              = start_or_schedule_button(lawyer)
-            - if lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+            - if lawyer.is_online && !lawyer.is_busy
+              %li
+                = start_or_schedule_button(lawyer)
+            - if lawyer.phone.present? 
               %li
                 = start_phone_consultation(lawyer)
             %li

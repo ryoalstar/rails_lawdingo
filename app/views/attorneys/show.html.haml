@@ -33,6 +33,10 @@
         %h2 Need-to-know Info
       .left-bar-section.info
         %div
+          %h3 State bar memberships:
+          %ul
+            - @attorney.states.each do |state|
+              %li= state.name
           = content_tag :h3, "#{@attorney.first_name}'s key practice areas:"
           = render collection: @attorney.practice_areas.where(parent_id: nil).order("name"), partial: "attorneys/area", as: :area, locals: { lawyer: @attorney }
         .person_info
@@ -85,19 +89,17 @@
         = link_to image_tag(@attorney.photo.url(:thumb)), attorney_path(@attorney, slug: @attorney.slug)
       .middle
         %h1
-          = link_to_unless_current "#{@attorney.first_name}", attorney_path(@attorney, slug: @attorney.slug)
+          = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
         .price
           %a.free{:href=> "#"}
             %p= free_message(@attorney)
-            %p.small 
-              then 
-              = number_to_currency (@attorney.rate + AppParameter.service_charge_value)
-              \/minute
+            = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute", class: "small"
           .button_tooltip
             .button-content
               %ul
-                %li
-                  = start_or_schedule_button(@attorney)
+                - if @attorney.phone.present? && logged_in?
+                  %li
+                    = start_or_schedule_button(@attorney)
                 - if @attorney.is_online && !@attorney.is_busy && @attorney.phone.present?
                   %li
                     = start_phone_consultation(@attorney)
@@ -203,7 +205,7 @@
                     = content_tag :span, yelp_review_posted_by(review), class: "footnote"
           - if @attorney.reviews.count.to_i > 0
             %h4 Lawdingo client reviews:        
-            .client-reviews
+            .client-reviews#reviews
               = render @attorney.reviews.order("created_at DESC")
             
 
