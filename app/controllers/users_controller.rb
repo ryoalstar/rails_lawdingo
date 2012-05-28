@@ -132,7 +132,7 @@ class UsersController < ApplicationController
       elsif @user.is_client?
         # If there is a pending question
         if session[:question_id].present?
-          send_pending_question(session[:question_id], @user)
+          send_pending_question(session[:question_id], @user) and return
         end
 
         UserMailer.notify_client_signup(@user).deliver
@@ -144,9 +144,9 @@ class UsersController < ApplicationController
         else
           return_path = lawyers_path
         end
-        redirect_to return_path
+        redirect_to return_path and return
       else
-        redirect_to root_path
+        redirect_to root_path and return
       end
     else
 
