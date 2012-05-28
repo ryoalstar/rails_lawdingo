@@ -9,6 +9,10 @@
   %a#close_notice{:href => "#"} Close
 #current_selected_lawyer
 #inline-wrapper
+  - if flash[:notice].present?
+    %p.notice
+      = flash[:notice]
+      %a#close_notice{:href => "#"} Close
   %form.filters
     .left-bar
       .left-bar-section.first
@@ -113,10 +117,6 @@
           %span.law-school-2 B
           %span.law-school-3 A
           %span.law-school-4 A+
-  - if flash[:notice].present?
-    %p.notice
-      = flash[:notice]
-      %a#close_notice{:href => "#"} Close
   .main_content
     #generail_question.question.question-container
       %h2.selected-lawyers-caption= selected_lawyers_caption
