@@ -326,16 +326,12 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 	.yelp_reviews{
 		cursor:pointer;
 		display:block;
-		border-bottom:1px dotted #c3c6c7;
 		font-size:13px;
 		color:#313131;
 		text-decoration:none;
 		float:left;
 		margin-bottom:10px;
-	}
-	.yelp_reviews:hover{
-	  border-bottom:0;
-	}
+  }
 	#header{
 		height:73px;
 		margin-bottom: 0px;
@@ -837,6 +833,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 								text-decoration:none;
 								margin-top:2px;
 								padding: 0px 9px 4px 19px;
+							}
+							.yelp_reviews{
+							  float:right;
 							}
 							.reviews:hover{
 								border:0;
