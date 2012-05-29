@@ -89,7 +89,13 @@ h1 a, h2 a, h3 a, h4 a, h5 a{
   float: left;
   width: 135px;
 }
-
+#clear_data_search{
+  position: absolute;
+  margin-left: 160px;
+  margin-top: 17px;
+  border-bottom: 0px;
+  cursor: pointer;
+}
 
 // @import "page.scss";        /* Main style declarations for all pages, headers, footers, etc. */
 // @import "results.scss";     /* Style for search results */

@@ -17,6 +17,15 @@ group :assets do
   gem 'uglifier'
 end
 
+
+#solr-sunspot
+gem 'sunspot_rails' #fork for rails
+gem 'sunspot_solr'  #Solr
+gem 'progress_bar'  #for_re-index
+  group :test, :development do 
+      gem "sunspot-rails-tester" #for test
+  end
+
 gem 'jquery-rails'
 gem "therubyracer"
 gem 'jquery-rails'
