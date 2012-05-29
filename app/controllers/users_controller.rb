@@ -35,10 +35,16 @@ class UsersController < ApplicationController
       [:practice_areas, {:bar_memberships => :state}, :reviews]
     )
     @states = State.with_approved_lawyers
-
+    query = params[:search_query]
+    
+    @search = Lawyer.build_search(query)
+    
     add_state_scope
     add_practice_area_scope
     add_service_type_scope
+    
+    @search.execute
+    @lawyers = @search.results
 
     # we try to auto-detect the state if possible
     if self.get_state_name.blank? && request.location.present? && request.location.state_code.present?
@@ -555,25 +561,37 @@ class UsersController < ApplicationController
 
   # helper method to add the state scope to the
   # main search
+  # add state_scope_for_search__SOLR
   def add_state_scope
-    # store selected state for the view
-    @selected_state = State.name_like(self.get_state_name).first
-    if @selected_state.present?
-      @lawyers = @lawyers.practices_in_state(@selected_state)
+      # store selected state for the view
+      @selected_state = State.name_like(self.get_state_name).first
+      state_name = @selected_state.name if !!@selected_state 
+      if @selected_state.present? 
+        @search.build do
+          with :states, state_name
+        end
+
+      end
+
     end
-  end
+  
+  
 
   # helper method to add the practice area scope to the
   # main search
-  def add_practice_area_scope
-    # if we have a practice area
-    if params[:practice_area].present?
-      scope = PracticeArea.name_like(params[:practice_area])
-      if @selected_practice_area = scope.first
-        @lawyers = @lawyers.offers_practice_area(@selected_practice_area)
+  # add practic_area_scope_for_search__SOLR
+  def add_practice_area_scope 
+      # if we have a practice area
+      if params[:practice_area].present?
+        scope = PracticeArea.name_like(params[:practice_area])
+        area_name = scope.first.name
+          @search.build do
+            with :practice_areas,  area_name
+        end
       end
     end
-  end
+  
+ 
 
   # gives us the state name provided in the params
   def get_state_name

@@ -11,7 +11,68 @@ class Lawyer < User
       self.select{|dh| dh.wday == wday}.first    
     end
   end
+  
+  #solr index
+    searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
+       string :practice_areas, :multiple => true do
+         practice_area_names
+       end
+       string :personal_tagline
+       string :first_name
+       string :last_name
+       string :law_school
+       string :states,  :multiple => true do
+         state_names
+       end
+       string :reviews,  :multiple => true do
+         review_purpos
+       end
+       string :school do
+         school.name if school.present?
+       end
+       string :bar_memberships, :multiple => true
+       
+       
+     end
+     
+     def practice_area_names
+       self.practice_areas.map(&:name)
+     end
+     
+     def state_names
+        states.map(&:name)
 
+      end
+      
+      def review_purpos
+          reviews.map(&:purpose)
+      end
+      
+      
+      
+     def reindex!
+        Sunspot.index!(self)
+     end
+     
+     def self.build_search(query)
+       search = Sunspot.new_search(Lawyer)
+       search.build do
+         any_of do
+           with :first_name,       query
+           with :last_name,        query
+           with :practice_areas,   query
+           with :personal_tagline, query
+           with :law_school,       query
+           with :states,           query
+           with :reviews,          query
+           with :school,           query
+           with :bar_memberships,  query
+         end
+         order_by :first_name
+       end
+       search    
+     end
+    
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
@@ -53,7 +114,9 @@ class Lawyer < User
         {:ids => [pa.id] + pa.children.collect(&:id)}
       ])
   }
-
+  
+  
+  
   def self.approved_lawyers_states
     states = []
 
@@ -131,6 +194,6 @@ class Lawyer < User
     pas_names_last = pas_names.pop
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
-
-
+  
+  
 end

@@ -26,3 +26,7 @@
 /nbproject
 /db/*.sqlite*
 .rbenv-version
+
+.DS_Store
+/solr/data
+/solr/pids
