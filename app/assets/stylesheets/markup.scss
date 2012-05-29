@@ -242,6 +242,14 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		a{
 		  border-bottom:0;
 		}
+		.yelp_reviews{
+		  cursor:pointer;
+			display:block;
+			font-size:14px;
+			color:#6d6d6d;
+			text-decoration:none;
+			margin-top:2px;
+		}
 		.wrapper{
 			width:990px;
 			margin:0 auto;
