@@ -205,6 +205,7 @@
 	background:url(orange_button_full.png) repeat-x 0px 0px;
 	font-weight:bold;
 	border:1px solid #eb7538;
+	cursor:pointer;
 	@include rounded( 4px );
 	-moz-text-shadow: 1px 1px 1px #ea5e1a;
   -webkit-text-shadow: 1px 1px 1px #ea5e1a;
@@ -241,6 +242,7 @@
 	margin-right: 0;
 	font-size:14px !important;
 	font-weight:bold;
+	cursor:pointer;
 	color:#403f3f;
 	@include rounded( 3px );
 	-moz-text-shadow: 1px 1px 1px #b5bcc3;
