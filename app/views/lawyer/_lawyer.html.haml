@@ -7,7 +7,8 @@
       - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
         .stars
           = image_tag lawyer.yelp[:rating_img_url]
-          = content_tag :span, pluralize(lawyer.yelp[:review_count], "yelp review"), class: "yelp_reviews"
+          %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
+            = content_tag :span, pluralize(lawyer.yelp[:review_count], "yelp review"), class: "yelp_reviews"
       - else
         .stars
           - if lawyer.reviews.average(:rating).to_i > 0
