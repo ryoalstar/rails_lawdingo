@@ -202,6 +202,16 @@ class Lawyer < User
     pas_names_last = pas_names.pop
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
-  
-  
+
+  protected
+  # convert a date to a time if applicable
+  def convert_date(time)
+    time = time.to_time if time.is_a?(Date)
+    time = time.midnight
+    time
+  end
+  # the earliest time we allow bookings
+  def min_time_to_book
+    Time.zone.now + 30.minutes
+  end
 end

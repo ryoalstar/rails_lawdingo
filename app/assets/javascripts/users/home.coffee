@@ -69,7 +69,7 @@ class Home
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
     else
-      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"
+      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+params
       
   current_hash : ()->
     "!#{this.current_search_url()}"
