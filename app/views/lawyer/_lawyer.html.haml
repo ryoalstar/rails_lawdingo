@@ -3,12 +3,17 @@
   .left.row_block
     .avatar
       = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
-    .stars
-      - if lawyer.reviews.average(:rating).to_i > 0
-        = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
-    - if lawyer.reviews.count > 0
-      %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
-        = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
+    - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
+      - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
+        .stars
+          = image_tag lawyer.yelp[:rating_img_url]
+          = content_tag :span, pluralize(lawyer.yelp[:review_count], "review"), class: "reviews"
+      - else
+        .stars
+          - if lawyer.reviews.average(:rating).to_i > 0
+            = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+        %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
+          = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
     .clear
   - bms = []
   - bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
