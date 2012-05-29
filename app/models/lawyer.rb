@@ -26,7 +26,59 @@ class Lawyer < User
       return true
     end
   end
-
+  
+  #solr index
+  searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
+   text :practice_areas do
+     practice_area_names
+   end
+   text :personal_tagline
+   text :first_name
+   text :last_name
+   text :law_school
+   text :states do
+     state_names
+   end
+   text :reviews do
+     review_purpos
+   end
+   text :school do
+     school.name if school.present?
+   end
+   string :bar_memberships, :multiple => true
+  end
+  
+  def practice_area_names
+    self.practice_areas.map(&:name)*","
+  end
+  
+  
+  def state_names
+     states.map(&:name)*","
+  
+  end
+ 
+   
+  def review_purpos
+      reviews.map(&:purpose)*","
+  end
+  
+  
+   
+   
+   
+  def reindex!
+     Sunspot.index!(self)
+  end
+  
+  def self.build_search(query)
+    search = Sunspot.new_search(Lawyer)
+    search.build do
+      fulltext query
+    end
+    search    
+  end
+  
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
@@ -214,7 +266,6 @@ class Lawyer < User
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
 
-
   protected
   # convert a date to a time if applicable
   def convert_date(time)
@@ -226,5 +277,4 @@ class Lawyer < User
   def min_time_to_book
     Time.zone.now + 30.minutes
   end
-
 end

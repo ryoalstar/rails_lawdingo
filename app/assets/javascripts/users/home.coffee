@@ -7,7 +7,7 @@ class Home
       document.location.hash = "!#{document.location.pathname}"
 
     if document.location.hash == ""
-      this.set_defaults(default_state)
+      this.set_gs(default_state)
       this.submit()
     else
       this.read_hash()
@@ -37,6 +37,19 @@ class Home
 
     this.add_appointment_forms()
 
+    $("#clear_data_search").click =>
+        $("#search_query").val('')
+        this.set_defaults(default_state)
+        this.submit()
+        false
+
+    $("#search_query").keypress((e) =>
+      if e.keyCode == 13
+        this.set_defaults(default_state)
+        this.submit()
+        false
+      )
+
     this.service_type_fields().click((e)=>
       this.set_service_type_fields_val(
         $(e.target).attr('data-val')
@@ -65,10 +78,14 @@ class Home
         @lawyers.push(new Lawyer(id))
 
   current_search_url : ()->
-    if @practice_area == "All"
-      "/lawyers/#{@service_type}/#{@state}"
+    if $("#search_query").val()
+      params = "?search_query=" + $("#search_query").val()
     else
-      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"
+      params = ""
+    if @practice_area == "All"
+      "/lawyers/#{@service_type}/#{@state}"+params
+    else
+      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+params
       
   current_hash : ()->
     "!#{this.current_search_url()}"
@@ -84,13 +101,18 @@ class Home
     "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."   
   read_hash : ()->
     hash = document.location.hash.replace("#!/lawyers/","")
+    first = getUrlVars()["search_query"];
+    if first
+      $("#search_query").val(first)
+      hash = document.location.hash.replace("?search_query=","")
+      hash = document.location.hash.replace(first,"")
     hash = hash.split("/")
     this.set_service_type_fields_val(hash[0])
     this.set_state_fields_val(hash[1])
     if hash[2]
       this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
     else 
-      this.set_practice_area_fields_val("All")
+      this.set_practice_area_fields_val("All").parent().find('img').trigger('click')
       
   set_defaults : (default_state)->
     
@@ -112,7 +134,7 @@ class Home
       this.practice_area_fields()
         .filter("[data-default=1]")
         .val()
-    )
+    ).parent().find('img').trigger('click')
 
   form : ()->
     $("form.filters")
@@ -191,5 +213,19 @@ class Home
   practice_area_fields : ()->
     this.form()
       .find("div#practice_areas input:radio")
-
+      
+  getUrlVars = ->
+    vars = []
+    hash = undefined
+    hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&")
+    i = 0
+    
+    while i < hashes.length
+      hash = hashes[i].split("=")
+      vars.push hash[0]
+      vars[hash[0]] = hash[1]
+      i++
+    vars
+    
+        
 this.Home = new Home()
