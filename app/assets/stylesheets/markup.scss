@@ -323,24 +323,21 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 	input,textarea,select {font-family:Arial ,helvetica, verdana, tahoma;font-size:inherit;font-weight:inherit;}
 	input,textarea,select {*font-size:100%;}
 	legend {color:#000;}
+	.yelp_reviews{
+		cursor:pointer;
+		display:block;
+		border-bottom:1px dotted #c3c6c7;
+		font-size:13px;
+		color:#313131;
+		text-decoration:none;
+		float:left;
+	}
 	#header{
 		height:73px;
 		margin-bottom: 0px;
 		background: url(header_bg.png) repeat-x;
 		text-align: center;
 		a{
-		  border-bottom:0;
-		}
-		.yelp_reviews{
-			cursor:pointer;
-			display:block;
-			border-bottom:1px dotted #c3c6c7;
-			font-size:13px;
-			color:#313131;
-			text-decoration:none;
-			float:left;
-		}
-		.yelp_reviews:hover{
 		  border-bottom:0;
 		}
 		.wrapper{
