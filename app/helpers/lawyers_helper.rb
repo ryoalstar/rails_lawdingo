@@ -183,9 +183,9 @@ module LawyersHelper
   def start_or_video_button_profile(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "Avaiable by video chat now", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
+        link_to "Start free video consultation", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
       else
-        link_to "Avaiable by video chat now", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
+        link_to "Start free video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
       end
    end
   end
@@ -210,9 +210,9 @@ module LawyersHelper
 
  def start_phone_consultation_profile(lawyer)
     if logged_in?
-      link_to "Avaiable by phone now", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+      link_to "Start free phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
    else
-     link_to "Avaiable by phone now", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
+     link_to "Start free phone consultation", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
    end
  end
 

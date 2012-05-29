@@ -97,10 +97,10 @@
           .button_tooltip
             .button-content
               %ul
-                - if @attorney.phone.present? && logged_in?
+                - if @attorney.is_online && !@attorney.is_busy
                   %li
                     = start_or_schedule_button(@attorney)
-                - if @attorney.is_online && !@attorney.is_busy && @attorney.phone.present?
+                - if @attorney.phone.present? 
                   %li
                     = start_phone_consultation(@attorney)
                 %li
