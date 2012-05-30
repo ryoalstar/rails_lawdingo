@@ -1,9 +1,9 @@
 .profile
   .left_menu
     %ul
-      %li= link_to_unless_current "1. Account information", user_path(user, :t => User::ACCOUNT_TAB) 
-      %li= link_to_unless_current "2. Set availability", user_daily_hours_path(user) 
-      %li= link_to_unless_current "3. Fixed-price offers", user_offerings_path(user) 
+      %li= link_to_unless_current "1. Account information", user_path(@user, :t => User::ACCOUNT_TAB) 
+      %li= link_to_unless_current "2. Set availability", user_daily_hours_path(@user) 
+      %li= link_to_unless_current "3. Fixed-price offers", user_offerings_path(@user) 
       %li= link_to_unless_current "4. Intro video", framey_videos_path
 
 

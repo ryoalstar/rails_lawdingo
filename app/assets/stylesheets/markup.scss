@@ -34,6 +34,9 @@ body.daily_hours.index{
     padding-top:0;
   }
 }
+#page.lawyer_edit > div{
+  padding: 20px 45px;
+}
 .framey-video#page{
   width:960px;
   margin:0 auto;
@@ -78,7 +81,7 @@ body.daily_hours.index{
     }
   }
 }
-body.users.show, body.daily_hours.index, body.offerings.index{
+body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
   #page > div{
     width:960px;
     .profile{
