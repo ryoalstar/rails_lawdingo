@@ -18,8 +18,8 @@ class Lawyer < User
          practice_area_names
        end
        string :personal_tagline
-       string :first_name
-       string :last_name
+       text :first_name
+       text :last_name
        string :law_school
        string :states,  :multiple => true do
          state_names
@@ -57,18 +57,7 @@ class Lawyer < User
      def self.build_search(query)
        search = Sunspot.new_search(Lawyer)
        search.build do
-         any_of do
-           with :first_name,       query
-           with :last_name,        query
-           with :practice_areas,   query
-           with :personal_tagline, query
-           with :law_school,       query
-           with :states,           query
-           with :reviews,          query
-           with :school,           query
-           with :bar_memberships,  query
-         end
-         order_by :first_name
+          fulltext query
        end
        search    
      end
