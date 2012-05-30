@@ -80,6 +80,8 @@
             %li 
               Offers
               %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee services
+        - if lawyer.license_year.present?      
+          %li #{pluralize years_practicing_law(lawyer), "year", "years'"} experience
       %a.free{:href=> "#"}
         %p= free_message(lawyer)
         = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
