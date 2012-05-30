@@ -59,20 +59,32 @@
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="rand" class="solr.RandomSortField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
-	<fieldType name="text" class="solr.TextField" omitNorms="false">
-	  <analyzer type="index">
-	    <tokenizer class="solr.StandardTokenizerFactory"/>
-	    <filter class="solr.StandardFilterFactory"/>
-	    <filter class="solr.LowerCaseFilterFactory"/>
-		<filter class="solr.NGramFilterFactory" minGramSize="2" maxGramSize="15"/>
-	    <filter class="solr.EdgeNGramFilterFactory" minGramSize="2" maxGramSize="15" side="front"/>
-	  </analyzer>
-	  <analyzer type="query">
-	    <tokenizer class="solr.StandardTokenizerFactory"/>
-	    <filter class="solr.StandardFilterFactory"/>
-	    <filter class="solr.LowerCaseFilterFactory"/>
-	  </analyzer>
-	</fieldType>
+    <fieldType name="text" class="solr.TextField" omitNorms="false">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+
+    </fieldType>
+    <!-- *** This fieldType is used by Sunspot! *** -->
+    <fieldType name="text_partial" class="solr.TextField" omitNorms="false">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="15" side = "front"/>
+      </analyzer>
+      
+            
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+      
+    </fieldType>
+    
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="boolean" class="solr.BoolField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
@@ -126,10 +138,18 @@
     <field name="class_name" stored="false" type="string" multiValued="false" indexed="true"/>
     <!-- *** This field is used by Sunspot! *** -->
     <field name="text" stored="false" type="string" multiValued="true" indexed="true"/>
+    
+    <!-- *** This field is used by Sunspot! *** -->
+    <field name="text_partial" stored="false" type="string" multiValued="true" indexed="true"/>
+    
     <!-- *** This field is used by Sunspot! *** -->
     <field name="lat" stored="true" type="tdouble" multiValued="false" indexed="true"/>
     <!-- *** This field is used by Sunspot! *** -->
     <field name="lng" stored="true" type="tdouble" multiValued="false" indexed="true"/>
+    
+    <!-- *** This dynamicField is used by Sunspot! *** -->
+    <dynamicField name="*_partial" stored="false" type="text_partial" multiValued="true" indexed="true"/>
+    
     <!-- *** This dynamicField is used by Sunspot! *** -->
     <dynamicField name="random_*" stored="false" type="rand" multiValued="false" indexed="true"/>
     <!-- *** This dynamicField is used by Sunspot! *** -->
