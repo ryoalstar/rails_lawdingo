@@ -9,24 +9,27 @@
           %p 
             - if @attorney.is_online
               %span.video.online= start_or_video_button_p(@attorney)
-              %span= start_or_video_button_profile(@attorney)
+              %span.online_video_tooltip= start_or_video_button_profile(@attorney)
+              .video_chat.online.tooltip Available for video chat
             - else 
               %span.video.offline
-              %span Not avaiable by video now
+              %span.offline_video_tooltip Not avaiable by video now
+              .video_chat.offline.tooltip Not available by video now
           %p
             - if @attorney.phone.present? 
               %span.voice.online= start_phone_consultation_p(@attorney)
-              %span= start_phone_consultation_profile(@attorney)
+              %span.online_voice_tooltip= start_phone_consultation_profile(@attorney)
+              .voice_chat.online.tooltip Available for voice chat
             - else
               %span.voice.offline
-              %span Not avaiable by phone now
+              %span.offline_voice_tooltip Not avaiable by phone now
+              .voice_chat.offline.tooltip Not available by phone now 
           %p
             %span.note= start_or_schedule_button_text_profile(@attorney)
             %span= start_or_schedule_button_text_profile_text(@attorney)
           %p 
             %span.text
             %span Schedule a consultation
-          
           
     .left-bar
       .left-bar-section.info-header

@@ -27,6 +27,37 @@ $(document).ready(function(){
 		});
 	});
 		
+	$(".left-bar-section span.voice.online, .left-bar-section span.online_voice_tooltip").live('mouseover', function(){
+	  $(".voice_chat.tooltip.online").fadeIn('slow');
+	});
+	$(".left-bar-section span.voice.online, .left-bar-section span.online_voice_tooltip").live('mouseout', function(){
+	  $(".voice_chat.tooltip.online").fadeOut('slow');
+	});
+	
+	
+	$(".left-bar-section span.voice.offline, .left-bar-section span.offline_voice_tooltip").live('mouseover', function(){
+	  $(".voice_chat.tooltip.offline").fadeIn('slow');
+	});
+	$(".left-bar-section span.voice.offline, .left-bar-section span.offline_voice_tooltip").live('mouseout', function(){
+	  $(".voice_chat.tooltip.offline").fadeOut('slow');
+	});
+	
+	
+	$(".left-bar-section span.video.offline, .left-bar-section span.offline_video_tooltip").live('mouseover', function(){
+	  $(".video_chat.tooltip.offline").fadeIn('slow');
+	});
+	$(".left-bar-section span.video.offline, .left-bar-section span.offline_video_tooltip").live('mouseout', function(){
+	  $(".video_chat.tooltip.offline").fadeOut('slow');
+	});
+	
+	
+	$(".left-bar-section span.video.online, .left-bar-section span.online_video_tooltip").live('mouseover', function(){
+	  $(".video_chat.tooltip.online").fadeIn('slow');
+	});
+	$(".left-bar-section span.video.online, .left-bar-section span.online_video_tooltip").live('mouseout', function(){
+	  $(".video_chat.tooltip.online").fadeOut('slow');
+	});
+	
 	
 	$("input[name='practice_area']").imageTick({
 		tick_image_path: "/assets/radio_selected.png",
