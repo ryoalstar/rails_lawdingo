@@ -68,7 +68,8 @@ class Home
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"
     else
-      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"
+      practice_area = @practice_area.replace /\s+/g, "-"
+      "/lawyers/#{@service_type}/#{@state}/#{practice_area}"
       
   current_hash : ()->
     "!#{this.current_search_url()}"
