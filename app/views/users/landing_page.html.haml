@@ -56,7 +56,7 @@
                 .text_chat.tooltip No appointments available
                 .video_chat.offline.tooltip Not available by video now
                 .voice_chat.offline.tooltip Not available by phone now
-            %p.desc= description
+            %p.desc= raw(description)
             #carousel-buttons
               %a.free{:href=> "#"}
                 %p.rate= "#{lawyer.free_consultation_duration} minutes free"

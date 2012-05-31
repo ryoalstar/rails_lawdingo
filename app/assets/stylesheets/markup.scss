@@ -726,6 +726,15 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 								word-spacing: -1px;
 								line-height: 19px;
 							}
+							p.desc{
+							  a{
+							    border-bottom:1px dotted #BBC1C4;
+							    font-weight:bold;
+							  }
+							  a:hover{
+							    border-bottom:0;
+							  }
+							}
 							#carousel-buttons{
 								position: absolute;
 								margin-top: 141px;

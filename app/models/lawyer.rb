@@ -91,7 +91,8 @@ class Lawyer < User
 
   def practice_areas_names
     self.practice_areas.parent_practice_areas.map do |area|
-      area.name.downcase
+      #area.name.downcase
+      "<a href='/lawyers/Legal-Advice/All-States/#{CGI::escape(area.name)}'>#{area.name.downcase}</a>"
     end
   end
 

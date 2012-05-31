@@ -30,7 +30,7 @@
   - pas_string += pa.name + ', '
   - }
   - pas_string.chomp!(', ')
-  - pas_names = pas.map { |area| area.name.downcase  }
+  - pas_names = pas.map { |area| "<a href='/lawyers/Legal-Advice/All-States/#{CGI::escape(area.name)}'>#{area.name.downcase}</a>"  }
   - pas_names_last = pas_names.pop
   - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"        
   .middle.row_block
@@ -70,7 +70,7 @@
             Licensed in #{licenced_states}
         - unless lawyer.practice_areas.blank?
           %li
-            Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : "#{pas_names_list} law"}
+            Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : raw(pas_names_list) + " law"}
         - if lawyer.offerings.count > 0
           - if lawyer.offerings.count == 1
             %li 
