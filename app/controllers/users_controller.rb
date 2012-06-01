@@ -568,7 +568,7 @@ class UsersController < ApplicationController
       state_name = @selected_state.name if !!@selected_state 
       if @selected_state.present? 
         @search.build do
-          with :states, state_name
+          fulltext state_name
         end
 
       end
@@ -584,10 +584,10 @@ class UsersController < ApplicationController
       # if we have a practice area
       if params[:practice_area].present?
         scope = PracticeArea.name_like(params[:practice_area])
-        area_name = scope.first.name
+        area_name = scope.first.name if scope.first
           @search.build do
-            with :practice_areas,  area_name
-        end
+            fulltext area_name
+          end
       end
     end
   

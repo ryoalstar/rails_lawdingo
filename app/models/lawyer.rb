@@ -13,40 +13,42 @@ class Lawyer < User
   end
   
   #solr index
-    searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
-       string :practice_areas, :multiple => true do
-         practice_area_names
-       end
-       string :personal_tagline
-       string :first_name
-       string :last_name
-       string :law_school
-       string :states,  :multiple => true do
-         state_names
-       end
-       string :reviews,  :multiple => true do
-         review_purpos
-       end
-       string :school do
-         school.name if school.present?
-       end
-       string :bar_memberships, :multiple => true
-       
-       
+  searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
+   text :practice_areas do
+     practice_area_names
+   end
+   text :personal_tagline
+   text :first_name
+   text :last_name
+   text :law_school
+   text :states do
+     state_names
+   end
+   text :reviews do
+     review_purpos
+   end
+   text :school do
+     school.name if school.present?
+   end
+   string :bar_memberships, :multiple => true
   end
   
   def practice_area_names
-    self.practice_areas.map(&:name)
+    self.practice_areas.map(&:name)*","
   end
   
-  def state_names
-     states.map(&:name)
   
-   end
+  def state_names
+     states.map(&:name)*","
+  
+  end
+ 
    
-   def review_purpos
-       reviews.map(&:purpose)
-   end
+  def review_purpos
+      reviews.map(&:purpose)*","
+  end
+  
+  
    
    
    
@@ -57,18 +59,8 @@ class Lawyer < User
   def self.build_search(query)
     search = Sunspot.new_search(Lawyer)
     search.build do
-      any_of do
-        with :practice_areas, query
-        with :personal_tagline, query
-        with :first_name, query
-        with :last_name, query
-        with :law_school, query
-        with :states, query
-        with :reviews, query
-        with :school, query
-        with :bar_memberships, query 
-       end 
-     end
+      fulltext query
+    end
     search    
   end
   

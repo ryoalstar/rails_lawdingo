@@ -7,7 +7,7 @@ class Home
       document.location.hash = "!#{document.location.pathname}"
 
     if document.location.hash == ""
-      this.set_defaults(default_state)
+      this.set_gs(default_state)
       this.submit()
     else
       this.read_hash()
@@ -30,6 +30,11 @@ class Home
       this.submit()
       false
     )
+    $("#clear_data_search").click =>
+        $("#search_query").val('')
+        this.set_defaults(default_state)
+        this.submit()
+        false
     $("#search_query").keypress((e) =>
       if e.keyCode == 13
         this.set_defaults(default_state)
