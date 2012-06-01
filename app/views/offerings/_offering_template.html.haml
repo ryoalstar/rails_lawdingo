@@ -8,7 +8,7 @@
   %h3
     = link_to_unless_current "#{offering_template.name}", offering_template
   = simple_format offering_template.description, class: "description"
-  - if offering_template.practice_area.present?
+  -# if offering_template.practice_area.present?
     %p.last
       %strong Practice area: #{offering_template.practice_area.name}
   %p.hide_on_attorneys
