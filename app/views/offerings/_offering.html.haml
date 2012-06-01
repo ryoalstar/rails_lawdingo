@@ -10,7 +10,7 @@
     .clear      
   .middle.row_block  
     %h1= link_to_unless_current "#{offering.name}", offering
-    .online_icons
+    -#.online_icons
       - if lawyer.is_online
         = start_or_video_button_p(lawyer)
         %span.video.online
