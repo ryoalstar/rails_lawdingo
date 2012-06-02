@@ -11,6 +11,10 @@
   <%= f.submit "Submit review", class: "button" %>
 <% end %>
 
+<div class="thank-you" style="display: none;">
+  <h3>Thank you for your review!</h3>
+</div>
+
 <script>
   $(document).ready(function(){  
     $("form.simple_form.new_review").on("submit", function(event){

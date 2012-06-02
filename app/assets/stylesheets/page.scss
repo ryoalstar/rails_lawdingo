@@ -181,6 +181,17 @@ body.users.home {
                 display: block;
                 margin: 12px 0px;
             }
+
+           ul.navigation-links {
+             display: block;
+             position: relative;
+             margin-top: 1em;
+
+             li {
+               line-height: 1.4;
+               margin: 0.5em;
+             }
+           }
         }
     }
 

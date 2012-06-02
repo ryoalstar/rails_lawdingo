@@ -2,6 +2,7 @@ class Conversation < ActiveRecord::Base
   belongs_to :client
   belongs_to :lawyer
   has_many :reviews
+  has_one :call
 
   after_create :process_payment
 

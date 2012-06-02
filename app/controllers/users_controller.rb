@@ -375,10 +375,17 @@ class UsersController < ApplicationController
     if @call.status == 'dialing' || @call.status == 'connected' || @call.status == 'billed'
     elsif @call.status == 'completed'
       call_conversation = Conversation.find(@call.conversation_id)
-      render :js => "window.location = '#{conversation_summary_path(call_conversation, :call_type =>'phonecall')}'", :notice => "Your call is completed"
+
+      unless (@call.call_duration == 0) || (@call.digits != 1)
+        form = "review"
+      else
+        form = "report"
+      end
+
+      render :js => "window.location = '#{conversation_summary_path(call_conversation, call_type: 'phonecall', form: form)}'", :notice => "Your call is completed"
       return
     else
-      render :js => "window.location = '#{root_path}'"
+      render :js => "window.location = '#{conversation_summary_path(call_conversation, call_type: 'phonecall', form: 'report')}'"
       return
     end
   end

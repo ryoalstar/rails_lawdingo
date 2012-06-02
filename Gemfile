@@ -71,7 +71,7 @@ group :test do
   gem 'database_cleaner'
   gem "factory_girl_rails"
   gem "guard-rspec"
-  gem "mocha"
+  gem "mocha", require: false
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
   gem 'ruby-debug19', :require => 'ruby-debug'

@@ -11,17 +11,14 @@ describe ConversationsController do
       session[:user_id] = @brian.to_param
     end
 
-    context "if conversations duration is 0" do
-      before :each do
-        @conversation = FactoryGirl.create(:conversation, consultation_type: "video")
-        @conversation.stubs(duration: 0)
-      end
+    context "if lawyer answers the phone" do
+      context "and accepts a call"
+      context "and refuses a call"
+    end
 
-      it "should not show render new review form" do
-        get :summary, conversation_id: @conversation.to_param
-        response.should be_success
-        response.should_not render_template("reviews/_form")
-      end
+    context "if lawyer doesn't answer the phone" do
+      context "and call ends after ~30 seconds"
+      context "and user ends a call"
     end
   end
 end

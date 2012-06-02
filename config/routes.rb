@@ -55,6 +55,7 @@ Lawdingo::Application.routes.draw do
     get 'review'
     get 'summary'
   end
+  match 'conversations/:conversation_id/summary(/:form)' => "conversations#summary", as: :conversation_summary
 
   # Sample resource route with options:
   #   resources :products do
