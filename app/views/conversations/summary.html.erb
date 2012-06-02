@@ -20,12 +20,14 @@
                         <%= link_to "<< Go home", root_path %>
                         <%= link_to 'View all my previous sessions >>', user_path(current_user,:t =>'l'), :title => 'View all my previous sessions' %>
                     </div>
+                  <% if @available_for_review %>
                     <div class="column last-child">
                       <%= render "reviews/form" %>
                       <div class="thank-you" style="display: none;">
                         <h3>Thank you for your review!</h3>
                       </div>
                     </div>
+                  <% end %>
                     <% else %>
                       Nothing to show!
                     <% end %>

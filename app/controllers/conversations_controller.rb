@@ -47,6 +47,8 @@ class ConversationsController < ApplicationController
     begin
       @conversation = Conversation.find params[:conversation_id]
       @review = @conversation.reviews.new
+
+      @available_for_review = (@conversation.duration == 0) ? true : false
     rescue
       @conversation = nil
     end
