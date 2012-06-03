@@ -8,8 +8,9 @@
         .stars
           = image_tag lawyer.yelp[:rating_img_url]
           .clear
-        %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
-          = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com'}" + "review").html_safe, class: "yelp_reviews"
+        .yelp_reviews
+          %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
+            = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com'}" + "review").html_safe, class: ""
       - else
         .stars
           - if lawyer.reviews.average(:rating).to_i > 0
