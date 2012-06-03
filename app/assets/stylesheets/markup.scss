@@ -369,13 +369,10 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							margin: 0px 5px;
 						}
 						a:hover, a.selected{
-							background:url(login_button_selected_bg.png) repeat-x;
-							-moz-border-radius:15px;
-							-webkit-border-radius:15px;
-							border-radius:15px;
-						}
-						a.signup:hover{
-							background:url(signup_hover.png) no-repeat;
+							background:url(signup_hover_bg.png) repeat-x;
+							-moz-border-radius:10px;
+							-webkit-border-radius:10px;
+							border-radius:10px;
 						}
 						a.lawyers_signup{
 							background:url(signup_button_full.png) no-repeat 0px -1px;
