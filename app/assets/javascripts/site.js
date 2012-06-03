@@ -9,7 +9,9 @@ function CloseCall()
 
 function notifyUser(msg)
 {
-  $.prompt(msg)
+  if(!msg.search("ErrorMessage")){
+    $.prompt(msg)
+  }
 }
 
 function showFlash()
