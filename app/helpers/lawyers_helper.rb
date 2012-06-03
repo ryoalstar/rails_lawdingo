@@ -111,9 +111,9 @@ module LawyersHelper
   def start_or_schedule_button(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "Chat now by video conference", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
+        link_to "Chat now by video conference", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "Chat now by video conference", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
+        link_to "Chat now by video conference", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
     else
       if logged_in?
@@ -173,9 +173,9 @@ module LawyersHelper
   def start_or_video_button_p(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
+        link_to "", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
+        link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
    end
   end
@@ -183,9 +183,9 @@ module LawyersHelper
   def start_or_video_button_profile(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "Start free video consultation", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
+        link_to "Start free video consultation", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "Start free video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
+        link_to "Start free video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
    end
   end
