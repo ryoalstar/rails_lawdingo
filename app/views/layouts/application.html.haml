@@ -61,8 +61,8 @@
                   #{link_to "Log out", logout_path}
               - else
                 %li
-                  = link_to "Log in", login_path
-                  = link_to "Sign up", new_user_path(:ut=>0), :class => 'signup'
+                  = link_to "Log In", login_path
+                  = link_to "Client Signup", new_user_path(:ut=>0), :class => 'signup'
                 %li
                   =link_to "", new_lawyer_path, :class => 'lawyers_signup'
           %a.logo{:href => '/'}
