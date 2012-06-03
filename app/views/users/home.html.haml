@@ -29,7 +29,7 @@
             %p
             %a.show-states-selector{ href: "#" } Set state anyway
           %select.states{:name => "state"}
-            %option{"data-default" => "1", :value => "All-States"} All
+            %option{"data-default" => "1", :value => "All-States"} Any state
             - @states.each do |state|
               %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
                 = state.name

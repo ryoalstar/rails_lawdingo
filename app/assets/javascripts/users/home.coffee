@@ -52,7 +52,7 @@ class Home
     )
 
   current_search_url : ()->
-    if @practice_area == "All"
+    if @practice_area == "Any state"
       "/lawyers/#{@service_type}/#{@state}"
     else
       practice_area = @practice_area.replace /\s+/g, "-"
@@ -78,7 +78,7 @@ class Home
     if hash[2]
       this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
     else 
-      this.set_practice_area_fields_val("All")
+      this.set_practice_area_fields_val("Any state")
       
   set_defaults : (default_state)->
     
