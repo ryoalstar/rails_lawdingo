@@ -1812,6 +1812,16 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				float:left;
 				width: 118px;
 				padding:17px 10px 0px 17px;
+				.yelp_reviews{
+				  a{
+				    border:0;
+				    img{
+				      padding-bottom: 5px;
+				      border:0;
+				      float:none;
+				    }
+				  }
+				}
 				.reviews{
 					margin-bottom: 10px;
 					cursor:pointer;
