@@ -841,6 +841,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							}
 							.yelp_reviews{
 							  float:right;
+							  img{
+							    padding-bottom:5px;
+							  }
 							}
 							.reviews:hover{
 								border:0;
