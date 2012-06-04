@@ -115,8 +115,8 @@ class SearchController < ApplicationController
        else
          images_hash["rating"] = ""
        end
-       images_hash["test"] = lawyer.reviews.count
        if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
+         images_hash["test"] = true
          if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
            Rails.logger.info lawyer.yelp[:review_count].inspect
            images_hash["reviews"] = "#{lawyer.yelp[:review_count]} <a href='http://www.yelp.com'><img src='/assets/miniMapLogo.png' /></a> reviews".html_safe
