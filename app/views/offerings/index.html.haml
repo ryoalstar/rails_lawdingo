@@ -10,8 +10,10 @@
       = render partial: "lawyer/menu", locals: { lawyer: current_user }
       .profile-block
         #offerings
-          %h3 My fixed-price offers:
-          - if @lawyer.offerings.any?
+          = render template: "offerings/new"
+        #offerings-listing
+          %h3 My flat-fee services:
+          - if @lawyer.offerings.count > 0
             %ul.offerings-list
               - @lawyer.offerings.each do |offering|
                 - unless offering.id.to_i == 0
@@ -21,6 +23,4 @@
                     = link_to "Edit", { controller: "offerings", action: "edit", id: offering.id }, class: "edit"
                     = link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", confirm: "Are you sure?", class: "delete"
           - else
-            %p{:style => "color: #999;"} [none inputted yet]
-        #new_offering
-          = render template: "offerings/new"
+            %p{:style => "color: #999;"} [None added yet.]
