@@ -11,18 +11,16 @@
   .middle.row_block  
     %h1= link_to_unless_current "#{offering.name}", offering
     .online_icons
-      -# if lawyer.is_online
-        = start_or_video_button_p(lawyer)
-        %span.video.online
-      -# else
+      - if lawyer.is_online
+        %span.video.online= start_or_video_button_p(lawyer)
+      - else
         %span.video.offline
-      -# if lawyer.phone.present? 
-        %a{:href =>start_phone_consultation_p(lawyer)}
-        %span.voice.online
-      -# else 
+      - if lawyer.phone.present? 
+        %span.voice.online= start_phone_consultation_p(lawyer)
+      - else 
         %span.voice.offline
       %span.note= start_or_schedule_button_text_profile(lawyer)
-      %span.text        
+      %span.text
       .video_chat.online.tooltip Available for video chat
       .voice_chat.online.tooltip Available for voice chat
       .note_chat.tooltip Ask (text) question
