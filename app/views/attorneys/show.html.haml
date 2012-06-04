@@ -89,7 +89,7 @@
     .bio-block
       .left_border
       .avatar     
-        = image_tag(@attorney.photo.url(:thumb))
+        = image_tag(@attorney.photo.url(:medium))
       .middle
         %h1
           = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
