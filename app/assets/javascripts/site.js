@@ -259,16 +259,14 @@ $(function(){
 						}
             //self.find('.carousel-description a.phone').attr('href', carousel_info['start_live_conversation'] );
             //self.find('.carousel-description a.shedule').attr('href', carousel_info['start_live_conversation'] );
-            if ( carousel_info['test'] == true)
-						{
-							self.find('.carousel-description .rev_for_js').html( carousel_info['link_reviews'] );
-							self.find('.carousel-description .rev_for_js span.number_rev').html( carousel_info['reviews'] );
-						}
-						else
-						{
-							self.find('.carousel-description span.number_rev').hide();
-							self.find('.carousel-description a.reviews').hide();
-						}
+            if ( carousel_info['test'] == true){
+  							self.find('.carousel-description .rev_for_js').show().html( carousel_info['link_reviews'] );
+  							self.find('.carousel-description .rev_for_js span.number_rev').show().html( carousel_info['reviews'] );
+  						} else {
+  							self.find('.carousel-description span.number_rev').html('').hide();
+  							self.find('.carousel-description a.reviews').html('').hide();
+  							self.find('.carousel-description a.yelp_reviews').html('').hide();
+  						}
             
         }
 
