@@ -164,7 +164,7 @@ function setPracticeAreas()
         var chkbox = inner_list.find('input[type=checkbox]')
         if(chkbox.attr('checked') == 'checked')
         {
-          specialities_string += chkbox.data('name')
+          specialities_string += chkbox.data('name') + ', '
         }
       });
       if(specialities_string != "")
