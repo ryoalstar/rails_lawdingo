@@ -72,13 +72,33 @@
                       = start_phone_consultation(lawyer)
                     %li.text
                       = start_or_schedule_button_text(lawyer)
-              .stars
-                - if  lawyer.reviews.average(:rating).to_i !=0 
-                  = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"        
-              .rev_for_js
-                - if lawyer.reviews.count.to_i != 0
-                  %a.reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
-                    %span.number_rev= "#{lawyer.reviews.count} reviews"
+                        
+              - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
+                - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]                      
+                  .stars
+                    = image_tag lawyer.yelp[:rating_img_url]
+                  .rev_for_js
+                    %a.yelp_reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
+                      = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com'}" + "review").html_safe, class: "number_rev"
+                    %a.reviews{:style => 'display:none;'}
+                      %span.number_rev
+                - else
+                  .stars
+                    - if  lawyer.reviews.average(:rating).to_i !=0 
+                      = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"        
+                  .rev_for_js
+                    - if lawyer.reviews.count.to_i != 0
+                      %a.reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
+                        %span.number_rev= "#{lawyer.reviews.count} reviews"
+                      %a.yelp_reviews{:style => 'display:none;'}
+                        %span.number_rev
+              - else    
+                .stars
+                .rev_for_js
+                  %a.reviews{:style => "display:none;"}
+                    %span.number_rev
+                  %a.yelp_reviews{:style => 'display:none;'}
+                    %span.number_rev
 #bottom_content
   .left_bar
     %h2 How Lawdingo works:
