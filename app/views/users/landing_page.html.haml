@@ -64,11 +64,11 @@
               .button_tooltip
                 .button-content
                   %ul
-                    
-                    %li.shedule
+                    - video_callable = lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
+                    %li.shedule{:style => "display: #{video_callable ? 'list-item' : 'none'}"}
                       = start_or_schedule_button(lawyer) # start_video_button(lawyer)
-                    - lo_callable = lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
-                    %li.phone{:style => "display: #{lo_callable ? 'list-item' : 'none'}"}
+                    - phone_callable = lawyer.phone.present? 
+                    %li.phone{:style => "display: #{phone_callable ? 'list-item' : 'none'}"}
                       = start_phone_consultation(lawyer)
                     %li.text
                       = start_or_schedule_button_text(lawyer)
