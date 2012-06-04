@@ -266,8 +266,8 @@ $(function(){
 						}
 						else
 						{
-							self.find('.carousel-description span.number_rev').hide();
-							self.find('.carousel-description a.reviews').hide();
+							self.find('.carousel-description span.number_rev').html('').hide();
+							self.find('.carousel-description a.reviews').html('').hide();
 						}
             
         }
