@@ -7,6 +7,14 @@ html, body{
 .hidden{
 	display:none;
 }
+#div_states_barids{
+  float:left;
+  width:100%;
+}
+#div_practice_areas{
+  float: left;
+  width: 100%;
+}
 body.users.create_phone_call{
   #wrapper-main{
     #container{

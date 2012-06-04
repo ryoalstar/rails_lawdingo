@@ -129,7 +129,7 @@
                       - p.specialities.each do |s|
                         - if l_pas.include?(s)
                           %li
-                            %input{:checked => "", "data-name" => "<haml:silent> s.name </haml:silent>", "data-parent-id" => p.id, :id => s.name, :name => "practice_areas[]", :type => "checkbox", :value => s.id}/
+                            %input{:checked => "", "data-name" => "#{raw(s.name)}", "data-parent-id" => p.id, :id => s.name, :name => "practice_areas[]", :type => "checkbox", :value => s.id}/
                             = s.name
                         - else
                           %li
