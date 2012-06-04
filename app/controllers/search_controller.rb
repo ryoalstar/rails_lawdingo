@@ -118,7 +118,7 @@ class SearchController < ApplicationController
        images_hash["test"] = lawyer.reviews.count
        if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
          if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
-           images_hash["reviews"] = escape_javascript lawyer.yelp[:review_count]
+           images_hash["reviews"] = "#{pluralize(lawyer.yelp[:review_count]}" + "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com'}" + "review" + "#{)}"
            images_hash["link_reviews"] = "<a href='/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews' class = 'yelp_reviews'><span class = 'number_rev'></span></a>"
            images_hash["rating"] = "<img src='#{lawyer.yelp[:rating_img_url]}' />"
          else
