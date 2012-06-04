@@ -7,6 +7,7 @@
       - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
         .stars
           = image_tag lawyer.yelp[:rating_img_url]
+          %img{:src => "#{lawyer.yelp[:rating_img_url]}"}
           .clear
         .yelp_reviews
           %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
