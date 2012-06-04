@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520123403) do
+ActiveRecord::Schema.define(:version => 20120602194601) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "appointments", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.datetime "time"
+    t.string   "contact_number"
+    t.string   "appointment_type", :default => "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "message"
+    t.integer  "client_id"
   end
 
   create_table "bar_memberships", :force => true do |t|
@@ -196,7 +207,7 @@ ActiveRecord::Schema.define(:version => 20120520123403) do
     t.boolean  "is_busy",                    :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                                     :null => false
+    t.string   "user_type",                                                            :null => false
     t.boolean  "is_approved",                :default => false
     t.text     "undergraduate_school"
     t.text     "law_school"
@@ -224,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20120520123403) do
     t.integer  "school_id"
     t.integer  "license_year"
     t.string   "yelp_business_id"
+    t.string   "time_zone",                  :default => "Pacific Time (US & Canada)"
   end
 
 end

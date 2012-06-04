@@ -32,6 +32,10 @@
         %br/
         = f.text_field :yelp_business_id, placeholder: "Busuniess ID on Yelp"
       - if @user.is_lawyer?
+
+      - # Time zone
+      = f.time_zone_select(:time_zone)
+
       - bms = @user.corresponding_user.bar_memberships
       - bms_text = "<h2>Bar Memberships: </h3>"
       - bms.each{|bm|

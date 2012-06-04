@@ -1,3 +1,5 @@
+@import "partials/attorneys/appointment_form";
+
 html, body{
 	margin:0;
 	font-family: Arial ,helvetica, verdana, tahoma;
@@ -1560,81 +1562,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 							color:#525d6a;
 							text-align:center;
 						}
-						table{
-							width: 420px;
-							margin-bottom: 10px;
-							height: 122px;
-							tr{
-								a{
-									text-decoration:none;
-									text-transform:uppercase;
-									font-size:11px;
-									font-weight:bold;
-									color:#313131;
-								}
-								a:hover{
-									color:#1076e8;
-								}
-								td{
-									a.first_date{
-										border: 1px solid #9e5bcd;
-										padding: 3px 4px;
-										color: #fff;
-										font-size: 11px;
-										font-weight:bold;
-										background: #bc7be9;
-										-moz-border-radius: 5px;
-										-webkit-border-radius: 5px;
-									}
-									a.second_date{
-										font-weight:bold;
-										border: 1px solid #ca7e3b;
-										padding: 3px 4px;
-										color: #fff;
-										font-size: 11px;
-										background: #e09858;
-										-moz-border-radius: 5px;
-										-webkit-border-radius: 5px;
-									}
-									a.third_date{
-										border: 1px solid #6bae69;
-										font-weight:bold;
-										padding: 3px 4px;
-										color: #fff;
-										font-size: 11px;
-										background: #85ca83;
-										-moz-border-radius: 5px;
-										-webkit-border-radius: 5px;
-									}
-									a.fourth_date{
-										font-weight:bold;
-										border: 1px solid #5691ce;
-										padding: 3px 4px;
-										color: #fff;
-										font-size: 11px;
-										background: #6aa7e5;
-										-moz-border-radius: 5px;
-										-webkit-border-radius: 5px;
-									}								
-								}
-								td{
-									padding-top: 3px;
-									a{
-										font-size:12px;
-										border-bottom: 1px dotted #bbc1c4;
-									}
-								}
-							}
-						}
-						a.appointments{
-							text-decoration:none;
-							color:#313131;
-							font-size:13px;
-							border-bottom:1px dotted #BBC1C4;
-						}
-						a.appointments:hover{
-							border-bottom:0;
-						}
+						@include appointment_form
 					}
 				}
 			}
@@ -1824,7 +1752,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			.middle{
 				float:left;
 				margin-left:15px;
-				width:354px;
+				width:350px;
 				padding:15px 0 15px 0px;
 				h1{
 					max-width: 225px;
@@ -1931,7 +1859,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			}
 			.right{
 				float:right;
-				width:198px;
+				width:210px;
 				position: relative;
 				padding:15px 0;
 				z-index:1;
@@ -1944,51 +1872,52 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					color:#525d6a;
 					margin:12px 0;
 				}
-				table{
-					height: 60%;
-					width:100%;
-					margin-bottom: 14px;
-					tr{
-						a{
-							text-decoration:none;
-							text-transform:uppercase;
-							font-size:11px;
-							font-weight:bold;
-							color:#313131;
-						}
-						a:hover{
-							color:#1076e8;
-						}
-						th{
-							width:50%;
-							a.first_date{
-								border: 1px solid #9e5bcd;
-								padding: 3px 5px;
-								color: #fff;
-								font-size: 12px;
-								background: #bc7be9;
-								-moz-border-radius: 5px;
-								-webkit-border-radius: 5px;
-							}
-							a.second_date{
-								border: 1px solid #ca7e3b;
-								padding: 3px 5px;
-								color: #fff;
-								font-size: 12px;
-								background: #e09858;
-								-moz-border-radius: 5px;
-								-webkit-border-radius: 5px;
-							}
-						}
-						td{
-							padding-top: 3px;
-							a{
-								font-size:12px;
-								border-bottom: 1px dotted #bbc1c4;
-							}
-						}
+				div#available_appointments{
+					a {
+						text-decoration:none;
+						text-transform:uppercase;
+						font-size:11px;
+						font-weight:bold;
+						color:#313131;
+					}
+					a:hover{
+						color:#1076e8;
+					}
+					a.day-0{
+						border: 1px solid #9e5bcd;
+						padding: 3px 5px;
+						color: #fff;
+						font-size: 12px;
+						background: #bc7be9;
+						-moz-border-radius: 5px;
+						-webkit-border-radius: 5px;
+					}
+					a.day-1{
+						border: 1px solid #ca7e3b;
+						padding: 3px 5px;
+						color: #fff;
+						font-size: 12px;
+						background: #e09858;
+						-moz-border-radius: 5px;
+						-webkit-border-radius: 5px;
 					}
 				}
+				// table{
+				// 	height: 60%;
+				// 	width:100%;
+				// 	margin-bottom: 14px;
+				// 	tr{
+						
+				// 		}
+				// 		td{
+				// 			padding-top: 3px;
+				// 			a{
+				// 				font-size:12px;
+				// 				border-bottom: 1px dotted #bbc1c4;
+				// 			}
+				// 		}
+				// 	}
+				// }
 				a.appointments{
 					background:url(appointments_button_bg.png);
 					word-spacing: 2px;
@@ -1999,7 +1928,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-top:1px solid #dae1e7;
 					color:#272727;
 					font-size:13px;
-					padding: 9px 21px;
+					padding: 9px 27px;
 				}
 			}
 		}

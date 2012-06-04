@@ -43,4 +43,50 @@ describe DailyHour do
 
   end
 
+  context "#end_time_on_date" do
+
+    it "should return nil if it is the wrong wday" do
+      t = Time.zone.now
+      t.stubs(:wday => 3)
+      subject.stubs(:wday => 4)
+      subject.end_time_on_date(t).should be_nil
+    end
+
+    it "should return nil if it is the wrong wday" do
+      t = Time.zone.now.midnight
+      t.stubs(:wday => 3)
+      subject.stubs(
+        :wday => 3,
+        :end_time => 1230
+      )
+      subject.end_time_on_date(t).should eql(
+        t + 12.hours + 30.minutes
+      )
+    end
+
+  end
+
+  context "#start_time_on_date" do
+
+    it "should return nil if it is the wrong wday" do
+      t = Time.zone.now
+      t.stubs(:wday => 3)
+      subject.stubs(:wday => 4)
+      subject.start_time_on_date(t).should be_nil
+    end
+
+    it "should return nil if it is the wrong wday" do
+      t = Time.zone.now.midnight
+      t.stubs(:wday => 3)
+      subject.stubs(
+        :wday => 3,
+        :start_time => 1230
+      )
+      subject.start_time_on_date(t).should eql(
+        t + 12.hours + 30.minutes
+      )
+    end
+
+  end
+
 end
