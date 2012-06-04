@@ -6,8 +6,8 @@ set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
 
 set :scm,             :git
-set :repository,      "git@github.com:yywt/videochat.git"
-set :branch,          "origin/master"
+set :repository,      "gitorious@repos.itima.ru:odesk-projects/lawdingo.git"
+set :branch,          "origin/Ilya"
 set :application,     'lawdingo'
 set :migrate_target,  :current
 set :ssh_options,     { :forward_agent => true }

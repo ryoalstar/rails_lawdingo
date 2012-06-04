@@ -7,7 +7,7 @@ body.users.home {
 
 }
 
-p.notice {
+#container p.notice {
   color: #895F00;
   text-shadow: 0 1px 0 white;
   font-weight: bold;
@@ -15,7 +15,8 @@ p.notice {
   position: relative;
   width: 90%;
   padding: 10px;
-  margin: 20px auto 0 auto;
+  text-align:center;
+  margin: 20px auto;
   background: #f6f5d3;
   background: -webkit-gradient(linear, left bottom, left top, from(#F6F5D3), to(#FDFBE8));
   background: -moz-linear-gradient(90deg, #F6F5D3 0%, #FDFBE8 100%);
@@ -31,6 +32,7 @@ p.notice {
   a#close_notice {
     position: absolute;
     top: 10px;
+    border:0;
     right: 10px;
     display: block;
     width: 16px;
@@ -135,10 +137,9 @@ form.filters {
   display: block;
 
   .duration_hint {
-    float: left;
-    margin-right: 5px;
+    float: right;
+    margin-right: 25px;
     padding-top: 8px;
-    margin-left: 10px;
     font-size: 1.5em;
     color: #371C1C;
     right: 4.1667em;

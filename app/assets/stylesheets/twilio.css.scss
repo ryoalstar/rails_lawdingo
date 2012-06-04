@@ -3,7 +3,23 @@
   padding: 15px 0px 5px;
   min-height: 400px;
   font-size: 13px;
-
+  .label{
+    padding-top:5px;
+  }
+  input#card_detail_card_verification{
+    width: 58px;
+  }
+  span.right{
+    float: right;
+    padding-right: 22px;
+  }
+  button[type="submit"]{
+    float: left;
+    margin-top: 10px;
+  }
+  .sealed{
+    float: left;
+  }
   .details {
     min-height: 160px;
     width: 400px;

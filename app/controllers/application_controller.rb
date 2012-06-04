@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
 
       UserMailer.new_question_email(question).deliver
       session[:question_id] = nil
-      redirect_to lawyers_path, :notice => " #{user.full_name} !</b> Your question has been sent."
+      redirect_to lawyers_path, :notice => "Your question has been submitted, and an attorney will get back to you soon with some info."
 
     end
   end

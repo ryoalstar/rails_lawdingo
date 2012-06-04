@@ -31,6 +31,9 @@ a {
     text-decoration: none;
     &:hover { border-bottom: 0; }
 }
+a.dialog-opener{
+  border-bottom:0;
+}
 h1 a, h2 a, h3 a, h4 a, h5 a{
   color: #2491ff;
   border:none;
