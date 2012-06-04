@@ -198,14 +198,16 @@
 .button{
 	color:white;
 	display: inline-block;
-  padding:8px 11px;
+  padding:0px 11px;
 	text-decoration:none;
 	font-size:20px;
 	margin: 0px 5px 0 0px;
 	background:url(orange_button_full.png) repeat-x 0px 0px;
 	font-weight:bold;
 	border:1px solid #eb7538;
+	height: 38px;
 	cursor:pointer;
+	line-height: 36px;
 	@include rounded( 4px );
 	-moz-text-shadow: 1px 1px 1px #ea5e1a;
   -webkit-text-shadow: 1px 1px 1px #ea5e1a;
@@ -217,7 +219,7 @@
 .button:hover{
   text-decoration:none;
   background-position:0px -40px;
-  padding:8px 11px;
+  padding:0px 11px;
 }
 .button:active{
   -moz-box-shadow: inset 0px 1px 4px #f09035;
