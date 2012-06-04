@@ -2,6 +2,7 @@
 %html
   %head
     %title= content_for?(:title) ? yield(:title) : "Lawdingo: Ask a Lawyer Online Now - Free Consultations for Your Legal Questions"
+    %link{:rel => "canonical", :href => "http://matrix.itima.ru"}
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = javascript_include_tag 'site', 'users', 'twipsy', 'hints', 'jquery.timer','swfobject','jquery-impromptu.3.2'
@@ -113,7 +114,7 @@
                                   stream: "false",
                                   header: "false" }
           %span.left.gplus.top-offset-small
-            %g:plusone {size: "small", annotation:"inline", href: "http://matrix.itima.ru:8079/"}
+            %g:plusone {size: "small", annotation:"inline"}
 
           %ul.top-offset-small
             %li= link_to "About", about_page_path
