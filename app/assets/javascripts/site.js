@@ -259,7 +259,7 @@ $(function(){
 						}
             //self.find('.carousel-description a.phone').attr('href', carousel_info['start_live_conversation'] );
             //self.find('.carousel-description a.shedule').attr('href', carousel_info['start_live_conversation'] );
-            if ( carousel_info['test'] == true)
+            if ( carousel_info['test'] != 0)
 						{
 							self.find('.carousel-description .rev_for_js').html( carousel_info['link_reviews'] );
 							self.find('.carousel-description .rev_for_js span.number_rev').html( carousel_info['reviews'] );
