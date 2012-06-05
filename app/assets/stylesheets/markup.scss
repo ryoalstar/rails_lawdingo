@@ -166,7 +166,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
     }
   }
 }
-body.users.show, body.daily_hours.index, body.offerings.index{
+body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
   #page > div{
     width:960px;
     .profile{
@@ -199,12 +199,16 @@ body.users.show, body.daily_hours.index, body.offerings.index{
         #offerings{
           float:left;
           display:inline-block;
-          width:220px;
+          width:320px;
         }
-        #new_offering{
+        #offerings-listing{
           float: right;
           display: inline-block;
-          width:320px;
+          width:250px;
+          min-height:410px;
+          overflow: hidden;
+          border-left: 2px solid #888;
+          padding: 5px 5px 5px 1.4em;
         }
       }
     }
