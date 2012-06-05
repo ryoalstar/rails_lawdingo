@@ -15,7 +15,7 @@ class Lawyer < User
   #solr index
   searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
    text :practice_areas do
-     practice_area_names
+      practice_area_names
    end
    text :personal_tagline
    text :first_name
@@ -35,6 +35,23 @@ class Lawyer < User
   
   def practice_area_names
     self.practice_areas.map(&:name)*","
+  end
+  
+  def offerings_name
+    self.offerings.map(&:name)*","
+  end
+  
+  def offerings_description
+    self.offerings.map(&:description)*","
+  end
+  
+  def offerings_practice_area 
+    offerings_practice_area_arr=""   
+    self.offerings(:include => [:practice_area]).each do |f|
+        temp_name=f.practice_area.name+","
+        offerings_practice_area_arr=offerings_practice_area_arr+temp_name
+    end
+    offerings_practice_area_arr
   end
   
   
@@ -61,7 +78,7 @@ class Lawyer < User
     search.build do
       fulltext query
     end
-    search    
+    search
   end
   
   has_many :expert_areas
