@@ -15,7 +15,10 @@ class Home
     
   submit : ()->
     $.ajax(this.current_search_url(),{
-      complete : ()->
+      complete : ()=>
+        # listeners for appointment forms
+        this.add_appointment_forms()
+
       dataType : 'script'
 
     })
@@ -25,6 +28,7 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
+  
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
@@ -60,6 +64,13 @@ class Home
       )
       this.submit()
     )
+
+  add_appointment_forms : ()->
+    @lawyers = []
+    $(".lawyer").each (i, el)=>
+      id = $(el).attr("data-lawyer-id")
+      if parseInt(id) > 0
+        @lawyers.push(new Lawyer(id))
 
   current_search_url : ()->
     if $("#search_query").val()

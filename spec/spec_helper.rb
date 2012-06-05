@@ -14,11 +14,12 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'capybara/rspec'
+  require 'draper/rspec_integration'
 
   require 'database_cleaner'
   DatabaseCleaner.strategy = :truncation
 
-  # Debugger.start
+  Debugger.start
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.

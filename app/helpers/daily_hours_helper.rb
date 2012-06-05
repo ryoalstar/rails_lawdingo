@@ -13,9 +13,9 @@ module DailyHoursHelper
 
     content_tag(:select, opts) do
       ret = "".tap do |ret|
-        t = 600
+        t = 0
         ret << content_tag(:option, "Closed", :value => "-1")
-        while t <= 2200
+        while t <= 2330
           # is this option selected
           selected = (t == daily_hour.send(name))
           ret << generate_option(t, selected)

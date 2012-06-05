@@ -10,4 +10,12 @@ FactoryGirl.define do
     password "secret"
     user_type User::CLIENT_TYPE
   end
+
+  factory :client do
+    first_name "Thome"
+    last_name "York"
+    email
+    password "secret"
+    user_type User::CLIENT_TYPE
+  end
 end

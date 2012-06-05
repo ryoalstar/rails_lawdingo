@@ -1,4 +1,5 @@
 class Lawyer < User
+
   # validates :payment_email, :bar_ids, :practice_areas, :presence =>true
   # validates :payment_email, :presence => true
   
@@ -10,12 +11,26 @@ class Lawyer < User
     def on_wday(wday)
       self.select{|dh| dh.wday == wday}.first    
     end
+    # are we bookable on a given day?
+    def bookable_on_day?(time)
+      # allow for dates or times to be passed in
+      time = time.to_time if time.is_a?(Date)
+      time = time.midnight
+      dh = self.on_wday(time.wday)
+      return false if dh.blank?
+      # if it is the current day, check to see that 
+      # it is not too late in the day to book
+      if Time.zone.now.midnight == time
+        return false if Time.zone.now + 1.hour > dh.end_time_on_date(time)
+      end
+      return true
+    end
   end
   
   #solr index
   searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
    text :practice_areas do
-      practice_area_names
+     practice_area_names
    end
    text :personal_tagline
    text :first_name
@@ -35,23 +50,6 @@ class Lawyer < User
   
   def practice_area_names
     self.practice_areas.map(&:name)*","
-  end
-  
-  def offerings_name
-    self.offerings.map(&:name)*","
-  end
-  
-  def offerings_description
-    self.offerings.map(&:description)*","
-  end
-  
-  def offerings_practice_area 
-    offerings_practice_area_arr=""   
-    self.offerings(:include => [:practice_area]).each do |f|
-        temp_name=f.practice_area.name+","
-        offerings_practice_area_arr=offerings_practice_area_arr+temp_name
-    end
-    offerings_practice_area_arr
   end
   
   
@@ -78,7 +76,7 @@ class Lawyer < User
     search.build do
       fulltext query
     end
-    search
+    search    
   end
   
   has_many :expert_areas
@@ -87,6 +85,13 @@ class Lawyer < User
   has_many :states, :through => :bar_memberships
   
   has_one :homepage_image, :dependent => :destroy
+
+  # validations
+  validates :time_zone, 
+    :presence => true,
+    :inclusion => {
+      :in => ActiveSupport::TimeZone.us_zones.collect(&:name)
+    }
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
@@ -123,8 +128,6 @@ class Lawyer < User
       ])
   }
   
-  
-  
   def self.approved_lawyers_states
     states = []
 
@@ -138,6 +141,66 @@ class Lawyer < User
   # returns currently online lawyer user
   def self.online
    self.where('is_online is true' )
+  end
+  # all available times for a given date
+  def available_times(time)
+    self.in_time_zone do
+      # make sure it's a time
+      time = self.convert_date(time)
+      # get the relevant daily_hour
+      daily_hour = self.daily_hours.on_wday(time.wday)
+      return [] if daily_hour.blank?
+      # cache the min time to book
+      min_time = self.min_time_to_book
+      # iterate through the daily hours
+      return [].tap do |ret|
+        current_time = daily_hour.start_time_on_date(time)
+        end_time = daily_hour.end_time_on_date(time)
+        while current_time < end_time
+          # make sure this is an allowable time and add it
+          ret << current_time if current_time >= min_time
+          current_time += 30.minutes
+        end
+      end
+    end
+  end
+  # is this provider bookable on a given date
+  def bookable_on_day?(date)
+    self.in_time_zone do
+      self.daily_hours.bookable_on_day?(date)
+    end
+  end
+  # runs a block in this Lawyer's time_zone
+  def in_time_zone(&block)
+    begin
+      old_zone = Time.zone
+      Time.zone = self.time_zone
+      yield
+    ensure
+      Time.zone = old_zone
+    end
+  end
+
+  # the next x days on which the lawyer is open
+  def next_available_days(num_days)
+    self.in_time_zone do
+      return [] if self.daily_hours.blank?
+      self.in_time_zone do
+        [].tap do |ret|
+          # start on today
+          t = Time.zone.now.midnight
+          # go until we have enough days to return
+          while ret.length < num_days
+            # if we have this day
+            if self.bookable_on_day?(t)
+              ret << t.to_date
+            end
+            # 25 hours to account for daylight savings
+            t = (t + 25.hours).midnight
+          end
+        end
+      end
+    end
   end
 
   def total_earning
@@ -202,6 +265,16 @@ class Lawyer < User
     pas_names_last = pas_names.pop
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
-  
-  
+
+  protected
+  # convert a date to a time if applicable
+  def convert_date(time)
+    time = time.to_time if time.is_a?(Date)
+    time = time.midnight
+    time
+  end
+  # the earliest time we allow bookings
+  def min_time_to_book
+    Time.zone.now + 30.minutes
+  end
 end

@@ -41,7 +41,7 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
 
-  %body#lawdingo{:class => params.values_at(:controller, :action).join(' '), :onload => ""}
+  %body#lawdingo{:class => body_classes.join(' '), :onload => ""}
     #wrapper-main
       / HEADER
 
