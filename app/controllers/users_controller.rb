@@ -37,15 +37,28 @@ class UsersController < ApplicationController
     @states = State.with_approved_lawyers
     query = params[:search_query]
     
-    @search = Lawyer.build_search(query)
+    service_type = (params[:service_type] || "")
+    @service_type = service_type.downcase || ""
     
+    
+    if @service_type == "legal-services"
+       @search = Offering.build_search(query)
+    else
+       @search = Lawyer.build_search(query) 
+    end
+    add_service_type_scope
     add_state_scope
     add_practice_area_scope
-    add_service_type_scope
+    
     
     @search.execute
-    @lawyers = @search.results
-
+        
+    if @service_type == "legal-services"
+      @offerings = @search.results
+    else
+      @lawyers = @search.results  
+    end
+    
     # we try to auto-detect the state if possible
     if self.get_state_name.blank? && request.location.present? && request.location.state_code.present?
       if state = State.find_by_abbreviation(request.location.state_code)
@@ -550,11 +563,14 @@ class UsersController < ApplicationController
     # handle the type of service offered
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase
-
+    
     # legal services
     if @service_type == "legal-services"
       # @lawyers = @lawyers.offers_legal_services
       @offerings = Offering.find(:all, conditions: { user_id: @lawyers.offers_legal_services.map(&:id) })
+      @search.build do
+        fulltext params[:search_query]
+      end
     # default is legal advice
     else
       @lawyers = @lawyers.offers_legal_advice

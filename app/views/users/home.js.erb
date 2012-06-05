@@ -1,2 +1,6 @@
-$(".question h2.selected-lawyers-caption").html("<%= escape_javascript(selected_lawyers_caption) %>")
+<% if @service_type == "legal-services" %>
+  $(".question h2.selected-lawyers-caption").html("<%= escape_javascript(selected_offerings_caption) %>")
+<% else %>
+  $(".question h2.selected-lawyers-caption").html("<%= escape_javascript(selected_lawyers_caption) %>")
+<% end %>
 $("div.results").html("<%= escape_javascript(render(:partial => "search_results")) %>")

@@ -37,7 +37,7 @@ class Home
         false
     $("#search_query").keypress((e) =>
       if e.keyCode == 13
-        this.set_defaults(default_state)
+        this.set_defaults_s(default_state)
         this.submit()
         false
       )
@@ -113,7 +113,17 @@ class Home
       )
     else
       this.set_state_fields_val(default_state+'-lawyers')
-
+  set_defaults_s : (default_state)->
+    if (default_state == "")
+      this.set_state_fields_val(
+          this.state_fields().find(
+            "option[data-default=1]"
+          ).val()
+      )
+    else
+      this.set_state_fields_val(default_state+'-lawyers')
+      
+      
     this.set_practice_area_fields_val(
       this.practice_area_fields()
         .filter("[data-default=1]")
