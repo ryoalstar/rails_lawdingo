@@ -55,7 +55,6 @@ class UsersController < ApplicationController
     add_hourly_rate_scope
     add_school_rank_scope
     
-    
     @search.execute
         
     if @service_type == "legal-services"
