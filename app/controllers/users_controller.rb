@@ -46,10 +46,11 @@ class UsersController < ApplicationController
     else
        @search = Lawyer.build_search(query) 
     end
+    
     add_service_type_scope
     add_state_scope
     add_practice_area_scope
-    
+    add_free_time_scope
     
     @search.execute
         
@@ -593,6 +594,16 @@ class UsersController < ApplicationController
 
     end
   
+  def add_free_time_scope
+    @free_time_val = params[:freetimeval].to_i if !!params[:freetimeval]
+    free_time_val_s = @free_time_val
+    free_time_val_e = 90
+    if @free_time_val.present?
+       @search.build do
+         with :free_consultation_duration, (free_time_val_s)..(free_time_val_e)
+       end
+    end
+  end
   
 
   # helper method to add the practice area scope to the

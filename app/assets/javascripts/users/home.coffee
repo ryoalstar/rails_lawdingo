@@ -2,7 +2,17 @@ class Home
 
   initialize : ()->
     this.add_event_listeners()
-
+    
+    Home.h = {}
+    Home.h[198] = 90
+    Home.h[169] = 60
+    Home.h[141] = 30
+    Home.h[113] = 20
+    Home.h[84] = 15
+    Home.h[56] = 10
+    Home.h[28] = 5
+    Home.h[0] = 2
+    
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
 
@@ -34,6 +44,11 @@ class Home
       this.submit()
       false
     )
+    $("#free_minutes_slider").bind "slidechange", (event, ui)=>
+      $("#freetimeval").val(Home.h[$(".ui-slider-range").width()])
+      this.set_defaults_s(default_state)
+      this.submit()
+      false
     $("#clear_data_search").click =>
         $("#search_query").val('')
         this.set_defaults(default_state)
@@ -73,8 +88,12 @@ class Home
         @lawyers.push(new Lawyer(id))
 
   current_search_url : ()->
-    if $("#search_query").val()
-      params = "?search_query=" + $("#search_query").val()
+    if $("#search_query").val() && $("#freetimeval").val()
+      params = "?search_query=" + $("#search_query").val() + "&freetimeval=" + $("#freetimeval").val() 
+    else if $("#search_query").val()
+      params = "?search_query=" + $("#search_query").val() 
+    else if $("#freetimeval").val()
+      params = "?freetimeval=" + $("#freetimeval").val() 
     else
       params = ""
     if @practice_area == "All"

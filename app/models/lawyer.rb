@@ -46,6 +46,7 @@ class Lawyer < User
      school.name if school.present?
    end
    string :bar_memberships, :multiple => true
+   integer :free_consultation_duration 
   end
   
   def practice_area_names
@@ -55,18 +56,13 @@ class Lawyer < User
   
   def state_names
      states.map(&:name)*","
-  
   end
  
    
   def review_purpos
       reviews.map(&:purpose)*","
   end
-  
-  
-   
-   
-   
+
   def reindex!
      Sunspot.index!(self)
   end
