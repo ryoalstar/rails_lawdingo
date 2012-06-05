@@ -46,7 +46,6 @@ class UsersController < ApplicationController
     else
        @search = Lawyer.build_search(query) 
     end
-    
     add_service_type_scope
     add_state_scope
     add_practice_area_scope
@@ -54,6 +53,7 @@ class UsersController < ApplicationController
     add_lawyer_rating_scope
     add_hourly_rate_scope
     add_school_rank_scope
+    
     
     @search.execute
         
