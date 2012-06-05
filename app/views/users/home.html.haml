@@ -61,8 +61,9 @@
         %h3 Search
         %a#clear_data_search 
           = image_tag('close_sea.png', :alt => 'clear')
-        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}   
-      -#.left-bar-section
+        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
+        %input.search{:name => "freetimeval", :id => "freetimeval", :style => "display:none;"}    
+      .left-bar-section
         %h3 Minimum free minutes:
         %p.hidden
           %label{:for => "minimum_free_minutes"} Minimum free minutes:
