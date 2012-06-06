@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     add_free_time_scope
     add_lawyer_rating_scope
     add_hourly_rate_scope
+    add_school_rank_scope
     
     @search.execute
         
@@ -584,17 +585,15 @@ class UsersController < ApplicationController
   # main search
   # add state_scope_for_search__SOLR
   def add_state_scope
-      # store selected state for the view
-      @selected_state = State.name_like(self.get_state_name).first
-      state_name = @selected_state.name if !!@selected_state 
-      if @selected_state.present? 
-        @search.build do
-          fulltext state_name
-        end
-
+    # store selected state for the view
+    @selected_state = State.name_like(self.get_state_name).first
+    state_name = @selected_state.name if !!@selected_state 
+    if @selected_state.present? 
+      @search.build do
+        fulltext state_name
       end
-
     end
+   end
   
   def add_free_time_scope
     @free_time_val = params[:freetimeval].to_i if !!params[:freetimeval]
@@ -634,20 +633,35 @@ class UsersController < ApplicationController
   end
   
   
+  def add_school_rank_scope
+    @school_rank = params[:schoolrating].to_i if !!params[:schoolrating]
+  
+    rank_start = @school_rank
+    rank_end = 4
+    
+    if @school_rank.present?
+       @search.build do
+         with :school_rank, (rank_start)..(rank_end)
+       end
+    end
+  end
+  
+  
+  
 
   # helper method to add the practice area scope to the
   # main search
   # add practic_area_scope_for_search__SOLR
   def add_practice_area_scope 
-      # if we have a practice area
-      if params[:practice_area].present?
-        scope = PracticeArea.name_like(params[:practice_area])
-        area_name = scope.first.name if scope.first
-          @search.build do
-            fulltext area_name
-          end
-      end
+    # if we have a practice area
+    if params[:practice_area].present?
+      scope = PracticeArea.name_like(params[:practice_area])
+      area_name = scope.first.name if scope.first
+        @search.build do
+          fulltext area_name
+        end
     end
+  end
   
  
 

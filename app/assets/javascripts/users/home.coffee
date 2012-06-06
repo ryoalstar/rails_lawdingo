@@ -26,6 +26,12 @@ class Home
     Home.v[65] = 2
     Home.v[0] = 0
     
+    Home.s = {}
+    Home.s[198] = 1
+    Home.s[131] = 2
+    Home.s[65] = 3
+    Home.s[0] = 4
+    
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
 
@@ -69,9 +75,20 @@ class Home
       this.set_defaults_s(default_state)
       this.submit()
       false
+    $("#law_school_quality").bind "slidechange", (event, ui)=>
+      $("#schoolrating").val(Home.s[$("#law_school_quality .ui-slider-range").width()])
+      this.set_defaults_s(default_state)
+      this.submit()
+      false
+       
       
     $("#clear_data_search").click =>
         $("#search_query").val('')
+        $("#freetimeval").val('')
+        $("#ratingval").val('')
+        $("#hourlyratestart").val('')
+        $("#hourlyrateend").val('')
+        $("#schoolrating").val('')
         this.set_defaults(default_state)
         this.submit()
         false
@@ -111,6 +128,8 @@ class Home
       params += "&ratingval=" + $("#ratingval").val()
     if ( $("#hourlyratestart").val() && $("#hourlyrateend").val() )
       params += "&hourlyratestart=" + $("#hourlyratestart").val() + "&hourlyrateend=" + $("#hourlyrateend").val()
+    if $("#schoolrating").val()
+      params += "&schoolrating=" + $("#schoolrating").val()
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
     else
@@ -164,6 +183,7 @@ class Home
           this.state_fields().find(
             "option[data-default=1]"
           ).val()
+      
       )
     else
       this.set_state_fields_val(default_state+'-lawyers')
