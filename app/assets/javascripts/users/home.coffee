@@ -13,6 +13,13 @@ class Home
     Home.h[28] = 5
     Home.h[0] = 2
     
+    Home.r = {}
+    Home.r[198] = 5
+    Home.r[148] = 4
+    Home.r[99] = 3
+    Home.r[49] = 2
+    Home.r[0] = 1
+    
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
 
@@ -45,10 +52,16 @@ class Home
       false
     )
     $("#free_minutes_slider").bind "slidechange", (event, ui)=>
-      $("#freetimeval").val(Home.h[$(".ui-slider-range").width()])
+      $("#freetimeval").val(Home.h[$("#free_minutes_slider .ui-slider-range").width()])
       this.set_defaults_s(default_state)
       this.submit()
       false
+    $("#minimum_client_rating").bind "slidechange", (event, ui)=>
+      $("#ratingval").val(Home.r[$("#minimum_client_rating .ui-slider-range").width()])
+      this.set_defaults_s(default_state)
+      this.submit()
+      false
+      
     $("#clear_data_search").click =>
         $("#search_query").val('')
         this.set_defaults(default_state)
@@ -88,14 +101,13 @@ class Home
         @lawyers.push(new Lawyer(id))
 
   current_search_url : ()->
-    if $("#search_query").val() && $("#freetimeval").val()
-      params = "?search_query=" + $("#search_query").val() + "&freetimeval=" + $("#freetimeval").val() 
-    else if $("#search_query").val()
-      params = "?search_query=" + $("#search_query").val() 
-    else if $("#freetimeval").val()
-      params = "?freetimeval=" + $("#freetimeval").val() 
-    else
-      params = ""
+    params = "?"
+    if $("#search_query").val()
+      params += "&search_query=" + $("#search_query").val() 
+    if $("#freetimeval").val()
+      params += "&freetimeval=" + $("#freetimeval").val() 
+    if $("#ratingval").val()
+      params += "&ratingval=" + $("#ratingval").val()
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
     else
