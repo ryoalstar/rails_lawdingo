@@ -51,6 +51,7 @@ class UsersController < ApplicationController
     add_state_scope
     add_practice_area_scope
     add_free_time_scope
+    add_lawyer_rating_scope
     
     @search.execute
         
@@ -601,6 +602,17 @@ class UsersController < ApplicationController
     if @free_time_val.present?
        @search.build do
          with :free_consultation_duration, (free_time_val_s)..(free_time_val_e)
+       end
+    end
+  end
+  
+  def add_lawyer_rating_scope
+    @lawyer_rating = params[:ratingval].to_i if !!params[:ratingval]
+    rating_start = @lawyer_rating
+    rating_end = 90
+    if @lawyer_rating.present?
+       @search.build do
+         with :lawyer_star_rating, (rating_start)..(rating_end)
        end
     end
   end
