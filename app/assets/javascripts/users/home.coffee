@@ -20,6 +20,12 @@ class Home
     Home.r[49] = 2
     Home.r[0] = 1
     
+    Home.v = {}
+    Home.v[198] = 6
+    Home.v[131] = 4
+    Home.v[65] = 2
+    Home.v[0] = 0
+    
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
 
@@ -58,6 +64,12 @@ class Home
       false
     $("#minimum_client_rating").bind "slidechange", (event, ui)=>
       $("#ratingval").val(Home.r[$("#minimum_client_rating .ui-slider-range").width()])
+      this.set_defaults_s(default_state)
+      this.submit()
+      false
+    $("#hourly_rate").bind "slidechange", (event, ui)=>
+      $("#hourlyratestart").val(Home.v[$("#hourly_rate .ui-slider-handle").first().position().left])
+      $("#hourlyrateend").val(Home.v[$("#hourly_rate .ui-slider-handle").last().position().left])
       this.set_defaults_s(default_state)
       this.submit()
       false
@@ -108,6 +120,8 @@ class Home
       params += "&freetimeval=" + $("#freetimeval").val() 
     if $("#ratingval").val()
       params += "&ratingval=" + $("#ratingval").val()
+    if ( $("#hourlyratestart").val() && $("#hourlyrateend").val() )
+      params += "&hourlyratestart=" + $("#hourlyratestart").val() + "&hourlyrateend=" + $("#hourlyrateend").val()
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
     else

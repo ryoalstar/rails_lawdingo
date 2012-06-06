@@ -47,6 +47,7 @@ class Lawyer < User
    end
    string :bar_memberships, :multiple => true
    integer :free_consultation_duration 
+   float :rate 
    integer :lawyer_star_rating do
      reviews.average(:rating).to_i
    end 
