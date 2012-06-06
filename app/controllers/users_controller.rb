@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     add_practice_area_scope
     add_free_time_scope
     add_lawyer_rating_scope
+    add_hourly_rate_scope
     
     @search.execute
         
@@ -616,6 +617,22 @@ class UsersController < ApplicationController
        end
     end
   end
+  
+  
+  def add_hourly_rate_scope
+    @hourly_start = params[:hourlyratestart].to_i if !!params[:hourlyratestart]
+    @hourly_end = params[:hourlyrateend].to_i if !!params[:hourlyrateend]
+  
+    hourly_start = @hourly_start
+    hourly_end = @hourly_end
+    
+    if @hourly_start.present? && @hourly_end.present?
+       @search.build do
+         with :rate, (hourly_start-AppParameter.service_charge_value)..(hourly_end-AppParameter.service_charge_value)
+       end
+    end
+  end
+  
   
 
   # helper method to add the practice area scope to the
