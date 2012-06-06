@@ -51,6 +51,9 @@ class Lawyer < User
    integer :lawyer_star_rating do
      reviews.average(:rating).to_i
    end 
+   integer :school_rank do
+     school.rank_category if !!school
+   end
   end
   
   def practice_area_names
