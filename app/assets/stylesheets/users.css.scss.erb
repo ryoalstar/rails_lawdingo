@@ -1,3 +1,6 @@
+@import "partials/lawyer/lawyer";
+@import "partials/attorneys/appointment_form";
+
 body.users.home {
   
   form.filters {
@@ -5,6 +8,14 @@ body.users.home {
     width: 100px;
   }
 
+  div.lawyer {
+    @include lawyer;
+  }
+
+  div.appointment-form {
+    @include appointment_form
+  }
+  
 }
 
 #container p.notice {
@@ -140,7 +151,6 @@ form.filters {
     float: right;
     margin-right: 5px;
     padding-top: 8px;
-    margin-left: 10px;
     font-size: 1.5em;
     color: #371C1C;
     right: 4.1667em;

@@ -1,9 +1,10 @@
-= javascript_tag do
+:javascript
   var default_state = '#{@state_name || ''}';
 
   $(function(){
-  Home.initialize()
+    Home.initialize();
   })
+
 %p.notice{:style => "display: none;"}
   Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
   %a#close_notice{:href => "#"} Close
@@ -24,10 +25,11 @@
       - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
         #state.left-bar-section
           %h3
-            %label{:for => "state"} Your state:
+            %label{:for => "state"} In:
           .national-area-notice
             %p
-            %a.show-states-selector{ href: "#" } Set state anyway
+            -#%a.show-states-selector{ href: "#" } Set state anyway 
+            -#Auto-detect state (need repair)
           %select.states{:name => "state"}
             %option{"data-default" => "1", :value => "All-States"} All
             - @states.each do |state|

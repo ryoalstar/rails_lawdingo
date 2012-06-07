@@ -9,7 +9,12 @@ module ApplicationHelper
   def current_user
     controller.current_user
   end
-
+  # classes on the bodyb element
+  def body_classes
+    parts = params.values_at(:controller, :action)
+    parts << "logged-in" if self.logged_in?
+    parts.compact
+  end
 
   def is_self_login? user_id
     current_user.id == user_id

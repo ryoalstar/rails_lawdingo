@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511212828) do
+ActiveRecord::Schema.define(:version => 20120602194601) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "appointments", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.datetime "time"
+    t.string   "contact_number"
+    t.string   "appointment_type", :default => "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "message"
+    t.integer  "client_id"
   end
 
   create_table "bar_memberships", :force => true do |t|
@@ -44,31 +55,21 @@ ActiveRecord::Schema.define(:version => 20120511212828) do
     t.integer  "conversation_id"
   end
 
-  create_table "card_details", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "card_type"
-    t.string   "card_number"
-    t.string   "expire_month"
-    t.string   "expire_year"
-    t.string   "card_verification"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "conversations", :force => true do |t|
-    t.integer  "client_id",                           :null => false
-    t.integer  "lawyer_id",                           :null => false
-    t.datetime "start_date",                          :null => false
-    t.datetime "end_date",                            :null => false
+    t.integer  "client_id",                            :null => false
+    t.integer  "lawyer_id",                            :null => false
+    t.datetime "start_date",                           :null => false
+    t.datetime "end_date",                             :null => false
     t.integer  "billable_time"
     t.float    "lawyer_rate"
-    t.float    "billed_amount",    :default => 0.0
-    t.boolean  "paid_to_lawyer",   :default => true
+    t.float    "billed_amount",     :default => 0.0
+    t.boolean  "paid_to_lawyer",    :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "has_been_charged", :default => false
+    t.boolean  "has_been_charged",  :default => false
     t.text     "payment_params"
     t.float    "lawdingo_charge"
+    t.string   "consultation_type"
   end
 
   create_table "daily_hours", :force => true do |t|
@@ -111,9 +112,11 @@ ActiveRecord::Schema.define(:version => 20120511212828) do
     t.datetime "updated_at"
   end
 
-  create_table "lawyers_practice_areas", :force => true do |t|
+  create_table "lawyer_daily_hours", :force => true do |t|
     t.integer  "lawyer_id"
-    t.integer  "practice_area_id"
+    t.integer  "wday"
+    t.integer  "start_time"
+    t.integer  "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -195,7 +198,7 @@ ActiveRecord::Schema.define(:version => 20120511212828) do
     t.boolean  "is_busy",                    :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                                     :null => false
+    t.string   "user_type",                                                            :null => false
     t.boolean  "is_approved",                :default => false
     t.text     "undergraduate_school"
     t.text     "law_school"
@@ -215,14 +218,15 @@ ActiveRecord::Schema.define(:version => 20120511212828) do
     t.string   "peer_id",                    :default => "0"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "stripe_customer_token"
     t.string   "phone"
     t.integer  "free_consultation_duration"
+    t.string   "stripe_customer_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.integer  "school_id"
     t.integer  "license_year"
     t.string   "yelp_business_id"
+    t.string   "time_zone",                  :default => "Pacific Time (US & Canada)"
   end
 
 end

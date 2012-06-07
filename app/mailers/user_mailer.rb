@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < ApplicationMailer
   default :from => "lawdingo@gmail.com",
           :bcc => "offline@lawdingo.com"
 

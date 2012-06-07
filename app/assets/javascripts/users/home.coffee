@@ -44,7 +44,10 @@ class Home
     
   submit : ()->
     $.ajax(this.current_search_url(),{
-      complete : ()->
+      complete : ()=>
+        # listeners for appointment forms
+        this.add_appointment_forms()
+
       dataType : 'script'
 
     })
@@ -54,6 +57,7 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
+  
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
@@ -118,6 +122,13 @@ class Home
       this.submit()
     )
 
+  add_appointment_forms : ()->
+    @lawyers = []
+    $(".lawyer").each (i, el)=>
+      id = $(el).attr("data-lawyer-id")
+      if parseInt(id) > 0
+        @lawyers.push(new Lawyer(id))
+
   current_search_url : ()->
     params = "?"
     if $("#search_query").val()
@@ -177,6 +188,11 @@ class Home
       )
     else
       this.set_state_fields_val(default_state+'-lawyers')
+      this.set_practice_area_fields_val(
+        this.practice_area_fields()
+          .filter("[data-default=1]")
+          .val()
+      ).parent().find('img').trigger('click')
   set_defaults_s : (default_state)->
     if (default_state == "")
       this.set_state_fields_val(
@@ -189,11 +205,7 @@ class Home
       this.set_state_fields_val(default_state+'-lawyers')
       
       
-    this.set_practice_area_fields_val(
-      this.practice_area_fields()
-        .filter("[data-default=1]")
-        .val()
-    ).parent().find('img').trigger('click')
+    
 
   form : ()->
     $("form.filters")
