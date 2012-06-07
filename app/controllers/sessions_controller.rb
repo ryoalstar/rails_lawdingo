@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     if logged_in?
+
     	redirect_to root_path and return
     end
 	end
@@ -16,27 +17,25 @@ class SessionsController < ApplicationController
       if session[:question_id].present?
         send_pending_question(session[:question_id], user)
       else
-        if user.is_client?
-          # If there is a pending question
-
-         if session[:return_to]
-          return_path = session[:return_to]
-          session[:return_to] = nil
-         else
-          return_path = lawyers_path
-         end
-        elsif user.is_lawyer?
-          # redirect the lawyer to the session summary page
-          return_path = user_path(current_user, :t=>'l')
-        elsif user.is_admin?
-          return_path = user_path(user.id)
-        end
-        if session[:referred_url]
-         return_path = session[:referred_url]
-         session[:referred_url] = nil
-        end
-
-        redirect_to return_path
+      if user.is_client?
+        # If there is a pending question
+       if session[:return_to]
+        return_path = session[:return_to]
+        session[:return_to] = nil
+       else
+        return_path = lawyers_path
+       end
+      elsif user.is_lawyer?
+        # redirect the lawyer to the session summary page
+        return_path = user_path(current_user, :t=>'l')
+      elsif user.is_admin?
+        return_path = user_path(user.id)
+      end
+      if session[:referred_url]
+       return_path = session[:referred_url]
+       session[:referred_url] = nil
+      end
+      redirect_to return_path
       end
     else
       @msg = "You have entered incorrect login credintial."

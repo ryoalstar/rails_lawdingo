@@ -7,7 +7,7 @@ class Home
       document.location.hash = "!#{document.location.pathname}"
 
     if document.location.hash == ""
-      this.set_gs(default_state)
+      this.set_defaults(default_state)
       this.submit()
     else
       this.read_hash()
@@ -15,10 +15,7 @@ class Home
     
   submit : ()->
     $.ajax(this.current_search_url(),{
-      complete : ()=>
-        # listeners for appointment forms
-        this.add_appointment_forms()
-
+      complete : ()->
       dataType : 'script'
 
     })
@@ -28,27 +25,11 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
-  
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
       false
     )
-
-    this.add_appointment_forms()
-
-    $("#clear_data_search").click =>
-        $("#search_query").val('')
-        this.set_defaults(default_state)
-        this.submit()
-        false
-
-    $("#search_query").keypress((e) =>
-      if e.keyCode == 13
-        this.set_defaults(default_state)
-        this.submit()
-        false
-      )
 
     this.service_type_fields().click((e)=>
       this.set_service_type_fields_val(
@@ -70,23 +51,12 @@ class Home
       this.submit()
     )
 
-  add_appointment_forms : ()->
-    @lawyers = []
-    $(".lawyer").each (i, el)=>
-      id = $(el).attr("data-lawyer-id")
-      if parseInt(id) > 0
-        @lawyers.push(new Lawyer(id))
-
   current_search_url : ()->
-    if $("#search_query").val()
-      params = "?search_query=" + $("#search_query").val()
-    else
-      params = ""
     if @practice_area == "Any state"
-      "/lawyers/#{@service_type}/#{@state}"+params
+      "/lawyers/#{@service_type}/#{@state}"
     else
       practice_area = @practice_area.replace /\s+/g, "-"
-      "/lawyers/#{@service_type}/#{@state}/#{practice_area}"+params
+      "/lawyers/#{@service_type}/#{@state}/#{practice_area}"
       
   current_hash : ()->
     "!#{this.current_search_url()}"
@@ -102,18 +72,13 @@ class Home
     "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."   
   read_hash : ()->
     hash = document.location.hash.replace("#!/lawyers/","")
-    first = getUrlVars()["search_query"];
-    if first
-      $("#search_query").val(first)
-      hash = document.location.hash.replace("?search_query=","")
-      hash = document.location.hash.replace(first,"")
     hash = hash.split("/")
     this.set_service_type_fields_val(hash[0])
     this.set_state_fields_val(hash[1])
     if hash[2]
       this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
     else 
-      this.set_practice_area_fields_val("Any state").parent().find('img').trigger('click')
+      this.set_practice_area_fields_val("Any state")
       
   set_defaults : (default_state)->
     
@@ -135,7 +100,7 @@ class Home
       this.practice_area_fields()
         .filter("[data-default=1]")
         .val()
-    ).parent().find('img').trigger('click')
+    )
 
   form : ()->
     $("form.filters")
@@ -214,19 +179,5 @@ class Home
   practice_area_fields : ()->
     this.form()
       .find("div#practice_areas input:radio")
-      
-  getUrlVars = ->
-    vars = []
-    hash = undefined
-    hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&")
-    i = 0
-    
-    while i < hashes.length
-      hash = hashes[i].split("=")
-      vars.push hash[0]
-      vars[hash[0]] = hash[1]
-      i++
-    vars
-    
-        
+
 this.Home = new Home()

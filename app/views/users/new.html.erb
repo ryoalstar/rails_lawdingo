@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-wrapper signin">
-    <p>Already a Lawdingo member? <%= link_to "Log in", login_path %> now.</p>
+    <p>Already a Lawdingo member? <%= link_to "Log in", login_path(session[:return_to])%> now.</p>
   </div>
 
   <% if is_client %>
