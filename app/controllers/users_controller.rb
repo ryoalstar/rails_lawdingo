@@ -624,7 +624,15 @@ class UsersController < ApplicationController
   
     hourly_start = @hourly_start
     hourly_end = @hourly_end
-    
+    if hourly_start==hourly_end
+      if hourly_start == 0
+        hourly_end=2
+      end
+      if hourly_start == 6
+        hourly_end=99
+      end
+    end
+        
     if @hourly_start.present? && @hourly_end.present?
        @search.build do
          with :rate, (hourly_start-AppParameter.service_charge_value)..(hourly_end-AppParameter.service_charge_value)

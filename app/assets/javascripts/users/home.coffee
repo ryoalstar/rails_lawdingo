@@ -3,6 +3,8 @@ class Home
   initialize : ()->
     this.add_event_listeners()
     
+    document.my_flag_search=false
+    
     Home.h = {}
     Home.h[198] = 90
     Home.h[169] = 60
@@ -36,7 +38,7 @@ class Home
       document.location.hash = "!#{document.location.pathname}"
 
     if document.location.hash == ""
-      this.set_gs(default_state)
+      this.set_defaults(default_state)
       this.submit()
     else
       this.read_hash()
@@ -65,37 +67,37 @@ class Home
     )
     $("#free_minutes_slider").bind "slidechange", (event, ui)=>
       $("#freetimeval").val(Home.h[$("#free_minutes_slider .ui-slider-range").width()])
-      this.set_defaults_s(default_state)
       this.submit()
       false
     $("#minimum_client_rating").bind "slidechange", (event, ui)=>
       $("#ratingval").val(Home.r[$("#minimum_client_rating .ui-slider-range").width()])
-      this.set_defaults_s(default_state)
       this.submit()
       false
     $("#hourly_rate").bind "slidechange", (event, ui)=>
       $("#hourlyratestart").val(Home.v[$("#hourly_rate .ui-slider-handle").first().position().left])
       $("#hourlyrateend").val(Home.v[$("#hourly_rate .ui-slider-handle").last().position().left])
-      this.set_defaults_s(default_state)
       this.submit()
       false
     $("#law_school_quality").bind "slidechange", (event, ui)=>
       $("#schoolrating").val(Home.s[$("#law_school_quality .ui-slider-range").width()])
-      this.set_defaults_s(default_state)
       this.submit()
       false
        
       
     $("#clear_data_search").click =>
-        $("#search_query").val('')
-        $("#freetimeval").val('')
-        $("#ratingval").val('')
-        $("#hourlyratestart").val('')
-        $("#hourlyrateend").val('')
-        $("#schoolrating").val('')
-        this.set_defaults(default_state)
-        this.submit()
-        false
+        if document.my_flag_search
+          document.my_flag_search=false
+          $("#search_query").val('')
+          $("#input_close_sea_img").hide()
+          $("#input_search_bg_img").show()
+          $("#search_query").submit()
+          false
+        if !document.my_flag_search && $("#search_query").val()
+          document.my_flag_search=true
+          $("#input_search_bg_img").hide()
+          $("#input_close_sea_img").show()
+          $("#search_query").submit()
+          false
     $("#search_query").keypress((e) =>
       if e.keyCode == 13
         this.set_defaults_s(default_state)
@@ -143,14 +145,26 @@ class Home
       params += "&schoolrating=" + $("#schoolrating").val()
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
+    if !@service_type 
+      @service_type="Legal-Advice"
+    if !@state 
+      @state="All-States"
+    if !@practice_area 
+      @practice_area="All"
     else
       "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+params
       
   current_hash : ()->
     "!#{this.current_search_url()}"
   current_title : ()->
+    if !@service_type 
+      @service_type="Legal-Advice"
+    if !@state 
+      @state="All-States"
+    if !@practice_area 
+      @practice_area="All"
     service_type = @service_type.replace /-/, " "
-    state = @state.replace /_/g, " "
+    state = @state.replace /_/, " "
     practice_area = @practice_area.replace /-/, " "
     "#{service_type} from #{state} #{practice_area} Lawyers. Lawdingo: Ask a Lawyer Online Now"
   current_meta : ()->
@@ -193,6 +207,7 @@ class Home
           .filter("[data-default=1]")
           .val()
       ).parent().find('img').trigger('click')
+      
   set_defaults_s : (default_state)->
     if (default_state == "")
       this.set_state_fields_val(

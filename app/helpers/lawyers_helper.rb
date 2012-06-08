@@ -248,10 +248,10 @@ module LawyersHelper
     is_are = @lawyers.count == 1 ? "is" : "are"
     ct = @lawyers.count == 0 ? "no" : @lawyers.count.to_s
     lawyers_string = @lawyers.count == 1 ? "lawyer" : "lawyers"
-
+    parent_practice_area_string = params[:practice_area] if !!params[:practice_area] && params[:practice_area]!='All'
     return "There #{is_are} #{ct}#{selected_state_string}" +
-      "#{parent_practice_area_string} #{lawyers_string} " +
-      "who can offer you legal advice#{child_practice_area_string} " +
+      " #{parent_practice_area_string} #{lawyers_string} " +
+      "who can offer you legal advice #{child_practice_area_string} " +
       "right now."
   end
 
@@ -259,9 +259,9 @@ module LawyersHelper
     is_are = @offerings.count == 1 ? "is" : "are"
     ct = @offerings.count == 0 ? "no" : @offerings.count.to_s
     service_string = @offerings.count == 1 ? "service" : "services"
-
+    parent_practice_area_string = params[:practice_area] if !!params[:practice_area] && params[:practice_area]!='All'
     return "There #{is_are} #{ct}#{selected_state_string}" +
-      "#{parent_practice_area_string} #{service_string} " +
+      " #{parent_practice_area_string} #{service_string} " +
       "that may be of interest to you."
   end
 

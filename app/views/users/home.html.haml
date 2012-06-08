@@ -59,16 +59,17 @@
         %h3 Specific need:
         %ul.specialities
 
-      .left-bar-section
+      .left-bar-section#search_class
         %h3 Search
         %a#clear_data_search 
-          = image_tag('close_sea.png', :alt => 'clear')
+          = image_tag('close_sea.png', :alt => 'clear', :id => "input_close_sea_img")
+          = image_tag('search_bg.png', :alt => 'clear', :id => "input_search_bg_img")
         %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
-        %input.search{:name => "freetimeval",     :id => "freetimeval", :style => "display:none;"}    
-        %input.search{:name => "ratingval",       :id => "ratingval", :style => "display:none;"}    
-        %input.search{:name => "hourlyratestart", :id => "hourlyratestart", :style => "display:none;"}    
-        %input.search{:name => "hourlyrateend",   :id => "hourlyrateend", :style => "display:none;"}   
-        %input.search{:name => "schoolrating",    :id => "schoolrating", :style => "display:none;"}   
+      %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
+      %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
+      %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
+      %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
+      %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}   
       .left-bar-section
         %h3 Minimum free minutes:
         %p.hidden
@@ -85,7 +86,7 @@
           %span.thirty 30 
           %span.sixty 60 
           %span.ninety 90
-      .left-bar-section
+      -#.left-bar-section
         %h3 Minimum Client rating
         %p.hidden
           %label{:for => "minimum_client_rating"} Minimum Client rating:
@@ -115,7 +116,7 @@
           %span.h-rate-2 $$
           %span.h-rate-3 $$$
           %span.h-rate-4 $$$$
-      .left-bar-section
+      -#.left-bar-section
         %h3 Law school quality:
         %p.hidden
           %label{:for => "law_school_quality"} Law school quality:
