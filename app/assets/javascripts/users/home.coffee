@@ -83,7 +83,10 @@ class Home
       this.submit()
       false
        
-      
+    $("a#need_auto_detect").click =>
+      $("#autodetect").val('need')
+      this.submit()
+      false
     $("#clear_data_search").click =>
         if document.my_flag_search
           document.my_flag_search=false
@@ -149,6 +152,8 @@ class Home
       params += "&hourlyratestart=" + $("#hourlyratestart").val() + "&hourlyrateend=" + $("#hourlyrateend").val()
     if $("#schoolrating").val()
       params += "&schoolrating=" + $("#schoolrating").val()
+    if $("#autodetect").val()
+      params += "&autodetect=" + $("#autodetect").val()
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
     if !@service_type 
@@ -284,7 +289,6 @@ class Home
       .show()
 
     $field.parent().next().show() unless @service_type == "Legal-Services"
-    $field
 
 
   set_service_type_fields_val : (val)->

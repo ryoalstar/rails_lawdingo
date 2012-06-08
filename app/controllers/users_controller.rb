@@ -64,7 +64,7 @@ class UsersController < ApplicationController
     end
     
     # we try to auto-detect the state if possible
-    if self.get_state_name.blank? && request.location.present? && request.location.state_code.present?
+    if self.get_state_name.blank? && request.location.present? && request.location.state_code.present? && params[:autodetect].present?
       if state = State.find_by_abbreviation(request.location.state_code)
         @state_name = state.name
       end

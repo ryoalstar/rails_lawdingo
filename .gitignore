@@ -21,6 +21,8 @@
 # Ignore database config 
 /config/database.yml
 
+.DS_Store
+
 
 /.idea
 /nbproject
@@ -28,29 +30,6 @@
 .rbenv-version
 
 .DS_Store
+/solr/conf
 /solr/data
 /solr/pids
-
-app/assets/images/raty/.DS_Store.orig
-app/assets/javascripts/solr_search.js.coffee
-app/assets/stylesheets/solr_search.css.scss
-app/controllers/solr_search_controller.rb
-app/helpers/solr_search_helper.rb
-app/mailers/.gitkeep.BACKUP.15057.gitkeep
-app/mailers/.gitkeep.LOCAL.15057.gitkeep
-doc/markup.html.haml~HEAD
-doc/markup.html.haml~markup files
-log/sunspot-solr-development.log.lck
-public/images/close.png
-public/images/images/
-solr/conf/admin-extra.html
-solr/conf/elevate.xml
-solr/conf/mapping-ISOLatin1Accent.txt
-solr/conf/protwords.txt
-solr/conf/scripts.conf
-solr/conf/solrconfig.xml
-solr/conf/spellings.txt
-solr/conf/stopwords.txt
-solr/conf/synonyms.txt
-spec/controllers/solr_search_controller_spec.rb
-spec/helpers/solr_search_helper_spec.rb

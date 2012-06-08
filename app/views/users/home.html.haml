@@ -39,8 +39,8 @@
             %label{:for => "state"} In:
           .national-area-notice
             %p
-            -#%a.show-states-selector{ href: "#" } Set state anyway 
-            -#Auto-detect state (need repair)
+            %a{ :href => '#',:id => "need_auto_detect" }
+              Auto-detect state
           %select.states{:name => "state"}
             %option{"data-default" => "1", :value => "All-States"} Any state
             - @states.each do |state|
@@ -69,6 +69,19 @@
         %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
         %h3 Specific need:
         %ul.specialities
+
+      .left-bar-section#search_class
+        %h3 Search
+        %a#clear_data_search 
+          = image_tag('close_sea.png', :alt => 'clear', :id => "input_close_sea_img")
+          = image_tag('search_bg.png', :alt => 'clear', :id => "input_search_bg_img")
+        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
+      %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
+      %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
+      %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
+      %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
+      %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}   
+      %input{:name => "autodetect",      :id => "autodetect",       :style => "display:none;"}   
 
       .left-bar-section
         %h3 Minimum free minutes:
