@@ -29,7 +29,14 @@
 /db/*.sqlite*
 .rbenv-version
 
-.DS_Store
 /solr/conf
-/solr/data
-/solr/pids
+
+/solr/conf/admin-extra.html
+/solr/conf/elevate.xml
+/solr/conf/mapping-ISOLatin1Accent.txt
+/solr/conf/protwords.txt
+/solr/conf/scripts.conf
+/solr/conf/solrconfig.xml
+/solr/conf/spellings.txt
+/solr/conf/stopwords.txt
+/solr/conf/synonyms.txt

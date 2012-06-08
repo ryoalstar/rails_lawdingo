@@ -1,6 +1,8 @@
 <% if @question.user.present? %>
 <p>User name: <%= @question.user.full_name %></p>
 <p>User email: <%= @question.user.email %></p>
+<%= "<p>User state:  #{@question.state_name}    </p>"    if !!@question.state_name %>
+<%= "<p>User area:  #{@question.practice_area} </p>"    if !!@question.practice_area %>
 <% end %>
 <p>Message type: <%= @type %></p>
 <%= simple_format @question.body %>

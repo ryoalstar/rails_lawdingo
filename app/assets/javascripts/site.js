@@ -203,14 +203,13 @@ function close_dialogs(){
 }
 $(document).ready(function() {
 $(function(){
-
+    
     $.fn.carousel = function(){
         if( this==null || this=='undefined' || this.length<=0 ) return;
 
         var self = this;
         self.current_image = 0;
-	self.interv = setTimeout( next_image, 7000 );
-	
+        self.interv = setTimeout( next_image, 7000 );
         self.images = [];
         $.ajax( self.attr('dataurl'), {
             data:{'p':self.current_image++},
@@ -293,11 +292,16 @@ $(function(){
   							self.find('.carousel-description a.reviews').html('').hide();
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
+
             self.interv = setTimeout( next_image, 7000 );
         }
 
-        function next_image(){ goto_image( self.current_image<self.images.length-1? self.current_image+1: 0 ) }
-        function prev_image(){ goto_image( self.current_image>0? self.current_image-1: self.images.length-1 ) }
+        function next_image(){ 
+          goto_image( self.current_image<self.images.length-1? self.current_image+1: 0 ); 
+        }
+        function prev_image(){ 
+          goto_image( self.current_image>0? self.current_image-1: self.images.length-1 );
+        }
 
 
         var cont = $('<div class="controls"></div>');

@@ -3,4 +3,13 @@
   <%= f.input :type, as: :hidden, input_html: { value: type } %>
   <%= f.input :body, as: :string, label: false, :placeholder => "Don’t know who to pick? Just ask your question here." %>
   <%= f.submit "", class: "" %>
+  <div class="question_state">
+	<h3 class = "question_label">
+	<label>Your state:</label></h3>
+  	<%= f.select :state_name, State.all.map(&:name), :include_blank => "Not specifed" %>
+  </div>
+  <div class="question_area">
+	<h3 class = "question_label"><label>Legal domain:</label></h3>
+    <%= f.select :practice_area, PracticeArea.where(:parent_id => nil).map(&:name), :include_blank => "Not specifed" %>
+  </div>
 <% end %>
