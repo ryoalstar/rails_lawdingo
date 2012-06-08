@@ -29,31 +29,46 @@ class Lawyer < User
   
   #solr index
   searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
-   text :practice_areas do
-      practice_area_names
-   end
-   text :personal_tagline
-   text :first_name
-   text :last_name
-   text :law_school
-   text :states do
-     state_names
-   end
-   text :reviews do
-     review_purpos
-   end
-   text :school do
-     school.name if school.present?
-   end
-   string :bar_memberships, :multiple => true
-   integer :free_consultation_duration 
-   float :rate 
-   integer :lawyer_star_rating do
-     reviews.average(:rating).to_i
-   end 
-   integer :school_rank do
-     school.rank_category if !!school
-   end
+    text :flat_fee_service_name do
+      offering_names if offerings!=[]
+    end
+    text :flat_fee_service_description do
+      offering_descriptions if offerings!=[]
+    end
+    text :practice_areas do
+       practice_area_names
+    end
+    text :personal_tagline
+    text :first_name
+    text :last_name
+    text :law_school
+    text :states do
+      state_names
+    end
+    text :reviews do
+      review_purpos
+    end
+    text :school do
+      school.name if school.present?
+    end
+    string :bar_memberships, :multiple => true
+    integer :free_consultation_duration 
+    float :rate 
+    integer :lawyer_star_rating do
+      reviews.average(:rating).to_i
+    end 
+    integer :school_rank do
+      school.rank_category if !!school
+    end
+  end
+  
+  
+  def offering_names
+    offerings.map(&:name)*"," 
+  end
+ 
+  def offering_descriptions
+    offerings.map(&:description)*"," 
   end
   
   def practice_area_names
@@ -61,12 +76,12 @@ class Lawyer < User
   end
   
   def state_names
-     states.map(&:name)*","
+    states.map(&:name)*","
   end
  
    
   def review_purpos
-      reviews.map(&:purpose)*","
+    reviews.map(&:purpose)*","
   end
 
   def reindex!

@@ -2,7 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_admin, :logged_in?, :logged_in_admin?, :log_in_user, :log_out_user
-
+  
+  unless Rails.application.config.consider_all_requests_local
+     rescue_from ActionController::RoutingError, with: :render_404
+     rescue_from ActionController::UnknownController, with: :render_404
+     rescue_from ActionController::UnknownAction, with: :render_404
+     rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  end
+  
   def log_in_user user_id
     session[:user_id] = user_id
   end
@@ -65,6 +72,13 @@ class ApplicationController < ActionController::Base
       session[:question_id] = nil
       redirect_to lawyers_path, :notice => "Your question has been submitted, and an attorney will get back to you soon with some info."
 
+    end
+  end
+  
+  def render_404
+    respond_to do |format|
+      format.html { render template: 'errors/error_404', layout: 'layouts/application', status: 404 }
+      format.all { render nothing: true, status: 404 }
     end
   end
 end

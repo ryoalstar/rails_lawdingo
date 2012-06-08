@@ -29,6 +29,7 @@
         %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
         %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
         %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}
+        %input{:name => "autodetect",      :id => "autodetect",       :style => "display:none;"}
       #service_type.left-bar-section
         %h3 Legal:
         %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
@@ -40,9 +41,6 @@
             %label{:for => "state"} In:
           .national-area-notice
             %p
-            %a.show-states-selector{ href: "#" } Set state anyway
-            %a{ :href => '#',:id => "need_auto_detect" }
-              Auto-detect state
           %select.states{:name => "state"}
             %option{"data-default" => "1", :value => "All-States"} Any state
             - @states.each do |state|
@@ -56,7 +54,8 @@
             %label{:for => "practice_area_All"} All types
           - @practice_areas.each do |area|
             %p
-              = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
+              -# = radio_button_tag "practice_area", area.name, data: { is_national: area.is_national?.to_s }
+              = radio_button_tag "practice_area", area.name
               = label_tag "practice_area_#{area.name}", area.name
             - if area.children.with_approved_lawyers.present?
               .practice-areas.children{:style => "display:none"}
@@ -113,10 +112,14 @@
         #hourly_rate
         .hourly_rate_splitters
         .slider_rates
-          %span.h-rate-1 $
-          %span.h-rate-2 $$
-          %span.h-rate-3 $$$
-          %span.h-rate-4 $$$$
+          %span.h-rate-1
+            $
+          %span.h-rate-2 
+            $$
+          %span.h-rate-3 
+            $$$
+          %span.h-rate-4 
+            $$$$
       -#.left-bar-section
         %h3 Law school quality:
         %p.hidden
@@ -153,6 +156,16 @@
   %hr/
   %a.button.blue{:href => "javascript:void(0)", :onclick => "sendMessage();return false;"} Send Message
 :javascript
+  $("#question_body").click( function(){
+      $("#question_state").show()
+      $("#question_area").show()
+  });
+  $("#generail_question").mouseleave( function(){
+    if ($("#question_body").val()==""){
+      $("#question_state").hide()
+      $("#question_area").hide()
+      }
+  });
   function sendMessage(){
     close_dialogs();
     var msg = $('textarea#txt_msg').val();

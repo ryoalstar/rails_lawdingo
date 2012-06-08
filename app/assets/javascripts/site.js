@@ -322,7 +322,6 @@ $(function(){
         cont.append( prev );
         cont.append( next );
         self.find('.carousel-image').append(cont);
-
         self.interv = setInterval( next_image, 2500 );
     }
 

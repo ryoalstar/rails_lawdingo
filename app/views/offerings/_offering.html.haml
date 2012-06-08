@@ -53,12 +53,7 @@
               %li
                 = start_phone_consultation(lawyer)
             %li
-              = start_or_schedule_button_text(lawyer)
-      .lawyer_rates
-        %h5= free_message(lawyer)
-        = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
-        %p.small
-          %span (prorated to the minute)        
+              = start_or_schedule_button_text(lawyer)        
   - if lawyer.daily_hours.present?      
     .right.row_block
       %p Available appointments

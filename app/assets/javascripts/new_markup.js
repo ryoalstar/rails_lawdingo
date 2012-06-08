@@ -91,7 +91,6 @@ $(document).ready(function(){
 	  $(this).nextAll(".text_chat.tooltip.offline").fadeOut('slow');
 	});
 	
-	
 	$("span.note").live('mouseover', function(){
 	  $(this).nextAll(".note_chat.tooltip").fadeIn('slow');
 	});

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except =>[:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search]
+  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
@@ -63,19 +63,27 @@ class UsersController < ApplicationController
       @lawyers = @search.results  
     end
     
-    # we try to auto-detect the state if possible
-    if self.get_state_name=="All States" && request.location.present? && request.location.state_code.present? && params[:autodetect].present?
-      if state = State.find_by_abbreviation(request.location.state_code)
-        @state_name = state.name
-      end
-    end
+    
+  
 
     respond_to do |format|
       format.html{render}
       format.js{render}
     end
   end
-
+  
+  def detect_state
+    # we try to auto-detect the state if possible
+    if request.location.present? && request.location.state_code.present? && params[:autodetect].present?
+      if state = State.find_by_abbreviation(request.location.state_code)
+        @state_name = state.name
+      end
+    end
+   
+    render :js => "var detect_state_name = '#{@state_name}';"
+  end
+  
+  
   def landing_page
     @tagline = AppParameter.find(2).value || "Free legal advice."
     @subtext = AppParameter.service_homepage_subtext
@@ -672,9 +680,6 @@ class UsersController < ApplicationController
        end
     end
   end
-  
-  
-  
 
   # helper method to add the practice area scope to the
   # main search

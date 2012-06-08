@@ -1,5 +1,6 @@
 Lawdingo::Application.routes.draw do
   
+
   match 'sitemap.xml' => 'sitemaps#sitemap'
   
   resources :appointments, :only => [:create]
@@ -12,7 +13,11 @@ Lawdingo::Application.routes.draw do
   resources :questions
   resources :reviews
   resources :schools
-
+  
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'application#render_404'
+  end
+  
   get "password_resets/new"
 
   # The priority is based upon order of creation:
@@ -142,7 +147,7 @@ Lawdingo::Application.routes.draw do
   match '/lawyers/:service_type(/:state)' => 'users#home'
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
   match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home'
-
+  match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
   root :to => 'users#landing_page'
 

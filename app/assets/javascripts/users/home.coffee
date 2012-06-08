@@ -36,7 +36,7 @@ class Home
     
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
-
+    
     if document.location.hash == ""
       this.set_defaults(default_state)
       this.submit()
@@ -50,6 +50,23 @@ class Home
       tallest = thisHeight  if thisHeight > tallest
     group.height tallest
   
+  need_auto_detect : ()->
+    if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
+      this.set_state_fields_val(detect_state_name+"-lawyers")
+    else
+      this.set_state_fields_val("All-States")
+    $("#question_state_name").val(detect_state_name)
+    $("#need_auto_detect").hide()
+    @submit()
+    false
+  
+  detect_state : ()->
+    $.ajax('/auto-detect/detect-state?autodetect=need',{
+      success: () =>
+        @need_auto_detect()
+      dataType : 'script'
+    })
+  
   submit : ()->
     $.ajax(this.current_search_url(),{
       complete : ()=>
@@ -62,6 +79,7 @@ class Home
 
     })
     document.location.hash = this.current_hash()
+    document.location.hash = document.location.hash.replace /\?\?/, "?"
     document.title = this.current_title().replace /-lawyers/, ""
     new_meta = document.createElement('meta')
     new_meta.name = 'Current'
@@ -92,23 +110,26 @@ class Home
       false
        
     $("a#need_auto_detect").click =>
-      $("#autodetect").val('need')
-      this.submit()
+      this.detect_state()
       false
     $("#clear_data_search").click =>
-        if document.my_flag_search
-          document.my_flag_search=false
-          $("#search_query").val('')
-          $("#input_close_sea_img").hide()
-          $("#input_search_bg_img").show()
-          $("#search_query").submit()
-          false
-        if !document.my_flag_search && $("#search_query").val()
-          document.my_flag_search=true
-          $("#input_search_bg_img").hide()
-          $("#input_close_sea_img").show()
-          $("#search_query").submit()
-          false
+      if document.my_flag_search
+        document.my_flag_search=false
+        $("#search_query").val('')
+        this.set_defaults(default_state)
+        this.set_defaults_s()
+        $("#input_close_sea_img").hide()
+        $("#input_search_bg_img").show()
+        $("#search_query").submit()
+        false
+      if !document.my_flag_search && $("#search_query").val()
+        document.my_flag_search=true
+        this.set_defaults(default_state)
+        this.set_defaults_s()
+        $("#input_search_bg_img").hide()
+        $("#input_close_sea_img").show()
+        $("#search_query").submit()
+        false
     $("#search_query").keypress((e) =>
       if e.keyCode == 13
         if !document.my_flag_search && $("#search_query").val()
@@ -117,7 +138,7 @@ class Home
           $("#input_close_sea_img").show()
           $("#search_query").submit()
           false
-        this.set_defaults_s(default_state)
+        this.set_defaults(default_state)
         this.submit()
         false
       )
@@ -138,7 +159,8 @@ class Home
       this.set_state_fields_val(
         $(e.target).val()
       )
-      this.submit()
+      delete detect_state_name
+      @submit()
     )
 
   add_appointment_forms : ()->
@@ -149,7 +171,7 @@ class Home
         @lawyers.push(new Lawyer(id))
 
   current_search_url : ()->
-    params = "?"
+    params = ""
     if $("#search_query").val()
       params += "&search_query=" + $("#search_query").val() 
     if $("#freetimeval").val()
@@ -168,10 +190,12 @@ class Home
       @service_type="Legal-Advice"
     if !@state 
       @state="All-States"
+    if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
+      @state=detect_state_name+"-lawyers"
     if !@practice_area 
       @practice_area="All"
     else
-      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+params
+      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params
       
   current_hash : ()->
     "!#{this.current_search_url()}"
@@ -183,31 +207,57 @@ class Home
     if !@practice_area 
       @practice_area="All"
     service_type = @service_type.replace /-/, " "
-    state = @state.replace /_/, " "
+    state = @state.replace /-/, " "
     practice_area = @practice_area.replace /-/, " "
+    service_type = service_type.replace /\+/, " "
+    state = state.replace /\+/, " "
+    practice_area = practice_area.replace /\+/, " "
+    if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
+      state=detect_state_name
     "#{service_type} from #{state} #{practice_area} Lawyers. Lawdingo: Ask a Lawyer Online Now"
   current_meta : ()->
     service_type = @service_type.replace /-/, " "
     state = @state.replace /-/, " "
     practice_area = @practice_area.replace /-/, " "
+    service_type = service_type.replace /\+/, " "
+    state = state.replace /\+/, " "
+    practice_area = practice_area.replace /\+/, " "
+    if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
+      state=detect_state_name
     "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."   
   read_hash : ()->
     hash = document.location.hash.replace("#!/lawyers/","")
-    first = getUrlVars()["search_query"];
+    first = getUrlVars()["search_query"]
     if first
       $("#search_query").val(first)
-      hash = document.location.hash.replace("?search_query=","")
+      hash = document.location.hash.replace("?&search_query=","")
       hash = document.location.hash.replace(first,"")
     hash = hash.split("/")
+    if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
+      hash[1]=detect_state_name+"-lawyers"
     this.set_service_type_fields_val(hash[0])
     this.set_state_fields_val(hash[1])
     if hash[2]
-      this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
+      temp_string = hash[2]
+      temp_string = temp_string.replace /\+/, " "
+      temp_string = temp_string.replace /\+/, " "
+      temp_string = temp_string.replace /\+/, " "
+      this.set_practice_area_fields_val(temp_string).parent().find('img').trigger('click')
     else 
       this.set_practice_area_fields_val("All").parent().find('img').trigger('click')
+  set_defaults_s : ()->
+   $( "#free_minutes_slider" ).slider(
+      value: 1
+      )
+   $("#hourly_rate").slider
+     values: [ 1, 4 ]
+     slide: (event, ui) ->
+       $("#hourly_rate_in").val "$" + ui.value
+   $("#freetimeval").val("")
+   $("#hourlyratestart").val("")
+   $("#hourlyrateend").val("") 
       
   set_defaults : (default_state)->
-    
     this.set_service_type_fields_val(
       this.service_type_fields()
         .filter("[data-default=1]")
@@ -226,20 +276,6 @@ class Home
           .filter("[data-default=1]")
           .val()
       ).parent().find('img').trigger('click')
-      
-  set_defaults_s : (default_state)->
-    if (default_state == "")
-      this.set_state_fields_val(
-          this.state_fields().find(
-            "option[data-default=1]"
-          ).val()
-      
-      )
-    else
-      this.set_state_fields_val(default_state+'-lawyers')
-      
-      
-    
 
   form : ()->
     $("form.filters")
@@ -257,36 +293,39 @@ class Home
       .find("div#service_type .service_type")
 
   set_practice_area_fields_val : (val)->
-    @practice_area = val
-
-    this.form().find(".children").hide()
-
-    $field = this.practice_area_fields()
-      .filter("[value='#{val}']")
-      .attr("checked", true)
-
-    is_national = $field.data "is-national"
-    $notice_container = ($ @form).find(".national-area-notice")
-
-    if is_national
-      # Set state to Any state and hide select field
-      this.set_state_fields_val(
-        this.state_fields().find(
-          "option[data-default=1]"
-        ).val()
-      )
-
-      ($ @state_fields()).hide()
-      ($ "label[for=state]").hide()
-
-      # Show help notice for national area
-      notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
-      $notice_container.show().find("p").html(notice)
-
-      # Show states select field on link click
-      show_states_selector_link = $notice_container.find("a.show-states-selector")
-      show_states_selector_link.live "click", (event) => 
-        event.preventDefault()
+      @practice_area = val
+  
+      this.form().find(".children").hide()
+  
+      $field = this.practice_area_fields()
+        .filter("[value='#{val}']")
+        .attr("checked", true)
+  
+      is_national = $field.data "is-national"
+      $notice_container = ($ @form).find(".national-area-notice")
+  
+      if is_national
+        # Set state to Any state and hide select field
+        this.set_state_fields_val(
+          this.state_fields().find(
+            "option[data-default=1]"
+          ).val()
+        )
+  
+        ($ @state_fields()).hide()
+  
+        # Show help notice for national area
+        notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
+        $notice_container.show().find("p").html(notice)
+  
+        # Show states select field on link click
+        show_states_selector_link = $notice_container.find("a.show-states-selector")
+        show_states_selector_link.live "click", (event) => 
+          event.preventDefault()
+          ($ @state_fields()).show()
+          $notice_container.hide()
+      else
+        # Hide notice and show states select field
         ($ @state_fields()).show()
         ($ "label[for=state]").show()
         $notice_container.hide()
@@ -302,28 +341,27 @@ class Home
     $field.parent().next().show() unless @service_type == "Legal-Services"
 
   set_service_type_fields_val : (val)->
-    @service_type = val
-    this.service_type_fields()
-
-      .removeClass('selected')
-      .filter("[data-val='#{val}']")
-      .addClass("selected")
-    
-    if val == "Legal-Services"
-      @practice_area_fields().parent().find(".children").hide()
-    else
-      $field = @practice_area_fields().filter("[checked='checked']")
-      $field.parents(".practice-areas").show()
-      $field.parent().find(".children").show()
-
+      @service_type = val
+      this.service_type_fields()
+  
+        .removeClass('selected')
+        .filter("[data-val='#{val}']")
+        .addClass("selected")
+  
+      if val == "Legal-Services"
+        @practice_area_fields().parent().find(".children").hide()
+      else
+        $field = @practice_area_fields().filter("[checked='checked']")
+        $field.parents(".practice-areas").show()
+        $field.parent().find(".children").show()
+  
+  
   practice_area_fields : ()->
     this.form()
       .find("div#practice_areas input:radio")
-      
   getUrlVars = ->
     vars = []
     hash = undefined
-    hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&")
     i = 0
     
     while i < hashes.length

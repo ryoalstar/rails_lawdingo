@@ -111,18 +111,18 @@ module LawyersHelper
   def start_or_schedule_button(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "Start Video Consultation", user_chat_session_path(lawyer), :class => ''
+        link_to "Chat now by video conference", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "Start Video Consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
+        link_to "Chat now by video conference", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
     else
       if lawyer.is_available_by_phone
         if logged_in?
           if current_user.stripe_customer_token.present?
-            link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+            link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
           else
             # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
-            link_to "Start Phone Consultation", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
+            link_to "Chat now by phone", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
           end
         else
           link_to 'Start Phone Consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ''
