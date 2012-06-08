@@ -7,8 +7,8 @@ var my_images = [
 
 
 
+
 $(document).ready(function(){
-  
   $(".profile_info .client-reviews .review").first().addClass('first');
   $(".profile_info .client-reviews .review").last().addClass('last');  
   

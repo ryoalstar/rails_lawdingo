@@ -19,7 +19,7 @@
             - if @attorney.phone.present? 
               %span.voice.online= start_phone_consultation_p(@attorney)
               %span.online_voice_tooltip= start_phone_consultation_profile(@attorney)
-              .voice_chat.online.tooltip Available for voice chat
+              .voice_chat.online.tooltip Available by phone now
             - else
               %span.voice.offline
               %span.offline_voice_tooltip Not avaiable by phone now
@@ -119,15 +119,16 @@
             ”
   .main_content
     .profile_info
+      %h2 Schedule a Consultation with #{@attorney.first_name}
+        
       .main-content
         .header_content
-          .left
+          -#.left
             %h2 Ask a question:
             %textarea{:placeholder => 'Type your question here'}
             %a{:href => '#'} Ask
           .right
             - if @attorney.daily_hours.present?
-              %p Available appointments
               
               %div.available-appointments
                 - @attorney.next_available_days(4).each_with_index do |d, i|

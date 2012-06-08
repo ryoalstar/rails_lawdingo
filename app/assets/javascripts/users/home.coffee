@@ -1,5 +1,16 @@
 class Home
+  
+  equalHeight = (group) ->
+    tallest = 0
+    group.each ->
+      thisHeight = $(this).height()
+      tallest = thisHeight  if thisHeight > tallest
 
+    group.height tallest
+  $(document).ready ->
+    $(".row").each ->
+      equalHeight $(this).find(".row_block")
+      
   initialize : ()->
     this.add_event_listeners()
     
@@ -48,7 +59,6 @@ class Home
     $.ajax(this.current_search_url(),{
       complete : ()->
       dataType : 'script'
-
     })
     document.location.hash = this.current_hash()
     document.title = this.current_title().replace /-lawyers/, ""
@@ -289,5 +299,6 @@ class Home
   practice_area_fields : ()->
     this.form()
       .find("div#practice_areas input:radio")
+
 
 this.Home = new Home()

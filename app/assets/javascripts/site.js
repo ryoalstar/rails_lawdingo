@@ -134,7 +134,7 @@ function setBarIds(){
     }
     states_barids_string = states_barids_string.substring(0,states_barids_string.length-2) + "</ul>";
     $('#barids_opener').hide();
-    //$('#barids_editor').show().css({'display': 'inline', 'margin-left': '0.5em'});
+    $('#barids_editor').show().css({'display': 'inline', 'margin-left': '0.5em'});
     $('#div_states_barids').html(states_barids_string);
     $('#div_states_barids').show().css('display', 'inline');
     close_dialogs();
@@ -178,7 +178,7 @@ function setPracticeAreas()
   $('#practice_areas_opener').hide();
   $('#div_practice_areas').html(practice_area_string);
   $('#div_practice_areas').show().css('display', 'inline');
-  //$('#practice_areas_editor').show().css({'display': 'inline', 'margin-left': '0.5em'});
+  $('#practice_areas_editor').show().css({'display': 'inline', 'margin-left': '0.5em'});
   close_dialogs();
 }
 

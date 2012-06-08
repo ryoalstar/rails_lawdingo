@@ -51,7 +51,7 @@
                 %span.note= start_or_schedule_button_text_profile(lawyer)
                 %span.text
                 .video_chat.online.tooltip Available for video chat
-                .voice_chat.online.tooltip Available for voice chat
+                .voice_chat.online.tooltip Available by phone now
                 .note_chat.tooltip Ask (text) question
                 .text_chat.tooltip No appointments available
                 .video_chat.offline.tooltip Not available by video now
@@ -106,34 +106,51 @@
       %a{:href => "/lawyers"}
         = image_tag('feature_1.png', :alt => '')  
       .feature_description
-        %h3 1 - Browse relevant lawyers
-        %p Filter by state, practice areas, experience, price and more. All lawyers on Lawdingo work with you virtually.
+        %h3 Browse Lawyers.
+        %p Find the right lawyer for you, by state practice area and price.
     .feature
       %a{:href => "/lawyers"}
         = image_tag('feature_2.png', :alt => '')  
       .feature_description
-        %h3 2 - Start a video or voice chat consultation
-        %p Without leaving your phone or computer, you can start a consultation for free, or schedule a consultation for later.
+        %h3 Consult Free Online.
+        %p Start a video chat or phone consultation immediately, or schedule one for later. Explain your legal situation.
     .feature
       %a{:href => "/lawyers"}
-        = image_tag('feature_3.png', :alt => '')  
+        = image_tag('feature_3.png', :alt => '')
       .feature_description
-        %h3 3 - Pay only for extended advice
-        %p For complex issues that extend past the free consultation, just pay by the minute (not by the hour!) with your credit card. Write a review when you're done!
-  -#.right_bar
-    %h2 Introduction video
-    = image_tag('video.png', :alt => '')  
+        %h3 Pay for Advice or Services.
+        %p Pay by the minute if you use more time than the free consultation, or purchase a legal service you need.
+  .right_bar
+    /%h2 Introduction video
+    /= image_tag('video.png', :alt => '')  
     .testimonials
       %h2 Testimonials
-      .avatar
+      -#.avatar
         = image_tag('ava.png', :alt => '')
         %p Johne Dwayne
       .testimonial_description
         %p
-          //%span.open_quotes
-          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
-          //%span.close_quotes
-          
+          %span.open_quotes
+          %span.desc 
+            Honestly, I wouldn’t have used a lawyer at all were it not for how easy talking to lawyer seems on Lawdingo.
+          %span.close_quotes{:style => 'margin-left: 285px;'}
+        %p.signature - Josh Leong, San Francisco
+        
+      .testimonial_description
+        %p
+          %span.open_quotes
+          %span.desc 
+            For about $100, I got the advice I needed to proceed confidently from a top-quality lawyer without needing to talk to a receptionist, go to an office, or frankly, reveal too much about myself. Highly recommended.
+          %span.close_quotes{:style => 'margin-left: 203px;'}
+        %p.signature - S.Y., Massachuesetts
+        
+      .testimonial_description
+        %p
+          %span.open_quotes
+          %span.desc 
+            Solo practitioners are always looking for cost-effective ways of bringing in new clients, and Lawdingo is great for that! It's been easy and seamless to add it to my practice. Best of all - it works! I have had paying clients from Lawdingo and I haven't had to expend a lot of time, effort, or money to get them.
+          %span.close_quotes{:style => 'margin-left: 320px;'}
+        %p.signature - Deepa Menon, Attorney    
           
 :javascript
   $ (".rating").raty({
@@ -142,19 +159,3 @@
       readOnly: true,
       start: function() {return $(this).data("score")}
   })
-  function equalHeight(group) {
-    tallest = 0;
-    group.each(function() {
-       thisHeight = $(this).height();
-       if(thisHeight > tallest) {
-          tallest = thisHeight;
-       }
-    });
-    group.height(tallest);
-  }
-  $(document).ready(function() {
-    $('.row').each(function(){
-
-      equalHeight($(this).find(".row_block"));
-    });
-  });

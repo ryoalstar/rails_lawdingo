@@ -9,6 +9,13 @@ html, body{
 .hidden{
 	display:none;
 }
+#new_lawyer{
+  #div_practice_areas, #div_states_barids{
+    h2{
+      margin:5px;
+    }
+  }
+}
 #div_states_barids{
   float:left;
   width:100%;
@@ -543,6 +550,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				padding:4px 0px 0px 6px;
 				z-index: 10;
 				border-bottom:0;
+				cursor:default;
 			}
 			.tooltip.offline, .tooltip.online{
 				border:0;
@@ -949,17 +957,46 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					}
 					.testimonial_description{
 						float:left;
-						width:260px;
+						width:380px;
+						font-family: Myriad Pro;
+						margin-bottom:20px;
+						font-style:italic;
 						p{
+						  margin-left:0;
+						  width:351px;
+						  word-spacing:1px;
+						}
+						p.signature{
+						  font-style:normal;
+						  margin-left:40px;
+						}
+						span.open_quotes{
+						  background:url(open_quotes.png) no-repeat;
+						  display:block;
+						  float:left;
+						  width:16px;
+						  height:12px;
+						  margin-right:5px;
+						}
+						span.close_quotes{
+						  background:url(close_quotes.png) no-repeat;
+						  display:block;
+						  float:right;
+						  width:16px;
+						  height:12px;
+						  margin-left:5px;
+						  position:absolute;
+						  margin-top: -16px;
+						}
+						/*p{
 							background:url(close_quotes.png) no-repeat 131px 77px;
-							width:237px;
 							margin:0;
-							font-family: Myriad Pro;
+							
 						}
 						p:first-letter{
 							background:url(open_quotes.png) no-repeat left top; 
 							padding-left: 18px;
-						}
+						}*/
 					}
 				}
 			}
@@ -1293,6 +1330,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					}
 					.ui-slider-handle{
 						position: absolute;
+						border:0;
 						z-index: 2;
 						width: 13px;
 						height: 22px;
@@ -1592,7 +1630,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					float:left;
 					background:#eff2f7;
 					height:195px;
-					width: 682px;
+					width: 647px;
 					-webkit-border-top-left-radius: 5px;
 					-webkit-border-top-right-radius: 5px;
 					-moz-border-radius-topleft: 5px;
@@ -1641,8 +1679,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					}
 					.right{
 						float:left;
-						margin-left:54px;
-						width:400px;
+						width:610px;
 						text-align:center;
 						p{
 							margin-top: 0;
@@ -2017,6 +2054,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					position: absolute;
 					text-decoration:none;
 					border-top:1px solid #dae1e7;
+					border-bottom:0;
 					color:#272727;
 					font-size:13px;
 					padding: 9px 27px;

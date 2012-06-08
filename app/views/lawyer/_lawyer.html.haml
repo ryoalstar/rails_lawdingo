@@ -50,7 +50,7 @@
       %span.text
       
       .video_chat.online.tooltip Available for video chat
-      .voice_chat.online.tooltip Available for voice chat
+      .voice_chat.online.tooltip Available by phone now
       .note_chat.tooltip Ask (text) question
       .text_chat.tooltip No appointments available
       .video_chat.offline.tooltip Not available by video now
@@ -149,19 +149,3 @@
       readOnly: true,
       start: function() {return $(this).data("score")}
   });
-  /*function equalHeight(group) {
-    var tallest = 0;
-    group.each(function() {
-       thisHeight = $(this).height();
-       if(thisHeight > tallest) {
-          tallest = thisHeight;
-       }
-    });
-    group.height(tallest);
-  }
-  $(document).ready(function() {
-    $('.row').each(function(){
-      
-      equalHeight($(this).find(".row_block"));
-    });
-  });*/
