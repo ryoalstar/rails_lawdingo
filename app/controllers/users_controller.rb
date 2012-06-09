@@ -142,6 +142,7 @@ class UsersController < ApplicationController
     if @user.save
 
       if @user.user_type == User::LAWYER_TYPE
+        Lawyer.reindex
         unless params[:practice_areas].blank?
           practice_areas = params[:practice_areas]
           practice_areas.each{|pid|
