@@ -631,6 +631,12 @@ class UsersController < ApplicationController
       if hourly_start == 6
         hourly_end=99
       end
+      if hourly_start == 4
+        hourly_end=6
+      end 
+      if hourly_start == 2
+        hourly_end=4
+      end
     end
         
     if @hourly_start.present? && @hourly_end.present?

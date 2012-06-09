@@ -60,24 +60,6 @@ class Lawyer < User
     self.practice_areas.map(&:name)*","
   end
   
-  def offerings_name
-    self.offerings.map(&:name)*","
-  end
-  
-  def offerings_description
-    self.offerings.map(&:description)*","
-  end
-  
-  def offerings_practice_area 
-    offerings_practice_area_arr=""   
-    self.offerings(:include => [:practice_area]).each do |f|
-        temp_name=f.practice_area.name+","
-        offerings_practice_area_arr=offerings_practice_area_arr+temp_name
-    end
-    offerings_practice_area_arr
-  end
-  
-  
   def state_names
      states.map(&:name)*","
   end
