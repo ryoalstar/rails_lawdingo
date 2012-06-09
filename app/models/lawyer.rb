@@ -77,6 +77,7 @@ class Lawyer < User
     search = Sunspot.new_search(Lawyer)
     search.build do
       fulltext query
+      paginate :per_page => 100
     end
     search
   end
