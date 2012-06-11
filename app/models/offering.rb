@@ -21,6 +21,7 @@ class Offering < ActiveRecord::Base
       search = Sunspot.new_search(Offering)
       search.build do
         fulltext query
+        paginate :per_page => 100
       end
       search
     end
