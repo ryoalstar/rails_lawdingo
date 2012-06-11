@@ -99,6 +99,9 @@
                 = start_or_schedule_button(lawyer)
             - if lawyer.phone.present? 
               %li
+                = start_or_schedule_button(lawyer)
+            - if lawyer.phone.present? 
+              %li
                 = start_phone_consultation(lawyer)
             %li
               = start_or_schedule_button_text(lawyer)

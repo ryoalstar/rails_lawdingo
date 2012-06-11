@@ -118,9 +118,15 @@ module LawyersHelper
     else
       if logged_in?
         if lawyer.phone.present?
-          link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
-        else
-          link_to "schedule consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+          if current_user.stripe_customer_token.present?
+            link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+          else
+            # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
+            link_to "Chat now by phone", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
+          end
+
+        #else
+         #link_to "schedule consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
         end
       else
         if lawyer.phone.present?
@@ -242,10 +248,10 @@ module LawyersHelper
     is_are = @lawyers.count == 1 ? "is" : "are"
     ct = @lawyers.count == 0 ? "no" : @lawyers.count.to_s
     lawyers_string = @lawyers.count == 1 ? "lawyer" : "lawyers"
-
+    parent_practice_area_string = params[:practice_area] if !!params[:practice_area] && params[:practice_area]!='All'
     return "There #{is_are} #{ct}#{selected_state_string}" +
-      "#{parent_practice_area_string} #{lawyers_string} " +
-      "who can offer you legal advice#{child_practice_area_string} " +
+      " #{parent_practice_area_string} #{lawyers_string} " +
+      "who can offer you legal advice #{child_practice_area_string} " +
       "right now."
   end
 
@@ -253,9 +259,9 @@ module LawyersHelper
     is_are = @offerings.count == 1 ? "is" : "are"
     ct = @offerings.count == 0 ? "no" : @offerings.count.to_s
     service_string = @offerings.count == 1 ? "service" : "services"
-
+    parent_practice_area_string = params[:practice_area] if !!params[:practice_area] && params[:practice_area]!='All'
     return "There #{is_are} #{ct}#{selected_state_string}" +
-      "#{parent_practice_area_string} #{service_string} " +
+      " #{parent_practice_area_string} #{service_string} " +
       "that may be of interest to you."
   end
 

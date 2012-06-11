@@ -28,7 +28,8 @@
             %label{:for => "state"} In:
           .national-area-notice
             %p
-            %a.show-states-selector{ href: "#" } Set state anyway
+            -#%a.show-states-selector{ href: "#" } Set state anyway 
+            -#Auto-detect state (need repair)
           %select.states{:name => "state"}
             %option{"data-default" => "1", :value => "All-States"} Any state
             - @states.each do |state|
@@ -42,7 +43,8 @@
             %label{:for => "practice_area_All"} All types
           - @practice_areas.each do |area|
             %p
-              = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
+              -# = radio_button_tag "practice_area", area.name, data: { is_national: area.is_national?.to_s }
+              = radio_button_tag "practice_area", area.name
               = label_tag "practice_area_#{area.name}", area.name
             - if area.children.with_approved_lawyers.present?
               .practice-areas.children{:style => "display:none"}
@@ -57,12 +59,18 @@
         %h3 Specific need:
         %ul.specialities
 
-      .left-bar-section
+      .left-bar-section#search_class
         %h3 Search
         %a#clear_data_search 
-          = image_tag('close_sea.png', :alt => 'clear')
-        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}   
-      -#.left-bar-section
+          = image_tag('close_sea.png', :alt => 'clear', :id => "input_close_sea_img")
+          = image_tag('search_bg.png', :alt => 'clear', :id => "input_search_bg_img")
+        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
+      %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
+      %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
+      %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
+      %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
+      %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}   
+      .left-bar-section
         %h3 Minimum free minutes:
         %p.hidden
           %label{:for => "minimum_free_minutes"} Minimum free minutes:
@@ -96,7 +104,7 @@
             %span 4
           .star.star_5
             %span 5    
-      -#.left-bar-section
+      .left-bar-section
         %h3 Hourly rate:
         %p.hidden
           %label{:for => "hourly_rate"} Hourly rate:

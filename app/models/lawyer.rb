@@ -30,7 +30,7 @@ class Lawyer < User
   #solr index
   searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
    text :practice_areas do
-     practice_area_names
+      practice_area_names
    end
    text :personal_tagline
    text :first_name
@@ -46,27 +46,29 @@ class Lawyer < User
      school.name if school.present?
    end
    string :bar_memberships, :multiple => true
+   integer :free_consultation_duration 
+   float :rate 
+   integer :lawyer_star_rating do
+     reviews.average(:rating).to_i
+   end 
+   integer :school_rank do
+     school.rank_category if !!school
+   end
   end
   
   def practice_area_names
     self.practice_areas.map(&:name)*","
   end
   
-  
   def state_names
      states.map(&:name)*","
-  
   end
  
    
   def review_purpos
       reviews.map(&:purpose)*","
   end
-  
-  
-   
-   
-   
+
   def reindex!
      Sunspot.index!(self)
   end
@@ -75,8 +77,9 @@ class Lawyer < User
     search = Sunspot.new_search(Lawyer)
     search.build do
       fulltext query
+      paginate :per_page => 100
     end
-    search    
+    search
   end
   
   has_many :expert_areas

@@ -2,7 +2,38 @@ class Home
 
   initialize : ()->
     this.add_event_listeners()
-
+    
+    document.my_flag_search=false
+    
+    Home.h = {}
+    Home.h[198] = 90
+    Home.h[169] = 60
+    Home.h[141] = 30
+    Home.h[113] = 20
+    Home.h[84] = 15
+    Home.h[56] = 10
+    Home.h[28] = 5
+    Home.h[0] = 2
+    
+    Home.r = {}
+    Home.r[198] = 5
+    Home.r[148] = 4
+    Home.r[99] = 3
+    Home.r[49] = 2
+    Home.r[0] = 1
+    
+    Home.v = {}
+    Home.v[198] = 6
+    Home.v[131] = 4
+    Home.v[65] = 2
+    Home.v[0] = 0
+    
+    Home.s = {}
+    Home.s[198] = 1
+    Home.s[131] = 2
+    Home.s[65] = 3
+    Home.s[0] = 4
+    
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
 
@@ -30,6 +61,51 @@ class Home
       this.submit()
       false
     )
+    $("#free_minutes_slider").bind "slidechange", (event, ui)=>
+      $("#freetimeval").val(Home.h[$("#free_minutes_slider .ui-slider-range").width()])
+      this.submit()
+      false
+    $("#minimum_client_rating").bind "slidechange", (event, ui)=>
+      $("#ratingval").val(Home.r[$("#minimum_client_rating .ui-slider-range").width()])
+      this.submit()
+      false
+    $("#hourly_rate").bind "slidechange", (event, ui)=>
+      $("#hourlyratestart").val(Home.v[$("#hourly_rate .ui-slider-handle").first().position().left])
+      $("#hourlyrateend").val(Home.v[$("#hourly_rate .ui-slider-handle").last().position().left])
+      this.submit()
+      false
+    $("#law_school_quality").bind "slidechange", (event, ui)=>
+      $("#schoolrating").val(Home.s[$("#law_school_quality .ui-slider-range").width()])
+      this.submit()
+      false
+       
+      
+    $("#clear_data_search").click =>
+        if document.my_flag_search
+          document.my_flag_search=false
+          $("#search_query").val('')
+          $("#input_close_sea_img").hide()
+          $("#input_search_bg_img").show()
+          $("#search_query").submit()
+          false
+        if !document.my_flag_search && $("#search_query").val()
+          document.my_flag_search=true
+          $("#input_search_bg_img").hide()
+          $("#input_close_sea_img").show()
+          $("#search_query").submit()
+          false
+    $("#search_query").keypress((e) =>
+      if e.keyCode == 13
+        if !document.my_flag_search && $("#search_query").val()
+          document.my_flag_search=true
+          $("#input_search_bg_img").hide()
+          $("#input_close_sea_img").show()
+          $("#search_query").submit()
+          false
+        this.set_defaults_s(default_state)
+        this.submit()
+        false
+      )
 
     this.service_type_fields().click((e)=>
       this.set_service_type_fields_val(
@@ -52,17 +128,41 @@ class Home
     )
 
   current_search_url : ()->
-    if @practice_area == "Any state"
-      "/lawyers/#{@service_type}/#{@state}"
+    params = "?"
+    if $("#search_query").val()
+      params += "&search_query=" + $("#search_query").val() 
+    if $("#freetimeval").val()
+      params += "&freetimeval=" + $("#freetimeval").val() 
+    if $("#ratingval").val()
+      params += "&ratingval=" + $("#ratingval").val()
+    if ( $("#hourlyratestart").val() && $("#hourlyrateend").val() )
+      params += "&hourlyratestart=" + $("#hourlyratestart").val() + "&hourlyrateend=" + $("#hourlyrateend").val()
+    if $("#schoolrating").val()
+      params += "&schoolrating=" + $("#schoolrating").val()
+    
+    if @practice_area == "All"
+      "/lawyers/#{@service_type}/#{@state}"+params
+    if !@service_type 
+      @service_type="Legal-Advice"
+    if !@state 
+      @state="All-States"
+    if !@practice_area 
+      @practice_area="All"
     else
       practice_area = @practice_area.replace /\s+/g, "-"
-      "/lawyers/#{@service_type}/#{@state}/#{practice_area}"
+      "/lawyers/#{@service_type}/#{@state}/#{practice_area}"+params
       
   current_hash : ()->
     "!#{this.current_search_url()}"
   current_title : ()->
+    if !@service_type 
+      @service_type="Legal-Advice"
+    if !@state 
+      @state="All-States"
+    if !@practice_area 
+      @practice_area="All"
     service_type = @service_type.replace /-/, " "
-    state = @state.replace /_/g, " "
+    state = @state.replace /_/, " "
     practice_area = @practice_area.replace /-/, " "
     "#{service_type} from #{state} #{practice_area} Lawyers. Lawdingo: Ask a Lawyer Online Now"
   current_meta : ()->
@@ -95,13 +195,23 @@ class Home
       )
     else
       this.set_state_fields_val(default_state+'-lawyers')
-
-    this.set_practice_area_fields_val(
-      this.practice_area_fields()
-        .filter("[data-default=1]")
-        .val()
-    )
-
+      this.set_practice_area_fields_val(
+        this.practice_area_fields()
+          .filter("[data-default=1]")
+          .val()
+      ).parent().find('img').trigger('click')
+      
+  set_defaults_s : (default_state)->
+    if (default_state == "")
+      this.set_state_fields_val(
+          this.state_fields().find(
+            "option[data-default=1]"
+          ).val()
+      
+      )
+    else
+      this.set_state_fields_val(default_state+'-lawyers')
+      
   form : ()->
     $("form.filters")
 

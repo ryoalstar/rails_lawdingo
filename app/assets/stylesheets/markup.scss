@@ -1204,7 +1204,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-top:1px solid #aaafb8;
 					padding:7px 24px;
 					text-decoration:none;
-					color:#371C1C;
+					color:#5d656b;
 					font-size:12px;
 					background:url(advice_button.png) repeat-x;
 					display: block;
@@ -1220,7 +1220,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					border-top:1px solid #aaafb8;
 					padding:7px 24px;
 					text-decoration:none;
-					color:#371C1C;
+					color:#5d656b;
 					font-size:12px;
 					background:url(advice_button.png) repeat-x;
 					display: block;
@@ -2030,31 +2030,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
   padding: 0 !important;
 }
 
-.national-area-notice {
-  position: relative;
-  display: block;
-  line-height: 1.4;
-
-  .state {
-    color: #222;
-    padding: 2px;
-    background-color: #F7EEC6;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  a.show-states-selector {
-    line-height: 1.1;
-    display: inline-block;
-    text-decoration: none;
-    border-bottom: 1px dotted #2491FF;
-    padding-bottom: 1px;
-    margin-top: 4px;
-
-    &:hover {
-      text-decoration: none;
-      border-bottom: none;
-    }
-  }
+#input_close_sea_img{
+  display:none;
+}
+#input_search_bg_img{
+  display:block;
 }

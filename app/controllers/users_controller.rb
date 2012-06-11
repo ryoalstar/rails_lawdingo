@@ -37,15 +37,32 @@ class UsersController < ApplicationController
     @states = State.with_approved_lawyers
     query = params[:search_query]
     
-    @search = Lawyer.build_search(query)
+    service_type = (params[:service_type] || "")
+    @service_type = service_type.downcase || ""
     
+    
+    if @service_type == "legal-services"
+       @search = Offering.build_search(query)
+    else
+       @search = Lawyer.build_search(query) 
+    end
+    
+    add_service_type_scope
     add_state_scope
     add_practice_area_scope
-    add_service_type_scope
+    add_free_time_scope
+    add_lawyer_rating_scope
+    add_hourly_rate_scope
+    add_school_rank_scope
     
     @search.execute
-    @lawyers = @search.results
-
+        
+    if @service_type == "legal-services"
+      @offerings = @search.results
+    else
+      @lawyers = @search.results  
+    end
+    
     # we try to auto-detect the state if possible
     if self.get_state_name.blank? && request.location.present? && request.location.state_code.present?
       if state = State.find_by_abbreviation(request.location.state_code)
@@ -125,6 +142,7 @@ class UsersController < ApplicationController
     if @user.save
 
       if @user.user_type == User::LAWYER_TYPE
+        Lawyer.reindex
         unless params[:practice_areas].blank?
           practice_areas = params[:practice_areas]
           practice_areas.each{|pid|
@@ -550,11 +568,14 @@ class UsersController < ApplicationController
     # handle the type of service offered
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase
-
+    
     # legal services
     if @service_type == "legal-services"
       # @lawyers = @lawyers.offers_legal_services
       @offerings = Offering.find(:all, conditions: { user_id: @lawyers.offers_legal_services.map(&:id) })
+      @search.build do
+        fulltext params[:search_query]
+      end
     # default is legal advice
     else
       @lawyers = @lawyers.offers_legal_advice
@@ -565,17 +586,81 @@ class UsersController < ApplicationController
   # main search
   # add state_scope_for_search__SOLR
   def add_state_scope
-      # store selected state for the view
-      @selected_state = State.name_like(self.get_state_name).first
-      state_name = @selected_state.name if !!@selected_state 
-      if @selected_state.present? 
-        @search.build do
-          fulltext state_name
-        end
-
+    # store selected state for the view
+    @selected_state = State.name_like(self.get_state_name).first
+    state_name = @selected_state.name if !!@selected_state 
+    if @selected_state.present? 
+      @search.build do
+        fulltext state_name
       end
-
     end
+   end
+  
+  def add_free_time_scope
+    @free_time_val = params[:freetimeval].to_i if !!params[:freetimeval]
+    free_time_val_s = @free_time_val
+    free_time_val_e = 90
+    if @free_time_val.present?
+       @search.build do
+         with :free_consultation_duration, (free_time_val_s)..(free_time_val_e)
+       end
+    end
+  end
+  
+  def add_lawyer_rating_scope
+    @lawyer_rating = params[:ratingval].to_i if !!params[:ratingval]
+    rating_start = @lawyer_rating
+    rating_end = 90
+    if @lawyer_rating.present?
+       @search.build do
+         with :lawyer_star_rating, (rating_start)..(rating_end)
+       end
+    end
+  end
+  
+  
+  def add_hourly_rate_scope
+    @hourly_start = params[:hourlyratestart].to_i if !!params[:hourlyratestart]
+    @hourly_end = params[:hourlyrateend].to_i if !!params[:hourlyrateend]
+  
+    hourly_start = @hourly_start
+    hourly_end = @hourly_end
+    if hourly_start==hourly_end
+      if hourly_start == 0
+        hourly_end=2
+      end
+      if hourly_start == 6
+        hourly_end=99
+      end
+      if hourly_start == 4
+        hourly_end=6
+      end 
+      if hourly_start == 2
+        hourly_end=4
+      end
+    end
+        
+    if @hourly_start.present? && @hourly_end.present?
+       @search.build do
+         with :rate, (hourly_start-AppParameter.service_charge_value)..(hourly_end-AppParameter.service_charge_value)
+       end
+    end
+  end
+  
+  
+  def add_school_rank_scope
+    @school_rank = params[:schoolrating].to_i if !!params[:schoolrating]
+  
+    rank_start = @school_rank
+    rank_end = 4
+    
+    if @school_rank.present?
+       @search.build do
+         with :school_rank, (rank_start)..(rank_end)
+       end
+    end
+  end
+  
   
   
 
@@ -583,15 +668,15 @@ class UsersController < ApplicationController
   # main search
   # add practic_area_scope_for_search__SOLR
   def add_practice_area_scope 
-      # if we have a practice area
-      if params[:practice_area].present?
-        scope = PracticeArea.name_like(params[:practice_area])
-        area_name = scope.first.name if scope.first
-          @search.build do
-            fulltext area_name
-          end
-      end
+    # if we have a practice area
+    if params[:practice_area].present?
+      scope = PracticeArea.name_like(params[:practice_area])
+      area_name = scope.first.name if scope.first
+        @search.build do
+          fulltext area_name
+        end
     end
+  end
   
  
 

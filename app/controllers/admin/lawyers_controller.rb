@@ -60,6 +60,7 @@ class Admin::LawyersController < ApplicationController
     if account
       new_status = !account.is_approved
       account.update_attribute(:is_approved, new_status)
+      Lawyer.reindex
       notice = 'Account Approval Changed!'
     else
       notice = 'No Account found!'
