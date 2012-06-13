@@ -125,7 +125,7 @@ $(document).ready(function(){
   });
   $( "#free_minutes_slider" ).slider({
     range: "min",
-    value: 2,
+    value: 1,
     min: 1,
     max: 8,
     slide: function( event, ui ) {
@@ -147,7 +147,7 @@ $(document).ready(function(){
   
   $( "#hourly_rate" ).slider({
     range: true,
-    values: [ 2, 3 ],
+    values: [ 1, 4 ],
     min: 1,
     max: 4,
     slide: function( event, ui ) {
