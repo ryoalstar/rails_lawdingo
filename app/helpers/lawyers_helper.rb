@@ -130,7 +130,7 @@ module LawyersHelper
         end
       else
         if lawyer.phone.present?
-          link_to 'Chat now by phone', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ''
+          link_to 'Chat now by phone', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ''
         #else
           #link_to 'schedule consultation', new_user_path(ut: 0, notice: true), :class => ''
         end
@@ -201,7 +201,7 @@ module LawyersHelper
    if logged_in?
       link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
   else
-    link_to 'Chat now by phone', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
+    link_to 'Chat now by phone', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
   end
  end
 
@@ -210,7 +210,7 @@ module LawyersHelper
 
        link_to "", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
    else
-     link_to "", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
+     link_to "", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
    end
  end
 
@@ -218,7 +218,7 @@ module LawyersHelper
     if logged_in?
       link_to "Start free phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
    else
-     link_to "Start free phone consultation", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id)), :class => ""
+     link_to "Start free phone consultation", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
    end
  end
 

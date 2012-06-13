@@ -4,7 +4,7 @@ class AttorneysController < ApplicationController
   def show
     @attorney = Lawyer.find(params[:id])
     # set the time zone
-    Time.zone = @attorney.time_zone
+    Time.zone = @attorney.daily_hours.time_zone
     
     @video = Framey::Video.find_by_creator_id(@attorney.id) if @attorney.has_video?
 

@@ -1,12 +1,16 @@
 <% is_client = @user.is_client? %>
 
-
 <div id="page" class="signup">
-  <% if params[:notice].present? %>
-    <p class="notice">
-      To connect with a lawyer, simply sign up or sign in with Lawdingo.
-      <a href="#" id="close_notice">Close</a>
-    </p>
+  <% if params[:lawyer_path].present? %>
+    <% @lawyer = Lawyer.find(params[:lawyer_path]) %>  
+    <% if params[:notice].present? %>
+      <p class="notice">
+        <% if @lawyer %>
+          To connect with <%= @lawyer.full_name %>, simply sign up or sign in with Lawdingo.
+        <% end %>
+        <a href="#" id="close_notice">Close</a>
+      </p>
+    <% end %>
   <% end %>
 
   <% if is_client %>
@@ -20,11 +24,14 @@
   </div>
 
   <div class="form-wrapper signin">
-    <p>Already a Lawdingo member? <%= link_to "Log in", login_path(session[:return_to])%> now.</p>
+    <% if @lawyer %>
+      <p>Already a Lawdingo member? <%= link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)%> now.</p>
+    <% else %>
+      <p>Already a Lawdingo member? <%= link_to "Log in", login_path(session[:return_to])%> now.</p>
+    <% end %>
   </div>
 
   <% if is_client %>
     <h3 style="color: #818181;">Lawyer? <%= link_to "Apply here", new_lawyer_path %>.</h3>
   <% end %>
 </div>
-
