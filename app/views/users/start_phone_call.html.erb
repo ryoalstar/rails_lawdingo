@@ -1,5 +1,5 @@
 <div id="page" class="signup">
-<p class="notice">To connect with the lawyer, just enter your phone number. In a minute you’ll be magically connected to <%= @lawyer.first_name %> by conference call.</p>
+<p class="notice">To start the consultation, enter your phone number. In a minute, if <%= @lawyer.first_name %> is available, you'll get a call and be connected.</p>
 <div>
 <%= form_tag create_call_path(:lawyer_id =>params[:id]), :id=>"phone_input_form" do %>
     <span class="phone-label">Your phone number:</span><br/>

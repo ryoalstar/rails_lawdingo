@@ -226,6 +226,15 @@ $(function(){
 							  self.find('.carousel-description span.video').html('').addClass("offline").removeClass("online");
 						}
 						
+						if (carousel_info["schedule_consultation"] !== undefined) {
+						  self.find('.carousel-description span.text')
+						    .addClass("online").removeClass("offline")
+								.html(carousel_info["schedule_consultation"]);
+						} else {
+							  self.find('.carousel-description span.text').html('').addClass("offline").removeClass("online");
+						}
+						
+						
 						if (carousel_info["start_phone_consultation_p"] !== undefined) {
 						  self.find('.carousel-description span.voice')
 						    .addClass("online").removeClass("offline")
@@ -285,7 +294,7 @@ $(function(){
         cont.append( next );
         self.find('.carousel-image').append(cont);
 
-        
+        self.interv = setInterval( next_image, 2500 );
     }
 
     $.fn.dialog = function( ){
@@ -354,7 +363,7 @@ $(function(){
               //grab the inputs id for the <label @for>, or make a new one from the Date
               inputId = (this.id) ? this.id : 'placeholder' + (+new Date()),
               placeholderText = $this.attr('placeholder'),
-              placeholder = $('<label for='+ inputId +'>'+ placeholderText + '</label>');
+              placeholder = $('<label for='+ inputId +' class="placeholder_text"'+'>'+ placeholderText + '</label>');
 
           //stuff in some calculated values into the placeholderCSS object
           options.placeholderCSS['width'] = inputWidth;

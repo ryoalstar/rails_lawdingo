@@ -132,7 +132,8 @@ class SearchController < ApplicationController
        images_hash["start_phone_conversation"] = start_phone_consultation(lawyer) if lawyer.phone.present? 
        images_hash["start_or_video_button_p"] = start_or_video_button_p(lawyer) if lawyer.is_online
        images_hash["start_phone_consultation_p"] = start_phone_consultation_p(lawyer) if lawyer.phone.present? 
-       images_hash["send_text_question"]       = start_or_schedule_button_text(lawyer)
+       images_hash["send_text_question"]  = start_or_schedule_button_text(lawyer)
+       images_hash["schedule_consultation"]  = "<a href='#' class='appt-select'></a>" if lawyer.daily_hours.present?
        images_hash["start_or_schedule_button_text_profile"] = start_or_schedule_button_text_profile(lawyer)
          
        list << images_hash

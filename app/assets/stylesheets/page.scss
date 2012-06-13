@@ -24,76 +24,7 @@
 
 
 
-#header{
-	height:73px;
-	margin-bottom: 2px;
-	background: url(header_bg.png) repeat-x;
-	text-align: center;
-	a{
-	  border-bottom:0;
-	}
-	.wrapper{
-		width:990px;
-		margin:0 auto;
-		line-height: 64px;
-		.logo{
-			float:left;
-			line-height: 10px;
-			img{
-				margin-top: 19px;
-			}
-		}
-		.links{
-			float:right;
-			ul{
-				list-style:none;
-				margin-top: 4px; 
-				li{
-					float:left;
-					a{
-						color:white;
-						padding:2px 11px 3px 11px;
-						text-decoration:none;
-						font-size:14px;
-						margin: 0px 5px;
-					}
-					a:hover, a.selected{
-						background:url(login_button_selected_bg.png) repeat-x;
-						-moz-border-radius:15px;
-						-webkit-border-radius:15px;
-						border-radius:15px;
-					}
-					a.signup:hover{
-						background:url(signup_hover.png) no-repeat;
-					}
-					a.lawyers_signup{
-						background:url(signup_button_full.png) no-repeat 0px -1px;
-						height:32px;
-						display:block;
-						width:160px;
-						margin-left:27px;
-						margin-top:16px;
-						padding-right: 0;
-						margin-right: 0;
-						padding:0;
-					}
-					a.lawyers_signup:hover{
-						background-position:0px -32px;
-						-moz-border-radius:0px;
-						-webkit-border-radius:0px;
-						border-radius:0px;
-					}
-					a.lawyers_signup:active{
-						background-position:0px -63px;
-						-moz-border-radius:0px;
-						-webkit-border-radius:0px;
-						border-radius:0px;
-					}
-				}
-			}
-		}
-	}
-}
+
 #footer{
 	height:84px;
 	width:100%;

@@ -686,7 +686,10 @@ class UsersController < ApplicationController
     state_name = (params[:state] || "").gsub(/\-lawyers?$/,'')
     return state_name.gsub(/\-/,' ')
   end
-
+  
+  def daily_hours
+  end
+  
 end
 
 # Obtain lawyers according to sent GET params

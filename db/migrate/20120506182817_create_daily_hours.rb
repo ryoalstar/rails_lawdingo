@@ -3,8 +3,8 @@ class CreateDailyHours < ActiveRecord::Migration
     create_table(:daily_hours) do |t|
       t.integer(:lawyer_id)
       t.integer(:wday)
-      t.integer(:start_time)
-      t.integer(:end_time)
+      t.integer(:start_time, :default => -1)
+      t.integer(:end_time, :default => -1)
     end
   end
 

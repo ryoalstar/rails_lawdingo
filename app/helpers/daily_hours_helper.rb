@@ -4,7 +4,7 @@ module DailyHoursHelper
   def daily_hours_time_select(name, wday)
     # get our relevant daily hour
     daily_hour = @daily_hours.select{|dh| dh.wday == wday}.first 
-    daily_hour ||= DailyHour.new(:start_time => 900, :end_time => 1700)
+    daily_hour ||= DailyHour.new(:start_time => -1, :end_time => -1)
 
     opts = {
       :name => "daily_hours[#{wday}][#{name}]", 

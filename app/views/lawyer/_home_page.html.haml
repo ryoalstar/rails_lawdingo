@@ -2,7 +2,8 @@
 - photo_url = user.photo.url(:medium)
 - tab       = tab == User::ACCOUNT_TAB ? tab : User::SESSION_TAB
 - txt_color = ['black','blue']
-%h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
+- if current_user.is_lawyer?
+  %h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
 %div
   %div{:style => "font-size:14px;margin-right:8px;margin-bottom:10px;font-weight:bold;"}
     = link_to_unless_current "Profile info", user_path(user, :t => User::ACCOUNT_TAB)

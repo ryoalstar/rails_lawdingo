@@ -76,14 +76,24 @@ $(document).ready(function(){
 	$("span.voice.online").live('mouseout', function(){
 	  $(this).nextAll(".voice_chat.tooltip.online").fadeOut('slow');
 	});
+	
+	
+	$("span.text.online").live('mouseover', function(){
+	  $(this).nextAll(".text_chat.tooltip.online").fadeIn('slow');
+	});
+	$("span.text.online").live('mouseout', function(){
+	  $(this).nextAll(".text_chat.tooltip.online").fadeOut('slow');
+	});	
+	$("span.text.offline").live('mouseover', function(){
+	  $(this).nextAll(".text_chat.tooltip.offline").fadeIn('slow');
+	});
+	$("span.text.offline").live('mouseout', function(){
+	  $(this).nextAll(".text_chat.tooltip.offline").fadeOut('slow');
+	});
+	
+	
 	$("span.note").live('mouseover', function(){
 	  $(this).nextAll(".note_chat.tooltip").fadeIn('slow');
-	});
-	$("span.text").live('mouseover', function(){
-	  $(this).nextAll(".text_chat.tooltip").fadeIn('slow');
-	});
-	$("span.text").live('mouseout', function(){
-	  $(this).nextAll(".text_chat.tooltip").fadeOut('slow');
 	});
 	$("span.video.offline").live('mouseover', function(){
 	  $(this).nextAll(".video_chat.tooltip.offline").fadeIn('slow');

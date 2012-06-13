@@ -1,4 +1,5 @@
-%h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
+- if current_user.is_lawyer?
+  %h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
 #page.framey-video
   %div
     .profile

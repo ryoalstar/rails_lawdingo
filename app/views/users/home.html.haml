@@ -18,6 +18,17 @@
     .left-bar
       .left-bar-section.first
         %h2 Find the right lawyer
+      .left-bar-section#search_class
+        %a#clear_data_search 
+          = image_tag('close_sea.png', :alt => 'clear', :id => "input_close_sea_img")
+          = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
+        %h3 Search
+        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
+        %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
+        %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
+        %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
+        %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
+        %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}
       #service_type.left-bar-section
         %h3 Legal:
         %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
@@ -59,17 +70,6 @@
         %h3 Specific need:
         %ul.specialities
 
-      .left-bar-section#search_class
-        %h3 Search
-        %a#clear_data_search 
-          = image_tag('close_sea.png', :alt => 'clear', :id => "input_close_sea_img")
-          = image_tag('search_bg.png', :alt => 'clear', :id => "input_search_bg_img")
-        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
-      %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
-      %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
-      %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
-      %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
-      %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}   
       .left-bar-section
         %h3 Minimum free minutes:
         %p.hidden

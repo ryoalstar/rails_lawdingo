@@ -5,7 +5,7 @@
 - practice_area_text=""
 - practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. "
 - description = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
-- #title @tagline
+- title "Legal advice online. Chat with a lawyer now on Lawdingo."
 - if params[:reset_email_notice].present?
   %p.notice
     Thanks - please check your email for instructions on resetting your password.
@@ -49,11 +49,16 @@
                 - else 
                   %span.voice.offline
                 %span.note= start_or_schedule_button_text_profile(lawyer)
-                %span.text
+                - if lawyer.daily_hours.present?
+                  %span.text.online
+                    %a.appt-select{:href => '#'}
+                - else
+                  %span.text.offline
                 .video_chat.online.tooltip Available for video chat
                 .voice_chat.online.tooltip Available by phone now
                 .note_chat.tooltip Ask (text) question
-                .text_chat.tooltip No appointments available
+                .text_chat.offline.tooltip No appointments available
+                .text_chat.online.tooltip Schedule consultation
                 .video_chat.offline.tooltip Not available by video now
                 .voice_chat.offline.tooltip Not available by phone now
             %p.desc= raw(description)
@@ -107,7 +112,7 @@
         = image_tag('feature_1.png', :alt => '')  
       .feature_description
         %h3 Browse Lawyers.
-        %p Find the right lawyer for you, by state practice area and price.
+        %p Find the right lawyer for you, by state, practice area and price.
     .feature
       %a{:href => "/lawyers"}
         = image_tag('feature_2.png', :alt => '')  
@@ -124,7 +129,7 @@
     /%h2 Introduction video
     /= image_tag('video.png', :alt => '')  
     .testimonials
-      %h2 Testimonials
+      %h2 Testimonials:
       -#.avatar
         = image_tag('ava.png', :alt => '')
         %p Johne Dwayne
@@ -133,7 +138,7 @@
           %span.open_quotes
           %span.desc 
             Honestly, I wouldn’t have used a lawyer at all were it not for how easy talking to lawyer seems on Lawdingo.
-          %span.close_quotes{:style => 'margin-left: 285px;'}
+          /%span.close_quotes{:style => 'margin-left: 285px;'}
         %p.signature - Josh Leong, San Francisco
         
       .testimonial_description
@@ -141,7 +146,7 @@
           %span.open_quotes
           %span.desc 
             For about $100, I got the advice I needed to proceed confidently from a top-quality lawyer without needing to talk to a receptionist, go to an office, or frankly, reveal too much about myself. Highly recommended.
-          %span.close_quotes{:style => 'margin-left: 203px;'}
+          /%span.close_quotes{:style => 'margin-left: 203px;'}
         %p.signature - S.Y., Massachuesetts
         
       .testimonial_description
@@ -149,7 +154,7 @@
           %span.open_quotes
           %span.desc 
             Solo practitioners are always looking for cost-effective ways of bringing in new clients, and Lawdingo is great for that! It's been easy and seamless to add it to my practice. Best of all - it works! I have had paying clients from Lawdingo and I haven't had to expend a lot of time, effort, or money to get them.
-          %span.close_quotes{:style => 'margin-left: 320px;'}
+          /%span.close_quotes{:style => 'margin-left: 320px;'}
         %p.signature - Deepa Menon, Attorney    
           
 :javascript

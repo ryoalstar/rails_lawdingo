@@ -18,6 +18,8 @@
             %ul.errors
               - errors.full_messages.each do |error|
                 %li= error
+      -# Time zone	  	
+      = f.time_zone_select(:time_zone)          
       = hidden_field_tag :user_type, @user[:user_type]
       = f.text_field :first_name ,{:placeholder=>"First Name",:class=>"name"}
       = f.text_field :last_name ,{:placeholder=>"Last Name",:class=>"name"}
@@ -81,6 +83,7 @@
         = f.text_area :personal_tagline ,{:placeholder=>"Professional summary (2000 chars)", :class=>"summary",:maxlength => 2000, :rows=>2}
         %div{:style => "font-size:14px;"} Upload a photo
         = f.file_field :photo
+        .clear
         / div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/
         - i = 0
         #dialog-overlay

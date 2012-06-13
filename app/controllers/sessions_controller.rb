@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
        end
       elsif user.is_lawyer?
         # redirect the lawyer to the session summary page
-        return_path = user_path(current_user, :t=>'l')
+        return_path = user_daily_hours_path(user.id)
       elsif user.is_admin?
         return_path = user_path(user.id)
       end

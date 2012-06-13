@@ -130,16 +130,15 @@ ul.offerings-list {
     }
 
     .controls {
-      display: inline-block;
-      margin-left: 1em;
+      display: inline;
       font-size: 0.75em;
-
       a {
+        border-bottom:0;
         color: #222;
         background-color: #F7EEC6;
         padding: 1px 3px;
         border-radius: 3px;
-        margin-right: 0.5em;
+        margin-right: 0;
       }
     }
   }

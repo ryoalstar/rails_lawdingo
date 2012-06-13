@@ -6,8 +6,81 @@ html, body{
 	height:100%;
 	background: url(content_bg.png) repeat;
 }
+#header{
+	height:73px;
+	margin-bottom: 0px;
+	background: url(header_bg.png) repeat-x;
+	text-align: center;
+	a{
+	  border-bottom:0;
+	}
+	.wrapper{
+		width:990px;
+		margin:0 auto;
+		line-height: 64px;
+		.logo{
+			float:left;
+			line-height: 10px;
+			img{
+				margin-top: 19px;
+			}
+		}
+		.links{
+			float:right;
+			ul{
+				list-style:none;
+				margin-top: 4px; 
+				li{
+					float:left;
+					a{
+						color:white;
+						padding:2px 11px 3px 11px;
+						text-decoration:none;
+						font-size:14px;
+						margin: 0px 5px;
+					}
+					a:hover, a.selected{
+						background:url(signup_hover_bg.png) repeat-x;
+						-moz-border-radius:10px;
+						-webkit-border-radius:10px;
+						border-radius:10px;
+					}
+					a.lawyers_signup{
+						background:url(signup_button_full.png) no-repeat 0px -2px;
+						height:30px;
+						display:block;
+						width:160px;
+						margin-left:27px;
+						margin-top:16px;
+						padding-right: 0;
+						margin-right: 0;
+						padding:0;
+						-moz-border-radius:0;
+						-webkit-border-radius:0;
+						border-radius:0;
+					}
+					a.lawyers_signup:hover{
+						background-position:0px -33px;
+						-moz-border-radius:0px;
+						-webkit-border-radius:0px;
+						border-radius:0px;
+					}
+					a.lawyers_signup:active{
+						background-position:0px -64px;
+						-moz-border-radius:0px;
+						-webkit-border-radius:0px;
+						border-radius:0px;
+					}
+				}
+			}
+		}
+	}
+}
 .hidden{
 	display:none;
+}
+.placeholder_text{
+  font-size:16px !important;
 }
 #new_lawyer{
   #div_practice_areas, #div_states_barids{
@@ -61,7 +134,8 @@ body.daily_hours.index{
   .profile{
     display: inline-block;
     .left_menu{
-      display: inline-block;
+      display: block;
+      width:168px;
       float: left;
       ul{
         li{
@@ -88,7 +162,8 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
     .profile{
       display: inline-block;
       .left_menu{
-        display: inline-block;
+        display: block;
+        width:168px;
         float: left;
         ul{
           li{
@@ -110,9 +185,9 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
       .profile-block{
         display: inline-block;
         float:left;
-        width: 638px;
+        width: 630px;
         padding: 10px 0px 0 40px;
-        #offerings{
+        #new_offering{
           float:left;
           display:inline-block;
           width:320px;
@@ -120,7 +195,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
         #offerings-listing{
           float: right;
           display: inline-block;
-          width:250px;
+          width: 270px;
           min-height:410px;
           overflow: hidden;
           border-left: 2px solid #888;
@@ -136,7 +211,8 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
   .profile{
     display: inline-block;
     .left_menu{
-      display: inline-block;
+      display: block;
+      width:168px;
       float: left;
       ul{
         li{
@@ -158,9 +234,9 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
     .profile-block{
       display: inline-block;
       float:left;
-      width: 638px;
+      width: 630px;
       padding: 10px 0px 0 40px;
-      #offerings{
+      #new_offering{
         float:left;
         display:inline-block;
         width:220px;
@@ -179,7 +255,8 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
     .profile{
       display: inline-block;
       .left_menu{
-        display: inline-block;
+        display: block;
+        width:168px;
         float: left;
         ul{
           li{
@@ -201,9 +278,9 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
       .profile-block{
         display: inline-block;
         float:left;
-        width: 638px;
+        width: 630px;
         padding: 10px 0px 0 40px;
-        #offerings{
+        #new_offering{
           float:left;
           display:inline-block;
           width:320px;
@@ -342,76 +419,6 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		float:left;
 		margin-bottom:10px;
   }
-	#header{
-		height:73px;
-		margin-bottom: 0px;
-		background: url(header_bg.png) repeat-x;
-		text-align: center;
-		a{
-		  border-bottom:0;
-		}
-		.wrapper{
-			width:990px;
-			margin:0 auto;
-			line-height: 64px;
-			.logo{
-				float:left;
-				line-height: 10px;
-				img{
-					margin-top: 19px;
-				}
-			}
-			.links{
-				float:right;
-				ul{
-					list-style:none;
-					margin-top: 4px; 
-					li{
-						float:left;
-						a{
-							color:white;
-							padding:2px 11px 3px 11px;
-							text-decoration:none;
-							font-size:14px;
-							margin: 0px 5px;
-						}
-						a:hover, a.selected{
-							background:url(signup_hover_bg.png) repeat-x;
-							-moz-border-radius:10px;
-							-webkit-border-radius:10px;
-							border-radius:10px;
-						}
-						a.lawyers_signup{
-							background:url(signup_button_full.png) no-repeat 0px -2px;
-							height:30px;
-							display:block;
-							width:160px;
-							margin-left:27px;
-							margin-top:16px;
-							padding-right: 0;
-							margin-right: 0;
-							padding:0;
-							-moz-border-radius:0;
-							-webkit-border-radius:0;
-							border-radius:0;
-						}
-						a.lawyers_signup:hover{
-							background-position:0px -33px;
-							-moz-border-radius:0px;
-							-webkit-border-radius:0px;
-							border-radius:0px;
-						}
-						a.lawyers_signup:active{
-							background-position:0px -64px;
-							-moz-border-radius:0px;
-							-webkit-border-radius:0px;
-							border-radius:0px;
-						}
-					}
-				}
-			}
-		}
-	}
 	#footer{
 		height:84px;
 		width:100%;
@@ -499,7 +506,13 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			  background-position:0px -52px;
 			}
 			span.text{
-				background:url(schedule_icon.png);
+				background:url(schedule_icon_full.png);
+			}
+			span.text.online{
+				background-position:0px -26px;
+			}
+			span.text.online:active{
+			  background-position:0px -52px;
 			}
 			span.video, span.voice{
 				width:26px;
@@ -572,7 +585,15 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			  width:183px;
 				margin-top: -34px;
 				margin-left:11px;
-				padding-left:15px;			  
+				padding-left:25px;			  
+				font-size: 12px;
+				padding-left:17px;
+			}
+			.tooltip.text_chat.online{
+			  background:url(tooltip_cloud.png) no-repeat;
+			  width:138px;
+			  margin-left: 38px;
+        padding-left: 10px;
 			}
 			.tooltip.note_chat{
 			  margin-top: -34px;
@@ -911,14 +932,19 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					margin-left:12px;
 					float:left;
 					margin-bottom:25px;
+					a{
+					  border-bottom:0;
+					  display:block;
+					  float:left;
+					}
 					img{
 						display:block;
 						float:left;
 					}
 					.feature_description{
 						float:left;
-						margin-left:37px;
-						width: 395px;
+						margin-left:30px;
+						width: 382px;
 						p{
 							color:#3f3e3e;
 							word-spacing: -1px;
@@ -933,8 +959,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 			}
 			.right_bar{
 				float:right;
-				width:380px;
-				margin-right: 12px;
+				width:355px;
 				h2{
 					margin:21px 0;
 					word-spacing: 3px;
@@ -953,18 +978,18 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				}
 				.testimonials{
 					h2{
-						margin: 17px 0px 23px 0;
+						margin: 21px 0px 23px 0;
 					}
 					.testimonial_description{
 						float:left;
 						width:380px;
-						font-family: Myriad Pro;
 						margin-bottom:20px;
-						font-style:italic;
+						/*font-style:italic;
+						font-family: Myriad Pro;*/
 						p{
 						  margin-left:0;
 						  width:351px;
-						  word-spacing:1px;
+						  word-spacing:-1px;
 						}
 						p.signature{
 						  font-style:normal;
@@ -1446,7 +1471,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				margin-top:0;
 			}
 			.profile_info{
-			  margin-bottom: 23px;
+			  margin-top: 23px;
 				width:722px;
 				float:left;
 				background:#fff;
@@ -1998,20 +2023,20 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					font-size:12px;
 					font-weight:bold;
 					color:#525d6a;
-					margin:12px 0;
+					margin:0 0 12px 0;
 				}
-				div#available_appointments{
-					a {
+				.available-appointments{
+					span{
 						text-decoration:none;
 						text-transform:uppercase;
 						font-size:11px;
 						font-weight:bold;
 						color:#313131;
 					}
-					a:hover{
+					/*span:hover{
 						color:#1076e8;
-					}
-					a.day-0{
+					}*/
+					.day-0{
 						border: 1px solid #9e5bcd;
 						padding: 3px 5px;
 						color: #fff;
@@ -2020,7 +2045,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						-moz-border-radius: 5px;
 						-webkit-border-radius: 5px;
 					}
-					a.day-1{
+					.day-1{
 						border: 1px solid #ca7e3b;
 						padding: 3px 5px;
 						color: #fff;

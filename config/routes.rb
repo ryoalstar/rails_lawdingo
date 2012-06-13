@@ -99,6 +99,7 @@ Lawdingo::Application.routes.draw do
 
   match 'modparam' =>'users#update_parameter', :as =>:update_parameter
   match '/user/sessions/:user_id' =>"users#session_history", :as =>:user_session_history
+  match '/users/:user_id/daily_hours' =>"users#daily_hours", :as =>:user_daily_hours
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
   match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page

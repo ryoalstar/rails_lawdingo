@@ -50,6 +50,31 @@
                 = start_phone_consultation(lawyer)
             %li
               = start_or_schedule_button_text(lawyer)        
+  - if lawyer.daily_hours.present?      
+    .right.row_block
+      %p Available appointments
+      .available-appointments
+        - lawyer.next_available_days(2).each_with_index do |d, i|
+          %ul
+            %li.title
+              %span{:class => "day-#{i}"}
+                #{d.strftime("%a, %m/%d")}
+            - times = lawyer.available_times(d)
+            - times[0..2].each do |t|
+              %li
+                %a.appt-select{:href => "#", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S")}
+                  #{t.strftime("%l:%M%p")}
+            - if times.length > 3
+              %li
+                %a.appt-select{:href => "#"}
+                  More                                            
+        .clear  
+      %a.appt-select.appointments{:href => '#'}
+        All available appointments
+
+    - # content for the modal dialog we are going to display
+    %div{:style => "display:none;"}
+      = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})                    
 :javascript
   $(".row .rating").raty({
       path: "/assets/raty",

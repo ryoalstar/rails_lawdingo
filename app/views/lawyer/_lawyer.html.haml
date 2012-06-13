@@ -47,12 +47,16 @@
       - else 
         %span.voice.offline
       %span.note= start_or_schedule_button_text_profile(lawyer)
-      %span.text
-      
+      - if lawyer.daily_hours.present?
+        %span.text.online
+          %a.appt-select{:href => '#'}
+      - else
+        %span.text.offline
       .video_chat.online.tooltip Available for video chat
       .voice_chat.online.tooltip Available by phone now
       .note_chat.tooltip Ask (text) question
-      .text_chat.tooltip No appointments available
+      .text_chat.offline.tooltip No appointments available
+      .text_chat.online.tooltip Schedule consultation
       .video_chat.offline.tooltip Not available by video now
       .voice_chat.offline.tooltip Not available by phone now
     .clear
@@ -99,24 +103,18 @@
                 = start_or_schedule_button(lawyer)
             - if lawyer.phone.present? 
               %li
-                = start_or_schedule_button(lawyer)
-            - if lawyer.phone.present? 
-              %li
                 = start_phone_consultation(lawyer)
             %li
               = start_or_schedule_button_text(lawyer)
             
   - if lawyer.daily_hours.present?      
     .right.row_block
-
       %p Available appointments
-
-      %div.available-appointments
-       
+      .available-appointments
         - lawyer.next_available_days(2).each_with_index do |d, i|
           %ul
             %li.title
-              %a{:href => '#', :class => "day-#{i}"} 
+              %span{:class => "day-#{i}"}
                 #{d.strftime("%a, %m/%d")}
             - times = lawyer.available_times(d)
             - times[0..2].each do |t|
@@ -125,7 +123,7 @@
                   #{t.strftime("%l:%M%p")}
             - if times.length > 3
               %li
-                %a{:href => "#"}
+                %a.appt-select{:href => "#"}
                   More                                            
         .clear  
       %a.appt-select.appointments{:href => '#'}

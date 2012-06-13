@@ -1,16 +1,5 @@
 class Home
-  
-  equalHeight = (group) ->
-    tallest = 0
-    group.each ->
-      thisHeight = $(this).height()
-      tallest = thisHeight  if thisHeight > tallest
 
-    group.height tallest
-  $(document).ready ->
-    $(".row").each ->
-      equalHeight $(this).find(".row_block")
-      
   initialize : ()->
     this.add_event_listeners()
     
@@ -57,8 +46,12 @@ class Home
     
   submit : ()->
     $.ajax(this.current_search_url(),{
-      complete : ()->
+      complete : ()=>
+        # listeners for appointment forms
+        this.add_appointment_forms()
+
       dataType : 'script'
+
     })
     document.location.hash = this.current_hash()
     document.title = this.current_title().replace /-lawyers/, ""
@@ -66,6 +59,7 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
+  
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
@@ -116,7 +110,6 @@ class Home
         this.submit()
         false
       )
-
     this.service_type_fields().click((e)=>
       this.set_service_type_fields_val(
         $(e.target).attr('data-val')
@@ -137,6 +130,13 @@ class Home
       this.submit()
     )
 
+  add_appointment_forms : ()->
+    @lawyers = []
+    $(".lawyer").each (i, el)=>
+      id = $(el).attr("data-lawyer-id")
+      if parseInt(id) > 0
+        @lawyers.push(new Lawyer(id))
+
   current_search_url : ()->
     params = "?"
     if $("#search_query").val()
@@ -149,7 +149,6 @@ class Home
       params += "&hourlyratestart=" + $("#hourlyratestart").val() + "&hourlyrateend=" + $("#hourlyrateend").val()
     if $("#schoolrating").val()
       params += "&schoolrating=" + $("#schoolrating").val()
-    
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
     if !@service_type 
@@ -159,8 +158,7 @@ class Home
     if !@practice_area 
       @practice_area="All"
     else
-      practice_area = @practice_area.replace /\s+/g, "-"
-      "/lawyers/#{@service_type}/#{@state}/#{practice_area}"+params
+      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+params
       
   current_hash : ()->
     "!#{this.current_search_url()}"
@@ -182,13 +180,18 @@ class Home
     "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."   
   read_hash : ()->
     hash = document.location.hash.replace("#!/lawyers/","")
+    first = getUrlVars()["search_query"];
+    if first
+      $("#search_query").val(first)
+      hash = document.location.hash.replace("?search_query=","")
+      hash = document.location.hash.replace(first,"")
     hash = hash.split("/")
     this.set_service_type_fields_val(hash[0])
     this.set_state_fields_val(hash[1])
     if hash[2]
       this.set_practice_area_fields_val(hash[2]).parent().find('img').trigger('click')
     else 
-      this.set_practice_area_fields_val("Any state")
+      this.set_practice_area_fields_val("All").parent().find('img').trigger('click')
       
   set_defaults : (default_state)->
     
@@ -222,6 +225,9 @@ class Home
     else
       this.set_state_fields_val(default_state+'-lawyers')
       
+      
+    
+
   form : ()->
     $("form.filters")
 
@@ -299,6 +305,19 @@ class Home
   practice_area_fields : ()->
     this.form()
       .find("div#practice_areas input:radio")
-
-
+      
+  getUrlVars = ->
+    vars = []
+    hash = undefined
+    hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&")
+    i = 0
+    
+    while i < hashes.length
+      hash = hashes[i].split("=")
+      vars.push hash[0]
+      vars[hash[0]] = hash[1]
+      i++
+    vars
+    
+        
 this.Home = new Home()

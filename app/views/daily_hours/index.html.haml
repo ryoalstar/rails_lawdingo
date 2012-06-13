@@ -1,7 +1,7 @@
 :javascript
   $(DailyHoursIndex.initialize)
-
-%h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
+- if current_user.is_lawyer?
+  %h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
 %div#page
   %div
     .profile
@@ -23,5 +23,5 @@
                     #{daily_hour.errors.full_messages.join(", ")}
 
             %li
-              %button{:type => "submit"}
+              %button.button{:type => "submit"}
                 Save
