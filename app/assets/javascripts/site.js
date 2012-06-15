@@ -194,7 +194,8 @@ $(function(){
 
         var self = this;
         self.current_image = 0;
-
+	self.interv = setTimeout( next_image, 7000 );
+	
         self.images = [];
         $.ajax( self.attr('dataurl'), {
             data:{'p':self.current_image++},
@@ -203,6 +204,7 @@ $(function(){
         });
 
         function goto_image( i ){
+            clearTimeout(self.interv);
             self.current_image = i;
             var carousel_info =  self.images[self.current_image];
             var carousel_image = self.find('.carousel-image');
@@ -267,7 +269,7 @@ $(function(){
   							self.find('.carousel-description a.reviews').html('').hide();
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
-            
+            self.interv = setTimeout( next_image, 7000 );
         }
 
         function next_image(){ goto_image( self.current_image<self.images.length-1? self.current_image+1: 0 ) }
@@ -283,7 +285,7 @@ $(function(){
         cont.append( next );
         self.find('.carousel-image').append(cont);
 
-        self.interv = setInterval( next_image, 5000 );
+        
     }
 
     $.fn.dialog = function( ){
