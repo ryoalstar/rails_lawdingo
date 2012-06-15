@@ -186,7 +186,7 @@ function close_dialogs(){
     $('.dialog-window').hide();
     $('#dialog-overlay').hide();
 }
-
+$(document).ready(function() {
 $(function(){
 
     $.fn.carousel = function(){
@@ -429,7 +429,7 @@ $(function(){
     });
 
 });
-
+});
 jQuery.fn.center = function () {
   this.css({"position": "fixed", "margin": "0"});
   this.css("margin-top", ((this.outerHeight()) / 2 * (-1)) + "px");
