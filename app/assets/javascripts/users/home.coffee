@@ -43,13 +43,21 @@ class Home
     else
       this.read_hash()
       this.submit()
-    
+  equalHeight = (group) ->
+    tallest = 0
+    group.each ->
+      thisHeight = $(this).height()
+      tallest = thisHeight  if thisHeight > tallest
+    group.height tallest
+  
   submit : ()->
     $.ajax(this.current_search_url(),{
       complete : ()=>
         # listeners for appointment forms
         this.add_appointment_forms()
-
+      success: () ->
+        $(".row").each ->
+          equalHeight $(this).find(".row_block")
       dataType : 'script'
 
     })
@@ -59,7 +67,7 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
-  
+
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()

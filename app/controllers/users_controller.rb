@@ -218,7 +218,10 @@ class UsersController < ApplicationController
       redirect_to root_path, :notice =>"Couldn't find any record"
     end
   end
-
+  
+  def account_information
+  end
+  
   def update
     @user = User.find(params[:id])
     if @user.is_lawyer?
@@ -248,7 +251,9 @@ class UsersController < ApplicationController
       redirect_to params[:return_url], :notice => @msg and return
     end
     if status
-      redirect_to root_path, :notice =>"Account Updated Successfully"
+      #redirect_to root_path, :notice =>"Account Updated Successfully"
+      #redirect_to user_account_information_path(@user.id), :notice =>"Account Updated Successfully"
+      redirect_to user_account_information_path(@user.id, :t=>'f')
     else
       render :action =>:edit
     end

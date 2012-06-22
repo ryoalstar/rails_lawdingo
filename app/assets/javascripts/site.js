@@ -6,7 +6,22 @@ function CloseCall()
 {
     closecall();
 }
-
+function equalHeight(group) {
+    tallest = 0;
+    group.each(function() {
+       thisHeight = $(this).height();
+       if(thisHeight > tallest) {
+          tallest = thisHeight;
+       }
+    });
+    group.height(tallest);
+  }
+  $(document).ready(function() {
+    $('.row').each(function(){
+      
+      equalHeight($(this).find(".row_block"));
+    });
+  });
 function notifyUser(msg)
 {
   if(!msg.search("ErrorMessage")){
