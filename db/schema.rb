@@ -57,13 +57,6 @@ ActiveRecord::Schema.define(:version => 20120611145030) do
 
   create_table "card_details", :force => true do |t|
     t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "street_address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "postal_code"
-    t.string   "country"
     t.string   "card_type"
     t.string   "card_number"
     t.string   "expire_month"
@@ -126,6 +119,13 @@ ActiveRecord::Schema.define(:version => 20120611145030) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lawyers_practice_areas", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.integer  "practice_area_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
