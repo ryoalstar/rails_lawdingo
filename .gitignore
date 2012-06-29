@@ -40,3 +40,6 @@
 /solr/conf/spellings.txt
 /solr/conf/stopwords.txt
 /solr/conf/synonyms.txt
+
+/solr/data
+/solr/pids
