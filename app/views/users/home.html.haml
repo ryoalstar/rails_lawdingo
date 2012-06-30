@@ -35,12 +35,11 @@
         %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
       - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
         #state.left-bar-section
+          %a{ :href => '#',:id => "need_auto_detect" } Auto-detect state
           %h3
             %label{:for => "state"} In:
           .national-area-notice
             %p
-            %a{ :href => '#',:id => "need_auto_detect" }
-              Auto-detect state
           %select.states{:name => "state"}
             %option{"data-default" => "1", :value => "All-States"} Any state
             - @states.each do |state|

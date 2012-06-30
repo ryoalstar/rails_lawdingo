@@ -1036,15 +1036,28 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 		form.filters{
 			width:246px;
 		}
+
+    .left-bar-section#state {
+      position: relative;
+
+      #need_auto_detect {
+        position: absolute;
+        right: 0px;
+        margin: 2px 26px 0 0;
+      }
+    }
+
 		.left-bars-block{
 			float: left;
 			width: 245px;
+
 			.left-bar.status{
 				padding:0;
 				margin-bottom: 23px;
 				.left-bar-section{
 					padding-bottom: 25px;
 					padding-left: 19px;
+
 					h3{
 						margin-top: 11px;
 					}
@@ -2105,11 +2118,26 @@ h3.question_label label{
   font-size: 13px;
   color: #303030;
 }
-.question_state, .question_area{
+
+.question_state, .question_area {
+  display: block;
   float:left;
-  margin-left:50px !important;
-  
+
+  h3.question_label {
+    display: inline-block;
+    margin-right: 6px !important;
+  }
 }
+
+.question_state {
+  margin-left: 22px !important;
+}
+
+.question_area {
+  margin-left: 30px !important;
+}
+
+
 .question_state select option, .question_area select option{
   font-size: 13px !important;
 }
@@ -2117,8 +2145,8 @@ h3.question_label label{
   background: url(select_bg.png) no-repeat;
   width: 197px;
   height: 28px;
-  font-size: 13px;
-  padding: 5px 5px 5px 10px;
+  font-size: 13px !important;
+  padding: 5px;
   margin-top: 4px;
   color: 
   #404040;
