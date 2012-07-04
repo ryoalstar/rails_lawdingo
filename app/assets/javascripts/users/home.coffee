@@ -258,7 +258,7 @@ class Home
 
   set_practice_area_fields_val : (val)->
     @practice_area = val
-    
+
     this.form().find(".children").hide()
 
     $field = this.practice_area_fields()
@@ -277,6 +277,7 @@ class Home
       )
 
       ($ @state_fields()).hide()
+      ($ "label[for=state]").hide()
 
       # Show help notice for national area
       notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
@@ -287,17 +288,18 @@ class Home
       show_states_selector_link.live "click", (event) => 
         event.preventDefault()
         ($ @state_fields()).show()
+        ($ "label[for=state]").show()
         $notice_container.hide()
     else
       # Hide notice and show states select field
       ($ @state_fields()).show()
+      ($ "label[for=state]").show()
       $notice_container.hide()
 			
     $field.parents(".practice-areas")
       .show()
 
     $field.parent().next().show() unless @service_type == "Legal-Services"
-
 
   set_service_type_fields_val : (val)->
     @service_type = val
