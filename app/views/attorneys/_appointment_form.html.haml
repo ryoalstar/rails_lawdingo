@@ -9,7 +9,7 @@
 
     %p Available appointments (select one)
 
-    -#%div.available-appointments
+    %div.available-appointments
       - lawyer.next_available_days(4).each_with_index do |d, i|
         %ul
           %li.title
