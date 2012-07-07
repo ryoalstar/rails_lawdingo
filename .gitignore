@@ -8,8 +8,10 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log
 /tmp
+
+/public/system
 
 # Ignore VIM swap files
 *.swp
