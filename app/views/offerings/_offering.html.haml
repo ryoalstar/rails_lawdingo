@@ -35,7 +35,7 @@
           Practice area: #{offering.practice_area.name}
       %p.hide_on_attorneys
         Delivered by: #{link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug)}
-        %span.status= status_message(lawyer)          
+        /%span.status= status_message(lawyer)          
       .free
         %table
           %tbody

@@ -67,7 +67,12 @@ class User < ActiveRecord::Base
   def get_stripe_customer_id
     self.stripe_customer_token
   end
-
+  
+  def slug
+    lawyer = Lawyer.find(self.id)
+    "#{lawyer.full_name.parameterize}"
+  end
+  
   def is_lawyer?
     self[:user_type] == self.class::LAWYER_TYPE
   end
