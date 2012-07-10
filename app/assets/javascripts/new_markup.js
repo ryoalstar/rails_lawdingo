@@ -111,14 +111,13 @@ $(document).ready(function(){
 	  $(this).nextAll(".note_chat.tooltip").fadeOut('slow');
 	});
 	
-	
-	$(".free").live('mouseenter', function(){
-			$(".button_tooltip").hide();
-	    $(this).nextAll(".button_tooltip").show();
-	});
-	$(".free").live('click', function(){
-			$(".button_tooltip").hide();
-	    $(this).nextAll(".button_tooltip").show();
+	$('html').click(function() {
+    $(".button_tooltip").hide();
+  });
+	$(".free_dropdown").live('click', function(ev){
+	  event.stopPropagation();	    
+		$(".button_tooltip").hide();
+    $(this).nextAll(".button_tooltip").show();
 	});
 	
 	$(".button_tooltip").live('mouseleave', function() {

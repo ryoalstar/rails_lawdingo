@@ -1,6 +1,10 @@
 @import "partials/lawyer/lawyer";
 @import "partials/attorneys/appointment_form";
-
+body.offerings.show{
+  div.offering{
+    @include lawyer;
+  }
+}
 body.users.home {
   
   form.filters {

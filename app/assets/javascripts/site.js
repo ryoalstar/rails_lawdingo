@@ -231,6 +231,16 @@ $(function(){
             self.find('.carousel-description p.small').html( carousel_info['small'] );
             self.find('.carousel-description .stars').html( carousel_info['rating'] );
             self.find('.carousel-description span.note').html( carousel_info['start_or_schedule_button_text_profile'] );
+            //self.find('.carousel-description p.active_action').html( carousel_info['active_action'] );
+            
+            if (carousel_info["active_action"] !== undefined) {
+			      	  self.find('.carousel-description p.active_action')
+										.html(carousel_info["active_action"])
+									  .show();
+		      	} else {
+		      	  	self.find('.carousel-description p.active_action').html('').hide();
+						}
+            
             
         		if (carousel_info["start_or_video_button_p"] !== undefined) {
 						  self.find('.carousel-description span.video')

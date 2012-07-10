@@ -19,7 +19,7 @@
                 .video_chat.online.tooltip Available for video chat
               - else 
                 %span.video.offline
-                %span.offline_video_tooltip Not avaiable by video now
+                %span.offline_video_tooltip Not available by video now
                 .video_chat.offline.tooltip Not available by video now
             %p
               - if @attorney.phone.present? 
@@ -106,9 +106,13 @@
           %h1
             = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
           .price
-            %a.free{:href=> "#"}
-              %p= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute", class: "small"
+            .free
+              %table
+                %tbody
+                  %tr
+                    %td
+                      %p= start_or_schedule_button(@attorney)
+            .free_dropdown{:href=> "#"}
             .button_tooltip
               .button-content
                 %ul
@@ -120,6 +124,12 @@
                       = start_phone_consultation(@attorney)
                   %li
                     = start_or_schedule_button_text(@attorney)
+            %br/
+            -#.lawyer_rates
+              %h5= free_message(@attorney)
+              = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute"
+              %p.small
+                %span (prorated to the minute)                    
           .clear
           %h3
             - unless @attorney.bar_memberships.blank?

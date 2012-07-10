@@ -88,13 +88,13 @@
               %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee services
         - if lawyer.license_year.present?      
           %li #{pluralize years_practicing_law(lawyer), "year", "years'"} experience
-      %a.free{:href=> "#"}
-        %p= free_message(lawyer)
-        = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
-        -#%p.small 
-          then 
-          = number_to_currency (lawyer.rate + AppParameter.service_charge_value)
-          \/minute
+      .free
+        %table
+          %tbody
+            %tr
+              %td
+                %p= start_or_schedule_button(lawyer)
+      .free_dropdown{:href=> "#"}
       .button_tooltip
         .button-content
           %ul
@@ -106,7 +106,11 @@
                 = start_phone_consultation(lawyer)
             %li
               = start_or_schedule_button_text(lawyer)
-            
+      .lawyer_rates
+        %h5= free_message(lawyer)
+        = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
+        %p.small
+          %span (prorated to the minute)
   - if lawyer.daily_hours.present?      
     .right.row_block
       %p Available appointments

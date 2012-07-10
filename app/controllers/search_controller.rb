@@ -135,7 +135,7 @@ class SearchController < ApplicationController
        images_hash["send_text_question"]  = start_or_schedule_button_text(lawyer)
        images_hash["schedule_consultation"]  = "<a href='#' class='appt-select'></a>" if lawyer.daily_hours.present?
        images_hash["start_or_schedule_button_text_profile"] = start_or_schedule_button_text_profile(lawyer)
-         
+       images_hash["active_action"] = start_or_schedule_button(lawyer)   
        list << images_hash
      end
      render :text => list.to_json, :layout=>false
