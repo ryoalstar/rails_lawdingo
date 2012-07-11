@@ -72,6 +72,7 @@ group :test do
   gem "factory_girl_rails"
   gem "guard-rspec"
   gem "mocha", require: false
+  gem "timecop"
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
   gem 'ruby-debug19', :require => 'ruby-debug'

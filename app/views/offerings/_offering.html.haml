@@ -15,7 +15,7 @@
         %span.video.online= start_or_video_button_p(lawyer)
       - else
         %span.video.offline
-      - if lawyer.phone.present? 
+      - if lawyer.is_available_by_phone
         %span.voice.online= start_phone_consultation_p(lawyer)
       - else 
         %span.voice.offline
@@ -49,7 +49,7 @@
             - if lawyer.is_online && !lawyer.is_busy
               %li
                 = start_or_schedule_button(lawyer)
-            - if lawyer.phone.present? 
+            - if lawyer.is_available_by_phone
               %li
                 = start_phone_consultation(lawyer)
             %li

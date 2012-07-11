@@ -9,7 +9,7 @@ class Lawyer < User
   has_many :daily_hours do
     # find on a given wday
     def on_wday(wday)
-      self.select{|dh| dh.wday == wday}.first    
+      self.select{|dh| dh.wday == wday}.first
     end
     # are we bookable on a given day?
     def bookable_on_day?(time)
@@ -145,6 +145,24 @@ class Lawyer < User
   def self.online
    self.where('is_online is true' )
   end
+
+  def is_available_by_phone
+    daily_hours = self.daily_hours
+    if daily_hours.any?
+      self.in_time_zone do
+        available_time = daily_hours.on_wday(Time.zone.now.wday)
+
+        if available_time.present?
+          day_start = available_time.start_time_on_date(Time.zone.today)
+          day_end = available_time.end_time_on_date(Time.zone.today)
+          Time.zone.now.between?(day_start, day_end)
+        end
+      end
+    else
+      true
+    end
+  end
+
   # all available times for a given date
   def available_times(time)
     self.in_time_zone do

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Lawyer do
+  DatabaseCleaner.clean
 
   before(:each) do
     subject.stubs(:time_zone => "Eastern Time (US & Canada)")
@@ -226,6 +227,27 @@ describe Lawyer do
     end
 
   end
-  
+
+  context "#is_available_by_phone" do
+    before :each do
+      @steven = FactoryGirl.create(:lawyer, first_name: "Steven")
+      Timecop.freeze(Time.zone.local(2012, 7, 11, 14, 0, 0))
+    end
+
+    it "should return true if current time is between lawyer's daily hours" do
+      daily_hour = FactoryGirl.create(:daily_hour, lawyer_id: @steven.to_param, wday: Time.zone.now.wday, start_time: 1000, end_time: 1800)
+      @steven.is_available_by_phone.should be_true
+    end
+
+    it "should return true if lawyer has no daily hours" do
+      @steven.stubs(:daily_hours).returns([])
+      @steven.is_available_by_phone.should be_true
+    end
+
+    it "should return false if current time is not between lawyer's daily hours" do
+      daily_hour = FactoryGirl.create(:daily_hour, lawyer_id: @steven.to_param, wday: Time.now.wday, start_time: 1600, end_time: 1800 )
+      @steven.is_available_by_phone.should be_false
+    end
+  end
 
 end

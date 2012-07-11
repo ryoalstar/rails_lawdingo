@@ -116,7 +116,7 @@ module LawyersHelper
         link_to "Start Video Consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
     else
-      if lawyer.phone.present?
+      if lawyer.is_available_by_phone
         if logged_in?
           if current_user.stripe_customer_token.present?
             link_to "Start Phone Consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
@@ -126,7 +126,7 @@ module LawyersHelper
           end
         else
           link_to 'Start Phone Consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ''
-        end          
+        end
       else
         if lawyer.daily_hours.present?
           link_to "Schedule an Appointment", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
@@ -136,7 +136,7 @@ module LawyersHelper
           else
             session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
             link_to "Send a Message", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :title => "Schedule a consultation", :class => ''
-          end  
+          end
         end
       end
       
@@ -238,7 +238,7 @@ module LawyersHelper
  def status_message(lawyer)
    if lawyer.is_online
      "online now"
- elsif lawyer.phone.present?
+ elsif lawyer.is_available_by_phone
      "available by phone now"
    end
  end
