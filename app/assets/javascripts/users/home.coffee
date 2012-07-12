@@ -313,7 +313,9 @@ class Home
       )
     
       ($ @state_fields()).hide()
-    
+      ($ "label[for=state]").hide()
+      ($ "a#need_auto_detect").hide()
+
       # Show help notice for national area
       notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
       $notice_container.show().find("p").html(notice)
@@ -323,10 +325,13 @@ class Home
       show_states_selector_link.live "click", (event) => 
         event.preventDefault()
         ($ @state_fields()).show()
+        ($ "label[for=state]").show()
         $notice_container.hide()
+        ($ "a#need_auto_detect").show()
     else
       # Hide notice and show states select field
       ($ @state_fields()).show()
+      ($ "label[for=state]").show()
       $notice_container.hide()
     
     $field.parents(".practice-areas")
