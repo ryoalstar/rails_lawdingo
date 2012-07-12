@@ -293,42 +293,41 @@ class Home
       .find("div#service_type .service_type")
 
   set_practice_area_fields_val : (val)->
-      @practice_area = val
-  
-      this.form().find(".children").hide()
-  
-      $field = this.practice_area_fields()
-        .filter("[value='#{val}']")
-        .attr("checked", true)
-  
-      is_national = $field.data "is-national"
-      $notice_container = ($ @form).find(".national-area-notice")
-  
-      if is_national
-        # Set state to Any state and hide select field
-        this.set_state_fields_val(
-          this.state_fields().find(
-            "option[data-default=1]"
-          ).val()
-        )
-  
-        ($ @state_fields()).hide()
-  
-        # Show help notice for national area
-        notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
-        $notice_container.show().find("p").html(notice)
-  
-        # Show states select field on link click
-        show_states_selector_link = $notice_container.find("a.show-states-selector")
-        show_states_selector_link.live "click", (event) => 
-          event.preventDefault()
-          ($ @state_fields()).show()
-          $notice_container.hide()
-      else
-        # Hide notice and show states select field
+    @practice_area = val
+
+    this.form().find(".children").hide()
+
+    $field = this.practice_area_fields()
+      .filter("[value='#{val}']")
+      .attr("checked", true)
+
+    is_national = $field.data "is-national"
+    $notice_container = ($ @form).find(".national-area-notice")
+
+    if is_national
+      # Set state to Any state and hide select field
+      this.set_state_fields_val(
+        this.state_fields().find(
+          "option[data-default=1]"
+        ).val()
+      )
+
+      ($ @state_fields()).hide()
+      ($ "label[for=state]").hide()
+      ($ "a#need_auto_detect").hide()
+
+      # Show help notice for national area
+      notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
+      $notice_container.show().find("p").html(notice)
+
+      # Show states select field on link click
+      show_states_selector_link = $notice_container.find("a.show-states-selector")
+      show_states_selector_link.live "click", (event) => 
+        event.preventDefault()
         ($ @state_fields()).show()
         ($ "label[for=state]").show()
         $notice_container.hide()
+        ($ "a#need_auto_detect").show()
     else
       # Hide notice and show states select field
       ($ @state_fields()).show()
