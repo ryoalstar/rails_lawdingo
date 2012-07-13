@@ -362,7 +362,7 @@ class Home
     vars = []
     hash = undefined
     i = 0
-    
+    hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&")
     while i < hashes.length
       hash = hashes[i].split("=")
       vars.push hash[0]
