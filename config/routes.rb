@@ -14,10 +14,6 @@ Lawdingo::Application.routes.draw do
   resources :reviews
   resources :schools
   
-  unless Rails.application.config.consider_all_requests_local
-    match '*not_found', to: 'application#render_404'
-  end
-  
   get "password_resets/new"
 
   # The priority is based upon order of creation:
