@@ -250,9 +250,9 @@ module LawyersHelper
  end
 
   def selected_lawyers_caption
-    is_are = @lawyers.count == 1 ? "is" : "are"
-    ct = @lawyers.count == 0 ? "no" : @lawyers.count.to_s
-    lawyers_string = @lawyers.count == 1 ? "lawyer" : "lawyers"
+    is_are = @search.total == 1 ? "is" : "are"
+    ct = @search.total == 0 ? "no" : @search.total.to_s
+    lawyers_string = @search.total == 1 ? "lawyer" : "lawyers"
     parent_practice_area_string = params[:practice_area] if !!params[:practice_area] && params[:practice_area]!='All'
     return "There #{is_are} #{ct}#{selected_state_string}" +
       " #{parent_practice_area_string} #{lawyers_string} " +

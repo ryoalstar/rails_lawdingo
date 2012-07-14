@@ -88,11 +88,17 @@ class Lawyer < User
      Sunspot.index!(self)
   end
   
-  def self.build_search(query)
-    search = Sunspot.new_search(Lawyer)
+  def self.build_search(query, opts = {})
+    search = self.search(
+      :include => [
+        {:bar_memberships => :state},
+        {:practice_areas => :expert_areas},
+        :offerings, :daily_hours, :reviews
+      ],
+    )
     search.build do
       fulltext query
-      paginate :per_page => 100
+      paginate :per_page => 20, :page => opts[:page] || 1
     end
     search
   end

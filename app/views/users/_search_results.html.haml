@@ -1,0 +1,14 @@
+- if @service_type == "legal-services"
+  - @offerings.each do |offering|
+    = render partial: 'offerings/offering', locals: { lawyer: Lawyer.find(offering.user_id), offering: offering } 
+- else 
+
+  - @lawyers.each do |lawyer| 
+    = render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer} 
+   
+  - unless @lawyers.last_page? 
+    %div.load-more
+      %a{:href => "#", "data-page" => @lawyers.next_page} View More
+  
+
+

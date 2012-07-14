@@ -66,12 +66,20 @@ class Home
         @need_auto_detect()
       dataType : 'script'
     })
-  
+
+  # quick and dirty - just set the page temporarily 
+  # we should fix this to keep the page as a variable
+  paginate : (page) ->
+    this.page = page
+    this.submit()
+    this.page = null
+
   submit : ()->
     $.ajax(this.current_search_url(),{
       complete : ()=>
         # listeners for appointment forms
         this.add_appointment_forms()
+        this.add_pagination()
       success: () ->
         $(".row").each ->
           equalHeight $(this).find(".row_block")
@@ -163,6 +171,8 @@ class Home
       @submit()
     )
 
+    this.add_pagination()
+
   add_appointment_forms : ()->
     @lawyers = []
     $(".lawyer").each (i, el)=>
@@ -170,8 +180,16 @@ class Home
       if parseInt(id) > 0
         @lawyers.push(new Lawyer(id))
 
+  add_pagination : ()->
+    $("div.load-more a").click (e)=>
+      this.paginate($(e.target).attr("data-page"))
+      $(e.target).html("Loading...")
+      false
+
   current_search_url : ()->
     params = ""
+    if this.page
+      params += "&page=#{this.page}"
     if $("#search_query").val()
       params += "&search_query=" + $("#search_query").val() 
     if $("#freetimeval").val()

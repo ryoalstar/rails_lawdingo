@@ -28,26 +28,20 @@ class UsersController < ApplicationController
     @question = Question.new
 
     @practice_areas = PracticeArea.parent_practice_areas
-
-    @lawyers = Lawyer.approved_lawyers
-    # add some includes
-    @lawyers = @lawyers.includes(
-      [:practice_areas, {:bar_memberships => :state}, :reviews]
-    )
     @states = State.with_approved_lawyers
-    query = params[:search_query]
     
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase || ""
     
     
     if @service_type == "legal-services"
-       @search = Offering.build_search(query)
+       @search = Offering.build_search(params[:search_query])
     else
-       @search = Lawyer.build_search(query) 
+       @search = Lawyer.build_search(
+        params[:search_query], :page => params[:page]
+      ) 
     end
     
-    add_service_type_scope
     add_state_scope
     add_practice_area_scope
     add_free_time_scope
@@ -62,9 +56,6 @@ class UsersController < ApplicationController
     else
       @lawyers = @search.results  
     end
-    
-    
-  
 
     respond_to do |format|
       format.html{render}
@@ -580,27 +571,6 @@ class UsersController < ApplicationController
   end
 
   protected
-
-
-  # helper method to add the service_type
-  # scope to the main search
-  def add_service_type_scope
-    # handle the type of service offered
-    service_type = (params[:service_type] || "")
-    @service_type = service_type.downcase
-    
-    # legal services
-    if @service_type == "legal-services"
-      # @lawyers = @lawyers.offers_legal_services
-      @offerings = Offering.find(:all, conditions: { user_id: @lawyers.offers_legal_services.map(&:id) })
-      @search.build do
-        fulltext params[:search_query]
-      end
-    # default is legal advice
-    else
-      @lawyers = @lawyers.offers_legal_advice
-    end
-  end
 
   # helper method to add the state scope to the
   # main search

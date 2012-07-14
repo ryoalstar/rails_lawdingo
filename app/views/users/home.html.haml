@@ -47,24 +47,25 @@
             - @states.each do |state|
               %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
                 = state.name
-      #practice_areas.left-bar-section.legal_domain
-        %h3 Type:
-        .practice-areas
-          %p
-            = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
-            %label{:for => "practice_area_All"} All types
-          - @practice_areas.each do |area|
+      - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
+        #practice_areas.left-bar-section.legal_domain
+          %h3 Type:
+          .practice-areas
             %p
-              = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
-              = label_tag "practice_area_#{area.name}", area.name
-            - if area.children.with_approved_lawyers.present?
-              .practice-areas.children{:style => "display:none"}
-                %h3 Specific need?
-                .child
-                  - area.children.with_approved_lawyers.each do |subarea|
-                    %p
-                      = radio_button_tag "practice_area", subarea.name, false, data: { is_national: area.is_national?.to_s }
-                      = label_tag "practice_area_#{subarea.name}", subarea.name
+              = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
+              %label{:for => "practice_area_All"} All types
+            - @practice_areas.each do |area|
+              %p
+                = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
+                = label_tag "practice_area_#{area.name}", area.name
+              - if area.children.with_approved_lawyers.present?
+                .practice-areas.children{:style => "display:none"}
+                  %h3 Specific need?
+                  .child
+                    - area.children.with_approved_lawyers.each do |subarea|
+                      %p
+                        = radio_button_tag "practice_area", subarea.name, false, data: { is_national: area.is_national?.to_s }
+                        = label_tag "practice_area_#{subarea.name}", subarea.name
       -#specialities_filter.filters-section{:style => "display: none;"}
         %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
         %h3 Specific need:
