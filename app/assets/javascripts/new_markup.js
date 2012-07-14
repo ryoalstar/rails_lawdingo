@@ -6,7 +6,19 @@ var my_images = [
 ];
 
 
-
+$(document).mouseup(function (e)
+{
+    var container = $("#new_question");
+    var question_body = $("#question_body").val();
+    if (container.has(e.target).length === 0)
+    {
+      if(question_body == 0 || question_body == "")
+      {
+        $("#question_state").hide('slow');
+        $("#question_area").hide('slow');
+      }
+    }
+});
 
 $(document).ready(function(){
   $(".profile_info .client-reviews .review").first().addClass('first');
@@ -109,9 +121,10 @@ $(document).ready(function(){
   $("span.note").live('mouseout', function(){
 	  $(this).nextAll(".note_chat.tooltip").fadeOut('slow');
 	});
-	
+	var show_on_mouseenter = false;
 	$('html').click(function() {
     $(".button_tooltip").hide();
+    show_on_mouseenter = false;
   });
   
   $("#question_body").click( function(){
@@ -120,28 +133,47 @@ $(document).ready(function(){
       $("#question_area").show('slow');
   });
   
-  var show_on_mouseenter = true;
 	$(".free_dropdown").live('click', function(ev){
 	  event.stopPropagation();	    
 		$(".button_tooltip").hide();
     $(this).nextAll(".button_tooltip").show();
     show_on_mouseenter = true;
+    //console.log(show_on_mouseenter);
 	});
   $(".free").live('mouseenter', function(){ 	  	
-     $(".button_tooltip").hide(); 	  	
+     console.log("111");
+     $(this).data('hover',1);  
      $(this).nextAll(".button_tooltip").show(); 	  	
-     show_on_mouseenter = false;
      //console.log(show_on_mouseenter)
   });
- 	  	
+  $(".free").live('mouseleave', function(){ 	 
+    $(this).data('hover',0); 
+    var self = this;	
+    var som = show_on_mouseenter;
+    //console.log(show_on_mouseenter);
+    var t = $(self).nextAll(".button_tooltip");
+ 	  setTimeout(function(){
+ 	    if(!(t.data('hover') || $(self).data('hover')) && !som){
+ 	      //console.log(som);
+ 	      t.hide();
+ 	    } 	  	
+ 	  }, 300);
+  });
   $(".free").live('click', function(){ 	  	
      $(".button_tooltip").hide(); 	  	
      $(this).nextAll(".button_tooltip").show();
   });
+  $(".button_tooltip").live('mouseenter', function() {
+	    if(show_on_mouseenter == false){
+	      $(this).data('hover',1);
+	      //console.log('flag true');
+	    }
+	});
 	$(".button_tooltip").live('mouseleave', function() {
-	    console.log(show_on_mouseenter)
 	    if(show_on_mouseenter == false){
 	      $(this).hide(); 
+	      $(this).data('hover',0);
+	      //console.log('flag false');
 	    }
 	});
 	$( "#slider-range-min" ).slider({

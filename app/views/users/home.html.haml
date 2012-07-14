@@ -20,7 +20,7 @@
         %h2 Find the right lawyer
       .left-bar-section#search_class
         %a#clear_data_search 
-          = image_tag('close_sea.png', :alt => 'clear', :id => "input_close_sea_img")
+          = image_tag('close_icon.png', :alt => 'clear', :id => "input_close_sea_img")
           = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
         %h3 Search
         %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
@@ -36,7 +36,7 @@
         %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
       - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
         #state.left-bar-section
-          %a{ :href => '#',:id => "need_auto_detect" } Auto-detect state
+          %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
           %h3
             %label{:for => "state"} In:
           .national-area-notice
@@ -135,7 +135,8 @@
           %span.law-school-4 A+
   .main_content
     #generail_question.question.question-container
-      %h2.selected-lawyers-caption= selected_lawyers_caption
+      -#%h2.selected-lawyers-caption= selected_lawyers_caption
+      %h2
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS
     #results.results

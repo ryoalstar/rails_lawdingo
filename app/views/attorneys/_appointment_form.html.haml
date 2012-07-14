@@ -1,7 +1,5 @@
-%div.appointment-form{:id => "appointment_form_#{lawyer.id}"}
-
-  %div.message{:style => "display:none"}
-
+.appointment-form{:id => "appointment_form_#{lawyer.id}"}
+  .message{:style => "display:none"}
   %form{:action => appointments_path, :method => "POST"}
     %h2 Schedule a consultation with #{lawyer.full_name}
 
@@ -9,7 +7,7 @@
 
     %p Available appointments (select one)
 
-    -#%div.available-appointments
+    %div.available-appointments
       - lawyer.next_available_days(4).each_with_index do |d, i|
         %ul
           %li.title
@@ -26,12 +24,13 @@
               %a.more{:href => "#"}
                 More
 
-    %b.appointment-info
+    %h2.appointment-info
 
     = hidden_field(:appointment, :time)
     = hidden_field(:appointment, :lawyer_id, :value => lawyer.id)
 
-    %label What would you like to discuss? (optional)
+    %h3
+      %label What would you like to discuss? (optional)
     =text_area(:appointment, :message)
 
     / %label Your preferred contact method
@@ -43,5 +42,5 @@
     /   %li
     /     =radio_button(:appointment, :appointment_type, :video)
     /     Video
-
-    =submit_tag("Book Appointment")
+    %hr/
+    = submit_tag("Book Appointment", :class => "button")

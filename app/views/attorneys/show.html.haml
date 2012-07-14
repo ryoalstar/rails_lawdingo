@@ -7,7 +7,8 @@
 %div{:id => "lawyer_#{@attorney.id}"}
   #inline-wrapper
     .left-bars-block
-      .left-bar
+      = link_to "All Lawyers", lawyers_path, class: 'back_to_lawyers'
+      -#.left-bar
         .left-bar-section.first_section
           %span.back_to
             = link_to "< Back to All Lawyers", lawyers_path
@@ -107,7 +108,7 @@
         .avatar     
           = image_tag(@attorney.photo.url(:medium))
         .middle
-          %h1
+          %h1.gray
             = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
           -#.price
             -#.free
@@ -127,10 +128,7 @@
             - unless @attorney.bar_memberships.blank?
               Licensed in #{licenced_states}
           - if @attorney.personal_tagline.present?    
-            %p.tagline
-              “
-              = @attorney.personal_tagline
-              ”
+            %p.tagline= raw "#{simple_format '“' + @attorney.personal_tagline + '”'}"
           %a.free{:href=> "#"}
             %p= free_message(@attorney)
             = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute", class: "small"                      
@@ -174,9 +172,10 @@
                         %li
                           %a{:href => "#"}
                             More                        
-                
-                  %a.appointments.appt-select{:href => '#'}
-                    See All Appointments
+                  .clear
+              .appointments
+                %a.appt-select{:href => '#'}
+                  See All Appointments
               - # important this is outside the .right because otherwise listeners are applied
               - # to the a tags in the actual form rather than only to the list above
               %div{:style => "display:none;"}

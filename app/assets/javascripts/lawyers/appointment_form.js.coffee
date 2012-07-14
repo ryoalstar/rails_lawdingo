@@ -40,6 +40,7 @@ class AppointmentForm
   show : ()->
     @div.find("form").show()
     @div.find("div.message").hide()
+    @div.removeClass('consutation_scheduled')
     @div.jqdialog({
       height : 500,
       width : 500,
@@ -63,12 +64,13 @@ class AppointmentForm
     )
   # TODO: make this use a templating language
   show_success : (appointment)->
-    str = "<h2>Consultation Scheduled</h2>
+    str = "<h2>Consultation Scheduled.</h2>
       <p>Thanks! Your appointment has been scheduled for #{appointment.time}.
         #{appointment.attorney_name} should be online then, so at
-        that time please come to Lawdingo and contact the attorney</p>"
+        that time please come to Lawdingo and contact the attorney</p><hr /><a href='#' class='button dialog-close'>Ok</a>"
     @div.find("form").hide()
     @div.find("div.message").html(str).show()
+    @div.addClass('consutation_scheduled')
 
   show_error : (errors)->
     error_string = ""
@@ -83,5 +85,10 @@ class AppointmentForm
 
   select_time : (time)->
     @div.find("a.appointment-time[data-time='#{time}']").click()
-
+    
+    
+  $(".dialog-close").live "click", ->
+    $(".ui-dialog").hide()
+    $(".ui-widget-overlay").hide()
+    
 this.AppointmentForm = AppointmentForm

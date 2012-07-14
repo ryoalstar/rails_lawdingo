@@ -20,7 +20,11 @@
       - else 
         %span.voice.offline
       %span.note= start_or_schedule_button_text_profile(lawyer)
-      %span.text
+      - if lawyer.daily_hours.present?
+        %span.text.online
+          %a.appt-select{:href => '#'}
+      - else
+        %span.text.offline
       .video_chat.online.tooltip Available for video chat
       .voice_chat.online.tooltip Available for voice chat
       .note_chat.tooltip Ask (text) question
@@ -44,8 +48,8 @@
                 %p= start_or_schedule_button(lawyer)
 
       %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
-        %p= free_message(lawyer)
-        = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"                
+        %p= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
+        %p.small free consultation
       .free_dropdown{:href=> "#"}
       .button_tooltip
         .button-content

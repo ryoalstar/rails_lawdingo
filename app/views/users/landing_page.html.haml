@@ -71,10 +71,9 @@
                     %tr
                       %td
                         %p.active_action= start_or_schedule_button(lawyer)
-              .free_button          
-                %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
-                  %p.rate= "#{lawyer.free_consultation_duration} minutes free"
-                  %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
+              %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
+                %p.rate= "#{lawyer.free_consultation_duration} minutes free"
+                %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
               .free_dropdown{:href=> "#"}  
               .button_tooltip
                 .button-content

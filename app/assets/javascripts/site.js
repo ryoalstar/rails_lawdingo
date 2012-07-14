@@ -225,7 +225,7 @@ $(function(){
             carousel_image.find('img').attr('src', carousel_info['url']);
 						carousel_image.find('a.profile_link').attr('href', carousel_info['href']);
             carousel_image.find('img').attr('alt', carousel_info['title']);
-            self.find('.carousel-description .free_button').html( carousel_info['free'] );
+            self.find('.carousel-description .free').attr('href', carousel_info['free'] );
             self.find('.carousel-description h4').html( carousel_info['title'] );
             self.find('.carousel-description p.desc').html( carousel_info['description'] );
             self.find('.carousel-description p.rate').html( carousel_info['rate'] );
