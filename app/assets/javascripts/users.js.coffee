@@ -40,10 +40,10 @@ jQuery ->
     rate = $input.val().match(/\d+/)[0] unless $input.val() == "" # remove dollar sign
     rate_per_minute = rate / 60
 
-    if $input.val() is ""
-      ($ "span.rate_hint").html "Will be quoted by the min."
-    else
-      ($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toFixed(2)}/minute."
+    #if $input.val() is ""
+      #($ "span.rate_hint").html "Will be quoted by the min."
+    #else
+      #($ "span.rate_hint").html "Quoted as $#{rate_per_minute.toFixed(2)}/minute."
 
   ($ "a#start_phone_session_button").bind "click", ->
     lawyerid = ($ @).data('attorneyid')

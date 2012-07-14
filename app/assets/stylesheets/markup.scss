@@ -1199,6 +1199,7 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 						background: url(star_rating_on.png);
 					}
 				}
+				
 				.left-bar-section.info-header{
 					padding-left:0;
 					padding-top:0;
@@ -1312,6 +1313,12 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 				border-bottom:1px dotted #c8cacc;
 				float: left;
 				width: 223px;
+				span.back_to a{
+				  border-bottom: 1px dotted black;
+          color: #303030;
+          text-decoration: none;
+          font-size: 15px;
+				}
 				p{
 					font-size:13px;
 					margin-bottom: 3px;
