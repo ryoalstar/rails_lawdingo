@@ -35,18 +35,21 @@
   <% else %>
     <h1 class="form-header">Apply for an Attorney Account</h1>
   <% end %>
-
+  
   <div class="form-wrapper signin">
-    <% if @lawyer && params[:lawyer_path] %>
-      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)%> now.</p>
+    <% if @lawyer %>
+      <p>Already a Lawdingo member? <%= link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)%> now.</p>
     <% else %>
-      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path %> now.</p>
+      <p>Already a Lawdingo member? <%= link_to "Log in", login_path(session[:return_to])%> now.</p>
     <% end %>
   </div>
-
+    
   <div class="form-wrapper">
     <%= render 'form' %>
   </div>
+  
+
+
 
   <% if is_client %>
     <h3 style="color: #818181;">Lawyer? <%= link_to "Apply here", new_lawyer_path %>.</h3>

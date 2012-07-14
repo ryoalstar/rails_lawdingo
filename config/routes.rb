@@ -147,13 +147,8 @@ Lawdingo::Application.routes.draw do
   match '/lawyers' => 'users#home'
   root :to => 'users#landing_page'
 
-  # Next home page temporary route
-  #match '/next' => "users#next"
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'errors#error_404'
+  end
 end
 

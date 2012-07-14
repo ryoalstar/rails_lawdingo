@@ -36,12 +36,16 @@
       %p.hide_on_attorneys
         Delivered by: #{link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug)}
         /%span.status= status_message(lawyer)          
-      .free
+      -#.free
         %table
           %tbody
             %tr
               %td
                 %p= start_or_schedule_button(lawyer)
+
+      %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
+        %p= free_message(lawyer)
+        = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"                
       .free_dropdown{:href=> "#"}
       .button_tooltip
         .button-content
@@ -52,6 +56,9 @@
             - if lawyer.is_available_by_phone
               %li
                 = start_phone_consultation(lawyer)
+            - if lawyer.daily_hours.present?
+              %li
+                %a.appt-select{:href => '#'} Schedule a consultation                
             %li
               = start_or_schedule_button_text(lawyer)        
   - if lawyer.daily_hours.present?      

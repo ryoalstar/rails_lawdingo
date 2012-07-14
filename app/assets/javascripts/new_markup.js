@@ -113,14 +113,36 @@ $(document).ready(function(){
 	$('html').click(function() {
     $(".button_tooltip").hide();
   });
+  
+  $("#question_body").click( function(){
+      event.stopPropagation();	    
+      $("#question_state").show('slow');
+      $("#question_area").show('slow');
+  });
+  
+  var show_on_mouseenter = true;
 	$(".free_dropdown").live('click', function(ev){
 	  event.stopPropagation();	    
 		$(".button_tooltip").hide();
     $(this).nextAll(".button_tooltip").show();
+    show_on_mouseenter = true;
 	});
-	
+  $(".free").live('mouseenter', function(){ 	  	
+     $(".button_tooltip").hide(); 	  	
+     $(this).nextAll(".button_tooltip").show(); 	  	
+     show_on_mouseenter = false;
+     //console.log(show_on_mouseenter)
+  });
+ 	  	
+  $(".free").live('click', function(){ 	  	
+     $(".button_tooltip").hide(); 	  	
+     $(this).nextAll(".button_tooltip").show();
+  });
 	$(".button_tooltip").live('mouseleave', function() {
-			$(this).hide();
+	    console.log(show_on_mouseenter)
+	    if(show_on_mouseenter == false){
+	      $(this).hide(); 
+	    }
 	});
 	$( "#slider-range-min" ).slider({
 	  range: "min",

@@ -371,7 +371,7 @@ class Home
       else
         $field = @practice_area_fields().filter("[checked='checked']")
         $field.parents(".practice-areas").show()
-        $field.parent().find(".children").show()
+        $field.parent().find(".children").show('slow')
   
   
   practice_area_fields : ()->

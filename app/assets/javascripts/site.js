@@ -225,13 +225,14 @@ $(function(){
             carousel_image.find('img').attr('src', carousel_info['url']);
 						carousel_image.find('a.profile_link').attr('href', carousel_info['href']);
             carousel_image.find('img').attr('alt', carousel_info['title']);
+            self.find('.carousel-description .free_button').html( carousel_info['free'] );
             self.find('.carousel-description h4').html( carousel_info['title'] );
             self.find('.carousel-description p.desc').html( carousel_info['description'] );
             self.find('.carousel-description p.rate').html( carousel_info['rate'] );
             self.find('.carousel-description p.small').html( carousel_info['small'] );
             self.find('.carousel-description .stars').html( carousel_info['rating'] );
             self.find('.carousel-description span.note').html( carousel_info['start_or_schedule_button_text_profile'] );
-            //self.find('.carousel-description p.active_action').html( carousel_info['active_action'] );
+            /*self.find('.carousel-description p.active_action').html( carousel_info['active_action'] );
             
             if (carousel_info["active_action"] !== undefined) {
 			      	  self.find('.carousel-description p.active_action')
@@ -240,7 +241,7 @@ $(function(){
 		      	} else {
 		      	  	self.find('.carousel-description p.active_action').html('').hide();
 						}
-            
+            */
             
         		if (carousel_info["start_or_video_button_p"] !== undefined) {
 						  self.find('.carousel-description span.video')

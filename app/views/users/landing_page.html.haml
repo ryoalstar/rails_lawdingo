@@ -4,7 +4,7 @@
 - lawyer = default_image.lawyer
 - practice_area_text=""
 - practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. "
-- description = practice_area_text + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
+- description = practice_area_text #+ "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
 - title "Legal advice online. Chat with a lawyer now on Lawdingo."
 - if params[:reset_email_notice].present?
   %p.notice
@@ -22,12 +22,14 @@
   #center_area
     .white_glow
       .start_off_info
-        %a{:href => "/lawyers"}
+        -#%a{:href => "/lawyers"}
           = image_tag('start_off_info.png', :alt => '')
         %h1= @tagline
         %p= @subtext[:first]
         / %p= @subtext[:second]
         = link_to "", lawyers_path, class: "browse_lawyers_button"
+        = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
+        = render partial: "questions/home_form", locals: { type: "lawyer" }
         -#%small
           Lawyer? #{link_to "Apply here!", new_lawyer_path}
       .slider
@@ -62,17 +64,18 @@
                 .video_chat.offline.tooltip Not available by video now
                 .voice_chat.offline.tooltip Not available by phone now
             %p.desc= raw(description)
-            #carousel-buttons
-            
-            
-            
-              .free
+            #carousel-buttons            
+              -#.free
                 %table
                   %tbody
                     %tr
                       %td
                         %p.active_action= start_or_schedule_button(lawyer)
-              .free_dropdown{:href=> "#"}
+              .free_button          
+                %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
+                  %p.rate= "#{lawyer.free_consultation_duration} minutes free"
+                  %p.small="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"
+              .free_dropdown{:href=> "#"}  
               .button_tooltip
                 .button-content
                   %ul
@@ -81,7 +84,7 @@
                       = start_or_schedule_button(lawyer) # start_video_button(lawyer)
                     - phone_callable = lawyer.is_available_by_phone
                     %li.phone{:style => "display: #{phone_callable ? 'list-item' : 'none'}"}
-                      = start_phone_consultation(lawyer)
+                      = start_phone_consultation(lawyer)                      
                     %li.text
                       = start_or_schedule_button_text(lawyer)
               -#.lawyer_rates
@@ -158,7 +161,7 @@
     /%h2 Introduction video
     /= image_tag('video.png', :alt => '')  
     .testimonials
-      %h2 People like you say:
+      %h2 People say:
       -#.avatar
         = image_tag('ava.png', :alt => '')
         %p Johne Dwayne

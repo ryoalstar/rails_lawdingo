@@ -157,16 +157,7 @@
   %hr/
   %a.button.blue{:href => "javascript:void(0)", :onclick => "sendMessage();return false;"} Send Message
 :javascript
-  $("#question_body").click( function(){
-      $("#question_state").show()
-      $("#question_area").show()
-  });
-  $("#generail_question").mouseleave( function(){
-    if ($("#question_body").val()==""){
-      $("#question_state").hide()
-      $("#question_area").hide()
-      }
-  });
+
   function sendMessage(){
     close_dialogs();
     var msg = $('textarea#txt_msg').val();
