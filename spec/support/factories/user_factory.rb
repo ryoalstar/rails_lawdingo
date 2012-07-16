@@ -17,5 +17,6 @@ FactoryGirl.define do
     email
     password "secret"
     user_type User::CLIENT_TYPE
+    phone 1122334455
   end
 end

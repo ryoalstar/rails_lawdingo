@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  DatabaseCleaner.clean
 
   include Rails.application.routes.url_helpers
 
@@ -208,6 +209,23 @@ describe UsersController do
       #   question_email = ActionMailer::Base.deliveries.last
       #   question_email.subject.should match /Question ##{@question.id}/
       # end
+    end
+  end
+
+  context "on starting a phone call", :focus do
+    before :each do
+      @james = FactoryGirl.create(:client, first_name: "James", phone: "")
+      @morgan = FactoryGirl.create(:lawyer, first_name: "Morgan")
+
+      # sign in as James (client)
+      session[:user_id] = @james.to_param
+    end
+
+    it "should remember client's phone number" do
+      number = "1234567890"
+      post :create_phone_call, { lawyer_id: @morgan.to_param, client_number: number }
+      response.should redirect_to controller: "users", action: "start_phone_call", id: @morgan.to_param, notice: "Error: making a call"
+      User.find(session[:user_id]).phone.should eq(number)
     end
   end
 end
