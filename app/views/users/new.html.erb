@@ -7,8 +7,7 @@
       <a href="#" id="close_notice">Close</a>
     </p>
   <% end %>
-  
-  
+
   <% if params[:lawyer_path].present? %>
     <% @lawyer = Lawyer.find(params[:lawyer_path]) %>  
     <% if params[:notice].present? %>
@@ -29,16 +28,15 @@
 
   <div class="form-wrapper signin">
     <% if @lawyer %>
-      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)%> now.</p>
+      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path(lawyer_path: @lawyer.id) %> now.</p>
     <% else %>
-      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path(session[:return_to])%> now.</p>
+      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path %> now.</p>
     <% end %>
   </div>
 
   <div class="form-wrapper">
     <%= render 'form' %>
   </div>
-
 
   <% if is_client %>
     <h3 style="color: #818181;">Lawyer? <%= link_to "Apply here", new_lawyer_path %>.</h3>
