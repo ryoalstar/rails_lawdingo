@@ -1,20 +1,30 @@
 <% is_client = @user.is_client? %>
 
 <div id="page" class="signup">
-  <% if params[:question_notice].present? %>
-    <p class="notice"> 
-      To submit that inquiry please sign up with or log in to Lawdingo. 
-      <a href="#" id="close_notice">Close</a>
-    </p>
-  <% end %>
-
   <% if params[:lawyer_path].present? %>
-    <% @lawyer = Lawyer.find(params[:lawyer_path]) %>  
+    <% @lawyer = Lawyer.find(params[:lawyer_path]) %>
     <% if params[:notice].present? %>
       <p class="notice">
         <% if @lawyer %>
           To connect with <%= @lawyer.full_name %>, simply sign up or sign in with Lawdingo.
         <% end %>
+        <a href="#" id="close_notice">Close</a>
+      </p>
+    <% end %>
+  <% end %>
+
+  <% if params[:question_notice].present? %>
+    <p class="notice">
+      To submit that inquiry please sign up with or log in to Lawdingo.
+      <a href="#" id="close_notice">Close</a>
+    </p>
+  <% end %>
+
+  <% if params[:appointment_with].present? %>
+    <% @lawyer = Lawyer.find(params[:appointment_with].to_i) %>
+    <% if @lawyer.present? %>
+      <p class="notice">
+        To make an appointment with <%= @lawyer.full_name %>, please sign up with or log in to Lawdingo.
         <a href="#" id="close_notice">Close</a>
       </p>
     <% end %>
@@ -27,8 +37,8 @@
   <% end %>
 
   <div class="form-wrapper signin">
-    <% if @lawyer %>
-      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path(lawyer_path: @lawyer.id) %> now.</p>
+    <% if @lawyer && params[:lawyer_path] %>
+      <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)%> now.</p>
     <% else %>
       <p>Already a Lawdingo lawyer? <%= link_to "Log in", login_path %> now.</p>
     <% end %>

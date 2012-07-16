@@ -19,9 +19,8 @@ class Lawyer
         path = encodeURI(
           document.location.pathname + document.location.search
         )
-        document.location = "/users/new?notice=true&return_path=#{path}&ut=0"
+        document.location = "/users/new?notice=true&appointment_with=#{@id}&return_path=#{path}&ut=0"
       # always return false
       return false
 
-this.Lawyer = Lawyer
-    
+@Lawyer = Lawyer
