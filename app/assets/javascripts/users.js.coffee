@@ -4,7 +4,28 @@ jQuery ->
   # ($ ".leveled-list input.parent-area").bind "click", ->
   #  value = ($ this).attr("checked") is "checked" ? "true" : "false"
   #  ($ ".sub[data-parent-id='#{($ this).data("id")}']").find("input").attr "checked", value
-  
+
+  # Bind loading spinner to ajaxStart and ajaxStop
+  spin_opts = {
+    lines: 13,
+    length: 7,
+    width: 4,
+    radius: 11,
+    rotate: 0,
+    color: '#333',
+    speed: 1,
+    trail: 60,
+    shadow: false,
+    hwaccel: false,
+    className: 'spinner',
+    zIndex: 2e9,
+    top: 'auto',
+    left: 'auto'
+  }
+
+  ($ "html").ajaxStart -> ($ "body").spin(spin_opts)
+  ($ "html").ajaxStop -> ($ "body").spin(false)
+
   # Practice areas checkboxes behavior
   ($ "#leveled-list_practice_areas input.parent-area").bind "change", ->
     input = ($ this)

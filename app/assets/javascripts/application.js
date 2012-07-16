@@ -11,6 +11,7 @@
 //= require rails.validations
 //= require jquery.numeric
 //= require jquery.raty
+//= require jquery.spin
 //= require offerings
 //= require filters
 //= require reviews
