@@ -132,4 +132,3 @@ class User < ActiveRecord::Base
     yelp_connection.find_by_id(self.yelp_business_id)
   end
 end
-

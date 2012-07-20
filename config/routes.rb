@@ -1,8 +1,6 @@
 Lawdingo::Application.routes.draw do
-  
-
   match 'sitemap.xml' => 'sitemaps#sitemap'
-  
+
   resources :appointments, :only => [:create]
 
   namespace :framey do
@@ -13,7 +11,8 @@ Lawdingo::Application.routes.draw do
   resources :questions
   resources :reviews
   resources :schools
-  
+  resources :inquiries, only: :show
+  resources :bids, only: :create
   get "password_resets/new"
 
   # The priority is based upon order of creation:

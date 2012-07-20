@@ -12,6 +12,7 @@
 //= require jquery.numeric
 //= require jquery.raty
 //= require jquery.spin
+//= require jquery.countdown
 //= require offerings
 //= require filters
 //= require reviews

@@ -2,9 +2,10 @@ class Lawyer < User
 
   # validates :payment_email, :bar_ids, :practice_areas, :presence =>true
   # validates :payment_email, :presence => true
-  
+
   has_many :bar_memberships
   has_many :conversations
+  has_many :bids
 
   has_many :daily_hours do
     # find on a given wday
