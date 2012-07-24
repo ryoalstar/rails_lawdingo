@@ -14,131 +14,134 @@
     %p.notice
       = flash[:notice]
       %a#close_notice{:href => "#"} Close
-  %form.filters
+  %form.filters#filters
     .left-bar
       .left-bar-section.first
         %h2 Find the right lawyer
-      .left-bar-section#search_class
-        %a#clear_data_search 
-          = image_tag('close_icon.png', :alt => 'clear', :id => "input_close_sea_img")
-          = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
-        %h3 Search
-        %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
-        %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
-        %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
-        %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
-        %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
-        %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}
-        %input{:name => "autodetect",      :id => "autodetect",       :style => "display:none;"}
-      #service_type.left-bar-section
-        %h3 Legal:
-        %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
-        %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
-      - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
-        #state.left-bar-section
-          %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
-          %h3
-            %label{:for => "state"} In:
-          .national-area-notice
-            %p
-            %a.show-states-selector{ href: "#" } Set state anyway
-          %select.states{:name => "state"}
-            %option{"data-default" => "1", :value => "All-States"} Any state
-            - @states.each do |state|
-              %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
-                = state.name
-      - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
-        #practice_areas.left-bar-section.legal_domain
-          %h3 Type:
-          .practice-areas
-            %p
-              = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
-              %label{:for => "practice_area_All"} All types
-            - @practice_areas.each do |area|
+      .sticky_filters
+        .left-bar-section#search_class
+          %a#clear_data_search 
+            = image_tag('close_icon.png', :alt => 'clear', :id => "input_close_sea_img")
+            = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
+          %h3 Search
+          %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
+          %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
+          %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
+          %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
+          %input{:name => "hourlyrateend",   :id => "hourlyrateend",    :style => "display:none;"}   
+          %input{:name => "schoolrating",    :id => "schoolrating",     :style => "display:none;"}
+          %input{:name => "autodetect",      :id => "autodetect",       :style => "display:none;"}
+        -#service_type.left-bar-section
+          %h3 Legal:
+          %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
+          %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
+        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
+          #state.left-bar-section
+            %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
+            %h3
+              %label{:for => "state"} In:
+            .national-area-notice
               %p
-                = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
-                = label_tag "practice_area_#{area.name}", area.name
-              - if area.children.with_approved_lawyers.present?
-                .practice-areas.children{:style => "display:none"}
-                  %h3 Specific need?
-                  .child
-                    - area.children.with_approved_lawyers.each do |subarea|
-                      %p
-                        = radio_button_tag "practice_area", subarea.name, false, data: { is_national: area.is_national?.to_s }
-                        = label_tag "practice_area_#{subarea.name}", subarea.name
-      -#specialities_filter.filters-section{:style => "display: none;"}
-        %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
-        %h3 Specific need:
-        %ul.specialities
+              %a.show-states-selector{ href: "#" } Set state anyway
+            %select.states{:name => "state"}
+              %option{"data-default" => "1", :value => "All-States"} Any state
+              - @states.each do |state|
+                %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
+                  = state.name
+        - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
+          #practice_areas.left-bar-section.legal_domain
+            %h3 Type:
+            .practice-areas
+              %p
+                = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
+                %label{:for => "practice_area_All"} All types
+              - @practice_areas.each do |area|
+                %p
+                  = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
+                  = label_tag "practice_area_#{area.name}", area.name
+                - if area.children.with_approved_lawyers.present?
+                  .practice-areas.children{:style => "display:none"}
+                    %h3 Specific need?
+                    .child
+                      - area.children.with_approved_lawyers.each do |subarea|
+                        %p
+                          = radio_button_tag "practice_area", subarea.name, false, data: { is_national: area.is_national?.to_s }
+                          = label_tag "practice_area_#{subarea.name}", subarea.name
+        -#specialities_filter.filters-section{:style => "display: none;"}
+          %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
+          %h3 Specific need:
+          %ul.specialities
 
-      .left-bar-section
-        %h3 Minimum free minutes:
-        %p.hidden
-          %label{:for => "minimum_free_minutes"} Minimum free minutes:
-          %input#minutes{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-        #free_minutes_slider
-        .filter_slider_spliters
-        .slider_rates
-          %span.two 2 
-          %span.five 5 
-          %span.ten 10 
-          %span.fiveteen 15 
-          %span.twenty 20 
-          %span.thirty 30 
-          %span.sixty 60 
-          %span.ninety 90
-      -#.left-bar-section
-        %h3 Minimum Client rating
-        %p.hidden
-          %label{:for => "minimum_client_rating"} Minimum Client rating:
-          %input#client_rating{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-        #minimum_client_rating
-        .minimum_client_rating_splitters
-        .slider_rates
-          .star.star_1
-            %span 1
-          .star.star_2
-            %span 2
-          .star.star_3
-            %span 3
-          .star.star_4
-            %span 4
-          .star.star_5
-            %span 5    
-      .left-bar-section
-        %h3 Hourly rate:
-        %p.hidden
-          %label{:for => "hourly_rate"} Hourly rate:
-          %input#hourly_rate_in{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-        #hourly_rate
-        .hourly_rate_splitters
-        .slider_rates
-          %span.h-rate-1
-            $
-          %span.h-rate-2 
-            $$
-          %span.h-rate-3 
-            $$$
-          %span.h-rate-4 
-            $$$$
-      -#.left-bar-section
-        %h3 Law school quality:
-        %p.hidden
-          %label{:for => "law_school_quality"} Law school quality:
-          %input#law_school{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-        #law_school_quality
-        .hourly_rate_splitters
-        .slider_rates
-          %span.law-school-1 B-
-          %span.law-school-2 B
-          %span.law-school-3 A
-          %span.law-school-4 A+
+        .left-bar-section
+          %h3 Minimum free minutes:
+          %p.hidden
+            %label{:for => "minimum_free_minutes"} Minimum free minutes:
+            %input#minutes{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          #free_minutes_slider
+          .filter_slider_spliters
+          .slider_rates
+            %span.two 2 
+            %span.five 5 
+            %span.ten 10 
+            %span.fiveteen 15 
+            %span.twenty 20 
+            %span.thirty 30 
+            %span.sixty 60 
+            %span.ninety 90
+        -#.left-bar-section
+          %h3 Minimum Client rating
+          %p.hidden
+            %label{:for => "minimum_client_rating"} Minimum Client rating:
+            %input#client_rating{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          #minimum_client_rating
+          .minimum_client_rating_splitters
+          .slider_rates
+            .star.star_1
+              %span 1
+            .star.star_2
+              %span 2
+            .star.star_3
+              %span 3
+            .star.star_4
+              %span 4
+            .star.star_5
+              %span 5    
+        .left-bar-section
+          %h3 Hourly rate:
+          %p.hidden
+            %label{:for => "hourly_rate"} Hourly rate:
+            %input#hourly_rate_in{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          #hourly_rate
+          .hourly_rate_splitters
+          .slider_rates
+            %span.h-rate-1
+              $
+            %span.h-rate-2 
+              $$
+            %span.h-rate-3 
+              $$$
+            %span.h-rate-4 
+              $$$$
+        -#.left-bar-section
+          %h3 Law school quality:
+          %p.hidden
+            %label{:for => "law_school_quality"} Law school quality:
+            %input#law_school{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          #law_school_quality
+          .hourly_rate_splitters
+          .slider_rates
+            %span.law-school-1 B-
+            %span.law-school-2 B
+            %span.law-school-3 A
+            %span.law-school-4 A+
   .main_content
     #generail_question.question.question-container
       -#%h2.selected-lawyers-caption= selected_lawyers_caption
       %h2
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS
+    #service_type_tabs
+      = render partial: "service_type_tabs"
     #results.results
       = render(:partial => "search_results")
 #schedule_session.dialog-window

@@ -304,7 +304,7 @@ $(function(){
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
 
-            self.interv = setTimeout( next_image, 7000 );
+            self.interv = setTimeout( next_image, 2300 );
         }
 
         function next_image(){ 
@@ -323,7 +323,7 @@ $(function(){
         cont.append( prev );
         cont.append( next );
         self.find('.carousel-image').append(cont);
-        self.interv = setInterval( next_image, 2500 );
+        self.interv = setInterval( next_image, 2000 );
     }
 
     $.fn.dialog = function( ){
@@ -438,7 +438,7 @@ $(function(){
         //tweak to your hearts content
         placeholderCSS: {
           'font':'16px', 
-          'color':'#393C3D', 
+          'color':'#a8a8a8', 
           'position': 'absolute', 
           'left':'5%',
           'top':'8px', 

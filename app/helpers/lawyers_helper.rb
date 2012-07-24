@@ -248,7 +248,7 @@ module LawyersHelper
      Time.now.year.to_i - lawyer.license_year.to_i + 1
    end
  end
-
+  
   def selected_lawyers_caption
     is_are = @search.total == 1 ? "is" : "are"
     ct = @search.total == 0 ? "no" : @search.total.to_s

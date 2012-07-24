@@ -21,8 +21,26 @@ $(document).mouseup(function (e)
 });
 
 $(document).ready(function(){
+
+  //Makes the filters sticky to top of page when page scrolls down
+	/*var msie6 = $.browser == 'msie' && $.browser.version < 7;
+	search_box = document.getElementById('filters');
+	if (search_box && !msie6) {
+		var top = $('#filters').offset().top + 40 - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
+		$(window).scroll(function (event) {
+		  var y = $(this).scrollTop();
+		  if (y >= top) {
+			$('#filters').addClass('fixed');
+			//$('.slidey').addClass('nudge');
+		  } else {
+			$('#filters').removeClass('fixed');
+			//$('.slidey').removeClass('nudge');
+		  }
+		});
+	}*/
+  
   $(".profile_info .client-reviews .review").first().addClass('first');
-  $(".profile_info .client-reviews .review").last().addClass('last');  
+  $(".profile_info .client-reviews .review").last().addClass('last');
   
 	$(my_images).each(function() { 	
 		var image = $('<img />').attr('src', this).hide();
@@ -127,28 +145,29 @@ $(document).ready(function(){
     show_on_mouseenter = false;
   });
   
-  $("#question_body").click( function(){
-      event.stopPropagation();	    
-      $("#question_state").show('slow');
-      $("#question_area").show('slow');
+  $("#question_body").focus(function(event){
+    event.stopPropagation();
+    $("#question_state").show('slow');
+    $("#question_area").show('slow');
   });
-  
-	$(".free_dropdown").live('click', function(ev){
-	  event.stopPropagation();	    
+    
+	$(".free_dropdown").live('click', function(event){
+	  event.stopPropagation();
 		$(".button_tooltip").hide();
     $(this).nextAll(".button_tooltip").show();
     show_on_mouseenter = true;
     //console.log(show_on_mouseenter);
 	});
-  $(".free").live('mouseenter', function(){ 	  	
-     console.log("111");
-     $(this).data('hover',1);  
-     $(this).nextAll(".button_tooltip").show(); 	  	
-     //console.log(show_on_mouseenter)
+	  
+  $(".free").live('mouseenter', function(){
+    //console.log("111");
+    $(this).data('hover',1);
+    $(this).nextAll(".button_tooltip").show();
+   //console.log(show_on_mouseenter);
   });
   $(".free").live('mouseleave', function(){ 	 
-    $(this).data('hover',0); 
-    var self = this;	
+    $(this).data('hover',0);
+    var self = this;
     var som = show_on_mouseenter;
     //console.log(show_on_mouseenter);
     var t = $(self).nextAll(".button_tooltip");
@@ -156,7 +175,7 @@ $(document).ready(function(){
  	    if(!(t.data('hover') || $(self).data('hover')) && !som){
  	      //console.log(som);
  	      t.hide();
- 	    } 	  	
+ 	    }
  	  }, 300);
   });
   $(".free").live('click', function(){ 	  	

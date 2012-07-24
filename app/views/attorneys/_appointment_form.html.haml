@@ -12,7 +12,12 @@
         %ul
           %li.title
             %a.appointment-time{:href => '#', :class => "day-#{i}"} 
-              #{d.strftime("%a, %m/%d")}
+              - if d === Date.today
+                Today
+              - elsif d === Date.tomorrow
+                Tomorrow
+              - else 
+                #{d.strftime("%a, %m/%d")}
           - times = lawyer.available_times(d)
           - times.each_with_index do |t, j|
             %li{:class => (j > 2) ? "hidden" : ""}

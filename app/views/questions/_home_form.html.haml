@@ -1,7 +1,7 @@
 = simple_form_for Question.new, remote: logged_in? do |f|
   = f.input :user_id, as: :hidden, input_html: { value: logged_in? ? current_user.id : nil }
   = f.input :type, as: :hidden, input_html: { value: type }
-  = f.input :body, as: :string, label: false, :placeholder => "Describe your legal matter to hear from lawyers."
+  = f.input :body, as: :string, label: false, :placeholder => "Have a legal issue? Ask a lawyer for free, right now."
   = f.submit "", class: ""
   #question_state.question_state
     .question_state_top

@@ -162,7 +162,12 @@
                     %ul
                       %li.title
                         %a{:href => '#', :class => "day-#{i}"} 
-                          #{d.strftime("%a, %m/%d")}
+                          - if d === Date.today
+                            Today
+                          - elsif d === Date.tomorrow
+                            Tomorrow
+                          - else 
+                            #{d.strftime("%a, %m/%d")}
                       - times = @attorney.available_times(d)
                       - times[0..2].each do |t|
                         %li

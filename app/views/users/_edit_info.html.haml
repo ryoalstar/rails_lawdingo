@@ -38,7 +38,7 @@
       - bms = @user.corresponding_user.bar_memberships
       - bms_text = "<h2>Bar Memberships: </h3>"
       - bms.each{|bm|
-      - bms_text += "<li>#{bm.state.name}(Bar ID: #{bm.bar_id})</li>"
+      - bms_text += "<li>#{bm.state.name}(Bar ID: #{bm.bar_id})</li>" if bm.bar_id
       - }
       - pas = @user.practice_areas
       - ppas = @user.corresponding_user.practice_areas.parent_practice_areas
@@ -73,6 +73,7 @@
               ["60 minutes", "60"],                 |
               ["90 minutes", "90"]                  |
             ])                                      |
+          %span.rate_hint free consultation offered
         - @user.rate = nil if @user.new_record?
         - @user.rate = number_with_precision @user.rate, :precision => 2
         = f.text_field :rate ,{:class=>"paypal", :placeholder => "Per minute rate"}
@@ -139,5 +140,6 @@
                           %li
                             %input{"data-name" => s.name, "data-parent-id" => p.id, :id => s.name, :name => "practice_areas[]", :type => "checkbox", :value => s.id}/
                             = s.name
-          %a.button.blue{:onclick => "setPracticeAreas();"} Done
+          %a.button.blue{:onclick => "setPracticeAreas();", :style => 'float:left;'} Done
+          .dialog-close
       = f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button"

@@ -51,15 +51,12 @@
 		ul{
 			margin-top: 1px;
 			list-style-type:none;
-			float:right;
 			margin:0;
 			padding:0;
 			li:last-child{
 				padding-right: 0;
 			}
 			li{
-				display:block;
-				float:left;
 				padding:0 12px;
 				a{
 					color:#505050;
@@ -354,7 +351,7 @@ body.users.home {
 
             .rate_hint {
               display: inline-block;
-              margin-left: 10px;
+              margin-right: 20px;
               font-size: 1.5em;
               color: #B8B8B8;
             }

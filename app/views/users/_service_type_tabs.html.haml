@@ -1,0 +1,10 @@
+#service_type
+  %a.advice.service_type{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} 
+    Lawyers
+    %span.count= @search.total.to_i
+  %a.service.service_type.selected{:href => '#', 'data-val' => 'Legal-Services'}
+    Services
+    -#%span.count 1
+  -#.availability
+    %input{:type => 'checkbox'}
+    %label Only show lawyers available now

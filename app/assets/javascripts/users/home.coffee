@@ -150,8 +150,8 @@ class Home
         this.submit()
         false
       )
-    this.service_type_fields().click((e)=>
-      this.set_service_type_fields_val(
+    this.service_type_tabs().click((e)=>
+      this.set_service_type_tabs_val(
         $(e.target).attr('data-val')
       )
       this.submit()
@@ -253,7 +253,7 @@ class Home
     hash = hash.split("/")
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       hash[1]=detect_state_name+"-lawyers"
-    this.set_service_type_fields_val(hash[0])
+    this.set_service_type_tabs_val(hash[0])
     this.set_state_fields_val(hash[1])
     if hash[2]
       temp_string = hash[2]
@@ -276,8 +276,8 @@ class Home
    $("#hourlyrateend").val("") 
       
   set_defaults : (default_state)->
-    this.set_service_type_fields_val(
-      this.service_type_fields()
+    this.set_service_type_tabs_val(
+      this.service_type_tabs()
         .filter("[data-default=1]")
         .attr('data-val')    
     )
@@ -295,6 +295,28 @@ class Home
           .val()
       ).parent().find('img').trigger('click')
 
+  tabs : ()->
+    $("div#service_type_tabs")
+  
+  service_type_tabs : ()->
+    this.tabs()
+      .find("div#service_type .service_type")
+  
+  set_service_type_tabs_val : (val)->
+      @service_type = val
+      this.service_type_tabs()
+  
+        .addClass('selected')
+        .filter("[data-val='#{val}']")
+        .removeClass("selected")
+  
+      if val == "Legal-Services"
+        @practice_area_fields().parent().find(".children").hide()
+      else
+        $field = @practice_area_fields().filter("[checked='checked']")
+        $field.parents(".practice-areas").show()
+        $field.parent().find(".children").show('slow')
+          
   form : ()->
     $("form.filters")
 
@@ -306,9 +328,9 @@ class Home
     this.state_fields()
       .val(val)
 
-  service_type_fields : ()->
-    this.form()
-      .find("div#service_type .service_type")
+  #service_type_fields : ()->
+  #  this.form()
+  #    .find("div#service_type .service_type")
 
   set_practice_area_fields_val : (val)->
     @practice_area = val
@@ -358,20 +380,20 @@ class Home
     $field.parent().next().show() unless @service_type == "Legal-Services"
     $field
 
-  set_service_type_fields_val : (val)->
-      @service_type = val
-      this.service_type_fields()
-  
-        .removeClass('selected')
-        .filter("[data-val='#{val}']")
-        .addClass("selected")
-  
-      if val == "Legal-Services"
-        @practice_area_fields().parent().find(".children").hide()
-      else
-        $field = @practice_area_fields().filter("[checked='checked']")
-        $field.parents(".practice-areas").show()
-        $field.parent().find(".children").show('slow')
+  #set_service_type_fields_val : (val)->
+  #    @service_type = val
+  #    this.service_type_fields()
+  #
+  #      .removeClass('selected')
+  #      .filter("[data-val='#{val}']")
+  #      .addClass("selected")
+  #
+  #    if val == "Legal-Services"
+  #      @practice_area_fields().parent().find(".children").hide()
+  #    else
+  #      $field = @practice_area_fields().filter("[checked='checked']")
+  #      $field.parents(".practice-areas").show()
+  #      $field.parent().find(".children").show('slow')
   
   
   practice_area_fields : ()->
