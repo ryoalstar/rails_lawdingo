@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
+    # Empy return_to if user came from homepage
+    session[:return_to] = nil if request.referer == root_url
     if logged_in?
-
     	redirect_to root_path and return
     end
 	end
@@ -18,6 +19,7 @@ class SessionsController < ApplicationController
         send_pending_question(session[:question_id], user)
       else
       if user.is_client?
+        return_path = lawyers_path
         # If there is a pending question
        if session[:return_to]
         return_path = session[:return_to]
