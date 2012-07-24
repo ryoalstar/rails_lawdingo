@@ -525,6 +525,9 @@ body.users.landing_page{
 			margin-top: 17px;
 			text-align: center;
 		}
+		.placeholder_text{
+		  top:14px !important;
+		}
 		input#question_body{
 		  color: #393C3D;
 			display:block;
@@ -2305,6 +2308,9 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 					margin-left: 35px;
 					margin-top: 17px;
 					text-align: center;
+				}
+				.placeholder_text{
+				  top:14px !important;
 				}
 				input#question_body{
 				  color: #393C3D;

@@ -21,23 +21,24 @@ $(document).mouseup(function (e)
 });
 
 $(document).ready(function(){
-
-  //Makes the filters sticky to top of page when page scrolls down
-	/*var msie6 = $.browser == 'msie' && $.browser.version < 7;
-	search_box = document.getElementById('filters');
-	if (search_box && !msie6) {
-		var top = $('#filters').offset().top + 40 - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
-		$(window).scroll(function (event) {
-		  var y = $(this).scrollTop();
-		  if (y >= top) {
-			$('#filters').addClass('fixed');
-			//$('.slidey').addClass('nudge');
-		  } else {
-			$('#filters').removeClass('fixed');
-			//$('.slidey').removeClass('nudge');
-		  }
-		});
-	}*/
+  if($(window).height() > 779){
+    //Makes the filters sticky to top of page when page scrolls down
+  	var msie6 = $.browser == 'msie' && $.browser.version < 7;
+  	search_box = document.getElementById('filters');
+  	if (search_box && !msie6) {
+  		var top = $('#filters').offset().top + 40 - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
+  		$(window).scroll(function (event) {
+  		  var y = $(this).scrollTop();
+  		  if (y >= top) {
+  			$('#filters').addClass('fixed');
+  			//$('.slidey').addClass('nudge');
+  		  } else {
+  			$('#filters').removeClass('fixed');
+  			//$('.slidey').removeClass('nudge');
+  		  }
+  		});
+  	}
+  }
   
   $(".profile_info .client-reviews .review").first().addClass('first');
   $(".profile_info .client-reviews .review").last().addClass('last');

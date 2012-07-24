@@ -202,7 +202,7 @@ function close_dialogs(){
     $('#dialog-overlay').hide();
 }
 $(document).ready(function() {
-$(function(){
+  $(function(){
     
     $.fn.carousel = function(){
         if( this==null || this=='undefined' || this.length<=0 ) return;
@@ -466,7 +466,7 @@ $(function(){
         //if (isOverlayOpen) postponePayment();
     });
 
-});
+  });
 });
 jQuery.fn.center = function () {
   this.css({"position": "fixed", "margin": "0"});

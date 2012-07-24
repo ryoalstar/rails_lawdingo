@@ -39,7 +39,7 @@
           #state.left-bar-section
             %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
             %h3
-              %label{:for => "state"} In:
+              %label{:for => "state"} State:
             .national-area-notice
               %p
               %a.show-states-selector{ href: "#" } Set state anyway
@@ -50,7 +50,7 @@
                   = state.name
         - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
           #practice_areas.left-bar-section.legal_domain
-            %h3 Type:
+            %h3 Practice area:
             .practice-areas
               %p
                 = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"

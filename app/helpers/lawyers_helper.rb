@@ -132,10 +132,10 @@ module LawyersHelper
           link_to "Schedule an appointment", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
         else
           if logged_in?
-            link_to "Send a message", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+            link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
           else
             session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
-            link_to "Send a message", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :title => "Schedule a consultation", :class => ''
+            link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :title => "Schedule a consultation", :class => ''
           end
         end
       end
@@ -145,10 +145,10 @@ module LawyersHelper
 
   def start_or_schedule_button_text(lawyer)
     if logged_in?
-      link_to "Send a message", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+      link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
       session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
-      link_to "Send a message", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :title => "Schedule a consultation", :class => ''
+      link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :title => "Schedule a consultation", :class => ''
     end
   end
 

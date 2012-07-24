@@ -26,15 +26,54 @@
 
 
 #footer{
-	height:84px;
+	height:180px;
 	width:100%;
 	float:left;
-	background: url(footer_bg.png);
+	//background: url(footer_bg.png);
+	position:absolute; 
+	bottom:0;
 	padding-bottom:0;
+	background: #eaecef; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eaecef 0%,#d5dbe1 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaecef', endColorstr='#d5dbe1',GradientType=0 ); /* IE6-9 */
+  .footer_border{
+    background:url('footer_border.png') repeat-x;
+    height:4px;
+    width:100%;
+  }
+	.footer-logo{
+	  float:left;
+	  margin-left:235px;
+	  margin-top: 22px;
+	  text-align:center;
+	  width:120px;
+	  font-size:14px;
+	}
+	.social-links{
+	  float: right;
+    width: 300px;
+    text-align:center;
+    .fb_link{
+      margin-top:22px;
+    }
+    .custom_hr{
+      margin:20px 0;
+    }
+	}
 	.footer_content{
 		margin:0 auto;
 		width:990px;
-		padding-top: 18px;
+		padding-top: 12px;
+
+    .top-offset-small {
+      padding-top: 15px;
+    }
+
 		span.left{
 			font-size: 14px;
 			margin:5px 10px 0px 4px;
@@ -42,33 +81,29 @@
 			display:block;
 			float:left;
 		}
-		.top-offset-small{
-		  padding-top: 15px;
-		}
 		span.gplus{
-		  width:100px;
+			width: 100px;
 		}
 		ul{
 			margin-top: 1px;
 			list-style-type:none;
+			float:left;
 			margin:0;
 			padding:0;
 			li:last-child{
 				padding-right: 0;
 			}
 			li{
-				padding:0 12px;
+				padding:8px 0px;
 				a{
 					color:#505050;
 					text-decoration:none;
-					display:block;
+					display:inline;
 					font-size: 14px;
 					border-bottom:0;
-					padding:3px 10px;
 				}
 				a.selected, a:hover{
 					color:white;
-					display:block;
 					background:#8795a5;
 				  -moz-border-radius: 15px;
 				  -webkit-border-radius: 15px;
