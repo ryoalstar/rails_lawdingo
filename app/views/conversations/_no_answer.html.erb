@@ -1,10 +1,7 @@
-<%= simple_form_for Question.new, remote: true do |f| %>
-  <h3>No answer</h3>
-  <p>Hm... Looks like <%= @conversation.lawyer.full_name %> isn't actually available right now.</p>
-  <p>If you write <%= @conversation.lawyer.first_name %> a note about what you wanted to talk about, <%= @conversation.lawyer.first_name %> will be sure to get back on you.</p>
-  <%= f.input :user_id, as: :hidden, input_html: { value: logged_in? ? current_user.id : nil } %>
-  <%= f.input :type, as: :hidden, input_html: { value: "lawyer" } %>
-  <%= f.input :body, label: false, input_html: { style: "width: 400px; height: 100px;" } %>
-  <%= f.submit "Leave message", class: "button" %>
-  <p>Or <%= link_to "find another lawyer", lawyers_path, style: "display: inline;" %>.</p>
-<% end %>
+<h3>No answer</h3>
+<p>Hm... Looks like <%= @conversation.lawyer.full_name %> isn't actually available right now.</p>
+<p>If you write <%= @conversation.lawyer.first_name %> a note about what you wanted to talk about, <%= @conversation.lawyer.first_name %> will be sure to get back on you.</p>
+<div class="input text"><%= text_area_tag :message, "", style: "width: 400px; height: 100px;" %></div>
+<%= hidden_field_tag :lawyer_id, @conversation.lawyer.id %>
+<%= submit_tag "Leave message", id: "no_answer_message_submit", class: "button", style: "margin-top: 0.5em" %>
+<p>Or <%= link_to "find another lawyer", lawyers_path, style: "display: inline;" %>.</p>
