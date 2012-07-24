@@ -9,7 +9,7 @@
         %label Your state:
     .clear    
     .question_state_bot
-      = f.select :state_name, State.all.map(&:name), :include_blank => "Not specifed"
+      = f.select :state_name, State.all.map(&:name), selected: auto_detected_state, :include_blank => "Not specifed"
   #question_area.question_area
     .question_area_top
       %h3.question_label
