@@ -212,7 +212,7 @@ describe UsersController do
     end
   end
 
-  context "on starting a phone call", :focus do
+  context "on starting a phone call" do
     before :each do
       @james = FactoryGirl.create(:client, first_name: "James", phone: "")
       @morgan = FactoryGirl.create(:lawyer, first_name: "Morgan")
@@ -226,6 +226,17 @@ describe UsersController do
       post :create_phone_call, { lawyer_id: @morgan.to_param, client_number: number }
       response.should redirect_to controller: "users", action: "start_phone_call", id: @morgan.to_param, notice: "Error: making a call"
       User.find(session[:user_id]).phone.should eq(number)
+    end
+  end
+
+  context "came to sign up page from root", :focus do
+    before :each do
+      @request.stubs(:referer).returns(root_url(host: "localhost"))
+    end
+
+    it "set session[:return_to] to nil" do
+      get :new
+      session[:return_to].should eq(nil)
     end
   end
 end
