@@ -116,6 +116,10 @@ class UsersController < ApplicationController
     if params[:return_path]
       session[:return_to] = params[:return_path]
     end
+
+    # Empy return_to if user came from homepage
+    session[:return_to] = nil if request.referer == root_url
+
     redirect_to root_path and return if current_user
     user_type  = params[:ut] || '1'
     if user_type == '0'

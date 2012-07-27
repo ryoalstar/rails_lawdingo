@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   def new
     # Empy return_to if user came from homepage
     session[:return_to] = nil if request.referer == root_url
+
     if logged_in?
     	redirect_to root_path and return
     end
