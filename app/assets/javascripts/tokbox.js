@@ -169,6 +169,9 @@
 var g_invite_interval = 0;
 var xhr=0;
 function fn_invite_check(){
+  if(typeof(fn_play_ring) == "undefined"){
+    return true;
+  }
   fn_play_ring();
   if(is_lawyer)return;
   $('#opentok_resume').hide();

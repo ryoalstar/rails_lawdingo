@@ -5,7 +5,6 @@
     %link{:rel => "canonical", :href => "https://www.lawdingo.com"}
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
-    = javascript_include_tag 'site', 'users', 'twipsy', 'hints', 'jquery.timer','swfobject','jquery-impromptu.3.2'
     = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment"
     - if current_user && current_user.user_type == 'LAWYER'
       :javascript
@@ -41,6 +40,8 @@
         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=363994853644871";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+    :javascript
+      window.is_lawyer = #{logged_in? && current_user.is_lawyer? ? "true" : "false"}
 
   %body#lawdingo{:class => body_classes.join(' '), :onload => ""}
     #wrapper-main

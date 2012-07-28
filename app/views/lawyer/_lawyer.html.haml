@@ -1,4 +1,4 @@
-- cache("lawyer/_lawyer/#{lawyer.id}-#{lawyer.updated_at.to_i}", :expires_in => 1.day) do
+- cache("lawyer/_lawyer/#{lawyer.id}-#{lawyer.updated_at.to_i}", :expires_in => 1.hour) do
   .row.lawyer{:id => "lawyer_#{lawyer.id}", "data-lawyer-id" => lawyer.id, "data-lawyer-slug" => lawyer.slug}
     = hidden_field(:current, :lid)
     .left.row_block
