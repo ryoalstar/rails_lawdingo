@@ -488,6 +488,34 @@ class UsersController < ApplicationController
   end
 
   def update_online_status
+   if params[:op]=="call"
+      lawyer = User.find(params[:lawyer_id])
+      if !current_user.is_lawyer?
+          if lawyer.call_status!='accept'
+            lawyer.update_attribute(:call_status, params[:call_mode].to_s)    
+          end
+      else
+          lawyer.update_attribute(:call_status, params[:call_mode].to_s)
+      end
+      render :text=>"success" and return
+    else
+      if params[:op]=="get_call_status"
+        lawyer = User.find(params[:lawyer_id])
+        render :text=>lawyer.call_status and return
+      end
+
+      if params[:op]=="end_video_chat"
+        lawyer = User.find(params[:lawyer_id])
+        lawyer.update_attribute(:call_status, "")
+        
+        conversation = Conversation.find(params[:conversation_id])
+        conversation.update_attribute(:end_date,Time.now)
+        
+      end
+    end
+
+
+
     if current_user && current_user.is_lawyer?
       current_user.update_attribute(:last_online, DateTime.now)
       render :text => "true", :layout =>false

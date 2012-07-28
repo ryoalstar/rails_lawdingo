@@ -18,6 +18,28 @@ class ApplicationController < ActionController::Base
     session[:user_id] = nil
   end
 
+  def update_tokbox_session user
+    tokbox_info = get_tokbox_info
+    tokbox_session_id = tokbox_info[0]
+    tokbox_token = tokbox_info[1]
+
+    user.update_attributes(:tb_session_id => tokbox_session_id,
+        :tb_token => tokbox_token,:call_status=>'')
+    session[:user_id] = user.id
+  end
+
+
+  def get_tokbox_info
+    require "yaml"
+    config = YAML.load_file("config/tokbox.yml")
+    @opentok=OpenTok::OpenTokSDK.new config['API_KEY'],config['SECRET']
+    @location=config['LOCATION']
+    session_id=@opentok.create_session(@location)
+    token=@opentok.generate_token :session_id => session_id, :expire_time=>(Time.now+2.day).to_i
+    return [session_id.to_s,token.to_s]
+  end
+
+
   def current_user
     return nil if session[:user_id].blank?
      @current_user ||= User.find_by_id(session[:user_id])

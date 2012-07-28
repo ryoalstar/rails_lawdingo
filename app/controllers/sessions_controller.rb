@@ -29,12 +29,13 @@ class SessionsController < ApplicationController
         return_path = lawyers_path
        end
       elsif user.is_lawyer?
+        update_tokbox_session(user)
         if session[:return_to]
           return_path = session[:return_to]
           session[:return_to] = nil
-         else
+        else
           return_path = user_daily_hours_path(user.id)
-         end
+        end
       elsif user.is_admin?
         return_path = user_path(user.id)
       end
