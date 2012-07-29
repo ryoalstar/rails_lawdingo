@@ -5,6 +5,12 @@ html, body{
 	height:100%;
 	background: url(content_bg.png) repeat;
 }
+.left-gutter{
+  width: 246px;
+  height: 833px;
+  float: left;
+  display: block;
+}
 .fixed{
   position:fixed;
   top:-40px;
@@ -180,6 +186,9 @@ body.daily_hours.index{
   padding-top:0;
   .profile{
     display: inline-block;
+    h2{
+      margin-top:0;
+    }
     .left_menu{
       display: block;
       width:168px;
@@ -209,6 +218,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
     .profile{
       display: inline-block;
       .left_menu{
+        padding-bottom: 30px;
         display: block;
         width:168px;
         float: left;
@@ -238,6 +248,19 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
           float:left;
           display:inline-block;
           width:320px;
+          input.optional{
+            width: 370px;
+          }
+          input[type="submit"].button{
+            margin-left:0;
+            width:400px;
+          }
+          input.currency.optional{
+            width:150px;
+          }
+          textarea{
+            width:370px;
+          }
         }
         #offerings-listing{
           float: right;
@@ -258,6 +281,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
   .profile{
     display: inline-block;
     .left_menu{
+      padding-bottom: 30px;
       display: block;
       width:168px;
       float: left;
@@ -296,50 +320,226 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
     }
   }
 }
-body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
+body.index.logged-in, body.users.show.logged-in{
   #page > div{
     width:960px;
+    padding:0;
     .profile{
       display: inline-block;
       .left_menu{
         display: block;
-        width:168px;
+        width:200px;
         float: left;
+        background:#f2f7fb;
+        border-right: solid 1px #B8B8B8;
+        -webkit-border-top-left-radius: 10px;
+        -webkit-border-bottom-left-radius: 10px;
+        -moz-border-radius-topleft: 10px;;
+        -moz-border-radius-bottomleft: 10px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        h2{
+          padding: 15px 15px 0 15px;
+          text-transform:uppercase;
+          color:#525d6a;
+          font-size:12px;
+          font-weight:normal;
+          margin:0 0 10px 0;
+          a{
+            color:#525d6a;
+          }
+        }
         ul{
           li{
-            font-size:15px;
-            font-weight:bold;
-            padding:15px 0;
+            font-size:13px;
+            //padding: 7px 0px 7px 0px;
+            padding:0;
+            color:#0b0b0b;
+            border-top:1px solid transparent;
+            border-bottom:1px solid transparent;
+            background-repeat:no-repeat;
+            background-position:14px 8px;
             a{
-              color: #2491FF;
-              font-size:15px;
+              color: #313131;
               text-decoration:none;
               border:0;
+              display:block;
+              width:100%;
+              height:100%;
+              font-size:13px;
+            }
+            span{
+              padding: 7px 15px 7px 35px;
+              display:block;
+              width:100%;
+              height:100%;
             }
             a:hover{
-              text-decoration:underline;
+              text-decoration:none;
             }
+          }
+          li:hover{
+            background-color:#e6f0f8;
+            border-top:1px solid #cde3f3;
+            border-bottom:1px solid #cde3f3;
+          }
+          li.acc_info{
+            background-image:url("acc_info_icon.png");
+            background-position:14px 7px;
+          }
+          li.price_offers{
+            background-image:url("offers_icon.png");
+          }
+          li.availability{
+            background-image:url("availability_icon.png");
+            background-position:14px 7px;
+          }
+          li.video{
+            background-image:url("intro_video_icon.png");
+            background-position:14px 11px;
+          }
+          li.view_profile{
+            background-image:url("profile_icon.png");
           }
         }
       }
       .profile-block{
+        .recorder-wrapper{
+          height:230px;
+        }
         display: inline-block;
         float:left;
-        width: 630px;
-        padding: 10px 0px 0 40px;
+        width: 717px;
+        padding: 30px 0px 0 40px;
+        table.summary{
+          tr{
+            td{
+              text-align:center;
+            }
+          }
+        }
+        select{
+          height: 37px;
+          font-size: 13px;
+          padding: 5px 5px 5px 10px;
+          margin-top: 4px;
+          margin-bottom:10px;
+          color: #404040;
+          border: 0;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          overflow: hidden;
+        }
+        input[type="password"], input[type="text"], textarea{
+          width:490px;
+        }
+        input[type="submit"]{
+          margin-left: 110px;
+          width:455px;
+        }
+        span.rate_hint{
+          margin-left:20px;
+        }
+        ul.tick{
+          li{
+            margin-left: 20px; 
+          }
+        }
+        a.dialog-opener{
+          float:left;
+          font-size:11px;
+          color:#4c4c4c;
+          padding:6px 8px;
+          border:1px solid #b8b8b8;
+          -moz-border-radius: 5px;
+  				-webkit-border-radius: 5px;
+  				border-radius: 5px;
+  				background: #f6f6f6; /* Old browsers */
+          background: -moz-linear-gradient(top,  #f6f6f6 0%, #e8e8e8 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#e8e8e8)); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* IE10+ */
+          background: linear-gradient(to bottom,  #f6f6f6 0%,#e8e8e8 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+          
+        }
+        label{
+          color:#3f3f3f;
+          font-size:12px;
+          margin-right:40px;
+        }
+        select#lawyer_time_zone{
+          width: 328px;
+          background: url(time_select_bg.png) no-repeat;
+        }
+        select{
+          width: 231px;
+          background: url(free_consultation_select_bg.png) no-repeat;
+        }
         #new_offering{
           float:left;
           display:inline-block;
-          width:320px;
+          width:405px;
         }
         #offerings-listing{
           float: right;
           display: inline-block;
-          width:250px;
+          width:260px;
           min-height:410px;
           overflow: hidden;
           border-left: 2px solid #888;
           padding: 5px 5px 5px 1.4em;
+        }
+      }
+    }
+  }
+}
+body.users.show.logged-in{
+  #page.session-summary > div{
+    .profile{
+      .profile-block{
+        padding-left:20px;
+      }
+    }
+  }
+}
+body.daily_hours.index.logged-in{
+  #page > div{
+    .profile{
+      width:100%;
+      .profile-block{
+        padding-left:0;
+        width:757px;
+        ul{
+          margin-bottom:20px;
+          li.gray{
+            background-color:#f4f5f7;
+            border-top:1px solid #eeeeee;
+            border-bottom:1px solid #eeeeee;
+          }
+          li{
+            padding: 10px 0 10px 40px;
+            color:#4d4d4d;
+            select{
+              margin: 0 30px;
+            }
+            b{
+              color: #272727;
+              padding-top:10px;
+            }
+          }
+          li:first-child{
+            padding-top:0;
+          }
+          li.last{
+            text-align:center;
+            .button{
+              width: 235px;
+              margin-top: 15px;
+            }
+          }
         }
       }
     }
@@ -1524,6 +1724,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		margin:21px auto;
 		form.filters{
 			width:246px;
+			position:absolute;
 		}
 
     .left-bar-section#state {

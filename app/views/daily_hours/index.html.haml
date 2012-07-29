@@ -13,7 +13,7 @@
               - # using on_wday didn't work here because it's not always 
               - # a real association collection
               - daily_hour = @daily_hours.select{|dh| dh.wday == wday}.first
-              %li
+              %li{:class => cycle("white", "gray")}
                 %b #{Date::DAYNAMES[wday]}
                 #{daily_hours_time_select("start_time", wday)}
                 to
@@ -22,6 +22,6 @@
                   %div.error
                     #{daily_hour.errors.full_messages.join(", ")}
 
-            %li
+            %li.last
               %button.button{:type => "submit"}
                 Save

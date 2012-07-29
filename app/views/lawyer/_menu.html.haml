@@ -1,14 +1,15 @@
-%div{:style => "font-size: 14px; margin: 0 8px 10px 0; font-weight: bold;"}
-  = link_to_unless (controller.controller_name == 'daily_hours' || controller.controller_name == 'offerings' || controller.controller_name == 'videos'), "Profile info", user_path(lawyer, :t => User::ACCOUNT_TAB)
-  |
-  = link_to_unless_current "Summary of sessions", user_path(lawyer, :t => User::SESSION_TAB)
-  %hr/
 .left_menu
+  %h2= link_to_unless (controller.controller_name == 'daily_hours' || controller.controller_name == 'offerings' || controller.controller_name == 'videos'), "Profile info", user_path(lawyer, :t => User::ACCOUNT_TAB)
   %ul
-    %li= link_to_unless_current "1. Account information", user_path(lawyer, :t => User::ACCOUNT_TAB) 
-    %li= link_to_unless_current "2. Fixed-price offers", user_offerings_path(lawyer) 
-    %li= link_to_unless_current "3. Set availability", user_daily_hours_path(lawyer)
-    %li= link_to_unless_current "4. Intro video", framey_videos_path  
-    %li= link_to "View your profile >>", attorney_path(lawyer, slug: lawyer.slug), :target => 'blank'
-   
+    %li.acc_info
+      %span= link_to_unless_current "Account information", user_path(lawyer, :t => User::ACCOUNT_TAB) 
+    %li.price_offers
+      %span= link_to_unless_current "Fixed-price offers", user_offerings_path(lawyer) 
+    %li.availability
+      %span= link_to_unless_current "Set availability", user_daily_hours_path(lawyer)
+    %li.video
+      %span= link_to_unless_current "Intro video", framey_videos_path  
+    %li.view_profile
+      %span= link_to "View your profile", attorney_path(lawyer, slug: lawyer.slug), :target => 'blank'
+  %h2= link_to_unless_current "Summary of sessions", user_path(lawyer, :t => User::SESSION_TAB) 
     

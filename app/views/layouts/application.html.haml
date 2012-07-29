@@ -108,25 +108,35 @@
           }
       / FOOTER
       #footer
+        .footer_border
         .footer_content
-          %span.left.top-offset-small &copy; Lawdingo
-          %span.left.top-offset-small
-            %a{href:"https://twitter.com/thelawdingo", class:"twitter-follow-button", "data-show-count" => "false"}
-          %span.left
-            -# .fb-like{"data-href" => "http://lawdingo.com/", "data-send" => "false", "data-width" => "250",  "data-show-faces" => "false", "data-font" => "arial"}            
-            = content_tag :div, "", class: "fb-like-box", data: { href: "https://www.facebook.com/pages/Lawdingo/244786945591535",
-                                  width: "212",
-                                  "show-faces" => "false",
-                                  stream: "false",
-                                  header: "false" }
-          %span.left.gplus.top-offset-small
-            %g:plusone {size: "small", annotation:"inline"}
-
           %ul.top-offset-small
             %li= link_to "About", about_page_path
             %li= link_to "Contact", "mailto:info@lawdingo.com"
             %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank'
             %li= link_to "Terms & Privacy", terms_page_path, :target=>'_blank'
+          .footer-logo
+            = image_tag('footer_dingo.png', :alt => 'Home')
+            &copy; Lawdingo
+          .social-links  
+            = content_tag :div, "", class: "fb-like-box", data: { href: "https://www.facebook.com/pages/Lawdingo/244786945591535",
+                                  width: "212",
+                                  "show-faces" => "false",
+                                  stream: "false",
+                                  header: "false" }
+            = image_tag('footer_social_hr.png', :class => 'custom_hr')
+            .gplus
+              %g:plusone {size: "small", annotation:"inline"}
+            %a{href:"https://twitter.com/thelawdingo", class:"twitter-share-button", "data-show-count" => "false"}
+          /%span.left.top-offset-small &copy; Lawdingo
+          -#%span.left.top-offset-small
+            %a{href:"https://twitter.com/thelawdingo", class:"twitter-follow-button", "data-show-count" => "false"}
+          -#%span.left
+            -# .fb-like{"data-href" => "http://lawdingo.com/", "data-send" => "false", "data-width" => "250",  "data-show-faces" => "false", "data-font" => "arial"}            
+            -#= content_tag :div, "", class: "fb-like-box", data: { href: "https://www.facebook.com/pages/Lawdingo/244786945591535",
+
+          -#%span.left.gplus.top-offset-small
+            %g:plusone {size: "small", annotation:"inline"}
 
 
       / END FOOTER

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720160056) do
+ActiveRecord::Schema.define(:version => 20120724171824) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(:version => 20120720160056) do
 
   create_table "card_details", :force => true do |t|
     t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
     t.string   "card_type"
     t.string   "card_number"
     t.string   "expire_month"
@@ -138,20 +145,6 @@ ActiveRecord::Schema.define(:version => 20120720160056) do
     t.datetime "updated_at"
   end
 
-  create_table "languages", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "spoken_language_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "lawyers_practice_areas", :force => true do |t|
-    t.integer  "lawyer_id"
-    t.integer  "practice_area_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "offering_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -214,12 +207,6 @@ ActiveRecord::Schema.define(:version => 20120720160056) do
     t.datetime "updated_at"
   end
 
-  create_table "spoken_languages", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "states", :force => true do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -232,18 +219,18 @@ ActiveRecord::Schema.define(:version => 20120720160056) do
     t.string   "hashed_password"
     t.string   "address"
     t.string   "skype"
-    t.float    "balance",                    :default => 0.0
-    t.boolean  "is_online",                  :default => false
-    t.boolean  "is_busy",                    :default => false
+    t.float    "balance",                                  :default => 0.0
+    t.boolean  "is_online",                                :default => false
+    t.boolean  "is_busy",                                  :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                                                            :null => false
-    t.boolean  "is_approved",                :default => false
+    t.string   "user_type",                                                                          :null => false
+    t.boolean  "is_approved",                              :default => false
     t.text     "undergraduate_school"
     t.text     "law_school"
     t.text     "alma_maters"
     t.string   "law_firm"
-    t.float    "rate",                       :default => 0.0
+    t.float    "rate",                                     :default => 0.0
     t.string   "payment_email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -253,8 +240,8 @@ ActiveRecord::Schema.define(:version => 20120720160056) do
     t.datetime "photo_updated_at"
     t.text     "personal_tagline"
     t.string   "bar_ids"
-    t.boolean  "has_payment_info",           :default => false
-    t.string   "peer_id",                    :default => "0"
+    t.boolean  "has_payment_info",                         :default => false
+    t.string   "peer_id",                                  :default => "0"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "stripe_customer_token"
@@ -265,7 +252,10 @@ ActiveRecord::Schema.define(:version => 20120720160056) do
     t.integer  "school_id"
     t.integer  "license_year"
     t.string   "yelp_business_id"
-    t.string   "time_zone",                  :default => "Pacific Time (US & Canada)"
+    t.string   "time_zone",                                :default => "Pacific Time (US & Canada)"
+    t.string   "tb_session_id"
+    t.text     "tb_token"
+    t.string   "call_status",                :limit => 50
   end
 
 end

@@ -21,7 +21,7 @@ $(document).mouseup(function (e)
 });
 
 $(document).ready(function(){
-  if($(window).height() > 779){
+  /*if($(window).height() > 779){
     //Makes the filters sticky to top of page when page scrolls down
   	var msie6 = $.browser == 'msie' && $.browser.version < 7;
   	search_box = document.getElementById('filters');
@@ -38,8 +38,59 @@ $(document).ready(function(){
   		  }
   		});
   	}
-  }
+  }*/
   
+  $(function() {
+      var search_box = document.getElementById('filters');
+      if(search_box){
+        var $sidebar = $('#filters');
+        var $wrapper = $('#inline-wrapper > .main_content');
+        var t = undefined;
+        $sidebar.data('my_offsets', {
+            min: $sidebar.offset().top,
+            max: ($wrapper.offset().top + $wrapper.height() - $sidebar.height()),
+            start: $(window).scrollTop()
+        });
+        var handler = function(e) {
+            var offsets = $sidebar.data('my_offsets');
+            var scroll_direction = (offsets.start < $(window).scrollTop()) ? 1 : -1;
+            $sidebar.data('my_offsets').start = $(window).scrollTop();
+            var slide_to = undefined;
+
+            var sidebar_top = Math.round($sidebar.offset().top);
+            var sidebar_bottom = Math.round(sidebar_top + $sidebar.height());
+
+            var window_top = $(window).scrollTop();
+            var window_bottom = window_top + $(window).height();
+
+            if (scroll_direction > 0) {
+                if (sidebar_bottom < window_bottom) {
+                    slide_to = window_bottom - $sidebar.height();
+                }
+            } else {
+                if (sidebar_top > window_top) {
+                    slide_to = window_top;
+                }
+            }
+
+            if (slide_to != undefined) {
+                if (slide_to > offsets.max) {
+                    slide_to = offsets.max;
+                } else if (slide_to < offsets.min) {
+                    slide_to = offsets.min;
+                }
+
+                clearTimeout(t);
+                t = setTimeout(function() {
+                    $sidebar.animate({"top": slide_to}, "fast");
+                }, 50);
+            }
+        }
+
+        $(window).bind('scroll', handler);
+        $(window).trigger('scroll');
+    }
+  });
   $(".profile_info .client-reviews .review").first().addClass('first');
   $(".profile_info .client-reviews .review").last().addClass('last');
   

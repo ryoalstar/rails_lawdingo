@@ -18,9 +18,9 @@ function equalHeight(group) {
   }
   $(document).ready(function() {
     $('.row').each(function(){
-      
       equalHeight($(this).find(".row_block"));
     });
+    equalHeight($(".profile > div"));
   });
 function notifyUser(msg)
 {
