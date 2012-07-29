@@ -502,6 +502,7 @@ class UsersController < ApplicationController
   end
 
   def update_online_status
+
    if params[:op]=="call"
       lawyer = User.find(params[:lawyer_id])
       if !current_user.is_lawyer?
@@ -514,6 +515,9 @@ class UsersController < ApplicationController
       render :text=>"success" and return
     else
       if params[:op]=="get_call_status"
+        if current_user && current_user.is_lawyer?
+          current_user.update_attribute(:last_online, DateTime.now)
+        end
         lawyer = User.find(params[:lawyer_id])
         render :text=>lawyer.call_status and return
       end
@@ -530,12 +534,6 @@ class UsersController < ApplicationController
 
 
 
-    if current_user && current_user.is_lawyer?
-      current_user.update_attribute(:last_online, DateTime.now)
-      render :text => "true", :layout =>false
-    else
-      render :text => "false", :laout =>false
-    end
   end
 
   def register_for_videochat
