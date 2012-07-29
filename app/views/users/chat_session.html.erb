@@ -10,8 +10,8 @@
   	var g_conversation_id = "<%=@conversation_id%>";
   </script>
   <%
-  	#@current_user LAWYER CLIENT
-	if !@current_user.is_lawyer?
+  	#current_user LAWYER CLIENT
+	if !current_user.is_lawyer?
 	  %>
 	  <script type="text/javascript"> var is_lawyer = false;</script>
 	  <%= render :partial => "sound_player" %>
