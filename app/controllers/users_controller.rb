@@ -428,7 +428,21 @@ class UsersController < ApplicationController
   def chat_session
     #redirect_to card_detail_path and return unless current_user.card_detail
     begin
+      @current_user = current_user
+
+      if current_user.user_type!='LAWYER'
+        lawyer = User.find params[:user_id]
+        lawyer.update_attribute(:call_status,'invite_video_chat')
+        conversation_params = {:client_id=>current_user.id,:lawyer_id=>params[:user_id],:start_date=>Time.now,:end_date=>Time.now,:consultation_type => "video"}
+        @conversation = Conversation.create_conversation(conversation_params)
+        @conversation_id = @conversation.id
+      end
+
+
       @lawyer = Lawyer.find params[:user_id]
+      require "yaml"
+      config = YAML.load_file("config/tokbox.yml")
+      @api_key = config['API_KEY']
     rescue
       @lawyer = nil
     end
