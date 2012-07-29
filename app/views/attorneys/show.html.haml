@@ -105,7 +105,8 @@
     .main_content
       .bio-block
         .left_border
-        .avatar     
+        = render "share"
+        .avatar
           = image_tag(@attorney.photo.url(:medium))
         .middle
           %h1.gray

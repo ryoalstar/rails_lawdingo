@@ -5,7 +5,7 @@
     %link{:rel => "canonical", :href => "https://www.lawdingo.com"}
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
-    = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment"
+    = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment", "//platform.linkedin.com/in.js"
     - if current_user && current_user.user_type == 'LAWYER'
       :javascript
         swfobject.registerObject("mySwf", "10.2.0");

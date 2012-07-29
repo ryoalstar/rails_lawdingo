@@ -2596,3 +2596,38 @@ body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.sh
 	}
 }
 
+.bio-block {
+  position: relative;
+
+  ul.share {
+    position: absolute;
+    display: block;
+    top: 29px;
+    right: 54px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 4px 4px 3px 4px !important;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+
+    li {
+      display: -moz-inline-stack;
+      display: inline-block;
+      vertical-align: top;
+      zoom: 1;
+      *display: inline;
+    }
+
+    li.facebook {
+      width: 47px;
+    }
+
+    .connect_widget_simple_including {
+      display: none !important;
+    }
+  }
+}
+
