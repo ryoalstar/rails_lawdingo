@@ -1,8 +1,12 @@
 FactoryGirl.define do
+  sequence :lawyer_email do |n|
+    "lawyer#{n}@lawdingo.com"
+  end
+
   factory :lawyer do
     first_name "Dan"
     last_name "Langevin"
-    email "dan.langevin@gmail.com"
+    email { generate :lawyer_email }
     password "123456"
     user_type User::LAWYER_TYPE
     free_consultation_duration 10

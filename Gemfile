@@ -52,6 +52,9 @@ gem 'dynamic_sitemaps'
 # Use unicorn as the web server
 #gem 'unicorn'
 
+# Handling cron jobs
+gem 'whenever', require: false
+
 # Deploy with Capistrano
 gem 'capistrano'
 

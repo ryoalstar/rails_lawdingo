@@ -4,3 +4,9 @@ task :populate_free_consultation_duration => :environment do
   end
   puts "\nPopulation done."
 end
+
+task :set_inquiries_closed_value => :environment do
+  Inquiry.all.each do |inquiry|
+    inquiry.update_attributes({ is_closed: inquiry.expired? })
+  end
+end

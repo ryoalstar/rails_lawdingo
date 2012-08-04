@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724171824) do
-
+ActiveRecord::Schema.define(:version => 20120804211320) do
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
     t.string   "value"
@@ -143,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20120724171824) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_closed",   :default => false
   end
 
   create_table "offering_types", :force => true do |t|

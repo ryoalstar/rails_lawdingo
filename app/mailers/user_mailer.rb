@@ -49,5 +49,12 @@ class UserMailer < ApplicationMailer
 
     mail(to: "nikhil.nirmel@gmail.com", subject: "Question ##{@question.id}")
   end
+
+  def closed_inquiry_notification(inquiry)
+    @inquiry = inquiry
+    @inquiry_url = inquiry_url(@inquiry)
+
+    mail(to: %w(nikhil.nirmel@gmail.com info@lawdingo.com), subject: "Inquiry ##{@inquiry.id} closed")
+  end
 end
 

@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   def get_tokbox_info
     require "yaml"
-    config = YAML.load_file("config/tokbox.yml")
+    config = YAML.load_file(File.join(Rails.root, "config", "tokbox.yml"))
     @opentok=OpenTok::OpenTokSDK.new config['API_KEY'],config['SECRET']
     @location=config['LOCATION']
     session_id=@opentok.create_session(@location)
