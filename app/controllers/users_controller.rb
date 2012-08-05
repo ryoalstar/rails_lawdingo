@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search]
+  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore]
   before_filter :ensure_self_account, :only =>[:edit, :update]
   before_filter :ensure_admin_login, :only =>[:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     #return render :json =>current_user
 
     @question = Question.new
-
+    @subtext = AppParameter.service_homepage_subtext
     @practice_areas = PracticeArea.parent_practice_areas
     @states = State.with_approved_lawyers
     
@@ -74,12 +74,16 @@ class UsersController < ApplicationController
     render :js => "var detect_state_name = '#{@state_name}';"
   end
   
+  def learnmore
+    @tagline = AppParameter.find(2).value || "Free legal advice."
+    @subtext = AppParameter.service_homepage_subtext
+  end  
   
   def landing_page
     @tagline = AppParameter.find(2).value || "Free legal advice."
     @subtext = AppParameter.service_homepage_subtext
   end
-
+  
   def show
     begin
       @user = User.find params[:id]

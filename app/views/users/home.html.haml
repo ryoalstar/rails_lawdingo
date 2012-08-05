@@ -14,12 +14,18 @@
     %p.notice
       = flash[:notice]
       %a#close_notice{:href => "#"} Close
+  #slogan
+    .inner
+      -#%h1= @subtext[:second]
+      %h1 Lawdingo is a market for live legal consultations. Legal advice with out the law office.
+      = link_to 'Learn More', learnmore_path
+      /%a{:href => '#'} Learn More      
   %form.filters#filters
     .left-bar
       .left-bar-section.first
         %h2 Find the right lawyer
       .sticky_filters
-        .left-bar-section#search_class
+        -#.left-bar-section#search_class
           %a#clear_data_search 
             = image_tag('close_icon.png', :alt => 'clear', :id => "input_close_sea_img")
             = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
@@ -35,22 +41,9 @@
           %h3 Legal:
           %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
           %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
-        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
-          #state.left-bar-section
-            %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
-            %h3
-              %label{:for => "state"} State:
-            .national-area-notice
-              %p
-              %a.show-states-selector{ href: "#" } Set state anyway
-            %select.states{:name => "state"}
-              %option{"data-default" => "1", :value => "All-States"} Any state
-              - @states.each do |state|
-                %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
-                  = state.name
         - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
           #practice_areas.left-bar-section.legal_domain
-            %h3 Practice area:
+            %h3 Type of law:
             .practice-areas
               %p
                 = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
@@ -66,7 +59,20 @@
                       - area.children.with_approved_lawyers.each do |subarea|
                         %p
                           = radio_button_tag "practice_area", subarea.name, false, data: { is_national: area.is_national?.to_s }
-                          = label_tag "practice_area_#{subarea.name}", subarea.name
+                          = label_tag "practice_area_#{subarea.name}", subarea.name          
+        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
+          #state.left-bar-section
+            %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
+            %h3
+              %label{:for => "state"} Relevant state:
+            .national-area-notice
+              %p
+              %a.show-states-selector{ href: "#" } Set state anyway
+            %select.states{:name => "state"}
+              %option{"data-default" => "1", :value => "All-States"} Any state
+              - @states.each do |state|
+                %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
+                  = state.name
         -#specialities_filter.filters-section{:style => "display: none;"}
           %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
           %h3 Specific need:
@@ -135,13 +141,14 @@
             %span.law-school-3 A
             %span.law-school-4 A+
   .main_content
+        
+    #service_type_tabs
+      = render partial: "service_type_tabs"
     #generail_question.question.question-container
       -#%h2.selected-lawyers-caption= selected_lawyers_caption
       %h2
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS
-    #service_type_tabs
-      = render partial: "service_type_tabs"
     #results.results
       = render(:partial => "search_results")
 #schedule_session.dialog-window

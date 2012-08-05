@@ -1,7 +1,8 @@
 <%= simple_form_for Question.new, remote: logged_in? do |f| %>
+  <p>Unsure who to choose? Ask a question to a lawyer instantly.</p>
   <%= f.input :user_id, as: :hidden, input_html: { value: logged_in? ? current_user.id : nil } %>
   <%= f.input :type, as: :hidden, input_html: { value: type } %>
-  <%= f.input :body, as: :string, label: false, :placeholder => "Don’t know who to choose? Ask a lawyer for free right now." %>
+  <%= f.input :body, as: :string, label: false, :placeholder => "Summarize your legal situation." %>
   <%= f.submit "", class: "" %>
 
   <div class="question_state" id="question_state">
