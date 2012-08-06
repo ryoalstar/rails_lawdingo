@@ -21,7 +21,7 @@ $(document).mouseup(function (e)
 });
 
 $(document).ready(function(){
-  /*if($(window).height() > 779){
+  if($(window).height() > 779){
     //Makes the filters sticky to top of page when page scrolls down
   	var msie6 = $.browser == 'msie' && $.browser.version < 7;
   	search_box = document.getElementById('filters');
@@ -38,9 +38,27 @@ $(document).ready(function(){
   		  }
   		});
   	}
-  }*/
+  }
   
-  $(function() {
+  //Makes the question box sticky to top of page when page scrolls down
+	var msie6 = $.browser == 'msie' && $.browser.version < 7;
+	search_box = document.getElementById('generail_question');
+	filters = document.getElementById('filters');
+	if (search_box && filters && !msie6) {
+		var top = $('#generail_question').offset().top + 15 - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
+		$(window).scroll(function (event) {
+		  var y = $(this).scrollTop();
+		  if (y >= top) {
+			$('#generail_question').addClass('fixed_question');
+			//$('.slidey').addClass('nudge');
+		  } else {
+			$('#generail_question').removeClass('fixed_question');
+			//$('.slidey').removeClass('nudge');
+		  }
+		});
+	}
+  
+  /*$(function() {
       var search_box = document.getElementById('filters');
       if(search_box){
         var $sidebar = $('#filters');
@@ -90,7 +108,7 @@ $(document).ready(function(){
         $(window).bind('scroll', handler);
         $(window).trigger('scroll');
     }
-  });
+  });*/
   $(".profile_info .client-reviews .review").first().addClass('first');
   $(".profile_info .client-reviews .review").last().addClass('last');
   

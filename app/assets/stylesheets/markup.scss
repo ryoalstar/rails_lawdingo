@@ -15,6 +15,10 @@ html, body{
   position:fixed;
   top:-40px;
 }
+.fixed_question{
+  position:fixed;
+  top:0;
+}
 body.users.home{
   .ui-dialog{
     width: 540px !important;
@@ -879,7 +883,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
         display:block;
       }
       #clear_data_search{
-        margin-left: 465px;
+        margin-left: 695px;
         margin-top: 16px;
       }
       input.search{
@@ -1036,6 +1040,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
   }
 	#footer{
 		height:180px;
+		z-index:10;
 		width:100%;
 		float:left;
 		//background: url(footer_bg.png);
@@ -1109,6 +1114,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						text-decoration:none;
 						display:inline;
 						font-size: 14px;
+						padding: 3px 7px;
 						border-bottom:0;
 					}
 					a.selected, a:hover{
@@ -1242,7 +1248,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 			  margin-top: -34px;
         margin-left: 6px;
         border-bottom: 0;
-        padding-left: 19px;
+        padding-left: 28px;
 			}
 		}
 		.button_tooltip{
@@ -1724,7 +1730,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		margin:21px auto;
 		form.filters{
 			width:246px;
-			position:absolute;
+			//position:absolute;
 		}
 
     .left-bar-section#state {
@@ -1933,7 +1939,6 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				font-weight:bold;
 				color:#4d6b94;
 				text-align:center;
-				text-transform:uppercase;
 			}
 			h3{
 				font-size:13px;
@@ -2557,6 +2562,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				}
 			}
 			.question{
+			  z-index:100;
 				background:#fdfdfd;
 				border:1px solid #d0d2d5;
 				float: left;

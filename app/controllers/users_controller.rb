@@ -80,8 +80,9 @@ class UsersController < ApplicationController
   end  
   
   def landing_page
-    @tagline = AppParameter.find(2).value || "Free legal advice."
-    @subtext = AppParameter.service_homepage_subtext
+    redirect_to :action => :home
+    #@tagline = AppParameter.find(2).value || "Free legal advice."
+    #@subtext = AppParameter.service_homepage_subtext
   end
   
   def show

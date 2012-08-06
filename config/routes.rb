@@ -145,7 +145,7 @@ Lawdingo::Application.routes.draw do
   match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
   match '/learnmore' => 'users#learnmore'
-  root :to => 'users#home'
+  root :to => 'users#landing_page'
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'

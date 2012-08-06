@@ -23,7 +23,7 @@
   %form.filters#filters
     .left-bar
       .left-bar-section.first
-        %h2 Find the right lawyer
+        %h2 Describe your legal matter
       .sticky_filters
         -#.left-bar-section#search_class
           %a#clear_data_search 
@@ -43,11 +43,11 @@
           %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
         - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
           #practice_areas.left-bar-section.legal_domain
-            %h3 Type of law:
+            %h3 Type of matter:
             .practice-areas
               %p
                 = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
-                %label{:for => "practice_area_All"} All types
+                %label{:for => "practice_area_All"} Unknown
               - @practice_areas.each do |area|
                 %p
                   = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
@@ -64,7 +64,7 @@
           #state.left-bar-section
             %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
             %h3
-              %label{:for => "state"} Relevant state:
+              %label{:for => "state"} State I’m in:
             .national-area-notice
               %p
               %a.show-states-selector{ href: "#" } Set state anyway
@@ -81,7 +81,7 @@
         .left-bar-section
           %h3 Minimum free minutes:
           %p.hidden
-            %label{:for => "minimum_free_minutes"} Minimum free minutes:
+            %label{:for => "minimum_free_minutes"} Free time needed:
             %input#minutes{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
           #free_minutes_slider
           .filter_slider_spliters
@@ -115,7 +115,7 @@
         .left-bar-section
           %h3 Hourly rate:
           %p.hidden
-            %label{:for => "hourly_rate"} Hourly rate:
+            %label{:for => "hourly_rate"} Rate I expect to pay:
             %input#hourly_rate_in{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
           #hourly_rate
           .hourly_rate_splitters
