@@ -1,18 +1,18 @@
 .profile
   .left_menu
-    %h2= link_to_unless_current "Profile info", user_path(user, :t => User::ACCOUNT_TAB)
+    %h2= link_to_unless_current "Profile info", user_path(@user, :t => User::ACCOUNT_TAB)
     %ul
       %li.acc_info
-        %span= link_to_unless_current "Account information", user_path(@user, :t => User::ACCOUNT_TAB) 
+        %span= link_to "Account information", user_path(@user, :t => User::ACCOUNT_TAB) 
       %li.price_offers
-        %span= link_to_unless_current "Fixed-price offers", user_offerings_path(@user) 
+        %span= link_to "Fixed-price offers", user_offerings_path(@user) 
       %li.availability
-        %span= link_to_unless_current "Set availability", user_daily_hours_path(@user) 
+        %span= link_to "Set availability", user_daily_hours_path(@user) 
       %li.video
-        %span= link_to_unless_current "Intro video", framey_videos_path
+        %span= link_to "Intro video", framey_videos_path
       %li.view_profile
-        %span= link_to_unless_current "View your profile", attorney_path(@user, slug: @user.slug), :target => 'blank'
-    %h2= link_to_unless_current "Summary of sessions", user_path(user, :t => User::SESSION_TAB)          
+        %span= link_to "View your profile", attorney_path(@user, slug: @user.slug), :target => 'blank'
+    %h2= link_to_unless_current "Summary of sessions", user_path(@user, :t => User::SESSION_TAB)          
 
   .profile-block
     = raw flash[:error]
