@@ -486,6 +486,8 @@ body.index.logged-in, body.users.show.logged-in{
           float:left;
           display:inline-block;
           width:405px;
+          border:0;
+          padding-left:0;
         }
         #offerings-listing{
           float: right;
@@ -820,7 +822,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
     background:url('slogan_border.png') repeat;
     padding:5px;
     width:978px;
-    border:1px solid #9b6c43;
+    border:1px solid #cb9a63;
     margin-bottom:23px;
     -moz-border-radius: 5px;
 		-webkit-border-radius: 5px;

@@ -573,7 +573,7 @@ class UsersController < ApplicationController
   def current_user_home
     if current_user
       if current_user.is_lawyer?
-        redirect_to users_path(:t=>'l')
+        redirect_to user_daily_hours_path(current_user.id)
       else
         redirect_to lawyers_path
       end
