@@ -56,5 +56,12 @@ class UserMailer < ApplicationMailer
 
     mail(to: %w(nikhil.nirmel@gmail.com info@lawdingo.com), subject: "Inquiry ##{@inquiry.id} closed")
   end
+
+  def new_bid_notification(bid)
+    @bid = bid
+    @inquiry_url = inquiry_url(@bid.inquiry)
+
+    mail(to: "nikhil.nirmel@gmail.com", subject: "Bid ##{@bid.id} submitted")
+  end
 end
 

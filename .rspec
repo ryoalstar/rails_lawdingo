@@ -1,5 +1,4 @@
 --colour
---format nested
---backtrace
+--format documentation
 -X
 
