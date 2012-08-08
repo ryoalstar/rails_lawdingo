@@ -4,6 +4,7 @@ class Client < User
   has_many :appointments
   has_many :conversations
   has_many :calls
+  has_many :messages
 
 
   def total_spending

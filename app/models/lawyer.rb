@@ -6,6 +6,7 @@ class Lawyer < User
   has_many :bar_memberships
   has_many :conversations
   has_many :bids
+  has_many :messages
 
   has_many :daily_hours do
     # find on a given wday

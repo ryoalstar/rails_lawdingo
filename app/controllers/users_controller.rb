@@ -482,17 +482,18 @@ class UsersController < ApplicationController
   end
 
   def send_email_to_lawyer
-
-
     if !current_user.nil?
+      @lawyer = User.find(params[:l2])
+      msg = params[:email_msg]
 
-      begin
-      #render :text => 'in current user block1', :layout => false
-        @lawyer = User.find(params[:l2])
-        msg = params[:email_msg]
-        UserMailer.schedule_session_email(current_user, @lawyer.email, msg).deliver
-      rescue
+      Message.create do |message|
+        message.body = msg
+        message.client_id = current_user.id
+        message.lawyer_id = @lawyer.id
       end
+
+      UserMailer.schedule_session_email(current_user, @lawyer.email, msg).deliver
+
       render :text => '1', :layout => false
     else
       render :text => '0', :layout => false
