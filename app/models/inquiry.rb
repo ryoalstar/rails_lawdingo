@@ -7,17 +7,17 @@ class Inquiry < ActiveRecord::Base
   def expiration(date_part)
     case date_part.to_sym
     when :year
-      created_at.year
+      expired_at.year
     when :month
-      created_at.month.to_i - 1
+      expired_at.month.to_i - 1
     when :day
-      created_at.day
+      expired_at.day
     when :hours
-      created_at.strftime("%k").to_i + 12
+      expired_at.strftime("%k")
     when :minutes
-      created_at.strftime("%M").to_i
+      expired_at.strftime("%M").to_i
     when :seconds
-      created_at.strftime("%S").to_i
+      expired_at.strftime("%S").to_i
     else
       expired_at
     end

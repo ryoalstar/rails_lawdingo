@@ -8,7 +8,7 @@ inquiries =
 
   startCountdown: ->
     countdownDiv = ($ "body.inquiries.show .countdown")
-    untilTime = new Date(countdownDiv.data("expiration-year"), countdownDiv.data("expiration-month"), countdownDiv.data("expiration-day"), countdownDiv.data("expiration-hours"), countdownDiv.data("expiration-minutes"), countdownDiv.data("expiration-seconds"))
+    untilTime = new Date(Date.UTC(countdownDiv.data("expiration-year"), countdownDiv.data("expiration-month"), countdownDiv.data("expiration-day"), countdownDiv.data("expiration-hours"), countdownDiv.data("expiration-minutes"), countdownDiv.data("expiration-seconds")))
 
     console.log untilTime
 
