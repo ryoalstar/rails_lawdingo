@@ -3,10 +3,10 @@
     = image_tag('close_icon.png', :alt => 'clear', :id => "input_close_sea_img")
     = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
   %a.advice.service_type{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} 
-    Lawyers who can help
-    %span.count= @search.total.to_i
+    Lawyers
+    -#%span.count= @search.total.to_i
   %a.service.service_type.selected{:href => '#', 'data-val' => 'Legal-Services'}
-    Services they offer
+    Services
     -#%span.count 1
   -#.availability
     %input{:type => 'checkbox'}

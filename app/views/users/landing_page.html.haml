@@ -28,8 +28,8 @@
         %p= @subtext[:first]
         / %p= @subtext[:second]
         = link_to "", lawyers_path, class: "browse_lawyers_button"
-        = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
-        = render partial: "questions/home_form", locals: { type: "lawyer" }
+        -#= image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
+        -#= render partial: "questions/home_form", locals: { type: "lawyer" }
         -#%small
           Lawyer? #{link_to "Apply here!", new_lawyer_path}
       .slider
@@ -135,27 +135,28 @@
                     %span.number_rev
                   %a.yelp_reviews{:style => 'display:none;'}
                     %span.number_rev
+#top_content_border                    
 #bottom_content
   .left_bar
     %h2 How Lawdingo works:
     .feature
       %a{:href => "/lawyers"}
-        = image_tag('feature_1.png', :alt => '')  
+        = image_tag('feature1.png', :alt => '')  
       .feature_description
-        %h3 Browse Lawyers.
-        %p Find the right lawyer for you, by state, practice area and price.
+        -#%h3 Browse Lawyers.
+        %p 1. Browse lawyers or submit your question
     .feature
       %a{:href => "/lawyers"}
-        = image_tag('feature_2.png', :alt => '')  
+        = image_tag('feature2.png', :alt => '')  
       .feature_description
-        %h3 Consult Free Online.
-        %p Start a video chat or phone consultation immediately, or schedule one for later. Explain your legal situation.
+        -#%h3 Consult Free Online.
+        %p 2. Talk immediately or schedule sconsultation
     .feature
       %a{:href => "/lawyers"}
-        = image_tag('feature_3.png', :alt => '')
+        = image_tag('feature3.png', :alt => '')
       .feature_description
-        %h3 Pay for Advice or Services.
-        %p Pay by the minute if you use more time than the free consultation, or purchase a legal service you need.
+        -#%h3 Pay for Advice or Services.
+        %p 3. Pay up for services or extended consultations
   .right_bar
     /%h2 Introduction video
     /= image_tag('video.png', :alt => '')  
@@ -167,12 +168,37 @@
       .testimonial_description
         %p
           %span.open_quotes
+          %span.desc
+            Easiest way to talk to a lawyer...
+      .testimonial_description
+        %p
+          %span.open_quotes
+          %span.desc              
+            Best way to meet clients outside my hometown...
+      .testimonial_description
+        %p
+          %span.open_quotes
+          %span.desc
+            Never stepping foot in a law office again...
+      .testimonial_description
+        %p
+          %span.open_quotes
+          %span.desc
+            Wait, this is amazing...
+      .testimonial_description
+        %p
+          %span.open_quotes
+          %span.desc
+            Virtual lawyering gone mainstream...        
+      -#.testimonial_description
+        %p
+          %span.open_quotes
           %span.desc 
             Honestly, I wouldn’t have used a lawyer at all were it not for how easy talking to lawyer seems on Lawdingo.
           /%span.close_quotes{:style => 'margin-left: 285px;'}
         %p.signature - Josh Leong, San Francisco
         
-      .testimonial_description
+      -#.testimonial_description
         %p
           %span.open_quotes
           %span.desc 
@@ -180,7 +206,7 @@
           /%span.close_quotes{:style => 'margin-left: 203px;'}
         %p.signature - S.Y., Massachuesetts
         
-      .testimonial_description
+      -#.testimonial_description
         %p
           %span.open_quotes
           %span.desc 

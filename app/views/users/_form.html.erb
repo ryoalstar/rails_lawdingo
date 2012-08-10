@@ -128,7 +128,7 @@
 </div>
 <div class="actions">
   <div class="form-inner" style="padding-left: 37px;">
-    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Create Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account'), :class=>"button", id: "submit_signup" %>
+    <%= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as a Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account'), :class=>"button", id: "submit_signup" %>
     <div class="form-notice">
       <% if params[:ut].present? %>
         <span class="fine-print">By clicking "Join Lawdingo" you confirm that you accept the <a href="/terms" target="_blank">Terms of Service</a></span>

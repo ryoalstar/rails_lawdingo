@@ -63,10 +63,14 @@ body.users.home{
     }
   }
 }
+#header_border{
+  height:3px;
+  background: url(header_border.png) repeat-x;
+}
 #header{
-	height:73px;
+	height:72px;
 	margin-bottom: 0px;
-	background: url(header_bg.png) repeat-x;
+	background: url(header_bg_gray.png) repeat;
 	text-align: center;
 	a{
 	  border-bottom:0;
@@ -90,20 +94,30 @@ body.users.home{
 				li{
 					float:left;
 					a{
-						color:white;
+						color:#bbbbbb;
 						padding:2px 11px 3px 11px;
 						text-decoration:none;
 						font-size:14px;
 						margin: 0px 5px;
 					}
 					a:hover, a.selected{
-						background:url(signup_hover_bg.png) repeat-x;
+						//background:url(signup_hover_bg.png) repeat-x;
+						color:#ffffff;
+						background:#2b2b2b;
 						-moz-border-radius:10px;
 						-webkit-border-radius:10px;
 						border-radius:10px;
 					}
-					a.lawyers_signup{
-						background:url(signup_button_full.png) no-repeat 0px -2px;
+					span.lawyers_signup{
+					  border:1px solid #eb7538;
+						background: #f3a648; /* Old browsers */
+            background: -moz-linear-gradient(top,  #f3a648 0%, #ec6e2e 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3a648), color-stop(100%,#ec6e2e)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #f3a648 0%,#ec6e2e 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3a648', endColorstr='#ec6e2e',GradientType=0 ); /* IE6-9 */
 						height:30px;
 						display:block;
 						width:160px;
@@ -112,21 +126,44 @@ body.users.home{
 						padding-right: 0;
 						margin-right: 0;
 						padding:0;
-						-moz-border-radius:0;
-						-webkit-border-radius:0;
-						border-radius:0;
+						-moz-border-radius:3px;
+						-webkit-border-radius:3px;
+						border-radius:3px;
+						line-height:28px;
+						-moz-text-shadow: 0px -1px 1px #ed7937;
+            -webkit-text-shadow: 0px -1px 1px #ed7937;
+            text-shadow: 0px -1px 1px #ed7937;
+            a{
+						  display:block;
+						  color:#ffffff;
+						  width:100%;
+						  padding:0;
+						  height:100%;
+						  background:url('lawyers_signup_icon.png') no-repeat 3px 5px;
+						}
 					}
-					a.lawyers_signup:hover{
-						background-position:0px -33px;
-						-moz-border-radius:0px;
-						-webkit-border-radius:0px;
-						border-radius:0px;
+					span.lawyers_signup:hover{
+            background: #f5b04e; /* Old browsers */
+            background: -moz-linear-gradient(top,  #f5b04e 0%, #ee7832 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5b04e), color-stop(100%,#ee7832)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #f5b04e 0%,#ee7832 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5b04e', endColorstr='#ee7832',GradientType=0 ); /* IE6-9 */
 					}
-					a.lawyers_signup:active{
-						background-position:0px -64px;
-						-moz-border-radius:0px;
-						-webkit-border-radius:0px;
-						border-radius:0px;
+					span.lawyers_signup:active{
+            background: #f5b04e; /* Old browsers */
+            background: -moz-linear-gradient(top,  #f5b04e 0%, #ee7832 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5b04e), color-stop(100%,#ee7832)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #f5b04e 0%,#ee7832 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5b04e', endColorstr='#ee7832',GradientType=0 ); /* IE6-9 */
+						-moz-box-shadow: inset 3px 3px 6px #eb7538;
+      	    -webkit-box-shadow: inset 3px 3px 6px #eb7538;
+      	    box-shadow: inset 3px 3px 6px #eb7538;
 					}
 				}
 			}
@@ -883,7 +920,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
     height:47px;
     color:#3e4855;
     font-size:13px;
-    margin-bottom:23px;
+    margin-top:23px;
     border-bottom:1px solid #d0d2d5;
     #service_type{
       float:left;
@@ -896,14 +933,14 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
       }
       #clear_data_search{
         margin-left: 695px;
-        margin-top: 16px;
+        margin-top: 12px;
       }
       input.search{
 				font-size: 13px;
 				height:30px;
 				width:162px;
 				float: right;
-        margin-top: 8px;
+        margin-top: 4px;
 				padding:0 10px;
 				border:1px solid #aaafb8;
 				/*background:url(search_bg.png) no-repeat 156px 7px;*/
@@ -1059,16 +1096,18 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		position:absolute; 
 		bottom:0;
 		padding-bottom:0;
-		background: #eaecef; /* Old browsers */
-    background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #eaecef 0%,#d5dbe1 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaecef', endColorstr='#d5dbe1',GradientType=0 ); /* IE6-9 */
+		background: #424242;
+		color:#bbbbbb;
+    /*background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1));
+    background: -webkit-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
+    background: -o-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
+    background: -ms-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
+    background: linear-gradient(to bottom,  #eaecef 0%,#d5dbe1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaecef', endColorstr='#d5dbe1',GradientType=0 );
+    */
     .footer_border{
-      background:url('footer_border.png') repeat-x;
+      background:url('footer_border_gray.png') repeat-x;
       height:4px;
       width:100%;
     }
@@ -1079,6 +1118,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		  text-align:center;
 		  width:120px;
 		  font-size:14px;
+		  img{
+		    margin-bottom:5px;
+		  }
 		}
 		.social-links{
 		  float: right;
@@ -1122,7 +1164,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				li{
 					padding:8px 0px;
 					a{
-						color:#505050;
+						color:#bbbbbb;
 						text-decoration:none;
 						display:inline;
 						font-size: 14px;
@@ -1131,7 +1173,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					}
 					a.selected, a:hover{
 						color:white;
-						background:#8795a5;
+						background:#333333;
 					  -moz-border-radius: 15px;
 					  -webkit-border-radius: 15px;
 					}
@@ -1448,24 +1490,29 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 			color:#1b1b1b;
 			margin:15px 0;
 		}
+		#top_content_border{
+		  height:4px;
+      background: url(homepage_topc_border.png) repeat-x;
+      margin-bottom: 33px;
+		}
 		#top_content{
-			margin-bottom: 33px;
-			background:url(center_area_bg.png) repeat-x;
+			background:url(center_area_bg_gray.png) repeat;
 			#center_area{
 				width: 990px;
 				margin: 0px auto;
 				padding: 0px 0px;
 				height:602px;
-				background: url(white_glow.png) no-repeat -48px 0px;
+				//background: url(white_glow.png) no-repeat -48px 0px;
 				.white_glow{
 					height:602px;
 					width:990px;
 					.start_off_info{
 						width:510px;
-						padding-top: 73px;
+						padding-top: 188px;
 						float:left;
-						text-align:center;
-						color:#3b454f;
+						//text-align:center;
+						//color:#3b454f;
+						color:white;
 						padding-left: 57px;
 						a{
 						  border-bottom:0;
@@ -1476,6 +1523,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 							margin-bottom: 15px;
 						}
 						p{
+						  color:white;
 							margin:0;
 							font-size:18px;
 						}
@@ -1484,7 +1532,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 							width:233px;
 							height:44px;
 							display:block;
-							margin-left: 140px;
+							//margin-left: 140px;
 							background: url(browse_lawyers_button_full.png) no-repeat 0px 0px;
 						}
 						a.browse_lawyers_button:hover{
@@ -1505,9 +1553,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						-moz-border-radius:3px;
 						-webkit-border-radius:3px;
 						border-radius:3px;
-						-moz-box-shadow: 0px 7px 11px #B6B6B6;
-						-webkit-box-shadow: 0px 7px 11px #B6B6B6;
-						box-shadow: 0px 7px 11px #B6B6B6;
+						-moz-box-shadow: 0px 5px 7px #171717;
+						-webkit-box-shadow: 0px 5px 7px #171717;
+						box-shadow: 0px 5px 7px #171717;
 						a{
 						  border-bottom:0;
 						}
@@ -1638,7 +1686,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				.feature{
 					margin-left:12px;
 					float:left;
-					margin-bottom:25px;
+					margin-bottom: 38px;
 					a{
 					  border-bottom:0;
 					  display:block;
@@ -1652,6 +1700,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						float:left;
 						margin-left:30px;
 						width: 382px;
+						margin-top:16px;
 						p{
 							color:#3f3e3e;
 							word-spacing: -1px;
@@ -1690,7 +1739,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					.testimonial_description{
 						float:left;
 						width:380px;
-						margin-bottom:20px;
+						margin-bottom:35px;
 						/*font-style:italic;
 						font-family: Myriad Pro;*/
 						.desc{
@@ -2769,6 +2818,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					  font-style:italic;
 						margin-top:13px;
 						font-size:13px;
+						width:100%;
 						color:#3f3f3f;
 						margin-bottom:0px;
 						
@@ -2785,9 +2835,16 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 							border-bottom:0;
 						}
 					}
+					ul.bar_memberships{
+					  float:left;
+					}
+					ul.license_years{
+					  float:right;
+					  margin-right:20px;
+					}
 					ul{
 						padding-left: 22px;
-						margin-top: 4px;
+						//margin-top: 4px;
 						li{
 							list-style-image:url(li_list_img.png);
 							font-size:13px;

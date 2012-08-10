@@ -70,11 +70,16 @@
       .description
         - if lawyer.personal_tagline.present?
           %p= raw lawyer_tagline
-            
-        %ul
-          - unless lawyer.bar_memberships.blank?
+          
+        - unless lawyer.bar_memberships.blank?
+          %ul.bar_memberships
             %li
-              Licensed in #{licenced_states}
+              Licensed in #{licenced_states}    
+          - if lawyer.license_year.present?      
+            %ul.license_years
+              %li #{pluralize years_practicing_law(lawyer), "year", "years'"} experience  
+          .clear
+        %ul
           - unless lawyer.practice_areas.blank?
             %li
               Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : raw(pas_names_list) + " law"}
@@ -87,8 +92,6 @@
               %li 
                 Offers
                 %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee services
-          - if lawyer.license_year.present?      
-            %li #{pluralize years_practicing_law(lawyer), "year", "years'"} experience
         -#.free
           %table
             %tbody

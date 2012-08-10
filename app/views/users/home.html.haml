@@ -14,7 +14,7 @@
     %p.notice
       = flash[:notice]
       %a#close_notice{:href => "#"} Close
-  #slogan
+  -#slogan
     .inner
       %h1= @subtext[:second]
       -#%h1 Lawdingo is a market for live legal consultations. Legal advice with out the law office.
@@ -23,7 +23,7 @@
   %form.filters#filters
     .left-bar
       .left-bar-section.first
-        %h2 Describe your legal matter
+        %h2 FIND THE RIGHT LAWYER
       .sticky_filters
         -#.left-bar-section#search_class
           %a#clear_data_search 
@@ -43,11 +43,11 @@
           %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
         - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
           #practice_areas.left-bar-section.legal_domain
-            %h3 Type of matter:
+            %h3 Legal domain:
             .practice-areas
               %p
                 = radio_button_tag "practice_area", "All", true, :class => "selected", "data-default" => "1"
-                %label{:for => "practice_area_All"} Unknown
+                %label{:for => "practice_area_All"} All types
               - @practice_areas.each do |area|
                 %p
                   = radio_button_tag "practice_area", area.name, false, data: { is_national: area.is_national?.to_s }
@@ -64,7 +64,7 @@
           #state.left-bar-section
             %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
             %h3
-              %label{:for => "state"} State I’m in:
+              %label{:for => "state"} Relevant state:
             .national-area-notice
               %p
               %a.show-states-selector{ href: "#" } Set state anyway
@@ -79,7 +79,7 @@
           %ul.specialities
 
         .left-bar-section
-          %h3 Free time needed:
+          %h3 Minimum free minutes:
           %p.hidden
             %label{:for => "minimum_free_minutes"} Free time needed:
             %input#minutes{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
@@ -113,9 +113,9 @@
             .star.star_5
               %span 5    
         .left-bar-section
-          %h3 Rate I expect to pay:
+          %h3 Per-minute rate::
           %p.hidden
-            %label{:for => "hourly_rate"} Rate I expect to pay:
+            %label{:for => "hourly_rate"} Per-minute rate::
             %input#hourly_rate_in{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
           #hourly_rate
           .hourly_rate_splitters
@@ -141,14 +141,13 @@
             %span.law-school-3 A
             %span.law-school-4 A+
   .main_content
-        
-    #service_type_tabs
-      = render partial: "service_type_tabs"
     #generail_question.question.question-container
       -#%h2.selected-lawyers-caption= selected_lawyers_caption
       %h2
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS
+    #service_type_tabs
+      = render partial: "service_type_tabs"
     #results.results
       = render(:partial => "search_results")
 #schedule_session.dialog-window

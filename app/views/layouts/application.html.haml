@@ -71,9 +71,11 @@
                   = link_to "Log In", login_path
                   = link_to "Client Signup", new_user_path(:ut=>0), :class => 'signup'
                 %li
-                  =link_to "", new_lawyer_path, :class => 'lawyers_signup'
+                  %span.lawyers_signup
+                    = link_to "Attorney Signup", new_lawyer_path, :class => ''
           %a.logo{:href => '/'}
             = image_tag('Lawdingo-logo.png', :alt => 'Home')
+      #header_border      
       / END HEADER
       / CONTENT
       #container
@@ -122,6 +124,7 @@
             = content_tag :div, "", class: "fb-like-box", data: { href: "https://www.facebook.com/pages/Lawdingo/244786945591535",
                                   width: "212",
                                   "show-faces" => "false",
+                                  colorscheme: "dark",
                                   stream: "false",
                                   header: "false" }
             = image_tag('footer_social_hr.png', :class => 'custom_hr')

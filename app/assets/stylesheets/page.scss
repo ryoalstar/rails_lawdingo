@@ -27,22 +27,25 @@
 
 #footer{
 	height:180px;
+	z-index:10;
 	width:100%;
 	float:left;
 	//background: url(footer_bg.png);
 	position:absolute; 
 	bottom:0;
 	padding-bottom:0;
-	background: #eaecef; /* Old browsers */
-  background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #eaecef 0%,#d5dbe1 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaecef', endColorstr='#d5dbe1',GradientType=0 ); /* IE6-9 */
+	background: #424242;
+	color:#bbbbbb;
+  /*background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1));
+  background: -webkit-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
+  background: -o-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
+  background: -ms-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
+  background: linear-gradient(to bottom,  #eaecef 0%,#d5dbe1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaecef', endColorstr='#d5dbe1',GradientType=0 );
+  */
   .footer_border{
-    background:url('footer_border.png') repeat-x;
+    background:url('footer_border_gray.png') repeat-x;
     height:4px;
     width:100%;
   }
@@ -53,6 +56,9 @@
 	  text-align:center;
 	  width:120px;
 	  font-size:14px;
+	  img{
+	    margin-bottom:5px;
+	  }
 	}
 	.social-links{
 	  float: right;
@@ -96,16 +102,16 @@
 			li{
 				padding:8px 0px;
 				a{
-					color:#505050;
+					color:#bbbbbb;
 					text-decoration:none;
 					display:inline;
 					font-size: 14px;
-					border-bottom:0;
 					padding: 3px 7px;
+					border-bottom:0;
 				}
 				a.selected, a:hover{
 					color:white;
-					background:#8795a5;
+					background:#333333;
 				  -moz-border-radius: 15px;
 				  -webkit-border-radius: 15px;
 				}

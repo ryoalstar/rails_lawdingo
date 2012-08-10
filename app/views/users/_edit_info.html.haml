@@ -11,8 +11,8 @@
       %li.video
         %span= link_to "Intro video", framey_videos_path
       %li.view_profile
-        %span= link_to_unless_current "View your profile", attorney_path(@user, slug: @user.slug), :target => 'blank'
-    %h2= link_to_unless_current "Summary of sessions", user_path(@user, :t => User::SESSION_TAB)
+        %span= link_to "View your profile", attorney_path(@user, slug: @user.slug), :target => 'blank'
+    %h2= link_to_unless_current "Summary of sessions", user_path(@user, :t => User::SESSION_TAB)          
 
   .profile-block
     = raw flash[:error]
