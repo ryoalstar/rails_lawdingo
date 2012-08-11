@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore]
-  before_filter :ensure_self_account, :only =>[:edit, :update]
-  before_filter :ensure_admin_login, :only =>[:update_parameter]
+  before_filter :ensure_self_account, :only => [:edit, :update]
+  before_filter :ensure_admin_login, :only => [:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
   #before_filter :check_payment_info, :only => [:start_phone_call]
 
