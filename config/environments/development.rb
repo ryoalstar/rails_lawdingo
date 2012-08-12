@@ -34,9 +34,9 @@ Lawdingo::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  
-  #  config.force_ssl = true
+
+  # config.force_ssl = true
   # config.after_initialize do
-    # Debugger.start
+  #   Debugger.start
   # end
 end

@@ -48,6 +48,7 @@ gem 'framey'
 gem 'oauth'
 gem 'haml-rails'
 gem 'dynamic_sitemaps'
+gem 'exception_notification'
 #gem "psych" 
 # Use unicorn as the web server
 #gem 'unicorn'
