@@ -1,5 +1,5 @@
-//var g_server_url = "https://www.lawdingo.com";
-var g_server_url = "http://192.168.1.141:3000";
+var g_server_url = "https://www.lawdingo.com";
+//var g_server_url = "http://192.168.1.141:3000";
 var g_email = '';
 var g_password = '';
 var g_interval = 0;
