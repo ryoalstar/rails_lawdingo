@@ -51,6 +51,39 @@ class SessionsController < ApplicationController
     end
   end
 
+  def login_by_app
+    response.headers["Access-Control-Allow-Origin"]="*"
+    response.headers["Access-Control-Allow-Headers"]="X-Requested-With"
+    if user = User.authenticate(params[:email], params[:password])
+      render :json=>{:result=>user, :key=>user.hashed_password} and return
+    else
+      render :json=>{:result=>null, :key=>user.hashed_password} and return
+    end
+  end
+
+  def set_status_by_app
+    response.headers["Access-Control-Allow-Origin"]="*"
+    response.headers["Access-Control-Allow-Headers"]="X-Requested-With"
+    if user = User.authenticate(params[:email], params[:password])
+      if(params[:is_online]=='true')
+        user.update_attribute(:is_online,true);
+      end
+
+      if(params[:is_online]=='false')
+        user.update_attribute(:is_online,false);
+      end
+
+      if(params[:call_status]=='decline')
+        user.update_attribute(:call_status,'decline');
+      end
+
+      render :json=>{:result=>true} and return
+    else
+      render :json=>{:result=>null} and return
+    end
+  end
+
+
   def destroy
     begin
       logout_user

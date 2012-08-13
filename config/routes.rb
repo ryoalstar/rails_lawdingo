@@ -150,5 +150,9 @@ Lawdingo::Application.routes.draw do
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'
   end
+
+  match '/LoginByApp' => 'sessions#login_by_app'
+  match '/UpdateOnlineByApp' => 'sessions#set_status_by_app'
+
 end
 
