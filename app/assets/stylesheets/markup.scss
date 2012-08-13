@@ -3,7 +3,8 @@ html, body{
 	margin:0;
 	font-family: Arial ,helvetica, verdana, tahoma;
 	height:100%;
-	background: url(content_bg.png) repeat;
+	//background: url(content_bg.png) repeat;
+	background:#f5f7fa;
 }
 .left-gutter{
   width: 246px;
@@ -64,7 +65,7 @@ body.users.home{
   }
 }
 #header_border{
-  height:3px;
+  height:4px;
   background: url(header_border.png) repeat-x;
 }
 #header{
@@ -109,7 +110,7 @@ body.users.home{
 						border-radius:10px;
 					}
 					span.lawyers_signup{
-					  border:1px solid #eb7538;
+					  border:1px solid #353c45;
 						background: #f3a648; /* Old browsers */
             background: -moz-linear-gradient(top,  #f3a648 0%, #ec6e2e 100%); /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3a648), color-stop(100%,#ec6e2e)); /* Chrome,Safari4+ */
@@ -755,7 +756,8 @@ body.offerings.show, body.attorneys.call_payment{
 }
 body.users.landing_page, body.users.learnmore{
   .new_question#new_question{
-		border:1px solid #d0d2d5;
+    background-color:rgba(0,0,0,0.1);
+		border:1px solid #515862;
 		float: left;
 		width:530px;
 		margin-top:30px;
@@ -788,7 +790,7 @@ body.users.landing_page, body.users.learnmore{
 			height:45px;
 			width:390px;
 			padding:0 10px;
-			border:1px solid #aaafb8;
+			border:1px solid #5c636d;
 			border-right:0;
 			background-color:#f6f6f6;
 			font-size:16px;
@@ -808,6 +810,9 @@ body.users.landing_page, body.users.learnmore{
     }
 		input[type="submit"]{
 			background:url(ask_submit_full.png) no-repeat 0px -1px;
+			border-right:1px solid #5c636d;
+			border-bottom:1px solid #5c636d;
+			border-top:1px solid #5c636d;
 			height:47px;
 			width:80px;
 			display:block;
@@ -826,11 +831,11 @@ body.users.landing_page, body.users.learnmore{
 		  margin-top:10px;
 		}
     label{
-      color:#5d5e5f;
+      color:#fff;
       font-size:13px;
-      -moz-text-shadow: 1px 1px 1px #f6f7f9;
-		  -webkit-text-shadow: 1px 1px 1px #f6f7f9;
-		  text-shadow: 1px 1px 1px #f6f7f9;
+      -moz-text-shadow: 1px 1px 1px #595e66;
+		  -webkit-text-shadow: 1px 1px 1px #595e66;
+		  text-shadow: 1px 1px 1px #595e66;
     }
 		select{
 		  float:left;
@@ -1096,7 +1101,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		position:absolute; 
 		bottom:0;
 		padding-bottom:0;
-		background: #424242;
+		background: url('header_bg_gray.png') repeat;
 		color:#bbbbbb;
     /*background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1));
@@ -1686,7 +1691,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				.feature{
 					margin-left:12px;
 					float:left;
-					margin-bottom: 38px;
+					margin-bottom: 25px;
 					a{
 					  border-bottom:0;
 					  display:block;
@@ -1700,7 +1705,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						float:left;
 						margin-left:30px;
 						width: 382px;
-						margin-top:16px;
+						margin-top:38px;
 						p{
 							color:#3f3e3e;
 							word-spacing: -1px;
@@ -1739,7 +1744,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					.testimonial_description{
 						float:left;
 						width:380px;
-						margin-bottom:35px;
+						margin-bottom:55px;
 						/*font-style:italic;
 						font-family: Myriad Pro;*/
 						.desc{

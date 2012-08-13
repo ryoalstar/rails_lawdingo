@@ -28,8 +28,8 @@
         %p= @subtext[:first]
         / %p= @subtext[:second]
         = link_to "", lawyers_path, class: "browse_lawyers_button"
-        -#= image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
-        -#= render partial: "questions/home_form", locals: { type: "lawyer" }
+        = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
+        = render partial: "questions/home_form", locals: { type: "lawyer" }
         -#%small
           Lawyer? #{link_to "Apply here!", new_lawyer_path}
       .slider
