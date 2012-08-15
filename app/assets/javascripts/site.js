@@ -18,7 +18,7 @@ function equalHeight(group) {
   }
   $(document).ready(function() {
     $('.row').each(function(){
-      
+
       equalHeight($(this).find(".row_block"));
     });
   });
@@ -156,7 +156,7 @@ function setBarIds(){
   }
   else
   {
-    alert("Please provide your barid for the states")
+    close_dialogs();
     return;
   }
 }
@@ -203,7 +203,7 @@ function close_dialogs(){
 }
 $(document).ready(function() {
   $(function(){
-    
+
     $.fn.carousel = function(){
         if( this==null || this=='undefined' || this.length<=0 ) return;
 
@@ -233,7 +233,7 @@ $(document).ready(function() {
             self.find('.carousel-description .stars').html( carousel_info['rating'] );
             self.find('.carousel-description span.note').html( carousel_info['start_or_schedule_button_text_profile'] );
             /*self.find('.carousel-description p.active_action').html( carousel_info['active_action'] );
-            
+
             if (carousel_info["active_action"] !== undefined) {
 			      	  self.find('.carousel-description p.active_action')
 										.html(carousel_info["active_action"])
@@ -242,7 +242,7 @@ $(document).ready(function() {
 		      	  	self.find('.carousel-description p.active_action').html('').hide();
 						}
             */
-            
+
         		if (carousel_info["start_or_video_button_p"] !== undefined) {
 						  self.find('.carousel-description span.video')
 						    .addClass("online").removeClass("offline")
@@ -250,7 +250,7 @@ $(document).ready(function() {
 						} else {
 							  self.find('.carousel-description span.video').html('').addClass("offline").removeClass("online");
 						}
-						
+
 						if (carousel_info["schedule_consultation"] !== undefined) {
 						  self.find('.carousel-description span.text')
 						    .addClass("online").removeClass("offline")
@@ -258,17 +258,17 @@ $(document).ready(function() {
 						} else {
 							  self.find('.carousel-description span.text').html('').addClass("offline").removeClass("online");
 						}
-						
-						
+
+
 						if (carousel_info["start_phone_consultation_p"] !== undefined) {
 						  self.find('.carousel-description span.voice')
 						    .addClass("online").removeClass("offline")
 								.html(carousel_info["start_phone_consultation_p"]);
 						} else {
 							  self.find('.carousel-description span.voice').html('').addClass("offline").removeClass("online");
-						}        
-            
-            
+						}
+
+
             //self.find('.carousel-description li.shedule').attr('href', carousel_info['start_live_conversation'] );
 					  if (carousel_info["start_video_conversation"] !== undefined) {
 			      	  self.find('.carousel-description li.shedule')
@@ -277,7 +277,7 @@ $(document).ready(function() {
 		      	} else {
 		      	  	self.find('.carousel-description li.shedule').html('').hide();
 						}
-						
+
 						if (carousel_info["start_phone_conversation"] !== undefined) {
 								self.find('.carousel-description li.phone')
 										.html(carousel_info["start_phone_conversation"])
@@ -285,7 +285,7 @@ $(document).ready(function() {
 						} else {
 							  self.find('.carousel-description li.phone').html('').hide();
 						}
-						
+
 						if (carousel_info["send_text_question"] !== undefined) {
 			      		self.find('.carousel-description li.text')
 										.html(carousel_info["send_text_question"])
@@ -307,10 +307,10 @@ $(document).ready(function() {
             self.interv = setTimeout( next_image, 2300 );
         }
 
-        function next_image(){ 
-          goto_image( self.current_image<self.images.length-1? self.current_image+1: 0 ); 
+        function next_image(){
+          goto_image( self.current_image<self.images.length-1? self.current_image+1: 0 );
         }
-        function prev_image(){ 
+        function prev_image(){
           goto_image( self.current_image>0? self.current_image-1: self.images.length-1 );
         }
 
@@ -318,7 +318,7 @@ $(document).ready(function() {
         var cont = $('<div class="controls"></div>');
         var prev = $('<a class="prev icn">prev</a>'); prev.click( prev_image );
         var next = $('<a class="next icn">next</a>'); next.click( next_image );
-       
+
 
         cont.append( prev );
         cont.append( next );
@@ -399,7 +399,7 @@ $(document).ready(function() {
           options.placeholderCSS['height'] = inputHeight;
           options.placeholderCSS['color'] = options.color;
 
-          // adjust position of placeholder 
+          // adjust position of placeholder
           options.placeholderCSS.left = (isOldOpera && (this.type == 'email' || this.type == 'url')) ?
              '11%' : o_left;
           placeholder.css(options.placeholderCSS);
@@ -437,11 +437,11 @@ $(document).ready(function() {
         //more or less just emulating what webkit does here
         //tweak to your hearts content
         placeholderCSS: {
-          'font':'16px', 
-          'color':'#a8a8a8', 
-          'position': 'absolute', 
+          'font':'16px',
+          'color':'#a8a8a8',
+          'position': 'absolute',
           'left':'5%',
-          'top':'8px', 
+          'top':'8px',
           'overflow-x': 'hidden',
     			'display': 'block'
         }
