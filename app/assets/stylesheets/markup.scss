@@ -64,9 +64,13 @@ body.users.home{
     }
   }
 }
-#header_border{
+#header > #header_border{
   height:4px;
   background: url(header_border.png) repeat-x;
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  top: 71px;
 }
 #header{
 	height:72px;
@@ -95,7 +99,7 @@ body.users.home{
 				li{
 					float:left;
 					a{
-						color:#bbbbbb;
+						color:#e9f6ff;
 						padding:2px 11px 3px 11px;
 						text-decoration:none;
 						font-size:14px;
@@ -1169,7 +1173,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				li{
 					padding:8px 0px;
 					a{
-						color:#bbbbbb;
+						color:#e9f6ff;
 						text-decoration:none;
 						display:inline;
 						font-size: 14px;
