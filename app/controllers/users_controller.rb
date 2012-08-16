@@ -29,32 +29,32 @@ class UsersController < ApplicationController
     @subtext = AppParameter.service_homepage_subtext
     @practice_areas = PracticeArea.parent_practice_areas
     @states = State.with_approved_lawyers
-    
+
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase || ""
-    
-    
+
+
     if @service_type == "legal-services"
        @search = Offering.build_search(params[:search_query])
     else
        @search = Lawyer.build_search(
         params[:search_query], :page => params[:page]
-      ) 
+      )
     end
-    
+
     add_state_scope
     add_practice_area_scope
     add_free_time_scope
     add_lawyer_rating_scope
     add_hourly_rate_scope
     add_school_rank_scope
-    
+
     @search.execute
-        
+
     if @service_type == "legal-services"
       @offerings = @search.results
     else
-      @lawyers = @search.results  
+      @lawyers = @search.results
     end
 
     respond_to do |format|
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
       format.js{render}
     end
   end
-  
+
   def detect_state
     # we try to auto-detect the state if possible
     if request.location.present? && request.location.state_code.present? && params[:autodetect].present?
@@ -70,21 +70,21 @@ class UsersController < ApplicationController
         @state_name = state.name
       end
     end
-   
+
     render :js => "var detect_state_name = '#{@state_name}';"
   end
-  
+
   def learnmore
     @tagline = AppParameter.find(2).value || "Free legal advice."
     @subtext = AppParameter.service_homepage_subtext
-  end  
-  
+  end
+
   def landing_page
     #redirect_to :action => :home
     @tagline = AppParameter.find(2).value || "Free legal advice."
     @subtext = AppParameter.service_homepage_subtext
   end
-  
+
   def show
     begin
       @user = User.find params[:id]
@@ -165,12 +165,12 @@ class UsersController < ApplicationController
 
         UserMailer.notify_client_signup(@user).deliver
         session[:user_id] = @user.id
-        
+
         # If there is a pending question
         if session[:question_id].present?
           send_pending_question(session[:question_id], @user) and return
         end
-        
+
         return_path = ""
         if session[:return_to]
           return_path = session[:return_to]
@@ -226,10 +226,10 @@ class UsersController < ApplicationController
       redirect_to root_path, :notice =>"Couldn't find any record"
     end
   end
-  
+
   def account_information
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.is_lawyer?
@@ -513,7 +513,7 @@ class UsersController < ApplicationController
       lawyer = User.find(params[:lawyer_id])
       if !current_user.is_lawyer?
           if lawyer.call_status!='accept'
-            lawyer.update_attribute(:call_status, params[:call_mode].to_s)    
+            lawyer.update_attribute(:call_status, params[:call_mode].to_s)
           end
       else
           lawyer.update_attribute(:call_status, params[:call_mode].to_s)
@@ -531,10 +531,10 @@ class UsersController < ApplicationController
       if params[:op]=="end_video_chat"
         lawyer = User.find(params[:lawyer_id])
         lawyer.update_attribute(:call_status, "")
-        
+
         conversation = Conversation.find(params[:conversation_id])
         conversation.update_attribute(:end_date,Time.now)
-        
+
       end
     end
 
@@ -632,14 +632,14 @@ class UsersController < ApplicationController
   def add_state_scope
     # store selected state for the view
     @selected_state = State.name_like(self.get_state_name).first
-    state_name = @selected_state.name if !!@selected_state 
-    if @selected_state.present? 
+    state_name = @selected_state.name if !!@selected_state
+    if @selected_state.present?
       @search.build do
         fulltext state_name
       end
     end
    end
-  
+
   def add_free_time_scope
     @free_time_val = params[:freetimeval].to_i if !!params[:freetimeval]
     free_time_val_s = @free_time_val
@@ -650,7 +650,7 @@ class UsersController < ApplicationController
        end
     end
   end
-  
+
   def add_lawyer_rating_scope
     @lawyer_rating = params[:ratingval].to_i if !!params[:ratingval]
     rating_start = @lawyer_rating
@@ -661,12 +661,12 @@ class UsersController < ApplicationController
        end
     end
   end
-  
-  
+
+
   def add_hourly_rate_scope
     @hourly_start = params[:hourlyratestart].to_i if !!params[:hourlyratestart]
     @hourly_end = params[:hourlyrateend].to_i if !!params[:hourlyrateend]
-  
+
     hourly_start = @hourly_start
     hourly_end = @hourly_end
     if hourly_start==hourly_end
@@ -678,26 +678,26 @@ class UsersController < ApplicationController
       end
       if hourly_start == 4
         hourly_end=6
-      end 
+      end
       if hourly_start == 2
         hourly_end=4
       end
     end
-        
+
     if @hourly_start.present? && @hourly_end.present?
        @search.build do
          with :rate, (hourly_start-AppParameter.service_charge_value)..(hourly_end-AppParameter.service_charge_value)
        end
     end
   end
-  
-  
+
+
   def add_school_rank_scope
     @school_rank = params[:schoolrating].to_i if !!params[:schoolrating]
-  
+
     rank_start = @school_rank
     rank_end = 4
-    
+
     if @school_rank.present?
        @search.build do
          with :school_rank, (rank_start)..(rank_end)
@@ -708,7 +708,7 @@ class UsersController < ApplicationController
   # helper method to add the practice area scope to the
   # main search
   # add practic_area_scope_for_search__SOLR
-  def add_practice_area_scope 
+  def add_practice_area_scope
     # if we have a practice area
     if params[:practice_area].present?
       scope = PracticeArea.name_like(params[:practice_area])
@@ -718,8 +718,8 @@ class UsersController < ApplicationController
         end
     end
   end
-  
- 
+
+
 
   # gives us the state name provided in the params
   def get_state_name
@@ -727,10 +727,10 @@ class UsersController < ApplicationController
     state_name = (params[:state] || "").gsub(/\-lawyers?$/,'')
     return state_name.gsub(/\-/,' ')
   end
-  
+
   def daily_hours
   end
-  
+
 end
 
 # Obtain lawyers according to sent GET params
