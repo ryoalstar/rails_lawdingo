@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :user_type, :rate, :presence => true
   validates :email, :uniqueness =>true
   validates :password, :presence => { :on => :create }
+  validates_format_of :phone, :with => /^[+0-9\(\)\-,\s]+$/, :allow_blank => true
+
   attr_accessor :password, :password_confirmation
   #attr_accessible :email, :password, :password_confirmation
 
@@ -67,12 +69,12 @@ class User < ActiveRecord::Base
   def get_stripe_customer_id
     self.stripe_customer_token
   end
-  
+
   def slug
     lawyer = Lawyer.find(self.id)
     "#{lawyer.full_name.parameterize}"
   end
-  
+
   def is_lawyer?
     self[:user_type] == self.class::LAWYER_TYPE
   end
