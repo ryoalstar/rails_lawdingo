@@ -83,5 +83,7 @@ group :test do
   gem "spork"
   gem 'watchr'
   gem 'faker'
+  gem 'shoulda'
+  gem 'shoulda-matchers'
 end
 

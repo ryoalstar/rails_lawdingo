@@ -9,6 +9,7 @@ FactoryGirl.define do
     email
     password "secret"
     user_type User::CLIENT_TYPE
+    phone '+0123456789'
   end
 
   factory :client do
