@@ -477,3 +477,14 @@ jQuery.fn.center = function () {
   return this;
 }
 
+$(document).ready(function() {
+  if($('div.load-more a').length){
+    $(window).scroll(function () {
+      var eTop = $('div.load-more a').offset().top;
+      var offset = eTop - $(window).scrollTop();
+      if(offset < 700){
+        $("div.load-more a").click();
+      }
+    });
+  }
+});
