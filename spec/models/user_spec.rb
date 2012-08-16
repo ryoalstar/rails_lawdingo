@@ -9,10 +9,9 @@ describe User do
   specify { should validate_presence_of(:email) }
   specify { should validate_presence_of(:user_type) }
   specify { should validate_presence_of(:rate) }
-  specify { should validate_presence_of(:password) }
   specify { should validate_uniqueness_of(:email) }
-  specify { should allow_value("asdfghj").for(:phone) }
-  subject { Factory(:user) }
+  specify { should_not allow_value("asdfghj").for(:phone) }
+  subject { FactoryGirl.create(:user) }
 
   describe "validation" do
 
