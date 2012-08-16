@@ -1,6 +1,6 @@
 %ul.share
   %li.facebook
-    <fb:like send="false" layout="button_count" width="50" show_faces="false" href="#{attorney_url(@attorney, slug: @attorney.slug)}"></fb:like>
+    <fb:like href="#{attorney_url(@attorney, slug: @attorney.slug)}" send="false" layout="button_count" width="50" show_faces="false"></fb:like>
   %li.linkedin
     <script type="IN/Share"></script>
 
