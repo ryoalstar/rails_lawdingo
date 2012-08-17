@@ -35,7 +35,7 @@ Lawdingo::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.middleware.use('SpoofIp', '64.71.24.19') # California
+  # config.middleware.use('SpoofIp', '64.71.24.19') # California
   # config.middleware.use('SpoofIp', '159.247.160.80') # Connecticut  http://www.cga.ct.gov/
   # config.middleware.use('SpoofIp', '207.66.0.2') # New Mexico  http://legis.state.nm.us/
 

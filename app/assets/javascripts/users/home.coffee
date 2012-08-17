@@ -307,9 +307,9 @@ class Home
       @service_type = val
       this.service_type_tabs()
 
-        .addClass('selected')
+        .removeClass('selected')
         .filter("[data-val='#{val}']")
-        .removeClass("selected")
+        .addClass("selected")
 
       if val == "Legal-Services"
         @practice_area_fields().parent().find(".children").hide()
