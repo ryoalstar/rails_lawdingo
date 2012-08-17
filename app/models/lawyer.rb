@@ -40,6 +40,7 @@ class Lawyer < User
     text :practice_areas do
        practice_area_names
     end
+    integer :practice_area_ids, :multiple => true
     text :personal_tagline
     text :first_name
     text :last_name

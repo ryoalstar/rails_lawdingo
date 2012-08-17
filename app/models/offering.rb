@@ -8,9 +8,7 @@ class Offering < ActiveRecord::Base
     searchable do
       text :description
       text :name
-      text :practice_area do
-        practice_area.name if !!practice_area
-      end
+      integer :practice_area_id
       text :user
       text :state_name do
         get_state_name

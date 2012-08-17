@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     end
 
     add_state_scope
-    add_practice_area_scope
+    add_practice_area_scope @service_type
     add_free_time_scope
     add_lawyer_rating_scope
     add_hourly_rate_scope
@@ -707,18 +707,16 @@ class UsersController < ApplicationController
   # helper method to add the practice area scope to the
   # main search
   # add practic_area_scope_for_search__SOLR
-  def add_practice_area_scope
+  def add_practice_area_scope service_type
     # if we have a practice area
     if params[:practice_area].present?
       scope = PracticeArea.name_like(params[:practice_area])
-      area_name = scope.first.name if scope.first
-        @search.build do
-          fulltext area_name
-        end
+      area_id = scope.first.id if scope.first
+      @search.build do
+        service_type == "legal-services" ? with(:practice_area_id, area_id) : with(:practice_area_ids, [area_id])
+      end if area_id
     end
   end
-
-
 
   # gives us the state name provided in the params
   def get_state_name
