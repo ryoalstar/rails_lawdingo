@@ -8,6 +8,78 @@ describe Lawyer do
     Time.zone = "Eastern Time (US & Canada)"
   end
 
+  subject { FactoryGirl.create(:lawyer) }
+  specify { should have_many(:bar_memberships) }
+  specify { should have_many(:conversations) }
+  specify { should have_many(:bids) }
+  specify { should have_many(:messages) }
+  specify { should have_many(:daily_hours) }
+  specify { should have_many(:expert_areas) }
+  specify { should have_many(:practice_areas) }
+  specify { should have_many(:reviews) }
+  specify { should have_many(:states) }
+  specify { should have_one(:homepage_image) }
+  specify { should accept_nested_attributes_for(:bar_memberships) }
+
+  describe "validation" do
+    it "should be valid" do
+      subject.should be_valid
+    end
+  end
+
+  describe "search" do
+
+    describe "search by state" do
+
+      it "should find by state" do
+        FactoryGirl.create(:state, :name => 'Arizona')
+        state = FactoryGirl.create(:state, :name => 'Pennsylvania')
+        state2 = FactoryGirl.create(:state, :name => 'Arizona')
+        subject.states<< state
+        subject.states<< state2
+        subject.states.count.should == 2
+        subject.state_names.should == "#{state.name},#{state2.name}"
+        assert subject.reindex!
+        search = Lawyer.search do
+          with(:state_ids, [state.id])
+        end
+        search.total.should == 1
+      end
+
+    end
+
+    describe "search by practice_area" do
+
+      it "should find by practice_area" do
+        FactoryGirl.create(:practice_area, :name => 'Bankruptcy')
+        FactoryGirl.create(:practice_area, :name => 'Business and Startups')
+        practice_area = FactoryGirl.create(:practice_area, :name => 'Employment')
+        lawyer = FactoryGirl.create(:lawyer, :first_name => 'Robert')
+        lawyer.practice_areas<< practice_area
+        lawyer.save
+        assert subject.reindex!
+        search = Lawyer.search do
+          with :practice_area_ids, [practice_area.id]
+        end
+        search.total.should == 1
+        PracticeArea.name_like(practice_area.name).count.should == 1
+      end
+
+    end
+
+    describe "search by keyword" do
+
+      it "should find by keyword" do
+        lawyer = FactoryGirl.create(:lawyer, :last_name => 'Petr', :last_name => 'Find me')
+        search = Lawyer.search do
+          fulltext lawyer.last_name
+        end
+        search.total.should == 1
+      end
+    end
+
+  end
+
   it "should provide an offers_legal_services scope" do
     scope = Lawyer.offers_legal_services
 

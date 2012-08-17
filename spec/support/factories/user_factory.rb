@@ -18,6 +18,6 @@ FactoryGirl.define do
     email
     password "secret"
     user_type User::CLIENT_TYPE
-    phone { Faker::PhoneNumber.phone_number }
+    phone '+0123456789'
   end
 end
