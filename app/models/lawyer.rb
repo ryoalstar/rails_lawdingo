@@ -20,7 +20,7 @@ class Lawyer < User
       time = time.midnight
       dh = self.on_wday(time.wday)
       return false if dh.blank?
-      # if it is the current day, check to see that 
+      # if it is the current day, check to see that
       # it is not too late in the day to book
       if Time.zone.now.midnight == time
         return false if Time.zone.now + 1.hour > dh.end_time_on_date(time)
@@ -28,7 +28,7 @@ class Lawyer < User
       return true
     end
   end
-  
+
   #solr index
   searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
     text :flat_fee_service_name do
@@ -47,6 +47,7 @@ class Lawyer < User
     text :states do
       state_names
     end
+    integer :state_ids, :multiple => true
     text :reviews do
       review_purpos
     end
@@ -54,34 +55,34 @@ class Lawyer < User
       school.name if school.present?
     end
     string :bar_memberships, :multiple => true
-    integer :free_consultation_duration 
-    float :rate 
+    integer :free_consultation_duration
+    float :rate
     integer :lawyer_star_rating do
       reviews.average(:rating).to_i
-    end 
+    end
     integer :school_rank do
       school.rank_category if !!school
     end
   end
-  
-  
+
+
   def offering_names
-    offerings.map(&:name)*"," 
+    offerings.map(&:name)*","
   end
- 
+
   def offering_descriptions
-    offerings.map(&:description)*"," 
+    offerings.map(&:description)*","
   end
-  
+
   def practice_area_names
     self.practice_areas.map(&:name)*","
   end
-  
+
   def state_names
     states.map(&:name)*","
   end
- 
-   
+
+
   def review_purpos
     reviews.map(&:purpose)*","
   end
@@ -89,7 +90,7 @@ class Lawyer < User
   def reindex!
      Sunspot.index!(self)
   end
-  
+
   def self.build_search(query, opts = {})
     search = self.search(
       :include => [
@@ -104,16 +105,16 @@ class Lawyer < User
     end
     search
   end
-  
+
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
   has_many :states, :through => :bar_memberships
-  
+
   has_one :homepage_image, :dependent => :destroy
 
   # validations
-  validates :time_zone, 
+  validates :time_zone,
     :presence => true,
     :inclusion => {
       :in => ActiveSupport::TimeZone.us_zones.collect(&:name)
@@ -121,7 +122,7 @@ class Lawyer < User
 
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
-  scope :approved_lawyers, 
+  scope :approved_lawyers,
     where(:user_type => User::LAWYER_TYPE, :is_approved => true)
       .order("is_online desc, phone desc")
 
@@ -143,17 +144,17 @@ class Lawyer < User
     if practice_area_or_name.is_a?(PracticeArea)
       pa = practice_area_or_name
     else
-      pa = PracticeArea.name_like(practice_area_or_name).first 
+      pa = PracticeArea.name_like(practice_area_or_name).first
       pa ||= PracticeArea.new
     end
     includes(:offerings, :practice_areas)
       .where([
-        "practice_areas.id IN (:ids) " + 
+        "practice_areas.id IN (:ids) " +
         "OR offerings.practice_area_id IN (:ids)",
         {:ids => [pa.id] + pa.children.collect(&:id)}
       ])
   }
-  
+
   def self.approved_lawyers_states
     states = []
 

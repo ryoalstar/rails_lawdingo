@@ -4,22 +4,28 @@ class Offering < ActiveRecord::Base
   belongs_to :user,
     :touch => true
 
-
-   #solr index
+    #solr index
     searchable do
-     text :description
-     text :name
-     text :practice_area do
-       practice_area.name if !!practice_area
-     end
-     text :user
-     text :state_name do
-       get_state_name
-     end
+      text :description
+      text :name
+      text :practice_area do
+        practice_area.name if !!practice_area
+      end
+      text :user
+      text :state_name do
+        get_state_name
+      end
+      integer :state_ids, :multiple => true do
+        get_state_ids
+      end
     end
 
     def get_state_name
       Lawyer.find(self.user.id).states.map(&:name)*","
+    end
+
+    def get_state_ids
+      Lawyer.find(self.user.id).try(:state_ids) || []
     end
 
     def reindex!

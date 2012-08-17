@@ -7,20 +7,20 @@ describe Lawyer do
     subject.stubs(:time_zone => "Eastern Time (US & Canada)")
     Time.zone = "Eastern Time (US & Canada)"
   end
-  
+
   it "should provide an offers_legal_services scope" do
     scope = Lawyer.offers_legal_services
-    
+
     scope.includes_values.should eql([:offerings])
     scope.where_values.should eql(["offerings.id IS NOT NULL"])
   end
-  
+
   it "should provide an offers_legal_advice scope" do
     scope = Lawyer.offers_legal_advice
     scope.includes_values.should eql([:practice_areas])
     scope.where_values.should eql(["practice_areas.id IS NOT NULL"])
   end
-  
+
   context ".practices_in_state" do
 
     it "should provide a practices_in_state scope" do
@@ -54,22 +54,22 @@ describe Lawyer do
       scope.includes_values.should eql([:offerings, :practice_areas])
 
       where_values = [
-        "practice_areas.id IN (#{pa.id},#{pa2.id}) " + 
+        "practice_areas.id IN (#{pa.id},#{pa2.id}) " +
           "OR offerings.practice_area_id IN (#{pa.id},#{pa2.id})"
       ]
 
       scope.where_values.should eql(where_values)
-      
+
       lambda{scope.count}.should_not raise_error
 
     end
 
     it "should handle when an instance of PracticeArea is passed" do
       PracticeArea.expects(:name_like).never
-      
+
       pa = PracticeArea.new(:name => "Blah-Blah")
       pa.stubs(:id => 928)
-      
+
       scope = Lawyer.offers_practice_area(pa)
       scope.includes_values.should eql([:offerings, :practice_areas])
 
@@ -105,8 +105,8 @@ describe Lawyer do
     let(:daily_hour) do
       DailyHour.new.tap do |dh|
         dh.stubs(
-          :wday => time.wday, 
-          :start_time_on_date => time + 12.hours, 
+          :wday => time.wday,
+          :start_time_on_date => time + 12.hours,
           :end_time_on_date => time + 14.hours
         )
       end
@@ -144,15 +144,15 @@ describe Lawyer do
       end
 
     end
-    
+
 
   end
 
   context "#daily_hours" do
 
     context "#on_wday" do
-      
-      it "should provide an 'on_wday' method to find valid hours 
+
+      it "should provide an 'on_wday' method to find valid hours
         for a day" do
         daily_hour = DailyHour.new(:wday => 1)
         subject.daily_hours << daily_hour
@@ -163,7 +163,7 @@ describe Lawyer do
     end
 
     context "#bookable_on_day?" do
-      
+
       it "should provide a 'bookable_on_day' method to determine if a given
         day can currently be booked" do
         t = Time.zone.now
@@ -200,7 +200,7 @@ describe Lawyer do
 
   context "#next_available_days" do
 
-    it "should provide a method to get the next days of availability for 
+    it "should provide a method to get the next days of availability for
       the lawyer" do
       # we set only one open day
       subject.daily_hours << DailyHour.new(
@@ -214,7 +214,7 @@ describe Lawyer do
       end
     end
 
-    it "should not show days that are unavailable because it is too late 
+    it "should not show days that are unavailable because it is too late
       to book" do
       t = Time.zone.now
       Time.zone.stubs(:now => (t.midnight + 18.hours))

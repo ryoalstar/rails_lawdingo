@@ -633,12 +633,10 @@ class UsersController < ApplicationController
   def add_state_scope
     # store selected state for the view
     @selected_state = State.name_like(self.get_state_name).first
-    state_name = @selected_state.name if !!@selected_state
-    if @selected_state.present?
-      @search.build do
-        fulltext state_name
-      end
-    end
+    state_id = @selected_state.try(:id)
+    @search.build do
+      with(:state_ids, [state_id])
+    end if state_id
    end
 
   def add_free_time_scope
