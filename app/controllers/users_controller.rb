@@ -33,11 +33,12 @@ class UsersController < ApplicationController
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase || ""
 
-
     if @service_type == "legal-services"
-       @search = Offering.build_search(params[:search_query])
+      @search = Offering.build_search(
+        params[:search_query], :page => params[:page]
+      )
     else
-       @search = Lawyer.build_search(
+      @search = Lawyer.build_search(
         params[:search_query], :page => params[:page]
       )
     end
