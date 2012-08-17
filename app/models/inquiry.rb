@@ -54,8 +54,13 @@ class Inquiry < ActiveRecord::Base
     end
   end
 
+  def notify_admin
+    if self.bids.any?
+      UserMailer.closed_inquiry_notification(self).deliver
+    end
+  end
+
   def close
-    UserMailer.closed_inquiry_notification(self).deliver
     update_attributes({ is_closed: true })
   end
 
@@ -64,6 +69,7 @@ class Inquiry < ActiveRecord::Base
       Inquiry.opened.each do |inquiry|
         if inquiry.expired?
           inquiry.charge_winners
+          inquiry.notify_admin
           inquiry.close
         end
       end
