@@ -42,16 +42,28 @@ describe Inquiry do
       @inquiry.winners.should_not include @michael
     end
 
-    it "closes inquiry and send a notification to admin" do
+    it "doesn't send notification if there are no bids" do
+      @inquiry.bids.destroy_all
+
       expect {
-        @inquiry.close
+        @inquiry.notify_admin
+      }.to_not change(ActionMailer::Base.deliveries, :size)
+    end
+
+    it "notifies admin about inquiry closing" do
+      expect {
+        @inquiry.notify_admin
       }.to change(ActionMailer::Base.deliveries, :size).by(1)
 
       email = ActionMailer::Base.deliveries.last
       email.to.should include "nikhil.nirmel@gmail.com"
       email.to.should include "info@lawdingo.com"
+    end
 
-      @inquiry.is_closed.should be_true
+    it "closes inquiry" do
+      expect {
+        @inquiry.close
+      }.to change(@inquiry, :is_closed).to(true)
     end
   end
 end
