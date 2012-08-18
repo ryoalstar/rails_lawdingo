@@ -3,8 +3,12 @@
     <% @lawyer = Lawyer.find(params[:lawyer_path]) %>
     <% if @lawyer %>
       <%= notice text: "To connect with #{@lawyer.full_name}, simply sign up or sign in with Lawdingo.", 
-        avatar: @lawyer.photo.url(:thumb) %>
+        avatar: @lawyer.photo %>
     <% end %>
+  <% end %>
+
+  <% if @question_notice %>
+    <%= notice text: "To submit that inquiry please sign up with or log in to Lawdingo." %>
   <% end %>
 
   <h1 class="form-header">Log In</h1>
