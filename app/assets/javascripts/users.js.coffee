@@ -37,7 +37,7 @@ jQuery ->
     children_areas = input.parent().find("[data-parent-id='#{parent_id}'] input")
     children_areas.each (index, element) -> ($ element).attr "checked", checked
 
-  ($ "a#close_notice").bind "click", -> ($ "p.notice").hide()
+  ($ "a#close_notice").bind "click", -> ($ ".notice").hide()
 
   ($ "a#barids_opener").bind "click", -> ($ "div#bar_membership").center()
   ($ "a#practice_areas_opener").bind "click", -> ($ "div#practices").center()

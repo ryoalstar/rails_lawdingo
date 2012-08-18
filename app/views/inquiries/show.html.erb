@@ -2,10 +2,7 @@
 
 <div id="page">
   <% if flash.any? %>
-    <p class="notice">
-      <%= flash[:notice] %>
-      <a href="#" id="close_notice">Close</a>
-    </p>
+    <%= notice text: flash[:notice] %>
   <% end %>
 
   <div>

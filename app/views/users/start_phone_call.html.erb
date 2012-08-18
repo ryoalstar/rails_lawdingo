@@ -1,11 +1,13 @@
 <div id="page" class="signup">
-<p class="notice">To start the phone consultation, enter your phone number. If <%= @lawyer.full_name %> is available, you’ll be connected by phone momentarily.</p>
-<div>
-<%= form_tag create_call_path(:lawyer_id =>params[:id]), :id=>"phone_input_form" do %>
-    <span class="phone-label">Your phone number:</span><br/>
-    <input type="text" id="client_number" value="<%= current_user.phone || params[:number] %>" name="client_number" />
-    <%= submit_tag "Continue", class: "button" %>
-  <% end %>
+  <%= notice text: "To start the phone consultation, enter your phone number. If #{@lawyer.full_name} is available, you’ll be connected by phone momentarily.",
+    avatar: @lawyer.photo.url(:thumb) %>
+
+  <div>
+    <%= form_tag create_call_path(:lawyer_id =>params[:id]), :id=>"phone_input_form" do %>
+      <span class="phone-label">Your phone number:</span><br/>
+      <input type="text" id="client_number" value="<%= current_user.phone || params[:number] %>" name="client_number" />
+      <%= submit_tag "Continue", class: "button" %>
+    <% end %>
   </div>
 </div>
 

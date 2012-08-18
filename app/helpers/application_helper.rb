@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def notice(*args)
+    options = args.extract_options!
+
+    render partial: "notice", locals: { text: options[:text], avatar: options[:avatar] || false }
+  end
 
   # is there a current_user
   # this is here to help with stubbing on tests as well
