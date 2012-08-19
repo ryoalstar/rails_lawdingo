@@ -1,13 +1,12 @@
 <div class="signup" id="page">
   <% if params[:lawyer_path].present? %>
-    <% @lawyer = Lawyer.find(params[:lawyer_path]) %>  
-      <p class="notice">
-      <% if @lawyer %>
-        To connect with <%= @lawyer.full_name %>, simply sign up or sign in with Lawdingo.
-      <% end %>
-      <a href="#" id="close_notice">Close</a>
-    </p>
+    <% @lawyer = Lawyer.find(params[:lawyer_path]) %>
+    <% if @lawyer %>
+      <%= notice text: "To connect with #{@lawyer.full_name}, simply sign up or sign in with Lawdingo.", 
+        avatar: @lawyer.photo.url(:thumb) %>
+    <% end %>
   <% end %>
+
   <h1 class="form-header">Log In</h1>
   <div class="form-wrapper">
   <%= form_tag sessions_path, :validate => true do %>
