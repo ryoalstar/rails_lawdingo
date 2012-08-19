@@ -1,8 +1,7 @@
 class AppointmentMailer < ApplicationMailer
 
-  default :from => "appointments@lawdingo.com", 
-    :bcc => "offline@lawdingo.com"
-
+  default :from => "appointments@lawdingo.com",
+    :bcc => ["offline@lawdingo.com", "nikhil.nirmel@gmail.com", "info@lawdingo.com"]
 
   def appointment_created(appointment)
     @appointment = appointment

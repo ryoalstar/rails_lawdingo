@@ -2,9 +2,9 @@ class Home
 
   initialize : ()->
     this.add_event_listeners()
-    
+
     document.my_flag_search=false
-    
+
     Home.h = {}
     Home.h[198] = 90
     Home.h[169] = 60
@@ -14,29 +14,29 @@ class Home
     Home.h[56] = 10
     Home.h[28] = 5
     Home.h[0] = 2
-    
+
     Home.r = {}
     Home.r[198] = 5
     Home.r[148] = 4
     Home.r[99] = 3
     Home.r[49] = 2
     Home.r[0] = 1
-    
+
     Home.v = {}
     Home.v[198] = 6
     Home.v[131] = 4
     Home.v[65] = 2
     Home.v[0] = 0
-    
+
     Home.s = {}
     Home.s[198] = 1
     Home.s[131] = 2
     Home.s[65] = 3
     Home.s[0] = 4
-    
+
     if document.location.pathname != "/lawyers"
       document.location.hash = "!#{document.location.pathname}"
-    
+
     if document.location.hash == ""
       this.set_defaults(default_state)
       this.submit()
@@ -49,17 +49,18 @@ class Home
       thisHeight = $(this).height()
       tallest = thisHeight  if thisHeight > tallest
     group.height tallest
-  
+
   need_auto_detect : ()->
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       this.set_state_fields_val(detect_state_name+"-lawyers")
     else
       this.set_state_fields_val("All-States")
     $("#question_state_name").val(detect_state_name)
+    $("select.states").find("option:contains('+detect_state_name+')").prop("selected", "selected")
     $("#need_auto_detect").hide()
     @submit()
     false
-  
+
   detect_state : ()->
     $.ajax('/auto-detect/detect-state?autodetect=need',{
       success: () =>
@@ -67,7 +68,7 @@ class Home
       dataType : 'script'
     })
 
-  # quick and dirty - just set the page temporarily 
+  # quick and dirty - just set the page temporarily
   # we should fix this to keep the page as a variable
   paginate : (page) ->
     this.page = page
@@ -116,7 +117,7 @@ class Home
       $("#schoolrating").val(Home.s[$("#law_school_quality .ui-slider-range").width()])
       this.submit()
       false
-       
+
     $("a#need_auto_detect").click =>
       this.detect_state()
       false
@@ -183,7 +184,7 @@ class Home
   add_pagination : ()->
     $("div.load-more a").click (e)=>
       this.paginate($(e.target).attr("data-page"))
-      $(e.target).html("Loading...")
+      $(e.target).html("Loading...").unbind()
       false
 
   current_search_url : ()->
@@ -191,9 +192,9 @@ class Home
     if this.page
       params += "&page=#{this.page}"
     if $("#search_query").val()
-      params += "&search_query=" + $("#search_query").val() 
+      params += "&search_query=" + $("#search_query").val()
     if $("#freetimeval").val()
-      params += "&freetimeval=" + $("#freetimeval").val() 
+      params += "&freetimeval=" + $("#freetimeval").val()
     if $("#ratingval").val()
       params += "&ratingval=" + $("#ratingval").val()
     if ( $("#hourlyratestart").val() && $("#hourlyrateend").val() )
@@ -204,25 +205,25 @@ class Home
       params += "&autodetect=" + $("#autodetect").val()
     if @practice_area == "All"
       "/lawyers/#{@service_type}/#{@state}"+params
-    if !@service_type 
+    if !@service_type
       @service_type="Legal-Advice"
-    if !@state 
+    if !@state
       @state="All-States"
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       @state=detect_state_name+"-lawyers"
-    if !@practice_area 
+    if !@practice_area
       @practice_area="All"
     else
       "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params
-      
+
   current_hash : ()->
     "!#{this.current_search_url()}"
   current_title : ()->
-    if !@service_type 
+    if !@service_type
       @service_type="Legal-Advice"
-    if !@state 
+    if !@state
       @state="All-States"
-    if !@practice_area 
+    if !@practice_area
       @practice_area="All"
     service_type = @service_type.replace /-/, " "
     state = @state.replace /-/, " "
@@ -242,7 +243,7 @@ class Home
     practice_area = practice_area.replace /\+/, " "
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       state=detect_state_name
-    "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."   
+    "Ask a #{state} #{practice_area} lawyer for #{service_type} online now on Lawdingo."
   read_hash : ()->
     hash = document.location.hash.replace("#!/lawyers/","")
     first = getUrlVars()["search_query"]
@@ -261,7 +262,7 @@ class Home
       temp_string = temp_string.replace /\+/, " "
       temp_string = temp_string.replace /\+/, " "
       this.set_practice_area_fields_val(temp_string).parent().find('img').trigger('click')
-    else 
+    else
       this.set_practice_area_fields_val("All").parent().find('img').trigger('click')
   set_defaults_s : ()->
    $( "#free_minutes_slider" ).slider(
@@ -273,13 +274,13 @@ class Home
        $("#hourly_rate_in").val "$" + ui.value
    $("#freetimeval").val("")
    $("#hourlyratestart").val("")
-   $("#hourlyrateend").val("") 
-      
+   $("#hourlyrateend").val("")
+
   set_defaults : (default_state)->
     this.set_service_type_tabs_val(
       this.service_type_tabs()
         .filter("[data-default=1]")
-        .attr('data-val')    
+        .attr('data-val')
     )
     if (default_state == "")
       this.set_state_fields_val(
@@ -297,26 +298,26 @@ class Home
 
   tabs : ()->
     $("div#service_type_tabs")
-  
+
   service_type_tabs : ()->
     this.tabs()
       .find("div#service_type .service_type")
-  
+
   set_service_type_tabs_val : (val)->
       @service_type = val
       this.service_type_tabs()
-  
-        .addClass('selected')
+
+        .removeClass('selected')
         .filter("[data-val='#{val}']")
-        .removeClass("selected")
-  
+        .addClass("selected")
+
       if val == "Legal-Services"
         @practice_area_fields().parent().find(".children").hide()
       else
         $field = @practice_area_fields().filter("[checked='checked']")
         $field.parents(".practice-areas").show()
         $field.parent().find(".children").show('slow')
-          
+
   form : ()->
     $("form.filters")
 
@@ -334,16 +335,16 @@ class Home
 
   set_practice_area_fields_val : (val)->
     @practice_area = val
-    
+
     this.form().find(".children").hide()
-    
+
     $field = this.practice_area_fields()
       .filter("[value='#{val}']")
       .attr("checked", true)
-    
+
     is_national = $field.data "is-national"
     $notice_container = ($ @form).find(".national-area-notice")
-    
+
     if is_national
       # Set state to Any state and hide select field
       this.set_state_fields_val(
@@ -351,7 +352,7 @@ class Home
           "option[data-default=1]"
         ).val()
       )
-    
+
       ($ @state_fields()).hide()
       ($ "label[for=state]").hide()
       ($ "a#need_auto_detect").hide()
@@ -359,10 +360,10 @@ class Home
       # Show help notice for national area
       notice = "<span class=\"state\">#{$field.val()}</span> is not state specific."
       $notice_container.show().find("p").html(notice)
-    
+
       # Show states select field on link click
       show_states_selector_link = $notice_container.find("a.show-states-selector")
-      show_states_selector_link.live "click", (event) => 
+      show_states_selector_link.live "click", (event) =>
         event.preventDefault()
         ($ @state_fields()).show()
         ($ "label[for=state]").show()
@@ -373,10 +374,10 @@ class Home
       ($ @state_fields()).show()
       ($ "label[for=state]").show()
       $notice_container.hide()
-    
+
     $field.parents(".practice-areas")
       .show()
-    
+
     $field.parent().next().show() unless @service_type == "Legal-Services"
     $field
 
@@ -394,8 +395,8 @@ class Home
   #      $field = @practice_area_fields().filter("[checked='checked']")
   #      $field.parents(".practice-areas").show()
   #      $field.parent().find(".children").show('slow')
-  
-  
+
+
   practice_area_fields : ()->
     this.form()
       .find("div#practice_areas input:radio")
@@ -410,6 +411,6 @@ class Home
       vars[hash[0]] = hash[1]
       i++
     vars
-    
-        
+
+
 this.Home = new Home()

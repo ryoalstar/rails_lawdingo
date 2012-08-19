@@ -1,16 +1,25 @@
 <% if @service_type == "legal-services" %>
-  $("#service_type .service .count").html("<%= escape_javascript(@offerings.count.to_s) %>")
-  $("div.results").html("<%= escape_javascript(render(:partial => "search_results")) %>")
+  $("#service_type .service .count").html("<%= escape_javascript(@search.total.to_s) %>")
+
+  <% if @offerings.first_page? -%>
+    $("div.results").html("<%= escape_javascript(render(:partial => "search_results")) %>")
+  <% else -%>
+    <% # remove the load-more link %>
+    $("div.load-more").remove()
+    $("div.results").append("<%= escape_javascript(render(:partial => 'search_results')) %>")
+  <% end -%>
+
 <% else %>
+
   $("#service_type .advice .count").html("<%= escape_javascript(@search.total.to_s) %>")
-  
+
   <% if @lawyers.first_page? -%>
     $("div.results").html("<%= escape_javascript(render(:partial => "search_results")) %>")
   <% else -%>
     <% # remove the load-more link %>
     $("div.load-more").remove()
     $("div.results").append("<%= escape_javascript(render(:partial => 'search_results')) %>")
-  <% end -%>  
+  <% end -%>
 <% end %>
 
 

@@ -7,20 +7,92 @@ describe Lawyer do
     subject.stubs(:time_zone => "Eastern Time (US & Canada)")
     Time.zone = "Eastern Time (US & Canada)"
   end
-  
+
+  subject { FactoryGirl.create(:lawyer) }
+  specify { should have_many(:bar_memberships) }
+  specify { should have_many(:conversations) }
+  specify { should have_many(:bids) }
+  specify { should have_many(:messages) }
+  specify { should have_many(:daily_hours) }
+  specify { should have_many(:expert_areas) }
+  specify { should have_many(:practice_areas) }
+  specify { should have_many(:reviews) }
+  specify { should have_many(:states) }
+  specify { should have_one(:homepage_image) }
+  specify { should accept_nested_attributes_for(:bar_memberships) }
+
+  describe "validation" do
+    it "should be valid" do
+      subject.should be_valid
+    end
+  end
+
+  describe "search" do
+
+    describe "search by state" do
+
+      it "should find by state" do
+        FactoryGirl.create(:state, :name => 'Arizona')
+        state = FactoryGirl.create(:state, :name => 'Pennsylvania')
+        state2 = FactoryGirl.create(:state, :name => 'Arizona')
+        subject.states<< state
+        subject.states<< state2
+        subject.states.count.should == 2
+        subject.state_names.should == "#{state.name},#{state2.name}"
+        assert subject.reindex!
+        search = Lawyer.search do
+          with(:state_ids, [state.id])
+        end
+        search.total.should == 1
+      end
+
+    end
+
+    describe "search by practice_area" do
+
+      it "should find by practice_area" do
+        FactoryGirl.create(:practice_area, :name => 'Bankruptcy')
+        FactoryGirl.create(:practice_area, :name => 'Business and Startups')
+        practice_area = FactoryGirl.create(:practice_area, :name => 'Employment')
+        lawyer = FactoryGirl.create(:lawyer, :first_name => 'Robert')
+        lawyer.practice_areas<< practice_area
+        lawyer.save
+        assert subject.reindex!
+        search = Lawyer.search do
+          with :practice_area_ids, [practice_area.id]
+        end
+        search.total.should == 1
+        PracticeArea.name_like(practice_area.name).count.should == 1
+      end
+
+    end
+
+    describe "search by keyword" do
+
+      it "should find by keyword" do
+        lawyer = FactoryGirl.create(:lawyer, :last_name => 'Petr', :last_name => 'Find me')
+        search = Lawyer.search do
+          fulltext lawyer.last_name
+        end
+        search.total.should == 1
+      end
+    end
+
+  end
+
   it "should provide an offers_legal_services scope" do
     scope = Lawyer.offers_legal_services
-    
+
     scope.includes_values.should eql([:offerings])
     scope.where_values.should eql(["offerings.id IS NOT NULL"])
   end
-  
+
   it "should provide an offers_legal_advice scope" do
     scope = Lawyer.offers_legal_advice
     scope.includes_values.should eql([:practice_areas])
     scope.where_values.should eql(["practice_areas.id IS NOT NULL"])
   end
-  
+
   context ".practices_in_state" do
 
     it "should provide a practices_in_state scope" do
@@ -54,22 +126,22 @@ describe Lawyer do
       scope.includes_values.should eql([:offerings, :practice_areas])
 
       where_values = [
-        "practice_areas.id IN (#{pa.id},#{pa2.id}) " + 
+        "practice_areas.id IN (#{pa.id},#{pa2.id}) " +
           "OR offerings.practice_area_id IN (#{pa.id},#{pa2.id})"
       ]
 
       scope.where_values.should eql(where_values)
-      
+
       lambda{scope.count}.should_not raise_error
 
     end
 
     it "should handle when an instance of PracticeArea is passed" do
       PracticeArea.expects(:name_like).never
-      
+
       pa = PracticeArea.new(:name => "Blah-Blah")
       pa.stubs(:id => 928)
-      
+
       scope = Lawyer.offers_practice_area(pa)
       scope.includes_values.should eql([:offerings, :practice_areas])
 
@@ -105,8 +177,8 @@ describe Lawyer do
     let(:daily_hour) do
       DailyHour.new.tap do |dh|
         dh.stubs(
-          :wday => time.wday, 
-          :start_time_on_date => time + 12.hours, 
+          :wday => time.wday,
+          :start_time_on_date => time + 12.hours,
           :end_time_on_date => time + 14.hours
         )
       end
@@ -144,15 +216,15 @@ describe Lawyer do
       end
 
     end
-    
+
 
   end
 
   context "#daily_hours" do
 
     context "#on_wday" do
-      
-      it "should provide an 'on_wday' method to find valid hours 
+
+      it "should provide an 'on_wday' method to find valid hours
         for a day" do
         daily_hour = DailyHour.new(:wday => 1)
         subject.daily_hours << daily_hour
@@ -163,7 +235,7 @@ describe Lawyer do
     end
 
     context "#bookable_on_day?" do
-      
+
       it "should provide a 'bookable_on_day' method to determine if a given
         day can currently be booked" do
         t = Time.zone.now
@@ -200,7 +272,7 @@ describe Lawyer do
 
   context "#next_available_days" do
 
-    it "should provide a method to get the next days of availability for 
+    it "should provide a method to get the next days of availability for
       the lawyer" do
       # we set only one open day
       subject.daily_hours << DailyHour.new(
@@ -214,7 +286,7 @@ describe Lawyer do
       end
     end
 
-    it "should not show days that are unavailable because it is too late 
+    it "should not show days that are unavailable because it is too late
       to book" do
       t = Time.zone.now
       Time.zone.stubs(:now => (t.midnight + 18.hours))

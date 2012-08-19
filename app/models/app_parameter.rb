@@ -26,8 +26,8 @@ class AppParameter < ActiveRecord::Base
   class << self
     def service_homepage_subtext
       subtext = {}
-      subtext[:first] = find_by_name("Homepage Subtext #1").value
-      subtext[:second] = find_by_name("Homepage Subtext #2").value
+      subtext[:first] = find_by_name("Homepage Subtext #1").try(:value)
+      subtext[:second] = find_by_name("Homepage Subtext #2").try(:value)
       return subtext
     end
   end

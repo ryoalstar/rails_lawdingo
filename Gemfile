@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.4'
-gem 'rake', '0.8.7'
+gem 'rake'#, '0.8.7'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ end
 gem 'sunspot_rails' #fork for rails
 gem 'sunspot_solr'  #Solr
 gem 'progress_bar'  #for_re-index
-  group :test, :development do 
+  group :test, :development do
       gem "sunspot-rails-tester" #for test
   end
 
@@ -49,7 +49,7 @@ gem 'oauth'
 gem 'haml-rails'
 gem 'dynamic_sitemaps'
 gem 'exception_notification'
-#gem "psych" 
+#gem "psych"
 # Use unicorn as the web server
 #gem 'unicorn'
 
@@ -65,7 +65,7 @@ group :development do
 #  gem 'ruby-debug19', :require => "ruby-debug"
   gem 'sqlite3'
   gem 'quiet_assets'
-end 
+end
 
 group :test do
   # Pretty printed test output
@@ -81,5 +81,9 @@ group :test do
   gem "rspec-rails"
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem "spork"
+  gem 'watchr'
+  gem 'faker'
+  gem 'shoulda'
+  gem 'shoulda-matchers'
 end
 
