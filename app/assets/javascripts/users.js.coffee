@@ -12,19 +12,19 @@ jQuery ->
     width: 4,
     radius: 11,
     rotate: 0,
-    color: '#333',
+    color: '#222',
     speed: 1,
     trail: 60,
     shadow: false,
     hwaccel: false,
     className: 'spinner',
-    zIndex: 2e9,
+    zIndex: 9999,
     top: 'auto',
     left: 'auto'
   }
 
-  ($ "html").ajaxStart -> ($ "body").spin(spin_opts)
-  ($ "html").ajaxStop -> ($ "body").spin(false)
+  ($ "body.home").ajaxStart -> ($ "body").css("opacity", 0.7).spin(spin_opts)
+  ($ "body.home").ajaxStop -> ($ "body").css("opacity", 1).spin(false)
 
   # Practice areas checkboxes behavior
   ($ "#leveled-list_practice_areas input.parent-area").bind "change", ->
