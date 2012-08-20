@@ -73,10 +73,10 @@ function fn_login(){
 	g_password = password;
 	$('#btnLogin').attr('disabled',true);
 	$.ajax({
-		url : g_server_url+"/LoginByApp",
-		type:'get',
+		url : g_server_url+"/UpdateOnlineStatus",
+		type:'post',
 		dataType:"json",
-		data:'email='+email+'&password='+password,
+		data:'op=login_by_app&email='+email+'&password='+password,
 		cache:false,
 		success:function(msg){
 			$('#btnLogin').attr('disabled',false);
@@ -118,10 +118,10 @@ function fn_apply_setting(){
 	$('#btnApply').attr('disabled',true);
 	var is_online = $('#rdoAppear').attr('checked').toString();
 	$.ajax({
-		url : g_server_url+"/UpdateOnlineByApp",
-		type:'get',
+		url : g_server_url+"/UpdateOnlineStatus",
+		type:'post',
 		dataType:"json",
-		data:'email='+g_email+'&password='+g_password+'&is_online='+is_online,
+		data:'op=set_status_by_app&email='+g_email+'&password='+g_password+'&is_online='+is_online,
 		cache:false,
 		success:function(msg){
 			$('#btnApply').attr('disabled',false);
@@ -159,10 +159,10 @@ function fn_real_check(){
 	if(g_waiting_from_xhr)return;
 	g_waiting_from_xhr = true;
 	$.ajax({
-		url : g_server_url+"/LoginByApp",
-		type:'get',
+		url : g_server_url+"/UpdateOnlineStatus",
+		type:'post',
 		dataType:"json",
-		data:'email='+g_email+'&password='+g_password,
+		data:'op=login_by_app&email='+g_email+'&password='+g_password,
 		cache:false,
 		success:function(msg){
 			g_waiting_from_xhr = false;
@@ -220,19 +220,7 @@ function fn_accept_call(){
 
 	$('#myForm').get(0).submit();
 	return;
-	$.ajax({
-		url : g_server_url+"/UpdateOnlineByApp",
-		type:'get',
-		dataType:"json",
-		data:'email='+g_email+'&password='+g_password+'&call_status=accept',
-		cache:false,
-		success:function(msg){
-			fn_accept_callback(msg);
-		},error:function(msg){
-			alert("An error occured while saving the values.\nPlease close this window and try again.");
-		}
-	});
-
+	
 }
 
 
@@ -253,10 +241,10 @@ function fn_decline_call(){
 	$('#btnDecline').attr('disabled',true);
 	fn_stop_ring();
 	$.ajax({
-		url : g_server_url+"/UpdateOnlineByApp",
-		type:'get',
+		url : g_server_url+"/UpdateOnlineStatus",
+		type:'post',
 		dataType:"json",
-		data:'email='+g_email+'&password='+g_password+'&call_status=decline',
+		data:'op=set_status_by_app&email='+g_email+'&password='+g_password+'&call_status=decline',
 		cache:false,
 		success:function(msg){
 			fn_decline_callback(msg);
