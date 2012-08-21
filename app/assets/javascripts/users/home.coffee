@@ -85,7 +85,6 @@ class Home
         $(".row").each ->
           equalHeight $(this).find(".row_block")
       dataType : 'script'
-
     })
     document.location.hash = this.current_hash()
     document.location.hash = document.location.hash.replace /\?\?/, "?"
@@ -94,7 +93,6 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
-
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
@@ -213,9 +211,7 @@ class Home
       @state=detect_state_name+"-lawyers"
     if !@practice_area
       @practice_area="All"
-    else
-      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params
-
+    "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params 
   current_hash : ()->
     "!#{this.current_search_url()}"
   current_title : ()->
@@ -249,8 +245,8 @@ class Home
     first = getUrlVars()["search_query"]
     if first
       $("#search_query").val(first)
-      hash = document.location.hash.replace("?&search_query=","")
-      hash = document.location.hash.replace(first,"")
+      hash = hash.replace("?&search_query=","")
+      hash = hash.replace(first,"")
     hash = hash.split("/")
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       hash[1]=detect_state_name+"-lawyers"
