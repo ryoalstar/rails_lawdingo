@@ -5,3 +5,4 @@ en:
   errors:
     messages:
       blank: Don’t take the 5th!
+      email_format: "Please enter a valid email address."
