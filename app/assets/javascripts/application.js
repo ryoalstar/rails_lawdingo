@@ -25,5 +25,5 @@
 //= require jquery.ui.slider
 //= require new_markup
 //= require selectivizr.js
+//= require rails.validations.custom
 //= require_tree .
-
