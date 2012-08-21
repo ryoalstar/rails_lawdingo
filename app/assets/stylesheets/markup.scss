@@ -1314,6 +1314,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
         border-bottom: 0;
         padding-left: 28px;
 			}
+      .tooltip.dominant{
+        background:url(tooltip_cloud_dominant.png) no-repeat;
+      }
 		}
 		.button_tooltip{
 		  text-align:left;
