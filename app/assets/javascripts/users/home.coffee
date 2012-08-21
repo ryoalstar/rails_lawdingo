@@ -145,6 +145,9 @@ class Home
           $("#input_close_sea_img").show()
           $("#search_query").submit()
           false
+        this.set_state_fields_val("All-States")
+        this.set_practice_area_fields_val("All")
+        this.markSelected($('#practice_area_All').parent("p"))
         this.set_defaults(default_state)
         this.submit()
         false
@@ -171,6 +174,13 @@ class Home
     )
 
     this.add_pagination()
+
+  markSelected : (item) ->
+    item.siblings().children("input").removeAttr "checked"
+    item.siblings().removeClass "selected"
+    item.siblings().children('img.radios').attr 'src', "/assets/radio.png"
+    item.addClass "selected"
+    item.children('img.radios').attr 'src', "/assets/radio_selected.png"
 
   add_appointment_forms : ()->
     @lawyers = []
