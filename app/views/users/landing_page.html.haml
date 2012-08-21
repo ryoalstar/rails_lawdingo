@@ -84,6 +84,9 @@
                     - phone_callable = lawyer.is_available_by_phone
                     %li.phone{:style => "display: #{phone_callable ? 'list-item' : 'none'}"}
                       = start_phone_consultation(lawyer)                      
+                    - appointment_presnt = lawyer.daily_hours.present?
+                    %li.appt{:style => "display: #{appointment_presnt ? 'list-item' : 'none'}"}
+                      %a.appt-select{:href => '#'} Schedule a consultation                      
                     %li.text
                       = start_or_schedule_button_text(lawyer)
               -#.lawyer_rates
@@ -115,7 +118,7 @@
                     = image_tag lawyer.yelp[:rating_img_url]
                   .rev_for_js
                     %a.yelp_reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
-                      = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com'}" + "review").html_safe, class: "number_rev"
+                      = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{image_tag('miniMapLogo.png')}" + "review").html_safe, class: "number_rev"
                     %a.reviews{:style => 'display:none;'}
                       %span.number_rev
                 - else
@@ -156,7 +159,7 @@
         = image_tag('feature3.png', :alt => '')
       .feature_description
         -#%h3 Pay for Advice or Services.
-        %p 3. Pay up for services or extended consultations
+        %p 3. Pay for services or extended consultations
   .right_bar
     /%h2 Introduction video
     /= image_tag('video.png', :alt => '')  

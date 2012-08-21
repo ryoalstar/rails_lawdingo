@@ -6,7 +6,7 @@
   %div
     .profile
       = render(:partial =>  "lawyer/menu", :locals => {:lawyer => @lawyer})
-      .profile-block
+      .profile-block.same_height
         = form_tag(user_daily_hours_path(:user_id => @lawyer.id), :method => :put, :id => "user_daily_hours") do
           %ul
             - (0..6).each do |wday|

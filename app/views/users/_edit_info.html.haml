@@ -1,9 +1,12 @@
 .profile
-  .left_menu
+  
+  .left_menu.same_height
+    - act = action_name.to_sym
+    - contr = controller_name.to_sym
     %h2= link_to_unless_current "Profile info", user_path(@user, :t => User::ACCOUNT_TAB)
     %ul
       %li.acc_info
-        %span= link_to "Account information", user_path(@user, :t => User::ACCOUNT_TAB) 
+        %span= link_to "Account information", user_path(@user, :t => User::ACCOUNT_TAB), :class => (act == :show && contr == :users) ? 'active' : ''
       %li.price_offers
         %span= link_to "Fixed-price offers", user_offerings_path(@user) 
       %li.availability
@@ -14,7 +17,7 @@
         %span= link_to "View your profile", attorney_path(@user, slug: @user.slug), :target => 'blank'
     %h2= link_to_unless_current "Summary of sessions", user_path(@user, :t => User::SESSION_TAB)          
 
-  .profile-block
+  .profile-block.same_height
     = raw flash[:error]
     - errors = @user.errors
     = form_for @user, :url =>@user.new_record? ? users_path : user_path(@user), :html=>{:multipart => true} do |f|

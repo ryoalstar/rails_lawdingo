@@ -3,8 +3,8 @@ html, body{
 	margin:0;
 	font-family: Arial ,helvetica, verdana, tahoma;
 	height:100%;
-	//background: url(content_bg.png) repeat;
-	background:#f5f7fa;
+	background: url(content_bg.png) repeat;
+	//background:#f5f7fa;
 }
 .left-gutter{
   width: 246px;
@@ -65,17 +65,25 @@ body.users.home{
   }
 }
 #header > #header_border{
-  height:4px;
-  background: url(header_border.png) repeat-x;
+  height:2px;
+  background: url(header_shadow.png) repeat-x;
   position: absolute;
   margin: 0;
   width: 100%;
   top: 71px;
 }
+#header > #header_top_border{
+  height:2px;
+  background: url(header_top_border.png) repeat-x;
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  top: 0px;
+}
 #header{
-	height:72px;
+	height:71px;
 	margin-bottom: 0px;
-	background: url(header_bg_gray.png) repeat;
+	background: url(header_bg_full.png) repeat;
 	text-align: center;
 	a{
 	  border-bottom:0;
@@ -108,7 +116,10 @@ body.users.home{
 					a:hover, a.selected{
 						//background:url(signup_hover_bg.png) repeat-x;
 						color:#ffffff;
-						background:#2b2b2b;
+						background:#3e4855;
+						-moz-box-shadow: inset 0px 3px 3px #323A44;
+      	    -webkit-box-shadow: inset 0px 3px 3px #323A44;
+      	    box-shadow: inset 0px 3px 3px #323A44;
 						-moz-border-radius:10px;
 						-webkit-border-radius:10px;
 						border-radius:10px;
@@ -143,8 +154,16 @@ body.users.home{
 						  color:#ffffff;
 						  width:100%;
 						  padding:0;
+						  -moz-box-shadow: none;
+        	    -webkit-box-shadow: none;
+        	    box-shadow: none;
 						  height:100%;
 						  background:url('lawyers_signup_icon.png') no-repeat 3px 5px;
+						}
+						a:hover{
+						  -moz-box-shadow: none;
+        	    -webkit-box-shadow: none;
+        	    box-shadow: none;
 						}
 					}
 					span.lawyers_signup:hover{
@@ -181,7 +200,18 @@ body.users.home{
 .placeholder_text{
   font-size:16px !important;
 }
-#new_lawyer{
+#page.signup #new_lawyer{
+  .field_with_errors{
+    input{
+      border:1px solid #feacac;            
+      -moz-box-shadow:0px 0px 3px 3px #FDE6E3;
+      -webkit-box-shadow:0px 0px 3px 3px #FDE6E3;
+      box-shadow:0px 0px 3px 3px #FDE6E3;
+    }
+    label.message{
+      
+    }
+  }
   #div_practice_areas, #div_states_barids{
     h2{
       margin:5px;
@@ -258,13 +288,19 @@ body.daily_hours.index{
     }
   }
 }
+body.offerings.index #container .offerings#page .profile{
+  .profile-block.same_height{
+    padding-top:0;
+    padding-left:0;
+  }
+}
 body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
   #page > div{
     width:960px;
     .profile{
       display: inline-block;
       .left_menu{
-        padding-bottom: 30px;
+        //padding-bottom: 30px;
         display: block;
         width:168px;
         float: left;
@@ -309,13 +345,71 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
           }
         }
         #offerings-listing{
-          float: right;
+          float: left;
           display: inline-block;
           width: 270px;
-          min-height:410px;
           overflow: hidden;
           border-left: 2px solid #888;
           padding: 5px 5px 5px 1.4em;
+          p.empty{
+            font-size:13px;
+            color:#c3c3c3;
+            padding-left:30px;
+          }
+          h3{
+            color:#272727;
+            margin:25px 0 15px 30px;
+            font-size:15px;
+          }
+          ul{
+            li{
+              padding:15px 30px;
+              border-top:1px solid transparent;
+              border-bottom:1px solid transparent;
+              float:left;
+              a{
+                font-weight:normal;
+                display:block;
+                font-size:13px;
+                color:#3f3f3f;
+                float:left;
+                border-bottom:1px dotted #c3c4c6;
+              }
+              a:hover{
+                border-bottom:1px solid transparent;
+              }
+            }
+            li:hover{
+              background:#f4f5f7;
+              border-top:1px solid #eeeeee;
+              border-bottom:1px solid #eeeeee;
+            }
+          }
+          .controls{
+            margin-top:5px;
+            display:block;
+            float:left;
+            a{
+              margin-right:5px;
+              border-bottom:0;
+              color:#4c4c4c;
+              font-size:11px;
+              font-weight:bold;
+              border:1px solid #b8b8b8;
+              padding:5px 10px;
+              background: #f6f6f6; /* Old browsers */
+              background: -moz-linear-gradient(top,  #f6f6f6 0%, #e8e8e8 100%); /* FF3.6+ */
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#e8e8e8)); /* Chrome,Safari4+ */
+              background: -webkit-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Chrome10+,Safari5.1+ */
+              background: -o-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Opera 11.10+ */
+              background: -ms-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* IE10+ */
+              background: linear-gradient(to bottom,  #f6f6f6 0%,#e8e8e8 100%); /* W3C */
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+            }
+            a:hover{
+              border-bottom:1px solid #b8b8b8;
+            }
+          }
         }
       }
     }
@@ -415,7 +509,7 @@ body.index.logged-in, body.users.show.logged-in{
               padding: 7px 15px 7px 35px;
               width:150px;
             }
-            a:hover{
+            a:hover, a.active{
               background-color:#e6f0f8;
               border-top:1px solid #cde3f3;
               border-bottom:1px solid #cde3f3;
@@ -467,6 +561,11 @@ body.index.logged-in, body.users.show.logged-in{
         float:left;
         width: 717px;
         padding: 30px 0px 0 40px;
+        form.edit_lawyer{
+          hr{
+            width:96%;
+          }
+        }
         table.summary{
           tr{
             td{
@@ -534,21 +633,52 @@ body.index.logged-in, body.users.show.logged-in{
           width: 231px;
           background: url(free_consultation_select_bg.png) no-repeat;
         }
-        #new_offering{
+        #new_offering_outer{
           float:left;
           display:inline-block;
-          width:405px;
+          width:390px;
           border:0;
           padding-left:0;
+          border-left: solid 1px #B8B8B8;
+          padding:30px;
+          h3{
+            color: #272727;
+            font-size:15px;
+            margin-bottom:0;
+            small{
+              margin-top:10px;
+            }
+          }  
+        }
+        form#new_offering{
+          label{
+            color:#3f3f3f;
+            font-size:12px;
+            font-weight:normal;
+            margin-bottom:5px;
+          }
+          .input.optional{
+            margin:30px 0px 0px 0px;
+          }
+          span.hint{
+            color:#c3c3c3;
+            font-size:13px;
+          }
+          select{
+            margin-bottom:0;
+          }
+          input.button{
+            margin-top:30px;
+          }
         }
         #offerings-listing{
-          float: right;
+          float: left;
           display: inline-block;
           width:260px;
           min-height:410px;
           overflow: hidden;
-          border-left: 2px solid #888;
-          padding: 5px 5px 5px 1.4em;
+          border-left: 0;
+          padding: 5px 5px 5px 0px;
         }
       }
     }
@@ -556,9 +686,73 @@ body.index.logged-in, body.users.show.logged-in{
 }
 body.users.show.logged-in{
   #page.session-summary > div{
-    .profile{
+    .profile.summary_of_sessions{
       .profile-block{
-        padding-left:20px;
+        padding:0px;
+        width:757px;
+        -webkit-border-top-right-radius: 8px;
+        -webkit-border-bottom-right-radius: 8px;
+        -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomright: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        h2{
+          margin:0;
+          font-size:15px;
+          color:#272727;
+          border-bottom:1px solid #e2e3e5;
+          padding:20px 30px;
+          -webkit-border-top-right-radius: 8px;
+          -moz-border-radius-topright: 8px;
+          border-top-right-radius: 8px;
+          background: #fcfdfd; /* Old browsers */
+          background: -moz-linear-gradient(top,  #fcfdfd 0%, #f0f4f7 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfdfd), color-stop(100%,#f0f4f7)); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* IE10+ */
+          background: linear-gradient(to bottom,  #fcfdfd 0%,#f0f4f7 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfdfd', endColorstr='#f0f4f7',GradientType=0 ); /* IE6-9 */  
+        }
+        p{
+          padding:0px 29px 0px 30px;
+          color:#404040;
+          font-size:14px;
+        }
+        table.summary{
+          border-spacing: 0;
+          margin-bottom:0;
+          thead{
+            background: #fafafa; /* Old browsers */
+            background: -moz-linear-gradient(top,  #fafafa 0%, #f2f2f2 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #fafafa 0%,#f2f2f2 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+            td{
+              color:#3f3f3f;
+              padding:14px 10px;
+            }
+          }
+          tr{
+          }
+          td{
+            font-size:13px;
+            border-bottom:1px solid #e2e3e5;
+            border-right: 1px solid #e2e3e5;
+            text-align:center;
+            vertical-align:center;
+            padding:15px 10px;
+          }
+          tr.gray{
+            background:#f4f5f7;
+          }
+          td.last{
+            border-right: none;
+          }
+        }
       }
     }
   }
@@ -738,7 +932,7 @@ input, select, textarea {
 	bottom:0;
 	.gplus{
 	  float: left;
-    margin-left: 75px;
+    margin-left: 60px;
 	}
 	.twitter-share-button{
 	  float:left;
@@ -1182,7 +1376,10 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					}
 					a.selected, a:hover{
 						color:white;
-						background:#333333;
+						background:#3e4855;
+						-moz-box-shadow: inset 0px 3px 3px #323A44;
+      	    -webkit-box-shadow: inset 0px 3px 3px #323A44;
+      	    box-shadow: inset 0px 3px 3px #323A44;
 					  -moz-border-radius: 15px;
 					  -webkit-border-radius: 15px;
 					}
@@ -1517,7 +1714,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					width:990px;
 					.start_off_info{
 						width:510px;
-						padding-top: 155px;
+						padding-top: 110px;
 						float:left;
 						//text-align:center;
 						//color:#3b454f;
@@ -1530,11 +1727,18 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 							margin-top: 12px;
 							word-spacing: 3px;
 							margin-bottom: 15px;
+							-moz-text-shadow: 1px 1px 1px #434950;
+              -webkit-text-shadow: 1px 1px 1px #434950;
+              text-shadow: 1px 1px 1px #434950;
 						}
 						p{
 						  color:white;
 							margin:0;
+							font-weight:normal;
 							font-size:18px;
+							-moz-text-shadow: 1px 1px 1px #434950;
+              -webkit-text-shadow: 1px 1px 1px #434950;
+              text-shadow: 1px 1px 1px #434950;
 						}
 						a.browse_lawyers_button{
 							margin-top: 25px;
@@ -1711,6 +1915,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						width: 382px;
 						margin-top:38px;
 						p{
+						  font-size:18px;
 							color:#3f3e3e;
 							word-spacing: -1px;
 						}
@@ -1757,6 +1962,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						p{
 						  margin-left:0;
 						  width:351px;
+						  font-size:16px;
 						  word-spacing:-1px;
 						}
 						p.signature{

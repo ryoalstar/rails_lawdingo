@@ -1,6 +1,8 @@
-.profile
+.profile.summary_of_sessions
   - if current_user.is_lawyer?
-    .left_menu
+    .left_menu.same_height
+      - act = action_name.to_sym
+      - contr = controller_name.to_sym
       %h2= link_to_unless_current "Profile info", user_path(@user, :t => User::ACCOUNT_TAB)
       %ul
         %li.acc_info
@@ -13,17 +15,14 @@
           %span= link_to "Intro video", framey_videos_path
         %li.view_profile
           %span= link_to "View your profile", attorney_path(@user, slug: @user.slug), :target => 'blank'
-      %h2= link_to_unless_current "Summary of sessions", user_path(@user, :t => User::SESSION_TAB)          
+      %h2= link_to "Summary of sessions", user_path(@user, :t => User::SESSION_TAB), :class => (act == :index && contr == :conversations) ? 'active' : ''
     
-  .profile-block
+  .profile-block.same_height
     - if current_user.is_lawyer?
       - if @conversations.size.zero?
-        You haven’t had any legal sessions yet.
+        %h2 You haven’t had any legal sessions yet.
       - else
-        %br/
-        Your summary of earnings and sessions:
-        %br/
-        %br/
+        %h2 Your summary of earnings and sessions:
         %table.summary
           %thead{:style => "font-weight:bold;"}
             %tr
@@ -32,10 +31,10 @@
               %td Duration of Session
               %td Paid Duration
               %td Rate
-              %td Amount Earned
+              %td.last Amount Earned
           %tbody
             - @conversations.each do |con|
-              %tr
+              %tr{:class => cycle("white", "gray")}
                 %td
                   = con.client_name
                 %td
@@ -47,10 +46,10 @@
                 %td
                   = number_to_currency con.lawyer_rate
                   \/min
-                %td
+                %td.last
                   = number_to_currency con.lawyer_earning
             - user = current_user.corresponding_user
-            %tr.total
+            %tr.total.gray
               %td
                 = pluralize @conversations.map {|c| c.client_id}.uniq.count, "Client", "Clients"
               %td
@@ -64,9 +63,8 @@
               %td
                 = number_to_currency avg_rate
                 \/min
-              %td
+              %td.last
                 = number_to_currency user.total_earning.to_i
-        %br/
         / p>Checks are mailed at the end of the each month. Would you like it sooner? Just email to <a href="payments@lawdingo.com">payments@lawdingo.com</a>.</p
         %p
           Payments are made at the end of the month. Prefer a check? Want it sooner? Email
