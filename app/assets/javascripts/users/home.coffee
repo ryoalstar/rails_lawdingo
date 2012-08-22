@@ -50,7 +50,7 @@ class Home
       tallest = thisHeight  if thisHeight > tallest
     group.height tallest
 
-  need_auto_detect : ()->
+  set_auto_detected_state : ()->
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       this.set_state_fields_val(detect_state_name+"-lawyers")
     else
@@ -61,10 +61,17 @@ class Home
     @submit()
     false
 
+  show_hide_link_for_detected_state : ()->
+    if (!(typeof detect_state_abbreviation=="undefined") && !(detect_state_abbreviation==""))
+      $("#need_auto_detect").text('Set as ' + detect_state_abbreviation)
+    else
+      $("#need_auto_detect").hide()
+    false  
+
   detect_state : ()->
     $.ajax('/auto-detect/detect-state?autodetect=need',{
       success: () =>
-        @need_auto_detect()
+        @show_hide_link_for_detected_state()
       dataType : 'script'
     })
 
@@ -85,7 +92,6 @@ class Home
         $(".row").each ->
           equalHeight $(this).find(".row_block")
       dataType : 'script'
-
     })
     document.location.hash = this.current_hash()
     document.location.hash = document.location.hash.replace /\?\?/, "?"
@@ -94,7 +100,6 @@ class Home
     new_meta.name = 'Current'
     new_meta.content = this.current_meta()
     document.getElementsByTagName('head')[0].appendChild(new_meta)
-
   add_event_listeners : ()->
     this.form().submit(()=>
       this.submit()
@@ -119,7 +124,7 @@ class Home
       false
 
     $("a#need_auto_detect").click =>
-      this.detect_state()
+      this.set_auto_detected_state()
       false
     $("#clear_data_search").click =>
       if document.my_flag_search
@@ -147,6 +152,9 @@ class Home
           $("#input_close_sea_img").show()
           $("#search_query").submit()
           false
+        this.set_state_fields_val("All-States")
+        this.set_practice_area_fields_val("All")
+        this.markSelected($('#practice_area_All').parent("p"))
         this.set_defaults(default_state)
         this.submit()
         false
@@ -173,6 +181,13 @@ class Home
     )
 
     this.add_pagination()
+
+  markSelected : (item) ->
+    item.siblings().children("input").removeAttr "checked"
+    item.siblings().removeClass "selected"
+    item.siblings().children('img.radios').attr 'src', "/assets/radio.png"
+    item.addClass "selected"
+    item.children('img.radios').attr 'src', "/assets/radio_selected.png"
 
   add_appointment_forms : ()->
     @lawyers = []
@@ -213,9 +228,7 @@ class Home
       @state=detect_state_name+"-lawyers"
     if !@practice_area
       @practice_area="All"
-    else
-      "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params
-
+    "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params 
   current_hash : ()->
     "!#{this.current_search_url()}"
   current_title : ()->
@@ -249,8 +262,8 @@ class Home
     first = getUrlVars()["search_query"]
     if first
       $("#search_query").val(first)
-      hash = document.location.hash.replace("?&search_query=","")
-      hash = document.location.hash.replace(first,"")
+      hash = hash.replace("?&search_query=","")
+      hash = hash.replace(first,"")
     hash = hash.split("/")
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       hash[1]=detect_state_name+"-lawyers"
@@ -307,9 +320,9 @@ class Home
       @service_type = val
       this.service_type_tabs()
 
-        .removeClass('selected')
+        .addClass('selected')
         .filter("[data-val='#{val}']")
-        .addClass("selected")
+        .removeClass("selected")
 
       if val == "Legal-Services"
         @practice_area_fields().parent().find(".children").hide()

@@ -7,6 +7,7 @@ class Lawyer < User
   has_many :conversations
   has_many :bids
   has_many :messages
+  has_many :appointments
 
   has_many :daily_hours do
     # find on a given wday
@@ -64,6 +65,8 @@ class Lawyer < User
     integer :school_rank do
       school.rank_category if !!school
     end
+    time :created_at
+    boolean :is_online
   end
 
 
@@ -82,7 +85,6 @@ class Lawyer < User
   def state_names
     states.map(&:name)*","
   end
-
 
   def review_purpos
     reviews.map(&:purpose)*","
@@ -103,6 +105,8 @@ class Lawyer < User
     search.build do
       fulltext query
       paginate :per_page => 20, :page => opts[:page] || 1
+      order_by :is_online, :desc
+      order_by :created_at, :desc
     end
     search
   end
@@ -213,7 +217,7 @@ class Lawyer < User
   # is this provider bookable on a given date
   def bookable_on_day?(date)
     self.in_time_zone do
-      self.daily_hours.bookable_on_day?(date)
+      self.available_times(date).present? 
     end
   end
   # runs a block in this Lawyer's time_zone
@@ -234,6 +238,7 @@ class Lawyer < User
       self.in_time_zone do
         [].tap do |ret|
           # start on today
+
           t = Time.zone.now.midnight
           # go until we have enough days to return
           while ret.length < num_days

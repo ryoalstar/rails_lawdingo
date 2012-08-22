@@ -165,49 +165,56 @@ $(document).ready(function(){
 		image_tick_class: "radios"
 	});   	
 	$("span.video.online").live('mouseover', function(){
-	  $(this).nextAll(".video_chat.tooltip.online").fadeIn('slow');
+	  $(this).nextAll(".video_chat.tooltip.online").not('.dominant').fadeIn('slow');
 	});
 	$("span.video.online").live('mouseout', function(){
-	  $(this).nextAll(".video_chat.tooltip.online").fadeOut('slow');
+	  $(this).nextAll(".video_chat.tooltip.online").not('.dominant').fadeOut('slow');
 	});
 	$("span.voice.online").live('mouseover', function(){
-	  $(this).nextAll(".voice_chat.tooltip.online").fadeIn('slow');
+	  $(this).nextAll(".voice_chat.tooltip.online").not('.dominant').fadeIn('slow');
 	});
 	$("span.voice.online").live('mouseout', function(){
-	  $(this).nextAll(".voice_chat.tooltip.online").fadeOut('slow');
+	  $(this).nextAll(".voice_chat.tooltip.online").not('.dominant').fadeOut('slow');
 	});
 	
-	
+  $("div.row.lawyer").live('mouseover', function(){
+    $(this).find(".tooltip.dominant").show();
+  });
+
+  $("div.row.lawyer").live('mouseout', function(){
+    $(this).find(".tooltip.dominant").hide();
+  });
+
 	$("span.text.online").live('mouseover', function(){
-	  $(this).nextAll(".text_chat.tooltip.online").fadeIn('slow');
+	  $(this).nextAll(".text_chat.tooltip.online").not('.dominant').fadeIn('slow');
 	});
 	$("span.text.online").live('mouseout', function(){
-	  $(this).nextAll(".text_chat.tooltip.online").fadeOut('slow');
+	  $(this).nextAll(".text_chat.tooltip.online").not('.dominant').fadeOut('slow');
 	});	
 	$("span.text.offline").live('mouseover', function(){
-	  $(this).nextAll(".text_chat.tooltip.offline").fadeIn('slow');
+	  $(this).nextAll(".text_chat.tooltip.offline").not('.dominant').fadeIn('slow');
 	});
 	$("span.text.offline").live('mouseout', function(){
-	  $(this).nextAll(".text_chat.tooltip.offline").fadeOut('slow');
+	  $(this).nextAll(".text_chat.tooltip.offline").not('.dominant').fadeOut('slow');
 	});
 	
 	$("span.note").live('mouseover', function(){
-	  $(this).nextAll(".note_chat.tooltip").fadeIn('slow');
+	  $(this).nextAll(".note_chat.tooltip").not('.dominant').fadeIn('slow');
 	});
 	$("span.video.offline").live('mouseover', function(){
-	  $(this).nextAll(".video_chat.tooltip.offline").fadeIn('slow');
+	  $(this).nextAll(".video_chat.tooltip.offline").not('.dominant').fadeIn('slow');
 	});
 	$("span.video.offline").live('mouseout', function(){
-	  $(this).nextAll(".video_chat.tooltip.offline").fadeOut('slow');
+	  $(this).nextAll(".video_chat.tooltip.offline").not('.dominant').fadeOut('slow');
 	});
 	$("span.voice.offline").live('mouseover', function(){
-	  $(this).nextAll(".voice_chat.tooltip.offline").fadeIn('slow');
+	  $(this).nextAll(".voice_chat.tooltip.offline").not('.dominant').fadeIn('slow');
 	});
 	$("span.voice.offline").live('mouseout', function(){
-	  $(this).nextAll(".voice_chat.tooltip.offline").fadeOut('slow');
+	  $(this).nextAll(".voice_chat.tooltip.offline").not('.dominant').fadeOut('slow');
 	});  	
   $("span.note").live('mouseout', function(){
-	  $(this).nextAll(".note_chat.tooltip").fadeOut('slow');
+	  $(this).nextAll(".note_chat.tooltip").not('.dominant').fadeOut('slow');
 	});
 	var show_on_mouseenter = false;
 	$('html').click(function() {

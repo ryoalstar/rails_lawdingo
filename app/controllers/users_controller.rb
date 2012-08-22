@@ -43,6 +43,7 @@ class UsersController < ApplicationController
       )
     end
 
+    save_search 
     add_state_scope
     add_practice_area_scope @service_type
     add_free_time_scope
@@ -67,12 +68,13 @@ class UsersController < ApplicationController
   def detect_state
     # we try to auto-detect the state if possible
     if request.location.present? && request.location.state_code.present? && params[:autodetect].present?
-      if state = State.find_by_abbreviation(request.location.state_code)
+      if (state = State.find_by_abbreviation(request.location.state_code)) and state.lawyers.count
         @state_name = state.name
+        @state_abbreviation = state.abbreviation
       end
     end
 
-    render :js => "var detect_state_name = '#{@state_name}';"
+    render :js => "var detect_state_name = '#{@state_name}', detect_state_abbreviation = '#{@state_abbreviation}';"
   end
 
   def learnmore
@@ -509,57 +511,54 @@ class UsersController < ApplicationController
   end
 
   def update_online_status
-
-     case params[:op]
-      when "login_by_app"
-        if user = User.authenticate(params[:email], params[:password])
-          render :json=>{:result=>user, :key=>user.hashed_password} and return
-        else
-          render :json=>{:result=>null, :key=>user.hashed_password} and return
+    case params[:op]
+    when "login_by_app"
+      if user = User.authenticate(params[:email], params[:password])
+        render :json=>{:result=>user, :key=>user.hashed_password} and return
+      else
+        render :json=>{:result=>null, :key=>user.hashed_password} and return
+      end
+    when "set_status_by_app"
+      if user = User.authenticate(params[:email], params[:password])
+        if(params[:is_online]=='true')
+          user.update_attribute(:is_online,true);
         end
-      when "set_status_by_app"
-        if user = User.authenticate(params[:email], params[:password])
-          if(params[:is_online]=='true')
-            user.update_attribute(:is_online,true);
+
+        if(params[:is_online]=='false')
+          user.update_attribute(:is_online,false);
+        end
+
+        if(params[:call_status]=='decline')
+          user.update_attribute(:call_status,'decline');
+        end
+        render :json => { :result => true } and return
+      else
+        render :json => { :result => :null } and return 
+      end
+    when "call"
+      lawyer = User.find(params[:lawyer_id])
+      if !current_user.is_lawyer?
+          if lawyer.call_status!='accept'
+            lawyer.update_attribute(:call_status, params[:call_mode].to_s)    
           end
-
-          if(params[:is_online]=='false')
-            user.update_attribute(:is_online,false);
-          end
-
-          if(params[:call_status]=='decline')
-            user.update_attribute(:call_status,'decline');
-          end
-
-          render :json=>{:result=>true} and return
-        else
-          render :json=>{:result=>null} and return
-        end
-      when "call"
-        lawyer = User.find(params[:lawyer_id])
-        if !current_user.is_lawyer?
-            if lawyer.call_status!='accept'
-              lawyer.update_attribute(:call_status, params[:call_mode].to_s)    
-            end
-        else
-            lawyer.update_attribute(:call_status, params[:call_mode].to_s)
-        end
-        render :text=>"success" and return
-      when "get_call_status"
-        if current_user && current_user.is_lawyer?
-          current_user.update_attribute(:last_online, DateTime.now)
-        end
-        lawyer = User.find(params[:lawyer_id])
-        render :text=>lawyer.call_status and return
-      when "end_video_chat"
-        lawyer = User.find(params[:lawyer_id])
-        lawyer.update_attribute(:call_status, "")
-        
-        conversation = Conversation.find(params[:conversation_id])
-        conversation.update_attribute(:end_date,Time.now)
+      else
+          lawyer.update_attribute(:call_status, params[:call_mode].to_s)
+      end
+      render :text => "success" and return
+    when "get_call_status"
+      if current_user && current_user.is_lawyer?
+        current_user.update_attribute(:last_online, DateTime.now)
+      end
+      lawyer = User.find(params[:lawyer_id])
+      render :text=>lawyer.call_status and return
+    when "end_video_chat"
+      lawyer = User.find(params[:lawyer_id])
+      lawyer.update_attribute(:call_status, "")
+      
+      conversation = Conversation.find(params[:conversation_id])
+      conversation.update_attribute(:end_date,Time.now)
     end
-
-
+    render :nothing => true and return 
   end
 
   def register_for_videochat
@@ -746,6 +745,18 @@ class UsersController < ApplicationController
 
   def daily_hours
   end
+
+  def save_search
+    query = params[:search_query].presence
+    page = params[:page].presence
+    user = current_user.presence
+    if query && user
+      search = Search.find_or_create_by_query_and_user_id(query, user.id) unless page
+    elsif query
+      search = Search.find_or_create_by_query_and_user_id(query, nil) unless page
+    end
+    search.increment!(:count) if search.is_a? Search
+  end  
 
 end
 

@@ -134,7 +134,6 @@ module LawyersHelper
           if logged_in?
             link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
           else
-            session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
             link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
           end
         end
@@ -147,7 +146,6 @@ module LawyersHelper
     if logged_in?
       link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
       link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
@@ -157,7 +155,6 @@ module LawyersHelper
     if logged_in?
       link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
       link_to "", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
@@ -166,7 +163,6 @@ module LawyersHelper
     if logged_in?
       link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
       link_to "Send a note or ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
@@ -290,5 +286,26 @@ module LawyersHelper
     return "" unless @selected_practice_area.parent_name.present?
     return " on #{@selected_practice_area.name.downcase}"
   end
+
+  def tooltips lawyer
+    output = ''
+    if lawyer.is_online
+      output << '<div class="video_chat online tooltip dominant"> Start video consultation</div>'
+    else
+      output << '<div class="video_chat offline tooltip"> Not available by video now</div>'
+    end  
+    if lawyer.is_available_by_phone
+      output << "<div class='voice_chat online tooltip#{lawyer.is_online ? '' : ' dominant'}'> Start phone consultation</div>"
+    else
+      output << '<div class="voice_chat offline tooltip"> Not available by phone now</div>'
+    end  
+    if lawyer.daily_hours.present?
+      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone ? '' : 'dominant'}'> Schedule consultation</div>"
+    else
+      output << '<div class="text_chat offline tooltip">No appointments available</div>'
+    end  
+    output << "<div class='note_chat tooltip#{lawyer.is_online || lawyer.is_available_by_phone || lawyer.daily_hours.present? ? '' : 'dominant'}''> Ask a question</div>"
+    output.html_safe
+  end  
 end
 

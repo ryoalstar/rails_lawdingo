@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
   # Validate free consultation duration only if it's lawyer signing up
   validates_presence_of :free_consultation_duration, :if => :is_lawyer?
 
-  validates :first_name, :last_name, :email, :user_type, :rate, :presence => true
-  validates :email, :uniqueness =>true
+  validates :first_name, :last_name, :user_type, :rate, :email, :presence => true
+  validates_uniqueness_of :email
+  validates :email, :email_format => true
   validates :password, :presence => { :on => :create }
   validates_format_of :phone, :with => /^[+0-9\(\)\-,\s]+$/, :allow_blank => true
 
@@ -20,6 +21,8 @@ class User < ActiveRecord::Base
 
   has_many :offerings
   has_many :questions
+  has_many :searches
+  
   belongs_to :school,
     :touch => true
 
