@@ -511,57 +511,54 @@ class UsersController < ApplicationController
   end
 
   def update_online_status
-
-     case params[:op]
-      when "login_by_app"
-        if user = User.authenticate(params[:email], params[:password])
-          render :json=>{:result=>user, :key=>user.hashed_password} and return
-        else
-          render :json=>{:result=>null, :key=>user.hashed_password} and return
+    case params[:op]
+    when "login_by_app"
+      if user = User.authenticate(params[:email], params[:password])
+        render :json=>{:result=>user, :key=>user.hashed_password} and return
+      else
+        render :json=>{:result=>null, :key=>user.hashed_password} and return
+      end
+    when "set_status_by_app"
+      if user = User.authenticate(params[:email], params[:password])
+        if(params[:is_online]=='true')
+          user.update_attribute(:is_online,true);
         end
-      when "set_status_by_app"
-        if user = User.authenticate(params[:email], params[:password])
-          if(params[:is_online]=='true')
-            user.update_attribute(:is_online,true);
+
+        if(params[:is_online]=='false')
+          user.update_attribute(:is_online,false);
+        end
+
+        if(params[:call_status]=='decline')
+          user.update_attribute(:call_status,'decline');
+        end
+        render :json => { :result => true } and return
+      else
+        render :json => { :result => :null } and return 
+      end
+    when "call"
+      lawyer = User.find(params[:lawyer_id])
+      if !current_user.is_lawyer?
+          if lawyer.call_status!='accept'
+            lawyer.update_attribute(:call_status, params[:call_mode].to_s)    
           end
-
-          if(params[:is_online]=='false')
-            user.update_attribute(:is_online,false);
-          end
-
-          if(params[:call_status]=='decline')
-            user.update_attribute(:call_status,'decline');
-          end
-
-          render :json=>{:result=>true} and return
-        else
-          render :json=>{:result=>null} and return
-        end
-      when "call"
-        lawyer = User.find(params[:lawyer_id])
-        if !current_user.is_lawyer?
-            if lawyer.call_status!='accept'
-              lawyer.update_attribute(:call_status, params[:call_mode].to_s)    
-            end
-        else
-            lawyer.update_attribute(:call_status, params[:call_mode].to_s)
-        end
-        render :text=>"success" and return
-      when "get_call_status"
-        if current_user && current_user.is_lawyer?
-          current_user.update_attribute(:last_online, DateTime.now)
-        end
-        lawyer = User.find(params[:lawyer_id])
-        render :text=>lawyer.call_status and return
-      when "end_video_chat"
-        lawyer = User.find(params[:lawyer_id])
-        lawyer.update_attribute(:call_status, "")
-        
-        conversation = Conversation.find(params[:conversation_id])
-        conversation.update_attribute(:end_date,Time.now)
+      else
+          lawyer.update_attribute(:call_status, params[:call_mode].to_s)
+      end
+      render :text => "success" and return
+    when "get_call_status"
+      if current_user && current_user.is_lawyer?
+        current_user.update_attribute(:last_online, DateTime.now)
+      end
+      lawyer = User.find(params[:lawyer_id])
+      render :text=>lawyer.call_status and return
+    when "end_video_chat"
+      lawyer = User.find(params[:lawyer_id])
+      lawyer.update_attribute(:call_status, "")
+      
+      conversation = Conversation.find(params[:conversation_id])
+      conversation.update_attribute(:end_date,Time.now)
     end
-
-
+    render :nothing => true and return 
   end
 
   def register_for_videochat
