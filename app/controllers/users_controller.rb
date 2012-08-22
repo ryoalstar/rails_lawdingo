@@ -43,6 +43,7 @@ class UsersController < ApplicationController
       )
     end
 
+    save_search 
     add_state_scope
     add_practice_area_scope @service_type
     add_free_time_scope
@@ -747,6 +748,18 @@ class UsersController < ApplicationController
 
   def daily_hours
   end
+
+  def save_search
+    query = params[:search_query].presence
+    page = params[:page].presence
+    user = current_user.presence
+    if query && user
+      search = Search.find_or_create_by_query_and_user_id(query, user.id) unless page
+    elsif query
+      search = Search.find_or_create_by_query_and_user_id(query, nil) unless page
+    end
+    search.increment!(:count) if search.is_a? Search
+  end  
 
 end
 

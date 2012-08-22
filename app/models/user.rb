@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
 
   has_many :offerings
   has_many :questions
+  has_many :searches
+  
   belongs_to :school,
     :touch => true
 
