@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :set_timezone
   helper_method :current_admin, :logged_in?, :logged_in_admin?, :log_in_user, :log_out_user
+
+  def set_timezone
+    Time.zone = current_user.try(:time_zone) || "Pacific Time (US & Canada)"
+  end
   
   unless Rails.application.config.consider_all_requests_local
      rescue_from ActionController::RoutingError, with: :render_404

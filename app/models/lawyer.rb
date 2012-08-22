@@ -217,7 +217,7 @@ class Lawyer < User
   # is this provider bookable on a given date
   def bookable_on_day?(date)
     self.in_time_zone do
-      self.daily_hours.bookable_on_day?(date)
+      self.available_times(date).present? 
     end
   end
   # runs a block in this Lawyer's time_zone
@@ -238,6 +238,7 @@ class Lawyer < User
       self.in_time_zone do
         [].tap do |ret|
           # start on today
+
           t = Time.zone.now.midnight
           # go until we have enough days to return
           while ret.length < num_days
