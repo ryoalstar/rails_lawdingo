@@ -67,12 +67,13 @@ class UsersController < ApplicationController
   def detect_state
     # we try to auto-detect the state if possible
     if request.location.present? && request.location.state_code.present? && params[:autodetect].present?
-      if state = State.find_by_abbreviation(request.location.state_code)
+      if (state = State.find_by_abbreviation(request.location.state_code)) and state.lawyers.count
         @state_name = state.name
+        @state_abbreviation = state.abbreviation
       end
     end
 
-    render :js => "var detect_state_name = '#{@state_name}';"
+    render :js => "var detect_state_name = '#{@state_name}', detect_state_abbreviation = '#{@state_abbreviation}';"
   end
 
   def learnmore

@@ -62,7 +62,6 @@
                           = label_tag "practice_area_#{subarea.name}", subarea.name          
         - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
           #state.left-bar-section
-            %a{ :href => '#',:id => "need_auto_detect" } Auto-detect
             %h3
               %label{:for => "state"} Relevant state:
             .national-area-notice
@@ -73,6 +72,10 @@
               - @states.each do |state|
                 %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}
                   = state.name
+            %a{ :href => '#', :id => "need_auto_detect" }
+            :javascript
+              $(document).ready(function(){ Home.detect_state() })
+    
         -#specialities_filter.filters-section{:style => "display: none;"}
           %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
           %h3 Specific need:

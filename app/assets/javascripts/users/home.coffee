@@ -50,7 +50,7 @@ class Home
       tallest = thisHeight  if thisHeight > tallest
     group.height tallest
 
-  need_auto_detect : ()->
+  set_auto_detected_state : ()->
     if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
       this.set_state_fields_val(detect_state_name+"-lawyers")
     else
@@ -61,10 +61,17 @@ class Home
     @submit()
     false
 
+  show_hide_link_for_detected_state : ()->
+    if (!(typeof detect_state_abbreviation=="undefined") && !(detect_state_abbreviation==""))
+      $("#need_auto_detect").text('Set as ' + detect_state_abbreviation)
+    else
+      $("#need_auto_detect").hide()
+    false  
+
   detect_state : ()->
     $.ajax('/auto-detect/detect-state?autodetect=need',{
       success: () =>
-        @need_auto_detect()
+        @show_hide_link_for_detected_state()
       dataType : 'script'
     })
 
@@ -117,7 +124,7 @@ class Home
       false
 
     $("a#need_auto_detect").click =>
-      this.detect_state()
+      this.set_auto_detected_state()
       false
     $("#clear_data_search").click =>
       if document.my_flag_search
