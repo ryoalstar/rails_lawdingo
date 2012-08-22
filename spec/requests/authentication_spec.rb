@@ -1,14 +1,18 @@
 require 'spec_helper'
 
 describe "Authentication" do
+  DatabaseCleaner.clean
+  AppParameter.set_defaults
+
   context "registered as client" do
     it "redirects to lawyers page if user came from home page" do
       sign_up_from_root
       current_url.should eq(lawyer_url)
     end
   end
-
+ 
   def sign_up_from_root
+    FactoryGirl.build(:client, first_name: "Roland")
     @roland = FactoryGirl.build(:client, first_name: "Roland")
     visit root_path
     click_link "Client Signup"
