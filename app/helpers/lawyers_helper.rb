@@ -134,7 +134,6 @@ module LawyersHelper
           if logged_in?
             link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
           else
-            session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
             link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
           end
         end
@@ -147,7 +146,6 @@ module LawyersHelper
     if logged_in?
       link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
       link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
@@ -157,7 +155,6 @@ module LawyersHelper
     if logged_in?
       link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
       link_to "", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
@@ -166,7 +163,6 @@ module LawyersHelper
     if logged_in?
       link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      session[:return_to] = attorney_path(lawyer, slug: lawyer.slug)
       link_to "Send a note or ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
