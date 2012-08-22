@@ -111,7 +111,10 @@
 				}
 				a.selected, a:hover{
 					color:white;
-					background:#333333;
+					background:#3e4855;
+					-moz-box-shadow: inset 0px 3px 3px #323A44;
+    	    -webkit-box-shadow: inset 0px 3px 3px #323A44;
+    	    box-shadow: inset 0px 3px 3px #323A44;
 				  -moz-border-radius: 15px;
 				  -webkit-border-radius: 15px;
 				}

@@ -4,7 +4,7 @@
   %div
     .profile
       = render partial: "lawyer/menu", locals: { lawyer: current_user }
-      .profile-block
+      .profile-block.same_height
         %h2 Introduce yourself to prospective clients in a video of up to two minutes long.
         - unless @lawyer.has_video?
           .recorder-wrapper

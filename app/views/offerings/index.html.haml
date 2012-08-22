@@ -9,9 +9,7 @@
   %div
     .profile
       = render partial: "lawyer/menu", locals: { lawyer: current_user }
-      .profile-block
-        #new_offering
-          = render template: "offerings/new"
+      .profile-block.same_height
         #offerings-listing
           %h3 My flat-fee services:
           - if @lawyer.offerings.count > 0
@@ -20,8 +18,11 @@
                 - unless offering.id.to_i == 0
                   = content_tag_for :li, offering, data: {id: offering.id} do
                     = link_to offering.name, controller: "offerings", action: "show", id: offering.id
+                    .clear
                     .controls
                       = link_to "Edit", { controller: "offerings", action: "edit", id: offering.id }, class: "edit"
                       = link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", confirm: "Are you sure?", class: "delete"
           - else
-            %p{:style => "color: #999;"} [None added yet.]
+            %p.empty [None added yet.]
+        #new_offering_outer
+          = render template: "offerings/new"

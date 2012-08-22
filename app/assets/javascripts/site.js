@@ -18,9 +18,9 @@ function equalHeight(group) {
   }
   $(document).ready(function() {
     $('.row').each(function(){
-
       equalHeight($(this).find(".row_block"));
     });
+    equalHeight($('.profile').find(".same_height"));
   });
 function notifyUser(msg)
 {
@@ -285,6 +285,16 @@ $(document).ready(function() {
 						} else {
 							  self.find('.carousel-description li.phone').html('').hide();
 						}
+						
+						if (carousel_info["appt"] !== undefined) {
+								self.find('.carousel-description li.appt')
+										//.html(carousel_info["appt"])
+										.show();
+						} else {
+							  self.find('.carousel-description li.appt').hide();
+						}
+						
+						
 
 						if (carousel_info["send_text_question"] !== undefined) {
 			      		self.find('.carousel-description li.text')
@@ -304,7 +314,7 @@ $(document).ready(function() {
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
 
-            self.interv = setTimeout( next_image, 2300 );
+            self.interv = setTimeout( next_image, 21111300 );
         }
 
         function next_image(){
@@ -315,15 +325,15 @@ $(document).ready(function() {
         }
 
 
-        var cont = $('<div class="controls"></div>');
+        //var cont = $('<div class="controls"></div>');
         var prev = $('<a class="prev icn">prev</a>'); prev.click( prev_image );
         var next = $('<a class="next icn">next</a>'); next.click( next_image );
 
 
-        cont.append( prev );
-        cont.append( next );
-        self.find('.carousel-image').append(cont);
-        self.interv = setInterval( next_image, 2000 );
+        //cont.append( prev );
+        //cont.append( next );
+        self.find('.carousel-image').append(prev).append(next);
+        self.interv = setInterval( next_image, 21111300 );
     }
 
     $.fn.dialog = function( ){
