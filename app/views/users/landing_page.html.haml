@@ -147,7 +147,10 @@
         = image_tag('feature1.png', :alt => '')  
       .feature_description
         -#%h3 Browse Lawyers.
-        %p 1. Browse lawyers or submit your question
+        %p 
+          1. 
+          = link_to "Browse lawyers", lawyers_path
+          or submit your question
     .feature
       %a{:href => "/lawyers"}
         = image_tag('feature2.png', :alt => '')  

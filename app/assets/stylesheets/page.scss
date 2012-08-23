@@ -21,9 +21,10 @@
         margin: 0px auto;
     }
 }
-
-
-
+.custom_arrow{
+  background:url('gray_arrow.png') no-repeat 0px 2px;
+  padding-left:20px;
+}
 
 #footer{
 	height:180px;
@@ -303,28 +304,68 @@ body.users.home {
             }
 
             .nav {
-                width: 280px;
+                background:#fff;
+                border:1px solid #d0d2d5;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                width: 200px;
+                padding:18px 20px;
                 h1 {
                     font-weight: normal;
                     margin: 0px;
                 }
-
+                span{
+                  color:#1b1b1b;
+                  font-weight:bold;
+                }
                 span, a {
-                    font-size: 1.2em;
+                    font-size: 13px;
                     display: block;
                     margin: 12px 0px;
                     border-bottom:0;
                 }
                 a{
-                  color: #2491ff;
+                  color: #1076e8;
                 }
             }
-
+            .content_outer{
+              background:url('about_cont_border_bg.png') repeat;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;
+              border-radius: 5px;
+              padding:5px;
+              border:1px solid #976941;
+              margin-left:20px;
+              float:left;
+            }
             .content {
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                background:url('about_cont_bg.png') repeat;
                 font-size: 0.9em;
-                padding-top: 16px;
-                width: 400px;
-                h3 { margin: 0px; }
+                width: 635px;
+                padding:16px 25px;
+                h3 { 
+                  margin: 0px; 
+                  color:#313131;
+                  font-size:13px;
+                }
+                h1{
+                  font-size:23px;
+                  color:#3b454f;
+                  font-weight:normal;
+                  text-align:center;
+                }
+                p{
+                  color:#3f3f3f;
+                  font-size:13px;
+                }
+                a{
+                  color:#1076e8;
+                  border-bottom:0;
+                }
             }
         }
     }
