@@ -23,8 +23,8 @@ jQuery ->
     left: 'auto'
   }
 
-  ($ "body.home").ajaxStart -> ($ "body").css("opacity", 0.7).spin(spin_opts)
-  ($ "body.home").ajaxStop -> ($ "body").css("opacity", 1).spin(false)
+  ($ "body.home").ajaxStart -> ($ "body").spin(spin_opts)
+  ($ "body.home").ajaxStop -> ($ "body").spin(false)
 
   # Practice areas checkboxes behavior
   ($ "#leveled-list_practice_areas input.parent-area").bind "change", ->
