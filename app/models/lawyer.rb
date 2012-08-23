@@ -217,7 +217,7 @@ class Lawyer < User
   # is this provider bookable on a given date
   def bookable_on_day?(date)
     self.in_time_zone do
-      self.daily_hours.bookable_on_day?(date) 
+      self.daily_hours.bookable_on_day?(date)
     end
   end
   # runs a block in this Lawyer's time_zone
