@@ -87,6 +87,9 @@ Lawdingo::Application.routes.draw do
   namespace :admin do
     #     # Directs /admin/products/* to Admin::ProductsController
     #     # (app/controllers/admin/products_controller.rb)
+    resources :questions, only: [:index, :show] do
+      post "send_inquiry", on: :collection
+    end
     resources :clients
     resources :lawyers do
       get 'account_approval'

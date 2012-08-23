@@ -1,11 +1,25 @@
 class Question < ActiveRecord::Base
-  attr_accessible :type, :user_id, :body
+  attr_accessible :type, :user_id, :body, :state_name, :practice_area
   belongs_to :user
   has_one :inquiry
 
-  after_save :create_inquiry
+  after_create :create_inquiry
 
   set_inheritance_column :ruby_type
+
+  def matched_lawyers
+    state = State.where(name: self.state_name).first
+    practice_area = PracticeArea.where(name: self.practice_area, parent_id: nil).first
+
+    if state or practice_area
+     search = Lawyer.search do
+       with(:state_ids, state.id) if state.present?
+       with(:practice_area_ids, practice_area.id) if practice_area.present?
+     end
+
+     search.results
+    end
+  end
 
   private
 

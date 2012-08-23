@@ -63,5 +63,22 @@ class UserMailer < ApplicationMailer
 
     mail(to: "nikhil.nirmel@gmail.com", subject: "Bid ##{@bid.id} submitted")
   end
-end
 
+  def free_inquiry_email(question, lawyer)
+    @question = question
+    @lawyer = lawyer
+
+    mail(to: @lawyer.email, subject: "Inquiry: #{@question.practice_area} in #{@question.state_name}")
+  end
+
+  def auction_inquiry_email(question, lawyer)
+    @question = question
+    @lawyer = lawyer
+
+    @inquiry_url = inquiry_url(@question.inquiry)
+    @login_url = login_url
+
+    mail(to: @lawyer.email, subject: "Premium Inquiry: #{@question.practice_area} in #{@question.state_name}")
+  end
+
+end
