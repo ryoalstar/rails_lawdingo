@@ -516,7 +516,7 @@ class UsersController < ApplicationController
       if user = User.authenticate(params[:email], params[:password])
         render :json=>{:result=>user, :key=>user.hashed_password} and return
       else
-        render :json=>{:result=>null, :key=>user.hashed_password} and return
+        render :json=>{:result=>'null', :key=>user.hashed_password} and return
       end
     when "set_status_by_app"
       if user = User.authenticate(params[:email], params[:password])
@@ -533,7 +533,7 @@ class UsersController < ApplicationController
         end
         render :json => { :result => true } and return
       else
-        render :json => { :result => :null } and return 
+        render :json => { :result => 'null' } and return 
       end
     when "call"
       lawyer = User.find(params[:lawyer_id])
