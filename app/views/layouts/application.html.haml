@@ -2,7 +2,6 @@
 %html
   %head
     %title= content_for?(:title) ? yield(:title) : "Lawdingo: Ask a Lawyer Online Now - Free Consultations for Your Legal Questions"
-    %link{:rel => "canonical", :href => "https://www.lawdingo.com"}
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment", "//platform.linkedin.com/in.js"
@@ -17,6 +16,8 @@
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
     = render :partial => 'layouts/ie_style'
+    %meta{:property => "og:site_name", :content => 'Lawdingo: Ask a Lawyer Online Now'}
+    = yield :head
     - if ENV['RAILS_ENV'] == 'production'
       :javascript
         var _gaq = _gaq || [];
