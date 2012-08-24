@@ -4,6 +4,14 @@
   })
 
 - title "#{@attorney.full_name} — #{@attorney.licenced_states.join(', ')} lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
+
+-content_for :head do
+  %meta{:property => "og:title",     :content => yield(:title)}
+  %meta{:property => "og:type",      :content => 'public_figure'}
+  %meta{:property => "og:url",       :content => attorney_path(@attorney, slug: @attorney.slug)}
+  %meta{:property => "og:image",     :content => @attorney.photo.url(:medium)}
+  %meta{:property => "og:admins",    :content => '363994853644871'}
+
 %div{:id => "lawyer_#{@attorney.id}"}
   #inline-wrapper
     .left-bars-block
