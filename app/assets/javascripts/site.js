@@ -188,7 +188,7 @@ function setPracticeAreas()
         practice_area_string += ' (' + specialities_string + ')'  + '</li>';
       }
     }
-    });
+  });
   practice_area_string = practice_area_string.substring(0,practice_area_string.length-2) + "</ul>";
   $('#practice_areas_opener').hide();
   $('#div_practice_areas').html(practice_area_string);
@@ -202,6 +202,7 @@ function close_dialogs(){
     $('#dialog-overlay').hide();
 }
 $(document).ready(function() {
+  $('.dialog-close').click( function(){ close_dialogs() });
   $(function(){
 
     $.fn.carousel = function(){
@@ -490,10 +491,12 @@ jQuery.fn.center = function () {
 $(document).ready(function() {
   if($('div.load-more a').length){
     $(window).scroll(function () {
-      var eTop = $('div.load-more a').offset().top;
-      var offset = eTop - $(window).scrollTop();
-      if(offset < 700){
-        $("div.load-more a").click();
+      if($('div.load-more a').length){
+        var eTop = $('div.load-more a').offset().top;
+        var offset = eTop - $(window).scrollTop();
+        if(offset < 700){
+          $("div.load-more a").click();
+        }
       }
     });
   }

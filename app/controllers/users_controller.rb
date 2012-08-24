@@ -245,7 +245,7 @@ class UsersController < ApplicationController
         practice_areas.each{|pid|
           pa = PracticeArea.find(pid)
           if !pa.main_area.nil? && !practice_areas.include?(pa.main_area.id.to_s)
-            practice_areas << pa.main_area.id.to_s
+            practice_areas.delete pid
           end
         }
         practice_areas.uniq!
