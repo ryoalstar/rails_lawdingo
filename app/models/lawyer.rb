@@ -67,6 +67,10 @@ class Lawyer < User
     end
     time :created_at
     boolean :is_online
+    boolean :is_available_by_phone
+    boolean :daily_hours_present do
+      self.daily_hours.present?
+    end   
   end
 
 
@@ -106,6 +110,8 @@ class Lawyer < User
       fulltext query
       paginate :per_page => 20, :page => opts[:page] || 1
       order_by :is_online, :desc
+      order_by :is_available_by_phone, :desc
+      order_by :daily_hours_present, :desc
       order_by :created_at, :desc
     end
     search
@@ -217,7 +223,7 @@ class Lawyer < User
   # is this provider bookable on a given date
   def bookable_on_day?(date)
     self.in_time_zone do
-      self.daily_hours.bookable_on_day?(date) 
+      self.daily_hours.bookable_on_day?(date)
     end
   end
   # runs a block in this Lawyer's time_zone
