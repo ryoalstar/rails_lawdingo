@@ -315,7 +315,7 @@ $(document).ready(function() {
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
 
-            self.interv = setTimeout( next_image, 21111300 );
+            self.interv = setTimeout( next_image, 2300 );
         }
 
         function next_image(){
@@ -334,7 +334,7 @@ $(document).ready(function() {
         //cont.append( prev );
         //cont.append( next );
         self.find('.carousel-image').append(prev).append(next);
-        self.interv = setInterval( next_image, 21111300 );
+        self.interv = setInterval( next_image, 2300 );
     }
 
     $.fn.dialog = function( ){

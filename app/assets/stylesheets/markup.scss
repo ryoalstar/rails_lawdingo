@@ -1919,6 +1919,14 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						width: 382px;
 						margin-top:38px;
 						p{
+						  a{
+						    display: inline;
+                float: none;
+                border-bottom:1px dotted #BBC1C4;
+						  }
+						  a:hover{
+						    border-bottom:0;
+						  }
 						  font-size:18px;
 							color:#3f3e3e;
 							word-spacing: -1px;
