@@ -142,7 +142,7 @@
 
     function endConnection(){
       if(is_lawyer){
-        window.location.href = "/users?t=l";
+        window.location.href = "/users/"+lawyer_id+"/?t=l";
       }else{
         $.ajax({
               url: "/UpdateOnlineStatus",
