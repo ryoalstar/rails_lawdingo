@@ -134,7 +134,7 @@ class Home
         this.set_defaults_s()
         $("#input_close_sea_img").hide()
         $("#input_search_bg_img").show()
-        $("#search_query").submit()
+        this.submit()
         false
       if !document.my_flag_search && $("#search_query").val()
         document.my_flag_search=true
@@ -142,7 +142,7 @@ class Home
         this.set_defaults_s()
         $("#input_search_bg_img").hide()
         $("#input_close_sea_img").show()
-        $("#search_query").submit()
+        this.submit()
         false
     $("#search_query").keypress((e) =>
       if e.keyCode == 13
