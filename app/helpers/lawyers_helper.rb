@@ -182,7 +182,7 @@ module LawyersHelper
       if logged_in?
         link_to "", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
+        link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), lawyer_path: lawyer.id, :class => ''
       end
    end
   end

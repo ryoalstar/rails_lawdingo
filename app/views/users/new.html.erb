@@ -6,7 +6,7 @@
 
     <% if params[:notice].present? && @lawyer.present? %>
       <%= notice text: "To connect with #{@lawyer.full_name}, simply sign up or sign in with Lawdingo.", 
-        avatar: @lawyer.photo.url(:thumb) %>
+        avatar: @lawyer.photo %>
     <% end %>
   <% end %>
 
@@ -18,7 +18,7 @@
     <% @lawyer = Lawyer.find(params[:appointment_with].to_i) %>
     <% if @lawyer.present? %>
       <%= notice text: "To make an appointment with #{@lawyer.full_name}, please sign up with or log in to Lawdingo.", 
-        avatar: @lawyer.photo.url(:thumb) %>
+        avatar: @lawyer.photo %>
     <% end %>
   <% end %>
 
