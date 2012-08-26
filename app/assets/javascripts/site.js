@@ -403,7 +403,7 @@ $(document).ready(function() {
               //grab the inputs id for the <label @for>, or make a new one from the Date
               inputId = (this.id) ? this.id : 'placeholder' + (+new Date()),
               placeholderText = $this.attr('placeholder'),
-              placeholder = $('<label for='+ inputId +' class="placeholder_text"'+'>'+ placeholderText + '</label>');
+              placeholder = $('<span class="placeholder_text"'+'>'+ placeholderText + '</span>');
 
           //stuff in some calculated values into the placeholderCSS object
           options.placeholderCSS['width'] = inputWidth;
@@ -454,6 +454,7 @@ $(document).ready(function() {
           'left':'5%',
           'top':'8px',
           'overflow-x': 'hidden',
+          'overflow-y': 'hidden',
     			'display': 'block'
         }
       };
@@ -468,10 +469,10 @@ $(document).ready(function() {
     $('.leveled-list').leveled_list();
 
     $('.image-carousel').carousel();
-
-    $('input[placeholder]').placeholder();
-    $('textarea[placeholder]').placeholder();
-
+    //if (Browser.Version() != 9) {
+      $('input[placeholder]').placeholder();
+      $('textarea[placeholder]').placeholder();
+    //} 
     $(document).keyup(function(e) {
         if (e.keyCode == 27) close_dialogs();
         //if (isOverlayOpen) postponePayment();
