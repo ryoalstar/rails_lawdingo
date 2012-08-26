@@ -1513,7 +1513,8 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
         padding-left: 28px;
 			}
       .tooltip.dominant{
-        background:url(tooltip_cloud_dominant.png) no-repeat;
+        background:url(tooltip_cloud_dominant.png) no-repeat!important;
+        z-index: 9;
       }
 		}
 		.button_tooltip{

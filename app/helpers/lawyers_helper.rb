@@ -300,11 +300,11 @@ module LawyersHelper
       output << '<div class="voice_chat offline tooltip"> Not available by phone now</div>'
     end  
     if lawyer.daily_hours.present?
-      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone ? '' : 'dominant'}'> Schedule consultation</div>"
+      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone ? '' : ' dominant'}'> Schedule consultation</div>"
     else
       output << '<div class="text_chat offline tooltip">No appointments available</div>'
     end  
-    output << "<div class='note_chat tooltip#{lawyer.is_online || lawyer.is_available_by_phone || lawyer.daily_hours.present? ? '' : 'dominant'}''> Ask a question</div>"
+    output << "<div class='note_chat tooltip#{lawyer.is_online || lawyer.is_available_by_phone || lawyer.daily_hours.present? ? '' : ' dominant'}''> Ask a question</div>"
     output.html_safe
   end  
 end
