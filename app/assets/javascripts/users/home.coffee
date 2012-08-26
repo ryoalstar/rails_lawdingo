@@ -176,7 +176,6 @@ class Home
       this.set_state_fields_val(
         $(e.target).val()
       )
-      delete detect_state_name
       @submit()
     )
 
@@ -224,8 +223,6 @@ class Home
       @service_type="Legal-Advice"
     if !@state
       @state="All-States"
-    if (!(typeof detect_state_name=="undefined") && !(detect_state_name==""))
-      @state=detect_state_name+"-lawyers"
     if !@practice_area
       @practice_area="All"
     "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params 
