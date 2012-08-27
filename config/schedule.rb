@@ -25,3 +25,7 @@ every 1.hour do
   runner "Inquiry.close_expired"
   # runner "Inquiry.close_expired", environment: "development" # For staging
 end
+
+every 5.minutes do
+  rake 'lawyer:update_online_status'
+end
