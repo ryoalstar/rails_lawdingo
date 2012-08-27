@@ -170,12 +170,14 @@ class Home
       this.set_practice_area_fields_val(
         $(e.target).val()
       )
+      $.cookie('practice_area', $(e.target).val(), { expires: 30 });
       this.submit()
     )
     this.state_fields().change((e)=>
       this.set_state_fields_val(
         $(e.target).val()
       )
+      $.cookie('state', $(e.target).val(), { expires: 30 });
       @submit()
     )
 
@@ -224,7 +226,11 @@ class Home
     if !@state
       @state="All-States"
     if !@practice_area
-      @practice_area="All"
+      if $.cookie('practice_area')
+        this.set_practice_area_fields_val($.cookie('practice_area')).parent().find('img').trigger('click')
+        # @practice_area=$.cookie('practice_area')
+      else
+        @practice_area="All"
     "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params 
   current_hash : ()->
     "!#{this.current_search_url()}"
@@ -274,6 +280,7 @@ class Home
       this.set_practice_area_fields_val(temp_string).parent().find('img').trigger('click')
     else
       this.set_practice_area_fields_val("All").parent().find('img').trigger('click')
+
   set_defaults_s : ()->
    $( "#free_minutes_slider" ).slider(
       value: 1
@@ -294,9 +301,10 @@ class Home
     )
     if (default_state == "")
       this.set_state_fields_val(
-          this.state_fields().find(
-            "option[data-default=1]"
-          ).val()
+        if $.cookie('state') 
+          $.cookie('state') 
+        else  
+          this.state_fields().find("option[data-default=1]").val()
       )
     else
       this.set_state_fields_val(default_state+'-lawyers')
