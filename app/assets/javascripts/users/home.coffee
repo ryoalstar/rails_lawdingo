@@ -56,7 +56,7 @@ class Home
     else
       this.set_state_fields_val("All-States")
     $("#question_state_name").val(detect_state_name)
-    $("select.states").find("option:contains('+detect_state_name+')").prop("selected", "selected")
+    $("select.states").find("option:contains('"+detect_state_name+"')").prop("selected", "selected")
     $("#need_auto_detect").hide()
     @submit()
     false
