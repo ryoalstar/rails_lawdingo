@@ -126,24 +126,21 @@ class Home
     $("a#need_auto_detect").click =>
       this.set_auto_detected_state()
       false
-    $("#clear_data_search").click =>
-      if document.my_flag_search
-        document.my_flag_search=false
-        $("#search_query").val('')
-        this.set_defaults(default_state)
-        this.set_defaults_s()
-        $("#input_close_sea_img").hide()
-        $("#input_search_bg_img").show()
-        this.submit()
-        false
-      if !document.my_flag_search && $("#search_query").val()
-        document.my_flag_search=true
-        this.set_defaults(default_state)
-        this.set_defaults_s()
-        $("#input_search_bg_img").hide()
-        $("#input_close_sea_img").show()
-        this.submit()
-        false
+    $("#input_close_sea_img").click =>
+      $("#search_query").val('')
+      this.set_defaults(default_state)
+      this.set_defaults_s()
+      $("#input_close_sea_img").hide()
+      $("#input_search_bg_img").show()
+      this.submit()
+      false
+    $("#input_search_bg_img").click =>
+      this.set_defaults(default_state)
+      this.set_defaults_s()
+      $("#input_search_bg_img").hide()
+      $("#input_close_sea_img").show()
+      this.submit()
+      false
     $("#search_query").keypress((e) =>
       if e.keyCode == 13
         if !document.my_flag_search && $("#search_query").val()
@@ -259,6 +256,8 @@ class Home
     first = getUrlVars()["search_query"]
     if first
       $("#search_query").val(first)
+      $("#input_search_bg_img").hide()
+      $("#input_close_sea_img").show()
       hash = hash.replace("?&search_query=","")
       hash = hash.replace(first,"")
     hash = hash.split("/")
