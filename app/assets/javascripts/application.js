@@ -13,6 +13,7 @@
 //= require jquery.raty
 //= require jquery.spin
 //= require jquery.countdown
+//= require jquery.cookie
 //= require offerings
 //= require filters
 //= require reviews
