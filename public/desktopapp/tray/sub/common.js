@@ -214,6 +214,10 @@ function fn_open_accept_window(){
 
 function fn_accept_call(){
 	$('#btnAccept').attr('disabled',true);
+	$('#myForm input[name=email]').val(g_email);
+	$('#myForm input[name=password]').val(g_password);
+
+
 	g_once = true;
 	$("#acceptWindow").dialog('close');
 	fn_stop_ring();
