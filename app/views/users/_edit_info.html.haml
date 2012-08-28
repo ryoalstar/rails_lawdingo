@@ -71,7 +71,11 @@
       - bms = @user.corresponding_user.bar_memberships
       - bms_text = "<h2>Bar Memberships: </h3>"
       - bms.each{|bm|
-      - bms_text += "<li>#{bm.state.name}(Bar ID: #{bm.bar_id})</li>" if bm.bar_id
+      - if bm.bar_id?
+        - bar = "(Bar ID: #{bm.bar_id})"
+      - else 
+        - bar = ""
+      - bms_text += "<li>#{bm.state.name}#{bar}</li>"
       - }
       - pas = @user.practice_areas
       - ppas = @user.corresponding_user.practice_areas.parent_practice_areas

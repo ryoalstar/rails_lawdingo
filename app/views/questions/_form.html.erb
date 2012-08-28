@@ -2,7 +2,7 @@
   <!--<p>Unsure who to choose? Ask a question to a lawyer instantly.</p>-->
   <%= f.input :user_id, as: :hidden, input_html: { value: logged_in? ? current_user.id : nil } %>
   <%= f.input :type, as: :hidden, input_html: { value: type } %>
-  <%= f.input :body, as: :string, label: false, :placeholder => @subtext[:second] %>
+  <%= f.input :body, as: :string, label: false, :placeholder => 'sadsad' %>
   <%= f.submit "", class: "" %>
 
   <div class="question_state" id="question_state">
