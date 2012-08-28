@@ -2,7 +2,7 @@
 - photo_url = user.photo.url(:medium)
 - tab       = tab == User::ACCOUNT_TAB ? tab : User::SESSION_TAB
 - txt_color = ['black','blue']
-- if current_user.is_lawyer?
+- if current_user.is_lawyer? && current_user.is_online
   %h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.
 %div
   - if tab == User::ACCOUNT_TAB

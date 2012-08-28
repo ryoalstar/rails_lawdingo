@@ -554,6 +554,30 @@ class UsersController < ApplicationController
       end
       lawyer = User.find(params[:lawyer_id])
       render :text=>lawyer.call_status and return
+    when "set_online_status"
+      if current_user && current_user.is_lawyer?
+        current_user.update_attribute(:last_online, DateTime.now)
+        if(params[:is_online] == 'true')
+          current_user.update_attribute(:is_online, true);
+        end
+        if(params[:is_online] == 'false')
+          current_user.update_attribute(:is_online, false);
+        end
+        render :json => { :result => current_user } and return 
+      end
+      render :nothing => true and return 
+    when "set_phone_status"
+      if current_user && current_user.is_lawyer?
+        current_user.update_attribute(:last_online, DateTime.now)
+        if(params[:is_available_by_phone] == 'true')
+          current_user.update_attribute(:is_available_by_phone, true);
+        end
+        if(params[:is_available_by_phone] == 'false')
+          current_user.update_attribute(:is_available_by_phone, false);
+        end
+        render :json => { :result => current_user } and return 
+      end
+      render :nothing => true and return 
     when "end_video_chat"
       lawyer = User.find(params[:lawyer_id])
       lawyer.update_attribute(:call_status, "")

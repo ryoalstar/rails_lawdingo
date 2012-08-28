@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822103854) do
+ActiveRecord::Schema.define(:version => 20120828135124) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(:version => 20120822103854) do
     t.string   "tb_session_id"
     t.text     "tb_token"
     t.string   "call_status",                :limit => 50
+    t.boolean  "is_available_by_phone",                    :default => false
   end
 
   add_index "users", ["balance"], :name => "balance"
@@ -392,6 +393,7 @@ ActiveRecord::Schema.define(:version => 20120822103854) do
   add_index "users", ["free_consultation_duration"], :name => "free_consultation_duration"
   add_index "users", ["has_payment_info"], :name => "has_payment_info"
   add_index "users", ["is_approved"], :name => "is_approved"
+  add_index "users", ["is_available_by_phone"], :name => "index_users_on_is_available_by_phone"
   add_index "users", ["is_busy"], :name => "is_busy"
   add_index "users", ["is_online"], :name => "is_online"
   add_index "users", ["last_login"], :name => "last_login"

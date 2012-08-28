@@ -35,7 +35,7 @@
                 %span.offline_video_tooltip Not available by video now
                 .video_chat.offline.tooltip Not available by video now
             %p
-              - if @attorney.is_available_by_phone
+              - if @attorney.is_available_by_phone?
                 %span.voice.online= start_phone_consultation_p(@attorney)
                 %span.online_voice_tooltip= start_phone_consultation_profile(@attorney)
                 .voice_chat.online.tooltip Available by phone now
@@ -153,7 +153,7 @@
                 - if @attorney.is_online && !@attorney.is_busy
                   %li
                     = start_or_schedule_button(@attorney)
-                - if @attorney.is_available_by_phone
+                - if @attorney.is_available_by_phone?
                   %li
                     = start_phone_consultation(@attorney)
                 - if @attorney.daily_hours.present?

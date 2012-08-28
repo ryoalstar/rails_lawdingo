@@ -67,7 +67,9 @@ class Lawyer < User
     end
     time :created_at
     boolean :is_online
-    boolean :is_available_by_phone
+    boolean :available_by_phone do
+      self.is_available_by_phone?
+    end  
     boolean :daily_hours_present do
       self.daily_hours.present?
     end   
@@ -110,7 +112,7 @@ class Lawyer < User
       fulltext query
       paginate :per_page => 20, :page => opts[:page] || 1
       order_by :is_online, :desc
-      order_by :is_available_by_phone, :desc
+      order_by :available_by_phone, :desc
       order_by :daily_hours_present, :desc
       order_by :created_at, :desc
     end
@@ -181,7 +183,8 @@ class Lawyer < User
    self.where('is_online is true' )
   end
 
-  def is_available_by_phone
+  def is_available_by_phone?
+    return false unless self.is_available_by_phone
     daily_hours = self.daily_hours
     if daily_hours.any?
       self.in_time_zone do

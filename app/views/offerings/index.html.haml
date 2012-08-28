@@ -3,7 +3,7 @@
     %b All set! Get started by adding some services you offer to clients.
     Once we’ve verified your bar membership, we’ll email you to let you know that you’re listed on Lawdingo.
     %a#close_notice{:href => "#"} Close 
-- if current_user.is_lawyer?       
+- if current_user.is_lawyer? && current_user.is_online      
   %h3.lawyer_notice You are now shown as available by video chat. Keep this window open to remain available.    
 #page.offerings
   %div
