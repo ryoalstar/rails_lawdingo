@@ -13,14 +13,17 @@
   	#current_user LAWYER CLIENT
 	if !current_user.is_lawyer?
 	  %>
-	  <script type="text/javascript"> var is_lawyer = false;</script>
-	  <%= render :partial => "sound_player" %>
-	  <div id="opentok_ready">
-	  	<div id="opentok_buttons">
-		    <input id="opentok_resume" type="button" value="Resume" onclick="location.reload()();" />
-		    <input id="opentok_cancel" type="button" value="Cancel" onclick="fn_cancel_lawyer();" />
+		<script type="text/javascript"> var is_lawyer = false;</script>
+		<%= render :partial => "sound_player" %>
+		<div id="opentok_ready" style="background: url('<%= @lawyer.photo.url(:thumb) %>') no-repeat center center;" class="client_session">
+			<%= image_tag image_path 'avatar_round_middle.png' %>
+			<%= image_tag image_path('loading_dots.gif'), :class => :loading_dots %>
+			<p>Please wait while we try contact the lawyer</p>
+			<div id="opentok_buttons">
+			    <input id="opentok_resume" type="button" value="Resume" onclick="location.reload();" />
+			    <input id="opentok_cancel" type="button" value="Cancel" onclick="fn_cancel_lawyer(); location.replace('<%=attorney_url(@lawyer, slug: @lawyer.slug) %>');" />
+			</div>
 		</div>
-	  </div>
 	  
 	  <%
 	else

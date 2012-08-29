@@ -263,13 +263,37 @@ td {
   margin-top: 130px;
 }
 
+#opentok_ready.client_session
+{
+  height: 160px;
+  color: grey;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+#opentok_ready.client_session #opentok_buttons
+{
+  margin-top: 5px;
+}
+
+#opentok_ready.client_session #opentok_cancel, #opentok_ready.client_session #opentok_resume{
+  background-color: #dd3f3f;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+}
+
+#opentok_ready.client_session .loading_dots{
+  margin: 5px;
+  width: 100px;
+  height: 13px;
+}
+
 #opentok_resume  {
   display: none;
+
 }
 
 #video_window{
   display:none;
 }
-
-
-
