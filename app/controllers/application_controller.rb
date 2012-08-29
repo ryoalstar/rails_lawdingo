@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     if logged_in?
-      current_user.update_attribute(:is_online,true)
+      current_user.update_attribute(:last_online, Time.now)
     else
       access_denied
     end
@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_in_user user
-    user.update_attributes(:is_online => true, :last_login => Time.now, :last_online => Time.now)
+    user.update_attributes(:last_login => Time.now, :last_online => Time.now)
     session[:user_id] = user.id
   end
 

@@ -46,7 +46,7 @@
                   %span.video.online= start_or_video_button_p(lawyer)
                 - else
                   %span.video.offline
-                - if lawyer.is_available_by_phone
+                - if lawyer.is_available_by_phone?
                   %span.voice.online= start_phone_consultation_p(lawyer)
                 - else 
                   %span.voice.offline
@@ -81,7 +81,7 @@
                     - video_callable = lawyer.is_online && !lawyer.is_busy && lawyer.phone.present?
                     %li.shedule{:style => "display: #{video_callable ? 'list-item' : 'none'}"}
                       = start_or_schedule_button(lawyer) # start_video_button(lawyer)
-                    - phone_callable = lawyer.is_available_by_phone
+                    - phone_callable = lawyer.is_available_by_phone?
                     %li.phone{:style => "display: #{phone_callable ? 'list-item' : 'none'}"}
                       = start_phone_consultation(lawyer)                      
                     - appointment_presnt = lawyer.daily_hours.present?

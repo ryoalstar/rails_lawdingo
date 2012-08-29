@@ -116,7 +116,7 @@ module LawyersHelper
         link_to "Chat now by video conference", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
     else
-      if lawyer.is_available_by_phone
+      if lawyer.is_available_by_phone?
         if logged_in?
           if current_user.stripe_customer_token.present?
             link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
@@ -234,7 +234,7 @@ module LawyersHelper
  def status_message(lawyer)
    if lawyer.is_online
      "online now"
- elsif lawyer.is_available_by_phone
+ elsif lawyer.is_available_by_phone?
      "available by phone now"
    end
  end
@@ -294,17 +294,17 @@ module LawyersHelper
     else
       output << '<div class="video_chat offline tooltip"> Not available by video now</div>'
     end  
-    if lawyer.is_available_by_phone
+    if lawyer.is_available_by_phone?
       output << "<div class='voice_chat online tooltip#{lawyer.is_online ? '' : ' dominant'}'> Start phone consultation</div>"
     else
       output << '<div class="voice_chat offline tooltip"> Not available by phone now</div>'
     end  
     if lawyer.daily_hours.present?
-      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone ? '' : ' dominant'}'> Schedule consultation</div>"
+      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone? ? '' : ' dominant'}'> Schedule consultation</div>"
     else
       output << '<div class="text_chat offline tooltip">No appointments available</div>'
     end  
-    output << "<div class='note_chat tooltip#{lawyer.is_online || lawyer.is_available_by_phone || lawyer.daily_hours.present? ? '' : ' dominant'}''> Ask a question</div>"
+    output << "<div class='note_chat tooltip#{lawyer.is_online || lawyer.is_available_by_phone? || lawyer.daily_hours.present? ? '' : ' dominant'}''> Ask a question</div>"
     output.html_safe
   end  
 end

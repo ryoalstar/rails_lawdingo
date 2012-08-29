@@ -3216,3 +3216,28 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
   }
 }
 
+.availability {
+  width: 680px;
+
+  label{
+    color: #ccc !important;
+  }
+
+  .by_video{
+    width: 340px;
+    float: left;
+    padding-right: 10px;
+  }
+
+  .by_phone{
+  }
+
+  .iPhoneCheckContainer{
+    float: right;
+  }
+}
+
+label.iPhoneCheckLabelOn, label.iPhoneCheckLabelOff {
+  margin: 0 0 0 0 !important;
+  color: white !important;
+}

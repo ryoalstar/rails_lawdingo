@@ -28,7 +28,7 @@ gem 'progress_bar'  #for_re-index
 
 gem 'jquery-rails'
 gem "therubyracer"
-gem 'jquery-rails'
+gem 'ios-checkboxes'
 gem "paperclip", "~>2.3.8"
 gem 'aws-s3'
 gem "rabl"

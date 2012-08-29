@@ -1,7 +1,7 @@
 var g_realtime_checker = 0;
 var g_realtime_xhr = 0;
 $(function(){
- if(g_realtime_checker==0){
+ if(lawyer_id && g_realtime_checker==0){
   g_realtime_checker=setInterval(function(){
    if(g_realtime_xhr) g_realtime_xhr.abort();
    g_realtime_xhr = $.ajax({

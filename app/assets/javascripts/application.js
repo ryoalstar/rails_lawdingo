@@ -27,4 +27,5 @@
 //= require new_markup
 //= require selectivizr.js
 //= require rails.validations.custom
+//= require ios-checkboxes
 //= require_tree .
