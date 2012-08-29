@@ -1,5 +1,5 @@
 %ul.share
 	%li.facebook
-		.fb-like{'data-href' => attorney_url(@attorney, slug: @attorney.slug, protocol: 'https'), 'data-send' => :false, 'data-layout' => :button_count, 'data-width' => 50, 'data-show-faces' => :false}
+		.fb-like{'data-href' => attorney_url(@attorney, slug: @attorney.slug), 'data-send' => :false, 'data-layout' => :button_count, 'data-width' => 50, 'data-show-faces' => :false}
 	%li.linkedin
 		%script{:type => "IN/Share"}
