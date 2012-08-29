@@ -197,7 +197,7 @@ class Home
   add_pagination : ()->
     $("div.load-more a").click (e)=>
       this.paginate($(e.target).attr("data-page"))
-      $(e.target).html("Loading...").unbind()
+      $(e.target).html("Loading more lawyers...").unbind()
       false
 
   current_search_url : ()->

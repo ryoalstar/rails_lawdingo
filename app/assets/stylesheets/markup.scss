@@ -201,7 +201,8 @@ body.users.home{
   font-size:16px !important;
   color:#a8a8a8;
 }
-#page.signup #new_lawyer{
+#page.signup #new_lawyer, #page.signup #new_user{
+  margin-bottom:10px;
   .field_with_errors{
     input{
       border:1px solid #feacac;            
@@ -209,8 +210,40 @@ body.users.home{
       -webkit-box-shadow:0px 0px 3px 3px #FDE6E3;
       box-shadow:0px 0px 3px 3px #FDE6E3;
     }
+    input.email, input.passw{
+      margin-bottom:0;
+    }
+    input.phone{
+      margin:10px 0;
+    }
     label.message{
-      
+      -moz-box-shadow:0px 0px 5px 1px #ACACAC;
+      -webkit-box-shadow:0px 0px 5px 1px #ACACAC;
+      box-shadow:0px 0px 5px 1px #ACACAC;
+      border:1px solid #c56464;
+      color:#882b2b;
+      background:url('error_notice_bg.png')repeat-x;
+      -moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			padding:5px;
+			margin-top:2px;
+    }
+    .error_notice{
+      float: right;
+      margin-right: -19px;
+      label{
+        float:right;
+      }
+      .arrow{
+        margin-top: -5px;
+        margin-left:79px;
+        background:url('error_tooltip_arrow.png') no-repeat;
+        display:block;
+        width:11px;
+        height:9px;
+        position:absolute;
+      }
     }
   }
   #div_practice_areas, #div_states_barids{
@@ -565,6 +598,11 @@ body.index.logged-in, body.users.show.logged-in{
         form.edit_lawyer{
           hr{
             width:96%;
+          }
+          table{
+            td{
+              vertical-align:middle;
+            }
           }
         }
         table.summary{
@@ -3010,14 +3048,26 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
             padding-left:0;
             margin-top: 47px;
 						ul{
-							padding:10px 0px;
+							padding:0px 0px;
 							margin:0;
 							li:first-child{
+							  -webkit-border-top-left-radius: 5px;
+                -webkit-border-top-right-radius: 5px;
+                -moz-border-radius-topleft: 5px;
+                -moz-border-radius-topright: 5px;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
 							}
 							li:last-child{
+							  -webkit-border-bottom-right-radius: 5px;
+                -webkit-border-bottom-left-radius: 5px;
+                -moz-border-radius-bottomright: 5px;
+                -moz-border-radius-bottomleft: 5px;
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
 							}
 							li{
-								padding: 2px 10px;
+								padding: 1px 10px;
 								list-style-type: none;
 								list-style-image: none;
 								a{
