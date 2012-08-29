@@ -14,4 +14,12 @@ class QuestionsController < ApplicationController
       redirect_to new_user_path(ut: 0, question_notice: true)
     end
   end
+
+  def update
+    @question = Question.find(params[:id])
+    @question.update_attributes(params[:question])
+
+    respond_to :js
+  end
+
 end
