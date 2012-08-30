@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828135124) do
+ActiveRecord::Schema.define(:version => 20120830143043) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -373,6 +373,7 @@ ActiveRecord::Schema.define(:version => 20120828135124) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "stripe_customer_token"
+    t.string   "stripe_card_token"
     t.string   "phone"
     t.integer  "free_consultation_duration"
     t.string   "password_reset_token"

@@ -8,6 +8,7 @@ class Lawyer < User
   has_many :bids
   has_many :messages
   has_many :appointments
+  attr_accessor :stripe_card_token
 
   has_many :daily_hours do
     # find on a given wday
@@ -327,6 +328,23 @@ class Lawyer < User
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
 
+  def save_with_payment stripe_card_token
+    if valid?
+      customer = Stripe::Customer.create( description: email, plan: 3, card: stripe_card_token )
+      self.stripe_customer_token = customer.id
+      self.stripe_card_token = stripe_card_token
+      save!
+    end
+  rescue Stripe::CardError => e
+    logger.error "Stripe error while subscribing customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+
   protected
   # convert a date to a time if applicable
   def convert_date(time)
@@ -338,4 +356,5 @@ class Lawyer < User
   def min_time_to_book
     Time.zone.now + 30.minutes
   end
+
 end
