@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
      rescue_from ActiveRecord::RecordNotFound, with: :render_404
   end
   
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+  
   def log_in_user user_id
     session[:user_id] = user_id
   end

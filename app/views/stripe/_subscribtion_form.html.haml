@@ -1,0 +1,30 @@
+= raw flash[:error]
+- errors = @lawyer.errors
+= form_for(@lawyer, :url => subscribe_lawyer_path(@lawyer), :html => {:id => :new_subscription}) do |f|
+	- unless flash[:error]
+		- if errors.size > 0
+			.error_explanation
+				%h4.error Please fix the following errors:
+				%ul.errors
+					- errors.full_messages.each do |error|
+						%li= error
+
+	= f.hidden_field :stripe_card_token
+
+	.field= f.text_field :email, :class => :email, :readonly => :readonly
+	- if @lawyer.stripe_card_token.present?
+		.field
+			= label_tag :card, 'Credit card has been provided.'
+	- else
+		.field= text_field_tag :card_number, nil, name: nil, placeholder: "Credit Card Number", :class => :card, :required => :required, :validate => true
+		.field= text_field_tag :card_code, nil, name: nil, placeholder: "Security Code on Card (CVV)", :class => :passw, :required => :required, :validate => true
+		.field
+			= label_tag :card_month, "Card Expiration"
+			= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", :required => :required, :validate => true}
+			= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", :required => :required, :validate => true} 
+
+	= f.submit 'Subscribe', :class=>"button", id: "submit_subscribe"
+
+#stripe_error
+	%noscript
+		JavaScript is not enabled and is required for this form. First enable it in your web browser 

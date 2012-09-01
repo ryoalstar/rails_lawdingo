@@ -392,7 +392,7 @@ body.users.home {
         }
     }
 
-    &.signup, &.payment {
+    &.signup, &.payment, &.lawyer_subscribtion {
         > h1, > h3 {
             text-align: center;
             font-weight: normal;
@@ -556,6 +556,7 @@ body.users.home {
             &.email { background: url(icn_email.png) no-repeat 98% center white; }
             &.paypal { background: url(icn_paypal.png) no-repeat 98% center white; }
             &.phone { background: url(icn_phone.png) no-repeat 98% center white; }
+            &.card { background: url(icn_card.png) no-repeat 98% center white; }
         }
 
         .fine-print {
