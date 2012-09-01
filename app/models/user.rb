@@ -25,9 +25,8 @@ class User < ActiveRecord::Base
   has_many :offerings
   has_many :questions
   has_many :searches
-  
-  belongs_to :school,
-    :touch => true
+
+  belongs_to :school, touch: true
 
   has_attached_file :photo,
     :styles => { :medium => "253x253>", :thumb => "102x127>" },
@@ -46,7 +45,7 @@ class User < ActiveRecord::Base
 
   def reindex_lawyer!
     self.reindex!
-  end  
+  end
 
   def self.authenticate email, password
     user = User.find_by_email(email)
@@ -74,6 +73,13 @@ class User < ActiveRecord::Base
 
   def is_client?
     self[:user_type] == self.class::CLIENT_TYPE
+  end
+
+  # Check client's card details presence by this method,
+  # because we're going to switch to BP from Stripe and this
+  # seems more flexible.
+  def has_payment_info?
+    self.stripe_costumer_token.present?
   end
 
   def save_stripe_customer_id token_id

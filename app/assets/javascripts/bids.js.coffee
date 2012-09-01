@@ -22,11 +22,9 @@ bids =
 
     Stripe.createToken(card, bids.handleStripeResponse)
 
-
   handleStripeResponse: (status, response) ->
     if status == 200
       ($ "#bid_stripe_card_token").val(response.id)
       ($ "form#new_bid")[0].submit()
     else
       ($ "#stripe_error").text(response.error.message)
-

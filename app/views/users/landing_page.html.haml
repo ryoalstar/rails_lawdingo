@@ -30,10 +30,12 @@
           %span.browse_lawyers_button
             = link_to "Browse Lawyers", lawyers_path, class: ""
           = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
-          %span.lawyers_signup
-          .singup_link
-            %span.lawyers_signup
-              = link_to "Apply as an attorney", new_lawyer_path, :class => ''
+          #autoselect_landing_wraper
+            = render partial: "autoselect_lawyer", locals:{:header_text=>'In a rush?'}
+          -#%span.lawyers_signup
+          -#.singup_link
+          -#  %span.lawyers_signup
+          -#    = link_to "Apply as an attorney", new_lawyer_path, :class => ''
           -#= render partial: "questions/form", locals: { type: "lawyer", placeholder: "Describe your legal issue here." }
           -#%small
             Lawyer? #{link_to "Apply here!", new_lawyer_path}
@@ -56,16 +58,22 @@
                       %tr
                         %td
                           %p.active_action= start_or_schedule_button(lawyer)
-                %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
-                  %p.rate= "#{lawyer.free_consultation_duration} minutes free"
-                  %p.small="then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins"
-                .free_dropdown{:href=> "#"}  
-                .button_tooltip
-                  .button-content
-                    %ul
-
-                      = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer})                  
-                     
+                .free_section_container
+                  .free_button_outer
+                    %a.free{:href => "#"}
+                      %p
+                        Talk now
+                      -#%p.rate= "#{lawyer.free_consultation_duration} minutes free"
+                    -#%p.small="then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins"
+                    .free_dropdown{:href=> "#"}  
+                    .button_tooltip
+                      .button-content
+                        %ul
+                          = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer})                  
+                  .free_button_explanation
+                    %p.free_bold= "#{lawyer.free_consultation_duration} minutes free"
+                    = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
+                
               - # content for the modal dialog we are going to display
               %div{:style => "display:none;"}
                 = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})

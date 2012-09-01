@@ -76,9 +76,17 @@ body.offerings {
       min-width: 400px;
 
       &.string input,
+      &.text textarea {
+        width: 300px !important;
+      }
+
+      &.currency input {
+        width: 60px !important;
+      }
+
+      &.string input,
       &.currency input,
       &.text textarea {
-        width: 300px;
         font-family: arial, verdana, tahoma;
         border: 1px solid #B8B8B8;
         border-radius: 4px;
@@ -89,7 +97,11 @@ body.offerings {
       }
 
       &.text {
-        width: 400px;
+        width: 400px !important;
+      }
+
+      input.button[type="submit"] {
+        width: 205px !important;
       }
 
       .hint {
@@ -124,14 +136,19 @@ ul.offerings-list {
     padding: 4px;
 
     &.selected {
+      background: #F4F5F7;
+      border-top: 1px solid #EEE;
+      border-bottom: 1px solid #EEE;
+
       a {
         color: #222 !important;
       }
     }
 
-    .controls {
+    .controls, .cancel {
       display: inline;
       font-size: 0.75em;
+
       a {
         border-bottom:0;
         color: #222;

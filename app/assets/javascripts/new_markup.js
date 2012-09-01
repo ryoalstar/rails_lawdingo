@@ -5,6 +5,133 @@ var my_images = [
 '/assets/call_button_bg.png'
 ];
 
+show_on_mouseenter = false;
+
+initializeLawyersEvents = function ()
+{
+
+	$(".free_dropdown").live('click', function(event){
+	  event.stopPropagation();
+		$(".button_tooltip").hide();
+    $(this).nextAll(".button_tooltip").show();
+    show_on_mouseenter = true;
+    //console.log(show_on_mouseenter);
+	});
+	
+	
+	var debounce;
+	$(".offerings_item > .offerings").live('hover', function(){
+	    $(".offerings_wrapper", $(this).parent()).fadeIn("fast");
+	    clearTimeout(debounce);
+	});
+	
+	$(".offerings_item").live('mouseleave',function(){
+		var item = $(this);
+		debounce = setTimeout(function(){
+    	$(".offerings_wrapper", item).fadeOut("fast");
+    	clearTimeout(debounce);
+    },1500);
+	});
+	
+
+	$("#moretab").live('mouseleave', function() {
+	    debounce = setTimeout(closeMenu,400);
+	});  
+	  
+
+  $(".free").live('mouseenter', function(){
+    //console.log("111");
+    $(this).data('hover',1);
+    //$(this).nextAll(".button_tooltip").show();
+   //console.log(show_on_mouseenter);
+  });
+  
+
+  $(".free").live('mouseleave', function(){ 	 
+    $(this).data('hover',0);
+    var self = this;
+    var som = show_on_mouseenter;
+    //console.log(show_on_mouseenter);
+    var t = $(self).nextAll(".button_tooltip");
+ 	  setTimeout(function(){
+ 	    if(!(t.data('hover') || $(self).data('hover')) && !som){
+ 	      //console.log(som);
+ 	      t.hide();
+ 	    }
+ 	  }, 300);
+  });
+  
+
+  $(".free").live('click', function(event){
+  	event.stopPropagation(); 	  	
+     $(".button_tooltip").hide(); 	  	
+     $(this).nextAll(".button_tooltip").show();
+     return false;
+  });
+  
+  $(".button_tooltip").live('mouseenter', function() {
+	    if(show_on_mouseenter == false){
+	      $(this).data('hover',1);
+	      //console.log('flag true');
+	    }
+	});
+
+	$(".button_tooltip").live('mouseleave', function() {
+	    if(show_on_mouseenter == false){
+	      $(this).hide(); 
+	      $(this).data('hover',0);
+	      //console.log('flag false');
+	    }
+	});
+
+	$("div.row.lawyer").live('click', function(e){
+		var expander = $(".expander_container", $(this));
+		if (expander.length > 0)
+		{
+			// this code is repeated in a coffee file. TODO: fix it!  AF
+			var parent;
+			parent = $(expander).parents(".lawyer");
+			
+			if (parent.hasClass('expanded')) {
+			  parent.removeClass('expanded');
+			  $(".expanded_info", parent).hide('slow', function() {
+			    return $("p.lawyer_tagline", parent).hide('slow', function() {
+			      var maxheight;
+			      maxheight = parseInt($(".middle", parent).height());
+			      if (parseInt($(".left", parent).height()) > maxheight) {
+			        maxheight = parseInt($(".left", parent).height());
+			      }
+			      $(".right", parent).css('height', maxheight + "px");
+			      return $(".middle", parent).css('height', maxheight + "px");
+			    });
+			  });
+			  $(expander).html('+');
+			} else {
+			  parent.css('height', 'auto');
+			  $(".middle", parent).css('height', 'auto');
+			  parent.addClass('expanded');
+			  $(".expanded_info", parent).show("slow", function() {
+			    return $("p.lawyer_tagline", parent).show('slow', function() {
+			      return $(".right", parent).css('height', $(".middle", parent).height());
+			    });
+			  });
+			  $(expander).html('-');
+			}	
+			
+		}
+		e.stopPropagation();
+		return false;
+	}
+	);
+	
+	$("div.row.lawyer a, div.row.lawyer input, div.row.lawyer .view_profile_button").live('click',function(event){
+		// If the parent has a expander I will trigger an event manually, so stop propagation.
+		var parent = $(this).parents("div.row.lawyer");
+		var expander = $(".expander_container", parent);
+		if (expander.length > 0)
+    	event.stopPropagation();
+  });
+}
 
 $(document).mouseup(function (e)
 {
@@ -16,6 +143,12 @@ $(document).mouseup(function (e)
       {
         $("#question_state").hide('slow');
         $("#question_area").hide('slow');
+        
+        $wrapper = $(this).parents("#autoselect_lawyer_wraper");
+		  	if ($wrapper.length > 0)
+		  	{
+		  		$wrapper.removeClass('expanded');
+		  	}
       }
     }
 });
@@ -139,6 +272,13 @@ $(document).ready(function(){
 	  $(".voice_chat.tooltip.online").fadeOut('slow');
 	});
 	
+	$(".cvv-info").live('mouseover', function(){
+	  $(".tooltip.cvv").fadeIn('slow');
+	});
+	$(".cvv-info").live('mouseout', function(){
+	  $(".tooltip.cvv").fadeOut('slow');
+	});
+	
 	
 	$(".left-bar-section span.voice.offline, .left-bar-section span.offline_voice_tooltip").live('mouseover', function(){
 	  $(".voice_chat.tooltip.offline").fadeIn('slow');
@@ -174,6 +314,7 @@ $(document).ready(function(){
     $(this).find(".tooltip.dominant").show();
   });
 
+	
   $("div.row.lawyer").live('mouseout',function(){
     $(this).find(".tooltip.dominant").hide();
   });
@@ -187,8 +328,8 @@ $(document).ready(function(){
     $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeOut('slow'); // hide
     $('.tooltip.dominant').css('opacity','1'); 
   });
-
-	var show_on_mouseenter = false;
+	
+	
 	$('html').click(function() {
     $(".button_tooltip").hide();
     show_on_mouseenter = false;
@@ -198,71 +339,23 @@ $(document).ready(function(){
     event.stopPropagation();
     $("#question_state").show('slow');
     $("#question_area").show('slow');
+    
+    $wrapper = $(this).parents("#autoselect_lawyer_wraper");
+  	if ($wrapper.length == 0)
+  	{
+  		$wrapper = $(this).parents("#autoselect_landing_wraper");
+  	}
+  	if ($wrapper.length > 0)
+  	{
+  		$wrapper.addClass('expanded');
+  	}
   });
     
-	$(".free_dropdown").live('click', function(event){
-	  event.stopPropagation();
-		$(".button_tooltip").hide();
-    $(this).nextAll(".button_tooltip").show();
-    show_on_mouseenter = true;
-    //console.log(show_on_mouseenter);
-	});
 	
 	
-	var debounce;
-	$(".offerings_item").hover(function(){
-	    $(".offerings_wrapper", $(this)).fadeIn("fast");
-	    clearTimeout(debounce);
-	},
-	function(){
-		var item = $(this);
-		debounce = setTimeout(function(){
-    	$(".offerings_wrapper", item).fadeOut("fast");
-    	clearTimeout(debounce);
-    },1500);
-	});
 	
+	initializeLawyersEvents();
 	
-	$("#moretab").mouseleave (function() {
-	    debounce = setTimeout(closeMenu,400);
-	});  
-	  
-  $(".free").live('mouseenter', function(){
-    //console.log("111");
-    $(this).data('hover',1);
-    $(this).nextAll(".button_tooltip").show();
-   //console.log(show_on_mouseenter);
-  });
-  $(".free").live('mouseleave', function(){ 	 
-    $(this).data('hover',0);
-    var self = this;
-    var som = show_on_mouseenter;
-    //console.log(show_on_mouseenter);
-    var t = $(self).nextAll(".button_tooltip");
- 	  setTimeout(function(){
- 	    if(!(t.data('hover') || $(self).data('hover')) && !som){
- 	      //console.log(som);
- 	      t.hide();
- 	    }
- 	  }, 300);
-  });
-  $(".free").live('click', function(){ 	  	
-     $(".button_tooltip").hide(); 	  	
-     $(this).nextAll(".button_tooltip").show();
-  });
-  $(".button_tooltip").live('mouseenter', function() {
-	    if(show_on_mouseenter == false){
-	      $(this).data('hover',1);
-	      //console.log('flag true');
-	    }
-	});
-	$(".button_tooltip").live('mouseleave', function() {
-	    if(show_on_mouseenter == false){
-	      $(this).hide(); 
-	      $(this).data('hover',0);
-	      //console.log('flag false');
-	    }
-	});
 	$( "#slider-range-min" ).slider({
 	  range: "min",
     value: 37,

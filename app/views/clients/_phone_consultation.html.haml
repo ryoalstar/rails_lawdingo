@@ -1,0 +1,23 @@
+#phone_consultation_tab 
+  - client = current_user.try(:is_client?) ? current_user : Client.new
+  = form_for client, :html => { :id => :phone_consultation_form}, :url => logged_in? ? root_path : new_client_path, :method => :post, :validate=> true do |f|
+    - if logged_in?
+      = f.hidden_field :id
+    - if @states
+      .interact_state
+        Your state:
+        %br
+        .question_state_bot
+          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true,:class=>'select_small'
+    - if @practice_areas
+      .interact_legal_matter
+        Legal matter:
+        %br
+        .question_area_bot
+          = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_small'
+    .interact_phone_number
+      Your phone number:  
+      %br
+      = f.phone_field :phone, :class=>"phone"
+    .interact_submit
+      = f.submit :Continue, :id => :interact_submit_button

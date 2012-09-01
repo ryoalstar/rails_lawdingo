@@ -35,7 +35,10 @@ class Lawyer < User
   #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
   
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
-  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :personal_tagline, :bar_memberships_attributes, :phone, :time_zone
+  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :photo, :personal_tagline, 
+  :bar_memberships_attributes, :phone, :time_zone, :hourly_rate, :school_id, :undergraduate_school, :license_year, 
+  :yelp_business_id
+
   # scopes
   default_scope where(:user_type => User::LAWYER_TYPE)
 
@@ -136,6 +139,14 @@ class Lawyer < User
   def rate_for_minutes(minutes)
     self.rate * minutes
   end  
+  
+  def hourly_rate
+    self.rate.nil? ? '' : self.rate* 60
+  end
+  
+  def hourly_rate=(value)
+    self.rate = value.to_f / 60.0
+  end
 
   def detail
     super.merge(

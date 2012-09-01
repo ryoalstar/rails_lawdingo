@@ -378,6 +378,7 @@ $(document).ready(function() {
         this.children().each(function(){
             var self = $(this);
             self.children('.sub').hide();
+            self.children('.sub.filled').show();
             self.children('input[type=checkbox]').click( function(){
                 if( $(this).attr('checked') == 'checked' ){
                     self.children('.sub').show();

@@ -75,9 +75,9 @@
                 %li
                   = link_to "Log In", login_path
                   = link_to "Client Signup", new_client_path, :class => 'signup'
-                -#%li
-                  -#%span.lawyers_signup
-                    -#= link_to "Attorney Signup", new_lawyer_path, :class => ''
+                %li
+                  %span.lawyers_signup
+                    = link_to "Attorney Signup", new_lawyer_path, :class => ''
           %a.logo{:href => '/'}
             = image_tag('Lawdingo-logo.png', :alt => 'Home')      
         #header_border

@@ -372,5 +372,9 @@ module LawyersHelper
       count == 1 ? "#{noun}#{text}" : "#{noun.pluralize}#{text}"
     end
   end
+
+  def lawyer_rate(lawyer)
+    number_to_currency("#{lawyer.rate + AppParameter.service_charge_value}") + "/minute"
+  end
 end
 

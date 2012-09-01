@@ -32,13 +32,15 @@ Lawdingo::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  match 'attorneys/:id/call-payment' => 'attorneys#call_payment', 
-    as: :call_payment
+  match 'attorneys/:id/call-payment' => 'attorneys#call_payment', as: :call_payment
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
-  resource :stripe do
-    post :coupon_validate 
+  match '/apply' => "users#new", :as => :new_lawyer
+
+  # Lawyer subscriptions
+  match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
+  resource :stripe, only: [:new, :create] do
+    post :coupon_validate
   end
-  match '/paid' => "stripes#new", :as => :subscribe_lawyer
 
   resources :users do
     # daily_hours for this user (lawyer)
@@ -48,9 +50,10 @@ Lawdingo::Application.routes.draw do
         put "update"
       end
     end
-    
+
     resources :offerings, shallow: true
 
+    put "update_card_details"
     put 'image_upload'
     get 'chat_session'
     get 'onlinestatus'
@@ -170,6 +173,7 @@ Lawdingo::Application.routes.draw do
   match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
   match '/learnmore' => 'users#learnmore'
+
   root :to => 'users#landing_page'
 
   unless Rails.application.config.consider_all_requests_local

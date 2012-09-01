@@ -1,11 +1,12 @@
 class AttorneysController < ApplicationController
   before_filter :check_approval, only: :show
+  before_filter :authenticate, only: :call_payment
 
   def show
     @attorney = Lawyer.find(params[:id])
+
     # set the time zone
     # Time.zone = @attorney.time_zone
-    
     @video = Framey::Video.find_by_creator_id(@attorney.id) if @attorney.has_video?
 
     pas = []
@@ -24,14 +25,13 @@ class AttorneysController < ApplicationController
   end
 
   def call_payment
-   @attorney = Lawyer.find(params[:id])
-
+    @lawyer = Lawyer.find(params[:id])
+    session[:return_path] = phonecall_url(id: @lawyer.id)
   end
-  
+
   private
 
-    def check_approval
-      redirect_to lawyers_path, notice: "Sorry, this lawyer's bar membership hasn't been verified just yet." unless Lawyer.find(params[:id]).is_approved
-    end
+  def check_approval
+    redirect_to lawyers_path, notice: "Sorry, this lawyer's bar membership hasn't been verified just yet." unless Lawyer.find(params[:id]).is_approved
+  end
 end
-

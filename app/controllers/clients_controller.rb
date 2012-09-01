@@ -1,7 +1,5 @@
 class ClientsController < ApplicationController
-
   def new
-    
     # this is how we redirect users on login
     if params[:return_path].present?
       session[:return_to] = params[:return_path]
@@ -15,7 +13,6 @@ class ClientsController < ApplicationController
 
     # set up our client
     @client = Client.new
-
   end
 
   def create

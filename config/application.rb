@@ -49,7 +49,7 @@ module Lawdingo
     config.after_initialize do
       # Test/Dev mode Stripe Keys
       Stripe.api_key = "QbaDHDaP9lgeO12Z41JfwfUQ0u1EeQp3"
-      #test mode public key
+      # Test mode public key
       Object.const_set(
         "STRIPE_PUBLIC_KEY","pk_queCsxzkU4Hxf6lzDLXNzdQqkxNfI"
       )

@@ -34,7 +34,7 @@
               %td
                 %p= start_or_schedule_button(lawyer)
       .free_button_outer            
-        %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
+        %a.free{:href => "#"}
           %p= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
           %p.small free consultation
         .free_dropdown{:href=> "#"}

@@ -2,7 +2,7 @@ class OfferingsController < ApplicationController
   before_filter :ensure_self_account, only: :index
 
   def index
-    @lawyer = User.find(params[:user_id])
+    @lawyer = @user = User.find(params[:user_id])
     @offering = @lawyer.offerings.new
     @offering.fee = ""
   end
@@ -10,6 +10,15 @@ class OfferingsController < ApplicationController
   def show
     @offering = Offering.find(params[:id])
   end
+
+  def new
+    @lawyer = User.find(params[:user_id])
+    @offering = @lawyer.offerings.new
+    @offering.fee = ""
+
+    render layout: false
+  end
+
 
   def create
     @lawyer = User.find(params[:user_id])
@@ -24,13 +33,14 @@ class OfferingsController < ApplicationController
 
   def edit
     @offering = Offering.find(params[:id])
-    
+    @lawyer = @offering.user
+
     render layout: false
   end
 
   def update
     @offering = Offering.find(params[:id])
-    
+
     if @offering.update_attributes(params[:offering])
       redirect_to user_offerings_path(@offering.user)
     else
