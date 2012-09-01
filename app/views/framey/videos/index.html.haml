@@ -9,7 +9,7 @@
         - unless @lawyer.has_video?
           .recorder-wrapper
             %input#FrameyRecorder{"data-params" => "{ api_key: '#{Framey::API_KEY}', max_time: '120'}", :type => "video"}/
-          %p.center Remember to click “Publish” when you’re done recording.
+          %p Remember to click “Publish” when you’re done recording.
         - else
           .player-wrapper
             = render_player({                              |

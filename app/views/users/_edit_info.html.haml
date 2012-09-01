@@ -51,12 +51,12 @@
               = hidden_field_tag :user_type, @user[:user_type]
           %tr
             %td
-              %label= @user.first_name
+              %label First name:
             %td
               = f.text_field :first_name ,{:class=>"name"}
           %tr
             %td
-              %label= @user.last_name
+              %label Last name:
             %td
               = f.text_field :last_name ,{:class=>"name"}
           %tr

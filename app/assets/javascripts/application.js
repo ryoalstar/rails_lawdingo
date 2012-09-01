@@ -25,6 +25,7 @@
 //= require jquery.ui.mouse
 //= require jquery.ui.slider
 //= require new_markup
+//= require site
 //= require selectivizr.js
 //= require rails.validations.custom
 //= require ios-checkboxes

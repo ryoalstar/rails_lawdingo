@@ -284,7 +284,7 @@ body.offerings.index .lawyer_notice{
 }
 body.daily_hours.index{
   #page{
-    padding-top:0;
+    //padding-top:0;
   }
 }
 #page.lawyer_edit > div{
@@ -293,11 +293,20 @@ body.daily_hours.index{
 .framey-video#page{
   width:960px;
   margin:0 auto;
-  padding-top:0;
+  //padding-top:0;
   .profile{
     display: inline-block;
     h2{
       margin-top:0;
+      color:#272727;
+      font-size:15px;
+    }
+    p{
+      color:#3f3f3f;
+      margin-bottom:30px;
+    }
+    .recorder-wrapper{
+      padding-bottom: 10px;
     }
     .left_menu{
       display: block;
@@ -335,6 +344,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
       display: inline-block;
       .left_menu{
         //padding-bottom: 30px;
+        min-height: 300px;
         display: block;
         width:168px;
         float: left;
@@ -445,6 +455,41 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
             }
           }
         }
+      }
+    }
+    .profile.client_info{
+      .left_menu{
+        padding-top: 30px;
+        ul li a{
+          padding-left:15px;
+          width:170px;
+        }
+      }
+      table.client_info_fields{
+        td{
+          vertical-align:middle;
+          span{
+            font-size:12px;
+          }
+          input[type="text"]{
+            margin: 5px 0;
+          }
+        }
+      }
+      input[type="submit"]{
+        width:205px !important;
+      }
+    }
+  }
+}
+body.users.show.logged-in #page.session-summary > div .profile.client_info .profile-block{
+  padding:0;
+  table.summary{
+    thead{
+      td:last-child{
+        -webkit-border-top-right-radius: 7px;
+        -moz-border-radius-topright: 7px;
+        border-top-right-radius: 7px;
       }
     }
   }
