@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(:version => 20120830143043) do
     t.integer  "digits"
   end
 
+<<<<<<< HEAD
+=======
   create_table "card_details", :force => true do |t|
     t.integer  "user_id"
     t.string   "first_name"
@@ -82,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20120830143043) do
     t.datetime "updated_at"
   end
 
+>>>>>>> 7bb50f6... text changes for terms of use page and lawyers profile section
   create_table "conversations", :force => true do |t|
     t.integer  "client_id",                            :null => false
     t.integer  "lawyer_id",                            :null => false
@@ -146,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20120830143043) do
     t.boolean  "is_closed",   :default => false
   end
 
+<<<<<<< HEAD
   create_table "lawyer_daily_hours", :force => true do |t|
     t.integer  "lawyer_id"
     t.integer  "wday"
@@ -155,6 +159,8 @@ ActiveRecord::Schema.define(:version => 20120830143043) do
     t.datetime "updated_at"
   end
 
+=======
+>>>>>>> 7bb50f6... text changes for terms of use page and lawyers profile section
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "client_id"

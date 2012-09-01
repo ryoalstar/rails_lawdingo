@@ -45,7 +45,13 @@
         %tbody
           %tr
             %td
-              %label First Name:
+              %label Time:
+            %td
+              = f.time_zone_select(:time_zone)          
+              = hidden_field_tag :user_type, @user[:user_type]
+          %tr
+            %td
+              %label First name:
             %td
               = f.text_field :first_name ,{:class=>"name"}
           %tr

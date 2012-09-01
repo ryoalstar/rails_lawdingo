@@ -236,8 +236,15 @@ html, body{
   font-size:16px !important;
   font-weight:normal !important;
 }
-
-#page.lawyer_edit > div{
+body.offerings.index .lawyer_notice{
+  padding-top:19px;
+}
+body.daily_hours.index{
+  #page{
+    //padding-top:0;
+  }
+}
+section #page.lawyer_edit > div{
   padding: 20px 45px;
 }
 .framey-video#page{
