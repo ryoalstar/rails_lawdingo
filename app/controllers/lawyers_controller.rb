@@ -20,7 +20,7 @@ class LawyersController < ApplicationController
       # deliver our signup notification
       UserMailer.notify_lawyer_application(@lawyer).deliver
       # redirect to the subscription
-      return redirect_to(subscribe_lawyer_path)
+      return redirect_to(new_stripe_path)
     else
       return render(:action => :new)
     end

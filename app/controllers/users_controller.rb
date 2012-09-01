@@ -156,7 +156,7 @@ class UsersController < ApplicationController
         UserMailer.notify_lawyer_application(@user).deliver
         #redirect_to welcome_path and return
         login_in_user(@user)
-        redirect_to subscribe_lawyer_path and return
+        redirect_to new_stripe_path and return
       elsif @user.is_client?
         UserMailer.notify_client_signup(@user).deliver
         session[:user_id] = @user.id
@@ -304,6 +304,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_card_details
+    token = params[:stripe_card_token]
+
+    if token.present?
+      customer = Stripe::Customer.create(
+        email: current_user.email,
+        card: token
+      )
+
+      if customer
+        if current_user.stripe_customer_token.present?
+          Stripe::Customer.retrieve(current_user.stripe_customer_token).delete
+        end
+
+        current_user.save_stripe_customer_id(customer.id)
+      end
+    end
+
+    if session[:return_path].present?
+      stored_return_path = session[:return_path]
+      session[:return_path] = nil
+
+      redirect_to stored_return_path
+    else
+      redirect_to root_path
+    end
+  end
+
   def update_payment_info
    @status = false
    @phone_call_payment_status = false
@@ -345,7 +373,9 @@ class UsersController < ApplicationController
   end
 
   def start_phone_call
-    @lawyer = User.find(params[:id]) if params[:id].present?
+    @lawyer = Lawyer.find(params[:id]) if params[:id].present?
+
+    redirect_to call_payment_path(@lawyer.id) unless current_user.stripe_customer_token.present?
   end
 
   def create_phone_call
@@ -789,7 +819,7 @@ class UsersController < ApplicationController
       search = Search.find_or_create_by_query_and_user_id(query, nil) unless page
     end
     search.increment!(:count) if search.is_a? Search
-  end  
+  end
 
   def fill_states     
     @filled_states = @user.states

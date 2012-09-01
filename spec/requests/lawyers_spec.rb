@@ -44,7 +44,7 @@ describe "Restful Lawyers", :integration do
         Lawyer.last.practice_areas.should include practice_area
 
       }.should change{Lawyer.count}.by(1)
-    end 
+    end
 
     it "should display error messages when a user fails to be 
       created" do

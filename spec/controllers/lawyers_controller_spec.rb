@@ -26,7 +26,7 @@ describe LawyersController do
     it "should redirect to the subscription path by default" do
       Lawyer.any_instance.stubs(:save => true, :id => 132)
       post(:create)
-      response.should redirect_to(subscribe_lawyer_path)
+      response.should redirect_to(new_stripe_path)
     end
 
   end

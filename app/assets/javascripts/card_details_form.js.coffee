@@ -1,17 +1,15 @@
 jQuery ->
-  bids.initialize()
+  cardDetailsForm.initialize()
 
-bids =
-  initialize: ->
+cardDetailsForm =
+  initialize: (container) ->
     @ensureCardDetails()
 
   ensureCardDetails: ->
-    ($ "form#new_bid").on "submit", (event) =>
-      if ($ "input[type=submit]").data("ensure-card-details")
-        @processCard()
-        false
-      else
-        true
+    ($ "[data-card-details-form]").on "submit", (event) =>
+      event.preventDefault()
+      @processCard()
+      false
 
   processCard: ->
     card =
@@ -20,11 +18,11 @@ bids =
       expMonth: ($ "#card_month").val()
       expYear: ($ "#card_year").val()
 
-    Stripe.createToken(card, bids.handleStripeResponse)
+    Stripe.createToken(card, cardDetailsForm.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
     if status == 200
-      ($ "#bid_stripe_card_token").val(response.id)
-      ($ "form#new_bid")[0].submit()
+      ($ "input#stripe_card_token").val(response.id)
+      ($ "[data-card-details-form]")[0].submit()
     else
       ($ "#stripe_error").text(response.error.message)

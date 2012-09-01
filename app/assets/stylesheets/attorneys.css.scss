@@ -328,3 +328,130 @@ body.attorneys {
 }
 
 
+body.call_payment {
+  .page-body {
+    font-size: 12px;
+    border: 1px solid #999;
+    width: 820px;
+    margin: 20px auto !important;
+    border-radius: 6px;
+    padding: 20px 40px !important;
+    position: relative;
+    overflow: hidden;
+
+    &>h1.payment-notice {
+      font-size: 18px !important;
+      margin-bottom: 0.75em;
+      font-weight: 500 !important;
+    }
+
+    &>h2.payment-notice {
+      color: #222;
+      font-size: 16px !important;
+      font-weight: normal;
+
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
+
+  #card_details {
+    width: 100%;
+  }
+
+  .card-details-wrapper {
+    background-color: #ececec !important;
+    border-radius: 4px;
+    padding: 0 !important;
+    margin: 1.2em 0 0 0;
+    width: 100%;
+
+    label {
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    label[for="card_month"] {
+      margin-right: 30px;
+    }
+
+    .input {
+      display: block;
+      margin: 4px 0;
+    }
+
+    .string input {
+      font-family: arial, verdana, tahoma;
+      width: 25%;
+      border: 1px solid #B8B8B8;
+      border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      font-size: 1em;
+      margin: 0 0 10px 0;
+      padding: 8px;
+    }
+
+    .short input {
+      width: 10%;
+    }
+
+    .inline {
+      display: inline;
+    }
+
+    .inline-block {
+      display: inline-block;
+      width: 72%;
+    }
+
+    .cards-logos, .sealed {
+      position: relative;
+      display: block;
+    }
+
+    .cards-logos {
+      left: 112px;
+      margin-bottom: 1em;
+    }
+
+    .sealed {
+      left: 121px;
+      margin-bottom: 1.2em;
+    }
+
+    .collection select {
+      background: url("/assets/select_bg.png") no-repeat;
+      width: 197px;
+      height: 28px;
+      font-size: 13px;
+      padding: 5px 5px 5px 10px;
+      margin-top: 4px;
+      color: #404040;
+      border: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      overflow: hidden;
+    }
+
+    .collection select#card_month {
+      margin-right: 12px;
+    }
+  }
+
+  .card-details {
+    padding: 10px 15px 15px 20px;
+  }
+
+  input.button {
+    margin-top: 1em;
+  }
+
+  #stripe_error {
+    display: block;
+    font-size: 1em;
+    margin-top: 1.85em;
+  }
+}

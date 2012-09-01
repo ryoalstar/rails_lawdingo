@@ -737,7 +737,7 @@ body.offerings.show, body.attorneys.call_payment{
 	}
 }
 
-body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show, body.attorneys.call_payment{
+body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show {
 	html {color:#000;}
 	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td
 	{margin:0;padding:0;}
