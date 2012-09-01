@@ -55,6 +55,7 @@
                     %a.appt-select{:href => '#'}
                 - else
                   %span.text.offline
+                    %a.appt-select{:href => '#'}
                 .video_chat.online.tooltip Start video consultation
                 .voice_chat.online.tooltip Start phone consultation
                 .note_chat.tooltip Ask a question
@@ -88,6 +89,9 @@
                       %a.appt-select{:href => '#'} Schedule a consultation                      
                     %li.text
                       = start_or_schedule_button_text(lawyer)
+            - # content for the modal dialog we are going to display
+            %div{:style => "display:none;"}
+              = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
               -#.lawyer_rates
                 %h5.rate= free_message(lawyer)
                 = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
