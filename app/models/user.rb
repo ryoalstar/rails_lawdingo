@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   def reindex_lawyer!
     self.corresponding_user.reindex!
   end  
-  
+
   def self.authenticate email, password
     user = User.find_by_email(email)
     if user
