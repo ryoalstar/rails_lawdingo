@@ -5,7 +5,7 @@ class Offering < ActiveRecord::Base
     :touch => true
 
     #solr index
-    searchable do
+    searchable :auto_index => true, :auto_remove => true do
       text :description
       text :name
       integer :practice_area_id

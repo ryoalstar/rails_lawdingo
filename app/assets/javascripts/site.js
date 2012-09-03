@@ -507,13 +507,10 @@ $(document).ready(function() {
     checkedLabel: 'Available',
     uncheckedLabel: 'Unavailable',
     onChange: function(elem, value) {
-      if(lawyer_id)
-      {
-        if($(elem)[0].checked==false)
-          $.post("/UpdateOnlineStatus", { op: "set_online_status", is_online: false } );
-        else
-          $.post("/UpdateOnlineStatus", { op: "set_online_status", is_online: true } );
-      }
+      if($(elem)[0].checked==false)
+        $.post("/UpdateOnlineStatus", { op: "set_online_status", is_online: false } );
+      else
+        $.post("/UpdateOnlineStatus", { op: "set_online_status", is_online: true } );
     }
   });
 
@@ -521,13 +518,10 @@ $(document).ready(function() {
     checkedLabel: 'Available',
     uncheckedLabel: 'Unavailable',
     onChange: function(elem, value) {
-      if(lawyer_id)
-      {
-        if($(elem)[0].checked==false)
-          $.post("/UpdateOnlineStatus", { op: "set_phone_status", is_available_by_phone: false } );
-        else
-          $.post("/UpdateOnlineStatus", { op: "set_phone_status", is_available_by_phone: true } );
-      }
+      if($(elem)[0].checked==false)
+        $.post("/UpdateOnlineStatus", { op: "set_phone_status", is_available_by_phone: false } );
+      else
+        $.post("/UpdateOnlineStatus", { op: "set_phone_status", is_available_by_phone: true } );
     }
   });
 

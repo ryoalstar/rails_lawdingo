@@ -34,11 +34,16 @@ class User < ActiveRecord::Base
     :path => "system/:attachment/:id/:style/:basename.:extension"
 
   before_save :normalize_name
+  after_update :reindex_lawyer!, :if => :is_lawyer?
 
   def normalize_name
     self.first_name = self.first_name.squish.titleize if self.first_name
     self.last_name = self.last_name.squish.titleize if self.last_name
   end
+
+  def reindex_lawyer!
+    self.corresponding_user.reindex!
+  end  
 
   def self.authenticate email, password
     user = User.find_by_email(email)

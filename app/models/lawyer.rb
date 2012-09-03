@@ -17,8 +17,12 @@ class Lawyer < User
     end
   end
 
+  def reindex!
+     Sunspot.index!(self)
+  end
+
   #solr index
-  searchable :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
+  searchable :auto_index => true, :auto_remove => true, :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
     text :flat_fee_service_name do
       offering_names if offerings!=[]
     end
@@ -89,10 +93,6 @@ class Lawyer < User
 
   def review_purpos
     reviews.map(&:purpose)*","
-  end
-
-  def reindex!
-     Sunspot.index!(self)
   end
 
   def self.build_search(query, opts = {})
