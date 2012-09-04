@@ -218,14 +218,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       if @user.is_lawyer?
         @user = Lawyer.find(@user.id)
-        @filled_states = @user.states
-        unless @filled_states.blank?
-          filled_state_ids = []
-          @filled_states.each{|state| filled_state_ids << state.id}
-          @states = State.where('id not in (?)', filled_state_ids).all
-        else
-          @states = State.all
-        end
+        fill_states
         @states.count.times {@user.bar_memberships.build}
       end
     rescue
@@ -240,6 +233,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.is_lawyer?
       @user  = Lawyer.find(@user.id)
+      fill_states
       status = @user.update_attributes(params[:lawyer])
       @user.update_attribute :school_id, params[:lawyer][:school_id]
       @user.corresponding_user.practice_areas.delete_all
@@ -794,7 +788,19 @@ class UsersController < ApplicationController
       search = Search.find_or_create_by_query_and_user_id(query, nil) unless page
     end
     search.increment!(:count) if search.is_a? Search
-  end
+  end  
+
+  def fill_states     
+    @filled_states = @user.states
+    unless @filled_states.blank?
+      filled_state_ids = []
+      @filled_states.each{|state| filled_state_ids << state.id}
+      @states = State.where('id not in (?)', filled_state_ids).all
+    else
+      @states = State.all
+    end
+  end 
+
 end
 
 # Obtain lawyers according to sent GET params

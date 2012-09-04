@@ -11,12 +11,19 @@ describe User do
   specify { should validate_presence_of(:rate) }
   specify { should validate_uniqueness_of(:email) }
   specify { should_not allow_value("asdfghj").for(:phone) }
+  specify { should be_valid }
   subject { FactoryGirl.create(:user) }
 
-  describe "validation" do
+  describe "timezone" do
 
-    it "should be valid" do
-      subject.should be_valid
+    it "timezone_utc_offset" do
+      subject.time_zone = 'Lima'
+      subject.timezone_utc_offset.should == -5
+    end
+
+    it "timezone_abbreviation" do
+      subject.time_zone = 'Atlantic Time (Canada)'
+      subject.timezone_abbreviation.should == "ADT"
     end
 
   end

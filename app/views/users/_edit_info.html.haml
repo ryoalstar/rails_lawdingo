@@ -21,7 +21,7 @@
   .profile-block.same_height
     = raw flash[:error]
     - errors = @user.errors
-    = form_for @user, :url =>@user.new_record? ? users_path : user_path(@user), :html=>{:multipart => true} do |f|
+    = form_for @user, :url =>@user.new_record? ? users_path : user_path(@user, :t => User::ACCOUNT_TAB), :html=>{:multipart => true} do |f|
       - unless flash[:error]
         - if errors.size > 0
           .error_explanation
@@ -45,13 +45,7 @@
         %tbody
           %tr
             %td
-              %label Time:
-            %td
-              = f.time_zone_select(:time_zone)          
-              = hidden_field_tag :user_type, @user[:user_type]
-          %tr
-            %td
-              %label First name:
+              %label First Name:
             %td
               = f.text_field :first_name ,{:class=>"name"}
           %tr
@@ -143,6 +137,13 @@
                 %label Phone:
               %td
                 = f.text_field :phone ,{}
+
+            %tr
+              %td
+                %label Time:
+              %td
+                = f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
+                = hidden_field_tag :user_type, @user[:user_type]    
             %tr
               %td 
                 %label Paypal email:

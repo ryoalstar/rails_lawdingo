@@ -133,6 +133,10 @@
                 %li
                   %a.appt-select{:href => "#"}
                     More
+          - if lawyer.time_zone       
+            .times           
+              %span.grey Times in #{lawyer.timezone_abbreviation}
+              = "(#{lawyer.timezone_utc_offset})"            
           .clear
         %a.appt-select.appointments{:href => '#'}
           All available appointments
