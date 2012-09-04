@@ -172,3 +172,156 @@ body.call_payment {
     }
   }
 }
+
+.bio-block {
+  position: relative;
+
+  ul.share {
+    position: absolute;
+    display: block;
+    top: 29px;
+    right: 54px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 4px 4px 3px 4px !important;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+
+    li {
+      display: -moz-inline-stack;
+      display: inline-block;
+      vertical-align: top;
+      zoom: 1;
+      *display: inline;
+    }
+
+    li.facebook {
+      width: 47px;
+    }
+    li.twitter {
+      width: 55px;
+    }
+
+    .connect_widget_simple_including {
+      display: none !important;
+    }
+  }
+}
+
+body.attorneys.show{
+  #wrapper-main{
+   #container{
+     #inline-wrapper{
+       .left-bars-block{
+         .left-bar{
+           padding-top:0;
+           .info-header{
+             padding-bottom:12px;
+             background: #1e5799; /* Old browsers */
+             background: -moz-linear-gradient(top,  #1e5799 0%, #fcfdfd 0%, #f0f4f7 100%); /* FF3.6+ */
+             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(0%,#fcfdfd), color-stop(100%,#f0f4f7)); /* Chrome,Safari4+ */
+             background: -webkit-linear-gradient(top,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* Chrome10+,Safari5.1+ */
+             background: -o-linear-gradient(top,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* Opera 11.10+ */
+             background: -ms-linear-gradient(top,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* IE10+ */
+             background: linear-gradient(to bottom,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* W3C */
+             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#f0f4f7',GradientType=0 ); /* IE6-9 */
+             -webkit-border-top-left-radius: 5px;
+             -webkit-border-top-right-radius: 5px;
+             -moz-border-radius-topleft: 5px;
+             -moz-border-radius-topright: 5px;
+             border-top-left-radius: 5px;
+             border-top-right-radius: 5px;
+             h2{
+               margin-top:1px;
+               padding-top:12px;
+             }
+           }
+         }
+       }
+       .main_content{
+         .appointments{
+           float: left;
+           width: 100%;
+           text-align: center;
+           a.appt-select{
+             font-size: 11px;
+             text-transform: uppercase;
+             font-weight: bold;
+           }
+         }
+         .bio-block{
+           .middle{
+             h1{
+               float:none;
+             }
+             h1.gray{
+               color: #303030;
+             }
+             h3{
+               //margin-top:-13px;
+             }
+             a.free{
+               border-bottom:none;
+             }
+             .button_tooltip{
+               margin-left: -4px;
+               margin-top: 47px;
+             }
+             .price{
+               .free_dropdown{
+                 margin-top:0;
+               }
+               a.free{
+                 border-bottom:0;
+                 margin-top:0;
+                 margin-left:17px;
+               }
+               .button_tooltip{
+                 margin-top: 37px;
+                 margin-left: 13px;
+                 ul{
+                   li{
+                     a{
+                        border-bottom:0;
+                      }
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   } 
+  }
+
+}
+
+body.attorneys {
+  .offers-container {
+    margin: 1.25em 0 1.667em 0;
+
+    h3 {
+      margin: 0 0 0.133em 0; 
+    }
+  }
+
+  .hide_on_attorneys {
+    display: none;
+  }
+
+  .offering {
+    h3 {
+      font-size: 1.25555em;
+    }
+    
+    .info {
+      margin-left: 0 !important;
+    }
+  }
+}
+
+

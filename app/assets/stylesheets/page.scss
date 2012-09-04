@@ -704,3 +704,55 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
+#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion{
+  margin-bottom:10px;
+  .field_with_errors{
+    input{
+      border:1px solid #feacac;            
+      -moz-box-shadow:0px 0px 3px 3px #FDE6E3;
+      -webkit-box-shadow:0px 0px 3px 3px #FDE6E3;
+      box-shadow:0px 0px 3px 3px #FDE6E3;
+    }
+    input.email, input.passw{
+      margin-bottom:0;
+    }
+    input.phone{
+      margin:10px 0;
+    }
+    label.message{
+      -moz-box-shadow:0px 0px 5px 1px #ACACAC;
+      -webkit-box-shadow:0px 0px 5px 1px #ACACAC;
+      box-shadow:0px 0px 5px 1px #ACACAC;
+      border:1px solid #c56464;
+      color:#882b2b;
+      background:url('error_notice_bg.png')repeat-x;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      padding:5px;
+      margin-top:2px;
+    }
+    .error_notice{
+      float: right;
+      margin-right: -19px;
+      label{
+        float:right;
+      }
+      .arrow{
+        margin-top: -5px;
+        margin-left:79px;
+        background:url('error_tooltip_arrow.png') no-repeat;
+        display:block;
+        width:11px;
+        height:9px;
+        position:absolute;
+      }
+    }
+  }
+  #div_practice_areas, #div_states_barids{
+    h2{
+      margin:5px;
+    }
+  }
+}
+

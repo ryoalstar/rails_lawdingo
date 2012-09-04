@@ -20,50 +20,6 @@ html, body{
   position:fixed;
   top:0;
 }
-body.users.home{
-  .ui-dialog{
-    width: 540px !important;
-    h2{
-      text-align:center;
-    }
-    p{
-      text-align:center;
-    }
-    h2.appointment-info{
-      color:red;
-      margin:20px 0;
-    }
-    h3{
-      text-align:center;
-      margin-bottom:5px;
-    }
-    hr{
-      margin: 8px -29px 8px;
-    }
-    .error{
-      text-align:center;
-    }
-    .button{
-      font-size: 16px;
-      color:white;
-      margin-top: 6px;
-      font-weight: bold;
-      padding: 0 11px;
-    }
-    .appointment-form{
-      padding: 0 20px;
-    }
-    .consutation_scheduled{
-      height:180px !important;
-      h2{
-        text-align:left;
-      }
-      p{
-        text-align:left;
-      }
-    }
-  }
-}
 #header > #header_border{
   height:2px;
   background: image-url('header_shadow.png') repeat-x;
@@ -202,6 +158,7 @@ body.users.home{
   font-size:16px !important;
   color:#a8a8a8;
 }
+
 #page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion{
   margin-bottom:10px;
   .field_with_errors{
@@ -263,6 +220,7 @@ body.users.home{
     }
   }
 }
+
 #div_states_barids{
   float:left;
   width:100%;
@@ -271,33 +229,14 @@ body.users.home{
   float: left;
   width: 100%;
 }
-body.users.create_phone_call{
-  #wrapper-main{
-    #container{
-      .call-container{
-        #payment_div{
-          float: none !important;
-          margin: 0 auto;
-          padding-left: 63px;
-        }
-      }
-    }
-  }
-}
+
 .lawyer_notice{
   color:red;
   text-align:center;
   font-size:16px !important;
   font-weight:normal !important;
 }
-body.offerings.index .lawyer_notice{
-  padding-top:19px;
-}
-body.daily_hours.index{
-  #page{
-    //padding-top:0;
-  }
-}
+
 #page.lawyer_edit > div{
   padding: 20px 45px;
 }
@@ -342,12 +281,7 @@ body.daily_hours.index{
     }
   }
 }
-body.offerings.index #container .offerings#page .profile{
-  .profile-block.same_height{
-    padding-top:0;
-    padding-left:0;
-  }
-}
+
 body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
   #page > div{
     width:960px;
@@ -779,120 +713,7 @@ body.index.logged-in, body.users.show.logged-in{
     }
   }
 }
-body.users.show.logged-in{
-  #page.session-summary > div{
-    .profile.summary_of_sessions{
-      .profile-block{
-        padding:0px;
-        width:757px;
-        -webkit-border-top-right-radius: 8px;
-        -webkit-border-bottom-right-radius: 8px;
-        -moz-border-radius-topright: 8px;
-        -moz-border-radius-bottomright: 8px;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-        h2{
-          margin:0;
-          font-size:15px;
-          color:#272727;
-          border-bottom:1px solid #e2e3e5;
-          padding:20px 30px;
-          -webkit-border-top-right-radius: 8px;
-          -moz-border-radius-topright: 8px;
-          border-top-right-radius: 8px;
-          background: #fcfdfd; /* Old browsers */
-          background: -moz-linear-gradient(top,  #fcfdfd 0%, #f0f4f7 100%); /* FF3.6+ */
-          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfdfd), color-stop(100%,#f0f4f7)); /* Chrome,Safari4+ */
-          background: -webkit-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Chrome10+,Safari5.1+ */
-          background: -o-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Opera 11.10+ */
-          background: -ms-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* IE10+ */
-          background: linear-gradient(to bottom,  #fcfdfd 0%,#f0f4f7 100%); /* W3C */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfdfd', endColorstr='#f0f4f7',GradientType=0 ); /* IE6-9 */  
-        }
-        p{
-          padding:0px 29px 0px 30px;
-          color:#404040;
-          font-size:14px;
-        }
-        table.summary{
-          border-spacing: 0;
-          margin-bottom:0;
-          thead{
-            background: #fafafa; /* Old browsers */
-            background: -moz-linear-gradient(top,  #fafafa 0%, #f2f2f2 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  #fafafa 0%,#f2f2f2 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
-            td{
-              color:#3f3f3f;
-              padding:14px 10px;
-            }
-          }
-          tr{
-          }
-          td{
-            font-size:13px;
-            border-bottom:1px solid #e2e3e5;
-            border-right: 1px solid #e2e3e5;
-            text-align:center;
-            vertical-align:center;
-            padding:15px 10px;
-          }
-          tr.gray{
-            background:#f4f5f7;
-          }
-          td.last{
-            border-right: none;
-          }
-        }
-      }
-    }
-  }
-}
-body.daily_hours.index.logged-in{
-  #page > div{
-    .profile{
-      width:100%;
-      .profile-block{
-        padding-left:0;
-        width:757px;
-        ul{
-          margin-bottom:20px;
-          list-style: none;
-          li.gray{
-            background-color:#f4f5f7;
-            border-top:1px solid #eeeeee;
-            border-bottom:1px solid #eeeeee;
-          }
-          li{
-            padding: 10px 0 10px 40px;
-            color:#4d4d4d;
-            select{
-              margin: 0 30px;
-            }
-            b{
-              color: #272727;
-              padding-top:10px;
-            }
-          }
-          li:first-child{
-            padding-top:0;
-          }
-          li.last{
-            text-align:center;
-            .button{
-              width: 235px;
-              margin-top: 15px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+
 ul.tick{
   li{
     line-height: 25px;
@@ -904,100 +725,7 @@ ul.tick{
 .center{
   text-align:center;
 }
-body.attorneys.show{
-  #wrapper-main{
-   #container{
-     #inline-wrapper{
-       .left-bars-block{
-         .left-bar{
-           padding-top:0;
-           .info-header{
-             padding-bottom:12px;
-             background: #1e5799; /* Old browsers */
-             background: -moz-linear-gradient(top,  #1e5799 0%, #fcfdfd 0%, #f0f4f7 100%); /* FF3.6+ */
-             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(0%,#fcfdfd), color-stop(100%,#f0f4f7)); /* Chrome,Safari4+ */
-             background: -webkit-linear-gradient(top,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* Chrome10+,Safari5.1+ */
-             background: -o-linear-gradient(top,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* Opera 11.10+ */
-             background: -ms-linear-gradient(top,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* IE10+ */
-             background: linear-gradient(to bottom,  #1e5799 0%,#fcfdfd 0%,#f0f4f7 100%); /* W3C */
-             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#f0f4f7',GradientType=0 ); /* IE6-9 */
-             -webkit-border-top-left-radius: 5px;
-             -webkit-border-top-right-radius: 5px;
-             -moz-border-radius-topleft: 5px;
-             -moz-border-radius-topright: 5px;
-             border-top-left-radius: 5px;
-             border-top-right-radius: 5px;
-             h2{
-               margin-top:1px;
-               padding-top:12px;
-             }
-           }
-         }
-       }
-       .main_content{
-         .appointments{
-           float: left;
-           width: 100%;
-           text-align: center;
-           a.appt-select{
-             font-size: 11px;
-             text-transform: uppercase;
-             font-weight: bold;
-           }
-         }
-         .bio-block{
-           .middle{
-             h1{
-               float:none;
-             }
-             h1.gray{
-               color: #303030;
-             }
-             h3{
-               //margin-top:-13px;
-             }
-             a.free{
-               border-bottom:none;
-             }
-             .button_tooltip{
-               margin-left: -4px;
-               margin-top: 47px;
-             }
-             .price{
-               .free_dropdown{
-                 margin-top:0;
-               }
-               a.free{
-                 border-bottom:0;
-                 margin-top:0;
-                 margin-left:17px;
-               }
-               .button_tooltip{
-                 margin-top: 37px;
-                 margin-left: 13px;
-                 ul{
-                   li{
-                     a{
-                        border-bottom:0;
-                      }
-                   }
-                 }
-               }
-             }
-           }
-         }
-       }
-     }
-   } 
-  }
 
-}
-body.users.start_phone_call{
-  p.notice{
-    margin-bottom:25px;
-    text-align:center;
-  }
-}
 // error styles
 div.error {
 	padding: 3px;
@@ -1048,6 +776,7 @@ body.offerings.show, body.attorneys.call_payment{
 		}
 	}
 }
+<<<<<<< HEAD
 body.users.landing_page, body.users.learnmore{
   .new_question#new_question{
     background-color:rgba(0,0,0,0.1);
@@ -1140,6 +869,8 @@ body.users.landing_page, body.users.learnmore{
 		}
 	}
 }
+=======
+>>>>>>> 66ae641... issue # 35448813 Add tweet button to lawyer profile
 body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show, body.attorneys.call_payment{
 	html {color:#000;}
 	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td
@@ -3285,41 +3016,6 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 	}
 }
 
-.bio-block {
-  position: relative;
-
-  ul.share {
-    position: absolute;
-    display: block;
-    top: 29px;
-    right: 54px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    padding: 4px 4px 3px 4px !important;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-    -moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-
-    li {
-      display: -moz-inline-stack;
-      display: inline-block;
-      vertical-align: top;
-      zoom: 1;
-      *display: inline;
-    }
-
-    li.facebook {
-      width: 47px;
-    }
-
-    .connect_widget_simple_including {
-      display: none !important;
-    }
-  }
-}
-
 .availability {
   width: 680px;
 
@@ -3339,9 +3035,4 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
   .iPhoneCheckContainer{
     float: right;
   }
-}
-
-label.iPhoneCheckLabelOn, label.iPhoneCheckLabelOff {
-  margin: 0 0 0 0 !important;
-  color: white !important;
 }
