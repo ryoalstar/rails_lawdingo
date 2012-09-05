@@ -34,13 +34,8 @@ class Home
     Home.s[65] = 3
     Home.s[0] = 4
 
-    if document.location.pathname != "/lawyers"
-      document.location.hash = "!#{document.location.pathname}"
-
-    if document.location.hash == ""
-      this.set_defaults(default_state)
-      this.submit()
-    else
+    unless document.location.hash == ""
+      this.set_defaults()
       this.read_hash()
       this.submit()
   equalHeight = (group) ->

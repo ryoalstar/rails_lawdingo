@@ -31,7 +31,7 @@ class PracticeArea < ActiveRecord::Base
   scope :child_practice_areas_having_lawyers, joins(:expert_areas, :lawyers).where("parent_id is not null").select("distinct(practice_areas.id)")
 
   scope :name_like, lambda{|name|
-    name_parts = name.split(/[^\w]+/)
+    name_parts = name.gsub(/-/,' ').split(/[^\w]+/)
     quoted_name_parts = name_parts.collect{|n| 
       self.connection.quote_string(n)
     }
@@ -51,5 +51,11 @@ class PracticeArea < ActiveRecord::Base
       self.is_national
     end
   end
+
+  def name_for_url
+    return '' unless self.name
+    self.name.squish.gsub(/\s/,'-')
+  end  
+
 end
 

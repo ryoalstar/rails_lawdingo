@@ -685,6 +685,7 @@ class UsersController < ApplicationController
     @search.build do
       with(:state_ids, [state_id])
     end if state_id
+    @state_id = state_id
    end
 
   def add_free_time_scope
@@ -763,6 +764,7 @@ class UsersController < ApplicationController
       @search.build do
         service_type == "legal-services" ? with(:practice_area_id, area_id) : with(:practice_area_ids, [area_id])
       end if area_id
+      @area_id = area_id
     end
   end
 
