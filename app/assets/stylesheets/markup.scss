@@ -720,6 +720,120 @@ body.index.logged-in, body.users.show.logged-in{
     }
   }
 }
+body.users.show.logged-in{
+  #page.session-summary > div{
+    .profile.summary_of_sessions{
+      .profile-block{
+        padding:0px;
+        width:757px;
+        -webkit-border-top-right-radius: 8px;
+        -webkit-border-bottom-right-radius: 8px;
+        -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomright: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        h2{
+          margin:0;
+          font-size:15px;
+          color:#272727;
+          border-bottom:1px solid #e2e3e5;
+          padding:20px 30px;
+          -webkit-border-top-right-radius: 8px;
+          -moz-border-radius-topright: 8px;
+          border-top-right-radius: 8px;
+          background: #fcfdfd; /* Old browsers */
+          background: -moz-linear-gradient(top,  #fcfdfd 0%, #f0f4f7 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfdfd), color-stop(100%,#f0f4f7)); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* IE10+ */
+          background: linear-gradient(to bottom,  #fcfdfd 0%,#f0f4f7 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfdfd', endColorstr='#f0f4f7',GradientType=0 ); /* IE6-9 */  
+        }
+        p{
+          padding:0px 29px 0px 30px;
+          color:#404040;
+          font-size:14px;
+        }
+        table.summary{
+          border-spacing: 0;
+          margin-bottom:0;
+          thead{
+            background: #fafafa; /* Old browsers */
+            background: -moz-linear-gradient(top,  #fafafa 0%, #f2f2f2 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #fafafa 0%,#f2f2f2 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+            td{
+              color:#3f3f3f;
+              padding:14px 10px;
+            }
+          }
+          tr{
+          }
+          td{
+            font-size:13px;
+            border-bottom:1px solid #e2e3e5;
+            border-right: 1px solid #e2e3e5;
+            text-align:center;
+            vertical-align:center;
+            padding:15px 10px;
+          }
+          tr.gray{
+            background:#f4f5f7;
+          }
+          td.last{
+            border-right: none;
+          }
+        }
+      }
+    }
+  }
+}
+body.daily_hours.index.logged-in{
+  #page > div{
+    .profile{
+      width:100%;
+      .profile-block{
+        padding-left:0;
+        width:757px;
+        ul{
+          margin-bottom:20px;
+          list-style: none;
+          li.gray{
+            background-color:#f4f5f7;
+            border-top:1px solid #eeeeee;
+            border-bottom:1px solid #eeeeee;
+          }
+          li{
+            padding: 10px 0 10px 40px;
+            color:#4d4d4d;
+            select{
+              margin: 0 30px;
+            }
+            b{
+              color: #272727;
+              padding-top:10px;
+            }
+          }
+          li:first-child{
+            padding-top:0;
+          }
+          li.last{
+            text-align:center;
+            .button{
+              width: 235px;
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 ul.tick{
   li{
