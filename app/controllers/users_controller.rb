@@ -349,58 +349,45 @@ class UsersController < ApplicationController
   end
 
   def create_phone_call
-    unless params[:client_number].blank?
-      @lawyer = Lawyer.find(params[:lawyer_id])
-      @client = Twilio::REST::Client.new(
-        'ACc97434a4563144d08e48cabd9ee4c02a', 
-        '3406637812b250f4c93773f0ec3e4c6b'
-      )
-
-      # Save entered phone number as current user's phone
-      current_user.update_attribute(:phone, params[:client_number].to_i) if current_user.is_client?
-
-     # make a new outgoing call
-     begin
-      @call = @client.account.calls.create(
-        :From => TWILIO_FROM,
-        :To => @lawyer.phone,
-        :Url => twilio_voice_url(:cn => params[:client_number], :free_duration => @lawyer.free_consultation_duration, :lrate => @lawyer.rate),
-        :FallBackUrl => twilio_fallback_url,
-        :StatusCallback => twilio_callback_url
-      )
-      Call.create(:client_id => current_user.id, :from => params[:client_number], :to =>@lawyer.phone, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
-     rescue
-       redirect_to phonecall_path(:id=>params[:lawyer_id], :notice => "Error: making a call")
-     end
+    if params[:client_number].blank?
+      redirect_to phonecall_path(id: params[:lawyer_id], notice: "Please enter your phone number.")
     else
-      redirect_to phonecall_path(:id=>params[:lawyer_id], number: params[:client_number]), :notice => "Please enter you phone number"
-    end
-  end
+      current_user.update_attribute(:phone, params[:client_number]) if current_user.is_client?
 
-  def end_phone_call
-    @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
-    @call = @client.account.calls.get(params[:call_id])
-    @call.hangup
-    render :text => "", :layout => false
+      @lawyer = Lawyer.find(params[:lawyer_id])
+      @client = Twilio::REST::Client.new(Twilio::ACCOUNT_SID, Twilio::AUTH_TOKEN)
+
+      # Call the client, son
+      @call = @client.account.calls.create(
+        from: Twilio::FROM,
+        to: current_user.phone,
+        url: twilio_welcome_url(
+          lawyer_rate: @lawyer.rate,
+          lawyer_number: @lawyer.phone,
+          client_number: current_user.phone,
+          duration_for_free: @lawyer.free_consultation_duration
+        ),
+        fallbackurl: twilio_fallback_url,
+        statuscallback: twilio_callback_url
+      )
+
+      Call.create do |call|
+        call.client_id  = current_user.id
+        call.lawyer_id  = @lawyer.id
+        call.from       = current_user.phone
+        call.to         = @lawyer.phone
+        call.sid        = @call.sid
+        call.status     = "dialing"
+        call.start_date = Time.now
+      end
+    end
   end
 
   def check_call_status
     @call = Call.find_by_sid(params[:call_id])
-    if @call.status == 'dialing' || @call.status == 'connected' || @call.status == 'billed'
-    elsif @call.status == 'completed'
-      call_conversation = Conversation.find(@call.conversation_id)
 
-      unless (@call.call_duration == 0) || (@call.digits != 1)
-        form = "review"
-      else
-        form = "report"
-      end
-
-      render :js => "window.location = '#{conversation_summary_path(call_conversation, call_type: 'phonecall', form: form)}'", :notice => "Your call is completed"
-      return
-    else
-      render :js => "window.location = '#{conversation_summary_path(call_conversation, call_type: 'phonecall', form: 'report')}'"
-      return
+    unless @call.status == 'dialing' || @call.status == 'connected' || @call.status == 'billed'
+      render js: "window.location = '#{conversation_summary_path(@call.conversation, call_type: 'phonecall', form: 'review')}'", :notice => "Your call is completed"
     end
   end
 

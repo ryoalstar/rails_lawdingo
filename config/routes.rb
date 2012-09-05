@@ -133,11 +133,6 @@ Lawdingo::Application.routes.draw do
   match '/twilio/phonecall' => 'users#start_phone_call', :as => :phonecall
   match '/twilio/createcall' => 'users#create_phone_call', :as => :create_call
   match '/twilio/endcall' => 'users#end_phone_call', :as => :endcall
-  match '/twilio/voice' => 'twilio#twilio_return_voice', :as => :twilio_voice
-  match '/twilio/process_gather' => 'twilio#process_gather', :as => :process_gather
-  match '/twilio/fallback' => 'twilio#fallback', :as => :twilio_fallback
-  match '/twilio/callback' => 'twilio#callbackstatus', :as => :twilio_callback
-  match '/twilio/dial_callback' => 'twilio#dial_callback', :as =>:dial_callback
   match '/search' => 'users#search'
   match '/search/populate_specialities' => 'search#populate_specialities'
   # Temporary route for the next home page
@@ -150,11 +145,22 @@ Lawdingo::Application.routes.draw do
   match '/UpdateCallStatus' => 'users#update_call_status'
   # match '/results' => "users#home", :as => :results
 
+  # New phone calls flow routes
+  match "/twilio/welcome", to: "twilio#welcome", as: :twilio_welcome
+  match "/twilio/dial-lawyer", to: "twilio#dial_lawyer", as: :twilio_dial_lawyer
+  match "/twilio/goodbye", to: "twilio#goodbye", as: :twilio_goodbye
+  match "/twilio/callback", to: "twilio#callback", as: :twilio_callback
+  match "/twilio/fallback", to: "twilio#fallback", as: :twilio_fallback
+  match "/twilio/conference", to: "twilio#connect_to_conference", as: :twilio_conference
+  match "/twilio/hangup", to: "twilio#hangup", as: :twilio_hangup
+  match "/twilio/check-call-status", to: "twilio#check_call_status", as: :twilio_check_call_status
+  match "/twilio/update-call-status", to: "twilio#update_call_status", as: :twilio_update_call_status
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
   #root :to => 'users#home'
-  
+
   match '/lawyers/:service_type(/:state)' => 'users#home'
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
   match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home'
