@@ -33,6 +33,13 @@ class User < ActiveRecord::Base
     :s3_protocol => "https",
     :path => "system/:attachment/:id/:style/:basename.:extension"
 
+  before_save :normalize_name
+
+  def normalize_name
+    self.first_name = self.first_name.squish.titleize if self.first_name
+    self.last_name = self.last_name.squish.titleize if self.last_name
+  end
+
   def self.authenticate email, password
     user = User.find_by_email(email)
     if user
