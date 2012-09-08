@@ -46,6 +46,13 @@ module Lawdingo
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    config.after_initialize do
+      # Test/Dev mode Stripe Keys
+      Stripe.api_key = "QbaDHDaP9lgeO12Z41JfwfUQ0u1EeQp3"
+      #test mode public key
+      STRIPE_PUBLIC_KEY = "pk_queCsxzkU4Hxf6lzDLXNzdQqkxNfI"
+    end
+
     config.generators do |g|
       g.test_framework :rspec, :views => true
       #g.fixture_replacement :factory_girl, :dir => 'spec/factories'

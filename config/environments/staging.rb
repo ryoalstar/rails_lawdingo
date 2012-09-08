@@ -55,14 +55,9 @@ Lawdingo::Application.configure do
 
   config.force_ssl = false
 
-  config.after_initialize do
-    Stripe.api_key = "bpEQeNExwRmbUPhULtvuxvIIdiszDAsM"
-    STRIPE_PUBLIC_KEY = "pk_nhHiYxc2FBJLSEkQ9esXEbmXgvmnW"
-  end
-
   # Send email with an error log each time an exception is raised
   config.middleware.use ExceptionNotifier,
-    email_prefix: "[Lawdingo] ",
+    email_prefix: "[Lawdingo STAGING]",
     sender_address: "notifier@lawdingo.com",
     exception_recipients: %w{nikhil.nirmel@gmail.com},
     ignore_exceptions: ExceptionNotifier.default_ignore_exceptions
