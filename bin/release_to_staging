@@ -31,14 +31,14 @@ class ReleaseToStaging
         Kernel.exit
       end
 
-      # self.rebase
+      self.rebase
 
-      # if self.ask("Do you want to run the tests?")
-      #   self.run_tests
-      # else 
-      #   puts "\nOK - Make sure to run them on your own!\n"
-      #   Kernel.exit
-      # end
+      if self.ask("Do you want to run the tests?")
+        self.run_tests
+      else 
+        puts "\nOK - Make sure to run them on your own!\n"
+        Kernel.exit
+      end
 
       if self.ask("Do you want to release to #{self.qa_dir} in qa?")
         self.push_to_github
