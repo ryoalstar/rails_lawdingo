@@ -3,6 +3,11 @@ require 'spec_helper'
 describe "/daily_hours/index" do
 
   before(:each) do
+    view.stubs(
+      :current_user => lawyer,
+      :action_name => "index",
+      :controller_name => "daily_hours"
+    )
     assign(:lawyer, lawyer)
     assign(:daily_hours, lawyer.daily_hours)
   end

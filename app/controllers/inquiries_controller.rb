@@ -6,7 +6,7 @@ class InquiriesController < ApplicationController
 
     # Create a new bid only if logged in user is a lawyer
     if logged_in? && current_user.is_lawyer?
-      @bid = Lawyer.find(current_user).bids.new
+      @bid = current_user.becomes(Lawyer).bids.build
     end
   end
 

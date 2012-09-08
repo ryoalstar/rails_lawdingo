@@ -17,12 +17,7 @@ class AppointmentsController < ApplicationController
         if @appointment.new_record?
           return render(:status => :unprocessable_entity)
         else
-          begin
-            AppointmentMailer.appointment_created(@appointment).deliver
-          rescue => e
-            debugger
-            true
-          end
+          AppointmentMailer.appointment_created(@appointment).deliver
           return render(:status => :created)
         end
       end

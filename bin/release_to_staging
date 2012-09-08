@@ -95,12 +95,13 @@ class ReleaseToStaging
       ]
 
       # create the branch if it doesn't exist
-      unless branch_exists
-        commands <<  "git branch -t #{self.original_branch} " + 
-                        "origin/#{self.original_branch}"
+      if branch_exists
+        commands << "git checkout master"
+        commands << "git branch -D #{self.original_branch}"
       end
         
       commands += [
+        "git branch -t #{self.original_branch} origin/#{self.original_branch}",
         # now check out our branch
         "git checkout #{self.original_branch}",
         "git pull origin #{self.original_branch}",

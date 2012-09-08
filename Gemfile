@@ -22,9 +22,10 @@ end
 gem 'sunspot_rails' #fork for rails
 gem 'sunspot_solr'  #Solr
 gem 'progress_bar'  #for_re-index
-  group :test, :development do
-      gem "sunspot-rails-tester" #for test
-  end
+
+group :test, :development do
+  gem "sunspot-rails-tester" #for test
+end
 
 gem 'jquery-rails'
 gem "therubyracer"
@@ -34,6 +35,7 @@ gem 'aws-s3'
 gem "rabl"
 gem "draper"
 #gem 'pg'
+
 gem 'stripe'
 gem 'rack-ssl', :require => 'rack/ssl'
 gem 'openssl-extensions', '1.1.0'
@@ -48,23 +50,17 @@ gem 'framey'
 gem 'oauth'
 gem 'haml-rails'
 gem 'dynamic_sitemaps'
-gem 'exception_notification'
-#gem "psych"
-# Use unicorn as the web server
-#gem 'unicorn'
 
 # Handling cron jobs
 gem 'whenever', require: false
 
-# Deploy with Capistrano
-gem 'capistrano'
-
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
-#  gem 'ruby-debug19', :require => "ruby-debug"
+  #gem 'ruby-debug19', :require => "ruby-debug"
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'thin'
 end
 
 group :test do
@@ -74,17 +70,19 @@ group :test do
   gem "capybara"
   gem 'database_cleaner'
   gem "factory_girl_rails"
+  gem 'faker'
+  gem "guard-bundler"
   gem "guard-rspec"
+  gem "guard-spork"
   gem "mocha", require: false
   gem "timecop"
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
-  gem 'ruby-debug19', :require => 'ruby-debug'
-  gem "spork"
-  gem 'watchr'
-  gem 'faker'
+  gem 'debugger' 
   gem 'shoulda'
   gem 'shoulda-matchers'
 end
 
-gem 'thin'
+group :staging, :production do
+  gem 'exception_notification'
+end

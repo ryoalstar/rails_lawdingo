@@ -358,7 +358,10 @@ class UsersController < ApplicationController
   def create_phone_call
     unless params[:client_number].blank?
       @lawyer = Lawyer.find(params[:lawyer_id])
-      @client = Twilio::REST::Client.new 'ACc97434a4563144d08e48cabd9ee4c02a', '3406637812b250f4c93773f0ec3e4c6b'
+      @client = Twilio::REST::Client.new(
+        'ACc97434a4563144d08e48cabd9ee4c02a', 
+        '3406637812b250f4c93773f0ec3e4c6b'
+      )
 
       # Save entered phone number as current user's phone
       current_user.update_attribute(:phone, params[:client_number].to_i) if current_user.is_client?
@@ -370,7 +373,7 @@ class UsersController < ApplicationController
         :To => @lawyer.phone,
         :Url => twilio_voice_url(:cn => params[:client_number], :free_duration => @lawyer.free_consultation_duration, :lrate => @lawyer.rate),
         :FallBackUrl => twilio_fallback_url,
-        :StatusCallback => twilio_callback_url,
+        :StatusCallback => twilio_callback_url
       )
       Call.create(:client_id => current_user.id, :from => params[:client_number], :to =>@lawyer.phone, :lawyer_id => @lawyer.id, :sid => @call.sid, :status => 'dialing', :start_date => Time.now)
      rescue

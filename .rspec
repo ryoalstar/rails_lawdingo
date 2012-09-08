@@ -1,4 +1,6 @@
 --colour
 --format documentation
+-p
 -X
+--backtrace
 

@@ -4,20 +4,27 @@ describe BidsController do
   DatabaseCleaner.clean
 
   context "#create" do
-    before :each do
-      @inquiry = FactoryGirl.create(:inquiry)
-      @alan = FactoryGirl.create(:lawyer, first_name: "Alan", stripe_customer_token: "cus_PqhSJctocrjC3B")
-      @bid = FactoryGirl.build(:bid, amount: 10, lawyer_id: @alan.to_param, inquiry_id: @inquiry.to_param)
+    
+    let(:bid) do
+      FactoryGirl.build_stubbed(:bid)
+    end
+
+    let(:bid_attrs) do
+      {"amount" => 10}
     end
 
     it "send email notification when new bid submitted" do
+
+      bid.stubs(:save_with_payment => true)
+      Bid.expects(:new).returns(bid)
+      
       expect {
-        post :create, bid: @bid.attributes
+        post :create, bid: bid_attrs
       }.to change(ActionMailer::Base.deliveries, :size).by(1)
 
       email = ActionMailer::Base.deliveries.last
       email.to.should include "nikhil.nirmel@gmail.com"
-      email.subject.should match /Bid ##{Bid.last.id} submitted/
+      email.subject.should match /Bid ##{bid.id} submitted/
     end
   end
 end

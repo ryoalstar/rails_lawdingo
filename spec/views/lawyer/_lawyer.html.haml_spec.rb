@@ -11,6 +11,9 @@ describe "/lawyer/_lawyer" do
       lawyer.stubs(:next_available_days).with(2).returns([
         Date.today, Date.tomorrow
       ])
+      lawyer.stubs(:next_available_days).with(4).returns([
+        Date.today, Date.tomorrow, Date.today + 2, Date.today + 3
+      ])
       lawyer.stubs(:available_times).returns([
         Time.now, 
         Time.now + 30.minutes, 
@@ -25,7 +28,7 @@ describe "/lawyer/_lawyer" do
       :partial => "/lawyer/lawyer", 
       :locals => {:lawyer => LawyerDecorator.new(lawyer)}
     )
-    lawyer.next_available_days(2).each do |day|
+    lawyer.next_available_days(4).each do |day|
       lawyer.available_times.each do |t|
         rendered.should have_selector("a[data-time='#{t.to_s(:db)}']")
       end

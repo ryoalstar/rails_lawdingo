@@ -3,13 +3,11 @@ require 'spec_helper'
 describe DailyHoursController do
 
   let(:lawyer) do
-    lawyer = Lawyer.new
-    lawyer.stubs(:id => 4)
-    lawyer
+    FactoryGirl.build_stubbed(:lawyer)
   end
 
   before(:each) do
-    Lawyer.expects(:find).with("4").returns(lawyer)
+    Lawyer.expects(:find).with(lawyer.id.to_s).returns(lawyer)
   end
 
   context "GET /users/:id/daily_hours" do
@@ -20,7 +18,7 @@ describe DailyHoursController do
       
       lawyer.expects(:daily_hours).returns(daily_hours)
 
-      get(:index, :user_id => "4")
+      get(:index, :user_id => lawyer.id)
 
       assigns["lawyer"].should eql(lawyer)
       assigns["daily_hours"].should eql(daily_hours)
@@ -36,10 +34,10 @@ describe DailyHoursController do
       dh = {
         "1" => {:start_time => 800, :end_time => 1200}
       }
-      # 
-      lawyer.stubs(:save => true)
 
-      put(:update, :user_id => "4", :daily_hours => dh)
+      lawyer.stubs(:save => true)
+    
+      put(:update, :user_id => lawyer.id, :daily_hours => dh)
 
       assigns["lawyer"].should eql(lawyer)
       # should have 7 daily_hours

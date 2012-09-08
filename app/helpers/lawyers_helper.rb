@@ -246,13 +246,13 @@ module LawyersHelper
  end
   
   def selected_lawyers_caption
-    is_are = @search.total == 1 ? "is" : "are"
-    ct = @search.total == 0 ? "no" : @search.total.to_s
+    is_are = @search.total == 1 ? "is " : "are "
+    ct = @search.total == 0 ? "no " : "#{@search.total} "
     lawyers_string = @search.total == 1 ? "lawyer" : "lawyers"
-    parent_practice_area_string = params[:practice_area] if !!params[:practice_area] && params[:practice_area]!='All'
-    return "There #{is_are} #{ct}#{selected_state_string}" +
-      " #{parent_practice_area_string} #{lawyers_string} " +
-      "who can offer you legal advice #{child_practice_area_string} " +
+
+    return "There #{is_are}#{ct}#{selected_state_string}" +
+      "#{parent_practice_area_string}#{lawyers_string} " +
+      "who can offer you legal advice #{child_practice_area_string}" +
       "right now."
   end
 
@@ -267,24 +267,21 @@ module LawyersHelper
   end
 
   def selected_state_string
-    @selected_state.present? ? " #{@selected_state.name}" : ""
+    @selected_state.present? ? "#{@selected_state.name} " : ""
   end
 
   def parent_practice_area_string
-    if @selected_practice_area.present?
-      if @selected_practice_area.parent_name.present?
-        return " #{@selected_practice_area.parent_name.downcase}"
-      else
-        return " #{@selected_practice_area.name.downcase}"
-      end
+    if params[:practice_area].present? && params[:practice_area] != "All"
+      return "#{params[:practice_area]} ".downcase
+    else
+      return ""
     end
-    return ""
   end
 
   def child_practice_area_string
     return "" unless @selected_practice_area.present?
     return "" unless @selected_practice_area.parent_name.present?
-    return " on #{@selected_practice_area.name.downcase}"
+    return "on #{@selected_practice_area.name.downcase} "
   end
 
   def tooltips lawyer

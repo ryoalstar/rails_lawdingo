@@ -18,6 +18,8 @@ Lawdingo::Application.configure do
   config.assets.compress = true
   config.assets.digest = true
 
+  config.assets.allow_debugging = true
+
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx

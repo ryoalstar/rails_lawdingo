@@ -11,7 +11,7 @@ describe AppointmentsController do
 
     let(:current_user) do
       Client.new do |c|
-        c.stubs(:id => 1, :new_record? => false)
+        c.stubs(:id => 1, :new_record? => false, :becomes => c)
       end
     end
 

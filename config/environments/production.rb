@@ -57,7 +57,9 @@ Lawdingo::Application.configure do
 
   config.after_initialize do
     Stripe.api_key = "bpEQeNExwRmbUPhULtvuxvIIdiszDAsM"
-    STRIPE_PUBLIC_KEY = "pk_nhHiYxc2FBJLSEkQ9esXEbmXgvmnW"
+    Object.const_set(
+      "STRIPE_PUBLIC_KEY", "pk_nhHiYxc2FBJLSEkQ9esXEbmXgvmnW"
+    )
   end
 
   # Send email with an error log each time an exception is raised

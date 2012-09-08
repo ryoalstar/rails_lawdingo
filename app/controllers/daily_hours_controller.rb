@@ -16,7 +16,7 @@ class DailyHoursController < ApplicationController
     # default hours
     default_hours = {:start_time => -1, :end_time => -1}
 
-    # set our daily hours, defaulting to 
+    # set our daily hours, defaulting to closed
     @daily_hours = (0..6).to_a.collect do |i|
       dh = @lawyer.daily_hours.on_wday(i)
       # default to a new daily hour for this lawyer
@@ -27,8 +27,11 @@ class DailyHoursController < ApplicationController
       dh  
     end
 
+    # set the daily hours on the lawyer
+    @lawyer.daily_hours = @daily_hours
+
     # save the  all of its hours of operation, 
-    if @daily_hours.collect(&:save).all?{|res| res}
+    if @lawyer.save
       return redirect_to(:action => :index, :user_id => @lawyer.id)
     else
       return render(:action => :index)

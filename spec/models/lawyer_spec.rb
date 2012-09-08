@@ -27,7 +27,12 @@ describe Lawyer do
     end
   end
 
-  describe "search" do
+  describe "search", :integration do
+
+    before(:each) do
+      Lawyer.delete_all
+      Lawyer.solr_remove_all_from_index!
+    end
 
     describe "search by state" do
 
@@ -55,7 +60,7 @@ describe Lawyer do
         FactoryGirl.create(:practice_area, :name => 'Business and Startups')
         practice_area = FactoryGirl.create(:practice_area, :name => 'Employment')
         lawyer = FactoryGirl.create(:lawyer, :first_name => 'Robert')
-        lawyer.practice_areas<< practice_area
+        lawyer.practice_areas << practice_area
         lawyer.save
         assert subject.reindex!
         search = Lawyer.search do
@@ -70,7 +75,8 @@ describe Lawyer do
     describe "search by keyword" do
 
       it "should find by keyword" do
-        lawyer = FactoryGirl.create(:lawyer, :last_name => 'Petr', :last_name => 'Find me')
+        lawyer = FactoryGirl.create(:lawyer, :last_name => 'Find me')
+        Lawyer.solr_reindex
         search = Lawyer.search do
           fulltext lawyer.last_name
         end
@@ -300,25 +306,51 @@ describe Lawyer do
 
   end
 
-  context "#is_available_by_phone" do
-    before :each do
-      @steven = FactoryGirl.create(:lawyer, first_name: "Steven")
-      Timecop.freeze(Time.zone.local(2012, 7, 11, 14, 0, 0))
+  context "#is_available_by_phone?" do
+
+    around(:each) do |example|
+      t = Time.zone.now
+      Timecop.freeze(Time.zone.local(t.year, t.month, t.day, 14, 0, 0)) do
+        example.run
+      end
     end
 
-    it "should return true if current time is between lawyer's daily hours" do
-      daily_hour = FactoryGirl.create(:daily_hour, lawyer_id: @steven.to_param, wday: Time.zone.now.wday, start_time: 1000, end_time: 1800)
-      @steven.is_available_by_phone.should be_true
+    before :each do
+      @steven = FactoryGirl.create(
+        :lawyer, 
+        first_name: "Steven"
+      )
+      @steven.update_attributes(is_available_by_phone: true)
+    end
+
+    it "should return true if current time is between 
+      lawyer's daily hours" do
+      
+      daily_hour = FactoryGirl.create(
+        :daily_hour, 
+        lawyer_id: @steven.to_param, 
+        wday: Time.zone.now.wday, 
+        start_time: 1000, 
+        end_time: 1800
+      )
+      @steven.is_available_by_phone?.should be_true
     end
 
     it "should return true if lawyer has no daily hours" do
-      @steven.stubs(:daily_hours).returns([])
-      @steven.is_available_by_phone.should be_true
+      @steven.daily_hours.delete_all
+      @steven.is_available_by_phone?.should be_true
     end
 
-    it "should return false if current time is not between lawyer's daily hours" do
-      daily_hour = FactoryGirl.create(:daily_hour, lawyer_id: @steven.to_param, wday: Time.now.wday, start_time: 1600, end_time: 1800 )
-      @steven.is_available_by_phone.should be_false
+    it "should return false if current time is not 
+      between lawyer's daily hours" do
+      daily_hour = FactoryGirl.create(
+        :daily_hour, 
+        lawyer_id: @steven.to_param, 
+        wday: Time.zone.now.wday, 
+        start_time: 1600, 
+        end_time: 1800
+      )
+      @steven.reload.is_available_by_phone?.should be_false
     end
   end
 

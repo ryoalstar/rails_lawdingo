@@ -3,7 +3,7 @@ development:
   access_key_id: AKIAIB2GYPDWTBK6FXTQ
   secret_access_key: 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
 test:
-  bucket: bucket_test
+  bucket: lawdingo_test
   access_key_id: AKIAIB2GYPDWTBK6FXTQ
   secret_access_key: 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
 staging:

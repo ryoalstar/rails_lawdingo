@@ -3,7 +3,6 @@ require 'spec_helper'
 describe HomepageImage do
   DatabaseCleaner.clean
   specify { should belong_to(:lawyer) }
-  specify { should has_attached_file(:photo) }
   subject { FactoryGirl.create(:homepage_image) }
 
   describe "validation" do
