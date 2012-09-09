@@ -10,7 +10,7 @@ require 'net/ssh'
 
 class ReleaseToStaging
 
-  attr_reader :qa_dir, :original_branch
+  attr_reader :qa_dir, :original_branch, :rebase_branch
 
   def self.run(opts)
     self.new(opts).run
@@ -18,6 +18,7 @@ class ReleaseToStaging
 
   def initialize(opts = {})
     @qa_dir = opts[:qa_dir]
+    @rebase_branch = opts[:rebase_branch]
   end
 
   def run
@@ -25,8 +26,8 @@ class ReleaseToStaging
       # get the current branch
       @original_branch = self.get_current_branch
       
-      if self.original_branch == "master"
-        puts "\n\nCannot run this command from master - " +
+      if self.original_branch == self.rebase_branch
+        puts "\n\nCannot run this command from #{self.rebase_branch} - " +
           "please select another branch\n\n"
         Kernel.exit
       end
@@ -70,11 +71,11 @@ class ReleaseToStaging
   end
 
   def rebase
-    system("git checkout master")
+    system("git checkout #{self.rebase_branch}")
     system("git fetch --all")
-    system("git pull origin master")
+    system("git pull origin #{self.rebase_branch}")
     system("git checkout #{self.original_branch}")
-    system("git rebase -i master")
+    system("git rebase -i #{self.rebase_branch}")
   end
 
   def release_to_qa
@@ -135,13 +136,14 @@ ReleaseToStaging
 
 A simple command line interface to
 
-1) Rebase your branch off of master
+1) Rebase your branch off of a branch (defaults to master)
 2) Run all of the tests
 3) Deploy your changes to a staging installation
 
 Options:
   EOF
   opt :qa_dir, "Directory to release to on QA", :default => `whoami`.strip
+  opt :rebase_branch, "Branch to rebase off of", :default => "master"
 end
 
 ReleaseToStaging.run(opts)
