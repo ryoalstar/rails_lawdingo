@@ -256,6 +256,17 @@ describe Lawyer do
         subject.bookable_on_day?(t + 1.week).should be true
       end
 
+      it "should not be bookable_on_day if the found daily_hour is closed" do
+        t = Time.zone.now.midnight + 1.day
+        subject.daily_hours << DailyHour.new.tap do |dh|
+          dh.stubs(
+            :wday => t.wday,
+            :closed? => true
+          )
+        end
+        subject.bookable_on_day?(t).should be false
+      end
+
     end
   end
 
@@ -301,6 +312,7 @@ describe Lawyer do
         :start_time => 900,
         :end_time => 1830
       )
+
       subject.next_available_days(1).first.should_not eql(t.to_date)
     end
 

@@ -10,7 +10,7 @@ describe "Authentication" do
     FactoryGirl.create(:homepage_image)
   end
 
-  context "registered as client" do
+  context "registered as client", :integration do
     it "redirects to lawyers page if user came from home page" do
       sign_up_from_root
       current_url.should eq(lawyers_url)

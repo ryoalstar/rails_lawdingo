@@ -29,10 +29,44 @@ class DailyHour < ActiveRecord::Base
 
   validate :check_times
 
+  BOOKING_BUFFER = 1.hour
+
   # actual end time on a real date
   def start_time_on_date(date)
     return self.time_on_date(:start_time, date)
   end
+
+  # are we bookable at a given time?
+  def bookable_at_time?(time)
+    return false if self.closed?
+    return false unless self.wday == time.wday
+    # if it is the current day, check to see that
+    # it is not too late in the day to book
+    if Time.zone.now.midnight == time.midnight
+      return Time.zone.now + BOOKING_BUFFER < self.end_time_on_date(time)
+    else
+      return time.between?(
+        self.start_time_on_date(time),
+        self.end_time_on_date(time)
+      )
+    end
+  end
+
+  def bookable_on_day?(day)
+    day = day.to_time
+    return false if self.closed?
+    return false unless self.wday == day.wday
+    # if we are bookable for the last slot of the day,
+    # we assume we are bookable at at least one point in
+    # that day and return true
+    return self.bookable_at_time?(self.end_time_on_date(day))
+  end
+
+  # if we have -1 for a start or end time we are closed
+  def closed?
+    [self.start_time, self.end_time].include?(-1)
+  end
+
   # actual end time on a real date
   def end_time_on_date(date)
     return self.time_on_date(:end_time, date)

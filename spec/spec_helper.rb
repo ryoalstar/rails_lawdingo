@@ -60,4 +60,7 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   # FactoryGirl.reload
+  ActiveSupport::Dependencies.clear
+  Object.send(:remove_const, "Lawyer")
+  load(Rails.root.join("app","models","lawyer.rb"))
 end

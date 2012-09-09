@@ -12,7 +12,7 @@ describe Offering do
     end
   end
 
-  describe "search" do
+  describe "search", :integration => true do
 
     describe "search by state" do
 
@@ -38,7 +38,13 @@ describe Offering do
         FactoryGirl.create(:practice_area, :name => 'Bankruptcy')
         FactoryGirl.create(:practice_area, :name => 'Business and Startups')
         practice_area = FactoryGirl.create(:practice_area, :name => 'Employment')
-        offering = FactoryGirl.create(:offering, :practice_area => practice_area)
+        offering = FactoryGirl.create(
+          :offering, 
+          :practice_area => practice_area
+        )
+        # reindex our offering
+        offering.reindex!
+
         search = Offering.search do
           with :practice_area_id, practice_area.id
         end

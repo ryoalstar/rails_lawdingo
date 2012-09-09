@@ -15,20 +15,6 @@ class Lawyer < User
     def on_wday(wday)
       self.select{|dh| dh.wday == wday}.first
     end
-    # are we bookable on a given day?
-    def bookable_on_day?(time)
-      # allow for dates or times to be passed in
-      time = time.to_time if time.is_a?(Date)
-      time = time.midnight
-      dh = self.on_wday(time.wday)
-      return false if dh.blank?
-      # if it is the current day, check to see that
-      # it is not too late in the day to book
-      if Time.zone.now.midnight == time
-        return false if Time.zone.now + 1.hour > dh.end_time_on_date(time)
-      end
-      return true
-    end
   end
 
   #solr index
@@ -186,16 +172,10 @@ class Lawyer < User
 
   def is_available_by_phone?
     return false unless self.is_available_by_phone
-    self.in_time_zone do
-      available_time = self.daily_hours.on_wday(Time.zone.now.wday)
-      if available_time.present?
-        day_start = available_time.start_time_on_date(Time.zone.today)
-        day_end = available_time.end_time_on_date(Time.zone.today)
-        Time.zone.now.between?(day_start, day_end)
-      else
-        true
-      end
-    end
+    # if we haven't set hours, default to true
+    return true if self.daily_hours.blank?
+    # check normal bookability
+    return self.bookable_at_time?(Time.zone.now)
   end
 
   # all available times for a given date
@@ -220,12 +200,27 @@ class Lawyer < User
       end
     end
   end
+  
+  # are we bookable at a given time?
+  def bookable_at_time?(time)
+    self.in_time_zone do
+      dh = self.daily_hours.on_wday(time.wday)
+      return false if dh.blank?
+      return dh.bookable_at_time?(time)
+    end
+  end
+
   # is this provider bookable on a given date
   def bookable_on_day?(date)
     self.in_time_zone do
-      self.daily_hours.bookable_on_day?(date)
+      dh = self.daily_hours.on_wday(date.wday)
+      return false if dh.blank?
+      return dh.bookable_on_day?(date)
     end
   end
+
+  
+
   # runs a block in this Lawyer's time_zone
   def in_time_zone(&block)
     begin
@@ -246,14 +241,15 @@ class Lawyer < User
           # start on today
 
           t = Time.zone.now.midnight
+          max_time = Time.zone.now.midnight + (num_days).weeks
           # go until we have enough days to return
-          while ret.length < num_days
+          while ret.length < num_days && t <= max_time
             # if we have this day
             if self.bookable_on_day?(t)
               ret << t.to_date
             end
             # 25 hours to account for daylight savings
-            t = (t + 25.hours).midnight
+            t = t + 24.hours
           end
         end
       end
