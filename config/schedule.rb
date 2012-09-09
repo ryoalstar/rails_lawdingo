@@ -26,6 +26,10 @@ every 1.hour do
   # runner "Inquiry.close_expired", environment: "development" # For staging
 end
 
+every 1.day, :at => '5am' do
+  command "#{path}/bin/backup_database -e production"
+end
+
 every 5.minutes do
   rake 'lawyer:update_online_status'
 end
