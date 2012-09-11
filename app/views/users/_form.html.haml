@@ -111,7 +111,7 @@
                         = label_tag "practice_area_#{s.id}", s.name
           %a.button.blue{:onclick => "setPracticeAreas();", :style => "width: 100px; text-align: center;"} Done
     .actions
-      .form-inner{:style => "padding-left: 37px;"}
+      .form-inner
         = f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as a Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account'), :class=>"button", id: "submit_signup"
         .form-notice
           - if params[:ut].present?

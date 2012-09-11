@@ -109,6 +109,9 @@ Lawdingo::Application.routes.draw do
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
   match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page
+  match '/pricing_process' =>"pages#pricing_process", :name =>'pricing_process', :as =>:pricing_process
+  match '/pricing_process_activation' =>"pages#pricing_process_activation", :name =>'pricing_process_activation', :as =>:pricing_process_activation
+  
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
   match '/details' => 'users#payment_info', :as => :card_detail

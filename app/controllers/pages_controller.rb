@@ -18,6 +18,12 @@ class PagesController < ApplicationController
     @title = "About Lawdingo"
     render "about_attorneys"
   end
+  
+  def pricing_process
+  end
+  
+  def pricing_process_activation
+  end
 
   def terms_of_use
   end

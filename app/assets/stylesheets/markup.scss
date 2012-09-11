@@ -247,6 +247,16 @@ body.users.home{
       }
     }
   }
+  .user_rate{
+    .field_with_errors{
+      height: 70px;
+      width:140px;
+    }
+    .error_notice{
+    float: right;
+    margin-right: -3px;
+    }
+  }
   #div_practice_areas, #div_states_barids{
     h2{
       margin:5px;
