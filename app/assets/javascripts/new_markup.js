@@ -45,14 +45,16 @@ $(document).ready(function(){
 	search_box = document.getElementById('generail_question');
 	filters = document.getElementById('filters');
 	if (search_box && filters && !msie6) {
-		var top = $('#generail_question').offset().top + 15 - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
+		var top = $('#generail_question').offset().top - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
 		$(window).scroll(function (event) {
 		  var y = $(this).scrollTop();
 		  if (y >= top) {
 			$('#generail_question').addClass('fixed_question');
+			$('#service_type_tabs').addClass('fixed_question_margin');
 			//$('.slidey').addClass('nudge');
 		  } else {
 			$('#generail_question').removeClass('fixed_question');
+			$('#service_type_tabs').removeClass('fixed_question_margin');
 			//$('.slidey').removeClass('nudge');
 		  }
 		});

@@ -5,15 +5,17 @@
     Home.initialize();
   })
 
-%p.notice{:style => "display: none;"}
-  Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
-  %a#close_notice{:href => "#"} Close
+.notice{:style => "display: none;"}
+  .text
+    Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
+    %a#close_notice{:href => "#"} Close
 #current_selected_lawyer
 #inline-wrapper
   - if flash[:notice].present?
-    %p.notice
-      = flash[:notice]
-      %a#close_notice{:href => "#"} Close
+    .notice
+      .text
+        = flash[:notice]
+        %a#close_notice{:href => "#"} Close
   -#slogan
     .inner
       %h1= @subtext[:second]

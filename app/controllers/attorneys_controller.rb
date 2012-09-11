@@ -31,7 +31,7 @@ class AttorneysController < ApplicationController
   private
 
     def check_approval
-      redirect_to lawyers_path, notice: "Your account didn't approved yet." unless Lawyer.find(params[:id]).is_approved
+      redirect_to lawyers_path, notice: "Sorry, this lawyer's bar membership hasn't been verified just yet." unless Lawyer.find(params[:id]).is_approved
     end
 end
 

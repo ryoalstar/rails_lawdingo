@@ -1294,7 +1294,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
       }
     }
   }
-  
+  #service_type_tabs.fixed_question_margin{
+    margin-top:110px;
+  }
   h3.question_label label{
     font-size: 13px;
     color: #303030;
@@ -3025,6 +3027,11 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				}
 			}
 		}
+		.row{
+		  .left.row_block{
+		    min-height: 180px;
+		  }
+		}
 		.row, .bio-block{
 			background:#fdfdfd;
 			border:1px solid #d0d2d5;
@@ -3105,23 +3112,13 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
             padding-left:0;
             margin-top: 47px;
 						ul{
-							padding:0px 0px;
+							padding:10px 0px;
 							margin:0;
 							li:first-child{
-							  -webkit-border-top-left-radius: 5px;
-                -webkit-border-top-right-radius: 5px;
-                -moz-border-radius-topleft: 5px;
-                -moz-border-radius-topright: 5px;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
+
 							}
 							li:last-child{
-							  -webkit-border-bottom-right-radius: 5px;
-                -webkit-border-bottom-left-radius: 5px;
-                -moz-border-radius-bottomright: 5px;
-                -moz-border-radius-bottomleft: 5px;
-                border-bottom-right-radius: 5px;
-                border-bottom-left-radius: 5px;
+
 							}
 							li{
 								padding: 1px 10px;
