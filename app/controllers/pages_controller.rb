@@ -22,6 +22,28 @@ class PagesController < ApplicationController
   def pricing_process
   end
   
+  def process_signup
+    if params[:return_path]
+      session[:return_to] = params[:return_path]
+    end
+
+    # Keep question notice after clicking the login link
+    session[:keep_question_notice] = true if params[:question_notice].present?
+
+    # Empy return_to if user came from homepage
+    session[:return_to] = nil if request.referer == root_url
+
+    redirect_to root_path and return if current_user
+    user_type  = params[:ut] || '1'
+    if user_type == '0'
+      @user       = User.new(:user_type => User::CLIENT_TYPE  )
+    else
+      @user       = Lawyer.new(:user_type => User::LAWYER_TYPE )
+      @states = State.all
+      @states.count.times {@user.bar_memberships.build}
+    end
+  end
+  
   def pricing_process_activation
   end
 

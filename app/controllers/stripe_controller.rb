@@ -4,8 +4,7 @@ class StripeController < ApplicationController
     force_ssl
 
 	def subscribe_lawyer
-		redirect_to root_path, :status => :unauthorized unless current_user.is_lawyer?
-		@lawyer = current_user
+		@lawyer = Lawyer.find(params[:id])
 		if request.put? && params[:lawyer][:stripe_card_token].present?
 			if @lawyer.save_with_payment params[:lawyer][:stripe_card_token]
 			    redirect_to @lawyer, :notice => "Thank you for subscribing!"

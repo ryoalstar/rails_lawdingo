@@ -21,6 +21,9 @@ $(document).mouseup(function (e)
 });
 
 $(document).ready(function(){
+  
+  $('.testimonials_slider').bxSlider();
+  
   if($(window).height() > 779){
     //Makes the filters sticky to top of page when page scrolls down
   	var msie6 = $.browser == 'msie' && $.browser.version < 7;

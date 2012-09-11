@@ -1,0 +1,94 @@
+- is_client = @user.is_client?
+#page.apply-form-wrapper
+  - if params[:lawyer_path].present?
+    - @lawyer = Lawyer.find(params[:lawyer_path])
+    - if params[:notice].present? && @lawyer.present?
+      = notice text: "To connect with #{@lawyer.full_name}, simply sign up or sign in with Lawdingo.", |
+        avatar: @lawyer.photo                                                                          |
+  - if params[:question_notice].present?
+    = notice text: "To submit that inquiry please sign up with or log in to Lawdingo."
+  - if params[:appointment_with].present?
+    - @lawyer = Lawyer.find(params[:appointment_with].to_i)
+    - if @lawyer.present?
+      = notice text: "To make an appointment with #{@lawyer.full_name}, please sign up with or log in to Lawdingo.", |
+        avatar: @lawyer.photo                                                                                        |
+  - if is_client
+    %div
+      %h1.form-header Who are you?
+      .process-wrapper.users_apply
+        .process_notice
+          %h3
+            Already a Lawdingo member? #{link_to "Log in", login_path(session[:return_to])} now.
+        .apply-form
+          = render 'form'
+      .user_notice
+        %h5
+          = image_tag('new_lawyer_icon.png')
+          Lawyer? #{link_to "Apply here", new_lawyer_path}.
+  - else
+    %h1.form-header Apply for an Attorney Account
+    %div
+      .process-wrapper
+        .process-header
+          .process-bar
+          .first-step.steps.active
+            1
+          .second-step.steps
+            2
+          .third-step.steps
+            3
+          .clear
+          %p.first-notice.notices Create Account
+          %p.second-notice.notices Activate Subcription
+          %p.third-notice.notices Complete Profile
+        .process_notice
+          - if @lawyer
+            %h3
+              Already a Lawdingo member? #{link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)} now.
+          - else
+            %h3
+              Already a Lawdingo member? #{link_to "Log in", login_path(session[:return_to])} now.
+        .apply-form
+          = render 'form'
+      .right-wrapper
+        .right-block.testimonials
+          %h3 Testimonials
+          .testimonials_slider
+            %div
+              %p Lawdingo works! I have had paying clients from Lawdingo and I haven't had to expend a lot of time, effort, or money to get them.
+              %p.signature - Deepa Menon, Attorney
+            %div 
+              %p Wouldn’t have used or paid for a lawyer if it weren’t for Lawdingo
+              %p.signature - Lawdingo client
+            %div
+              %p For just over $100 for a half hour call, I got the advice I needed from a top-quality lawyer on Lawdingo.
+              %p.signature - Lawdingo client
+          .clear
+        .right-block
+          %h3 Attorney Benefits
+          %ul
+            %li Get paid to talk to potential new clients
+            %li Attorney profile featuring your practice
+            %li List flat-fee services, record intro video
+            %li Display availability, accept appointments
+            %li Receive legal inquiries relevant to you
+            %li No fee-splitting or referral fees charged
+            %li Just $92/month with no commitments
+        .contact_outer
+          %p 
+            Questions? Contact:
+            %a{:href => 'mailto:info@lawdingo.com'} info@lawdingo.com 
+            %br/
+            or 415-234-DINGO (3464).
+                
+          
+  -#.form-wrapper.signin
+    - if @lawyer
+      %p
+        Already a Lawdingo member? #{link_to "Log in", login_path(session[:return_to], lawyer_path: @lawyer.id)} now.
+    - else
+      %p
+        Already a Lawdingo member? #{link_to "Log in", login_path(session[:return_to])} now.
+  -# if is_client
+    %h3{:style => "color: #818181;"}
+      Lawyer? #{link_to "Apply here", new_lawyer_path}.

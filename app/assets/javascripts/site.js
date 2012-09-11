@@ -136,18 +136,18 @@ function setBarIds(){
   });
   if(form_data_status)
   {
-    var states_barids_string = "<h2>Bar Memberships:</h2> <ul class='tick'>";
+    var states_barids_string = "";
     for(key in states_barids)
     {
       states_barids_key_label = states_barids[key] ? "(Bar ID: " + states_barids[key] + ")" : '';
 
       if(states_barids_key_label) {
-        states_barids_string += "<li>" + key + " " + states_barids_key_label + "</li>";
+        states_barids_string += "" + key + " " + states_barids_key_label + ", ";
       } else {
-        states_barids_string += "<li>" + key + "</li>";
+        states_barids_string += "" + key + ", ";
       }
     }
-    states_barids_string = states_barids_string.substring(0,states_barids_string.length-2) + "</ul>";
+    states_barids_string = states_barids_string.substring(0,states_barids_string.length-2) + "";
     $('#barids_opener').hide();
     $('#barids_editor').show().css({'display': 'inline', 'margin-left': '0.5em'});
     $('#div_states_barids').html(states_barids_string);
@@ -163,14 +163,14 @@ function setBarIds(){
 
 function setPracticeAreas()
 {
-  var practice_area_string = "<h2>Practice Areas:</h2> <ul class='tick'>";
+  var practice_area_string = "";
   var specialities_string = "";
   $('#leveled-list_practice_areas').children().each(function(index){
     var parent_list = $(this);
     var parent_checkbox = parent_list.find(':checkbox:first');
     if(parent_checkbox.attr('checked') == 'checked')
     {
-      practice_area_string += "<li>" + parent_checkbox.data('name');
+      practice_area_string += "" + parent_checkbox.data('name');
       var div = parent_list.find('div');
       var inner_ul = div.find('ul');
       specialities_string = "";
@@ -184,12 +184,12 @@ function setPracticeAreas()
       });
       if(specialities_string != "")
       {
-        specialities_string = specialities_string.substring(0,specialities_string.length-2);
-        practice_area_string += ' (' + specialities_string + ')'  + '</li>';
+        specialities_string = specialities_string.substring(0,specialities_string.length - 2);
+        practice_area_string += ' (' + specialities_string + ')'  + ', ';
       }
     }
   });
-  practice_area_string = practice_area_string.substring(0,practice_area_string.length-2) + "</ul>";
+  practice_area_string = practice_area_string.substring(0,practice_area_string.length) + "";
   $('#practice_areas_opener').hide();
   $('#div_practice_areas').html(practice_area_string);
   $('#div_practice_areas').show().css('display', 'inline');
