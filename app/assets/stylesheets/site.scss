@@ -55,7 +55,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a{
     position: relative;
     width: 18px;
     height: 18px;
-    background: url(question.png) no-repeat center center transparent;
+    background: image-url('question.png') no-repeat center center transparent;
     &:hover:after {
         content: attr(tooltip);
         display: block;
@@ -97,10 +97,3 @@ h1 a, h2 a, h3 a, h4 a, h5 a{
   cursor: pointer;
   z-index:10;
 }
-
-// @import "page.scss";        /* Main style declarations for all pages, headers, footers, etc. */
-// @import "results.scss";     /* Style for search results */
-// @import "buttons.scss";     /* Button styles */
-// @import "carousel.scss";    /* Carousel style */
-// @import "dialog.scss";      /* Dialog style */
-

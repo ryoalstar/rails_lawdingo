@@ -62,7 +62,7 @@ body.users.home, body.offerings.show {
     display: block;
     width: 20px;
     height: 20px;
-    background: url(<%= asset_path "close_notice.png" %>);
+    background: image-url("close_notice.png");
     text-indent: -9999999px;
   }
 }
@@ -74,7 +74,7 @@ body.users.home, body.offerings.show {
   font-weight: 300;
   text-align: center;
   color: #818181;
-  background: url(<%= asset_path "shadow-down.png" %>) no-repeat bottom center;
+  background: image-url("shadow-down.png") no-repeat bottom center;
   margin-bottom: 0.75em !important;
 }
 
@@ -176,7 +176,7 @@ form.filters {
     top: 0.2em;
   }
   #lawyer_free_consultation_duration{
-    background: url(select_bg_offer.png) no-repeat;
+    background: image-url('select_bg_offer.png') no-repeat;
     width: 144px;
     height: 28px;
     font-size: 13px;
