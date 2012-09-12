@@ -32,7 +32,7 @@ Lawdingo::Application.routes.draw do
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
 
   match '/apply' => "users#new", :as => :new_lawyer
-  match '/paid/:id' => "stripe#subscribe_lawyer", :id => /\d{1,6}/, :as => :subscribe_lawyer
+  match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
   
   resources :users do
     # daily_hours for this user (lawyer)
