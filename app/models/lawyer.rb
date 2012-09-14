@@ -2,14 +2,18 @@ class Lawyer < User
 
   # validates :payment_email, :bar_ids, :practice_areas, :presence =>true
   # validates :payment_email, :presence => true
+  PAYMENT_STATUSES = ['free', 'paid', 'unpaid']
 
   has_many :bar_memberships
   has_many :conversations
   has_many :bids
   has_many :messages
   has_many :appointments
-  attr_accessor :stripe_card_token
-
+  has_many :expert_areas
+  has_many :practice_areas, :through => :expert_areas
+  has_many :reviews
+  has_many :states, :through => :bar_memberships
+  has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours do
     # find on a given wday
     def on_wday(wday)
@@ -20,6 +24,59 @@ class Lawyer < User
   def reindex!
      Sunspot.index!(self)
   end
+
+  # validations
+  validates_presence_of :payment_status, :if => :is_lawyer?
+  validates_inclusion_of :payment_status, :in => PAYMENT_STATUSES, :if => :is_lawyer?
+  validates :time_zone,
+    :presence => true,
+    :inclusion => {
+      :in => ActiveSupport::TimeZone.us_zones.collect(&:name)
+    }
+
+  attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
+  accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
+
+  # scopes
+  default_scope where(:user_type => User::LAWYER_TYPE)
+
+  scope :approved_lawyers,
+    where(:is_approved => true)
+      .order("is_online desc, phone desc")
+
+  scope :offers_legal_services,
+    includes(:offerings)
+      .where("offerings.id IS NOT NULL")
+
+  scope :offers_legal_advice,
+    includes(:practice_areas)
+      .where("practice_areas.id IS NOT NULL")
+
+  scope :practices_in_state, lambda{|state_or_name|
+    name = state_or_name.is_a?(State) ? state_or_name.name : state_or_name
+    includes(:states)
+      .where(["states.name = ?", name])
+  }
+
+  scope :paid, where('stripe_card_token IS NOT NULL').where('stripe_customer_token IS NOT NULL').where(:payment_status => 'paid')
+  scope :unpaid, where(:payment_status => 'unpaid')
+  scope :free, where(:payment_status => 'free')
+  scope :shown, where(:is_approved => true).where(:payment_status => ['paid', 'free']) 
+
+  scope :offers_practice_area, lambda{|practice_area_or_name|
+    if practice_area_or_name.is_a?(PracticeArea)
+      pa = practice_area_or_name
+    else
+      pa = PracticeArea.name_like(practice_area_or_name).first
+      pa ||= PracticeArea.new
+    end
+    includes(:offerings, :practice_areas)
+      .where([
+        "practice_areas.id IN (:ids) " +
+        "OR offerings.practice_area_id IN (:ids)",
+        {:ids => [pa.id] + pa.children.collect(&:id)}
+      ])
+  }
 
   #solr index
   searchable :auto_index => true, :auto_remove => true, :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
@@ -48,6 +105,7 @@ class Lawyer < User
       school.name if school.present?
     end
     string :bar_memberships, :multiple => true
+    string :payment_status
     integer :free_consultation_duration
     float :rate
     integer :lawyer_star_rating do
@@ -57,6 +115,7 @@ class Lawyer < User
       school.rank_category if !!school
     end
     time :created_at
+    boolean :is_approved
     boolean :is_online
     boolean :available_by_phone do
       self.is_available_by_phone?
@@ -107,59 +166,11 @@ class Lawyer < User
       fulltext query
       paginate :per_page => 20, :page => opts[:page] || 1
       order_by :calculated_order, :desc
-      order_by :created_at, :desc
+      with :is_approved, true
+      with :payment_status, [:paid, :free]
     end
     search
   end
-
-  has_many :expert_areas
-  has_many :practice_areas, :through => :expert_areas
-  has_many :reviews
-  has_many :states, :through => :bar_memberships
-
-  has_one :homepage_image, :dependent => :destroy
-
-  # validations
-  validates :time_zone,
-    :presence => true,
-    :inclusion => {
-      :in => ActiveSupport::TimeZone.us_zones.collect(&:name)
-    }
-
-  accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
-
-  scope :approved_lawyers,
-    where(:user_type => User::LAWYER_TYPE, :is_approved => true)
-      .order("is_online desc, phone desc")
-
-  scope :offers_legal_services,
-    includes(:offerings)
-      .where("offerings.id IS NOT NULL")
-
-  scope :offers_legal_advice,
-    includes(:practice_areas)
-      .where("practice_areas.id IS NOT NULL")
-
-  scope :practices_in_state, lambda{|state_or_name|
-    name = state_or_name.is_a?(State) ? state_or_name.name : state_or_name
-    includes(:states)
-      .where(["states.name = ?", name])
-  }
-
-  scope :offers_practice_area, lambda{|practice_area_or_name|
-    if practice_area_or_name.is_a?(PracticeArea)
-      pa = practice_area_or_name
-    else
-      pa = PracticeArea.name_like(practice_area_or_name).first
-      pa ||= PracticeArea.new
-    end
-    includes(:offerings, :practice_areas)
-      .where([
-        "practice_areas.id IN (:ids) " +
-        "OR offerings.practice_area_id IN (:ids)",
-        {:ids => [pa.id] + pa.children.collect(&:id)}
-      ])
-  }
 
   def self.approved_lawyers_states
     states = []
@@ -339,6 +350,89 @@ class Lawyer < User
     logger.error "Stripe error while creating customer: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
     false
+  end
+
+  def update_payment_status
+    result = Stripe::Invoice.all(
+      :customer => self.stripe_customer_token,
+      :paid => false
+    )
+    self.update_attribute(:payment_status, :unpaid) if result.count > 0
+  end  
+
+  def create_stripe_card attributes
+    stripe_card_token = Stripe::Token.create(
+      :card => {
+      :number => attributes[:number],
+      :exp_month => attributes[:exp_month],
+      :exp_year => attributes[:exp_year],
+      :cvc => attributes[:cvc]
+    })
+    self.stripe_card_token = stripe_card_token.id if stripe_card_token.is_a? Stripe::StripeObject
+    save!
+  end
+
+  def create_stripe_test_card!
+    self.create_stripe_card(:number => "4242424242424242",:exp_month => 9,:exp_year => 2013,:cvc => 314)
+  end
+
+  def create_stripe_customer!
+    return nil unless self.stripe_card_token
+    customer = Stripe::Customer.create(
+      :description => self.email,
+      :card => self.stripe_card_token
+    )
+    self.stripe_customer_token = customer.id if customer.is_a? Stripe::Customer
+    save!
+  end  
+
+  def get_stripe_customer
+    return nil unless self.stripe_customer_token
+    Stripe::Customer.retrieve(self.stripe_customer_token)
+  end   
+
+  def delete_stripe_customer!
+    customer = self.get_stripe_customer
+    customer.delete
+    self.stripe_customer_token = nil
+    save!
+  end
+
+  def get_stripe_card
+    return nil unless self.stripe_card_token
+    Stripe::Token.retrieve(self.stripe_card_token)
+  end
+
+  def create_stripe_subscribtion stripe_customer, stripe_plan, stripe_card
+    customer = Stripe::Subscription.create( description: self.email, plan: '3', card: self.stripe_card_token )
+      self.stripe_customer_token = customer.id
+      self.stripe_card_token = stripe_card_token
+      save!
+  end
+
+  def cancel_stripe_subscribtion
+    customer = self.get_stripe_customer
+    return false unless customer
+    customer.cancel_subscription
+  end
+
+  def self.stripe_create_plan attributes
+    Stripe::Plan.create(
+      :amount => attributes[:amount],
+      :interval => attributes[:interval],
+      :name => attributes[:name],
+      :currency => attributes[:currency],
+      :id => attributes[:id]
+    )
+  end 
+
+  def self.get_stripe_plan plan_id
+    Stripe::Plan.retrieve(plan_id)
+  end
+
+  def self.delete_stripe_plan plan_id
+    plan = Stripe::Plan.retrieve(plan_id)
+    plan.delete if plan.is_a? Stripe::Plan
   end
 
   protected

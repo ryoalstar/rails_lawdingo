@@ -19,8 +19,11 @@ describe Lawyer do
   specify { should have_many(:reviews) }
   specify { should have_many(:states) }
   specify { should have_one(:homepage_image) }
+  specify { should validate_presence_of(:payment_status) }
+  specify { should ensure_inclusion_of(:payment_status).in_array(Lawyer::PAYMENT_STATUSES) }
   specify { should be_valid }
   specify { should accept_nested_attributes_for(:bar_memberships) }
+
   describe "search", :integration do
 
     before(:each) do
@@ -70,6 +73,24 @@ describe Lawyer do
         lawyers = search.results
         lawyers.last.should == lawyer2
       end
+    end
+  
+    it "Search results must not contains :payment_status => :unpaid, :is_approved => false lawyers" do
+      lawyer1 = FactoryGirl.create(:lawyer, :first_name => 'First keyword', :payment_status => 'unpaid', :is_approved => false)
+      lawyer2 = FactoryGirl.create(:lawyer, :first_name => 'Second keyword', :payment_status => 'unpaid', :is_approved => true)
+      lawyer3 = FactoryGirl.create(:lawyer, :first_name => 'Third keyword', :payment_status => 'free', :is_approved => true)
+      lawyer4 = FactoryGirl.create(:lawyer, :first_name => 'Fourth keyword', :payment_status => 'paid', :is_approved => true)
+      lawyer5 = FactoryGirl.create(:lawyer, :first_name => 'Fifth', :payment_status => 'paid', :is_approved => true, :stripe_card_token => 'FwZ_fj0l1fZw36bVmrg-Rg', :stripe_customer_token => 'cus_0MXYFpVxum69S5' )
+      subject.reindex!
+      search = Lawyer.build_search('keyword').execute
+      Lawyer.all.count.should == 5
+      Lawyer.paid.count.should == 1
+      Lawyer.unpaid.count.should == 2
+      Lawyer.free.count.should == 1
+      Lawyer.approved_lawyers == 3
+      Lawyer.shown == 3
+      lawyers = search.results
+      search.results.count.should == 2
     end
 
     describe "search by state" do
@@ -124,9 +145,32 @@ describe Lawyer do
 
   end
 
+  it "should provide a approved_lawyers scope" do
+    scope = Lawyer.approved_lawyers
+    scope.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :is_approved => true)
+    scope.order_values.should eql(["is_online desc, phone desc"])
+  end
+
+  it "should provide a paid scope" do
+    scope = Lawyer.paid
+    scope.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :payment_status => 'paid')
+    scope.where_values.should include("stripe_card_token IS NOT NULL", "stripe_customer_token IS NOT NULL")
+  end
+
+  it "should provide a unpaid scope" do
+    Lawyer.unpaid.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :payment_status => 'unpaid')
+  end
+
+  it "should provide a free scope" do
+    Lawyer.free.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :payment_status => 'free')
+  end
+
+  it "should provide a shown scope" do
+    Lawyer.shown.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :is_approved => true, :payment_status => ['paid', 'free'])
+  end
+
   it "should provide an offers_legal_services scope" do
     scope = Lawyer.offers_legal_services
-
     scope.includes_values.should eql([:offerings])
     scope.where_values.should eql(["offerings.id IS NOT NULL"])
   end
@@ -370,7 +414,6 @@ describe Lawyer do
         :lawyer, 
         first_name: "Steven"
       )
-      @steven.update_attributes(is_available_by_phone: true)
     end
 
     it "should return true if current time is between 
@@ -402,6 +445,36 @@ describe Lawyer do
       )
       @steven.reload.is_available_by_phone?.should be_false
     end
+  end
+
+  context "stripe" do
+
+    before :all do
+      @steven = FactoryGirl.create( :lawyer, :payment_status => 'paid')
+    end
+
+    it "should create stripe_card_token" do 
+      @steven.create_stripe_test_card!
+      @steven.get_stripe_card.class.should eql(Stripe::Token)
+    end
+
+    it "should create customer" do
+      @steven.create_stripe_customer!
+      @steven.get_stripe_customer.class.should eql(Stripe::Customer)
+    end
+
+    it "should delete customer" do
+      @steven.delete_stripe_customer!
+      @steven.get_stripe_customer.should be_nil
+    end
+
+    it "should subscribe lawyer on plan 3"
+    it "should cancel subscribe lawyer"
+    it "should create unpaid invoce"
+    it "should delete user invoces"
+    it "should update lawyer payment status"
+    it "should delete stripe customer"
+
   end
 
 end

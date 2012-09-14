@@ -13,6 +13,7 @@ FactoryGirl.define do
     is_approved true
     time_zone "Pacific Time (US & Canada)"
     is_online false
-    is_available_by_phone false
+    is_available_by_phone true
+    payment_status 'free'
   end
 end

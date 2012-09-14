@@ -33,3 +33,11 @@ end
 every 5.minutes do
   rake 'lawyer:update_online_status'
 end
+
+every 12.hours do
+  rake 'lawyer:update_payment_status'
+end
+
+every 1.hours do
+  rake 'sunspot:solr:reindex'
+end
