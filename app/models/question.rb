@@ -18,6 +18,11 @@ class Question < ActiveRecord::Base
      end
 
      search.results
+    else
+      # Return empty array when state and practice area aren't specified
+      # so the question.matched_lawyers.count will return 0 in
+      # matched_lawyer_count helper
+      []
     end
   end
 

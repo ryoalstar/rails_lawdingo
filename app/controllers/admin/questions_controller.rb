@@ -1,6 +1,6 @@
 class Admin::QuestionsController < ApplicationController
   def index
-    @questions = Question.order("created_at DESC")
+    @questions = Question.where("user_id IS NOT NULL").order("created_at DESC")
   end
 
   def show
