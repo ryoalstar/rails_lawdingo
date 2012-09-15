@@ -12,6 +12,7 @@
 /tmp
 
 /public/system
+/public/assets/
 
 # Ignore VIM swap files
 *.swp
