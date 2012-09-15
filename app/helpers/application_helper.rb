@@ -5,13 +5,13 @@ module ApplicationHelper
     unless options[:avatar].present?
       render partial: "notice", locals: { text: options[:text], avatar: false }
     else
-      dimensions = Paperclip::Geometry.from_file(options[:avatar].to_file(:thumb))
+      dimensions = Paperclip::Geometry.from_file(options[:avatar].to_file(:thumb)) rescue nil
       render partial: "notice", locals: {
         text: options[:text],
         avatar: options[:avatar].url(:thumb),
         width: 40,
         height: (dimensions.height * (40 / dimensions.width)).round
-      }
+      } if dimensions
     end
   end
 

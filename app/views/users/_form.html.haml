@@ -66,6 +66,10 @@
           %tr
             %td Direct phone number:
             %td= f.text_field :phone, :placeholder => "Your direct phone number", title: "To receive clients by phone, enter your direct phone line here.", rel: "twipsy"
+
+          %tr
+            %td Time Zone:
+            %td= f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
           %tr
             %td Professional summary:
             %td= f.text_area :personal_tagline, :placeholder=>"Professional summary (2000 chars)", :class=>"summary", :maxlength => 2000, :rows => 2, title: "A brief description of your personal credentials and focal practice areas.", rel: "twipsy"
@@ -138,7 +142,6 @@
                   By clicking "Apply as Lawyer" you confirm that you accept the
                   %a{:href => "/terms", :target => "_blank"} Terms of Service
     
-
 :javascript
   $(document).ready(function(){
     $('#barids_editor').hide();

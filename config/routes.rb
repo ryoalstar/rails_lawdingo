@@ -35,7 +35,6 @@ Lawdingo::Application.routes.draw do
   match 'attorneys/:id/call-payment' => 'attorneys#call_payment', 
     as: :call_payment
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
-
   match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
   
   resources :users do

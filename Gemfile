@@ -61,6 +61,7 @@ group :development do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'thin'
+  gem 'certified' # mac ssl error fix
 end
 
 group :test do

@@ -4,7 +4,7 @@ class Lawyer < User
   # validates :payment_email, :presence => true
   PAYMENT_STATUSES = ['free', 'paid', 'unpaid']
 
-  has_many :bar_memberships
+  has_many :bar_memberships, :inverse_of => :lawyer
   has_many :conversations
   has_many :bids
   has_many :messages
@@ -174,6 +174,7 @@ class Lawyer < User
       fulltext query
       paginate :per_page => 20, :page => opts[:page] || 1
       order_by :calculated_order, :desc
+      order_by :created_at, :desc
       with :is_approved, true
       with :payment_status, [:paid, :free]
     end

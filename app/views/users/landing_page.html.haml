@@ -10,7 +10,7 @@
     Thanks - please check your email for instructions on resetting your password.
     %a#close_notice{:href => "#"} Close
     / Image carousel block with a link to json file consisting of data about previewed lawyers
-    -#.image-carousel{:dataurl => "/search/carsousel_images"}
+    -#.image-carousel{:dataurl => "/search/carsousel_images.json"}
       .carousel-image
         = image_tag default_image.photo.url(:large), :alt => ""
       .carousel-description
@@ -33,7 +33,7 @@
           Lawyer? #{link_to "Apply here!", new_lawyer_path}
       .slider
         = image_tag('slider_featured.png', :alt => '', :class => 'green_line')
-        .image-carousel{:dataurl => "/search/carsousel_images"}
+        .image-carousel{:dataurl => "/search/carsousel_images.json"}
           .carousel-image
             %a.profile_link{:href => attorney_path(lawyer, slug: lawyer.slug)}
               = image_tag default_image.photo.url(:large), :alt => ""
@@ -131,7 +131,7 @@
                   .rev_for_js
                     - if lawyer.reviews.count.to_i != 0
                       %a.reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
-                        %span.number_rev= "#{lawyer.reviews.count} reviews"
+                        %span.number_rev= pluralize(lawyer.reviews.count, "review", "reviews")
                       %a.yelp_reviews{:style => 'display:none;'}
                         %span.number_rev
               - else    

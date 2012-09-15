@@ -14,8 +14,8 @@ class LawyersController < ApplicationController
       self.log_in_user!(@lawyer)
       # deliver our signup notification
       UserMailer.notify_lawyer_application(@lawyer).deliver
-      # redirect to the newly created account
-      return redirect_to(user_path(@lawyer))
+      # redirect to the subscription
+      return redirect_to(subscribe_lawyer_path)
     else
       @states = State.all
       return render(:action => :new)

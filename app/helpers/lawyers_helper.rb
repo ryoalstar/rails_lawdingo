@@ -98,6 +98,21 @@ module LawyersHelper
     areas_names.empty? ? last_area_name : "#{areas_names.join(', ')} and #{last_area_name}"
   end
 
+  def bar_memberships_listing lawyer
+    output = ''
+    bms = lawyer.bar_memberships
+    if bms.present?
+      bms_text = '<h2>Bar Memberships: </h3>'
+      bms.each do |bm|
+        bar = bm.bar_id? ? "(Bar ID: #{bm.bar_id})" : ""
+        bms_text += "<li>#{bm.state.name} #{bar}</li>" if bm.state
+      end
+      output = "<div id='div_states_barids'><ul class='tick'>#{bms_text}</ul></div>"
+      output += '<a href="#bar_membership" id="barids_editor" class="dialog-opener"> Edit</a>'
+    end  
+    output.html_safe
+  end  
+
   def free_message lawyer
     # if !lawyer.is_online && lawyer.phone.present?
     #   msg = "two minutes free, then:"
@@ -106,7 +121,6 @@ module LawyersHelper
     # end
     "#{lawyer.free_consultation_duration} minutes free"
   end
-
 
   def start_or_schedule_button(lawyer)
     if lawyer.is_online && !lawyer.is_busy
@@ -304,5 +318,11 @@ module LawyersHelper
     output << "<div class='note_chat tooltip#{lawyer.is_online || lawyer.is_available_by_phone? || lawyer.daily_hours.present? ? '' : ' dominant'}''> Ask a question</div>"
     output.html_safe
   end  
+
+  def pluralize_without_count(count, noun, text = nil)
+    if count != 0
+      count == 1 ? "#{noun}#{text}" : "#{noun.pluralize}#{text}"
+    end
+  end
 end
 

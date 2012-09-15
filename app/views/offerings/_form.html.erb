@@ -1,4 +1,4 @@
-<%= simple_form_for [@lawyer, @offering] do |f| %>
+<%= simple_form_for [@lawyer, @offering], :url => user_offerings_path(@lawyer, @offering) do |f| %>
   <%= f.input :practice_area_id, collection: PracticeArea.parent_practice_areas, include_blank: false, label: "Relevant practice area:" %>
   <%= f.input :name, label: "Name of flat-fee service:", hint: "e.g. \"Contract review — up to 3 pages\".".html_safe %>
   <%= f.input :description, label: "What specifically will you do and deliver?" %>

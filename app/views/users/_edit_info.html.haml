@@ -45,13 +45,7 @@
         %tbody
           %tr
             %td
-              %label Time:
-            %td
-              = f.time_zone_select(:time_zone)          
-              = hidden_field_tag :user_type, @user[:user_type]
-          %tr
-            %td
-              %label First name:
+              %label First Name:
             %td
               = f.text_field :first_name ,{:class=>"name"}
           %tr
@@ -79,32 +73,21 @@
         %br/
         = f.text_field :yelp_business_id, placeholder: "Busuniess ID on Yelp"
       - if @user.is_lawyer?
-      - bms = @user.bar_memberships
-      - bms_text = "<h2>Bar Memberships: </h3>"
-      - bms.each{|bm|
-      - if bm.bar_id?
-        - bar = "(Bar ID: #{bm.bar_id})"
-      - else 
-        - bar = ""
-      - bms_text += "<li>#{bm.state.name}#{bar}</li>"
-      - }
-      - pas = @user.practice_areas
-      - ppas = @user.practice_areas.parent_practice_areas
-      - pas_text = "<h2>Practice Areas: </h2>"
-      - ppas.each{|pa|
-      - pas_text += "<li>#{pa.name}"
-      - sps = pa.specialities
-      - sps_text = ""
-      - sps.each{|sp|
-      - sps_text += pas.include?(sp)? "#{sp.name}, ": ""
-      - }
-      - sps_text.chomp!(', ')
-      - pas_text += (sps_text != '')? "(#{sps_text})</li>": "</li>"
-      - }
-      - pas_text.chomp!(", ")
-        #div_states_barids{:style => "font-size:1em;"}
-          %ul.tick= raw(bms_text)
-        %a#barids_editor.dialog-opener{:href => "#bar_membership"} Edit
+        - pas = @user.practice_areas
+        - ppas = @user.practice_areas.parent_practice_areas
+        - pas_text = "<h2>Practice Areas: </h2>"
+        - ppas.each{|pa|
+        - pas_text += "<li>#{pa.name}"
+        - sps = pa.specialities
+        - sps_text = ""
+        - sps.each{|sp|
+        - sps_text += pas.include?(sp)? "#{sp.name}, ": ""
+        - }
+        - sps_text.chomp!(', ')
+        - pas_text += (sps_text != '')? "(#{sps_text})</li>": "</li>"
+        - }
+        - pas_text.chomp!(", ")
+        = bar_memberships_listing @user
         .clear
         #div_practice_areas{:style => "font-size:1em;"}
           %ul.tick= raw(pas_text)

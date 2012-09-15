@@ -39,8 +39,8 @@ class User < ActiveRecord::Base
   after_update :reindex_lawyer!, :if => :is_lawyer?
 
   def normalize_name
-    self.first_name = self.first_name.squish.titleize if self.first_name
-    self.last_name = self.last_name.squish.titleize if self.last_name
+    self.first_name = self.first_name.squish.downcase.titleize if self.first_name
+    self.last_name = self.last_name.squish.downcase.titleize if self.last_name
   end
 
   def reindex_lawyer!

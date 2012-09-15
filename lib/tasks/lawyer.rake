@@ -24,4 +24,5 @@ namespace :lawyer do
     end
     puts "Updated #{counter} lawyers payment_status."
   end  
+
 end

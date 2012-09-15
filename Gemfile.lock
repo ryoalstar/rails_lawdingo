@@ -43,6 +43,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    certified (0.1.1)
     childprocess (0.3.5)
       ffi (~> 1.0, >= 1.0.6)
     chronic (0.6.7)
@@ -292,6 +293,7 @@ PLATFORMS
 DEPENDENCIES
   aws-s3
   capybara
+  certified
   client_side_validations
   coffee-rails
   database_cleaner

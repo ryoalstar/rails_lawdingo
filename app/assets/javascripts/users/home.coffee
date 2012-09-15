@@ -33,11 +33,19 @@ class Home
     Home.s[131] = 2
     Home.s[65] = 3
     Home.s[0] = 4
+  
+    this.redirect_to_last_practice_area_state_select_from_cookie()
 
     unless document.location.hash == ""
-      this.set_defaults()
+      this.set_defaults(default_state)
       this.read_hash()
       this.submit()
+
+  redirect_to_last_practice_area_state_select_from_cookie : ()->
+    if document.location.pathname == "/lawyers" && $.cookie('practice_area') && $.cookie('state')
+      this.set_state_fields_val($.cookie('state'))
+      this.set_practice_area_fields_val($.cookie('practice_area'))
+      this.submit()   
   equalHeight = (group) ->
     tallest = 0
     group.each ->
@@ -218,11 +226,7 @@ class Home
     if !@state
       @state="All-States"
     if !@practice_area
-      if $.cookie('practice_area')
-        this.set_practice_area_fields_val($.cookie('practice_area')).parent().find('img').trigger('click')
-        # @practice_area=$.cookie('practice_area')
-      else
-        @practice_area="All"
+      @practice_area="All"
     "/lawyers/#{@service_type}/#{@state}/#{@practice_area}"+"?"+params 
   current_hash : ()->
     "!#{this.current_search_url()}"
@@ -266,11 +270,13 @@ class Home
       hash[1]=detect_state_name+"-lawyers"
     this.set_service_type_tabs_val(hash[0])
     this.set_state_fields_val(hash[1])
+    
     if hash[2]
       temp_string = hash[2]
       temp_string = temp_string.replace /\+/, " "
       temp_string = temp_string.replace /\+/, " "
       temp_string = temp_string.replace /\+/, " "
+      temp_string = temp_string.replace /\?/, ""
       this.set_practice_area_fields_val(temp_string).parent().find('img').trigger('click')
     else
       this.set_practice_area_fields_val("All").parent().find('img').trigger('click')
@@ -295,10 +301,7 @@ class Home
     )
     if (default_state == "")
       this.set_state_fields_val(
-        if $.cookie('state') 
-          $.cookie('state') 
-        else  
-          this.state_fields().find("option[data-default=1]").val()
+        this.state_fields().find("option[data-default=1]").val()
       )
     else
       this.set_state_fields_val(default_state+'-lawyers')

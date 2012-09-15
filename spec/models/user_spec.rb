@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe User do
+  subject { FactoryGirl.create(:user) }
   specify { should belong_to(:school) }
   specify { should have_many(:offerings) }
   specify { should have_many(:questions) }
@@ -12,6 +13,7 @@ describe User do
   specify { should validate_uniqueness_of(:email) }
   specify { should_not allow_value("asdfghj").for(:phone) }
   specify { should be_valid }
+
   subject { FactoryGirl.create(:user) }
 
   describe "timezone" do
@@ -24,6 +26,29 @@ describe User do
     it "timezone_abbreviation" do
       subject.time_zone = 'Atlantic Time (Canada)'
       subject.timezone_abbreviation.should == "ADT"
+    end
+
+  end   
+
+  describe "methods" do
+
+    it "#normalize_name" do
+      subject.first_name = "\n rick "
+      subject.last_name = "\n geiger "
+      subject.save
+      subject.first_name.should eql('Rick')
+      subject.last_name.should eql('Geiger')
+
+      subject.first_name = "\n JEFFREY    "
+      subject.last_name = " BRAXTON \n "
+      subject.save
+      subject.first_name.should eql('Jeffrey')
+      subject.last_name.should eql('Braxton')
+
+      subject.first_name = 'tESt   '
+      subject.save
+      subject.first_name.should eql('Test')
+
     end
 
   end

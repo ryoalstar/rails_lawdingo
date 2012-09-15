@@ -57,5 +57,18 @@ class PracticeArea < ActiveRecord::Base
     self.name.squish.gsub(/\s/,'-')
   end  
 
+  def selected? area_id = nil
+    return false unless area_id
+    return true if self.id == area_id
+    self.children_include? area_id, true
+  end
+
+  def children_include? area_id = nil, approved = false
+    return false unless area_id
+    chldrn = approved ? self.children.with_approved_lawyers : self.children
+    return false unless chldrn.present?
+    chldrn.exists?(area_id)
+  end
+
 end
 

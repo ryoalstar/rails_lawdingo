@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore, :create_lawyer_request]
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
@@ -174,7 +173,7 @@ class UsersController < ApplicationController
         UserMailer.notify_lawyer_application(@user).deliver
         #redirect_to welcome_path and return
         login_in_user(@user)
-        redirect_to user_offerings_path(@user, :ft => true) and return
+        redirect_to subscribe_lawyer_path and return
       elsif @user.is_client?
 
         UserMailer.notify_client_signup(@user).deliver

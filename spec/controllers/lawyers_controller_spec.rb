@@ -23,10 +23,10 @@ describe LawyersController do
       assigns[:current_user].should be_instance_of(Lawyer)
     end
 
-    it "should redirect to the lawyers path by default" do
+    it "should redirect to the subscription path by default" do
       Lawyer.any_instance.stubs(:save => true, :id => 132)
       post(:create)
-      response.should redirect_to(user_path(132))
+      response.should redirect_to(subscribe_lawyer_path)
     end
 
   end

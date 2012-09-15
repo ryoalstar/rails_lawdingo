@@ -50,19 +50,33 @@ describe Lawyer do
         lawyers.last.should == lawyer2
       end
     end
+  
+    it "Search results must not contains :payment_status => :unpaid, :is_approved => false lawyers" do
+      lawyer1 = FactoryGirl.create(:lawyer, :first_name => 'First keyword', :payment_status => 'unpaid', :is_approved => false)
+      lawyer2 = FactoryGirl.create(:lawyer, :first_name => 'Second keyword', :payment_status => 'unpaid', :is_approved => true)
+      lawyer3 = FactoryGirl.create(:lawyer, :first_name => 'Third keyword', :payment_status => 'free', :is_approved => true)
+      lawyer4 = FactoryGirl.create(:lawyer, :first_name => 'Fourth keyword', :payment_status => 'paid', :is_approved => true)
+      lawyer5 = FactoryGirl.create(:lawyer, :first_name => 'Fifth', :payment_status => 'paid', :is_approved => true, :stripe_card_token => 'FwZ_fj0l1fZw36bVmrg-Rg', :stripe_customer_token => 'cus_0MXYFpVxum69S5' )
+      subject.reindex!
+      search = Lawyer.build_search('keyword').execute
+      Lawyer.all.count.should == 5
+      Lawyer.paid.count.should == 1
+      Lawyer.unpaid.count.should == 2
+      Lawyer.free.count.should == 1
+      Lawyer.approved_lawyers == 3
+      Lawyer.shown == 3
+      lawyers = search.results
+      search.results.count.should == 2
+    end
 
     describe "Availability toggles" do
       it "should be valid" do
         lawyer1 = FactoryGirl.create(:lawyer, :first_name => 'First keyword', :is_online => false, :is_available_by_phone => false)
         lawyer2 = FactoryGirl.create(:lawyer, :first_name => 'Second keyword', :is_online => true, :is_available_by_phone => false)
         lawyer3 = FactoryGirl.create(:lawyer, :first_name => 'Third keyword', :is_online => true, :is_available_by_phone => true)
-        
-        # lawyer who won't show up in the keyword search
-        lawyer4 = FactoryGirl.create(:lawyer)
-
         subject.reindex!
         search = Lawyer.build_search('keyword').execute
-        Lawyer.all.count.should == 4
+        Lawyer.all.count.should == 3
         lawyers = search.results
         search.results.count.should == 3
         lawyers.first.should == lawyer3
