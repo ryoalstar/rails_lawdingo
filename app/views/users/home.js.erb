@@ -20,6 +20,12 @@
     $("div.load-more").remove()
     $("div.results").append("<%= escape_javascript(render(:partial => 'search_results')) %>")
   <% end -%>
+
+  // Render the lawyer request form if no lawyer found
+  <% unless @lawyers.count > 0 %>
+    $("div#no_lawyer_found").remove();
+    $("div.main_content").append("<%= j(render partial: "no_lawyer_found") %>");
+  <% end  %>
 <% end %>
 
 

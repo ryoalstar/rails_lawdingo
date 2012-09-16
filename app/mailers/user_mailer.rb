@@ -81,4 +81,10 @@ class UserMailer < ApplicationMailer
     mail(to: @lawyer.email, subject: "Premium Inquiry: #{@question.practice_area} in #{@question.state_name}")
   end
 
+  def lawyer_request_email(request_body)
+    @request_body = request_body
+
+    mail(to: "info@lawdingo.com", subject: "New lawyer request")
+  end
+
 end

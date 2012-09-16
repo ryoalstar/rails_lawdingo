@@ -104,4 +104,17 @@ describe UsersController do
       response.body.should eq "1"
     end
   end
+
+  context "#create_lawyer_request", :focus do
+    it "should send an email with lawyer request" do
+      expect {
+        post :create_lawyer_request, request_body: "Something new."
+      }.to change(ActionMailer::Base.deliveries, :size).by(1)
+
+      email = ActionMailer::Base.deliveries.last
+      email.to.should include "info@lawdingo.com"
+      email.subject.should match /New lawyer request/
+      email.body.should match /Something new/
+    end
+  end
 end

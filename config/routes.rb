@@ -103,6 +103,7 @@ Lawdingo::Application.routes.draw do
   end
 
   match 'modparam' =>'users#update_parameter', :as =>:update_parameter
+  match "/users/create_lawyer_request", to: "users#create_lawyer_request", as: :create_lawyer_request
   match '/user/sessions/:user_id' =>"users#session_history", :as =>:user_session_history
   match '/users/:user_id/daily_hours' =>"users#daily_hours", :as =>:user_daily_hours
   match '/users/:user_id' =>"users#account_information", :as =>:user_account_information
@@ -111,7 +112,7 @@ Lawdingo::Application.routes.draw do
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page
   match '/pricing_process' =>"pages#pricing_process", :name =>'pricing_process', :as =>:pricing_process
   match '/pricing_process_activation' =>"pages#pricing_process_activation", :name =>'pricing_process_activation', :as =>:pricing_process_activation
-  
+
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
   match '/details' => 'users#payment_info', :as => :card_detail
@@ -160,6 +161,4 @@ Lawdingo::Application.routes.draw do
 
   match '/LoginByApp' => 'sessions#login_by_app'
   match '/UpdateOnlineByApp' => 'sessions#set_status_by_app'
-
 end
-

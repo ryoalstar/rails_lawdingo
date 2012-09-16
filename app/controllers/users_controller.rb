@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore]
+  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore, :create_lawyer_request]
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
@@ -617,6 +617,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_lawyer_request
+    request_body = params[:request_body]
+    UserMailer.lawyer_request_email(request_body).deliver unless request_body.empty?
+
+    render nothing: true
+  end
 
   private
 
@@ -788,8 +794,7 @@ class UsersController < ApplicationController
       search = Search.find_or_create_by_query_and_user_id(query, nil) unless page
     end
     search.increment!(:count) if search.is_a? Search
-  end  
-
+  end
 end
 
 # Obtain lawyers according to sent GET params
@@ -865,4 +870,3 @@ end
     #     @selected_pa_specialities_str << [spec.name, spec.id]
     #   end
     # end
-

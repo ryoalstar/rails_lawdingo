@@ -458,3 +458,28 @@ body.users.home{
   }
 }
 
+#no_lawyer_found {
+  position: relative;
+  display: block;
+  border: 1px solid #d0d2d5;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 18px;
+  margin-top: 18px;
+  width: 688px;
+  float: left;
+
+  textarea {
+    display: block;
+    font-family: arial, verdana, tahoma;
+    width: 97%;
+    border: 1px solid #B8B8B8;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    font-size: 1.5em;
+    margin: 10px 0;
+    padding: 8px;
+  }
+}
