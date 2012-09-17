@@ -60,8 +60,16 @@ class Lawyer < User
     boolean :daily_hours_present do
       self.daily_hours.present?
     end   
+    integer :calculated_order
   end
 
+  def calculated_order
+    calculated_score = 0
+    calculated_score += 100 if self.is_online
+    calculated_score += 10 if self.is_available_by_phone?
+    calculated_score += 1 if self.daily_hours.present?
+    calculated_score
+  end
 
   def offering_names
     offerings.map(&:name)*","
@@ -98,9 +106,7 @@ class Lawyer < User
     search.build do
       fulltext query
       paginate :per_page => 20, :page => opts[:page] || 1
-      order_by :is_online, :desc
-      order_by :available_by_phone, :desc
-      order_by :daily_hours_present, :desc
+      order_by :calculated_order, :desc
       order_by :created_at, :desc
     end
     search
