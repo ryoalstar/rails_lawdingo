@@ -206,7 +206,7 @@ class Lawyer < User
     self.in_time_zone do
       dh = self.daily_hours.on_wday(time.wday)
       return false if dh.blank?
-      return dh.bookable_at_time?(time)
+      return dh.bookable_at_time?(time) rescue false
     end
   end
 
@@ -218,8 +218,6 @@ class Lawyer < User
       return dh.bookable_on_day?(date)
     end
   end
-
-  
 
   # runs a block in this Lawyer's time_zone
   def in_time_zone(&block)
