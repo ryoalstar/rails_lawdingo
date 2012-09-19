@@ -19,49 +19,23 @@ describe Lawyer do
   specify { should have_many(:reviews) }
   specify { should have_many(:states) }
   specify { should have_one(:homepage_image) }
+  specify { should be_valid }
   specify { should accept_nested_attributes_for(:bar_memberships) }
-
-  describe "validation" do
-    it "should be valid" do
-      subject.should be_valid
-    end
-  end
-
   describe "search", :integration do
 
     before(:each) do
       Lawyer.delete_all
       Lawyer.solr_remove_all_from_index!
-    end
-
+    end 
+  
     describe "Availability toggles" do
-      it "should be valid" do
+      it "should sort right" do
         lawyer1 = FactoryGirl.create(:lawyer, :first_name => 'First keyword', :is_online => false, :is_available_by_phone => false)
         lawyer2 = FactoryGirl.create(:lawyer, :first_name => 'Second keyword', :is_online => true, :is_available_by_phone => false)
         lawyer3 = FactoryGirl.create(:lawyer, :first_name => 'Third keyword', :is_online => true, :is_available_by_phone => true)
         subject.reindex!
         search = Lawyer.build_search('keyword').execute
-        Lawyer.all.count.should == 4
-        lawyers = search.results
-        search.results.count.should == 3
-        lawyers.first.should == lawyer3
-        lawyers.last.should == lawyer1
-        lawyer1.update_attribute(:is_online, true)
-        lawyer2.update_attribute(:is_online, false)
-        search = Lawyer.build_search('keyword').execute
-        lawyers = search.results
-        lawyers.last.should == lawyer2
-      end
-    end
-
-    describe "Availability toggles" do
-      it "should be valid" do
-        lawyer1 = FactoryGirl.create(:lawyer, :first_name => 'First keyword', :is_online => false, :is_available_by_phone => false)
-        lawyer2 = FactoryGirl.create(:lawyer, :first_name => 'Second keyword', :is_online => true, :is_available_by_phone => false)
-        lawyer3 = FactoryGirl.create(:lawyer, :first_name => 'Third keyword', :is_online => true, :is_available_by_phone => true)
-        subject.reindex!
-        search = Lawyer.build_search('keyword').execute
-        Lawyer.all.count.should == 4
+        Lawyer.all.count.should == 3
         lawyers = search.results
         search.results.count.should == 3
         lawyers.first.should == lawyer3
