@@ -105,7 +105,7 @@ describe UsersController do
     end
   end
 
-  context "#create_lawyer_request", :focus do
+  context "#create_lawyer_request" do
     it "should send an email with lawyer request" do
       expect {
         post :create_lawyer_request, request_body: "Something new."
