@@ -5,7 +5,7 @@
     = stylesheet_link_tag    "application"
     - if current_user && current_user.user_type == 'LAWYER'
       :javascript
-        swfobject.registerObject("mySwf", "10.2.0");
+        //swfobject.registerObject("mySwf", "10.2.0");
         var is_lawyer = true;
         var lawyer_id = #{current_user.id};
     - else
@@ -105,9 +105,9 @@
           var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
           if(playerVersion.major < 10 || (playerVersion.major == 10 && playerVersion.minor < 3))
           {
-          var output = "You have Flash player " + playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release + " installed. To use Lawdingo you'll just need to upgrade to Flash 11.It's free and easy  
-          = succeed "\";" do
-            %a{:href => "\\\"http://www.adobe.com/go/getflashplayer\\"} Upgrade to Flash Player 11
+          var output = "You have Flash player " + playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release + " installed. To use Lawdingo you'll just need to upgrade to Flash 11.It's free and easy <a href=\'http://www.adobe.com/go/getflashplayer\' >Upgrade to Flash Player 11</a>";
+          /= succeed "\";" do
+          /%a{:href => "\\\"http://www.adobe.com/go/getflashplayer\\"} Upgrade to Flash Player 11
           $.prompt( output )
           }
       / FOOTER
