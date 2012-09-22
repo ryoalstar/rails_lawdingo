@@ -14,12 +14,7 @@ class Lawyer < User
   has_many :reviews
   has_many :states, :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
-  has_many :daily_hours do
-    # find on a given wday
-    def on_wday(wday)
-      self.select{|dh| dh.wday == wday}.first
-    end
-  end
+  has_many :daily_hours 
 
   def reindex!
      Sunspot.index!(self)
@@ -201,7 +196,7 @@ class Lawyer < User
       # make sure it's a time
       time = self.convert_date(time)
       # get the relevant daily_hour
-      daily_hour = self.daily_hours.on_wday(time.wday)
+      daily_hour = self.daily_hours_on_wday(time.wday)
       return [] if daily_hour.blank?
       # cache the min time to book
       min_time = self.min_time_to_book
@@ -221,7 +216,7 @@ class Lawyer < User
   # are we bookable at a given time?
   def bookable_at_time?(time)
     self.in_time_zone do
-      dh = self.daily_hours.on_wday(time.wday)
+      dh = self.daily_hours_on_wday(time.wday)
       return false if dh.blank?
       return dh.bookable_at_time?(time) rescue false
     end
@@ -230,10 +225,15 @@ class Lawyer < User
   # is this provider bookable on a given date
   def bookable_on_day?(date)
     self.in_time_zone do
-      dh = self.daily_hours.on_wday(date.wday)
+      dh = self.daily_hours_on_wday(date.wday)
       return false if dh.blank?
       return dh.bookable_on_day?(date)
     end
+  end
+
+  # find the daily hours for a particular wday
+  def daily_hours_on_wday(wday)
+    self.daily_hours.select{|dh| dh.wday == wday}.first
   end
 
   # runs a block in this Lawyer's time_zone

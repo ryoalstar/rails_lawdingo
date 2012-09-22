@@ -64,24 +64,6 @@ ActiveRecord::Schema.define(:version => 20120914114034) do
     t.integer  "digits"
   end
 
-  create_table "card_details", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "street_address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "postal_code"
-    t.string   "country"
-    t.string   "card_type"
-    t.string   "card_number"
-    t.string   "expire_month"
-    t.string   "expire_year"
-    t.string   "card_verification"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "conversations", :force => true do |t|
     t.integer  "client_id",                            :null => false
     t.integer  "lawyer_id",                            :null => false
@@ -144,6 +126,15 @@ ActiveRecord::Schema.define(:version => 20120914114034) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_closed",   :default => false
+  end
+
+  create_table "lawyer_daily_hours", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.integer  "wday"
+    t.integer  "start_time"
+    t.integer  "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "messages", :force => true do |t|
@@ -264,10 +255,10 @@ ActiveRecord::Schema.define(:version => 20120914114034) do
     t.string   "peer_id",                                  :default => "0"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "stripe_customer_token"
-    t.string   "stripe_card_token"
     t.string   "phone"
     t.integer  "free_consultation_duration"
+    t.string   "stripe_customer_token"
+    t.string   "stripe_card_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.integer  "school_id"

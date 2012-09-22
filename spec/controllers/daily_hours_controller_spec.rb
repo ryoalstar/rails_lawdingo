@@ -44,9 +44,9 @@ describe DailyHoursController do
 
       lawyer.daily_hours.length.should eql(7)
       # default to -1
-      lawyer.daily_hours.on_wday(2).start_time.should eql(-1)
+      lawyer.daily_hours_on_wday(2).start_time.should eql(-1)
       # except for the one we posted
-      lawyer.daily_hours.on_wday(1).start_time.should eql(800)
+      lawyer.daily_hours_on_wday(1).start_time.should eql(800)
 
     end
 

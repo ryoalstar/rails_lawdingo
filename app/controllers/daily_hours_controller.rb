@@ -18,7 +18,7 @@ class DailyHoursController < ApplicationController
 
     # set our daily hours, defaulting to closed
     @daily_hours = (0..6).to_a.collect do |i|
-      dh = @lawyer.daily_hours.on_wday(i)
+      dh = @lawyer.daily_hours_on_wday(i)
       # default to a new daily hour for this lawyer
       dh ||= DailyHour.new(:wday => i, :lawyer => @lawyer)
       # if we pass no params, make the day closed - this is the 

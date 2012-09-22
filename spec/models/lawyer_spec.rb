@@ -312,12 +312,12 @@ describe Lawyer do
 
     context "#on_wday" do
 
-      it "should provide an 'on_wday' method to find valid hours
+      it "should provide a 'daily_hours_on_wday' method to find valid hours
         for a day" do
         daily_hour = DailyHour.new(:wday => 1)
         subject.daily_hours << daily_hour
-        subject.daily_hours.on_wday(1).should eql(daily_hour)
-        subject.daily_hours.on_wday(2).should be_nil
+        subject.daily_hours_on_wday(1).should eql(daily_hour)
+        subject.daily_hours_on_wday(2).should be_nil
       end
 
     end
