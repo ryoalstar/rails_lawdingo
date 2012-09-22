@@ -132,7 +132,14 @@ class User < ActiveRecord::Base
   end
 
   def corresponding_user
-    self.is_client? ? Client.find(self.id) : Lawyer.find(self.id)
+    case self.user_type
+      when ADMIN_TYPE
+        self.becomes(Admin)
+      when LAWYER_TYPE
+        self.becomes(Lawyer)
+      else
+        self.becomes(Client)
+    end
   end
 
   def full_name

@@ -108,12 +108,12 @@ class UsersController < ApplicationController
           @states = State.all
         end
         @states.count.times {@user.bar_memberships.build}
-      elsif User::SESSION_TAB == @tab
+      elsif User::SESSION_TAB == @tab && @user.is_lawyer?
         @conversations = current_user.corresponding_user.conversations
       end
-    rescue
-      path  = current_user ? user_path(current_user) : root_path
-      redirect_to path, :notice =>"No user found!" and return
+    rescue => e
+      Rails.logger.error(e)
+      redirect_to root_path, :notice =>"No user found!" and return
     end
     if @user.is_admin? && current_user.id != @user.id
       redirect_to root_path
