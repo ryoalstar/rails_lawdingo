@@ -32,8 +32,11 @@ class ApplicationController < ActionController::Base
     tokbox_session_id = tokbox_info[0]
     tokbox_token = tokbox_info[1]
 
-    user.update_attributes(:tb_session_id => tokbox_session_id,
-        :tb_token => tokbox_token,:call_status=>'')
+    user.update_attributes(
+      :tb_session_id => tokbox_session_id,
+      :tb_token => tokbox_token,
+      :call_status => ''
+    )
     session[:user_id] = user.id
   end
 
@@ -43,8 +46,16 @@ class ApplicationController < ActionController::Base
     config = YAML.load_file(File.join(Rails.root, "config", "tokbox.yml"))
     @opentok=OpenTok::OpenTokSDK.new config['API_KEY'],config['SECRET']
     @location=config['LOCATION']
-    session_id=@opentok.create_session(@location)
-    token=@opentok.generate_token :session_id => session_id, :expire_time=>(Time.now+2.day).to_i
+    begin
+      session_id = @opentok.create_session(@location)
+      token = @opentok.generate_token :session_id => session_id, :expire_time=>(Time.now+2.day).to_i
+    rescue => e
+      Rails.logger.error(e.message)
+      Rails.logger.error(config)
+      Rails.logger.error(e.backtrace[0..10])
+      session_id = ""
+      token = ""
+    end
     return [session_id.to_s,token.to_s]
   end
 
