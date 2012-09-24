@@ -79,7 +79,7 @@
         %br/
         = f.text_field :yelp_business_id, placeholder: "Busuniess ID on Yelp"
       - if @user.is_lawyer?
-      - bms = @user.corresponding_user.bar_memberships
+      - bms = @user.bar_memberships
       - bms_text = "<h2>Bar Memberships: </h3>"
       - bms.each{|bm|
       - if bm.bar_id?
@@ -89,7 +89,7 @@
       - bms_text += "<li>#{bm.state.name}#{bar}</li>"
       - }
       - pas = @user.practice_areas
-      - ppas = @user.corresponding_user.practice_areas.parent_practice_areas
+      - ppas = @user.practice_areas.parent_practice_areas
       - pas_text = "<h2>Practice Areas: </h2>"
       - ppas.each{|pa|
       - pas_text += "<li>#{pa.name}"

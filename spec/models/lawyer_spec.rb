@@ -147,38 +147,50 @@ describe Lawyer do
 
   it "should provide a approved_lawyers scope" do
     scope = Lawyer.approved_lawyers
-    scope.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :is_approved => true)
-    scope.order_values.should eql(["is_online desc, phone desc"])
+    scope.where_values_hash.should eql(
+      :user_type => [User::LAWYER_TYPE], :is_approved => true
+    )
+    scope.order_values.should include("is_online desc, phone desc")
   end
 
   it "should provide a paid scope" do
     scope = Lawyer.paid
-    scope.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :payment_status => 'paid')
+    scope.where_values_hash.should eql(
+      :user_type => [User::LAWYER_TYPE], :payment_status => 'paid'
+    )
     scope.where_values.should include("stripe_card_token IS NOT NULL", "stripe_customer_token IS NOT NULL")
   end
 
   it "should provide a unpaid scope" do
-    Lawyer.unpaid.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :payment_status => 'unpaid')
+    Lawyer.unpaid.where_values_hash.should eql(
+      :user_type => [User::LAWYER_TYPE], :payment_status => 'unpaid'
+    )
   end
 
   it "should provide a free scope" do
-    Lawyer.free.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :payment_status => 'free')
+    Lawyer.free.where_values_hash.should eql(
+      :user_type => [User::LAWYER_TYPE], :payment_status => 'free'
+    )
   end
 
   it "should provide a shown scope" do
-    Lawyer.shown.where_values_hash.should eql(:user_type => User::LAWYER_TYPE, :is_approved => true, :payment_status => ['paid', 'free'])
+    Lawyer.shown.where_values_hash.should eql(
+      :user_type => [User::LAWYER_TYPE], 
+      :is_approved => true, 
+      :payment_status => ['paid', 'free']
+    )
   end
 
   it "should provide an offers_legal_services scope" do
     scope = Lawyer.offers_legal_services
     scope.includes_values.should eql([:offerings])
-    scope.where_values.should eql(["offerings.id IS NOT NULL"])
+    scope.where_values.should include("offerings.id IS NOT NULL")
   end
 
   it "should provide an offers_legal_advice scope" do
     scope = Lawyer.offers_legal_advice
     scope.includes_values.should eql([:practice_areas])
-    scope.where_values.should eql(["practice_areas.id IS NOT NULL"])
+    scope.where_values.should include("practice_areas.id IS NOT NULL")
   end
 
   context ".practices_in_state" do
@@ -186,14 +198,14 @@ describe Lawyer do
     it "should provide a practices_in_state scope" do
       scope = Lawyer.practices_in_state("New York")
       scope.includes_values.should eql([:states])
-      scope.where_values.should eql(["states.name = 'New York'"])
+      scope.where_values.should include("states.name = 'New York'")
     end
 
     it "should provide a practices_in_state scope" do
       ny = State.new(:name => "New York")
       scope = Lawyer.practices_in_state(ny)
       scope.includes_values.should eql([:states])
-      scope.where_values.should eql(["states.name = 'New York'"])
+      scope.where_values.should include("states.name = 'New York'")
     end
 
   end
@@ -213,12 +225,10 @@ describe Lawyer do
       scope = Lawyer.offers_practice_area("Blah")
       scope.includes_values.should eql([:offerings, :practice_areas])
 
-      where_values = [
-        "practice_areas.id IN (#{pa.id},#{pa2.id}) " +
+      where_value = "practice_areas.id IN (#{pa.id},#{pa2.id}) " +
           "OR offerings.practice_area_id IN (#{pa.id},#{pa2.id})"
-      ]
 
-      scope.where_values.should eql(where_values)
+      scope.where_values.should include where_value
 
       lambda{scope.count}.should_not raise_error
 
@@ -233,11 +243,10 @@ describe Lawyer do
       scope = Lawyer.offers_practice_area(pa)
       scope.includes_values.should eql([:offerings, :practice_areas])
 
-      where_values = [
-        "practice_areas.id IN (928) OR offerings.practice_area_id IN (928)"
-      ]
+      where_value = "practice_areas.id IN (928) " + 
+        "OR offerings.practice_area_id IN (928)"
 
-      scope.where_values.should eql(where_values)
+      scope.where_values.should include(where_value)
       lambda{scope.count}.should_not raise_error
     end
 
@@ -247,11 +256,10 @@ describe Lawyer do
       scope = Lawyer.offers_practice_area("Blah-Blah")
       scope.includes_values.should eql([:offerings, :practice_areas])
 
-      where_values = [
-        "practice_areas.id IN (NULL) OR offerings.practice_area_id IN (NULL)"
-      ]
+      where_value =  "practice_areas.id IN (NULL) " + 
+        "OR offerings.practice_area_id IN (NULL)"
 
-      scope.where_values.should eql(where_values)
+      scope.where_values.should include(where_value)
       lambda{scope.count}.should_not raise_error
     end
   end
@@ -328,12 +336,13 @@ describe Lawyer do
         day can currently be booked" do
         t = Time.zone.now
         Time.zone.stubs(:now => (t.midnight + 22.hours))
+
         subject.daily_hours << DailyHour.new(
           :wday => t.wday,
           :start_time => 900,
           :end_time => 1800
         )
-        subject.bookable_on_day?(t).should_not be true
+        subject.bookable_on_day?(t).should be false
         # next week should be good though
         subject.bookable_on_day?(t + 1.week).should be true
       end
@@ -447,7 +456,7 @@ describe Lawyer do
     end
   end
 
-  context "stripe" do
+  context "stripe", :integration do
 
     before :all do
       @steven = FactoryGirl.create( :lawyer, :payment_status => 'paid')

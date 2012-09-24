@@ -10,6 +10,12 @@ Spork.prefork do
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
+
+  require 'draper/system'
+  Spork.trap_class_method(
+    ::Draper::System, :load_app_local_decorators
+  )
+
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
@@ -60,7 +66,5 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   # FactoryGirl.reload
-  ActiveSupport::Dependencies.clear
-  Object.send(:remove_const, "Lawyer")
-  load(Rails.root.join("app","models","lawyer.rb"))
+  Rails.application.reload_routes!
 end

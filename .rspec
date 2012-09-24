@@ -1,5 +1,6 @@
 --colour
 --format documentation
+--fail-fast
 -p
 -X
 --backtrace

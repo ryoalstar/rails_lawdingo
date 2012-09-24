@@ -48,7 +48,7 @@
                   \/min
                 %td.last
                   = number_to_currency con.lawyer_earning
-            - user = current_user.corresponding_user
+            - user = current_user
             %tr.total.gray
               %td
                 = pluralize @conversations.map {|c| c.client_id}.uniq.count, "Client", "Clients"
@@ -99,7 +99,7 @@
                 = number_to_currency con.lawdingo_charge
               %td
                 = number_to_currency con.billed_amount
-          - user = current_user.corresponding_user
+          - user = current_user
           %tr.total
             %td= pluralize @conversations.map{|c| c.lawyer_id}.uniq.count, "Lawyer", "Lawyers"
             %td

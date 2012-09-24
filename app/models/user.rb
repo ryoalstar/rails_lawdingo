@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
-  ADMIN_TYPE  = 'ADMIN'
-  CLIENT_TYPE = 'CLIENT'
-  LAWYER_TYPE = 'LAWYER'
+  ADMIN_TYPE  = 'Admin'
+  CLIENT_TYPE = 'Client'
+  LAWYER_TYPE = 'Lawyer'
   ACCOUNT_TAB = 'f'
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
   PFOFILE_TAB = 'profile'
+
+  self.inheritance_column = "user_type"
 
   # Validate free consultation duration only if it's lawyer signing up
   validates_presence_of :free_consultation_duration, :if => :is_lawyer?
@@ -42,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def reindex_lawyer!
-    self.corresponding_user.reindex!
+    self.reindex!
   end  
 
   def self.authenticate email, password
@@ -95,22 +97,11 @@ class User < ActiveRecord::Base
   end
 
   def detail
-    hash = {
+    {
       "First Name" => self.first_name,
       "Last Name" => self.last_name,
       "Email" => self.email
     }
-    if self.is_lawyer?
-      hash.update(
-                  "Rate" =>"$ #{rate}/minute",
-                  "Tag Line" =>self.personal_tagline,
-                  "Address" => self.address,
-                  "Practice Areas" =>self.corresponding_user.practice_areas,
-                  "Law School" => self.law_school,
-                  "Bar memberships"=>self.bar_memberships
-                )
-    end
-    hash
   end
 
   def password=(value)
@@ -124,22 +115,11 @@ class User < ActiveRecord::Base
   end
 
   def self.get_lawyers
-    self.where("user_type = '#{self::LAWYER_TYPE}'").order('id desc')
+    Lawyer.order('id desc')
   end
 
   def self.get_clients
-    self.where("user_type = '#{self::CLIENT_TYPE}'").order('id desc')
-  end
-
-  def corresponding_user
-    case self.user_type
-      when ADMIN_TYPE
-        self.becomes(Admin)
-      when LAWYER_TYPE
-        self.becomes(Lawyer)
-      else
-        self.becomes(Client)
-    end
+    Client.order('id desc')
   end
 
   def full_name

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_timezone
-  helper_method :current_admin, :logged_in?, :logged_in_admin?, :log_in_user, :log_out_user
+  helper_method :current_admin, :logged_in?, :logged_in_admin?
 
   def set_timezone
     Time.zone = current_user.try(:time_zone) || "Pacific Time (US & Canada)"
@@ -19,12 +19,10 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('Not Found')
   end
   
-  def log_in_user user_id
-    session[:user_id] = user_id
-  end
-
-  def log_out_user
-    session[:user_id] = nil
+  # log in a given user
+  def log_in_user!(user)
+    session[:user_id] = user.id
+    @current_user = user
   end
 
   def update_tokbox_session user
@@ -62,7 +60,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil if session[:user_id].blank?
-     @current_user ||= User.find_by_id(session[:user_id])
+    @current_user ||= User.find_by_id(session[:user_id])
   end
 
   def authenticate

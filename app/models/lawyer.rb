@@ -29,7 +29,9 @@ class Lawyer < User
       :in => ActiveSupport::TimeZone.us_zones.collect(&:name)
     }
 
-  attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
+  # TODO: use attr_accessible
+  #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
+  
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
 
   # scopes
@@ -127,6 +129,17 @@ class Lawyer < User
     calculated_score += 10 if self.is_available_by_phone?
     calculated_score += 1 if self.daily_hours.present?
     calculated_score
+  end
+
+  def detail
+    super.merge(
+      "Rate" =>"$ #{rate}/minute",
+      "Tag Line" =>self.personal_tagline,
+      "Address" => self.address,
+      "Practice Areas" =>self.practice_areas,
+      "Law School" => self.law_school,
+      "Bar memberships"=>self.bar_memberships
+    )
   end
 
   def offering_names

@@ -8,7 +8,7 @@ FactoryGirl.define do
     last_name "York"
     email
     password "secret"
-    user_type User::CLIENT_TYPE
+    user_type{User::CLIENT_TYPE}
     phone '+0123456789'
   end
 
@@ -17,7 +17,7 @@ FactoryGirl.define do
     last_name "York"
     email
     password "secret"
-    user_type User::CLIENT_TYPE
+    user_type{User::CLIENT_TYPE}
     phone '+0123456789'
   end
 end

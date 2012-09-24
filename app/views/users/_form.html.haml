@@ -1,21 +1,18 @@
 .form-inner
   = raw flash[:error]
   
-  = form_for @user, :validate => true, :url =>@user.new_record? ? users_path : user_path(@user), :html=>{:multipart => true} do |f|
+  = form_for user, :validate => true, :html=>{:multipart => true} do |f|
     - unless flash[:error]
       
-      - if @user.errors.size > 0
+      - if user.errors.size > 0
         
         .error_explanation
           
           %h4.error Please fix the following errors:
           %ul.errors  
-            - @user.errors.full_messages.each do |error|
+            - user.errors.full_messages.each do |error|
               %li= error
 
-    = hidden_field_tag :user_type, @user[:user_type]
-    
-    
     %table.user_info_form
       %tbody
         %tr
@@ -29,7 +26,9 @@
         %tr
           %td Password:
           %td= f.password_field :password, :placeholder=>"Password", :class=>"passw", title: "A password.", rel: "twipsy"
-        - if @user.is_lawyer?
+        
+        - if user.is_lawyer?
+          
           %tr
             %td Bar membership(s):
             %td
@@ -61,7 +60,7 @@
           %tr
             %td Hourly rate:
             %td
-              - @user.rate = nil if @user.new_record?
+              - user.rate = nil if user.new_record?
               = f.text_field :rate, :class=>"paypal", :placeholder => "Hourly rate", title: "Your hourly rate is quoted to clients as a per-minute rate.", rel: "twipsy"
               %span.rate_hint Will be quoted by the min.
           %tr
@@ -111,7 +110,7 @@
               %ul#leveled-list_practice_areas.leveled-list
                 - PracticeArea.parent_practice_areas.order(:name).each do |p|
                   %li
-                  %input.parent-area{"data-id" => p.id, "data-name" => p.name, :id => "practice_area_#{p.id}", :name => "practice_areas[]", :type => "checkbox", :value => p.id}/
+                  %input.parent-area{"data-id" => p.id, "data-name" => p.name, :id => "practice_area_#{p.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => p.id}/
                   = label_tag "practice_area_#{p.id}", p.name
                   .sub{"data-parent-id" => p.id}
                     = p.name
@@ -120,12 +119,12 @@
                       - p.specialities.order(:name).each do |s|
                         / li><haml:loud> check_box_tag &amp;quot;practice_areas[]&amp;quot;, &amp;quot;#{s.id}&amp;quot; </haml:loud> <haml:loud> s.name </haml:loud> </li
                         %li
-                          %input{"data-name" => s.name, :id => "practice_area_#{s.id}", :name => "practice_areas[]", :type => "checkbox", :value => s.id}/
+                          %input{"data-name" => s.name, :id => "practice_area_#{s.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => s.id}/
                           = label_tag "practice_area_#{s.id}", s.name
             %a.button.blue{:onclick => "setPracticeAreas();", :style => "width: 100px; text-align: center;"} Done      
         %tr
           %td
-          %td= f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as a Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account'), :class=>"button", id: "submit_signup"
+          %td= f.submit user.is_lawyer? ? (user.new_record? ? 'Apply as a Lawyer' : 'Update Account') : (user.new_record? ? 'Join Lawdingo' : 'Update Account'), :class=>"button", id: "submit_signup"
         %tr
           %td
           %td

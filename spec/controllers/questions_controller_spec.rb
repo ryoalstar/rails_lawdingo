@@ -36,7 +36,7 @@ describe QuestionsController do
 
       it "should redirect to sign up page" do
         response.should redirect_to(
-          new_user_path(ut: 0, question_notice: true)
+          new_client_path(question_notice: true)
         )
       end
     end

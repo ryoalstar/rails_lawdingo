@@ -3,7 +3,7 @@
   %head
     %title= content_for?(:title) ? yield(:title) : "Lawdingo: Ask a Lawyer Online Now - Free Consultations for Your Legal Questions"
     = stylesheet_link_tag    "application"
-    - if current_user && current_user.user_type == 'LAWYER'
+    - if current_user && current_user.is_a?(Lawyer)
       :javascript
         //swfobject.registerObject("mySwf", "10.2.0");
         var is_lawyer = true;
@@ -18,7 +18,7 @@
     = render :partial => 'layouts/ie_style'
     %meta{:property => "og:site_name", :content => 'Lawdingo: Ask a Lawyer Online Now'}
     = yield :head
-    - if ENV['RAILS_ENV'] == 'production'
+    - if Rails.env.production?
       :javascript
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-3494749-4']);
@@ -71,7 +71,7 @@
               - else
                 %li
                   = link_to "Log In", login_path
-                  = link_to "Client Signup", new_user_path(:ut=>0), :class => 'signup'
+                  = link_to "Client Signup", new_client_path, :class => 'signup'
                 %li
                   %span.lawyers_signup
                     = link_to "Attorney Signup", new_lawyer_path, :class => ''

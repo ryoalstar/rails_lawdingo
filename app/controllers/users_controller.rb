@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if User::PAYMENT_TAB == @tab
       #@card_detail = current_user.card_detail || CardDetail.new
     elsif User::SESSION_TAB == @tab
-      @conversations = current_user.corresponding_user.conversations
+      @conversations = current_user.conversations
     end
   end
 
@@ -109,7 +109,7 @@ class UsersController < ApplicationController
         end
         @states.count.times {@user.bar_memberships.build}
       elsif User::SESSION_TAB == @tab && @user.is_lawyer?
-        @conversations = current_user.corresponding_user.conversations
+        @conversations = current_user.conversations
       end
     rescue => e
       Rails.logger.error(e)
@@ -126,17 +126,25 @@ class UsersController < ApplicationController
     end
 
     # Keep question notice after clicking the login link
-    session[:keep_question_notice] = true if params[:question_notice].present?
+    if params[:question_notice].present?
+      session[:keep_question_notice] = true
+    end
 
     # Empy return_to if user came from homepage
-    session[:return_to] = nil if request.referer == root_url
+    if request.referer == root_url
+      session[:return_to] = nil 
+    end
 
-    redirect_to root_path and return if current_user
+    # if we are already logged in, return to homepage
+    if current_user.present?
+      return redirect_to(root_path)
+    end
+
     user_type  = params[:ut] || '1'
     if user_type == '0'
-      @user       = User.new(:user_type => User::CLIENT_TYPE  )
+      @user = User.new(:user_type => User::CLIENT_TYPE  )
     else
-      @user       = Lawyer.new(:user_type => User::LAWYER_TYPE )
+      @user = Lawyer.new(:user_type => User::LAWYER_TYPE )
       @states = State.all
       @states.count.times {@user.bar_memberships.build}
     end
@@ -236,7 +244,7 @@ class UsersController < ApplicationController
       fill_states
       status = @user.update_attributes(params[:lawyer])
       @user.update_attribute :school_id, params[:lawyer][:school_id]
-      @user.corresponding_user.practice_areas.delete_all
+      @user.practice_areas.delete_all
       unless params[:practice_areas].blank?
         practice_areas = params[:practice_areas]
         practice_areas.each{|pid|

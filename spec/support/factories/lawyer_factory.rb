@@ -8,7 +8,7 @@ FactoryGirl.define do
     last_name "Langevin"
     email { generate :lawyer_email }
     password "123456"
-    user_type User::LAWYER_TYPE
+    user_type{User::LAWYER_TYPE}
     free_consultation_duration 10
     is_approved true
     time_zone "Pacific Time (US & Canada)"

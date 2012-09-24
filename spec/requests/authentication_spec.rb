@@ -21,10 +21,10 @@ describe "Authentication" do
     @roland = FactoryGirl.build(:client, first_name: "Roland")
     visit root_path
     click_link "Client Signup"
-    page.fill_in "user_first_name", with: @roland.first_name
-    page.fill_in "user_last_name", with: @roland.last_name
-    page.fill_in "user_email", with: @roland.email
-    page.fill_in "user_password", with: @roland.password
+    page.fill_in "client_first_name", with: @roland.first_name
+    page.fill_in "client_last_name", with: @roland.last_name
+    page.fill_in "client_email", with: @roland.email
+    page.fill_in "client_password", with: @roland.password
     click_button "submit_signup"
   end
 end

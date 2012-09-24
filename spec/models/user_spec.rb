@@ -28,23 +28,4 @@ describe User do
 
   end
 
-  context "#corresponding_user" do
-
-    it "should correspond to a client if user_type is Client" do
-      user = User.new(:user_type => User::CLIENT_TYPE)
-      user.corresponding_user.should be_a(Client)
-    end
-
-    it "should correspond to a lawyer if user_type is Lawyer" do
-      user = User.new(:user_type => User::LAWYER_TYPE)
-      user.corresponding_user.should be_a(Lawyer)
-    end
-
-    it "should correspond to an admin if user_type is Admin" do
-      user = User.new(:user_type => User::ADMIN_TYPE)
-      user.corresponding_user.should be_a(Admin)
-    end
-
-  end
-
 end

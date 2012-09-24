@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
       respond_to :js
     else
       session[:question_id] = @question.to_param
-      redirect_to new_user_path(ut: 0, question_notice: true)
+      redirect_to new_client_path(question_notice: true)
     end
   end
 

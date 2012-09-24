@@ -113,7 +113,7 @@ module LawyersHelper
       if logged_in?
         link_to "Chat now by video conference", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "Chat now by video conference", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
+        link_to "Chat now by video conference", new_client_path(notice: true, return_path: user_chat_session_path(lawyer)), :class => ''
       end
     else
       if lawyer.is_available_by_phone?
@@ -125,7 +125,7 @@ module LawyersHelper
             link_to "Chat now by phone", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
           end
         else
-          link_to 'Start phone consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ''
+          link_to 'Start phone consultation', new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ''
         end
       else
         if lawyer.daily_hours.present?
@@ -134,7 +134,7 @@ module LawyersHelper
           if logged_in?
             link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
           else
-            link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+            link_to "Ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
           end
         end
       end
@@ -146,7 +146,7 @@ module LawyersHelper
     if logged_in?
       link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      link_to "Ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+      link_to "Ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
 
@@ -155,7 +155,7 @@ module LawyersHelper
     if logged_in?
       link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      link_to "", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+      link_to "", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
 
@@ -163,7 +163,7 @@ module LawyersHelper
     if logged_in?
       link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
     else
-      link_to "Send a note or ask a question", new_user_path(ut: 0, notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+      link_to "Send a note or ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
 
@@ -172,7 +172,7 @@ module LawyersHelper
       if logged_in?
         link_to "Chat now by video conference", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
       else
-        link_to "Chat now by video conference", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
+        link_to "Chat now by video conference", new_client_path(notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
       end
    end
   end
@@ -182,7 +182,7 @@ module LawyersHelper
       if logged_in?
         link_to "", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
+        link_to "", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
       end
    end
   end
@@ -192,7 +192,7 @@ module LawyersHelper
       if logged_in?
         link_to "Start free video consultation", user_chat_session_path(lawyer), :class => ''
       else
-        link_to "Start free video consultation", new_user_path(ut: 0, notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
+        link_to "Start free video consultation", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
       end
    end
   end
@@ -202,7 +202,7 @@ module LawyersHelper
    if logged_in?
       link_to "Start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
   else
-    link_to 'Start phone consultation', new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
+    link_to 'Start phone consultation', new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
   end
  end
 
@@ -211,7 +211,7 @@ module LawyersHelper
 
        link_to "", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
    else
-     link_to "", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
+     link_to "", new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
    end
  end
 
@@ -219,7 +219,7 @@ module LawyersHelper
     if logged_in?
       link_to "Start free phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
    else
-     link_to "Start free phone consultation", new_user_path(ut: 0, notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
+     link_to "Start free phone consultation", new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
    end
  end
 
@@ -227,7 +227,7 @@ module LawyersHelper
     if logged_in?
        phonecall_path(lawyer)
    else
-     new_user_path(:ut => 0, :notice => true, :return_path => phonecall_path(lawyer))
+     new_client_path(:notice => true, :return_path => phonecall_path(lawyer))
    end
  end
 

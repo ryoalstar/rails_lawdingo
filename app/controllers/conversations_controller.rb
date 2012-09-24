@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
 #  skip_before_filter :protect_from_frogery, :only =>[:create]
 
   def index
-    @conversations = current_user.corresponding_user.conversations
+    @conversations = current_user.conversations
   end
 
   def new

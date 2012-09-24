@@ -3,10 +3,15 @@ Lawdingo::Application.routes.draw do
 
   resources :appointments, :only => [:create]
 
+  resources :clients, :only => [:new, :create]
+
   namespace :framey do
     resources :videos
   end
   post "framey/callback" => "framey/videos#callback"
+
+  resources :lawyers, :only => [:new, :create]
+  match '/apply' => "lawyers#new", :as => :new_lawyer
 
   resources :questions
   resources :reviews
@@ -31,7 +36,6 @@ Lawdingo::Application.routes.draw do
     as: :call_payment
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
 
-  match '/apply' => "users#new", :as => :new_lawyer
   match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
   
   resources :users do

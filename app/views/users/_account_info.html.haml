@@ -1,4 +1,4 @@
-- @user = user.corresponding_user if user
+- @user = user if user
 - errors = @user.errors
 = form_for @user, :url =>@user.new_record? ? users_path : user_path(@user) do |f|
   %h2 Update Your Information

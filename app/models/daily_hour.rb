@@ -53,7 +53,7 @@ class DailyHour < ActiveRecord::Base
   end
 
   def bookable_on_day?(day)
-    day = day.to_time
+    day = day.to_time.in_time_zone.midnight
     return false if self.closed?
     return false unless self.wday == day.wday
     # if we are bookable for the last slot of the day,

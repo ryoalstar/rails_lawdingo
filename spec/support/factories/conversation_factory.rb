@@ -7,6 +7,6 @@ FactoryGirl.define do
     end_date 1.hour.from_now
     consultation_type "video"
     billable_time 20
-    lawdingo_charge AppParameter.service_charge_value
+    lawdingo_charge{AppParameter.service_charge_value}
   end
 end

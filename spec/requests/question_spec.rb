@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "general question for lawyers" do
+describe "general question for lawyers", :integration do
 
   context "when is signed in" do
     it "should show question form" do
@@ -8,25 +8,6 @@ describe "general question for lawyers" do
       page.body.should have_selector("div.question-container")
     end
   end
-
-  # context "when user is not signed in" do
-  #   context "after sign in" do
-  #     it "should show a notice that question is sent" do
-  #       visit lawyers_path
-  #       page.fill_in "question_body", with: "Are you my mommy?"
-  #       click_button "Ask"
-
-  #       page.fill_in "user_first_name", with: "Doctor"
-  #       page.fill_in "user_last_name", with: "Who"
-  #       page.fill_in "user_email", with: "thedoctor@lawdingo.com"
-  #       page.fill_in "user_password", with: "secret"
-  #       page.click_button "submit_signup"
-  #       # Capybara show an error: undefined method `node_name' for nil:NilClass
-
-  #       page.should have_selector("p.notice")
-  #     end
-  #   end
-  # end
 
   def sign_in
     user = FactoryGirl.create(:user)
@@ -39,7 +20,9 @@ end
 
 describe "lawyer specific question" do
   before :each do
-    @lily = FactoryGirl.create(:lawyer, first_name: 'Lily', last_name: 'Smith')
+    @lily = FactoryGirl.create(:lawyer, 
+      first_name: 'Lily', last_name: 'Smith'
+    )
     visit attorney_path(@lily.to_param, slug: @lily.slug)
     click_link "Send a note or ask a question"
   end
