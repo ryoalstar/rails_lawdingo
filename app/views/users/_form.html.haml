@@ -17,32 +17,32 @@
       %tbody
         %tr
           %td.labels Your name:
-          %td 
+          %td.name_fields 
             = f.text_field :first_name ,{:placeholder=>"First Name",:class=>"name"}
             = f.text_field :last_name ,{:placeholder=>"Last Name",:class=>"name"}
         %tr
-          %td Email:
-          %td= f.text_field :email, :validate => true, :placeholder=>"Email Address", :class=>"email", title: "Your email address.", rel: "twipsy"
+          %td.labels Email:
+          %td.email_field= f.text_field :email, :validate => true, :placeholder=>"Email Address", :class=>"email", title: "Your email address.", rel: "twipsy"
         %tr
-          %td Password:
-          %td= f.password_field :password, :placeholder=>"Password", :class=>"passw", title: "A password.", rel: "twipsy"
+          %td.labels Password:
+          %td.pass_field= f.password_field :password, :placeholder=>"Password", :class=>"passw", title: "A password.", rel: "twipsy"
         
         - if user.is_lawyer?
           
           %tr
-            %td Bar membership(s):
+            %td.labels Bar membership(s):
             %td
               #div_states_barids
-              %a#barids_editor.dialog-opener{:href => "#bar_membership"} (edit)
+              %a#barids_editor.dialog-opener.edit_gray{:href => "#bar_membership"} (edit)
               %a#barids_opener.dialog-opener.blue_button.gray.no-inner-shadow{:href => "#bar_membership", :style => "width: 13em; text-align: center;"} State Bar Membership(s)
           %tr
-            %td Practice areas:
+            %td.labels Practice areas:
             %td
               #div_practice_areas
-              %a#practice_areas_editor.dialog-opener{:href => "#practices"} (edit)
+              %a#practice_areas_editor.dialog-opener.edit_gray{:href => "#practices"} (edit)
               %a#practice_areas_opener.dialog-opener.blue_button.gray.no-inner-shadow{:href => "#practices", :style => "width: 11.3em; text-align: center;"} Your Practice Areas
           %tr
-            %td Free consultation offered:
+            %td.labels Free consultation offered:
             %td           
               .user_free_consultation_duration
                 = f.select(:free_consultation_duration, [ |
@@ -58,23 +58,23 @@
                   ], selected: 20)                        |
                 %span.duration_hint free consultation offered                                                 
           %tr
-            %td Hourly rate:
-            %td
+            %td.labels Hourly rate:
+            %td.rate_field
               - user.rate = nil if user.new_record?
               = f.text_field :rate, :class=>"paypal", :placeholder => "Hourly rate", title: "Your hourly rate is quoted to clients as a per-minute rate.", rel: "twipsy"
               %span.rate_hint Will be quoted by the min.
           %tr
-            %td Direct phone number:
+            %td.labels Direct phone number:
             %td= f.text_field :phone, :placeholder => "Your direct phone number", title: "To receive clients by phone, enter your direct phone line here.", rel: "twipsy"
 
           %tr
             %td Time Zone:
             %td= f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
           %tr
-            %td Professional summary:
+            %td.labels Professional summary:
             %td= f.text_area :personal_tagline, :placeholder=>"Professional summary (2000 chars)", :class=>"summary", :maxlength => 2000, :rows => 2, title: "A brief description of your personal credentials and focal practice areas.", rel: "twipsy"
           %tr
-            %td Profile Photo:
+            %td.labels Profile Photo:
             %td
               .file_select_wrapper
                 .file_select_button.blue_button.gray.no-inner-shadow
@@ -114,17 +114,17 @@
               %ul#leveled-list_practice_areas.leveled-list
                 - PracticeArea.parent_practice_areas.order(:name).each do |p|
                   %li
-                  %input.parent-area{"data-id" => p.id, "data-name" => p.name, :id => "practice_area_#{p.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => p.id}/
-                  = label_tag "practice_area_#{p.id}", p.name
-                  .sub{"data-parent-id" => p.id}
-                    = p.name
-                    specialities:
-                    %ul
-                      - p.specialities.order(:name).each do |s|
-                        / li><haml:loud> check_box_tag &amp;quot;practice_areas[]&amp;quot;, &amp;quot;#{s.id}&amp;quot; </haml:loud> <haml:loud> s.name </haml:loud> </li
-                        %li
-                          %input{"data-name" => s.name, :id => "practice_area_#{s.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => s.id}/
-                          = label_tag "practice_area_#{s.id}", s.name
+                    %input.parent-area{"data-id" => p.id, "data-name" => p.name, :id => "practice_area_#{p.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => p.id}/
+                    = label_tag "practice_area_#{p.id}", p.name
+                    .sub{"data-parent-id" => p.id}
+                      = p.name
+                      specialities:
+                      %ul
+                        - p.specialities.order(:name).each do |s|
+                          / li><haml:loud> check_box_tag &amp;quot;practice_areas[]&amp;quot;, &amp;quot;#{s.id}&amp;quot; </haml:loud> <haml:loud> s.name </haml:loud> </li
+                          %li
+                            %input{"data-name" => s.name, :id => "practice_area_#{s.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => s.id}/
+                            = label_tag "practice_area_#{s.id}", s.name
             %a.button.blue{:onclick => "setPracticeAreas();", :style => "width: 100px; text-align: center;"} Done      
         %tr
           %td

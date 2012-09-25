@@ -167,10 +167,14 @@ function setPracticeAreas()
   var specialities_string = "";
   $('#leveled-list_practice_areas').children().each(function(index){
     var parent_list = $(this);
-    var parent_checkbox = parent_list.find(':checkbox:first');
+    var parent_checkbox = parent_list.find('input[type=checkbox]');
+    //alert(parent_checkbox);
     if(parent_checkbox.attr('checked') == 'checked')
     {
+      var for_alert = parent_checkbox.data('name');
+      //alert(for_alert);
       practice_area_string += "" + parent_checkbox.data('name');
+      //alert(practice_area_string);
       var div = parent_list.find('div');
       var inner_ul = div.find('ul');
       specialities_string = "";
@@ -189,7 +193,7 @@ function setPracticeAreas()
       }
     }
   });
-  practice_area_string = practice_area_string.substring(0,practice_area_string.length) + "";
+  practice_area_string = practice_area_string.substring(0,practice_area_string.length -2) + "";
   $('#practice_areas_opener').hide();
   $('#div_practice_areas').html(practice_area_string);
   $('#div_practice_areas').show().css('display', 'inline');

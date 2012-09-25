@@ -26,7 +26,8 @@
         %h1= @tagline
         %p= @subtext[:first]
         / %p= @subtext[:second]
-        = link_to "", lawyers_path, class: "browse_lawyers_button"
+        %span.browse_lawyers_button
+          = link_to "Get Started", lawyers_path, class: ""
         = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
         = render partial: "questions/home_form", locals: { type: "lawyer" }
         -#%small

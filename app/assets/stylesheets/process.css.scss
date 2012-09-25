@@ -1,10 +1,75 @@
+body.clients.new #page.apply-form-wrapper div.outer{
+  background:none;
+}
 #page{
   &.signup, &.payment, &.lawyer_subscribtion, &.apply-form-wrapper {
+    a.dialog-opener.edit_gray{
+      float:left;
+      font-size:11px;
+      color:#4c4c4c;
+      padding:6px 8px;
+      border:1px solid #b8b8b8;
+      -moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			background: #f6f6f6; /* Old browsers */
+      background: -moz-linear-gradient(top,  #f6f6f6 0%, #e8e8e8 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#e8e8e8)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* IE10+ */
+      background: linear-gradient(to bottom,  #f6f6f6 0%,#e8e8e8 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+      
+    }
     form{
       margin: 0px 0px 12px 0px;
       table.user_info_form{
         td.labels{
           width: 70px;
+          font-weight:bold;
+        }
+        .field_with_errors{
+          label.message{
+            padding:4px 5px 2px 5px;
+          }
+        }
+        td.email_field{
+          .field_with_errors{
+            width: 447px;
+          }
+          .error_notice{
+            .arrow{
+              margin-left:67px;
+            }
+          }
+        }
+        td.name_fields{
+          .field_with_errors{
+            width: 214px;
+          }
+          input[type="text"]{
+            float:left;
+          }
+          .field_with_errors:first-child{
+            margin-right:10px;
+          }
+          .field_with_errors:last-child{
+            .error_notice{
+              margin-right: -30px;
+            }
+          }
+        }
+        td.pass_field{
+          .field_with_errors{
+            width: 447px;
+            margin-right: 20px;
+          }
+        }
+        td.rate_field{
+          .field_with_errors{
+            width: 290px;
+          }
         }
         tr td{
           padding-right:10px;
@@ -25,8 +90,20 @@
           .field_with_errors{
             float: left;
           }
+          input[type="text"].email{
+            background:url('email_icon.png') no-repeat 98% center white;
+          }
+          input[type="text"].paypal{
+            background:url('rate_icon.png') no-repeat 98% center white;
+          }
+          input[type="password"].passw{
+            background:url('password_icon.png') no-repeat 98% center white;
+          }
           input[type="text"].name{
             width: 204px;
+          }
+          input[type="text"]#client_last_name{
+            margin-left: 10px;
           }
           input#lawyer_last_name{
             margin-left:10px;
@@ -108,6 +185,9 @@
   width:990px;
   padding: 0;
   border:0;
+  &.notice{
+    border: 1px #D3E1E1 solid;
+  }
   .user_notice{
     width:635px;
     float: none;

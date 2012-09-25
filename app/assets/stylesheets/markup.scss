@@ -163,6 +163,68 @@ html, body{
   color:#a8a8a8;
 }
 
+#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion, #page.apply-form-wrapper{
+  margin-bottom:10px;
+  .field_with_errors{
+    input{
+      border:1px solid #feacac;            
+      -moz-box-shadow:0px 0px 3px 3px #FDE6E3;
+      -webkit-box-shadow:0px 0px 3px 3px #FDE6E3;
+      box-shadow:0px 0px 3px 3px #FDE6E3;
+    }
+    input.email, input.passw{
+      margin-bottom:0;
+    }
+    input.phone{
+      margin:10px 0;
+    }
+    label.message{
+      -moz-box-shadow:0px 0px 5px 1px #ACACAC;
+      -webkit-box-shadow:0px 0px 5px 1px #ACACAC;
+      box-shadow:0px 0px 5px 1px #ACACAC;
+      border:1px solid #c56464;
+      color:#882b2b;
+      background:image-url('error_notice_bg.png')repeat-x;
+      -moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			padding:5px;
+			margin-top:2px;
+    }
+    .error_notice{
+      float: right;
+      margin-right: -19px;
+      label{
+        float:right;
+      }
+      .arrow{
+        margin-top: -5px;
+        margin-left:79px;
+        background:image-url('error_tooltip_arrow.png') no-repeat;
+        display:block;
+        width:11px;
+        height:9px;
+        position:absolute;
+      }
+    }
+  }
+  .user_rate{
+    .field_with_errors{
+      height: 70px;
+      width:140px;
+    }
+    .error_notice{
+    float: right;
+    margin-right: -3px;
+    }
+  }
+  #div_practice_areas, #div_states_barids{
+    h2{
+      margin:5px;
+    }
+  }
+}
+
 #div_states_barids{
   font-size:1em;
   float:left;
@@ -1424,7 +1486,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
               -webkit-text-shadow: 1px 1px 1px #434950;
               text-shadow: 1px 1px 1px #434950;
 						}
-						a.browse_lawyers_button{
+						/*a.browse_lawyers_button{
 							margin-top: 25px;
 							width:233px;
 							height:44px;
@@ -1437,7 +1499,72 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						}
 						a.browse_lawyers_button:active{
 							background-position: 0px -92px;
-						}
+						}*/
+						span.browse_lawyers_button{
+  					  border:1px solid #3e454f;
+  						background: #f3a648; /* Old browsers */
+              background: -moz-linear-gradient(top,  #f3a648 0%, #ec6e2e 100%); /* FF3.6+ */
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3a648), color-stop(100%,#ec6e2e)); /* Chrome,Safari4+ */
+              background: -webkit-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* Chrome10+,Safari5.1+ */
+              background: -o-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* Opera 11.10+ */
+              background: -ms-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* IE10+ */
+              background: linear-gradient(to bottom,  #f3a648 0%,#ec6e2e 100%); /* W3C */
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3a648', endColorstr='#ec6e2e',GradientType=0 ); /* IE6-9 */
+  						height:40px;
+  						display:block;
+  						width:180px;
+  						margin-top:25px;
+  						padding-right: 0;
+  						margin-right: 0;
+  						padding:0;
+  						-moz-border-radius:3px;
+  						-webkit-border-radius:3px;
+  						border-radius:3px;
+  						line-height:40px;
+  						font-size:20px;
+  						-moz-text-shadow: 0px -1px 1px #ed7937;
+              -webkit-text-shadow: 0px -1px 1px #ed7937;
+              text-shadow: 0px -1px 1px #ed7937;
+              a{
+  						  display:block;
+  						  color:#ffffff;
+  						  width:100%;
+  						  padding:0 0 0 50px;
+  						  -moz-box-shadow: none;
+          	    -webkit-box-shadow: none;
+          	    box-shadow: none;
+  						  height:100%;
+  						  background:image-url('get_started_icon.png') no-repeat 16px 11px;
+  						}
+  						a:hover{
+  						  -moz-box-shadow: none;
+          	    -webkit-box-shadow: none;
+          	    box-shadow: none;
+  						}
+  					}
+  					span.browse_lawyers_button:hover{
+              background: #f5b04e; /* Old browsers */
+              background: -moz-linear-gradient(top,  #f5b04e 0%, #ee7832 100%); /* FF3.6+ */
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5b04e), color-stop(100%,#ee7832)); /* Chrome,Safari4+ */
+              background: -webkit-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Chrome10+,Safari5.1+ */
+              background: -o-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Opera 11.10+ */
+              background: -ms-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* IE10+ */
+              background: linear-gradient(to bottom,  #f5b04e 0%,#ee7832 100%); /* W3C */
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5b04e', endColorstr='#ee7832',GradientType=0 ); /* IE6-9 */
+  					}
+  					span.browse_lawyers_button:active{
+              background: #f5b04e; /* Old browsers */
+              background: -moz-linear-gradient(top,  #f5b04e 0%, #ee7832 100%); /* FF3.6+ */
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5b04e), color-stop(100%,#ee7832)); /* Chrome,Safari4+ */
+              background: -webkit-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Chrome10+,Safari5.1+ */
+              background: -o-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Opera 11.10+ */
+              background: -ms-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* IE10+ */
+              background: linear-gradient(to bottom,  #f5b04e 0%,#ee7832 100%); /* W3C */
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5b04e', endColorstr='#ee7832',GradientType=0 ); /* IE6-9 */
+  						-moz-box-shadow: inset 3px 3px 6px #eb7538;
+        	    -webkit-box-shadow: inset 3px 3px 6px #eb7538;
+        	    box-shadow: inset 3px 3px 6px #eb7538;
+  					}
 					}
 					.slider{
 						float:right;
@@ -2609,7 +2736,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		}
 		.row{
 		  .left.row_block{
-		    min-height: 180px;
+		    min-height: 200px;
 		  }
 		}
 		.row, .bio-block{
