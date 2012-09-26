@@ -13,6 +13,7 @@ class StripeController < ApplicationController
 			else
 				flash[:notice] = "Error. Something wrong."
 			end
+		  
 		end
 	end
 end

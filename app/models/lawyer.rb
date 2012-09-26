@@ -352,7 +352,13 @@ class Lawyer < User
 
   def save_with_payment stripe_card_token
     if valid?
-      customer = Stripe::Customer.create( description: email, plan: '5', card: stripe_card_token )
+
+      #customer = Stripe::Customer.create( description: email, plan: '3', card: stripe_card_token )
+      #Stripe error while creating customer: No such plan: 3; a similar object exists in live mode, but a test mode key was used to make this request.
+      #Changed by AF 
+      
+      customer = Stripe::Customer.create( description: email,  card: stripe_card_token )
+      
       self.stripe_customer_token = customer.id
       self.stripe_card_token = stripe_card_token
       save!
