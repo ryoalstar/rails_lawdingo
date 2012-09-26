@@ -5,11 +5,11 @@
 <% else %>
   <div id="page" class="session-summary">
 <% end %>
-<% if @user.is_client?  %>
+<% if @user.is_a?(Client) %>
   <%= render :partial =>'/client/home_page', :locals =>{:user =>@user, :tab =>@tab} %>
-<% elsif @user.is_lawyer? %>
+<% elsif @user.is_a?(Lawyer) %>
   <%= render :partial =>'/lawyer/home_page', :locals =>{:user =>@user, :tab =>@tab} %>
-<% elsif @user.is_admin? %>
+<% elsif @user.is_a?(Admin) %>
   <% if is_self_login?(@user.id)  %>
     <%= render :partial =>'/admin/home_page', :locals =>{:user =>@user} %>
   <% end %>
