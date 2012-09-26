@@ -10,6 +10,12 @@ describe Offering do
     it "should be valid" do
       subject.should be_valid
     end
+    
+    it "should not create without user" do
+      offering = FactoryGirl.create(:offering)
+      offering.user = nil
+      offering.should_not be_valid
+    end
   end
 
   describe "search", :integration => true do
