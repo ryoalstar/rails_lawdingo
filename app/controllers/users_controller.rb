@@ -154,7 +154,6 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-
       if @user.user_type == User::LAWYER_TYPE
         Lawyer.reindex
         unless params[:practice_areas].blank?
@@ -168,7 +167,6 @@ class UsersController < ApplicationController
         login_in_user(@user)
         redirect_to subscribe_lawyer_path and return
       elsif @user.is_client?
-
         UserMailer.notify_client_signup(@user).deliver
         session[:user_id] = @user.id
 

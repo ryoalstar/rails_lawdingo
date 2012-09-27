@@ -22,8 +22,15 @@ class ClientsController < ApplicationController
 
     if @client.save
       UserMailer.notify_client_signup(@client).deliver
-      log_in_user!(@client)
-      return redirect_on_login
+      
+      if session[:question_id].present?
+        send_pending_question(session[:question_id], @client)
+      else
+        log_in_user!(@client)
+        return redirect_on_login
+      end
+      
+      
     else
       return render(:action => :new)
     end
