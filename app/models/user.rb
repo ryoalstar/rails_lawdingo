@@ -144,4 +144,5 @@ class User < ActiveRecord::Base
   def timezone_abbreviation
     ActiveSupport::TimeZone.find_tzinfo(self.time_zone).current_period.abbreviation.to_s  rescue ''
   end  
+  
 end
