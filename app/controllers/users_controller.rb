@@ -133,20 +133,13 @@ class UsersController < ApplicationController
     if request.referer == root_url
       session[:return_to] = nil 
     end
-
+    
     # if we are already logged in, return to homepage
     if current_user.present?
       return redirect_to(root_path)
     end
 
-    user_type  = params[:ut] || '1'
-    if user_type == '0'
-      @user = User.new(:user_type => User::CLIENT_TYPE  )
-    else
-      @user = Lawyer.new(:user_type => User::LAWYER_TYPE )
-      @states = State.all
-      @states.count.times {@user.bar_memberships.build}
-    end
+    @user = Client.new
   end
 
   def create

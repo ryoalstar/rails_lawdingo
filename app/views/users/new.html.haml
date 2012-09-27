@@ -1,5 +1,5 @@
 #page.apply-form-wrapper                                                                                      |
-  %h1.form-header Apply for an Attorney Account
+  %h1.form-header Apply for an Client Account
   %div
     .process-wrapper
       .process-header
@@ -18,7 +18,7 @@
         %h3
           Already a Lawdingo member? #{link_to "Log in", login_path(session[:return_to])} now.
       .apply-form
-        = render(:partial => '/users/form', :locals => {:user => @lawyer})
+        = render(:partial => '/users/form', :locals => {:user => @user})
     .right-wrapper
       .right-block.testimonials
         %h3 Testimonials

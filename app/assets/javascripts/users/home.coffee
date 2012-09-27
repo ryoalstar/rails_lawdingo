@@ -40,6 +40,8 @@ class Home
       this.set_defaults(default_state)
       this.read_hash()
       this.submit()
+    else
+      this.add_appointment_forms()
 
   redirect_to_last_practice_area_state_select_from_cookie : ()->
     if document.location.pathname == "/lawyers" && $.cookie('practice_area') && $.cookie('state')

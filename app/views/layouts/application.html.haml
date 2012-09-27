@@ -83,7 +83,7 @@
       #container
         = yield
       / END CONTENT
-      - if user and user.user_type == 'LAWYER'
+      - if user and user.is_lawyer?
         #outer_div{:style => "position:absolute; width:960px; height:800px; left: -2000px;"}
           %div{:style => "margin:0 auto;width:960px;height:410px;"}
             %strong
