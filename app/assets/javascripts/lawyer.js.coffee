@@ -20,7 +20,7 @@ class Lawyer
           # document.location.pathname + document.location.search
           "/attorneys/#{@id}/#{@slug}"
         )
-        document.location = "/users/new?notice=true&appointment_with=#{@id}&return_path=#{path}&ut=0"
+        document.location = "/users/new?notice=true&appointment_with=#{@id}&return_path=#{path}"
       # always return false
       return false
 

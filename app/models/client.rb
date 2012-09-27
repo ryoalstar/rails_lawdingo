@@ -6,7 +6,6 @@ class Client < User
   has_many :calls
   has_many :messages
 
-
   def total_spending
     self.conversations.sum(:billed_amount)
   end
