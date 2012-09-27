@@ -133,7 +133,7 @@ class UsersController < ApplicationController
     if request.referer == root_url
       session[:return_to] = nil 
     end
-    
+
     # if we are already logged in, return to homepage
     if current_user.present?
       return redirect_to(root_path)

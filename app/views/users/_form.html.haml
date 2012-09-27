@@ -1,6 +1,5 @@
 .form-inner
   = raw flash[:error]
-  
   = form_for user, :validate => true, :html=>{:multipart => true} do |f|
     - unless flash[:error]
       

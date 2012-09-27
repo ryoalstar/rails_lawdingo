@@ -36,6 +36,7 @@ describe "Restful Lawyers", :integration do
         fill_in("lawyer_rate", :with => "200")
         
         check("practice_area_#{practice_area.id}")
+        
         click_button("Apply as a Lawyer")
         
         # base case redirects to lawyers path
