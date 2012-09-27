@@ -10,8 +10,6 @@ inquiries =
     countdownDiv = ($ "body.inquiries.show .countdown")
     untilTime = new Date(Date.UTC(countdownDiv.data("expiration-year"), countdownDiv.data("expiration-month"), countdownDiv.data("expiration-day"), countdownDiv.data("expiration-hours"), countdownDiv.data("expiration-minutes"), countdownDiv.data("expiration-seconds")))
 
-    console.log untilTime
-
     if countdownDiv.length
       countdownDiv.countdown {
         compact: true,

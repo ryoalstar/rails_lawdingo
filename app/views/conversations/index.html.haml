@@ -71,47 +71,50 @@
           %a{:href => "mailto:payments@lawdingo.com"} payments@lawdingo.com
           with any requests.
     - else
-      %table.summary
-        %thead{:style => "font-weight:bold;"}
-          %tr
-            %td Lawyer Name
-            %td Session Start
-            %td Duration of Session
-            %td Paid Duration
-            %td Rate
-            %td Lawdingo Fee
-            %td Amount Billed
-        %tbody
-          - @conversations.each do |con|
+      - unless @conversations.present?
+        %h2 You haven’t had any legal sessions yet.
+      - else   
+        %table.summary
+          %thead{:style => "font-weight:bold;"}
             %tr
+              %td Lawyer Name
+              %td Session Start
+              %td Duration of Session
+              %td Paid Duration
+              %td Rate
+              %td Lawdingo Fee
+              %td Amount Billed
+          %tbody
+            - @conversations.each do |con|
+              %tr
+                %td
+                  = con.lawyer_name
+                %td
+                  = con.start_date
+                %td
+                  = seconds_in_string con.duration
+                %td
+                  = seconds_in_string con.billed_time
+                %td
+                  = number_to_currency con.lawyer_rate
+                  \/min
+                %td
+                  = number_to_currency con.lawdingo_charge
+                %td
+                  = number_to_currency con.billed_amount
+            - user = current_user
+            %tr.total
+              %td= pluralize @conversations.map{|c| c.lawyer_id}.uniq.count, "Lawyer", "Lawyers"
               %td
-                = con.lawyer_name
+                = @conversations.size
+                Sessions
               %td
-                = con.start_date
+                = seconds_in_string user.total_session_duration
               %td
-                = seconds_in_string con.duration
+                = seconds_in_string user.total_paid_duration
+              - avg_rate = user.total_spending == 0? 0 : (user.total_spending/(user.total_paid_duration.to_f/60))
               %td
-                = seconds_in_string con.billed_time
-              %td
-                = number_to_currency con.lawyer_rate
-                \/min
-              %td
-                = number_to_currency con.lawdingo_charge
-              %td
-                = number_to_currency con.billed_amount
-          - user = current_user
-          %tr.total
-            %td= pluralize @conversations.map{|c| c.lawyer_id}.uniq.count, "Lawyer", "Lawyers"
-            %td
-              = @conversations.size
-              Sessions
-            %td
-              = seconds_in_string user.total_session_duration
-            %td
-              = seconds_in_string user.total_paid_duration
-            - avg_rate = user.total_spending == 0? 0 : (user.total_spending/(user.total_paid_duration.to_f/60))
-            %td
-              = number_to_currency avg_rate
-              &nbsp; min
-            %td= number_to_currency @conversations.map{|c| c.lawdingo_charge}.sum
-            %td= number_to_currency user.total_spending.to_i
+                = number_to_currency avg_rate
+                &nbsp; min
+              %td= number_to_currency @conversations.map{|c| c.lawdingo_charge}.sum
+              %td= number_to_currency user.total_spending.to_i
