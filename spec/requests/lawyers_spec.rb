@@ -1,7 +1,14 @@
 require 'spec_helper'
 
 describe "Restful Lawyers", :integration do
+  
+  #include Rails.application.routes.url_helpers
 
+  before(:all) do
+    DatabaseCleaner.clean
+    AppParameter.set_defaults
+    FactoryGirl.create(:homepage_image)
+  end
 
   before(:each) do
     Lawyer.delete_all
@@ -61,5 +68,26 @@ describe "Restful Lawyers", :integration do
     end
 
   end
+
+  describe "Availability toggles" do
+
+    it "should login/logout right" do
+      lawyer = FactoryGirl.create(:lawyer, :is_available_by_phone => false, :password => "secret")
+      lawyer.is_online.should be_false
+      lawyer.is_available_by_phone.should be_false
+      sign_in lawyer
+      current_url.should eq(user_daily_hours_url(lawyer.id))
+      page.should have_selector('h3.lawyer_notice:contains("You are now shown as available by video chat. Keep this window open to remain available.")')
+      lawyer.reload
+      lawyer.is_online.should be_true
+      lawyer.is_available_by_phone.should be_true
+      sign_out
+      current_url.should eq(root_url) 
+      lawyer.reload
+      lawyer.is_online.should be_false
+      lawyer.is_available_by_phone.should be_true
+    end 
+
+  end 
 
 end

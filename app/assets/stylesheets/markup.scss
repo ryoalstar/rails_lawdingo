@@ -163,68 +163,6 @@ html, body{
   color:#a8a8a8;
 }
 
-#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion, #page.apply-form-wrapper{
-  margin-bottom:10px;
-  .field_with_errors{
-    input{
-      border:1px solid #feacac;            
-      -moz-box-shadow:0px 0px 3px 3px #FDE6E3;
-      -webkit-box-shadow:0px 0px 3px 3px #FDE6E3;
-      box-shadow:0px 0px 3px 3px #FDE6E3;
-    }
-    input.email, input.passw{
-      margin-bottom:0;
-    }
-    input.phone{
-      margin:10px 0;
-    }
-    label.message{
-      -moz-box-shadow:0px 0px 5px 1px #ACACAC;
-      -webkit-box-shadow:0px 0px 5px 1px #ACACAC;
-      box-shadow:0px 0px 5px 1px #ACACAC;
-      border:1px solid #c56464;
-      color:#882b2b;
-      background:image-url('error_notice_bg.png')repeat-x;
-      -moz-border-radius: 3px;
-			-webkit-border-radius: 3px;
-			border-radius: 3px;
-			padding:5px;
-			margin-top:2px;
-    }
-    .error_notice{
-      float: right;
-      margin-right: -19px;
-      label{
-        float:right;
-      }
-      .arrow{
-        margin-top: -5px;
-        margin-left:79px;
-        background:image-url('error_tooltip_arrow.png') no-repeat;
-        display:block;
-        width:11px;
-        height:9px;
-        position:absolute;
-      }
-    }
-  }
-  .user_rate{
-    .field_with_errors{
-      height: 70px;
-      width:140px;
-    }
-    .error_notice{
-    float: right;
-    margin-right: -3px;
-    }
-  }
-  #div_practice_areas, #div_states_barids{
-    h2{
-      margin:5px;
-    }
-  }
-}
-
 #div_states_barids{
   font-size:1em;
   float:left;
