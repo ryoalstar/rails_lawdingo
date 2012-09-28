@@ -9,7 +9,6 @@
   .text
     Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
     %a#close_notice{:href => "#"} Close
-#current_selected_lawyer
 #inline-wrapper
   - if flash[:notice].present?
     .notice
@@ -167,46 +166,5 @@
       = render partial: "service_type_tabs"
     #results.results
       = render(:partial => "search_results")
-#schedule_session.dialog-window
-  %h3#overlay_user_name
-    %br/
-    %span Ask
-    %span.lawyer_name
-    %span a question.
-  %br/
-  /%span Have a question or comment for
-  /%span.lawyer_name
-  /%span ? Write it here, and
-  /%span.lawyer_name Lawyer
-  /will be able to email you back directly.
-  %textarea#txt_msg{:name => "txt_msg"}
-  %span.fine-print Sending a message does not form an attorney-client relationship.
-  %hr/
-  %a.button.blue{:href => "javascript:void(0)", :onclick => "sendMessage();return false;"} Send Message
-:javascript
-
-  function sendMessage(){
-    close_dialogs();
-    var msg = $('textarea#txt_msg').val();
-    var l1 = $("#current_selected_lawyer").attr("data-id");
-    if(msg != "")
-    {
-      $.ajax({
-          url: "/ScheduleSession",
-          type:'post',
-          data:{email_msg: msg, l2: l1, authenticity_token: $('[name="csrf-token"]').attr("content")},
-          success: function(response){
-          //alert(response);
-
-          if(response == '1')
-             alert('Your message has been sent.');
-           else{
-              alert('Problem sending message. You may not be logged in');
-              }
-             }
-      });
-    }else
-    {
-      alert('You can not send the blank message');
-    }
-  }
+= hidden_field_tag :lawyer_id, '', :class => :current_selected_lawyer
+= render '/messages/dialog_window'

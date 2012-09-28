@@ -31,7 +31,6 @@ class ClientsController < ApplicationController
         return redirect_on_login
       end
       
-      
     else
       return render(:action => :new)
     end

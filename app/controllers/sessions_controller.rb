@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
         send_pending_question(session[:question_id], user)
       else
         if user.is_client?
+          send_message user
           return_path = lawyers_path
           # If there is a pending question
           if session[:return_to]

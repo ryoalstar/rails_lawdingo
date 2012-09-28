@@ -121,4 +121,13 @@ class ApplicationController < ActionController::Base
       format.all { render nothing: true, status: 404 }
     end
   end
+
+  # send message from guest to lawyer
+  def send_message user
+    return false unless user.is_a?(Client)
+    return false unless session[:message] && session[:message].is_a?(Message)
+    message = session.delete(:message)
+    message.client = user
+    flash[:notice] = 'Your message has been sent.' if message.send!
+  end
 end
