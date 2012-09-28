@@ -91,6 +91,7 @@
                         %a.appt-select{:href => '#'} Schedule a consultation                      
                       %li.text
                         = start_or_schedule_button_text(lawyer)
+
               - # content for the modal dialog we are going to display
               %div{:style => "display:none;"}
                 = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
@@ -224,7 +225,10 @@
             Solo practitioners are always looking for cost-effective ways of bringing in new clients, and Lawdingo is great for that! It's been easy and seamless to add it to my practice. Best of all - it works! I have had paying clients from Lawdingo and I haven't had to expend a lot of time, effort, or money to get them.
           /%span.close_quotes{:style => 'margin-left: 320px;'}
         %p.signature - Deepa Menon, Attorney    
-          
+
+= hidden_field_tag :lawyer_id, '', :class => :current_selected_lawyer
+= render '/messages/dialog_window'
+    
 :javascript
   $ (".rating").raty({
       path: "/assets/raty",

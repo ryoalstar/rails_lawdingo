@@ -145,39 +145,10 @@ module LawyersHelper
         if lawyer.daily_hours.present?
           link_to "Schedule an appointment", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
         else
-          if logged_in?
-            link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
-          else
-            link_to "Ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
-          end
+          start_or_schedule_button_text(lawyer)
         end
       end
       
-    end
-  end
-
-  def start_or_schedule_button_text(lawyer)
-    if logged_in?
-      link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
-    else
-      link_to "Ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
-    end
-  end
-
-
-  def start_or_schedule_button_text_profile(lawyer)
-    if logged_in?
-      link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
-    else
-      link_to "", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
-    end
-  end
-
-  def start_or_schedule_button_text_profile_text(lawyer)
-    if logged_in?
-      link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
-    else
-      link_to "Send a note or ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
 

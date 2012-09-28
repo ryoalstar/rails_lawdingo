@@ -15,6 +15,7 @@ class Lawyer < User
   has_many :states, :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours 
+  has_many :messages
 
   def reindex!
      Sunspot.index!(self)

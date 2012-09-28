@@ -105,6 +105,11 @@ Lawdingo::Application.routes.draw do
     resources :practice_areas
   end
 
+  resources :messages do 
+    get :clear_session_message, :on => :collection
+    post '/send_message/:lawyer_id', :action => :send_message_to_lawyer, :on => :collection, :as => :schedule_session
+  end  
+
   match 'modparam' =>'users#update_parameter', :as =>:update_parameter
   match "/users/create_lawyer_request", to: "users#create_lawyer_request", as: :create_lawyer_request
   match '/user/sessions/:user_id' =>"users#session_history", :as =>:user_session_history
@@ -124,7 +129,6 @@ Lawdingo::Application.routes.draw do
   match '/Register' => 'users#register_for_videochat', :as => :register_videochat
   match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
   match '/UpdateBusyStatus' => 'users#update_busy_status', :as => :UpdateBusyStatus
-  match '/ScheduleSession' => 'users#send_email_to_lawyer', :as => :schedule_session
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
   match '/twilio/phonecall' => 'users#start_phone_call', :as => :phonecall
   match '/twilio/createcall' => 'users#create_phone_call', :as => :create_call

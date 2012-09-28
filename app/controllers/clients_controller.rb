@@ -23,6 +23,7 @@ class ClientsController < ApplicationController
     if @client.save
       UserMailer.notify_client_signup(@client).deliver
       log_in_user!(@client)
+      send_message @client
       return redirect_on_login
     else
       return render(:action => :new)

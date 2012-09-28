@@ -44,8 +44,7 @@ class Conversation < ActiveRecord::Base
 
   def client_name
     client = self.client
-    full_name = "#{client.first_name} #{client.last_name}"
-    client ? full_name : "-"
+    client ? "#{client.first_name} #{client.last_name}" : "-"
   end
 
   # in minute

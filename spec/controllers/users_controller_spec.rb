@@ -68,43 +68,6 @@ describe UsersController do
     end
   end
 
-  context "#send_email_to_lawyer" do
-    render_views
-
-    before :each do
-      @amy = FactoryGirl.create(:client, first_name: "Amelia")
-      @doctor = FactoryGirl.create(:lawyer, first_name: "The Doctor")
-      @attributes = { l2: @doctor.to_param, email_msg: "Geronimo!" }
-      session[:user_id] = @amy.to_param
-    end
-
-    it "save a message" do
-      expect {
-        get :send_email_to_lawyer, @attributes
-      }.to change(Message, :count).by(1)
-
-      message = Message.last
-      message.lawyer_id.should eq(@doctor.id)
-      message.client_id.should eq(@amy.id)
-      message.body.should match /Geronimo!/
-    end
-
-    it "send an email to lawyer" do
-      expect {
-        get :send_email_to_lawyer, @attributes
-      }.to change(ActionMailer::Base.deliveries, :size).by(1)
-
-      email = ActionMailer::Base.deliveries.last
-      email.to.should include @doctor.email
-    end
-
-    it "render 1 when message is sent" do
-      get :send_email_to_lawyer, @attributes
-
-      response.body.should eq "1"
-    end
-  end
-
   context "#create_lawyer_request" do
     it "should send an email with lawyer request" do
       expect {
