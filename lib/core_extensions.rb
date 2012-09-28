@@ -5,4 +5,8 @@ Date.class_eval do
     Time.zone.local_to_utc(self.to_time_without_time_zone).in_time_zone
   end
   alias_method_chain :to_time, :time_zone
+
+  def self.today
+    Time.zone.today
+  end
 end
