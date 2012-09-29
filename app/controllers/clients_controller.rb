@@ -7,10 +7,11 @@ class ClientsController < ApplicationController
       session[:return_to] = params[:return_path]
     end
 
+    # Changed by AF: 36856303 - Phone consultation not routing properly
     # Empy return_to if user came from homepage
-    if request.referer == root_url
-      session[:return_to] = nil 
-    end
+    #if request.referer == root_url
+    #  session[:return_to] = nil 
+    #end
 
     # set up our client
     @client = Client.new
