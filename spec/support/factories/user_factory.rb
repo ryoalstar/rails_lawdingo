@@ -20,4 +20,13 @@ FactoryGirl.define do
     user_type{User::CLIENT_TYPE}
     phone '+0123456789'
   end
+  
+  factory :admin do
+    first_name "Thome"
+    last_name "York"
+    email
+    password "secret"
+    user_type{User::ADMIN_TYPE}
+    phone '+0123456789'
+  end
 end

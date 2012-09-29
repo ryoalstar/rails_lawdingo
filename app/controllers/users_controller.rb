@@ -223,6 +223,7 @@ class UsersController < ApplicationController
         @user = Lawyer.find(@user.id)
         fill_states
         @states.count.times {@user.bar_memberships.build}
+        @schools = School.order(:name)
       end
     rescue
       redirect_to root_path, :notice =>"Couldn't find any record"

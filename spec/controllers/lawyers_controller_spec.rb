@@ -31,4 +31,5 @@ describe LawyersController do
 
   end
 
+
 end
