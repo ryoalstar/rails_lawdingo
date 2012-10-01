@@ -91,4 +91,25 @@ describe "Restful Lawyers", :integration do
 
   end 
 
+  context "Lawyers list" do
+    before(:each) do
+      offering = FactoryGirl.create(:offering)
+      @offering_link = "a[href='"+ offering_path(offering)  +"']"
+      user = FactoryGirl.create(:user)
+      sign_in user
+      visit(lawyers_path)
+    end
+    it "should render the offerings links" do
+      page.should have_selector("li.offerings_item")
+      page.should have_selector("li.offerings_item " + @offering_link) 
+    end
+    
+    #it "the offering links panel should be visible after hover on link" do 
+    #  page.find("li.offerings_item " + @offering_link).trigger(:mouseover)
+    #  find("li.offerings_item " + @offering_link).should be_visible
+    #end
+    
+  end
+  
+
 end

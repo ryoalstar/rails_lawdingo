@@ -76,16 +76,21 @@
         %ul
           - unless lawyer.practice_areas.blank?
             %li
+              Offers
               Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : raw(pas_names_list) + " law"}
           - if lawyer.offerings.count > 0
-            - if lawyer.offerings.count == 1
-              %li
-                Offers
-                %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee service
-            - else
-              %li
-                Offers
-                %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee services
+            %li.offerings_item
+              %a.offerings{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee #{pluralize(lawyer.offerings.count, 'service').split(" ", 2)[1]}
+              .offerings_wrapper
+                %table
+                  - lawyer.offerings.each do |offering|
+                    %tr
+                      %td
+                        %span.offering_name 
+                          = link_to "#{offering.name}", offering
+                      %td
+                        %span
+                          #{number_to_currency(offering.fee, precision: 0)}
         -#.free
           %table
             %tbody
