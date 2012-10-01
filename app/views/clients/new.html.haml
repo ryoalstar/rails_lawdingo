@@ -18,7 +18,8 @@
       .process_notice
         %h3
           Already a Lawdingo member?
-          = link_to("Log in", login_path(session[:return_to]))
+          - parameters = params[:lawyer_path].present? ? {:lawyer_path=>params[:lawyer_path]} : {}
+          = link_to("Log in", login_path(parameters))
           now.
       .apply-form
         = render(:partial =>'/users/form', :locals => {:user => @client})

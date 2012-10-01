@@ -219,7 +219,9 @@ $(document).ready(function() {
         $.ajax( self.attr('dataurl'), {
             data:{'p':self.current_image++},
             dataType:'json',
-            success:function( data, stat, ob ){ self.images = data; }
+            success:function( data, stat, ob ){ 
+            	self.images = data; 
+            }
         });
 
         function goto_image( i ){
@@ -302,11 +304,11 @@ $(document).ready(function() {
 						
 
 						if (carousel_info["send_text_question"] !== undefined) {
-			      		self.find('.carousel-description li.text')
-										.html(carousel_info["send_text_question"])
+			      		self.find('.carousel-description span.text')
+										.html(carousel_info["send_text_question"]).find("a").html('')
 										.show();
 						} else {
-								self.find('.carousel-description li.text').html('').hide();
+								self.find('.carousel-description span.text').html('').hide();
 						}
             //self.find('.carousel-description a.phone').attr('href', carousel_info['start_live_conversation'] );
             //self.find('.carousel-description a.shedule').attr('href', carousel_info['start_live_conversation'] );
