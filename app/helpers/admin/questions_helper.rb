@@ -3,7 +3,7 @@ module Admin::QuestionsHelper
     if question.matched_lawyers.count > 0
       question.matched_lawyers.count
     else
-      Lawyer.approved_lawyers.count
+      0
     end
   end
 

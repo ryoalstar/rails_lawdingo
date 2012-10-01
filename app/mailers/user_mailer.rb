@@ -68,7 +68,7 @@ class UserMailer < ApplicationMailer
     @question = question
     @lawyer = lawyer
 
-    mail(to: @lawyer.email, subject: "Inquiry: #{@question.practice_area} in #{@question.state_name}")
+    mail(to: @lawyer.email, from: "\"Lawdingo Client Inquiries\" <inquiries@lawdingo.com>", subject: "Inquiry: #{@question.practice_area} in #{@question.state_name}")
   end
 
   def auction_inquiry_email(question, lawyer)
@@ -78,7 +78,7 @@ class UserMailer < ApplicationMailer
     @inquiry_url = inquiry_url(@question.inquiry)
     @login_url = login_url
 
-    mail(to: @lawyer.email, subject: "Premium Inquiry: #{@question.practice_area} in #{@question.state_name}")
+    mail(to: @lawyer.email, from: "\"Lawdingo Client Inquiries\" <inquiries@lawdingo.com>", subject: "Premium Inquiry: #{@question.practice_area} in #{@question.state_name}")
   end
 
   def lawyer_request_email(request_body)
