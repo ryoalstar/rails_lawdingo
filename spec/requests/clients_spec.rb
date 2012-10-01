@@ -46,6 +46,61 @@ describe "Restful clients", :integration do
       }.should change{Client.count}.by(0)
 
     end
+    context "with alert messages" do
+      before(:each) do
+        @lawyer = FactoryGirl.create(:lawyer)
+      end
+      it "should persist lawyer alert when going to sign in page" do
+        
+        visit(new_client_path(:notice=>true, :lawyer_path=>@lawyer.id ))
+       
+        doc = Nokogiri::HTML(page.html)
+        text_message = doc.css("div.notice div.text").first.content
+       
+        click_link("Log in")
+        
+        page.should have_selector("div.notice div.text")
+        doc = Nokogiri::HTML(page.html)
+        text_message_login = doc.css("div.notice div.text").first.content
+       
+        text_message.should be_eql text_message_login
+
+      end
+      
+      
+      it "should persist question notice" do
+        visit(new_client_path(:question_notice=>true))
+       
+        doc = Nokogiri::HTML(page.html)
+        text_message = doc.css("div.notice div.text").first.content
+       
+        click_link("Log in")
+        
+        page.should have_selector("div.notice div.text")
+        doc = Nokogiri::HTML(page.html)
+        text_message_login = doc.css("div.notice div.text").first.content
+       
+        text_message.should be_eql text_message_login
+
+      end
+      
+      it "should persist appointment with notice" do
+        visit(new_client_path(:appointment_with=> @lawyer.id))
+       
+        doc = Nokogiri::HTML(page.html)
+        text_message = doc.css("div.notice div.text").first.content
+       
+        click_link("Log in")
+        
+        page.should have_selector("div.notice div.text")
+        doc = Nokogiri::HTML(page.html)
+        text_message_login = doc.css("div.notice div.text").first.content
+       
+        text_message.should be_eql text_message_login
+
+      end
+    end
+    
 
   end
 

@@ -129,11 +129,6 @@ class UsersController < ApplicationController
       session[:return_to] = params[:return_path]
     end
 
-    # Keep question notice after clicking the login link
-    if params[:question_notice].present?
-      session[:keep_question_notice] = true
-    end
-
     # Empy return_to if user came from homepage
     if request.referer == root_url
       session[:return_to] = nil 
