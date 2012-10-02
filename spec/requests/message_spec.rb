@@ -8,18 +8,6 @@ describe "Message", :integration do
   subject { FactoryGirl.build(:message) }
 
   describe "sending as guest", :js => true do
-    it 'should not send message if not confirm' do
-      visit root_path
-      page.current_path.should eql(root_path)
-      click_link('schedule_session_button')
-      page.has_css?("div#schedule_session").should be_true
-      fill_in("message", :with => 'Yahoo')
-      click_link('send_message_button')
-      sleep SLEEP 
-      page.driver.browser.switch_to.alert.dismiss
-      sleep SLEEP
-      page.current_path.should eql(root_path)
-    end
 
     it 'should send message from landing page' do 
       visit root_path
@@ -28,8 +16,6 @@ describe "Message", :integration do
       page.has_css?("div#schedule_session").should be_true
       fill_in("message", :with => 'Yahoo')
       click_link('send_message_button')
-      sleep SLEEP 
-      page.driver.browser.switch_to.alert.accept
       sleep SLEEP
       page.current_path.should eql(new_client_path)
     end
@@ -41,8 +27,6 @@ describe "Message", :integration do
       page.has_css?("div#schedule_session").should be_true
       fill_in("message", :with => 'Yahoo')
       click_link('send_message_button')
-      sleep SLEEP
-      page.driver.browser.switch_to.alert.accept
       sleep SLEEP
       page.current_path.should eql(new_client_path)
     end
@@ -58,8 +42,6 @@ describe "Message", :integration do
       page.has_css?("div#schedule_session").should be_true
       fill_in("message", :with => 'Yahoo')
       click_link('send_message_button')
-      sleep SLEEP
-      page.driver.browser.switch_to.alert.accept
       sleep SLEEP
       page.current_path.should eql(new_client_path)
     end
