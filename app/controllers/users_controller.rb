@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     add_school_rank_scope
 
     @search.execute
-
+    
     if @service_type == "legal-services"
       @offerings = @search.results
     else
@@ -438,7 +438,7 @@ class UsersController < ApplicationController
     begin
       @current_user = current_user
 
-      if current_user.user_type!='LAWYER'
+      unless current_user.is_lawyer?
         lawyer = User.find params[:user_id]
         lawyer.update_attribute(:call_status,'invite_video_chat')
         conversation_params = {:client_id=>current_user.id,:lawyer_id=>params[:user_id],:start_date=>Time.now,:end_date=>Time.now,:consultation_type => "video"}
@@ -481,6 +481,25 @@ class UsersController < ApplicationController
       render :text =>'Successfully Updated!'
     else
       render :text =>'Update failed!'
+    end
+  end
+
+  def send_email_to_lawyer
+    if !current_user.nil?
+      @lawyer = User.find(params[:l2])
+      msg = params[:email_msg]
+
+      Message.create do |message|
+        message.body = msg
+        message.client_id = current_user.id
+        message.lawyer_id = @lawyer.id
+      end
+
+      UserMailer.schedule_session_email(current_user, @lawyer.email, msg).deliver
+
+      render :text => '1', :layout => false
+    else
+      render :text => '0', :layout => false
     end
   end
 
