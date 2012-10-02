@@ -7,12 +7,12 @@ describe "Restful Lawyers", :integration do
   before(:all) do
     DatabaseCleaner.clean
     AppParameter.set_defaults
-    FactoryGirl.create(:homepage_image)
+    @homepage_image = FactoryGirl.create(:homepage_image)
   end
 
-  before(:each) do
-    Lawyer.delete_all
-  end
+  #before(:each) do
+    #Lawyer.delete_all
+  #end
 
   let(:practice_area) do
     FactoryGirl.create(:practice_area)
@@ -108,6 +108,41 @@ describe "Restful Lawyers", :integration do
     #  page.find("li.offerings_item " + @offering_link).trigger(:mouseover)
     #  find("li.offerings_item " + @offering_link).should be_visible
     #end
+    
+  end
+  
+  context "Lawyers list" do
+    before(:each) do
+      offering = FactoryGirl.create(:offering)
+      @offering_link = "a[href='"+ offering_path(offering)  +"']"
+      user = FactoryGirl.create(:user)
+      sign_in user
+      visit(lawyers_path)
+    end
+    it "should render the offerings links" do
+      page.should have_selector("li.offerings_item")
+      page.should have_selector("li.offerings_item " + @offering_link) 
+    end
+    
+  end
+  
+  
+  context "Using practice areas link" do
+    before(:each) do
+      @lawyer = HomepageImage.all.first.lawyer
+      practice_area = FactoryGirl.create(:practice_area)
+      @lawyer.practice_areas << practice_area
+    end
+    it "should render the practice area link" do
+      xhr :get, carousel_images_path, :format => "json"
+      parsed_body = JSON.parse(response.body)
+      homepage_options = parsed_body.last;
+      @lawyer.practice_areas_names.each do |pa_name|
+        includes = homepage_options["description"].include?(pa_name)
+        includes.should be_true
+      end
+    
+    end
     
   end
   
