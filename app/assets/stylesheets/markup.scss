@@ -262,7 +262,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
           float:left;
           display:inline-block;
           width:320px;
-          input.optional{
+          input{
             width: 370px;
           }
           input[type="submit"].button{
@@ -621,6 +621,23 @@ body.index.logged-in, body.users.show.logged-in{
               margin-top:10px;
             }
           }  
+          
+          div.currency{
+            width: 200px;
+            min-width: 200px;
+          }
+          .field_with_errors{
+            display: inline-block;
+            .error_notice{
+              position: absolute;
+              right: 0;
+              label.message{
+                padding:4px 5px 2px 5px;
+              }
+            }
+          }
+          
+          
         }
         form#new_offering{
           label{
@@ -629,7 +646,7 @@ body.index.logged-in, body.users.show.logged-in{
             font-weight:normal;
             margin-bottom:5px;
           }
-          .input.optional{
+          .input{
             margin:30px 0px 0px 0px;
           }
           span.hint{

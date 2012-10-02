@@ -141,10 +141,43 @@ describe "Restful Lawyers", :integration do
         includes = homepage_options["description"].include?(pa_name)
         includes.should be_true
       end
+    end
+  end
+  
+  
+  context "Logged in lawyer" do
+    before(:each) do
+      @lawyer = FactoryGirl.create(:lawyer, :password => "secret")
+      sign_in @lawyer
+      visit(user_offerings_path(@lawyer))
+    end
     
+    
+    it "cannot create an flat free offering without fee" do
+      lambda{
+        fill_in("offering_name", :with => 'Service name')
+        click_button("Add flat-fee service")
+       }.should change{Offering.count}.by(0)
+    end
+    
+    it "cannot create an flat free offering without name" do
+      lambda{
+        fill_in("offering_fee", :with => '323')
+        click_button("Add flat-fee service")
+       }.should change{Offering.count}.by(0)
+    end
+    
+    it "should create a flat free offering with name and fee" do
+      lambda{
+        fill_in("offering_fee", :with => '323')
+        fill_in("offering_name", :with => 'Service name')
+        click_button("Add flat-fee service")
+        
+        page.current_path.should eql(user_offerings_path(@lawyer))
+
+      }.should change{Offering.count}.by(1)
     end
     
   end
-  
 
 end

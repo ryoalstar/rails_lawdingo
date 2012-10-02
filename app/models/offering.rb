@@ -4,7 +4,7 @@ class Offering < ActiveRecord::Base
   belongs_to :user,
     :touch => true
 
-  validates_presence_of :user_id
+  validates_presence_of :user_id, :name, :fee
 
     #solr index
     searchable :auto_index => true, :auto_remove => true do

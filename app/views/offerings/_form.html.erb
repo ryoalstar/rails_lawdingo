@@ -1,7 +1,25 @@
-<%= simple_form_for [@lawyer, @offering], :url => user_offerings_path(@lawyer, @offering) do |f| %>
-  <%= f.input :practice_area_id, collection: PracticeArea.parent_practice_areas, include_blank: false, label: "Relevant practice area:" %>
-  <%= f.input :name, label: "Name of flat-fee service:", hint: "e.g. \"Contract review — up to 3 pages\".".html_safe %>
-  <%= f.input :description, label: "What specifically will you do and deliver?" %>
-  <%= f.input :fee, label: "Fee typically charged:", hint: "The typical amount you charge for this.", as: :currency %>
-  <%= f.submit params[:action] == "edit" ? "Edit flat-fee service" : "Add flat-fee service", class: "button", style: "font-size: 1.0833em;" %>
+<%= form_for [@lawyer, @offering], :validate=> true, :html=>{:class=>'simple_form new_offering'}, :url => user_offerings_path(@lawyer, @offering) do |f| %>
+  <div class="input select optional">
+  	<%= f.label "Relevant practice area:", :class=>'string optional'%>
+  	<%= f.select :practice_area_id, PracticeArea.parent_practice_areas.collect{|pa| [pa.name, pa.id]}, :class=>'select optional', :include_blank=> false %>
+	</div>
+	
+	<div class="input string optional field_with_hint">
+		<%= f.label "Name of flat-fee service:", :class=>'string optional'%>
+		<%= f.text_field :name, :validate => true, :class=>"string optional", :maxlength=>"255", :size=>"50" %>
+		<span class="hint">e.g. "Contract review — up to 3 pages".</span>
+	</div>
+	
+	<div class="input text optional">
+		<%= f.label "What specifically will you do and deliver?", :class=>'string optional'%>
+		<%= f.text_area :description, :class=> "text optional", :rows=>"20" %>
+	</div>
+		
+	<div class="input currency optional field_with_hint">
+		<%= f.label "Fee typically charged:", :class=>'currency optional'%>
+		$ <%= f.text_field :fee, :validate => true, :class=> "currency optional" %>
+		<span class="hint">The typical amount you charge for this.</span>
+	</div>
+
+  <%= f.submit params[:action] == "edit" ? "Edit flat-fee service" : "Add flat-fee service", :class=> "button", :style=> "font-size: 1.0833em;" %>
 <% end %>

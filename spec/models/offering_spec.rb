@@ -16,6 +16,18 @@ describe Offering do
       offering.user = nil
       offering.should_not be_valid
     end
+    
+    it "should not create without name" do
+      offering = FactoryGirl.create(:offering)
+      offering.name = nil
+      offering.should_not be_valid
+    end
+    
+    it "should not create without fee" do
+      offering = FactoryGirl.create(:offering)
+      offering.fee = nil
+      offering.should_not be_valid
+    end
   end
 
   describe "search", :integration => true do
