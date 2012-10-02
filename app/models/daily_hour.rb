@@ -43,7 +43,10 @@ class DailyHour < ActiveRecord::Base
     # if it is the current day, check to see that
     # it is not too late in the day to book
     if Time.zone.now.midnight == time.midnight
-      return Time.zone.now + BOOKING_BUFFER < self.end_time_on_date(time)
+      return time.between?(
+        self.start_time_on_date(time),
+        self.end_time_on_date(time) - BOOKING_BUFFER
+      )
     else
       return time.between?(
         self.start_time_on_date(time),
