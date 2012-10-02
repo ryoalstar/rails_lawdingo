@@ -3,6 +3,7 @@ include ActionView::Helpers::NumberHelper # Number helpers available inside cont
 class SearchController < ApplicationController
   include LawyersHelper
   include SearchHelper
+  include MessageHelper
   include ActionView::Helpers::TextHelper
   
   def populate_specialities

@@ -11,7 +11,7 @@
       Thanks - please check your email for instructions on resetting your password.
       %a#close_notice{:href => "#"} Close
       / Image carousel block with a link to json file consisting of data about previewed lawyers
-      -#.image-carousel{:dataurl => "/search/carsousel_images.json"}
+      -#.image-carousel{:dataurl => "/search/carousel_images.json"}
         .carousel-image
           = image_tag default_image.photo.url(:large), :alt => ""
         .carousel-description
@@ -35,7 +35,7 @@
             Lawyer? #{link_to "Apply here!", new_lawyer_path}
         .slider
           = image_tag('slider_featured.png', :alt => '', :class => 'green_line')
-          .image-carousel{:dataurl => "/search/carsousel_images.json"}
+          .image-carousel{:dataurl => "/search/carousel_images.json"}
             .carousel-image
               %a.profile_link{:href => attorney_path(lawyer, slug: lawyer.slug)}
                 = image_tag default_image.photo.url(:large), :alt => ""
@@ -92,15 +92,14 @@
                       %li.text
                         = start_or_schedule_button_text(lawyer)
 
-              - # content for the modal dialog we are going to display
-              %div{:style => "display:none;"}
-                = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
-                -#.lawyer_rates
-                  %h5.rate= free_message(lawyer)
-                  = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
-                  %p.small
-                    %span (prorated to the minute)            
-              
+                - # content for the modal dialog we are going to display
+                %div{:style => "display:none;"}
+                  = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
+                  -#.lawyer_rates
+                    %h5.rate= free_message(lawyer)
+                    = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
+                    %p.small
+                      %span (prorated to the minute)            
               
               
                 -#%a.free{:href=> "#"}
@@ -118,14 +117,15 @@
                       %li.text
                         = start_or_schedule_button_text(lawyer)
                           
+
                 - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
-                  - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]                      
+                  - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]                     
                     .stars
                       = image_tag lawyer.yelp[:rating_img_url]
                     .rev_for_js
                       %a.yelp_reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
                         = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{image_tag('miniMapLogo.png')}" + "review").html_safe, class: "number_rev"
-                      %a.reviews{:style => 'display:none;'}
+                      %a.reviews
                         %span.number_rev
                   - else
                     .stars
@@ -135,14 +135,14 @@
                       - if lawyer.reviews.count.to_i != 0
                         %a.reviews{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}#reviews"} 
                           %span.number_rev= pluralize(lawyer.reviews.count, "review", "reviews")
-                        %a.yelp_reviews{:style => 'display:none;'}
+                        %a.yelp_reviews
                           %span.number_rev
                 - else    
                   .stars
                   .rev_for_js
-                    %a.reviews{:style => "display:none;"}
+                    %a.reviews
                       %span.number_rev
-                    %a.yelp_reviews{:style => 'display:none;'}
+                    %a.yelp_reviews
                       %span.number_rev
 #top_content_border                    
 #bottom_content
