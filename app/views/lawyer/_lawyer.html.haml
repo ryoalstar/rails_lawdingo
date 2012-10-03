@@ -93,9 +93,8 @@
             .button-content
               %ul
                 = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
-    
-    .right.row_block
-      - if lawyer.daily_hours.present?
+    - if lawyer.daily_hours.present?
+      .right.row_block
         %p Available appointments
         .available-appointments
           - lawyer.next_available_days(2).each_with_index do |d, i|
