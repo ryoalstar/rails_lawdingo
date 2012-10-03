@@ -33,7 +33,7 @@ describe UserMailer do
     end
   end
 
-  context "#free_inquiry_email", :focus do
+  context "#free_inquiry_email" do
     before :all do
       @edward = FactoryGirl.create(:lawyer, first_name: "Edward", email: "edward7@lawdingo.com")
       @question = FactoryGirl.create(:question, body: "Are you my mommy?")
