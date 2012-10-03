@@ -16,7 +16,7 @@
 	<div class="question_state_bot">
 		<% states = State.all.map(&:name) %>
 		<% states.insert(0, states.delete_at(states.index('Non-US/UK'))) if !states.index('Non-US/UK').nil? %> 
-    <%= f.select :state_name, states, selected: auto_detected_state, :include_blank => "Not specifed", :validate => true %>
+    <%= f.select :state_name, states, selected: auto_detected_state, :include_blank => "Not specified", :validate => true %>
 	</div>	
   </div>
   <div class="question_area" id="question_area">
@@ -24,7 +24,7 @@
 	<h3 class = "question_label"><label>Type of law:</label></h3>
 	</div>
 	<div class ="question_area_bot">
-    <%= f.select :practice_area, PracticeArea.where(:parent_id => nil).map(&:name), :include_blank => "Not specifed" %>
+    <%= f.select :practice_area, PracticeArea.where(:parent_id => nil).map(&:name), :include_blank => "Not specified" %>
 	</div>
   </div>
 <% end %>
