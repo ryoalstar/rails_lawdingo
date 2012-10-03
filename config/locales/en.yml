@@ -1,8 +1,28 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
+#en:
+# errors:
+#    messages:
+#      blank: Don’t take the 5th!
+#      email_format: "Please enter a valid email address."
+      
+      
 en:
-  errors:
-    messages:
-      blank: Don’t take the 5th!
-      email_format: "Please enter a valid email address."
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "Please enter your first name."
+            last_name:
+              blank: "Please enter your last name."   
+            email:
+              blank: "Please enter your email."
+              email_format: "Please enter a valid email address."
+            password: 
+              blank: "Please enter your password."
+            rate:
+              blank: "Please enter your rate."
+            
