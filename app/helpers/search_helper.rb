@@ -48,8 +48,13 @@ module SearchHelper
       images_hash["start_phone_conversation"] = start_phone_consultation(lawyer) if lawyer.is_available_by_phone?
       images_hash["start_or_video_button_p"] = start_or_video_button_p(lawyer) if lawyer.is_online
       images_hash["start_phone_consultation_p"] = start_phone_consultation_p(lawyer) if lawyer.is_available_by_phone?
-      images_hash["send_text_question"]  = start_or_schedule_button_text(lawyer)
-      images_hash["schedule_consultation"]  = "<a href='#' class='appt-select'></a>" if lawyer.daily_hours.present?
+      
+      images_hash["ask_question_button_text"]  = ask_question_button_text(lawyer)
+      images_hash["ask_question_button"]  = ask_question_button(lawyer) 
+      
+      images_hash["schedule_consultation_button"]  =schedule_consultation_button(lawyer) if lawyer.daily_hours.present?
+      images_hash["schedule_consultation_button_text"]  =schedule_consultation_button_text(lawyer) if lawyer.daily_hours.present?
+      
       images_hash["start_or_schedule_button_text_profile"] = start_or_schedule_button_text_profile(lawyer)
       images_hash["active_action"] = start_or_schedule_button(lawyer)   
       images_hash["appt"] = true if lawyer.daily_hours.present?

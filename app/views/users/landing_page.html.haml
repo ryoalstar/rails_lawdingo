@@ -51,13 +51,12 @@
                     %span.voice.online= start_phone_consultation_p(lawyer)
                   - else 
                     %span.voice.offline
-                  %span.note= start_or_schedule_button_text_profile(lawyer)
+                  %span.note= ask_question_button(lawyer)
                   - if lawyer.daily_hours.present?
-                    %span.text.online
-                      %a.appt-select{:href => '#'}
+                    %span.text.online= schedule_consultation_button(lawyer) 
                   - else
                     %span.text.offline
-                      %a.appt-select{:href => '#'}
+                      %a{:href => '#'}
                   .video_chat.online.tooltip Start video consultation
                   .voice_chat.online.tooltip Start phone consultation
                   .note_chat.tooltip Ask a question
@@ -88,18 +87,18 @@
                         = start_phone_consultation(lawyer)                      
                       - appointment_presnt = lawyer.daily_hours.present?
                       %li.appt{:style => "display: #{appointment_presnt ? 'list-item' : 'none'}"}
-                        %a.appt-select{:href => '#'} Schedule a consultation                      
-                      %li.text
-                        = start_or_schedule_button_text(lawyer)
-
-                - # content for the modal dialog we are going to display
-                %div{:style => "display:none;"}
-                  = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
-                  -#.lawyer_rates
-                    %h5.rate= free_message(lawyer)
-                    = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
-                    %p.small
-                      %span (prorated to the minute)            
+                        = schedule_consultation_button_text(lawyer) if lawyer.daily_hours.present?                    
+                      %li.note
+                        = ask_question_button_text(lawyer)
+              - # content for the modal dialog we are going to display
+              %div{:style => "display:none;"}
+                = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
+                -#.lawyer_rates
+                  %h5.rate= free_message(lawyer)
+                  = content_tag :p, "then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute", class: "small"
+                  %p.small
+                    %span (prorated to the minute)            
+              
               
               
                 -#%a.free{:href=> "#"}

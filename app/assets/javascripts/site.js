@@ -249,7 +249,7 @@ $(document).ready(function() {
 		      	  	self.find('.carousel-description p.active_action').html('').hide();
 						}
             */
-
+						// Video Button
         		if (carousel_info["start_or_video_button_p"] !== undefined) {
 						  self.find('.carousel-description span.video')
 						    .addClass("online").removeClass("offline")
@@ -257,16 +257,8 @@ $(document).ready(function() {
 						} else {
 							  self.find('.carousel-description span.video').html('').addClass("offline").removeClass("online");
 						}
-
-						if (carousel_info["schedule_consultation"] !== undefined) {
-						  self.find('.carousel-description span.text')
-						    .addClass("online").removeClass("offline")
-								.html(carousel_info["schedule_consultation"]);
-						} else {
-							  self.find('.carousel-description span.text').html('').addClass("offline").removeClass("online");
-						}
-
-
+						
+						// Phone button
 						if (carousel_info["start_phone_consultation_p"] !== undefined) {
 						  self.find('.carousel-description span.voice')
 						    .addClass("online").removeClass("offline")
@@ -275,7 +267,25 @@ $(document).ready(function() {
 							  self.find('.carousel-description span.voice').html('').addClass("offline").removeClass("online");
 						}
 
+						// Schedule appointment button
+						if (carousel_info["schedule_consultation_button"] !== undefined) {
+						  self.find('.carousel-description span.text')
+						    .addClass("online").removeClass("offline")
+								.html(carousel_info["schedule_consultation_button"]);
+						} else {
+							  self.find('.carousel-description span.text').html('').addClass("offline").removeClass("online");
+						}
+						
+						// Ask question button
+						if (carousel_info["ask_question_button"] !== undefined) {
+			      		self.find('.carousel-description span.note')
+										.html(carousel_info["ask_question_button"])
+										.show();
+						} else {
+								self.find('.carousel-description span.note').html('').hide();
+						}
 
+						//Video list item
             //self.find('.carousel-description li.shedule').attr('href', carousel_info['start_live_conversation'] );
 					  if (carousel_info["start_video_conversation"] !== undefined) {
 			      	  self.find('.carousel-description li.shedule')
@@ -285,6 +295,7 @@ $(document).ready(function() {
 		      	  	self.find('.carousel-description li.shedule').html('').hide();
 						}
 
+						// Phone list item
 						if (carousel_info["start_phone_conversation"] !== undefined) {
 								self.find('.carousel-description li.phone')
 										.html(carousel_info["start_phone_conversation"])
@@ -293,23 +304,24 @@ $(document).ready(function() {
 							  self.find('.carousel-description li.phone').html('').hide();
 						}
 						
-						if (carousel_info["appt"] !== undefined) {
+  					// Ask question list item	
+  					if (carousel_info["ask_question_button_text"] !== undefined) {
+			      		self.find('.carousel-description li.note')
+										.html(carousel_info["ask_question_button_text"])
+										.show();
+						} else {
+								self.find('.carousel-description li.note').html('').hide();
+						}
+						
+						// Appointment list item
+						if (carousel_info["schedule_consultation_button_text"] !== undefined) {
 								self.find('.carousel-description li.appt')
-										//.html(carousel_info["appt"])
+										.html(carousel_info["schedule_consultation_button_text"])
 										.show();
 						} else {
 							  self.find('.carousel-description li.appt').hide();
 						}
 						
-						
-
-						if (carousel_info["send_text_question"] !== undefined) {
-			      		self.find('.carousel-description span.text')
-										.html(carousel_info["send_text_question"]).find("a").html('')
-										.show();
-						} else {
-								self.find('.carousel-description span.text').html('').hide();
-						}
             //self.find('.carousel-description a.phone').attr('href', carousel_info['start_live_conversation'] );
             //self.find('.carousel-description a.shedule').attr('href', carousel_info['start_live_conversation'] );
             if ( carousel_info['test'] == true){
@@ -320,7 +332,6 @@ $(document).ready(function() {
   							self.find('.carousel-description a.reviews').html('').hide();
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
-
             self.interv = setTimeout( next_image, 2300 );
         }
 
