@@ -76,6 +76,8 @@ describe Offering do
 
       it "should find by keyword" do
         offering = FactoryGirl.create(:offering, :name => 'Find me')
+        offering.reindex!
+        
         search = Offering.search do
           fulltext offering.name
         end
