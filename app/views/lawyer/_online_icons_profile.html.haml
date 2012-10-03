@@ -1,0 +1,31 @@
+
+%p
+  - if lawyer.is_online
+    %span.video.online= start_or_video_button_p(lawyer)
+    %span.online_video_tooltip= start_or_video_button_profile(lawyer)
+    .video_chat.online.tooltip Available for video chat
+  - else
+    %span.video.offline
+    %span.offline_video_tooltip Not available by video now
+    .video_chat.offline.tooltip Not available by video now
+%p
+  - if lawyer.is_available_by_phone?
+    %span.voice.online= start_phone_consultation_p(lawyer)
+    %span.online_voice_tooltip= start_phone_consultation_profile(lawyer)
+    .voice_chat.online.tooltip Available by phone now
+  - else
+    %span.voice.offline
+    %span.offline_voice_tooltip Not avaiable by phone now
+    .voice_chat.offline.tooltip Not available by phone now 
+%p
+  %span.note= start_or_schedule_button_text_profile(lawyer)
+  %span= start_or_schedule_button_text(lawyer)
+%p
+  - if lawyer.daily_hours.present?
+    %span.text.online= schedule_consultation_button(lawyer)
+    %span= schedule_consultation_button_profile_text(lawyer)
+  - else
+    %span.text.offline
+    %a{:href => '#'}
+    %span No appointments available
+= tooltips lawyer

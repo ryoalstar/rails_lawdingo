@@ -45,21 +45,7 @@
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
       .online_icons
-        - if lawyer.is_online
-          %span.video.online= start_or_video_button_p(lawyer)
-        - else
-          %span.video.offline
-        - if lawyer.is_available_by_phone?
-          %span.voice.online= start_phone_consultation_p(lawyer)
-        - else
-          %span.voice.offline
-        %span.note= start_or_schedule_button_text_profile(lawyer)
-        - if lawyer.daily_hours.present?
-          %span.text.online
-            %a.appt-select{:href => '#'}
-        - else
-          %span.text.offline
-        = tooltips lawyer
+        = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
       .clear
       .description
         - if lawyer.personal_tagline.present?
@@ -106,17 +92,7 @@
           .button_tooltip
             .button-content
               %ul
-                - if lawyer.is_online && !lawyer.is_busy
-                  %li
-                    = start_or_schedule_button(lawyer)
-                - if lawyer.is_available_by_phone?
-                  %li
-                    = start_phone_consultation(lawyer)
-                - if lawyer.daily_hours.present?
-                  %li
-                    %a.appt-select{:href => '#'} Schedule a consultation
-                %li
-                  = start_or_schedule_button_text(lawyer)
+                = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
     - if lawyer.daily_hours.present?
       .right.row_block
         %p Available appointments
