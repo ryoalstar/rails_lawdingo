@@ -217,8 +217,11 @@ class UsersController < ApplicationController
       if @user.is_lawyer?
         @user = Lawyer.find(@user.id)
         fill_states
-        @states.count.times {@user.bar_memberships.build}
+        
         @schools = School.order(:name)
+        
+        bar_memb_with_null_states = @user.bar_memberships.select{|bm| bm.state.nil?}.count
+        (@states.count - bar_memb_with_null_states).times {@user.bar_memberships.build}
       end
     rescue
       redirect_to root_path, :notice =>"Couldn't find any record"
