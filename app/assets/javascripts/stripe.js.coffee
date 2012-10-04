@@ -15,11 +15,38 @@ subscription =
         false
       else
         true
+
+    $('#apply_coupon_button').click ->    
+      token = ($ "[name='csrf-token']").attr "content"
+      coupon = $('input#coupon')
+      stripe_plan_amount = $('input#stripe_plan_amount').val()
+      _this = this
+      $.ajax(
+        url: $(this).attr 'href'
+        type: 'POST'
+        data:
+          coupon: coupon.val(),
+          authenticity_token: token
+        beforeSend: ->
+          $(_this).text "Checking..."
+        complete: ->
+          $(_this).text "Apply"
+        success: (response) ->
+          if response.result
+            coupon.removeClass 'invalid'
+            coupon.addClass 'valid'
+            $('span#subscription_price').text('$' + (stripe_plan_amount - response.coupon.percent_off*0.01) + '/month for '+ response.coupon.duration+', $'+stripe_plan_amount+' thereafter')
+          else
+            coupon.removeClass 'valid'
+            coupon.addClass 'invalid'
+      )
+      false
+
   
   processCard: ->
     card =
       number: $('#card_number').val()
-      cvc: $('#card_code').val()
+      cvc: $('#card_cvc').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
     Stripe.createToken(card, subscription.handleStripeResponse)
