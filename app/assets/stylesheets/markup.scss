@@ -2333,6 +2333,45 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 			h4{
 				margin-top:0;
 			}
+			
+			#no_lawyer_found
+			{
+			  background-color: red;
+			  margin-top: 20px;
+			  padding-left: 15px;
+			  padding-top: 19px;
+			  padding-bottom: 19px;
+			  background: #FDFDFD;
+        border: 1px solid #D0D2D5;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #5d5e5f;
+        p{
+          line-height: 26px;
+        }
+        
+        textarea{
+              color: #393C3D;
+              display:block;
+              height:45px;
+              width:667px;
+              padding:0 10px;
+              border:1px solid #aaafb8;
+              background-color:#f6f6f6;
+              font-size:16px;
+              font-weight:bold;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;   
+              -moz-box-shadow: inset 0px 1px 2px #e3e3e3;
+              -webkit-box-shadow: inset 0px 1px 2px #e3e3e3;
+              box-shadow: inset 0px 1px 2px #e3e3e3;
+            }
+        button{
+          margin-top: 15px;
+        }
+			  
+			}
 			.profile_info{
 			  margin-top: 23px;
 				width:722px;
