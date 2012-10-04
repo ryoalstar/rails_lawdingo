@@ -93,8 +93,9 @@
             .button-content
               %ul
                 = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
-    - if lawyer.daily_hours.present?
-      .right.row_block
+    
+    .right.row_block
+      - if lawyer.daily_hours.present?
         %p Available appointments
         .available-appointments
           - lawyer.next_available_days(2).each_with_index do |d, i|
@@ -123,6 +124,11 @@
           .clear
         %a.appt-select.appointments{:href => '#'}
           All available appointments
+      - else
+        .no_appointments
+          %p Sorry,
+          %p No Appointments
+          %p Are Available
 
       - # content for the modal dialog we are going to display
       %div{:style => "display:none;"}
