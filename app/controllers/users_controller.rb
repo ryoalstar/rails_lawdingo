@@ -219,8 +219,6 @@ class UsersController < ApplicationController
         fill_states
         
         @schools = School.order(:name)
-        # An error has made a lot of bar_memberships being stored with null state. Until we 
-        # fix that error we should workaround those cases
         bar_memb_with_null_states = @user.bar_memberships.select{|bm| bm.state.nil?}.count
         (@states.count - bar_memb_with_null_states).times {@user.bar_memberships.build}
       end
