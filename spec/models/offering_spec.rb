@@ -10,6 +10,24 @@ describe Offering do
     it "should be valid" do
       subject.should be_valid
     end
+    
+    it "should not create without user" do
+      offering = FactoryGirl.create(:offering)
+      offering.user = nil
+      offering.should_not be_valid
+    end
+    
+    it "should not create without name" do
+      offering = FactoryGirl.create(:offering)
+      offering.name = nil
+      offering.should_not be_valid
+    end
+    
+    it "should not create without fee" do
+      offering = FactoryGirl.create(:offering)
+      offering.fee = nil
+      offering.should_not be_valid
+    end
   end
 
   describe "search", :integration => true do
@@ -58,6 +76,8 @@ describe Offering do
 
       it "should find by keyword" do
         offering = FactoryGirl.create(:offering, :name => 'Find me')
+        offering.reindex!
+        
         search = Offering.search do
           fulltext offering.name
         end

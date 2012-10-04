@@ -10,10 +10,11 @@ AppParameter.set_defaults
 
 PracticeArea.create([{ name: 'Bankruptcy', parent_id: nil}, { name: 'Divorce and Family', parent_id: nil}, { name: 'Employment', parent_id: nil}, {name: 'Immigration', parent_id: nil}, { name: 'Pre-Litigation Advice', parent_id: nil}, { name: 'Real Estate / Rentals', parent_id: nil}, { name: 'Startups / Business', parent_id: nil}, { name: 'Tax'}, { name: 'Wills and Trusts', parent_id: nil}])
 
-Offering.create([
-  { name: "Contract review" }, 
-  { name: "Incorporation" }, 
-  { name: "Trademark application" }, 
-  { name: "Will and estate creation" }
-])
+# Commented by AF on ticket 36691845. Offerings should have user_id.
+#Offering.create([
+#  { name: "Contract review" }, 
+#  { name: "Incorporation" }, 
+#  { name: "Trademark application" }, 
+#  { name: "Will and estate creation" }
+#])
 

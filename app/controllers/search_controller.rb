@@ -100,7 +100,7 @@ class SearchController < ApplicationController
   protected
   
   def link_to(*args)
-    puts args.inspect
+    #puts args.inspect
     self.class.helpers.link_to *args
   end
 end

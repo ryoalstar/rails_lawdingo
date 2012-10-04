@@ -65,7 +65,7 @@
               = f.password_field :password ,{:class=>"passw"}
       %hr/
       - if current_user.is_admin?
-        = select_tag "lawyer[school_id]", options_from_collection_for_select(School.all, "id", "name", @user.school_id), prompt: "Law school"
+        = select_tag "lawyer[school_id]", options_from_collection_for_select(@schools, "id", "name", @user.school_id), prompt: "Law school"
         %br/
         = f.text_field :undergraduate_school, placeholder: "Undergrad school"
         %br/

@@ -4,6 +4,8 @@ class Offering < ActiveRecord::Base
   belongs_to :user,
     :touch => true
 
+  validates_presence_of :user_id, :name, :fee
+
     #solr index
     searchable :auto_index => true, :auto_remove => true do
       text :description
@@ -19,11 +21,17 @@ class Offering < ActiveRecord::Base
     end
 
     def get_state_name
-      Lawyer.find(self.user.id).states.map(&:name)*","
+      if self.user.present?
+        Lawyer.find(self.user.id).states.map(&:name)*","
+      end
+      
     end
 
     def get_state_ids
-      Lawyer.find(self.user.id).try(:state_ids) || []
+      if self.user.present?
+        Lawyer.find(self.user.id).try(:state_ids) || []
+      end
+      
     end
 
     def reindex!

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "/lawyer/_lawyer" do
 
   before(:each) do
-    view.stubs(:logged_in? => true)
+    view.stubs(:logged_in? => true, :current_user => lawyer)  
   end
   
   let(:lawyer) do
@@ -28,7 +28,7 @@ describe "/lawyer/_lawyer" do
       :partial => "/lawyer/lawyer", 
       :locals => {:lawyer => LawyerDecorator.new(lawyer)}
     )
-    lawyer.next_available_days(4).each do |day|
+    lawyer.next_available_days(2).each do |day|
       lawyer.available_times.each do |t|
         rendered.should have_selector("a[data-time='#{t.to_s(:db)}']")
       end

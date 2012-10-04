@@ -708,7 +708,8 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
-#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion, #page.apply-form-wrapper{
+#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion, #page.apply-form-wrapper,
+.new_offering{
   margin-bottom:10px;
   .field_with_errors{
     input{

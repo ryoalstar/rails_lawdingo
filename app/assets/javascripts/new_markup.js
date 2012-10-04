@@ -240,6 +240,25 @@ $(document).ready(function(){
     show_on_mouseenter = true;
     //console.log(show_on_mouseenter);
 	});
+	
+	
+	var debounce;
+	$(".offerings_item").hover(function(){
+	    $(".offerings_wrapper", $(this)).fadeIn("fast");
+	    clearTimeout(debounce);
+	},
+	function(){
+		var item = $(this);
+		debounce = setTimeout(function(){
+    	$(".offerings_wrapper", item).fadeOut("fast");
+    	clearTimeout(debounce);
+    },1500);
+	});
+	
+	
+	$("#moretab").mouseleave (function() {
+	    debounce = setTimeout(closeMenu,400);
+	});  
 	  
   $(".free").live('mouseenter', function(){
     //console.log("111");

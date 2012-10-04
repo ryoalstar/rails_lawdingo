@@ -262,7 +262,7 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
           float:left;
           display:inline-block;
           width:320px;
-          input.optional{
+          input{
             width: 370px;
           }
           input[type="submit"].button{
@@ -621,6 +621,23 @@ body.index.logged-in, body.users.show.logged-in{
               margin-top:10px;
             }
           }  
+          
+          div.currency{
+            width: 200px;
+            min-width: 200px;
+          }
+          .field_with_errors{
+            display: inline-block;
+            .error_notice{
+              position: absolute;
+              right: 0;
+              label.message{
+                padding:4px 5px 2px 5px;
+              }
+            }
+          }
+          
+          
         }
         form#new_offering{
           label{
@@ -629,7 +646,7 @@ body.index.logged-in, body.users.show.logged-in{
             font-weight:normal;
             margin-bottom:5px;
           }
-          .input.optional{
+          .input{
             margin:30px 0px 0px 0px;
           }
           span.hint{
@@ -744,6 +761,68 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
     font-weight: bold;
     color: #303030;
   }
+  .offerings_item{
+    position: relative;
+    
+    .offerings_wrapper{
+      width: 340px;
+      display:none;
+      border: 1px solid #D0D2D5;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      position: absolute;
+      left: -35%;
+      bottom: 35px;
+      z-index: 2;
+      background-color: white;
+      color: #3f3f3f;
+      
+      table{
+        width: 100%; 
+        border-spacing: 0;
+        tr:nth-child(even){
+          background-color: #f5f5f7;
+        }
+        td{
+          padding:10px; 
+          border-top: 1px solid #eeeeee;
+          .offering_name{
+            cursor: pointer;
+            border-bottom: 1px dotted #c4c5c6; 
+          }
+        }
+        tr > td:first-child { 
+          width: 90%;
+        }
+      }
+    }  
+    .offerings_wrapper:after, .offerings_wrapper:before {
+      top: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    
+    .offerings_wrapper:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-top-color: #ffffff;
+      border-width: 10px;
+      left: 50%;
+      margin-left: -10px;
+    }
+    .offerings_wrapper:before {
+      border-color: rgba(208, 210, 213, 0);
+      border-top-color: #D0D2D5;
+      border-width: 11px;
+      left: 50%;
+      margin-left: -11px;
+    }
+  }
+  
   #slogan{
     background:image-url('slogan_border.png') repeat;
     padding:5px;

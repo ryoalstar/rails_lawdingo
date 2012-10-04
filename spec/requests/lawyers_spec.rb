@@ -7,12 +7,12 @@ describe "Restful Lawyers", :integration do
   before(:all) do
     DatabaseCleaner.clean
     AppParameter.set_defaults
-    FactoryGirl.create(:homepage_image)
+    @homepage_image = FactoryGirl.create(:homepage_image)
   end
 
-  before(:each) do
-    Lawyer.delete_all
-  end
+  #before(:each) do
+    #Lawyer.delete_all
+  #end
 
   let(:practice_area) do
     FactoryGirl.create(:practice_area)
@@ -90,5 +90,94 @@ describe "Restful Lawyers", :integration do
     end 
 
   end 
+
+  context "Lawyers list" do
+    before(:each) do
+      offering = FactoryGirl.create(:offering)
+      @offering_link = "a[href='"+ offering_path(offering)  +"']"
+      user = FactoryGirl.create(:user)
+      sign_in user
+      visit(lawyers_path)
+    end
+    it "should render the offerings links" do
+      page.should have_selector("li.offerings_item")
+      page.should have_selector("li.offerings_item " + @offering_link) 
+    end
+    
+    #it "the offering links panel should be visible after hover on link" do 
+    #  page.find("li.offerings_item " + @offering_link).trigger(:mouseover)
+    #  find("li.offerings_item " + @offering_link).should be_visible
+    #end
+    
+  end
+  
+  context "Lawyers list" do
+    before(:each) do
+      offering = FactoryGirl.create(:offering)
+      @offering_link = "a[href='"+ offering_path(offering)  +"']"
+      user = FactoryGirl.create(:user)
+      sign_in user
+      visit(lawyers_path)
+    end
+    it "should render the offerings links" do
+      page.should have_selector("li.offerings_item")
+      page.should have_selector("li.offerings_item " + @offering_link) 
+    end
+    
+  end
+  
+  
+  context "Using practice areas link" do
+    before(:each) do
+      @lawyer = HomepageImage.all.first.lawyer
+      practice_area = FactoryGirl.create(:practice_area)
+      @lawyer.practice_areas << practice_area
+    end
+    it "should render the practice area link" do
+      xhr :get, carousel_images_path, :format => "json"
+      parsed_body = JSON.parse(response.body)
+      homepage_options = parsed_body.last;
+      @lawyer.practice_areas_names.each do |pa_name|
+        includes = homepage_options["description"].include?(pa_name)
+        includes.should be_true
+      end
+    end
+  end
+  
+  
+  context "Logged in lawyer" do
+    before(:each) do
+      @lawyer = FactoryGirl.create(:lawyer, :password => "secret")
+      sign_in @lawyer
+      visit(user_offerings_path(@lawyer))
+    end
+    
+    
+    it "cannot create an flat free offering without fee" do
+      lambda{
+        fill_in("offering_name", :with => 'Service name')
+        click_button("Add flat-fee service")
+       }.should change{Offering.count}.by(0)
+    end
+    
+    it "cannot create an flat free offering without name" do
+      lambda{
+        fill_in("offering_fee", :with => '323')
+        click_button("Add flat-fee service")
+       }.should change{Offering.count}.by(0)
+    end
+    
+    it "should create a flat free offering with name and fee" do
+      lambda{
+        fill_in("offering_fee", :with => '323')
+        fill_in("offering_name", :with => 'Service name')
+        click_button("Add flat-fee service")
+        
+        page.current_path.should eql(user_offerings_path(@lawyer))
+
+      }.should change{Offering.count}.by(1)
+    end
+    
+  end
 
 end

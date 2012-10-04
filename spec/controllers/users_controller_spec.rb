@@ -80,4 +80,30 @@ describe UsersController do
       email.body.should match /Something new/
     end
   end
+
+  context "#admin_is_editing_layer" do
+    before :each do
+      @admin = FactoryGirl.create(:admin)
+      session[:user_id] = @admin.id
+      @schoolA = FactoryGirl.create(:school, :name=>'A-School')
+      @schoolC = FactoryGirl.create(:school, :name=>'C-School')
+      @schoolB = FactoryGirl.create(:school, :name=>'B-School')
+      
+    end
+    
+    it "should show the schools in alphabetical order" do
+      lawyer = FactoryGirl.create(:lawyer)
+      get :edit, :id=>lawyer.id
+      school_list = assigns(:schools)
+      school_list.should_not be_nil
+      
+      school_list.at(0).should eq(@schoolA)
+      school_list.at(1).should eq(@schoolB)
+      school_list.at(2).should eq(@schoolC)
+      
+      
+    end
+    
+  end
+
 end

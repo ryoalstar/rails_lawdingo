@@ -7,10 +7,11 @@ class ClientsController < ApplicationController
       session[:return_to] = params[:return_path]
     end
 
+    # Changed by AF: 36856303 - Phone consultation not routing properly
     # Empy return_to if user came from homepage
-    if request.referer == root_url
-      session[:return_to] = nil 
-    end
+    #if request.referer == root_url
+    #  session[:return_to] = nil 
+    #end
 
     # set up our client
     @client = Client.new
@@ -22,9 +23,15 @@ class ClientsController < ApplicationController
 
     if @client.save
       UserMailer.notify_client_signup(@client).deliver
-      log_in_user!(@client)
-      send_message @client
-      return redirect_on_login
+      
+      if session[:question_id].present?
+        send_pending_question(session[:question_id], @client)
+      else
+        log_in_user!(@client)
+        send_message @client
+        return redirect_on_login
+      end
+      
     else
       return render(:action => :new)
     end

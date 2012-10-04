@@ -1,5 +1,9 @@
 class LawyersController < ApplicationController
 
+  def index
+    @users  = User.get_lawyers
+  end
+
   def new
     @lawyer = Lawyer.new
     setup_form

@@ -294,7 +294,17 @@ describe Lawyer do
   end
 
   context "#daily_hours" do
-
+    
+    it "should update daily hours after first save" do
+      daily_hour = DailyHour.new(:wday => 1)
+      subject.daily_hours << daily_hour 
+      subject.daily_hours_on_wday(2).should be_nil
+      second_daily_hour = DailyHour.new(:wday => 2)
+      subject.daily_hours << second_daily_hour 
+      subject.daily_hours_on_wday(2).should_not be_nil
+      
+    end
+    
     context "#on_wday" do
 
       it "should provide a 'daily_hours_on_wday' method to find valid hours

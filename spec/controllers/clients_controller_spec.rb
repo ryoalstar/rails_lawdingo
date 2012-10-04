@@ -13,16 +13,17 @@ describe ClientsController do
 
     end
 
-    it "should empty the return_to param if the user is coming from
-      the root_url" do
+    #Changed by AF. no longer valid. 
+    #it "should empty the return_to param if the user is coming from
+    #  the root_url" do
 
-      request.env["HTTP_REFERER"] = root_url
-      session[:return_to] = "/a/path"
+    #  request.env["HTTP_REFERER"] = root_url
+    #  session[:return_to] = "/a/path"
 
-      get(:new)
-      session[:return_to].should be_nil
+    #  get(:new)
+    #  session[:return_to].should be_nil
 
-    end
+    #end
   end
 
   context "POST #create" do

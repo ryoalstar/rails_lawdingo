@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase || ""
-
+    
     if @service_type == "legal-services"
       @search = Offering.build_search(
         params[:search_query], :page => params[:page]
@@ -57,7 +57,12 @@ class UsersController < ApplicationController
     else
       @lawyers = @search.results
     end
-
+    
+    @current_time_zone = 'Eastern Time (US & Canada)'     
+    if !current_user.nil? && current_user.time_zone.present?       
+      @current_time_zone = current_user.time_zone     
+    end     
+    
     respond_to do |format|
       format.html{render}
       format.js{render}
@@ -124,11 +129,6 @@ class UsersController < ApplicationController
       session[:return_to] = params[:return_path]
     end
 
-    # Keep question notice after clicking the login link
-    if params[:question_notice].present?
-      session[:keep_question_notice] = true
-    end
-
     # Empy return_to if user came from homepage
     if request.referer == root_url
       session[:return_to] = nil 
@@ -154,7 +154,6 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-
       if @user.user_type == User::LAWYER_TYPE
         Lawyer.reindex
         unless params[:practice_areas].blank?
@@ -168,7 +167,6 @@ class UsersController < ApplicationController
         login_in_user(@user)
         redirect_to subscribe_lawyer_path and return
       elsif @user.is_client?
-
         UserMailer.notify_client_signup(@user).deliver
         session[:user_id] = @user.id
 
@@ -220,6 +218,7 @@ class UsersController < ApplicationController
         @user = Lawyer.find(@user.id)
         fill_states
         @states.count.times {@user.bar_memberships.build}
+        @schools = School.order(:name)
       end
     rescue
       redirect_to root_path, :notice =>"Couldn't find any record"
