@@ -16,7 +16,7 @@
   </div>
   <div class="question_area" id="question_area">
 	<div class="question_area_top">
-	<h3 class = "question_label"><label>Legal domain:</label></h3>
+	<h3 class = "question_label"><label>Type of law:</label></h3>
 	</div>
 	<div class ="question_area_bot">
     <%= f.select :practice_area, PracticeArea.where(:parent_id => nil).map(&:name), :include_blank => "Not specifed" %>

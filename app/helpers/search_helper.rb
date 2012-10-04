@@ -7,7 +7,11 @@ module SearchHelper
       practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
       images_hash = Hash.new
       images_hash["free"] = "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"
-      images_hash["url"] = image.photo.url(:large)
+      if image.photo?
+        images_hash["url"] = image.photo.url(:large)
+      else
+        images_hash["url"] = "/assets/profile_m.gif"
+      end
       images_hash["title"] = "<a href='/attorneys/#{lawyer.id}/#{lawyer.slug}'>#{lawyer.full_name}</a>".html_safe
       images_hash["description"] = practice_area_text # + "#{lawyer.free_consultation_duration} minutes free consultation, then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute."
       images_hash["small"]="then #{number_to_currency (lawyer.rate + AppParameter.service_charge_value)}/minute"

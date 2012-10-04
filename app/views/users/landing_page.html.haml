@@ -28,7 +28,7 @@
           %p= @subtext[:first]
           / %p= @subtext[:second]
           %span.browse_lawyers_button
-            = link_to "Get Started", lawyers_path, class: ""
+            = link_to "Enter Lawdingo", lawyers_path, class: ""
           = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
           = render partial: "questions/home_form", locals: { type: "lawyer" }
           -#%small

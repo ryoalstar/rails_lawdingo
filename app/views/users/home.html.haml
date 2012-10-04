@@ -157,13 +157,13 @@
             %span.law-school-3 A
             %span.law-school-4 A+
   .main_content
+    #service_type_tabs
+      = render partial: "service_type_tabs"
     #generail_question.question.question-container
       -#%h2.selected-lawyers-caption= selected_lawyers_caption
       %h2
       = render partial: "questions/form", locals: { type: "lawyer" }
     / RESULTS
-    #service_type_tabs
-      = render partial: "service_type_tabs"
     #results.results
       = render(:partial => "search_results")
 = hidden_field_tag :lawyer_id, '', :class => :current_selected_lawyer

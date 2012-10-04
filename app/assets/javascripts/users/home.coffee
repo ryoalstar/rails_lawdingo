@@ -393,9 +393,8 @@ class Home
       $notice_container.hide()
 
     $field.parents(".practice-areas")
-      .show()
 
-    $field.parent().next().show() unless @service_type == "Legal-Services"
+    $field.parent().next().show('slow') unless @service_type == "Legal-Services"
     $field
 
   #set_service_type_fields_val : (val)->

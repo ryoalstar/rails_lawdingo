@@ -131,14 +131,15 @@
           %td
           %td
             .form-notice
-              - if params[:ut].present?
+              - if user.is_lawyer?
                 %span.fine-print
-                  By clicking "Join Lawdingo" you confirm that you accept the
+                  By clicking "Apply as a Lawyer" you confirm that you accept the
                   %a{:href => "/terms", :target => "_blank"} Terms of Service
               - else
                 %span.fine-print
-                  By clicking "Apply as Lawyer" you confirm that you accept the
+                  By clicking "Join Lawdingo" you confirm that you accept the
                   %a{:href => "/terms", :target => "_blank"} Terms of Service
+                
     
 :javascript
   $(document).ready(function(){

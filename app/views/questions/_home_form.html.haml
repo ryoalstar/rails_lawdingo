@@ -13,7 +13,7 @@
   #question_area.question_area
     .question_area_top
       %h3.question_label
-        %label Legal domain:
+        %label Type of law:
     .clear
     .question_area_bot
       = f.select :practice_area, PracticeArea.where(:parent_id => nil).map(&:name), :include_blank => "Not specifed"
