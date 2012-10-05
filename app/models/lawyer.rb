@@ -128,8 +128,8 @@ class Lawyer < User
   def calculated_order
     calculated_score = 0
     calculated_score += 100 if self.is_online
-    calculated_score += 10 if self.is_available_by_phone?
-    calculated_score += 1 if self.daily_hours.present?
+    calculated_score += 10 if self.daily_hours.present?
+    calculated_score += 1 if self.is_available_by_phone?
     calculated_score
   end
 
