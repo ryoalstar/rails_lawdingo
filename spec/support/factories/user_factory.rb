@@ -6,7 +6,7 @@ FactoryGirl.define do
   factory :user do
     first_name "Thome"
     last_name "York"
-    email
+    email { Faker::Internet.email }
     password "secret"
     user_type{User::CLIENT_TYPE}
     phone '+0123456789'
@@ -15,7 +15,7 @@ FactoryGirl.define do
   factory :client do
     first_name "Thome"
     last_name "York"
-    email
+    email { Faker::Internet.email }
     password "secret"
     user_type{User::CLIENT_TYPE}
     phone '+0123456789'
@@ -24,7 +24,7 @@ FactoryGirl.define do
   factory :admin do
     first_name "Thome"
     last_name "York"
-    email
+    email { Faker::Internet.email }
     password "secret"
     user_type{User::ADMIN_TYPE}
     phone '+0123456789'

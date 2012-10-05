@@ -61,10 +61,10 @@ Spork.prefork do
   # don't want to stub non existent methods
   Mocha::Configuration.prevent(:stubbing_non_existent_method)
 
-  def sign_in user
+  def sign_in user, password = "secret"
     visit login_path
     page.fill_in "email", with: user.email
-    page.fill_in "password", with: "secret"
+    page.fill_in "password", with: password
     click_button "submit_login"
   end
 

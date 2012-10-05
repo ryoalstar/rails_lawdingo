@@ -128,6 +128,9 @@ class ApplicationController < ActionController::Base
     return false unless session[:message] && session[:message].is_a?(Message)
     message = session.delete(:message)
     message.client = user
-    flash[:notice] = 'Your message has been sent.' if message.send!
+    if message.send!
+      session[:return_to] = attorney_path(message.lawyer, slug: message.lawyer.slug)
+      flash[:notice] = 'Your message has been sent.' 
+    end
   end
 end
