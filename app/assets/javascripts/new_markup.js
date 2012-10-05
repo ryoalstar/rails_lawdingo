@@ -170,25 +170,22 @@ $(document).ready(function(){
 		image_tick_class: "radios"
 	});   	
 
-  var tooltip_callbacks = function(){
-    $("div.row.lawyer").mouseover(function(){
-      $(this).find(".tooltip.dominant").show();
-    });
-
-    $("div.row.lawyer").mouseout(function(){
-      $(this).find(".tooltip.dominant").hide();
-    });
-  }  
-  tooltip_callbacks();
-
-  $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").mouseover(function(){
-    $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeIn('slow'); // show
-    $("div.row.lawyer").unbind('mouseover');
+  $("div.row.lawyer").live('mouseover',function(){
+    $(this).find(".tooltip.dominant").show();
   });
 
-  $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").mouseout(function(){
+  $("div.row.lawyer").live('mouseout',function(){
+    $(this).find(".tooltip.dominant").hide();
+  });
+
+  $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").live('mouseover', function(){
+    $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeIn('slow'); // show
+    $('.tooltip.dominant').css('opacity','0');
+  });
+
+  $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").live('mouseout', function(){
     $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeOut('slow'); // hide
-    tooltip_callbacks();
+    $('.tooltip.dominant').css('opacity','1'); 
   });
 
 	var show_on_mouseenter = false;
