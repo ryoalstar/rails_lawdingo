@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
   attr_accessible :type, :user_id, :body, :state_name, :practice_area
   belongs_to :user
   has_one :inquiry
-
+  validates_presence_of :body, :state_name
   after_create :create_inquiry
 
   set_inheritance_column :ruby_type

@@ -1,8 +1,11 @@
-<%= simple_form_for Question.new, remote: logged_in? do |f| %>
+<%= form_for Question.new, :remote=> logged_in?, :validate=> true do |f| %>
   <!--<p>Unsure who to choose? Ask a question to a lawyer instantly.</p>-->
-  <%= f.input :user_id, as: :hidden, input_html: { value: logged_in? ? current_user.id : nil } %>
-  <%= f.input :type, as: :hidden, input_html: { value: type } %>
-  <%= f.input :body, as: :string, label: false, :placeholder => @subtext[:second] %>
+  
+  <%= f.hidden_field :user_id, :value=> (logged_in? ? current_user.id : nil)  %>
+  <%= f.hidden_field :type, :value =>type %>
+  <div class="question_body_wrapper input string optional">
+  	<%= f.text_field :body, :size=>50, :placeholder => @subtext[:second], :validate=> true %>
+  </div>
   <%= f.submit "", class: "" %>
 
   <div class="question_state" id="question_state">
@@ -11,7 +14,9 @@
 	<label>Your state:</label></h3>
 	</div>
 	<div class="question_state_bot">
-    <%= f.select :state_name, State.all.map(&:name), selected: auto_detected_state, :include_blank => "Not specifed" %>
+		<% states = State.all.map(&:name) %>
+		<% states.insert(0, states.delete_at(states.index('Non-US/UK'))) if !states.index('Non-US/UK').nil? %> 
+    <%= f.select :state_name, states, selected: auto_detected_state, :include_blank => "Not specifed", :validate => true %>
 	</div>	
   </div>
   <div class="question_area" id="question_area">
