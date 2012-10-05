@@ -28,7 +28,7 @@ describe "lawyer specific question" do
   end
 
   context "when user is not signed in" do
-    it "should show message form when send a question link clicked" do
+    it "should redirect to sign up page when send a question link clicked" do
       page.should have_content("Ask a question.")
     end
 
