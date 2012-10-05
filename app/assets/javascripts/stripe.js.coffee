@@ -35,7 +35,7 @@ subscription =
           if response.result
             coupon.removeClass 'invalid'
             coupon.addClass 'valid'
-            $('span#subscription_price').text('$' + (stripe_plan_amount - response.coupon.percent_off*0.01) + '/month for '+ response.coupon.duration+', $'+stripe_plan_amount+' thereafter')
+            $('span#subscription_price').text('$' + (stripe_plan_amount - response.coupon.percent_off*0.01) + '/month for the first one month, $'+stripe_plan_amount+' thereafter period.')
           else
             coupon.removeClass 'valid'
             coupon.addClass 'invalid'
