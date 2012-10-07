@@ -43,9 +43,8 @@ jQuery ->
   ($ "a#practice_areas_opener").bind "click", -> ($ "div#practices").center()
   ($ "a#start_phone_session_button").bind "click", -> ($ "div#paid_schedule_session").center()
 
-  ($ "a#schedule_session_button").bind "click", ->
+  ($ "a#schedule_session_button").live "click", ->
     lawyer_name = ($ @).data('fullname')
-
     ($ "div#schedule_session").center()
     ($ "div#schedule_session span.lawyer_name").html(lawyer_name)
 

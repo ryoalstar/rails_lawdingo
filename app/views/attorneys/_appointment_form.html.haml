@@ -1,7 +1,7 @@
 .appointment-form{:id => "appointment_form_#{lawyer.id}"}
   .message{:style => "display:none"}
   %form{:action => appointments_path, :method => "POST"}
-    %h2 Schedule a consultation with #{lawyer.full_name}
+    %h2.popup_head Schedule a consultation with #{lawyer.full_name}
 
     %div.error{:style => "display:none"}
 
@@ -47,5 +47,5 @@
     /   %li
     /     =radio_button(:appointment, :appointment_type, :video)
     /     Video
-    %hr/
+    /%hr/
     = submit_tag("Book Appointment", :class => "button")

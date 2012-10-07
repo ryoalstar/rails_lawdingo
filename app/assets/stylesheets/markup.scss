@@ -1493,6 +1493,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 							-moz-text-shadow: 1px 1px 1px #434950;
               -webkit-text-shadow: 1px 1px 1px #434950;
               text-shadow: 1px 1px 1px #434950;
+              font-family: 'Exo', sans-serif;
 						}
 						p{
 						  color:white;
@@ -1502,6 +1503,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 							-moz-text-shadow: 1px 1px 1px #434950;
               -webkit-text-shadow: 1px 1px 1px #434950;
               text-shadow: 1px 1px 1px #434950;
+              font-family: 'Exo', sans-serif;
 						}
 						/*a.browse_lawyers_button{
 							margin-top: 25px;
@@ -3056,20 +3058,23 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 	}
 }
 
-.availability {
+body.users.show.logged-in #page > div .profile .profile-block .availability {
   width: 680px;
-
-  label{
-    color: #ccc !important;
-  }
-
-  .by_video{
-    width: 340px;
+  .by_video, .by_phone{
+    width: 295px;
     float: left;
     padding-right: 10px;
+    label{
+      color: #ccc;
+      margin-right:10px;
+      font-size:13px;
+      margin-top: 5px;
+      display: inline-block;
+    }
   }
-
   .by_phone{
+    margin-left:27px;
+    margin-bottom: 20px;
   }
 
   .iPhoneCheckContainer{

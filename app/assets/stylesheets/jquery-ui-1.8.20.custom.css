@@ -320,16 +320,18 @@
   font-size: 1.45em;
 }
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
-.ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .1em 0; } 
+.ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .1em 0; display:none;} 
 .ui-dialog .ui-dialog-titlebar-close {
   /*position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; */
-  background: url("close.png") no-repeat scroll center center transparent;
+  /*background: url("close.png") no-repeat scroll center center transparent;*/
+  background: url("modal_close.png") no-repeat scroll center center transparent;
   height: 30px;
   margin: 0;
+  z-index: 10;
   width: 30px;
   position: absolute;
-  top: -10px;
-  left: -10px;
+  top: -16px;
+  left: -16px;
   cursor: pointer;
   border-bottom: none;
   }

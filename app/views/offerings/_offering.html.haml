@@ -33,15 +33,15 @@
             %tr
               %td
                 %p= start_or_schedule_button(lawyer)
-
-      %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
-        %p= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
-        %p.small free consultation
-      .free_dropdown{:href=> "#"}
-      .button_tooltip
-        .button-content
-          %ul
-            = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer})      
+      .free_button_outer            
+        %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
+          %p= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
+          %p.small free consultation
+        .free_dropdown{:href=> "#"}
+        .button_tooltip
+          .button-content
+            %ul
+              = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer})      
   - if lawyer.daily_hours.present?      
     .right.row_block
       %p Available appointments
