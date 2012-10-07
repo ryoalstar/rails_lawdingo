@@ -2,6 +2,7 @@
  var messageString = "";
  var isOverlayOpen = false;
 //functions to bring up and collapse the video chat screen for lawyer
+
 function CloseCall()
 {
     closecall();
@@ -502,6 +503,7 @@ jQuery.fn.center = function () {
 }
 
 $(document).ready(function() {
+  $('body.users.show.logged-in .dialog-window').center();
   if($('div.load-more a').length){
     $(window).scroll(function () {
       if($('div.load-more a').length){

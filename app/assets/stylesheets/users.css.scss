@@ -409,7 +409,7 @@ body.users.create_phone_call{
 
 body.users.home{
   .ui-dialog{
-    width: 540px !important;
+    width: 420px !important;
     h2{
       text-align:center;
     }
@@ -421,8 +421,9 @@ body.users.home{
       margin:20px 0;
     }
     h3{
-      text-align:center;
       margin-bottom:5px;
+      text-align: left;
+      margin-left: 15px;
     }
     hr{
       margin: 8px -29px 8px;
@@ -433,12 +434,14 @@ body.users.home{
     .button{
       font-size: 16px;
       color:white;
-      margin-top: 6px;
+      margin-top: 10px;
       font-weight: bold;
       padding: 0 11px;
+      margin-left:13px;
     }
     .appointment-form{
-      padding: 0 20px;
+      padding:0 0 15px 0;
+      height:auto !important;
     }
     .consutation_scheduled{
       height:180px !important;

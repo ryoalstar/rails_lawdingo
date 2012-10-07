@@ -66,7 +66,7 @@
             %td.labels Direct phone number:
             %td= f.text_field :phone, :placeholder => "Your direct phone number", title: "To receive clients by phone, enter your direct phone line here.", rel: "twipsy"
           %tr
-            %td Time Zone:
+            %td.labels Time zone:
             %td= f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
           %tr
             %td.labels Professional summary:
@@ -123,6 +123,7 @@
                           %li
                             %input{"data-name" => s.name, :id => "practice_area_#{s.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => s.id}/
                             = label_tag "practice_area_#{s.id}", s.name
+            .dialog-close
             %a.button.blue{:onclick => "setPracticeAreas();", :style => "width: 100px; text-align: center;"} Done      
         %tr
           %td
