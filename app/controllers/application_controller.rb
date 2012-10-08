@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     else
       Time.zone = current_user.try(:time_zone)  || "Eastern Time (US & Canada)" 
     end
+
   end
   
   unless Rails.application.config.consider_all_requests_local
