@@ -51,6 +51,8 @@
         - if lawyer.personal_tagline.present?
           %p= raw lawyer_tagline
 
+        = send_message_from_lawyer_mini_profile lawyer
+
         - unless lawyer.bar_memberships.blank?
           %ul.bar_memberships
             %li
