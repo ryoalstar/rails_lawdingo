@@ -21,12 +21,16 @@ $label-color: #404040;
 	}
 	select#card_month{
 	  margin-left:0;
-		width: 147px; 
+		width: 114px; 
+		height: 28px;
 		background: url(bid_month_select_bg.png) no-repeat;
+		color: #404040;
 	}
 	select#card_year{
-		width: 100px; 
+		width: 76px; 
+		height: 28px;
 		background: url(bid_year_select_bg.png) no-repeat;
+		color: #404040;
 	}
 	#submit_subscribe{
 		

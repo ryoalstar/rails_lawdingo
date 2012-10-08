@@ -216,6 +216,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    background-color: #f9fbfe;
     &.users_apply{
       margin:0 auto;
       float:none;
@@ -595,14 +596,56 @@ body.clients.new #page.apply-form-wrapper div.outer{
         color:#404040;
       }
       .card-info{
-        padding:10px;
-        background:#ececec;
+        //padding:10px;
+        background: #f8fcff; /* Old browsers */
+        background: -moz-linear-gradient(top, #f8fcff 1%, #e6f5ff 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f8fcff), color-stop(100%,#e6f5ff)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #f8fcff 1%,#e6f5ff 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #f8fcff 1%,#e6f5ff 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #f8fcff 1%,#e6f5ff 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #f8fcff 1%,#e6f5ff 100%); /* W3C */
+        border: 1px solid #babbbe;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
         form{
-          table{
-            width: 420px;
+          table.card_user_info{
+            width: 100%;
+            margin: 0px;
+            border-spacing: 0px;
+            padding-top: 20px;
+            
+            tr.row_notice
+            {
+              height: 35px;
+            }
+            
+            table.card_info_table{
+              margin: 0;
+              padding: 0;
+              
+              tr,td{
+                padding: 0;
+                margin: 0;
+              }
+              td.separator{
+                width: 20px;
+              }
+              
+              #card_number{
+               width: 116px;
+              }
+              #coupon {
+                width: 100px;
+              }
+              
+              
+            }
+            
+            tr.cards_row{
+              height: 47px;
+              background-color: #e2f1f8;
+            }
             tr td{
               vertical-align:middle;
               font-size:13px;
@@ -627,6 +670,9 @@ body.clients.new #page.apply-form-wrapper div.outer{
               input#lawyer_email{
                 width: 197px;
               }
+              &.card_notice{
+                color: #9b9b9b;
+              }
               &.card_notice, &.buttons{
                 text-align:left;
               }
@@ -640,7 +686,8 @@ body.clients.new #page.apply-form-wrapper div.outer{
                 border:0;
               }
               &.labels{
-                width:115px;
+                width: 86px;
+                color: #9b9b9b;
               }
               a.gray_button{
                 font-size:12px;
@@ -651,6 +698,10 @@ body.clients.new #page.apply-form-wrapper div.outer{
               input#coupon{
                 float: left;
                 
+              }
+              #submit_subscribe{
+                font-weight: normal;
+                padding: 0px 23px;
               }
             }
           }
