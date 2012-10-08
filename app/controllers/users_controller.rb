@@ -58,10 +58,7 @@ class UsersController < ApplicationController
       @lawyers = @search.results
     end
     
-    @current_time_zone = 'Eastern Time (US & Canada)'     
-    if !current_user.nil? && current_user.time_zone.present?       
-      @current_time_zone = current_user.time_zone     
-    end     
+    
     
     respond_to do |format|
       format.html{render}

@@ -62,7 +62,12 @@ class DailyHour < ActiveRecord::Base
     # if we are bookable for the last slot of the day,
     # we assume we are bookable at at least one point in
     # that day and return true
-    return self.bookable_at_time?(self.end_time_on_date(day))
+    if Time.zone.now.midnight == day
+      return self.bookable_at_time?(Time.zone.now)
+    else
+      return self.bookable_at_time?(self.end_time_on_date(day))
+    end
+    
   end
 
   # if we have -1 for a start or end time we are closed

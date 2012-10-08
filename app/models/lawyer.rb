@@ -284,6 +284,27 @@ class Lawyer < User
       end
     end
   end
+  
+  # the next x days on which the lawyer is open
+  def next_available_days_usertimezone(num_days)
+    return [] if self.daily_hours.blank?
+    [].tap do |ret|
+      # start on today
+
+      t = Time.zone.now.midnight
+      max_time = Time.zone.now.midnight + (num_days).weeks
+      # go until we have enough days to return
+      while ret.length < num_days && t <= max_time
+        # if we have this day
+        if self.bookable_on_day?(t)
+          ret << t.to_date
+        end
+        # 25 hours to account for daylight savings
+        t = t + 24.hours
+      end
+    end
+  end
+  
 
   def total_earning
     sum = 0.0

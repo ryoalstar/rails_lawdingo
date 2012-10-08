@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_admin, :logged_in?, :logged_in_admin?
 
   def set_timezone
-    Time.zone = current_user.try(:time_zone) || "Pacific Time (US & Canada)"
+    Time.zone = current_user.try(:time_zone) || "Eastern Time (US & Canada)"
   end
   
   unless Rails.application.config.consider_all_requests_local

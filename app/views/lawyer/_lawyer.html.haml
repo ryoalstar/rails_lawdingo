@@ -98,13 +98,13 @@
       - if lawyer.daily_hours.present?
         %p Available appointments
         .available-appointments
-          - lawyer.next_available_days(2).each_with_index do |d, i|
+          - lawyer.next_available_days_usertimezone(2).each_with_index do |d, i|
             %ul
               %li.title
                 %span{:class => "day-#{i}"}
-                  - if d === Time.now.in_time_zone(@current_time_zone).to_date
+                  - if d === Time.zone.now.to_date
                     Today
-                  - elsif d === Time.now.in_time_zone(@current_time_zone).tomorrow.to_date
+                  - elsif d === Time.zone.now.tomorrow.to_date
                     Tomorrow
                   - else
                     #{d.strftime("%a, %m/%d")}
