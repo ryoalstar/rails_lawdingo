@@ -351,7 +351,7 @@ class Lawyer < User
   def licenced_states
     states = []
     bar_memberships.each do |membership|
-      states << membership.state.abbreviation
+      states << membership.state.abbreviation if membership.state.present?
     end
     states
   end
