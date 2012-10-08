@@ -28,7 +28,7 @@ test:
   database: law_test
   pool: 5
   username: root
-  password:
+  password: n!kbh@!977
   socket: /var/run/mysqld/mysqld.sock
 
 staging:
