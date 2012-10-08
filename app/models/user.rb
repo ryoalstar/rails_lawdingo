@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :password, :password_confirmation
   #attr_accessible :email, :password, :password_confirmation
-  attr_accessible :user_type, :first_name, :last_name, :email, :password, :free_consultation_duration
+  attr_accessible :user_type, :first_name, :last_name, :email, :password, :free_consultation_duration, :phone
 
   has_many :offerings
   has_many :questions

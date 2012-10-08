@@ -139,7 +139,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
             float:right;
           }
           input#lawyer_rate{
-            width:280px !important;
+            width:250px !important;
           }
           .file_select_button.blue_button{
             border:1px solid #9c9c9c;
@@ -247,6 +247,10 @@ body.clients.new #page.apply-form-wrapper div.outer{
     .apply-form{
       margin-top:30px;
       padding: 0 50px;
+      
+      #client_phone{
+        background: url("phone_icon.png") no-repeat 98% center white;
+      }
     }
   }
   .process_notice{

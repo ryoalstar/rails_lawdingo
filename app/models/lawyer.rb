@@ -132,6 +132,10 @@ class Lawyer < User
     calculated_score += 1 if self.is_available_by_phone?
     calculated_score
   end
+  
+  def rate_for_minutes(minutes)
+    self.rate * minutes
+  end  
 
   def detail
     super.merge(
@@ -246,6 +250,15 @@ class Lawyer < User
       return dh.bookable_on_day?(date)
     end
   end
+  
+  # is this provider bookable on a given date
+  def bookable_on_day_ontimezone?(date, timezone)
+    self.in_specific_time_zone(timezone) do
+      dh = self.daily_hours_on_wday(date.wday)
+      return false if dh.blank?
+      return dh.bookable_on_day?(date)
+    end
+  end
 
   # find the daily hours for a particular wday
   def daily_hours_on_wday(wday)
@@ -257,6 +270,16 @@ class Lawyer < User
     begin
       old_zone = Time.zone
       Time.zone = self.time_zone
+      yield
+    ensure
+      Time.zone = old_zone
+    end
+  end
+  
+  def in_specific_time_zone(timezone, &block)
+    begin
+      old_zone = Time.zone
+      Time.zone = timezone
       yield
     ensure
       Time.zone = old_zone
@@ -298,7 +321,7 @@ class Lawyer < User
       # go until we have enough days to return
       while ret.length < num_days && t <= max_time
         # if we have this day
-        if self.bookable_on_day?(t)
+        if self.bookable_on_day_ontimezone?(t, Time.zone)
           ret << t.to_date
         end
         # 25 hours to account for daylight savings

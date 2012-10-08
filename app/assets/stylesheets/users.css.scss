@@ -407,7 +407,7 @@ body.users.create_phone_call{
   }
 }
 
-body.users.home{
+body.users.home, body.attorneys.show{
   .ui-dialog{
     width: 420px !important;
     h2{

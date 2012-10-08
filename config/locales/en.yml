@@ -25,4 +25,11 @@ en:
               blank: "Please enter your password."
             rate:
               blank: "Please enter your rate."
-            
+        question:
+          attributes:
+            body:
+              blank: "Please enter the question."
+            state_name:
+              blank: "Please select the state."   
+           
+              

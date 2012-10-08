@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_one :inquiry
   validates_presence_of :body, :state_name
+  validates_length_of :body, :minimum => 11, :message =>"The question should have at least 11 characters."
+
   after_create :create_inquiry
 
   set_inheritance_column :ruby_type

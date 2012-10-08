@@ -42,7 +42,26 @@
           %h3 Legal:
           %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
           %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
-
+        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
+          #state.left-bar-section
+            %h3
+              %label{:for => "state"} Relevant state:
+            .national-area-notice
+              %p
+              %a.show-states-selector{ href: "#" } Set state anyway
+            %select.states{:name => "state"}
+              - if @state_id
+                %option{:value => "All-States"} Any state
+              - else 
+                %option{"data-default" => "1", :value => "All-States", :selected => :selected} Any state
+              - @states.each do |state|
+                - if @state_id && state.id == @state_id
+                  %option{"data-default" => "1", :value => "#{state.name.gsub(/\s+/,'_')}-lawyers", :selected => :selected }= state.name 
+                - else
+                  %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}= state.name 
+            %a{ :href => '#', :id => "need_auto_detect" }
+            :javascript
+              $(document).ready(function(){ Home.detect_state() })
         - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
           #practice_areas.left-bar-section.legal_domain
             %h3 Type of law:
@@ -68,26 +87,6 @@
                         %p
                           = radio_button_tag "practice_area", subarea.name_for_url, false, data: { is_national: area.is_national?.to_s, parent: area.name_for_url  }
                           = label_tag "practice_area_#{subarea.name_for_url}", subarea.name          
-        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
-          #state.left-bar-section
-            %h3
-              %label{:for => "state"} Relevant state:
-            .national-area-notice
-              %p
-              %a.show-states-selector{ href: "#" } Set state anyway
-            %select.states{:name => "state"}
-              - if @state_id
-                %option{:value => "All-States"} Any state
-              - else 
-                %option{"data-default" => "1", :value => "All-States", :selected => :selected} Any state
-              - @states.each do |state|
-                - if @state_id && state.id == @state_id
-                  %option{"data-default" => "1", :value => "#{state.name.gsub(/\s+/,'_')}-lawyers", :selected => :selected }= state.name 
-                - else
-                  %option{:value => "#{state.name.gsub(/\s+/,'_')}-lawyers"}= state.name 
-            %a{ :href => '#', :id => "need_auto_detect" }
-            :javascript
-              $(document).ready(function(){ Home.detect_state() })
     
         -#specialities_filter.filters-section{:style => "display: none;"}
           %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
@@ -162,7 +161,7 @@
     #generail_question.question.question-container
       -#%h2.selected-lawyers-caption= selected_lawyers_caption
       %h2
-      = render partial: "questions/form", locals: { type: "lawyer" }
+      = render partial: "questions/form", locals: { type: "lawyer", placeholder: @subtext[:second] }
     / RESULTS
     #results.results
       = render(:partial => "search_results")

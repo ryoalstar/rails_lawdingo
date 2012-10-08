@@ -8,7 +8,7 @@
         alert("You don't have the minimum requirements to run this application."
             + "Please upgrade to the latest version of Flash.");
       } else {
-        session = TB.initSession(sessionId);  // Initialize session
+        session = TB.initSession($("#session_id").val());  // Initialize session
         session.addEventListener('sessionConnected', sessionConnectedHandler);
         session.addEventListener('sessionDisconnected', sessionDisconnectedHandler);
         session.addEventListener('connectionCreated', connectionCreatedHandler);
@@ -19,7 +19,7 @@
     });
 
     function connect() {
-      clearInterval(g_realtime_checker);
+      //clearInterval(g_realtime_checker);
       $('#subscribers').show();
       session.connect(apiKey, token);
       $('#connectLink').attr('disabled',true);

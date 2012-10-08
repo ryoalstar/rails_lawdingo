@@ -1,19 +1,24 @@
 <script src="https://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
 <div style="width:1000px; height:410px; position: relative; margin: 25px auto 50px auto;">
+
 <% if @lawyer %>
   <script>
   	var apiKey = <%=@api_key%>;
     var sessionId = '<%=@lawyer.tb_session_id %>';
-    var token = '<%=@lawyer.tb_token %>';
+    var token = '<%=@token %>';
   	var lawyer_id = "<%=@lawyer.id%>";
   	var is_chat_session_page = true;
   	var g_conversation_id = "<%=@conversation_id%>";
   </script>
+  
+  <%= hidden_field_tag 'session_id', @lawyer.tb_session_id%>
   <%
   	#current_user LAWYER CLIENT
 	if !current_user.is_lawyer?
 	  %>
-		<script type="text/javascript"> var is_lawyer = false;</script>
+		<script type="text/javascript"> 
+				var is_lawyer = false;
+		</script>
 		<%= render :partial => "sound_player" %>
 		<div id="opentok_ready" style="background: url('<%= @lawyer.photo.url(:thumb) %>') no-repeat center center;" class="client_session">
 			<%= image_tag image_path 'avatar_round_middle.png' %>

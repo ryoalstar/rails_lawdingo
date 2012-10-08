@@ -120,7 +120,7 @@
           .free_button_wrapper
             %a.free{:href=> "#"}
               %p= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute", class: "small"                      
+              = content_tag :p, "then #{number_to_currency (@attorney.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"                      
             .free_dropdown{:href=> "#"}
             .button_tooltip
               .button-content

@@ -185,7 +185,7 @@ module LawyersHelper
     end
   end
 
- 
+=begin
   def start_or_schedule_button_text(lawyer)
     if logged_in?
       link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
@@ -202,10 +202,10 @@ module LawyersHelper
       link_to "", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
     end
   end
-  
+=end
   def schedule_consultation_button(lawyer)
     if logged_in?
-      link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+      link_to "", "#", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
       link_to "", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
     end
@@ -213,7 +213,7 @@ module LawyersHelper
   
   def schedule_consultation_button_profile_text(lawyer)
     if logged_in?
-      link_to "Schedule Consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+      link_to "Schedule Consultation", "#", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
       link_to "Schedule Consultation", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
     end

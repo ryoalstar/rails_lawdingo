@@ -151,7 +151,7 @@ GEM
     oauth (0.4.6)
     openssl-extensions (1.1.0)
     openssl-nonblock (0.2.1)
-    opentok (0.0.72)
+    opentok (0.0.91)
     options (2.3.0)
       fattr
     paperclip (2.3.16)
@@ -318,7 +318,7 @@ DEPENDENCIES
   oauth
   openssl-extensions (= 1.1.0)
   openssl-nonblock (= 0.2.1)
-  opentok
+  opentok (~> 0.0.91)
   paperclip (~> 2.3.8)
   progress_bar
   quiet_assets

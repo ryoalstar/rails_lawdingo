@@ -29,8 +29,10 @@ class Offering
   constructor : (id)->
     @id = id
     @div = $("#offering_#{id}")
-    @slug = @div.data "lawyer-slug"
     @lawyer_id = @div.data "lawyer-id"
+    @form = new AppointmentForm(@lawyer_id)
+    @slug = @div.data "lawyer-slug"
+    
     this.add_event_listeners()
 
   add_event_listeners : ()->

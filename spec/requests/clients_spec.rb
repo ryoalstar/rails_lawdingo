@@ -18,6 +18,7 @@ describe "Restful clients", :integration do
         fill_in("client_last_name", :with => client.last_name)
         fill_in("client_email", :with => client.email)
         fill_in("client_password", :with => client.password)
+        fill_in("client_phone", :with => client.phone)
         click_button("Join Lawdingo")
         
         # base case redirects to lawyers path

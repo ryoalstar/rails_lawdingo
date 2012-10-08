@@ -18,4 +18,3 @@ describe "general question for lawyers", :integration do
   end
 end
 
-# was dublicate content with message_spec

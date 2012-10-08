@@ -22,9 +22,15 @@
         %tr
           %td.labels Email:
           %td.email_field= f.text_field :email, :validate => true, :placeholder=>"Email Address", :class=>"email", title: "Your email address.", rel: "twipsy"
+        - if !user.is_lawyer?
+          %tr 
+            %td.labels Phone number (optional):
+            %td= f.text_field :phone, :placeholder => "Your direct phone number", :validate=>false, rel: "twipsy"  
         %tr
           %td.labels Password:
           %td.pass_field= f.password_field :password, :placeholder=>"Password", :class=>"passw", title: "A password.", rel: "twipsy"
+          
+          
         
         - if user.is_lawyer?
           
@@ -60,8 +66,8 @@
             %td.labels Hourly rate:
             %td.rate_field
               - user.rate = nil if user.new_record?
-              = f.text_field :rate, :class=>"paypal", :placeholder => "Hourly rate", title: "Your hourly rate is quoted to clients as a per-minute rate.", rel: "twipsy"
-              %span.rate_hint Will be quoted by the min.
+              = f.text_field :rate, :class=>"paypal", :placeholder => "Hourly rate", title: "Your hourly rate is quoted to clients per 0.1 hour.", rel: "twipsy"
+              %span.rate_hint Will be quoted per 0.1 hour.
           %tr
             %td.labels Direct phone number:
             %td= f.text_field :phone, :placeholder => "Your direct phone number", title: "To receive clients by phone, enter your direct phone line here.", rel: "twipsy"

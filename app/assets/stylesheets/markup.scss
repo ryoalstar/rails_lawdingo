@@ -1533,9 +1533,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
   						display:block;
   						width:200px;
   						margin-top:25px;
-  						padding-right: 0;
+  						padding-left: 20px;
+              padding-right: 20px;
   						margin-right: 0;
-  						padding:0;
   						-moz-border-radius:3px;
   						-webkit-border-radius:3px;
   						border-radius:3px;
@@ -1548,12 +1548,12 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
   						  display:block;
   						  color:#ffffff;
   						  width:100%;
-  						  padding:0 0 0 50px;
+  						  padding:0 0 0 43px;
   						  -moz-box-shadow: none;
           	    -webkit-box-shadow: none;
           	    box-shadow: none;
   						  height:100%;
-  						  background:image-url('get_started_icon.png') no-repeat 16px 11px;
+  						  background:image-url('get_started_icon.png') no-repeat 11px 11px;
   						}
   						a:hover{
   						  -moz-box-shadow: none;
@@ -1583,6 +1583,79 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
   						-moz-box-shadow: inset 3px 3px 6px #eb7538;
         	    -webkit-box-shadow: inset 3px 3px 6px #eb7538;
         	    box-shadow: inset 3px 3px 6px #eb7538;
+  					}
+  					
+  					div.singup_link
+  					{
+  					  span.lawyers_signup{
+                border:1px solid #353c45;
+                background: #f3a648; /* Old browsers */
+                background: -moz-linear-gradient(top,  #f3a648 0%, #ec6e2e 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3a648), color-stop(100%,#ec6e2e)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #f3a648 0%,#ec6e2e 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #f3a648 0%,#ec6e2e 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3a648', endColorstr='#ec6e2e',GradientType=0 ); /* IE6-9 */
+                height:30px;
+                display:block;
+                width:185px;
+                margin-left: 0px;
+                margin-top: 32px;
+                padding-right: 0;
+                margin-right: 0;
+                padding:0;
+                -moz-border-radius:3px;
+                -webkit-border-radius:3px;
+                border-radius:3px;
+                line-height:28px;
+                -moz-text-shadow: 0px -1px 1px #ed7937;
+                -webkit-text-shadow: 0px -1px 1px #ed7937;
+                text-shadow: 0px -1px 1px #ed7937;
+                a{
+                  display:block;
+                  color:#ffffff;
+                  width:100%;
+                  padding:0;
+                  padding-left: 30px;
+                  -moz-box-shadow: none;
+                  -webkit-box-shadow: none;
+                  box-shadow: none;
+                  height:100%;
+                  background:image-url('lawyers_signup_icon.png') no-repeat 3px 5px;
+                  text-decoration: none;
+                  font-size: 14px;
+                  margin: 0px 5px;
+                }
+                a:hover{
+                  -moz-box-shadow: none;
+                  -webkit-box-shadow: none;
+                  box-shadow: none;
+                }
+              }
+              span.lawyers_signup:hover{
+                background: #f5b04e; /* Old browsers */
+                background: -moz-linear-gradient(top,  #f5b04e 0%, #ee7832 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5b04e), color-stop(100%,#ee7832)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #f5b04e 0%,#ee7832 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5b04e', endColorstr='#ee7832',GradientType=0 ); /* IE6-9 */
+              }
+              span.lawyers_signup:active{
+                background: #f5b04e; /* Old browsers */
+                background: -moz-linear-gradient(top,  #f5b04e 0%, #ee7832 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5b04e), color-stop(100%,#ee7832)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #f5b04e 0%,#ee7832 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #f5b04e 0%,#ee7832 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5b04e', endColorstr='#ee7832',GradientType=0 ); /* IE6-9 */
+                -moz-box-shadow: inset 3px 3px 6px #eb7538;
+                -webkit-box-shadow: inset 3px 3px 6px #eb7538;
+                box-shadow: inset 3px 3px 6px #eb7538;
+              }
   					}
 					}
 					.slider{
@@ -2105,7 +2178,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				}
 			}
 			.left-bar-section{
-				padding:17px 0 21px 25px;
+				padding:17px 0 35px 25px;
 				border-top:0;
 				border-bottom:1px dotted #c8cacc;
 				float: left;

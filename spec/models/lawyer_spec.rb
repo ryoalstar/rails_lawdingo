@@ -369,7 +369,7 @@ describe Lawyer do
       end
 
     end
-
+    
     context "#bookable_on_day?" do
 
       it "should provide a 'bookable_on_day' method to determine if a given
@@ -399,6 +399,64 @@ describe Lawyer do
       end
 
     end
+    
+    context "#bookable_on_day_ontimezone?" do
+
+      it "should provide a 'bookable_on_day_ontimezone' method to determine if a given
+        day can currently be booked on the timezone passed as parameter" do
+        t = Time.zone.now
+        Time.zone.stubs(:now => (t.midnight + 22.hours))
+
+        subject.daily_hours << DailyHour.new(
+          :wday => t.wday,
+          :start_time => 900,
+          :end_time => 1800
+        )
+        subject.bookable_on_day_ontimezone?(t, Time.zone).should be false
+        # next week should be good though
+        subject.bookable_on_day_ontimezone?(t + 1.week, Time.zone).should be true
+      end
+      
+      it "should be bookable for date Today if the user is on the same timezone of the lawyer and 
+      there is more than one hour before the end of his daily hours" do
+        t = Time.zone.now
+        Time.zone.stubs(:now => (t.midnight + 16.hours))
+
+        subject.daily_hours << DailyHour.new(
+          :wday => t.wday,
+          :start_time => 900,
+          :end_time => 1800
+        )
+        subject.bookable_on_day_ontimezone?(t, Time.zone).should be true
+      end
+      
+      it "should not be bookable for date Today if the user is on the same timezone of the lawyer and 
+      there is less than one hour before the end of his daily hours" do
+        t = Time.zone.now
+        Time.zone.stubs(:now => (t.midnight + 17.hours + 30.minutes))
+
+        subject.daily_hours << DailyHour.new(
+          :wday => t.wday,
+          :start_time => 900,
+          :end_time => 1800
+        )
+        subject.bookable_on_day_ontimezone?(t, Time.zone).should be false
+      end
+      
+
+      it "should not be bookable_on_day_ontimezone if the found daily_hour is closed" do
+        t = Time.zone.now.midnight + 1.day
+        subject.daily_hours << DailyHour.new.tap do |dh|
+          dh.stubs(
+            :wday => t.wday,
+            :closed? => true
+          )
+        end
+        subject.bookable_on_day_ontimezone?(t, Time.zone).should be false
+      end
+
+    end
+    
   end
 
   context "#in_time_zone" do

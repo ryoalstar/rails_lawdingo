@@ -156,9 +156,9 @@
             %ul#leveled_list_bar_ids.leveled-list
               - j = 0
               = f.fields_for :bar_memberships do |bar_membership_fields|
-                - if bar_membership_fields.object.new_record? || bar_membership_fields.object.state.nil?
-                  %li{:id => i + j}
-                    = check_box_tag("states_#{i + j}", @states[i].id, false, :id => "state_#{i + j}", :onchange =>"javascript:select_unselect_state('#{i + j}');")
+                - if bar_membership_fields.object.new_record? 
+                  %li{:id => i}
+                    = check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")
                     = @states[i].name
                     = bar_membership_fields.hidden_field :state_id
                     .sub{:id => @states[i].name}
@@ -166,15 +166,15 @@
                       = bar_membership_fields.text_field :bar_id
                   - i += 1
                 - else
-                  %li{:id => i + j}
-                    = check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")
-                    = @filled_states[j].name
-                    = bar_membership_fields.hidden_field :state_id
-                    .sub{:id => @filled_states[j].name}
-                      = "#{@filled_states[j].abbreviation} Bar ID:"
-                      = bar_membership_fields.text_field :bar_id
-                      = bar_membership_fields.hidden_field :id, :value => nil
-                  - j += 1
+                  - if !bar_membership_fields.object.state.nil?
+                    %li{:id => i + j}
+                      = check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")
+                      = @filled_states[j].name
+                      = #bar_membership_fields.hidden_field :state_id
+                      .sub{:id => @filled_states[j].name}
+                        = "#{@filled_states[j].abbreviation} Bar ID:"
+                        = bar_membership_fields.text_field :bar_id
+                    - j += 1
           %a.button.blue{:onclick => "setBarIds();", :style => 'float: left;'} Done
         #practices.dialog-window
           %h3 Edit Practice Area(s)

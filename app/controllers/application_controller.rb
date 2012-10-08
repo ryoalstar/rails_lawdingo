@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_admin, :logged_in?, :logged_in_admin?
+
+  def set_timezone
+    if current_user.nil?
+      Time.zone = "Eastern Time (US & Canada)"
+    else
+      Time.zone = current_user.try(:time_zone)  || "Eastern Time (US & Canada)" 
+    end
+  end
   
   unless Rails.application.config.consider_all_requests_local
      rescue_from ActionController::RoutingError, with: :render_404
