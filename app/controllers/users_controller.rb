@@ -115,6 +115,8 @@ class UsersController < ApplicationController
       elsif User::SESSION_TAB == @tab && @user.is_lawyer?
         @conversations = current_user.conversations
       end
+      
+      @schools = School.order(:name)
     rescue => e
       Rails.logger.error(e)
       redirect_to root_path, :notice =>"No user found!" and return
