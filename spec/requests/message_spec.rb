@@ -22,6 +22,7 @@ describe "Message", :integration do
       #page.current_path.should eql(new_client_path)
     #end
 
+
     # This test case should be revisited. schedule_session_button is not present anymore when the user is logged out
     it 'should send message from lawyers show page' do
       #client = FactoryGirl.build(:client)
