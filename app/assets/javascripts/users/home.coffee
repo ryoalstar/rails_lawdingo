@@ -194,10 +194,15 @@ class Home
 
   add_appointment_forms : ()->
     @lawyers = []
+    @offerings = []
     $(".lawyer").each (i, el)=>
       id = $(el).attr("data-lawyer-id")
       if parseInt(id) > 0
         @lawyers.push(new Lawyer(id))
+    $(".offering").each (i, el)=>
+      id = $(el).attr("data-offering-id")
+      if parseInt(id) > 0
+        @offerings.push(new Offering(id))
 
   add_pagination : ()->
     $("div.load-more a").click (e)=>

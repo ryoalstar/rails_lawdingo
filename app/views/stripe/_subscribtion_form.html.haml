@@ -11,45 +11,49 @@
         %h4.error Please fix the following errors:
         %ul.errors
           - errors.full_messages.each do |error|
-            %li= error    
-  %table
+            %li= error   
+  = f.hidden_field :email
+  %table.card_user_info
     %tbody
-      %tr
-        %td.labels Email: 
-        %td= f.text_field :email, :class => :email, :readonly => :readonly
-      %tr
-        %td Accepted cards:
+      %tr.cards_row
+        %td Credit Card
         %td.cards
           = image_tag('visa_icon.png')
           = image_tag('mc_icon.png')
           = image_tag('ae_icon.png')
           = image_tag('discover_icon.png')
-      - if @lawyer.stripe_card_token.present?
-        %tr
-          %td
-          %td= label_tag :card, 'Credit card has been provided.'
-      - else
-        %tr
-          %td Credit card number:
-          %td= text_field_tag :card_number, nil, name: nil, :required => :required, :validate => true
-        %tr
-          %td Expires on:
-          %td                                
-            = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", :required => :required, :validate => true}
-            = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", :required => :required, :validate => true}
-        %tr
-          %td CVV Code:
-          %td
-            = text_field_tag :card_code, nil, name: nil, :required => :required, :validate => true
-            %a.cvv-info{:href => '#'}
-        -#%tr
-          %td 
-            Promo code: 
-            %br/
-            (optional)
-          %td
-            = text_field_tag :coupon, nil, name: nil
-            %a.gray_button{:href => '#'} Apply
+      
+        - if @lawyer.stripe_card_token.present?
+          %tr
+            %td
+            %td= label_tag :card, 'Credit card has been provided.'
+        - else
+          %tr
+            %td{:colspan=>2}
+              %table.card_info_table
+                %tbody
+                  %tr
+                    %td.labels Credit Card #:
+                    %td= text_field_tag :card_number, nil, name: nil, :required => :required, :validate => true
+                    %td.separator
+                    %td.labels Expires on:
+                    %td
+                      = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", :required => :required, :validate => true}
+                      = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", :required => :required, :validate => true}
+                  %tr
+                    %td.labels CVV Code:
+                    %td
+                      = text_field_tag :card_code, nil, name: nil, :required => :required, :validate => true
+                      %a.cvv-info{:href => '#'}
+                    %td.separator
+                    %td.labels
+                      Promo code:
+                      %br/
+                      (optional)
+                    %td
+                      = text_field_tag :coupon, nil, name: nil
+                      %a.gray_button{:href => '#'} Apply
+
           
       %tr
         %td
@@ -57,7 +61,7 @@
           = f.submit 'Submit', :class=>"button", id: "submit_subscribe"
           %span#siteseal
             %script{:type=>"text/javascript", :src => 'https://seal.godaddy.com/getSeal?sealID=DY6qS9Z5Yb3G0eASdQ2SOHDc5j8MndNNTbTEvYzffdVwSYY0hv2'}
-      %tr
+      %tr.row_notice
         %td
 
         %td.card_notice#stripe_error

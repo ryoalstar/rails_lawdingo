@@ -1,7 +1,5 @@
 require 'rack/ssl'
 Lawdingo::Application.configure do
-
-
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -61,6 +59,6 @@ Lawdingo::Application.configure do
   config.middleware.use ExceptionNotifier,
     email_prefix: "[Lawdingo STAGING]",
     sender_address: "notifier@lawdingo.com",
-    exception_recipients: %w{nikhil.nirmel@gmail.com},
+    exception_recipients: %w{nikhil.nirmel@gmail.com adam.miribyan@gmail.com},
     ignore_exceptions: ExceptionNotifier.default_ignore_exceptions
 end

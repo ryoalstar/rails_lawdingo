@@ -34,8 +34,7 @@ class Lawyer < User
   #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
   
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
-  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online
-
+  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :personal_tagline,:bar_memberships_attributes, :phone, :time_zone
   # scopes
   default_scope where(:user_type => User::LAWYER_TYPE)
 
@@ -286,6 +285,27 @@ class Lawyer < User
       end
     end
   end
+  
+  # the next x days on which the lawyer is open
+  def next_available_days_usertimezone(num_days)
+    return [] if self.daily_hours.blank?
+    [].tap do |ret|
+      # start on today
+
+      t = Time.zone.now.midnight
+      max_time = Time.zone.now.midnight + (num_days).weeks
+      # go until we have enough days to return
+      while ret.length < num_days && t <= max_time
+        # if we have this day
+        if self.bookable_on_day?(t)
+          ret << t.to_date
+        end
+        # 25 hours to account for daylight savings
+        t = t + 24.hours
+      end
+    end
+  end
+  
 
   def total_earning
     sum = 0.0
@@ -332,7 +352,7 @@ class Lawyer < User
   def licenced_states
     states = []
     bar_memberships.each do |membership|
-      states << membership.state.abbreviation
+      states << membership.state.abbreviation if membership.state.present?
     end
     states
   end

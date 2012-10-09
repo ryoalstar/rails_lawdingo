@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+# Modified by AF. A logged out user should be redirected to sign up page when pressing the button to send messages.
+# This requirement was described by Nikhil. 
+
 describe "Message", :integration do
 
   SLEEP = 5
@@ -8,7 +11,6 @@ describe "Message", :integration do
   subject { FactoryGirl.build(:message) }
 
   describe "sending as guest", :js => true do
-
     it 'should send message from landing page' do 
       visit root_path
       page.current_path.should eql(root_path)

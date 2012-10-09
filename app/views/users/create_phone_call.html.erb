@@ -1,4 +1,7 @@
 <div class="call-container">
+  <div data-call-sid="<%= @call.sid %>"></div>
+  <div data-free-consultation-duration="<%= @lawyer.free_consultation_duration %>"></div>
+
   <div id="dialing_div" class="details">
     <%= image_tag(@lawyer.photo.url(:thumb), class: "userpic") %>
     <div class="info">
@@ -62,7 +65,6 @@
             <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
             </noscript>
           </div>
-          
       </form>
     </div>
 </div>
@@ -74,7 +76,7 @@
 <%= javascript_tag do %>
   var callStatusTimer = $.timer(function() {
       $.ajax({
-        url: "/CheckCallStatus",
+        url: "/twilio/check-call-status",
         type:'post',
         data:{call_id: '<%= @call.sid %>'},
         success: function(response){
@@ -88,7 +90,7 @@
     {
       freeCallTimer.pause();
       $.ajax({
-        url: "/UpdateCallStatus",
+        url: "/twilio/update-call-status",
         type:'post',
         data:{call_id: '<%= @call.sid %>', sb:'1'},
         success: function(response){
@@ -137,11 +139,10 @@
   function hangupCall(call_sid)
   {
     $.ajax({
-        url: "/twilio/endcall",
-        type:'get',
-        data:{call_id: '<%= @call.sid %>'},
-        success: function(response){
-        }
+        url: "/twilio/hangup",
+        type: "get",
+        data: {call_id: "<%= @call.sid %>"},
+        success: function(response) {}
     });
   }
 <% end %>
