@@ -397,7 +397,7 @@ class Home
       ($ "label[for=state]").show()
       $notice_container.hide()
 
-    $field.parents(".practice-areas")
+    $field.parents(".practice-areas").show()
 
     $field.parent().next().show('slow') unless @service_type == "Legal-Services"
     $field
