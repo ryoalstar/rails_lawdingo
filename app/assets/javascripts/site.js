@@ -94,15 +94,10 @@ function closecall()
 /*----------------------------------------*/
 
 function select_unselect_state(id) {
- if ($('#state_' + id).is(":checked")) {
-   $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val($('#state_' + id).val());
- }
- // else {
-// alert(id);
- //   $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val('');
- //   $('#lawyer_bar_memberships_attributes_' + id + '_bar_id').val('');
- // }
-
+  if ($('#state_' + id).is(":checked"))
+    $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val($('#state_' + id).val());
+  else
+    $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val('');
 }
 
 

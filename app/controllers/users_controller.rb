@@ -100,19 +100,11 @@ class UsersController < ApplicationController
           redirect_to :protocol => 'https', :t => 'm'
         end
       elsif User::ACCOUNT_TAB == @tab && @user.is_lawyer?
-        @filled_states = @user.states
-        unless @filled_states.blank?
-          filled_state_ids = []
-          @filled_states.each{|state| filled_state_ids << state.id}
-          @states = State.where('id not in (?)', filled_state_ids).all
-        else
-          @states = State.all
-        end
+        fill_states
         @states.count.times {@user.bar_memberships.build}
       elsif User::SESSION_TAB == @tab && @user.is_lawyer?
         @conversations = current_user.conversations
       end
-      
       @schools = School.order(:name)
     rescue => e
       Rails.logger.error(e)
@@ -233,6 +225,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.is_lawyer?
       @user  = Lawyer.find(@user.id)
+      @user.bar_memberships.delete_all
       fill_states
       status = @user.update_attributes(params[:lawyer])
       @user.update_attribute :school_id, params[:lawyer][:school_id]
