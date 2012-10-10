@@ -44,13 +44,6 @@
                 %h4= link_to "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
                 .online_icons
                   = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
-                  .video_chat.online.tooltip Start video consultation
-                  .voice_chat.online.tooltip Start phone consultation
-                  .note_chat.tooltip Ask a question
-                  .text_chat.offline.tooltip No appointments available
-                  .text_chat.online.tooltip Schedule consultation
-                  .video_chat.offline.tooltip Not available by video now
-                  .voice_chat.offline.tooltip Not available by phone now
               %p.desc= raw(description)
               #carousel-buttons            
                 -#.free
