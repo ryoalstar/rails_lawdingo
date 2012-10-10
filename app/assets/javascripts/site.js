@@ -509,7 +509,7 @@ $(document).ready(function() {
       if($('div.load-more a').length){
         var eTop = $('div.load-more a').offset().top;
         var offset = eTop - $(window).scrollTop();
-        if(offset < 700){
+        if(offset < 1000){
           $("div.load-more a").click();
         }
       }
