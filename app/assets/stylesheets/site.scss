@@ -47,6 +47,9 @@ h1 a, h2 a, h3 a, h4 a, h5 a{
 }
 .dummy-input { color: #b8b8b8 !important; }
 
+input.invalid { border-color:red!important; }
+input.valid { border-color:green!important; }
+
 .help-text {
     display: inline-block;
     vertical-align: middle;

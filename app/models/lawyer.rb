@@ -3,6 +3,8 @@ class Lawyer < User
   # validates :payment_email, :bar_ids, :practice_areas, :presence =>true
   # validates :payment_email, :presence => true
   PAYMENT_STATUSES = ['free', 'paid', 'unpaid']
+  STRIPE_PLAN_ID = '5' # 'really_test'
+  STRIPE_COUPON_ID = 'dingobaby' # 'xsgdfgvdsf'
 
   has_many :bar_memberships, :inverse_of => :lawyer
   has_many :conversations
@@ -14,7 +16,7 @@ class Lawyer < User
   has_many :reviews
   has_many :states, :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
-  has_many :daily_hours , :autosave => true
+  has_many :daily_hours, :autosave => true 
 
   def reindex!
      Sunspot.index!(self)
@@ -33,7 +35,7 @@ class Lawyer < User
   #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
   
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
-  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :personal_tagline,:bar_memberships_attributes, :phone, :time_zone
+  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :personal_tagline, :bar_memberships_attributes, :phone, :time_zone
   # scopes
   default_scope where(:user_type => User::LAWYER_TYPE)
 
@@ -126,8 +128,8 @@ class Lawyer < User
   def calculated_order
     calculated_score = 0
     calculated_score += 100 if self.is_online
-    calculated_score += 10 if self.is_available_by_phone?
-    calculated_score += 1 if self.daily_hours.present?
+    calculated_score += 10 if self.daily_hours.present?
+    calculated_score += 1 if self.is_available_by_phone?
     calculated_score
   end
 
@@ -402,6 +404,7 @@ class Lawyer < User
   end  
 
   def create_stripe_card attributes
+    create_stripe_customer! unless self.stripe_customer_token
     stripe_card_token = Stripe::Token.create(
       :card => {
       :number => attributes[:number],
@@ -409,8 +412,11 @@ class Lawyer < User
       :exp_year => attributes[:exp_year],
       :cvc => attributes[:cvc]
     })
-    self.stripe_card_token = stripe_card_token.id if stripe_card_token.is_a? Stripe::StripeObject
-    save!
+    if stripe_card_token.is_a? Stripe::StripeObject
+      self.stripe_card_token = stripe_card_token.id 
+      add_card_to_customer
+      save!
+    end
   end
 
   def create_stripe_test_card!
@@ -418,13 +424,24 @@ class Lawyer < User
   end
 
   def create_stripe_customer!
-    return nil unless self.stripe_card_token
-    customer = Stripe::Customer.create(
-      :description => self.email,
-      :card => self.stripe_card_token
-    )
-    self.stripe_customer_token = customer.id if customer.is_a? Stripe::Customer
+    self.create_stripe_customer
     save!
+  end 
+
+  def create_stripe_customer
+    customer = Stripe::Customer.create(
+      :description => self.email
+    )
+    if customer.is_a? Stripe::Customer
+      self.stripe_customer_token = customer.id
+    end
+  end  
+
+  def add_card_to_customer
+    return false unless self.stripe_card_token
+    customer = self.get_stripe_customer
+    customer.card = self.stripe_card_token
+    customer.save
   end  
 
   def get_stripe_customer
@@ -433,9 +450,11 @@ class Lawyer < User
   end   
 
   def delete_stripe_customer!
+    return false unless self.get_stripe_customer
     customer = self.get_stripe_customer
     customer.delete
     self.stripe_customer_token = nil
+    self.stripe_card_token = nil
     save!
   end
 
@@ -444,8 +463,14 @@ class Lawyer < User
     Stripe::Token.retrieve(self.stripe_card_token)
   end
 
+  def delete_stripe_card!
+    return false unless self.stripe_card_token
+    self.stripe_card_token = nil
+    save!
+  end
+
   def create_stripe_subscribtion stripe_customer, stripe_plan, stripe_card
-    customer = Stripe::Subscription.create( description: self.email, plan: '3', card: self.stripe_card_token )
+    customer = Stripe::Subscription.create( description: self.email, plan: STRIPE_PLAN_ID, card: self.stripe_card_token )
       self.stripe_customer_token = customer.id
       self.stripe_card_token = stripe_card_token
       save!
@@ -467,13 +492,61 @@ class Lawyer < User
     )
   end 
 
-  def self.get_stripe_plan plan_id
+  def self.get_stripe_plan plan_id = STRIPE_PLAN_ID
     Stripe::Plan.retrieve(plan_id)
   end
 
   def self.delete_stripe_plan plan_id
     plan = Stripe::Plan.retrieve(plan_id)
     plan.delete if plan.is_a? Stripe::Plan
+  end
+
+  def subscribe! plan_id = STRIPE_PLAN_ID
+    customer = self.get_stripe_customer
+    return false unless customer
+    customer.update_subscription(:plan => plan_id)
+  end  
+
+  def unsubscribe! plan_id = STRIPE_PLAN_ID
+    self.cancel_stripe_subscribtion
+  end 
+
+  def subscribed? plan_id = STRIPE_PLAN_ID
+    customer = self.get_stripe_customer
+    return false unless customer
+    return false unless defined? customer.subscription
+    customer.subscription.plan.id == plan_id
+  end  
+
+  def stripe_get_coupon coupon_id = STRIPE_COUPON_ID
+    Stripe::Coupon.retrieve(coupon_id)
+  end
+
+  def coupon_valid? coupon_id, allow_nil = true
+    return true if allow_nil && coupon_id.empty?
+    return false if !allow_nil && coupon_id.empty?
+    coupon = self.stripe_get_coupon(coupon_id)
+    errors.add(:coupon, "That code is invalid.") and return false unless coupon
+    true
+  rescue Stripe::InvalidRequestError
+    errors.add(:coupon, "That code is invalid.") and return false
+  end  
+
+  def apply_coupon plan_id = STRIPE_PLAN_ID, coupon_id
+    return true if coupon_id.empty? # allow blank coupon
+    return false unless coupon_valid?(coupon_id)
+    customer = self.get_stripe_customer
+    coupon = self.stripe_get_coupon(coupon_id)
+    return false unless customer && coupon
+    customer.update_subscription(:plan => plan_id, :coupon => coupon.id)
+  end
+
+  def coupon_applied? coupon_id = STRIPE_COUPON_ID
+    customer = self.get_stripe_customer 
+    coupon = self.stripe_get_coupon(coupon_id)
+    return false unless customer && coupon
+    return false unless defined? customer.discount.coupon
+    customer.discount.coupon.id == coupon.id
   end
 
   protected

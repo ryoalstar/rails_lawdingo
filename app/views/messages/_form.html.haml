@@ -1,0 +1,8 @@
+- @message = message if defined? message
+- placeholder = @message.lawyer.present? ? "Ask #{@message.lawyer.first_name} a question ..." : ''
+- if @message
+  = form_for @message do |f|
+    = f.hidden_field :client_id
+    = f.hidden_field :lawyer_id
+    = f.text_field :body, :placeholder => placeholder
+    = f.submit 'Ask', :id => :message_submit_button

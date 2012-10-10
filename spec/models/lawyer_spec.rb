@@ -24,6 +24,59 @@ describe Lawyer do
   specify { should be_valid }
   specify { should accept_nested_attributes_for(:bar_memberships) }
 
+  context "stripe", :integration do
+
+    before :all do
+      @steven = FactoryGirl.create( :lawyer, :payment_status => 'paid')
+    end
+
+    after :all do
+      @steven.delete_stripe_customer!
+    end
+
+    it "should create stripe_card_token" do
+      @steven.create_stripe_test_card!
+      @steven.get_stripe_card.class.should eql(Stripe::Token)
+    end
+
+    it "should create customer" do
+      @steven.create_stripe_customer!
+      @steven.get_stripe_customer.class.should eql(Stripe::Customer)
+    end
+
+    it "should add stripe_card to customer" do
+      customer = @steven.get_stripe_customer
+      customer.class.should eql(Stripe::Customer)
+      @steven.get_stripe_card.id.should eql(@steven.stripe_card_token)
+    end
+
+    it "should delete customer" do
+      @steven.delete_stripe_customer!
+      @steven.get_stripe_customer.should be_nil
+    end
+
+    it "should subscribe lawyer on plan" do
+      @steven.create_stripe_customer!
+      @steven.subscribe!
+      @steven.subscribed?.should be_true
+    end
+
+    it "should cancel subscribe lawyer" do
+      @steven.unsubscribe!
+      @steven.subscribed?.should be_false
+    end
+
+    it "should apply coupon" do
+      pending
+      @steven.coupon_applied?(Lawyer::STRIPE_COUPON_ID).should be_false
+      @steven.apply_coupon Lawyer::STRIPE_PLAN_ID, Lawyer::STRIPE_COUPON_ID
+      @steven.coupon_applied?(Lawyer::STRIPE_COUPON_ID).should be_true
+    end
+
+    it "should update lawyer payment status"
+
+  end
+
   describe "search", :integration do
 
     before(:each) do
@@ -441,36 +494,6 @@ describe Lawyer do
       )
       @steven.reload.is_available_by_phone?.should be_false
     end
-  end
-
-  context "stripe", :integration do
-
-    before :all do
-      @steven = FactoryGirl.create( :lawyer, :payment_status => 'paid')
-    end
-
-    it "should create stripe_card_token" do 
-      @steven.create_stripe_test_card!
-      @steven.get_stripe_card.class.should eql(Stripe::Token)
-    end
-
-    it "should create customer" do
-      @steven.create_stripe_customer!
-      @steven.get_stripe_customer.class.should eql(Stripe::Customer)
-    end
-
-    it "should delete customer" do
-      @steven.delete_stripe_customer!
-      @steven.get_stripe_customer.should be_nil
-    end
-
-    it "should subscribe lawyer on plan 3"
-    it "should cancel subscribe lawyer"
-    it "should create unpaid invoce"
-    it "should delete user invoces"
-    it "should update lawyer payment status"
-    it "should delete stripe customer"
-
   end
 
 end

@@ -19,3 +19,39 @@
     font-size: 0.8em; 
   }
 }
+
+div.description{
+  form.new_message{
+    #message_body{
+      font-size:14px;
+      width: 275px;
+      padding: 10px;
+      border:none;
+      background-color: #f6f6f6;
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-bottom-left-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-bottomleft: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-right:solid 1px #f6f6f6;
+      float:left;
+      margin: 15px 0;
+    }
+    #message_submit_button{
+      background-color: #dbe2e8;
+      color: #5b6268;
+      border:none;
+      border-left:solid 1px #dbe2e8;
+      padding: 10px;
+      font-size:14px;
+      -webkit-border-top-right-radius: 5px;
+      -webkit-border-bottom-right-radius: 5px;
+      -moz-border-radius-topright: 5px;
+      -moz-border-radius-bottomright: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      margin: 15px 0;
+    }
+  }
+}

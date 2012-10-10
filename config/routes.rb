@@ -35,8 +35,11 @@ Lawdingo::Application.routes.draw do
   match 'attorneys/:id/call-payment' => 'attorneys#call_payment', 
     as: :call_payment
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
-  match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
-  
+  resource :stripe do
+    post :coupon_validate 
+  end
+  match '/paid' => "stripes#new", :as => :subscribe_lawyer
+
   resources :users do
     # daily_hours for this user (lawyer)
     resources :daily_hours, :only => [:index] do
@@ -138,7 +141,7 @@ Lawdingo::Application.routes.draw do
   # Temporary route for the next home page
   match '/search/populate_specialities_next' => 'search#populate_specialities_next'
   match '/search/filter_results' => 'search#filter_results'
-  match '/search/carsousel_images' =>'search#get_homepage_lawyers', :as=>:carousel_images
+  match '/search/carousel_images' =>'search#get_homepage_lawyers', :as=>:carousel_images
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
   match '/CheckCallStatus' => 'users#check_call_status'

@@ -12,7 +12,11 @@
         %p.second-notice.notices Activate Subcription
         %p.third-notice.notices Complete Profile
       .card-activation
-        %h3 Activate your Lawdingo profile: $92/month. No commitment, and money back guarantee if you’re not satisfied within the first month.
+        %h3 
+          Activate your Lawdingo profile:   
+          %span#subscription_price $#{@stripe_plan.amount*0.01}/month.
+          No commitment, and money back guarantee if you’re not satisfied within the first month.
+
         .card-info
           = render 'subscribtion_form'
     .right-wrapper

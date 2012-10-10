@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120923215031) do
+ActiveRecord::Schema.define(:version => 20121005142857) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -146,15 +146,6 @@ ActiveRecord::Schema.define(:version => 20120923215031) do
     t.boolean  "is_closed",   :default => false
   end
 
-  create_table "lawyer_daily_hours", :force => true do |t|
-    t.integer  "lawyer_id"
-    t.integer  "wday"
-    t.integer  "start_time"
-    t.integer  "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "client_id"
@@ -252,7 +243,7 @@ ActiveRecord::Schema.define(:version => 20120923215031) do
     t.boolean  "is_busy",                                  :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                                                                              :null => false
+    t.string   "user_type",                                                                          :null => false
     t.boolean  "is_approved",                              :default => false
     t.string   "payment_status",                           :default => "unpaid"
     t.text     "undergraduate_school"

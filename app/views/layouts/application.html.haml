@@ -81,6 +81,8 @@
       / END HEADER
       / CONTENT
       #container
+        - if flash[:notice].present?
+          = notice text: flash[:notice]
         = yield
       / END CONTENT
       - if user and user.is_lawyer?

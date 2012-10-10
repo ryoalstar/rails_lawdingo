@@ -1,15 +1,15 @@
 - if lawyer.is_online
-  %span.video.online= start_or_video_button_p(lawyer)
+  %span.video.online{:tooltip => :video_chat}= start_or_video_button_p(lawyer)
 - else
-  %span.video.offline
+  %span.video.offline{:tooltip => :video_chat}
 - if lawyer.is_available_by_phone?
-  %span.voice.online= start_phone_consultation_p(lawyer)
+  %span.voice.online{:tooltip => :voice_chat}= start_phone_consultation_p(lawyer)
 - else
-  %span.voice.offline
-%span.note= start_or_schedule_button_text_profile(lawyer)
+  %span.voice.offline{:tooltip => :voice_chat}
+%span.note{:tooltip => :note_chat}= start_or_schedule_button_text_profile(lawyer)
 - if lawyer.daily_hours.present?
-  %span.text.online= schedule_consultation_button(lawyer) 
+  %span.text.online{:tooltip => :text_chat}= schedule_consultation_button(lawyer) 
 - else
-  %span.text.offline
+  %span.text.offline{:tooltip => :text_chat}
     %a{:href => '#'}
 = tooltips lawyer

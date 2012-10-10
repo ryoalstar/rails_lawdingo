@@ -28,6 +28,7 @@ class ClientsController < ApplicationController
         send_pending_question(session[:question_id], @client)
       else
         log_in_user!(@client)
+        send_message @client
         return redirect_on_login
       end
       
