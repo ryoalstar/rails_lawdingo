@@ -165,6 +165,7 @@ class Home
       this.set_service_type_tabs_val(
         $(e.target).attr('data-val')
       )
+      this.select_parent_practice_area_field_for_legal_services_tab()
       this.submit()
       false
     )
@@ -184,6 +185,14 @@ class Home
     )
 
     this.add_pagination()
+
+  select_parent_practice_area_field_for_legal_services_tab : () ->
+    if @service_type == 'Legal-Services'
+      # get current practice_area_field
+      $field = @practice_area_fields().filter("[checked='checked']")
+      # child or not 
+      if $field.attr('data-parent') != undefined
+        this.set_practice_area_fields_val($field.attr('data-parent')).parent().find('img').trigger('click')
 
   markSelected : (item) ->
     item.siblings().children("input").removeAttr "checked"
