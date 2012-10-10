@@ -132,9 +132,11 @@
         %p No Appointments
         %p Are Available
 
+
     - # content for the modal dialog we are going to display
     %div{:style => "display:none;"}
       = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
+
 
 :javascript
   $(".row .rating").raty({
