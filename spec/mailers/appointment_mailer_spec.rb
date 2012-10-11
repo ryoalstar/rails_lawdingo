@@ -24,7 +24,7 @@ describe AppointmentMailer do
 
     it "should display the appointment details" do
       mailer = AppointmentMailer.appointment_created(decorator)
-      mailer.subject.should eql "Client Appointment Request on Lawdingo."
+      mailer.subject.should eql "Client Appointment Request on Lawdingo"
       mailer.to.should eql(["dan@test.com"])
       mailer.body.should =~ /Hi there/
       mailer.body.should =~ /A. Client/
