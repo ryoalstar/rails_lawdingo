@@ -203,14 +203,14 @@ class Home
       this.set_practice_area_fields_val(
         $(e.target).val()
       )
-      $.cookie('practice_area', $(e.target).val(), { expires: 30 });
+      $.cookie('practice_area', $(e.target).val(), { expires: 30, path: "/" });
       this.submit()
     )
     this.state_fields().change((e)=>
       this.set_state_fields_val(
         $(e.target).val()
       )
-      $.cookie('state', $(e.target).val(), { expires: 30 });
+      $.cookie('state', $(e.target).val(), { expires: 30, path: "/" });
       @submit()
     )
 

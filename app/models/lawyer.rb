@@ -381,7 +381,7 @@ class Lawyer < User
   def practice_areas_names
     self.practice_areas.parent_practice_areas.map do |area|
       #area.name.downcase
-      "<a href='/lawyers#!/lawyers/Legal-Advice/All-States/#{area.name_for_url}'>#{area.name.downcase}</a>"
+      "<a href='/lawyers#!/lawyers/Legal-Advice/All-States/#{area.name_for_url}' class='practice_area_name' data-practice-area='#{area.name_for_url}'>#{area.name.downcase}</a>"
     end
   end
 
