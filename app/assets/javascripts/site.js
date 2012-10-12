@@ -250,6 +250,9 @@ $(document).ready(function() {
 		      	  	self.find('.carousel-description p.active_action').html('').hide();
 						}
             */
+           		// tooltips
+           		self.find('.carousel-description .online_icons .tooltips').html(carousel_info["tooltips"]);
+           		
 						// Video Button
         		if (carousel_info["start_or_video_button_p"] !== undefined) {
 						  self.find('.carousel-description span.video')
@@ -333,7 +336,7 @@ $(document).ready(function() {
   							self.find('.carousel-description a.reviews').html('').hide();
   							self.find('.carousel-description a.yelp_reviews').html('').hide();
   						}
-            self.interv = setTimeout( next_image, 2300 );
+            self.interv = setTimeout( next_image, 12300 );
         }
 
         function next_image(){

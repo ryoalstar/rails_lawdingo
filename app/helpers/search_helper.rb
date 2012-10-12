@@ -73,6 +73,7 @@ module SearchHelper
       images_hash["start_or_schedule_button_text_profile"] = start_or_schedule_button_text_profile(lawyer)
       images_hash["active_action"] = start_or_schedule_button(lawyer)   
       images_hash["appt"] = true if lawyer.daily_hours.present?
+      images_hash["tooltips"] = tooltips(lawyer)
       list << images_hash
     end
     list

@@ -336,12 +336,12 @@ $(document).ready(function(){
   });
 
   $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").live('mouseover', function(){
-    $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeIn('slow'); // show
+    $(this).nextAll('.tooltips').find('.'+$(this).attr('tooltip')+".tooltip").fadeIn('slow'); // show
     $('.tooltip.dominant').css('opacity','0');
   });
 
   $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").live('mouseout', function(){
-    $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeOut('slow'); // hide
+    $(this).nextAll('.tooltips').find(' .'+$(this).attr('tooltip')+".tooltip").fadeOut('slow'); // hide
     $('.tooltip.dominant').css('opacity','1'); 
   });
 	
