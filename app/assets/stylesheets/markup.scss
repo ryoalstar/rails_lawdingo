@@ -317,11 +317,12 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit{
               border-bottom:1px solid #eeeeee;
             }
           }
-          .controls{
+          .controls, .cancel {
             margin-top:5px;
             display:block;
             float:left;
-            a{
+
+            a {
               margin-right:5px;
               border-bottom:0;
               color:#4c4c4c;
@@ -620,10 +621,10 @@ body.index.logged-in, body.users.show.logged-in{
             small{
               margin-top:10px;
             }
-          }  
-          
+          }
+
           div.currency{
-            width: 200px;
+            width: 250px;
             min-width: 200px;
           }
           .field_with_errors{
@@ -636,10 +637,9 @@ body.index.logged-in, body.users.show.logged-in{
               }
             }
           }
-          
-          
         }
-        form#new_offering{
+
+        form#offering_form{
           label{
             color:#3f3f3f;
             font-size:12px;

@@ -11,6 +11,15 @@ class OfferingsController < ApplicationController
     @offering = Offering.find(params[:id])
   end
 
+  def new
+    @lawyer = User.find(params[:user_id])
+    @offering = @lawyer.offerings.new
+    @offering.fee = ""
+
+    render layout: false
+  end
+
+
   def create
     @lawyer = User.find(params[:user_id])
     @offering = @lawyer.offerings.new(params[:offering])
@@ -24,13 +33,14 @@ class OfferingsController < ApplicationController
 
   def edit
     @offering = Offering.find(params[:id])
-    
+    @lawyer = @offering.user
+
     render layout: false
   end
 
   def update
     @offering = Offering.find(params[:id])
-    
+
     if @offering.update_attributes(params[:offering])
       redirect_to user_offerings_path(@offering.user)
     else

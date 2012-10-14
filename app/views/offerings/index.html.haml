@@ -17,12 +17,14 @@
             %ul.offerings-list
               - @lawyer.offerings.each do |offering|
                 - unless offering.id.to_i == 0
-                  = content_tag_for :li, offering, data: {id: offering.id} do
+                  = content_tag_for :li, offering, data: {id: offering.id, user_id: offering.user.id } do
                     = link_to offering.name, controller: "offerings", action: "show", id: offering.id
                     .clear
                     .controls
                       = link_to "Edit", { controller: "offerings", action: "edit", id: offering.id }, class: "edit"
                       = link_to "Delete", { controller: "offerings", action: "destroy", id: offering.id }, method: "delete", confirm: "Are you sure?", class: "delete"
+                    .cancel{ style: "display: none;" }
+                      = link_to "Cancel editing", offering_path(offering.id)
           - else
             %p.empty [None added yet.]
         #new_offering_outer
