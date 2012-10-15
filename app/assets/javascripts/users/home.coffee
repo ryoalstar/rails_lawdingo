@@ -89,6 +89,7 @@ class Home
 
   submit : ()->
     $.ajax(this.current_search_url(),{
+      async : false
       complete : ()=>
         # listeners for appointment forms
         this.add_appointment_forms()
