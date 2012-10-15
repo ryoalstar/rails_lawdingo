@@ -231,8 +231,7 @@ class UsersController < ApplicationController
       @user  = Lawyer.find(@user.id)
       @user.bar_memberships.delete_all
       fill_states
-      puts '---------'
-      puts params[:lawyer]
+      @schools = School.order(:name)
       status = @user.update_attributes(params[:lawyer])
       @user.update_attribute :school_id, params[:lawyer][:school_id]
       @user.practice_areas.delete_all

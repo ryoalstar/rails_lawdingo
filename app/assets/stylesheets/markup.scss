@@ -456,7 +456,7 @@ body.index.logged-in{
   }
 }
 
-body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit,
+body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit, body.users.update, body.users.edit
 {
   #page > div{
     @include profile-base;
@@ -519,7 +519,7 @@ body.users.show.logged-in #page.session-summary > div .profile.client_info .prof
     }
   }
 }
-body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in {
+body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , body.users.update.logged-in {
   #page > div{
     width:960px;
     padding:0;
@@ -3139,6 +3139,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 
 body.users.show.logged-in .profile .availability,
 body.users.edit.logged-in .profile .availability,
+body.users.update.logged-in .profile .availability,
 body.offerings.index.logged-in .profile .availability,
 body.daily_hours.index.logged-in .profile .availability,
 body.index.logged-in .framey-video .profile .availability,
