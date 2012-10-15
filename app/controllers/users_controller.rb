@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  #include ActionView::Helpers::UrlHelper
+
   before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore, :create_lawyer_request]
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
@@ -17,6 +19,8 @@ class UsersController < ApplicationController
       @conversations = current_user.conversations
     end
   end
+  
+
 
   def home
     # if current_user and current_user.is_lawyer?
@@ -834,6 +838,15 @@ class UsersController < ApplicationController
       @states = State.all
     end
   end 
+
+  def redirect_to_last_practice_area_state_select_from_cookie
+    if cookies[:practice_area] && cookies[:state]
+      path_from_cookie = filtered_path(:service_type => 'Legal-Advice', :state => cookies[:state], :practice_area => cookies[:practice_area])
+      if lawyers_path? && !current_path?(path_from_cookie)
+        redirect_to(path_from_cookie) and return
+      end
+    end
+  end
 
 end
 
