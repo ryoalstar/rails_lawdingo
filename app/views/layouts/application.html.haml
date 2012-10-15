@@ -14,6 +14,9 @@
         var is_lawyer = false;
     = javascript_include_tag "application"
     = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment", "//platform.linkedin.com/in.js"
+    - if current_user.try(:is_lawyer?)
+      :javascript
+        $(function(){ RealtimeChecker.initialize(); })
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
     = render :partial => 'layouts/ie_style'
