@@ -519,7 +519,7 @@ body.users.show.logged-in #page.session-summary > div .profile.client_info .prof
     }
   }
 }
-body.index.logged-in, body.users.show.logged-in{
+body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in {
   #page > div{
     width:960px;
     padding:0;
@@ -569,8 +569,7 @@ body.index.logged-in, body.users.show.logged-in{
           width:490px;
         }
         input[type="submit"]{
-          margin-left: 110px;
-          width:455px;
+          width:250px;
         }
         span.rate_hint{
           margin-left:20px;
@@ -620,6 +619,7 @@ body.index.logged-in, body.users.show.logged-in{
           padding-left:0;
           border-left: solid 1px #B8B8B8;
           padding:30px;
+          padding-top: 0px;
           h3{
             color: #272727;
             font-size:15px;
@@ -3138,6 +3138,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 }
 
 body.users.show.logged-in .profile .availability,
+body.users.edit.logged-in .profile .availability,
 body.offerings.index.logged-in .profile .availability,
 body.daily_hours.index.logged-in .profile .availability,
 body.index.logged-in .framey-video .profile .availability,

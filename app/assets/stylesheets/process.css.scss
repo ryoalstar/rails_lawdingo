@@ -24,7 +24,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
     }
     form{
       margin: 0px 0px 12px 0px;
-      table.user_info_form{
+      table{
         td.labels{
           width: 70px;
           font-weight:bold;
@@ -106,10 +106,10 @@ body.clients.new #page.apply-form-wrapper div.outer{
             background:url('phone_icon.png') no-repeat 98% center white;
           }
           input[type="text"]#client_last_name{
-            margin-left: 10px;
+            //margin-left: 10px;
           }
           input#lawyer_last_name{
-            margin-left:10px;
+            //margin-left:10px;
           }
           a.dialog-opener.blue_button{
             margin-bottom:10px;

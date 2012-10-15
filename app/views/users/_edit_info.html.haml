@@ -35,22 +35,22 @@
         %table
           %tbody
             %tr
-              %td
+              %td.labels
                 %label First Name:
               %td
                 = f.text_field :first_name ,{:class=>"name"}
             %tr
-              %td
+              %td.labels
                 %label Last name:
               %td
                 = f.text_field :last_name ,{:class=>"name"}
             %tr
-              %td
+              %td.labels
                 %label Email:
               %td
                 = f.text_field :email,{:class=>"email", title: "Your email address.", rel: "twipsy"}
             %tr
-              %td
+              %td.labels
                 %label Password:
               %td
                 = f.password_field :password ,{:class=>"passw"}
@@ -88,7 +88,7 @@
           %table
             %tbody
               %tr
-                %td
+                %td.labels
                   %label Free:
                 %td
                   = f.select(:free_consultation_duration, [ |
@@ -107,35 +107,37 @@
               - @user.hourly_rate = nil if @user.new_record?
               - @user.hourly_rate = number_with_precision @user.hourly_rate, :precision => 2
               %tr
-                %td 
+                %td.labels
                   %label Price:
                 %td
                   = f.text_field :hourly_rate ,{:class=>"paypal"}
                   %span.rate_hint hourly rate
               %tr
-                %td 
+                %td.labels 
                   %label Phone:
                 %td
                   = f.text_field :phone ,{}
   
               %tr
-                %td
+                %td.labels
                   %label Time:
                 %td
                   = f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
                   = hidden_field_tag :user_type, @user[:user_type]    
               %tr
-                %td 
-                  %label Paypal email:
-                %td
-                  = f.text_field :payment_email ,{:class=>"paypal"}
-              %tr
-                %td 
+                %td.labels 
                   %label Message:
                 %td
                   = f.text_area :personal_tagline ,{:class=>"summary",:maxlength => 2000, :rows=>2}
-          %div{:style => "font-size:14px;"} Upload a photo
-          = f.file_field :photo
+              %tr
+                %td.labels
+                  %label Upload a photo:
+                %td
+                  .file_select_wrapper
+                    .file_select_button.blue_button.gray.no-inner-shadow
+                      %ins Add your photo
+                      = f.file_field :photo, :accept => 'image/png,image/gif,image/jpeg'
+                    %span.file_select_value
           .clear
           / div class="f_label"></div><span style="font-size:12px;">to receive payments from Lawdingo</span><br/
           - i = 0
