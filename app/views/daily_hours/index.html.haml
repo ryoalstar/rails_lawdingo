@@ -8,7 +8,7 @@
       = render(:partial =>  "lawyer/menu", :locals => {:lawyer => @lawyer})
       .profile_wrapper.same_height
         .profile_availability
-          = render '/users/iphone_handle'
+          = render  partial: '/users/iphone_handle', locals: {:lawyer => @lawyer}
           .clear
         .profile-block.same_height
           = form_tag(user_daily_hours_path(:user_id => @lawyer.id), :method => :put, :id => "user_daily_hours") do

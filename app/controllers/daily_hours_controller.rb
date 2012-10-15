@@ -4,7 +4,6 @@ class DailyHoursController < ApplicationController
 
   # GET /users/:id/daily_hours
   def index
-    @lawyer = @user = User.find(params[:user_id])
     @daily_hours = @lawyer.daily_hours
   end
 

@@ -6,7 +6,7 @@
       = render partial: "lawyer/menu", locals: { lawyer: current_user }
       .profile_wrapper.same_height
         .profile_availability
-          = render '/users/iphone_handle'
+          = render partial: '/users/iphone_handle', locals: {:lawyer => current_user}
           .clear
         .profile-block
           %h2 Introduce yourself to prospective clients in a video of up to two minutes long.

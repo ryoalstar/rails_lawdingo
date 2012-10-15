@@ -60,9 +60,21 @@ jQuery ->
     rate_per_6minutes = rate / 10
 
     if $input.val() is ""
-      ($ "span.rate_hint").html "Will be quoted per 0.1 hour."
+      $("span.rate_hint", $(this).parent()).html "Will be quoted per 0.1 hour."
     else
-      ($ "span.rate_hint").html "Quoted as $#{rate_per_6minutes.toFixed(2)} / 6 mins."
+      $("span.rate_hint", $(this).parent()).html "Quoted as $#{rate_per_6minutes.toFixed(2)} / 6 mins."
+
+  ($ "input#lawyer_hourly_rate").numeric() # accept only numbers
+  ($ "input#lawyer_hourly_rate").bind "keyup", ->
+    $input = ($ @)
+    rate = $input.val().match(/\d+/)[0] unless $input.val() == "" # remove dollar sign
+    rate_per_6minutes = rate / 10
+
+    if $input.val() is ""
+      $("span.rate_hint", $(this).parent()).html "Will be quoted per 0.1 hour."
+    else
+      $("span.rate_hint", $(this).parent()).html "Quoted as $#{rate_per_6minutes.toFixed(2)} / 6 mins."
+
 
   ($ "a#start_phone_session_button").bind "click", ->
     lawyerid = ($ @).data('attorneyid')

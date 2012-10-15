@@ -19,7 +19,7 @@
     %h2= link_to_unless_current "Summary of sessions", user_path(@user, :t => User::SESSION_TAB)          
   .profile_wrapper.same_height
     .profile_availability
-      = render 'iphone_handle'
+      = render partial: '/users/iphone_handle', locals: {:lawyer => @user}
     .profile-block
       = raw flash[:error]
       - errors = @user.errors
@@ -104,14 +104,14 @@
                       ["90 minutes", "90"]                  |
                     ])                                      |
                   %span.rate_hint free consultation offered
-              - @user.rate = nil if @user.new_record?
-              - @user.rate = number_with_precision @user.rate, :precision => 2
+              - @user.hourly_rate = nil if @user.new_record?
+              - @user.hourly_rate = number_with_precision @user.hourly_rate, :precision => 2
               %tr
                 %td 
                   %label Price:
                 %td
-                  = f.text_field :rate ,{:class=>"paypal"}
-                  %span.rate_hint per minute rate
+                  = f.text_field :hourly_rate ,{:class=>"paypal"}
+                  %span.rate_hint hourly rate
               %tr
                 %td 
                   %label Phone:

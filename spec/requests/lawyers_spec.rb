@@ -33,7 +33,7 @@ describe "Restful Lawyers", :integration do
         fill_in("lawyer_last_name", :with => lawyer.last_name)
         fill_in("lawyer_email", :with => lawyer.email)
         fill_in("lawyer_password", :with => lawyer.password)
-        fill_in("lawyer_rate", :with => "200")
+        fill_in("lawyer_hourly_rate", :with => "200")
         
         check("practice_area_#{practice_area.id}")
         
