@@ -68,6 +68,18 @@ module ApplicationHelper
       page_title
     end
   end
+  
+  def description(page_description)
+    content_for :description do
+      page_description
+    end
+  end
+  
+  def keywords(page_keywords)
+    content_for :keywords do
+      page_keywords
+    end
+  end
 
   def logo_url
     if current_user

@@ -19,6 +19,10 @@
         $(function(){ RealtimeChecker.initialize(); })
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
+    - if content_for?(:description)
+      = tag :meta, :name => :description, :content => yield(:description)
+    - if content_for?(:keywords)
+      = tag :meta, :name => :keywords, :content => yield(:keywords)
     = render :partial => 'layouts/ie_style'
     
     %link{:href=>'//fonts.googleapis.com/css?family=Exo', :rel=>'stylesheet', :type=>'text/css'}
