@@ -13,7 +13,8 @@
       <%= simple_format(@msg.gsub(/\n/, '<br />')) %>
     </p>
     <hr />
-    <p>You can reply directly to <%= @user.full_name %> about scheduling a time to connect on Lawdingo at <%= @user.email %>.</p><br/>
+    <p>You can reply directly to <%= @user.full_name %> about scheduling a time to connect on Lawdingo at <%= @user.email %>
+        <%= @user.try(:phone) ? " or by phone at #{@user.phone}" : '' %>.</p><br/>
     Thanks,<br/>
     Team Lawdingo,<br/>
     <a href ="mailto:info@lawdingo.com">info@lawdingo.com</a>,<br/>
