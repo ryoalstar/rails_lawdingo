@@ -2,7 +2,7 @@ class OfferingsController < ApplicationController
   before_filter :ensure_self_account, only: :index
 
   def index
-    @lawyer = User.find(params[:user_id])
+    @lawyer = @user = User.find(params[:user_id])
     @offering = @lawyer.offerings.new
     @offering.fee = ""
   end

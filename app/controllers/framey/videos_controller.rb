@@ -3,7 +3,7 @@ module Framey
     before_filter :authenticate, only: [:index, :destroy]
 
     def index
-      @lawyer = Lawyer.find(current_user.id)
+      @lawyer = @user = Lawyer.find(current_user.id)
       @video = Framey::Video.find_by_creator_id(@lawyer) if @lawyer.has_video?
     end
 
