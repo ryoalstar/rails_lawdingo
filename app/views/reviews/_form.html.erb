@@ -3,12 +3,18 @@
   <%= f.input :rating, as: :hidden, input_html: { value: 0 } %>
   <%= f.input :lawyer_id, as: :hidden, input_html: { value: @conversation.lawyer.id } %>
   <%= f.input :conversation_id, as: :hidden, input_html: { value:  @conversation.id } %>
-  <%= f.input :purpose, label: "What did #{@conversation.lawyer.full_name} do for you?", input_html: { value: "Legal advice" } %>
-  <%= f.label "Your rating of the session" %>
-  <div id="rating_stars"></div>
-  <p> Your review of this session:</p>
-  <%= f.input :body, label: false, placeholder: "Write a review about how valuable this session was" %>
-  <%= f.submit "Submit review", class: "button" %>
+  <div class="purpose_wrapper">
+  <%= f.input :purpose, label: "What did #{@conversation.lawyer.full_name} do for you?", placeholder: "Legal advice"  %>
+  </div>
+  <div class="stars_wrapper">
+	  <%= f.label "Your rating of the session" %>
+	  <div id="rating_stars"></div>
+	</div>
+	<div class="body_wrapper">
+	  <label> Your review of this session:</label>
+	  <%= f.input :body, label: false, placeholder: "Write a review about how valuable this session was" %>
+	</div>
+	<%= f.submit "Submit review", class: "button" %>
 <% end %>
 
 <div class="thank-you" style="display: none;">
