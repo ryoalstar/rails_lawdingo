@@ -23,7 +23,7 @@
     - bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
     - licenced_states = ""
     - bms.each{ |bm|
-    - licenced_states += bm.state.abbreviation + ', '
+    - licenced_states += bm.state.abbreviation + ', ' if !bm.state.nil?
     - }
     - licenced_states.chomp!(', ')
     - pas = []
