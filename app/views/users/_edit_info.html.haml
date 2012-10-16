@@ -61,6 +61,9 @@
           = f.text_field :license_year, placeholder: "Year licensed"
           %br/
           = f.text_field :yelp_business_id, placeholder: "Busuniess ID on Yelp"
+          - if @user.is_lawyer?
+            %br/
+            = f.select :payment_status, options_for_select(Lawyer::PAYMENT_STATUSES), prompt: "Payment status"
         - if @user.is_lawyer?
           = bar_memberships_listing @user
           .clear
