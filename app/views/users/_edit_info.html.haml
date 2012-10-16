@@ -35,15 +35,10 @@
         %table
           %tbody
             %tr
-              %td.labels
-                %label First Name:
-              %td
-                = f.text_field :first_name ,{:class=>"name"}
-            %tr
-              %td.labels
-                %label Last name:
-              %td
-                = f.text_field :last_name ,{:class=>"name"}
+              %td.labels Your name:
+              %td.name_fields 
+                = f.text_field :first_name ,{:placeholder=>"First Name",:class=>"name"}
+                = f.text_field :last_name ,{:placeholder=>"Last Name",:class=>"name"}
             %tr
               %td.labels
                 %label Email:
@@ -89,7 +84,7 @@
             %tbody
               %tr
                 %td.labels
-                  %label Free:
+                  %label Free consultation offered:
                 %td
                   = f.select(:free_consultation_duration, [ |
                       ["Free consultation duration", ""],   |
@@ -108,30 +103,30 @@
               - @user.hourly_rate = number_with_precision @user.hourly_rate, :precision => 2
               %tr
                 %td.labels
-                  %label Price:
+                  %label Hourly rate:
                 %td
                   = f.text_field :hourly_rate ,{:class=>"paypal"}
                   %span.rate_hint hourly rate
               %tr
                 %td.labels 
-                  %label Phone:
+                  %label Direct phone number:
                 %td
                   = f.text_field :phone ,{}
   
               %tr
                 %td.labels
-                  %label Time:
+                  %label Time zone:
                 %td
                   = f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
                   = hidden_field_tag :user_type, @user[:user_type]    
               %tr
                 %td.labels 
-                  %label Message:
+                  %label Professional summary:
                 %td
                   = f.text_area :personal_tagline ,{:class=>"summary",:maxlength => 2000, :rows=>2}
               %tr
                 %td.labels
-                  %label Upload a photo:
+                  %label Profile photo:
                 %td
                   .file_select_wrapper
                     .file_select_button.blue_button.gray.no-inner-shadow
@@ -150,9 +145,10 @@
                 = f.fields_for :bar_memberships do |bar_membership_fields|
                   - if bar_membership_fields.object.new_record? 
                     %li{:id => i}
-                      = check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")
-                      = @states[i].name
                       = bar_membership_fields.hidden_field :state_id
+                      = check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")
+                      %span 
+                        = @states[i].name
                       .sub{:id => @states[i].name}
                         = "#{@states[i].abbreviation} Bar ID:"
                         = bar_membership_fields.text_field :bar_id
@@ -161,9 +157,9 @@
                     - if !bar_membership_fields.object.state.nil?
                       %li{:id => i + j}
                         = check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")
-                        = @filled_states[j].name
-                        = #bar_membership_fields.hidden_field :state_id
-                        .sub{:id => @filled_states[j].name}
+                        %span
+                          = @filled_states[j].name
+                        .sub.filled{:id => @filled_states[j].name}
                           = "#{@filled_states[j].abbreviation} Bar ID:"
                           = bar_membership_fields.text_field :bar_id
                       - j += 1

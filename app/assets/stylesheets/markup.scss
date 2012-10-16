@@ -543,6 +543,7 @@ body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , bod
             td{
               vertical-align:middle;
             }
+            
           }
         }
         table.summary{
@@ -552,6 +553,16 @@ body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , bod
             }
           }
         }
+        
+        table {
+          td.name_fields
+            {
+              .name{
+                width: auto;
+              }
+            }
+          
+        }  
         select{
           height: 37px;
           font-size: 13px;
@@ -570,6 +581,7 @@ body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , bod
         }
         input[type="submit"]{
           width:250px;
+          margin-left: 107px;
         }
         span.rate_hint{
           margin-left:20px;
