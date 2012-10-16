@@ -30,11 +30,11 @@
           %span.browse_lawyers_button
             = link_to "Browse Lawyers", lawyers_path, class: ""
           = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
-          %span.lawyers_signup
-          .singup_link
-            %span.lawyers_signup
-              = link_to "Apply as an attorney", new_lawyer_path, :class => ''
-          -#= render partial: "questions/form", locals: { type: "lawyer", placeholder: "Describe your legal issue here." }
+          -#%span.lawyers_signup
+          -#.singup_link
+          -#  %span.lawyers_signup
+          -#    = link_to "Apply as an attorney", new_lawyer_path, :class => ''
+          = render partial: "questions/form", locals: { type: "lawyer", placeholder: "Describe your legal issue here." }
           -#%small
             Lawyer? #{link_to "Apply here!", new_lawyer_path}
         .slider
