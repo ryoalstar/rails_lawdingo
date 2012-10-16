@@ -69,13 +69,14 @@ body.users.home, body.offerings.show {
 
 .form-header {
   font-family: myriad-pro, sans-serif;
-  padding: 20px 0;
+  padding: 0px 0 20px;
   font-size: 4.75em !important;
   font-weight: 300;
   text-align: center;
   color: #818181;
   background: image-url("shadow-down.png") no-repeat bottom center;
   margin-bottom: 0.75em !important;
+  margin-top: 14px;
 }
 
 .form-wrapper {
