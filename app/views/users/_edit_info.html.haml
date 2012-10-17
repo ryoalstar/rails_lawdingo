@@ -143,6 +143,7 @@
               %ul#leveled_list_bar_ids.leveled-list
                 - j = 0
                 = f.fields_for :bar_memberships do |bar_membership_fields|
+                  = '' #nonsense line made by AF. Please keep it. For some reason without it, the next line, specially bar_membership_fields.object renders a lot of garbage, which in my opinion is a bug in Rails.  
                   - if bar_membership_fields.object.new_record? 
                     %li{:id => i}
                       = bar_membership_fields.hidden_field :state_id
