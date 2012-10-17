@@ -184,18 +184,18 @@ $(document).ready(function(){
   
   //Makes the question box sticky to top of page when page scrolls down
 	var msie6 = $.browser == 'msie' && $.browser.version < 7;
-	search_box = document.getElementById('generail_question');
+	search_box = document.getElementById('interact_with_lawyer_tabs');
 	filters = document.getElementById('filters');
 	if (search_box && filters && !msie6) {
-		var top = $('#generail_question').offset().top - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
+		var top = $('#interact_with_lawyer_tabs_container').offset().top - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
 		$(window).scroll(function (event) {
 		  var y = $(this).scrollTop();
 		  if (y >= top) {
-			$('#generail_question').addClass('fixed_question');
+			$('#interact_with_lawyer_tabs_container').addClass('fixed_question');
 			$('#service_type_tabs').addClass('fixed_question_margin');
 			//$('.slidey').addClass('nudge');
 		  } else {
-			$('#generail_question').removeClass('fixed_question');
+			$('#interact_with_lawyer_tabs_container').removeClass('fixed_question');
 			$('#service_type_tabs').removeClass('fixed_question_margin');
 			//$('.slidey').removeClass('nudge');
 		  }

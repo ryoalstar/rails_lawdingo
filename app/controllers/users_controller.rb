@@ -61,7 +61,6 @@ class UsersController < ApplicationController
     else
       @lawyers = @search.results
     end
-    
     respond_to do |format|
       format.html
       format.js
@@ -313,12 +312,12 @@ class UsersController < ApplicationController
   end
 
   def update_card_details
-    token = params[:client][:stripe_card_token]
+    token = params[:stripe_card_token]
 
     if token.present?
       customer = Stripe::Customer.create(
-        :description=> current_user.email,
-        :card=> token
+        email: current_user.email,
+        card: token
       )
 
       if customer

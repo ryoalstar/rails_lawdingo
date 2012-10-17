@@ -3251,14 +3251,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				}
 			}
 			.question{
+			  float: left;
 			  z-index:2;
-				background:#fdfdfd;
-				border:1px solid #d0d2d5;
-				float: left;
-				width:722px;
-				padding-bottom:19px;
-				-moz-border-radius: 5px;
-			  -webkit-border-radius: 5px;
+			  width:682px;
 			  form{
 			    float: left;
           width: 100%;

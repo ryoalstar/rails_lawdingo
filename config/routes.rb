@@ -3,7 +3,9 @@ Lawdingo::Application.routes.draw do
 
   resources :appointments, :only => [:create]
 
-  resources :clients, :only => [:new, :create]
+  resources :clients, :only => [:new, :create] do
+    post '/new', :on => :collection
+  end
 
   namespace :framey do
     resources :videos
@@ -189,4 +191,5 @@ Lawdingo::Application.routes.draw do
 
   match '/LoginByApp' => 'sessions#login_by_app'
   match '/UpdateOnlineByApp' => 'sessions#set_status_by_app'
+  
 end
