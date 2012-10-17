@@ -3059,7 +3059,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				position: relative;
 				padding:15px 0;
 				z-index:1;
-				background:#eaf1f5;
+				background:#f1f7fb;
 				border-left: 1px solid #D0D2D5;
 				text-align: center;
 				-webkit-border-top-right-radius: 5px;
@@ -3082,6 +3082,20 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				  opacity: 0.5;
 				  
 				}
+				
+				.appointments_title
+				{
+				  margin-top: -15px;
+				  height: 38px;
+				  line-height: 38px;
+				  color: #b3b7ba;
+				  background-color: #ebf2f8;
+				  border-bottom: 1px solid #d9dbdd;
+				  margin-bottom: 15px;
+				  vertical-align: middle;
+				  text-align: center;
+				  font-size: 13px;
+				}
 				.available-appointments{
 					span{
 						text-decoration:none;
@@ -3090,24 +3104,29 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						font-weight:bold;
 						color:#313131;
 					}
+					
+					.grey{
+					  color: #b7bbbf;
+					}
+					
 					/*span:hover{
 						color:#1076e8;
 					}*/
 					.day-0{
-						border: 1px solid #9e5bcd;
+						border: 1px solid #d9dbdd;
 						padding: 3px 5px;
-						color: #fff;
+						color: #757575;
 						font-size: 12px;
-						background: #bc7be9;
+						background: #e2e4e6;
 						-moz-border-radius: 5px;
 						-webkit-border-radius: 5px;
 					}
 					.day-1{
-						border: 1px solid #ca7e3b;
+						border: 1px solid #d9dbdd;
 						padding: 3px 5px;
-						color: #fff;
+						color: #757575;
 						font-size: 12px;
-						background: #e09858;
+						background: #e2e4e6;
 						-moz-border-radius: 5px;
 						-webkit-border-radius: 5px;
 					}
@@ -3128,21 +3147,22 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				// 		}
 				// 	}
 				// }
+				
+				.view_all_wrapper{
+				  text-align: center;
+				  bottom: 0;
+				  width: 100%;
+				  position: absolute;
+				}
 				a.appointments{
-					background:image-url('appointments_button_bg.png');
+					
 					word-spacing: 2px;
-					bottom: 0;
-					display:block;
-					position: absolute;
 					text-decoration:none;
-					border-top:1px solid #dae1e7;
 					border-bottom:0;
 					color:#272727;
 					font-size:13px;
-					padding: 9px 27px;
-					-webkit-border-bottom-right-radius: 5px;
-          -moz-border-radius-bottomright: 5px;
-          border-bottom-right-radius: 5px;
+					border-bottom: 1px dotted black;
+          margin-bottom: 20px;
 				}
 			}
 		}
