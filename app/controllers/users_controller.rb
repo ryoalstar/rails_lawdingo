@@ -79,13 +79,12 @@ class UsersController < ApplicationController
   end
 
   def learnmore
-    @tagline = AppParameter.find(2).value || "Free legal advice."
+    @tagline = AppParameter.where(id: 2).first.try(:value) || 'Free legal advice.'
     @subtext = AppParameter.service_homepage_subtext
   end
 
   def landing_page
-    #redirect_to :action => :home
-    @tagline = AppParameter.find(2).value || "Free legal advice."
+    @tagline = AppParameter.where(id: 2).first.try(:value) || 'Free legal advice.'
     @subtext = AppParameter.service_homepage_subtext
   end
 
