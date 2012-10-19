@@ -13,7 +13,7 @@
   video call from the client. Otherwise, you'll be reached by
   phone, so keep your phone handy.
 
-- if @appointment.client.try(:phone)
+- if @appointment.client.try(:phone).present?
   %p To confirm or reschedule, you can contact #{@appointment.client.try(:first_name)} by email at #{@appointment.client.try(:email)} or by phone at #{@appointment.client.try(:phone)}.
 - else 
   %p To confirm or reschedule, you can contact #{@appointment.client.try(:first_name)} by email at #{@appointment.client.try(:email)}.
