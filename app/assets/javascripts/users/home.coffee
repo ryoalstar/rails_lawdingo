@@ -4,7 +4,7 @@ class Home
     this.add_event_listeners()
 
     document.my_flag_search=false
-
+    
     Home.h = {}
     Home.h[198] = 90
     Home.h[169] = 60
@@ -86,10 +86,10 @@ class Home
     this.page = page
     this.submit()
     this.page = null
-
+  ajaxPort : false  
   submit : ()->
-    $.ajax(this.current_search_url(),{
-      async : false
+    this.ajaxPort.abort() if this.ajaxPort
+    this.ajaxPort = $.ajax(this.current_search_url(),{
       complete : ()=>
         # listeners for appointment forms
         this.add_appointment_forms()

@@ -26,6 +26,11 @@
           %tr
             %td
             %td= label_tag :card, 'Credit card has been provided.'
+          %tr  
+            %td
+            %td
+              = text_field_tag :coupon, nil
+              %a.gray_button#apply_coupon_button{:href => coupon_validate_stripe_path(:format => :json)} Apply 
         - else
           %tr
             %td{:colspan=>2}

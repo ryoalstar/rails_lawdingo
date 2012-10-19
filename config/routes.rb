@@ -46,7 +46,7 @@ Lawdingo::Application.routes.draw do
   match '/apply' => "users#new", :as => :new_lawyer
 
   # Lawyer subscriptions
-  match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
+  match '/paid' => "stripes#new", :as => :subscribe_lawyer
   resource :stripe, only: [:new, :create] do
     post :coupon_validate
   end
