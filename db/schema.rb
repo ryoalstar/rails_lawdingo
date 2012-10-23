@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005142857) do
+ActiveRecord::Schema.define(:version => 20121023084259) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(:version => 20121005142857) do
 
   create_table "card_details", :force => true do |t|
     t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
     t.string   "card_type"
     t.string   "card_number"
     t.string   "expire_month"
@@ -137,20 +144,6 @@ ActiveRecord::Schema.define(:version => 20121005142857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_closed",   :default => false
-  end
-
-  create_table "languages", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "spoken_language_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "lawyers_practice_areas", :force => true do |t|
-    t.integer  "lawyer_id"
-    t.integer  "practice_area_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "messages", :force => true do |t|
@@ -232,12 +225,6 @@ ActiveRecord::Schema.define(:version => 20121005142857) do
   end
 
   add_index "searches", ["user_id"], :name => "index_searches_on_user_id"
-
-  create_table "spoken_languages", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "states", :force => true do |t|
     t.string   "name"
