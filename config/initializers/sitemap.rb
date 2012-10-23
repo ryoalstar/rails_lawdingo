@@ -9,16 +9,16 @@ DynamicSitemaps::Sitemap.draw do
    
    ['Legal-Advice','Legal-Services'].each do |type|
      
-     url lawyers_url + "#!/lawyers/#{type}/All-States", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
+     url lawyers_url + "/#{type}/All-States", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
      
      State.with_approved_lawyers.each do |state|
-       url lawyers_url + "#!/lawyers/#{type}/#{state.name}-lawyers", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
+       url lawyers_url + "/#{type}/#{state.name}-lawyers", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
        
        PracticeArea.parent_practice_areas.with_approved_lawyers.each do |area|
-         url lawyers_url + "#!/lawyers/#{type}/#{state.name}-lawyers/#{CGI::escape(area.name)}", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
+         url lawyers_url + "/#{type}/#{state.name}-lawyers/#{area.name_for_url}", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
                 
          area.children.with_approved_lawyers.each do |child_area|
-           url lawyers_url + "#!/lawyers/#{type}/#{state.name}-lawyers/#{CGI::escape(child_area.name)}", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
+           url lawyers_url + "/#{type}/#{state.name}-lawyers/#{child_area.name_for_url}", :last_mod => Lawyer.order(:updated_at=>:desc).limit(1).first.updated_at, :change_freq => 'monthly', :priority => 0.8
          end
         # url lawyers_url + "#!/lawyers/#{}", :last_mod => area.updated_at, :change_freq => 'monthly', :priority => 0.8
        end
