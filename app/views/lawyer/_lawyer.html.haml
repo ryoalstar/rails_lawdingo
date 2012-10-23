@@ -46,7 +46,7 @@
           - lawyer_tagline = "“" + lawyer.personal_tagline.truncate(120, separator: ' ', omission: "...” #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}")
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
-      =link_to attorney_path(lawyer, slug: lawyer.slug) do
+      =link_to attorney_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
         .view_profile_wrapper
           .view_profile_button
             View Profile
@@ -104,7 +104,8 @@
             %p.free_bold= free_message(lawyer)
             = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
         .expander_container
-          +
+          %span +
+          .tooltip.expander See more info
     .right.row_block
       - if lawyer.daily_hours.present?
         .appointments_title

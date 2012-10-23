@@ -105,7 +105,8 @@ initializeLawyersEvents = function ()
 			      return $(".middle", parent).css('height', maxheight + "px");
 			    });
 			  });
-			  $(expander).html('+');
+			  $("span", expander).html('+');
+			  $(".tooltip", expander).html('See more info');
 			} else {
 			  parent.css('height', 'auto');
 			  $(".middle", parent).css('height', 'auto');
@@ -115,7 +116,8 @@ initializeLawyersEvents = function ()
 			      return $(".right", parent).css('height', $(".middle", parent).height());
 			    });
 			  });
-			  $(expander).html('-');
+			  $("span", expander).html('-');
+			  $(".tooltip", expander).html('Less info!');
 			}	
 			
 		}
@@ -272,10 +274,18 @@ $(document).ready(function(){
 	  $(".voice_chat.tooltip.online").fadeOut('slow');
 	});
 	
-	$(".cvv-info").live('mouseover', function(){
+	$(".expander_container").live('mouseover', function(){
+	  $(".tooltip.expander", $(this)).fadeIn('fast');
+	});
+	$(".expander_container").live('mouseout', function(){
+	  $(".tooltip.expander", $(this)).fadeOut('slow');
+	});
+	
+
+	$(".cvv-info").live('mouseenter', function(){
 	  $(".tooltip.cvv").fadeIn('slow');
 	});
-	$(".cvv-info").live('mouseout', function(){
+	$(".cvv-info").live('mouseleave', function(){
 	  $(".tooltip.cvv").fadeOut('slow');
 	});
 	

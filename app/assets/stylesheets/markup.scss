@@ -1161,6 +1161,12 @@ input, select, textarea {
       margin-left: 37px;  
       text-align: center;       
     }
+  .tooltip.expander{
+      top: -27px;
+      left: -47px;  
+      text-align: center;   
+      line-height: 15px;    
+    }
 }
 
 body.offerings.show, body.attorneys.call_payment{
