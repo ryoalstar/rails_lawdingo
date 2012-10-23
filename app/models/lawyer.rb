@@ -26,10 +26,7 @@ class Lawyer < User
   validates_presence_of :payment_status, :if => :is_lawyer?
   validates_inclusion_of :payment_status, :in => PAYMENT_STATUSES, :if => :is_lawyer?
   validates :time_zone,
-    :presence => true,
-    :inclusion => {
-      :in => ActiveSupport::TimeZone.us_zones.collect(&:name)
-    }
+    :presence => true
 
   # TODO: use attr_accessible
   #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
