@@ -29,10 +29,11 @@
         }
       }
     }
+    a:focus {outline: none; }
     a:hover{
       color:#1076e8;
     }
-    a.day-0{
+    span.day{
       border: 1px solid #d9dbdd;
       padding: 3px 4px;
       color: #757575;
@@ -41,37 +42,11 @@
       background: #e2e4e6;
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
+      text-decoration:none;
+      text-transform:uppercase;
+      font-size:11px;
     }
-    a.day-1{
-      font-weight:bold;
-      border: 1px solid #d9dbdd;
-      padding: 3px 4px;
-      color: #757575;
-      font-size: 11px;
-      background: #e2e4e6;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-    }
-    a.day-2{
-      border: 1px solid #d9dbdd;
-      font-weight:bold;
-      padding: 3px 4px;
-      color: #757575;
-      font-size: 11px;
-      background: #e2e4e6;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-    }
-    a.day-3{
-      font-weight:bold;
-      border: 1px solid #d9dbdd;
-      padding: 3px 4px;
-      color: #757575;
-      font-size: 11px;
-      background: #e2e4e6;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-    }
+    
     .times{
       text-decoration: none;
       font-size: 11px;
