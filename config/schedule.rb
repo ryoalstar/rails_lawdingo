@@ -41,3 +41,9 @@ end
 every '1 * * * *' do
   rake 'sunspot:solr:reindex'
 end
+
+every 1.day, :at => '1am' do
+  rake 'tmp:clear'
+  rake 'log:clear'
+end
+
