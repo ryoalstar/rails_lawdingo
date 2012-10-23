@@ -115,6 +115,7 @@ class Lawyer < User
     text :states do
       state_names
     end
+    text :state_abbreviations
     integer :state_ids, :multiple => true
     text :reviews do
       review_purpos
@@ -189,6 +190,10 @@ class Lawyer < User
 
   def state_names
     states.map(&:name)*","
+  end
+  
+  def state_abbreviations
+    states.map(&:abbreviation)*","
   end
 
   def review_purpos
