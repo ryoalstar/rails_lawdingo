@@ -44,6 +44,7 @@
                     %td
                       = text_field_tag 'card[cvc]', nil, :required => :required, :validate => true
                       %a.cvv-info{:href => '#'}
+                      .tooltip.big.cvv 3 digit code on the back of your card
                     %td.separator
                     %td.labels
                       Promo code:
@@ -57,7 +58,7 @@
       %tr
         %td
         %td.buttons
-          = f.submit 'Submit', :class=>"button", id: "submit_subscribe"
+          = f.submit 'Continue', :class=>"button", id: "submit_subscribe"
           %span#siteseal
             %script{:type=>"text/javascript", :src => 'https://seal.godaddy.com/getSeal?sealID=DY6qS9Z5Yb3G0eASdQ2SOHDc5j8MndNNTbTEvYzffdVwSYY0hv2'}
       %tr.row_notice

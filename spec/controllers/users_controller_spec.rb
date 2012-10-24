@@ -117,7 +117,11 @@ describe UsersController do
     it "should redirect to the payment info page unless client has payment data in file" do
       Lawyer.expects(:find).with(arnold.id.to_s).returns(arnold)
       get :start_phone_call, { id: arnold.id, client_number: "6087004680" }
+<<<<<<< HEAD
       request.should redirect_to call_payment_path(arnold.id)
+=======
+      request.should redirect_to call_payment_path(arnold.id, :return_path=>phonecall_path(:id =>arnold.id))
+>>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
     end
   end
 end

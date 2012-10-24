@@ -28,18 +28,3 @@
     $("div.main_content").append("<%= j(render partial: "no_lawyer_found") %>");
   <% end  %>
 <% end %>
-
-var debounce;
-$(".offerings_item").hover(function(){
-    $(".offerings_wrapper", $(this)).fadeIn("fast");
-    clearTimeout(debounce);
-},
-function(){
-	var item = $(this);
-	debounce = setTimeout(function(){
-  	$(".offerings_wrapper", item).fadeOut("fast");
-  	clearTimeout(debounce);
-  },1500);
-});
-
-

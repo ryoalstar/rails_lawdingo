@@ -58,11 +58,10 @@ class UsersController < ApplicationController
       @lawyers = @search.results
     end
     
-    
-    
     respond_to do |format|
-      format.html{render}
-      format.js{render}
+      format.html
+      format.js
+      format.json { render json: {:lawyers => @lawyers.to_a}, status: :ok }
     end
   end
 
@@ -86,6 +85,8 @@ class UsersController < ApplicationController
   def landing_page
     @tagline = AppParameter.where(id: 2).first.try(:value) || 'Free legal advice.'
     @subtext = AppParameter.service_homepage_subtext
+    @practice_areas = PracticeArea.parent_practice_areas
+    @states = State.with_approved_lawyers
   end
 
   def show
@@ -308,12 +309,22 @@ class UsersController < ApplicationController
   end
 
   def update_card_details
+<<<<<<< HEAD
     token = params[:stripe_card_token]
 
     if token.present?
       customer = Stripe::Customer.create(
         email: current_user.email,
         card: token
+=======
+    token = params[:client][:stripe_card_token]
+
+    
+    if token.present?
+      customer = Stripe::Customer.create(
+        :description=> current_user.email,
+        :card=> token
+>>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
       )
 
       if customer
@@ -348,6 +359,7 @@ class UsersController < ApplicationController
               -u #{Stripe.api_key}: -X DELETE"
     system curl_cmd
    end
+
    if customer && current_user.save_stripe_customer_id(customer.id)
     @status = true
    end
@@ -378,7 +390,11 @@ class UsersController < ApplicationController
   def start_phone_call
     @lawyer = Lawyer.find(params[:id]) if params[:id].present?
 
+<<<<<<< HEAD
     redirect_to call_payment_path(@lawyer.id) unless current_user.stripe_customer_token.present?
+=======
+    redirect_to call_payment_path(@lawyer.id, :return_path=>phonecall_path(:id => params[:id]) ) unless current_user.stripe_customer_token.present?
+>>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
   end
 
   def create_phone_call
@@ -714,7 +730,9 @@ class UsersController < ApplicationController
   # add state_scope_for_search__SOLR
   def add_state_scope
     # store selected state for the view
-    @selected_state = State.name_like(self.get_state_name).first
+
+    @selected_state = State.find_by_id(params[:state]) if params[:state] && params[:state].numeric?
+    @selected_state ||= State.name_like(self.get_state_name).first
     state_id = @selected_state.try(:id)
     @search.build do
       with(:state_ids, [state_id])
@@ -793,8 +811,8 @@ class UsersController < ApplicationController
   def add_practice_area_scope service_type
     # if we have a practice area
     if params[:practice_area].present?
-      scope = PracticeArea.name_like(params[:practice_area])
-      area_id = scope.first.id if scope.first
+      scope = params[:practice_area].numeric? ? PracticeArea.find_by_id(params[:practice_area]) : PracticeArea.name_like(params[:practice_area]).first
+      area_id = scope.try(:id)
       @search.build do
         service_type == "legal-services" ? with(:practice_area_id, area_id) : with(:practice_area_ids, [area_id])
       end if area_id

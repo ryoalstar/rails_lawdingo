@@ -35,7 +35,14 @@ class Lawyer < User
   #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token
   
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
+<<<<<<< HEAD
   attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :photo, :personal_tagline, :bar_memberships_attributes, :phone, :time_zone, :hourly_rate
+=======
+  attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :photo, :personal_tagline, 
+  :bar_memberships_attributes, :phone, :time_zone, :hourly_rate, :school_id, :undergraduate_school, :license_year, 
+  :yelp_business_id
+
+>>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
   # scopes
   default_scope where(:user_type => User::LAWYER_TYPE)
 

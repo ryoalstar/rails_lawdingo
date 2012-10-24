@@ -471,7 +471,11 @@ body.users.home {
         }
     }
 
+<<<<<<< HEAD
     &.signup, &.payment, &.lawyer_subscribtion, &.apply-form-wrapper {
+=======
+    &.signup, &.payment, &.lawyer_subscribtion, &.apply-form-wrapper, &.call-payment {
+>>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
         > h3 {
             text-align: center;
             font-weight: normal;
@@ -619,7 +623,7 @@ body.users.home {
             select{
               height: 37px;
               font-size: 13px;
-              padding: 5px 5px 5px 10px;
+              padding: 5px 5px 11px 10px;
               margin-top: 4px;
               margin-bottom:10px;
               color: #404040;

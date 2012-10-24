@@ -117,25 +117,19 @@
               Licensed in #{licenced_states}
           - if @attorney.personal_tagline.present?    
             %p.tagline= raw "#{simple_format '“' + @attorney.personal_tagline + '”'}"
-          .free_button_wrapper
-            %a.free{:href=> "#"}
-              %p= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"                      
-            .free_dropdown{:href=> "#"}
-            .button_tooltip
-              .button-content
-                %ul
-                  - if @attorney.is_online && !@attorney.is_busy
-                    %li
-                      = start_or_schedule_button(@attorney)
-                  - if @attorney.is_available_by_phone?
-                    %li
-                      = start_phone_consultation(@attorney)
-                  - if @attorney.daily_hours.present?
-                    %li
-                      %a.appt-select{:href => '#'} Schedule a consultation                      
-                  %li
-                    = start_or_schedule_button_text(@attorney)              
+          .free_section_container
+            .free_button_outer
+              %a.free{:href => "#"}
+                %p
+                  Talk Now
+              .free_dropdown{:href=> "#"}
+              .button_tooltip
+                .button-content
+                  %ul
+                    = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => @attorney})
+            .free_button_explanation
+              %p.free_bold= free_message(@attorney)
+              = content_tag :p, "then #{number_to_currency (@attorney.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"                                   
       - if @attorney.daily_hours.present?          
         .profile_info
           %h2 Schedule a Consultation with #{@attorney.first_name}

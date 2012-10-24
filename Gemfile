@@ -40,7 +40,8 @@ gem 'stripe'
 gem 'rack-ssl', :require => 'rack/ssl'
 gem 'openssl-extensions', '1.1.0'
 gem 'openssl-nonblock', '0.2.1'
-gem 'client_side_validations'
+gem 'client_side_validations', "~>3.2"
+
 gem 'twilio-ruby'
 gem "newrelic_rpm", "~>3.1.1"
 gem "simple_form"

@@ -161,6 +161,36 @@ class Home
         this.submit()
         false
       )
+    $(".expander_container").click( (e) =>
+      #First find the parent
+      parent = $(e.target).parents(".lawyer")
+      if parent.hasClass('expanded')
+        parent.removeClass('expanded')
+        
+        
+          
+        $(".expanded_info", parent).hide 'slow', ->
+          $("p.lawyer_tagline", parent).hide 'slow', ->
+            maxheight = parseInt($(".middle", parent).height())
+            if parseInt($(".left", parent).height()) > maxheight
+              maxheight = parseInt($(".left", parent).height()) 
+            $(".right", parent).css('height', maxheight + "px")
+            $(".middle", parent).css('height', maxheight + "px")
+        
+        $(e.target).html('+')
+      else
+        parent.css('height', 'auto')
+        $(".middle", parent).css('height', 'auto')
+        parent.addClass('expanded')
+        $(".expanded_info", parent).show "slow", ->
+          $("p.lawyer_tagline", parent).show 'slow', ->
+            $(".right", parent).css('height', $(".middle", parent).height())
+        
+        
+        $(e.target).html('-')
+      e.stopPropagation()
+      return false
+    )
     this.service_type_tabs().click((e)=>
       this.set_service_type_tabs_val(
         $(e.target).attr('data-val')
@@ -326,6 +356,7 @@ class Home
           .filter("[data-default=1]")
           .val()
       ).parent().find('img').trigger('click')
+    
 
   tabs : ()->
     $("div#service_type_tabs")

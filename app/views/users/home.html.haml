@@ -10,17 +10,6 @@
     Lawyers are standing by, ready to help you with your legal questions. Choose the type of lawyer you need and start a free consultation.
     %a#close_notice{:href => "#"} Close
 #inline-wrapper
-  - if flash[:notice].present?
-    .notice
-      .text
-        = flash[:notice]
-        %a#close_notice{:href => "#"} Close
-  -#slogan
-    .inner
-      %h1= @subtext[:second]
-      -#%h1 Lawdingo is a market for live legal consultations. Legal advice with out the law office.
-      = link_to 'Learn More', learnmore_path
-      /%a{:href => '#'} Learn More      
   %form.filters#filters
     .left-bar
       .left-bar-section.first
@@ -158,10 +147,13 @@
   .main_content
     #service_type_tabs
       = render partial: "service_type_tabs"
-    #generail_question.question.question-container
+    .clear
+    #autoselect_lawyer_wraper
+      = render partial: "autoselect_lawyer", locals:{:header_text=>'Don’t know who to pick?'}
+    -##generail_question.question.question-container
       -#%h2.selected-lawyers-caption= selected_lawyers_caption
-      %h2
-      = render partial: "questions/form", locals: { type: "lawyer", placeholder: @subtext[:second] }
+    -#  %h2
+    -#  = render partial: "questions/form", locals: { type: "lawyer", placeholder: @subtext[:second] }
     / RESULTS
     #results.results
       = render(:partial => "search_results")

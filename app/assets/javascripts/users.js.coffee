@@ -36,8 +36,13 @@ jQuery ->
 
     children_areas = input.parent().find("[data-parent-id='#{parent_id}'] input")
     children_areas.each (index, element) -> ($ element).attr "checked", checked
+  
+  ($ "a#close_notice").bind "click", (e)-> 
+    $(e.target).parents(".notice").hide()
+    $(e.target).parents(".notice_wrapper").hide()
+    
 
-  ($ "a#close_notice").bind "click", -> ($ ".notice").hide()
+    
 
   ($ "a#barids_opener").bind "click", -> ($ "div#bar_membership").center()
   ($ "a#practice_areas_opener").bind "click", -> ($ "div#practices").center()
@@ -84,4 +89,20 @@ jQuery ->
     $("#attorney_id").val(lawyerid)
     $('.paid_model_header').html("The first #{free_consultation_duration} minutes with #{lawyer_first_name} are free. To start the phone call, though, we require payment info, as any time past #{free_consultation_duration} minutes is billed at $#{lawyer_rate}/minute.");
     $('#payment_overlay_submit_button').val('Continue');
+    
+  $("#tabs_autoselect li").click ->
+    $("#new_question").resetClientSideValidations()
+    tabId = $(this).attr("data-target")
+    tabContent = $("#" + tabId)
+    tabContent.show()
+    $(this).addClass "selected"
+    $(this).siblings().removeClass "selected"
+    tabContent.siblings().hide()
+    
+    $("#question_state").hide()
+    $("#question_area").hide()
+    $("#autoselect_lawyer_wraper").removeClass("expanded")
+    $("#autoselect_landing_wraper").removeClass("expanded")
+    $("#new_question").enableClientSideValidations()
+    return false
 
