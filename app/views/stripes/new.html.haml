@@ -14,7 +14,7 @@
       .card-activation
         %h3 
           Activate your Lawdingo profile:   
-          %span#subscription_price $#{@stripe_plan.amount*0.01}/month.
+          %span#subscription_price $#{AppParameter.lawyer_mountly_fee*0.01}/month.
           No commitment, and money back guarantee if you’re not satisfied within the first month.
 
         .card-info
