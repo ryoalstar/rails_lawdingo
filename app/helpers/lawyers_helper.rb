@@ -399,11 +399,7 @@ module LawyersHelper
   end
 
   def lawyer_rate(lawyer)
-<<<<<<< HEAD
-    number_to_currency("#{lawyer.rate + AppParameter.service_charge_value}/minute")
-=======
     number_to_currency("#{lawyer.rate + AppParameter.service_charge_value}") + "/minute"
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
   end
 end
 

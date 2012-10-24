@@ -41,9 +41,6 @@ body.users.home, body.offerings.show {
     -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.24);
     box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.24);
   
-<<<<<<< HEAD
-  
-=======
     
     &.with-avatar{
       .text {
@@ -51,7 +48,6 @@ body.users.home, body.offerings.show {
       }
     }
     
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
     .avatar, .text {
       display: inline-block;
       display: -moz-inline-stack;
@@ -67,11 +63,7 @@ body.users.home, body.offerings.show {
   
     .text {
       position: relative;
-<<<<<<< HEAD
       width: 99.4%;
-=======
-      width: 100%;
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
     }
   
     a#close_notice {

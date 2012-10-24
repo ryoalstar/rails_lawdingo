@@ -461,10 +461,6 @@ body.index.logged-in{
   }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
 body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit, body.users.update, body.users.edit
 {
   #page > div{
@@ -1177,15 +1173,11 @@ body.offerings.show, body.attorneys.call_payment{
 	@include tooltip;
 }
 
-<<<<<<< HEAD
-body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show {
-=======
 body.stripes.new{
   @include tooltip;
 }
 
 body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.show, body.offerings.show{
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
 	html {color:#000;}
 	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td
 	{margin:0;padding:0;}
