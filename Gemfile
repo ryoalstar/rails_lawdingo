@@ -50,7 +50,7 @@ gem 'letter_opener'
 gem 'framey'
 gem 'oauth'
 gem 'haml-rails'
-gem 'dynamic_sitemaps'
+gem 'sitemap_generator'
 
 # Handling cron jobs
 gem 'whenever', require: false

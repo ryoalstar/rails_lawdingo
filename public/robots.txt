@@ -9,4 +9,4 @@ Disallow: /system/
 Disallow: /homepage_images/
 Disallow: /javascripts/
 
-Sitemap: http://lawdingo.com/sitemap.xml
+Sitemap: http://lawdingo.com/sitemap_index.xml.gz

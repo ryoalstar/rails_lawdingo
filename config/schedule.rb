@@ -47,3 +47,7 @@ every 1.day, :at => '1am' do
   rake 'log:clear'
 end
 
+every 1.day, :at => '2am' do
+  rake '-s sitemap:refresh'
+end
+
