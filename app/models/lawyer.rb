@@ -134,7 +134,7 @@ class Lawyer < User
   end
   
   def rate_for_minutes(minutes)
-    self.rate * minutes
+    (self.rate * minutes *100).round()/100
   end  
   
   def hourly_rate
