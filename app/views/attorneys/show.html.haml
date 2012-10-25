@@ -200,7 +200,27 @@
                   %a{:name => 'reviews'}
                   = render @attorney.reviews.order("created_at DESC")
                    
-  = hidden_field_tag :lawyer_id, @attorney.id, :class => :current_selected_lawyer          
+      .profile_info   
+        %h2 Similar Lawyers
+        .main-content
+          .main-info
+            %h4 See also:
+            %br
+            %ul.left
+              - if @attorney.school.present?
+                %li.practice_area_name= link_to "#{@attorney.school.name} alumni", filtered_path(:search_query => @attorney.school.name)
+              - @attorney.practice_areas.parent_practice_areas.each do |ppa|
+                %li.practice_area_name= link_to "#{ppa.name} legal advice", filtered_path(:practice_area => ppa.name_for_url)
+                - ppa.children.each do |cpa|
+                  %li.practice_area_name= link_to "#{cpa.name} legal advice", "/lawyers/Legal-Advice/All-States/#{cpa.name_for_url}"
+                  
+            %ul.right
+              - @attorney.states.each do |state|
+                %li.practice_area_name= link_to "#{state.name} Lawyers", state_path(:state => state.name_for_url)
+                - @attorney.practice_areas.parent_practice_areas.each do |ppa|
+                  %li.practice_area_name= link_to "#{state.name} #{ppa.name} Lawyers", filtered_path(:state => state.name_for_url, :practice_area => ppa.name_for_url)
+  
+  = hidden_field_tag :lawyer_id, @attorney.id, :class => :current_selected_lawyer
   = render '/messages/dialog_window'
   
 

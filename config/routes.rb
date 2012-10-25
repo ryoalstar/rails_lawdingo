@@ -176,9 +176,9 @@ Lawdingo::Application.routes.draw do
   match '/admin' =>"users#show", :as =>:admin_home
   #root :to => 'users#home'
 
-  match '/lawyers/:service_type(/:state)' => 'users#home'
+  match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
-  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered
+  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }
   match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
   match '/learnmore' => 'users#learnmore'

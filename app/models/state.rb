@@ -21,5 +21,10 @@ class State < ActiveRecord::Base
       self.create(:name => state[0], :abbreviation => state[1])
     end
   end
+  
+  def name_for_url
+    return '' unless self.name
+    "#{self.name.squish.gsub(/\s+/,'_')}-lawyers"
+  end  
 end
 
