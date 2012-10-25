@@ -4,8 +4,10 @@
     .left.row_block
       .avatar
         = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
-      .online_icons 
-        = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
+      =link_to attorney_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
+        .view_profile_wrapper
+          .view_profile_button
+            View Profile
       - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
         - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
           .stars
@@ -46,10 +48,9 @@
           - lawyer_tagline = "“" + lawyer.personal_tagline.truncate(120, separator: ' ', omission: "...” #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}")
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
-      =link_to attorney_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
-        .view_profile_wrapper
-          .view_profile_button
-            View Profile
+      .online_icons 
+        = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
+      
       .clear
       .description
         - if lawyer.personal_tagline.present?
