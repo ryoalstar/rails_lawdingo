@@ -42,7 +42,13 @@ class Home
       this.submit()
     else
       this.add_appointment_forms()
-
+      this.search_defaults()
+      
+  search_defaults : ()->
+    first = getUrlVars()["search_query"]
+    if first
+      $("#input_search_bg_img").hide()
+      $("#input_close_sea_img").show()
   redirect_to_last_practice_area_state_select_from_cookie : ()->
     if document.location.pathname == "/lawyers" && $.cookie('practice_area') && $.cookie('state')
       this.set_state_fields_val($.cookie('state'))

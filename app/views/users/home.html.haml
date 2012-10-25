@@ -20,7 +20,7 @@
             = image_tag('close_icon.png', :alt => 'clear', :id => "input_close_sea_img")
             = image_tag('search_bg.png', :alt => 'search', :id => "input_search_bg_img")
           %h3 Search
-          %input.search{:placeholder => "Search", :name => "search_query", :id => "search_query"}  
+          %input.search{:value => @search_query, :placeholder => "Search", :name => "search_query", :id => "search_query"}  
           %input{:name => "freetimeval",     :id => "freetimeval",      :style => "display:none;"}    
           %input{:name => "ratingval",       :id => "ratingval",        :style => "display:none;"}    
           %input{:name => "hourlyratestart", :id => "hourlyratestart",  :style => "display:none;"}    
