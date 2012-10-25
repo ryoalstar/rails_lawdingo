@@ -119,7 +119,7 @@
             %p.tagline= raw "#{simple_format '“' + @attorney.personal_tagline + '”'}"
           .free_section_container
             .free_button_outer
-              %a.free{:href => "#"}
+              = link_to !@attorney.is_available_by_phone? ? "#" : start_phone_consultation_path(@attorney), :class=>'free' do
                 %p
                   Talk Now
               .free_dropdown{:href=> "#"}

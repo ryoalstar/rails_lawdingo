@@ -63,10 +63,14 @@ initializeLawyersEvents = function ()
   
 
   $(".free").live('click', function(event){
-  	event.stopPropagation(); 	  	
-     $(".button_tooltip").hide(); 	  	
-     $(this).nextAll(".button_tooltip").show();
-     return false;
+  	if ($(this).attr('href') == '#')
+  	{
+  		 event.stopPropagation(); 	  	
+	     $(".button_tooltip").hide(); 	  	
+	     $(this).nextAll(".button_tooltip").show();
+	     return false;
+  	}
+  	
   });
   
   $(".button_tooltip").live('mouseenter', function() {

@@ -60,9 +60,9 @@
                           %p.active_action= start_or_schedule_button(lawyer)
                 .free_section_container
                   .free_button_outer
-                    %a.free{:href => "#"}
+                    = link_to !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer), :class=>'free' do
                       %p
-                        Talk now
+                        Talk Now
                       -#%p.rate= "#{lawyer.free_consultation_duration} minutes free"
                     -#%p.small="then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins"
                     .free_dropdown{:href=> "#"}  
