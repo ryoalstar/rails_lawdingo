@@ -289,7 +289,7 @@ module LawyersHelper
     if logged_in?
        phonecall_path(:id=>lawyer.id)
    else
-     new_client_path(:notice => true, :return_path => phonecall_path(lawyer))
+     new_client_path(:notice => true, :return_path => phonecall_path(:id=>lawyer.id), :lawyer_path=>lawyer.id)
    end
  end
 
