@@ -44,8 +44,9 @@
               %ul
                 = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
         .free_button_explanation
-          %p.free_bold= free_message(lawyer)
-          = content_tag :p, "#{number_to_currency(offering.fee, precision: 0)} flat fee", class: "small"
+          %p.free_bold= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
+          %p.small
+            = free_message(lawyer)
   .right.row_block
     - if lawyer.daily_hours.present?      
       %p Available appointments
