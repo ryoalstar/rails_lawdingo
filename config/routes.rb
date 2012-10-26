@@ -12,7 +12,12 @@ Lawdingo::Application.routes.draw do
   end
   post "framey/callback" => "framey/videos#callback"
 
-  resources :lawyers, :only => [:new, :create]
+  resources :lawyers, :only => [:new, :create] do 
+    member do
+    get :states
+    get :practice_areas
+    end
+  end
   match '/apply' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact

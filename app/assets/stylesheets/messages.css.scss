@@ -18,6 +18,25 @@
   .fine-print { 
     font-size: 0.8em; 
   }
+  .schedule_session_state{
+    padding-left: 20px; 
+    height: 55px; 
+    float: left;
+    .schedule_session_state_bot{
+      margin-top:5px; 
+    }
+  }
+  .schedule_session_legal_matter{
+    height: 55px; 
+    padding-left: 130px; 
+    .schedule_session_area_bot{
+      margin-top:5px; 
+    }
+  }
+  #schedule_session_warning{
+    margin-top: 10px;
+    display: block;
+  }
 }
 
 div.description{

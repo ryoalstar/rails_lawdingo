@@ -3610,8 +3610,7 @@ body.users.edit.logged-in .profile .availability,
 body.users.update.logged-in .profile .availability,
 body.offerings.index.logged-in .profile .availability,
 body.daily_hours.index.logged-in .profile .availability,
-body.index.logged-in .framey-video .profile .availability,
-
+body.index.logged-in .framey-video .profile .availability
 {
   width: 680px;
   .by_video, .by_phone{
@@ -3635,7 +3634,6 @@ body.index.logged-in .framey-video .profile .availability,
     float: right;
   }
 }
-
 
 .contact_wrapper{
   width: 600px;
@@ -3789,3 +3787,12 @@ body.index.logged-in .framey-video .profile .availability,
     
   }
 }
+
+.red {
+  color: red;
+}
+
+[disabled="disabled"]{
+  opacity: 0.7;
+}
+

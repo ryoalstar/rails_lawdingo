@@ -25,5 +25,19 @@ class LawyersController < ApplicationController
       return render(:action => :new)
     end
   end
+  
+  def states
+    @lawyer = Lawyer.find(params[:id]) || not_found
+    respond_to do |format|
+      format.json { render json: {:states => @lawyer.states.to_a}, status: :ok }
+    end
+  end
+  
+  def practice_areas
+    @lawyer = Lawyer.find(params[:id]) || not_found
+    respond_to do |format|
+      format.json { render json: {:practice_areas => @lawyer.practice_areas.to_a}, status: :ok }
+    end
+  end
 
 end
