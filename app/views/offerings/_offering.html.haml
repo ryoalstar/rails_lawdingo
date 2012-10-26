@@ -33,34 +33,20 @@
             %tr
               %td
                 %p= start_or_schedule_button(lawyer)
-      .free_button_outer            
-        %a.free{:href => "#"}
-          %p= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
-          %p.small free consultation
+      .free_button_outer
+        = link_to !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer), :class=>'free' do
+          %p
+            Talk Now
         .free_dropdown{:href=> "#"}
         .button_tooltip
           .button-content
             %ul
-              = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer})      
-  
+              = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
   .right.row_block
     - if lawyer.daily_hours.present?      
       %p Available appointments
       .available-appointments
-        - lawyer.next_available_days(2).each_with_index do |d, i|
-          %ul
-            %li.title
-              %span{:class => "day-#{i}"}
-                #{d.strftime("%a, %m/%d")}
-            - times = lawyer.available_times(d)
-            - times[0..2].each do |t|
-              %li
-                %a.appt-select{:href => "#", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S")}
-                  #{t.strftime("%l:%M%p")}
-            - if times.length > 3
-              %li
-                %a.appt-select{:href => "#"}
-                  More      
+        = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => lawyer, :ndays=> 2})
         - if lawyer.time_zone       
           .times           
             %span.grey Times in #{lawyer.timezone_abbreviation}

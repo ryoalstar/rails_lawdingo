@@ -3533,7 +3533,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					/*span:hover{
 						color:#1076e8;
 					}*/
-					.day-0{
+					.day-0, .day-1, .day-2, .day-3{
 						border: 1px solid #d9dbdd;
 						padding: 3px 5px;
 						color: #757575;
@@ -3541,34 +3541,13 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						background: #e2e4e6;
 						-moz-border-radius: 5px;
 						-webkit-border-radius: 5px;
-					}
-					.day-1{
-						border: 1px solid #d9dbdd;
-						padding: 3px 5px;
-						color: #757575;
-						font-size: 12px;
-						background: #e2e4e6;
-						-moz-border-radius: 5px;
-						-webkit-border-radius: 5px;
+						text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: bold;
 					}
 				}
-				// table{
-				// 	height: 60%;
-				// 	width:100%;
-				// 	margin-bottom: 14px;
-				// 	tr{
-						
-				// 		}
-				// 		td{
-				// 			padding-top: 3px;
-				// 			a{
-				// 				font-size:12px;
-				// 				border-bottom: 1px dotted #bbc1c4;
-				// 			}
-				// 		}
-				// 	}
-				// }
-				
+
 				.view_all_wrapper{
 				  text-align: center;
 				  bottom: 0;

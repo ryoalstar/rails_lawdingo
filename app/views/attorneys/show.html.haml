@@ -141,25 +141,7 @@
                 %a{:href => '#'} Ask
               .right
                 %div.available-appointments
-                  - @attorney.next_available_days(4).each_with_index do |d, i|
-                    %ul
-                      %li.title
-                        %a{:href => '#', :class => "day-#{i}"} 
-                          - if d === Date.today
-                            Today
-                          - elsif d === Date.tomorrow
-                            Tomorrow
-                          - else 
-                            #{d.strftime("%a, %m/%d")}
-                      - times = @attorney.available_times(d)
-                      - times[0..2].each do |t|
-                        %li
-                          %a.appt-select{:href => "#", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S")}
-                            #{t.strftime("%l:%M%p")}
-                      - if times.length > 3
-                        %li
-                          %a{:href => "#", :class=>'appt-select'}
-                            More                        
+                  = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => @attorney, :ndays=> 4})                      
                   .clear
               .appointments
                 %a.appt-select{:href => '#'}
