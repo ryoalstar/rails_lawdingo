@@ -115,56 +115,7 @@
           /%a{:href => "\\\"http://www.adobe.com/go/getflashplayer\\"} Upgrade to Flash Player 11
           $.prompt( output )
           }
-      / FOOTER
-      #footer
-        .footer_border
-        .footer_content
-          .footer_menu_wrapper
-            %ul.top-offset-small
-              %li= link_to "About", about_page_path
-              %li= link_to "Contact", contact_path
-              %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank'
-              %li= link_to "Terms & Privacy", terms_page_path, :target=>'_blank'
-            .footer-logo
-              = image_tag('footer_dingo.png', :alt => 'Home')
-          .social_sections
-            .social-links  
-              = content_tag :div, "", class: "fb-like-box", data: { href: "https://www.facebook.com/pages/Lawdingo/244786945591535",
-                                    width: "212",
-                                    "show-faces" => "false",
-                                    colorscheme: "dark",
-                                    stream: "false",
-                                    header: "false" }
-              = image_tag('footer_social_hr.png', :class => 'custom_hr')
-              .gplus
-                %g:plusone{size: "medium", href: root_url}
-              %a{href:"https://twitter.com/thelawdingo", class:"twitter-share-button", "data-show-count" => "false", "data-url" => root_url}
-            /%span.left.top-offset-small &copy; Lawdingo
-            -#%span.left.top-offset-small
-              %a{href:"https://twitter.com/thelawdingo", class:"twitter-follow-button", "data-show-count" => "false", "data-url" => root_url}
-              %g:plusone {size: "small", annotation:"inline"}
-            .clear
-            .copyright
-              Copyright &copy; 2012 Lawdingo
-          .footer_signup
-            %p.subscribe_notice.info
-            %p.subscribe_notice.error
-            .main_label
-              Sign up for our newsletter
-            .input_wrapper 
-              = form_tag new_subscriber_path, :method=>:post, :remote=>true do 
-                = text_field_tag :email, nil, :class=>'sign_up_textbox', :placeholder=>'Type your email'
-                = submit_tag 'Sign up', :class=>'sign_up_button'
-              .clear
-            .extra_info
-              %span.bold
-                Contact us:
-              %span
-                info@lawdingo.com | 415-234-3464
-          
-        .footer_hr
-
-      / END FOOTER
+      = render :partial => 'layouts/footer'
       #dialog-overlay
       - if current_user && current_user.user_type == 'CLIENT' && params[:action] != 'show'
         #paid_schedule_session.dialog-window
