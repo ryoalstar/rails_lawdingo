@@ -31,7 +31,7 @@
           %h3 Legal:
           %a.advice.service_type.selected{:href => '#',"data-default" => "1", 'data-val' => 'Legal-Advice'} Advice
           %a.service.service_type{:href => '#', 'data-val' => 'Legal-Services'} Service
-        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}") do
+        - cache("state-list-#{Lawyer.maximum(:updated_at).to_i}-#{@state_id}") do
           #state.left-bar-section
             %h3
               %label{:for => "state"} Relevant state:
@@ -51,7 +51,7 @@
             %a{ :href => '#', :id => "need_auto_detect" }
             :javascript
               $(document).ready(function(){ Home.detect_state() })
-        - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}") do
+        - cache("practice-areas-#{PracticeArea.maximum(:updated_at).to_i}-#{@area_id}") do
           #practice_areas.left-bar-section.legal_domain
             %h3 Type of law:
             .practice-areas
