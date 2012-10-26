@@ -100,10 +100,11 @@ describe UsersController do
     end
   end
 
-  context "#start_phone_call" do
+  context "check card details before consultation session", :payment do
     before :each do
       controller.stubs(:current_user).returns(harry)
       controller.stubs(:authenticate).returns(harry)
+      Lawyer.expects(:find).with(arnold.id.to_s).returns(arnold)
     end
 
     let :harry do
@@ -114,10 +115,19 @@ describe UsersController do
       FactoryGirl.build_stubbed(:lawyer, first_name: "Arnold")
     end
 
-    it "should redirect to the payment info page unless client has payment data in file" do
-      Lawyer.expects(:find).with(arnold.id.to_s).returns(arnold)
-      get :start_phone_call, { id: arnold.id, client_number: "6087004680" }
-      request.should redirect_to call_payment_path(arnold.id, :return_path=>phonecall_path(:id =>arnold.id))
+    context "#chat_session" do
+      it "should redirect to the payment info page unless client has payment data in file" do
+        get :chat_session, user_id: arnold.id.to_s
+        request.should redirect_to call_payment_path(id: arnold.id, type: "video-chat")
+      end
+    end
+
+    context "#start_phone_call" do
+      it "should redirect to the payment info page unless client has payment data in file" do
+        get :start_phone_call, { id: arnold.id, client_number: "6087004680" }
+        request.should redirect_to call_payment_path(id: arnold.id)
+      end
     end
   end
+
 end

@@ -311,11 +311,10 @@ class UsersController < ApplicationController
   def update_card_details
     token = params[:client][:stripe_card_token]
 
-    
     if token.present?
       customer = Stripe::Customer.create(
-        :description=> current_user.email,
-        :card=> token
+        description: current_user.email,
+        card: token
       )
 
       if customer
@@ -381,7 +380,7 @@ class UsersController < ApplicationController
   def start_phone_call
     @lawyer = Lawyer.find(params[:id]) if params[:id].present?
 
-    redirect_to call_payment_path(@lawyer.id, :return_path=>phonecall_path(:id => params[:id]) ) unless current_user.stripe_customer_token.present?
+    redirect_to call_payment_path(@lawyer.id) unless current_user.stripe_customer_token.present?
   end
 
   def create_phone_call
@@ -456,41 +455,37 @@ class UsersController < ApplicationController
   # start chat session with chosen lawyer
   # for logged in user
   def chat_session
-    #redirect_to card_detail_path and return unless current_user.card_detail
-    #begin
-      @current_user = current_user
-      
-      @lawyer = Lawyer.find params[:user_id]
-      require "yaml"
-      config = YAML.load_file("config/tokbox.yml")
-      
-      @api_key = config['API_KEY']
-      @api_secret = config['SECRET']
-      location = config['LOCATION']
-      @opentok = OpenTok::OpenTokSDK.new @api_key, @api_secret
-      
-      if !@current_user.is_lawyer?
-        @lawyer.update_attribute(:call_status,'invite_video_chat')
-        conversation_params = {:client_id=>@current_user.id,:lawyer_id=>@lawyer.id,:start_date=>Time.now,:end_date=>Time.now,:consultation_type => "video"}
-        @conversation = Conversation.create_conversation(conversation_params)
-        @conversation_id = @conversation.id
-        
-        
-        session =  @opentok.create_session(location)
-        
-       
-        @lawyer.tb_session_id = session.session_id
-        @lawyer.save
-        
-        @token  = @opentok.generate_token({:session_id => session.session_id})
-      else
-        @token  = @opentok.generate_token({:session_id => @lawyer.tb_session_id})
-      end
+    @current_user = current_user
+    @lawyer = Lawyer.find(params[:user_id])
 
-      
-    #rescue
-    #  @lawyer = nil
-    #end
+    unless current_user.stripe_customer_token.present?
+      redirect_to call_payment_path(@lawyer.id, type: "video-chat")
+      return
+    end
+
+    require "yaml"
+    config = YAML.load_file("config/tokbox.yml")
+
+    @api_key = config['API_KEY']
+    @api_secret = config['SECRET']
+    location = config['LOCATION']
+    @opentok = OpenTok::OpenTokSDK.new @api_key, @api_secret
+
+    unless @current_user.is_lawyer?
+      @lawyer.update_attribute(:call_status,'invite_video_chat')
+      conversation_params = {:client_id=>@current_user.id,:lawyer_id=>@lawyer.id,:start_date=>Time.now,:end_date=>Time.now,:consultation_type => "video"}
+      @conversation = Conversation.create_conversation(conversation_params)
+      @conversation_id = @conversation.id
+
+      session =  @opentok.create_session(location)
+
+      @lawyer.tb_session_id = session.session_id
+      @lawyer.save
+
+      @token  = @opentok.generate_token({:session_id => session.session_id})
+    else
+      @token  = @opentok.generate_token({:session_id => @lawyer.tb_session_id})
+    end
   end
 
   def session_history
