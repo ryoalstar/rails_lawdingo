@@ -5,7 +5,8 @@ class ContactMailer < ApplicationMailer
   def contact_email(name, email, body)
     @name = name
     @email = email
-    @body = body
+    @message = body
+    
     mail(
       :to => "nikhil.nirmel@gmail.com",
       :subject => "Message from contact form"
