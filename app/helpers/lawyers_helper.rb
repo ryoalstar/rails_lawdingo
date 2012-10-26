@@ -287,7 +287,7 @@ module LawyersHelper
 
  def start_phone_consultation_path(lawyer)
     if logged_in?
-       phonecall_path(lawyer)
+       phonecall_path(:id=>lawyer.id)
    else
      new_client_path(:notice => true, :return_path => phonecall_path(lawyer))
    end

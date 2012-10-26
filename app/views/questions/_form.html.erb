@@ -4,7 +4,7 @@
   <%= f.hidden_field :user_id, :value=> (logged_in? ? current_user.id : nil)  %>
   <%= f.hidden_field :type, :value =>type %>
   <div class="question_body_wrapper input string optional">
-  	<%= f.text_field :body, :size=>50, :placeholder => placeholder, :validate=> true %>
+  	<%= f.text_field :body, :size=>50, :placeholder => placeholder, :validate=> false %>
   </div>
   <%= f.submit "", class: "" %>
 

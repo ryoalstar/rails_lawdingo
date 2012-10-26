@@ -12,7 +12,6 @@ describe AttorneysController do
       Lawyer.expects(:find).with(arnold.id.to_s).returns(arnold)
 
       request.host = "localhost:3000"
-      get :call_payment, id: arnold.id
     end
 
     let :harry do
@@ -24,11 +23,20 @@ describe AttorneysController do
     end
 
     it "should assign to @lawyer" do
+      get :call_payment, id: arnold.id
       assigns(:lawyer).should eq arnold
     end
 
-    it "should set the return_path in session array to the phonecall_url" do
-      session[:return_path].should eq phonecall_url(id: arnold.id, host: "localhost:3000")
+    context "should set the return_path in session array" do
+      it "to the phonecall_url if params[:type] is nil" do
+        get :call_payment, id: arnold.id
+        session[:return_path].should eq phonecall_url(id: arnold.id, host: "localhost:3000")
+      end
+
+      it "to the user_chat_session_url if params[:type] is \"video-chat\"" do
+        get :call_payment, id: arnold.id, type: "video-chat"
+        session[:return_path].should eq user_chat_session_url(user_id: arnold.id, host: "localhost:3000")
+      end
     end
   end
 end

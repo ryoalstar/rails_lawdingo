@@ -6,7 +6,7 @@ module SearchHelper
       lawyer = image.lawyer
       practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
       images_hash = Hash.new
-      images_hash["free"] = "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"
+      images_hash["free"] = !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer)
       if image.photo?
         images_hash["url"] = image.photo.url(:large)
       else

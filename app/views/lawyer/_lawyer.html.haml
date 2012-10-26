@@ -4,11 +4,10 @@
     .left.row_block
       .avatar
         = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
-<<<<<<< HEAD
-=======
-      .online_icons 
-        = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
+      =link_to attorney_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
+        .view_profile_wrapper
+          .view_profile_button
+            View Profile
       - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
         - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
           .stars
@@ -49,47 +48,9 @@
           - lawyer_tagline = "“" + lawyer.personal_tagline.truncate(120, separator: ' ', omission: "...” #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}")
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
-<<<<<<< HEAD
       .online_icons 
         = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
-      .clear
-      .description
-        - if lawyer.personal_tagline.present?
-          %p= raw lawyer_tagline
-  
-        = send_message_from_lawyer_mini_profile lawyer
-  
-        - unless lawyer.bar_memberships.blank?
-          %ul.bar_memberships
-            %li
-              Licensed in #{licenced_states}
-          - if lawyer.license_year.present?
-            %ul.license_years
-              %li #{pluralize years_practicing_law(lawyer), "year", "years'"} experience
-          .clear
-        %ul
-          - unless lawyer.practice_areas.blank?
-            %li
-              Offers
-              Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : raw(pas_names_list) + " law"}
-          - if lawyer.offerings.count > 0
-            %li.offerings_item
-              %a.offerings{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee #{pluralize(lawyer.offerings.count, 'service').split(" ", 2)[1]}
-              .offerings_wrapper
-                %table
-                  - lawyer.offerings.each do |offering|
-                    %tr
-                      %td
-                        %span.offering_name 
-                          = link_to "#{offering.name}", offering
-                      %td
-                        %span
-                          #{number_to_currency(offering.fee, precision: 0)}
-=======
-      =link_to attorney_path(lawyer, slug: lawyer.slug) do
-        .view_profile_wrapper
-          .view_profile_button
-            View Profile
+      
       .clear
       .description
         - if lawyer.personal_tagline.present?
@@ -123,7 +84,6 @@
                         %td
                           %span
                             #{number_to_currency(offering.fee, precision: 0)}
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
         -#.free
           %table
             %tbody
@@ -131,21 +91,9 @@
                 %td
                   %p= start_or_schedule_button(lawyer)
         .clear
-<<<<<<< HEAD
-        .free_button_outer
-          %a.free{:href => "/attorneys/#{lawyer.id}/#{CGI::escape(lawyer.full_name)}"}
-            %p= free_message(lawyer)
-            = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
-          .free_dropdown{:href=> "#"}
-          .button_tooltip
-            .button-content
-              %ul
-                = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
-    
-=======
         .free_section_container
           .free_button_outer
-            %a.free{:href => "#"}
+            = link_to !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer), :class=>'free' do
               %p
                 Talk Now
             .free_dropdown{:href=> "#"}
@@ -157,8 +105,8 @@
             %p.free_bold= free_message(lawyer)
             = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
         .expander_container
-          +
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
+          %span +
+          .tooltip.expander See more info
     .right.row_block
       - if lawyer.daily_hours.present?
         .appointments_title
@@ -175,11 +123,16 @@
                   - else
                     #{d.strftime("%a, %m/%d")}
               - times = lawyer.available_times(d)
-              - times[0..2].each do |t|
+              - last_index_times = 2
+              - if lawyer.is_available_by_phone? && d === Time.zone.now.to_date
+                - last_index_times = 1
+                %li 
+                  = link_to 'NOW', start_phone_consultation_path(lawyer)
+              - times[0..last_index_times].each do |t|
                 %li
                   %a.appt-select{:href => "#", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S")}
                     #{t.strftime("%l:%M%p")}
-              - if times.length > 3
+              - if times.length > last_index_times + 1
                 %li
                   %a.appt-select{:href => "#"}
                     More
@@ -207,8 +160,5 @@
         hintList: ['', '', '', '', '', ''],
         readOnly: true,
         start: function() {return $(this).data("score")}
-<<<<<<< HEAD
     });
-=======
-    });
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
+    

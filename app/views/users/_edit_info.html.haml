@@ -117,11 +117,7 @@
                 %td.labels
                   %label Time zone:
                 %td
-<<<<<<< HEAD
-                  = f.time_zone_select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
-=======
-                  = f.select( :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Pacific Time (US & Canada)")
->>>>>>> 0fc80aabbd603f76417fe1f975ea94da477790d1
+                  = f.collection_select :time_zone, ActiveSupport::TimeZone.us_zones, :name, :to_s, :default => "Pacific Time (US & Canada)"
                   = hidden_field_tag :user_type, @user[:user_type]    
               %tr
                 %td.labels 

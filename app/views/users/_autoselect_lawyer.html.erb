@@ -7,10 +7,10 @@
 			Talk to a lawyer by
 		</div>
 		<ul>
-			<li data-target="autoselect_tab_question">
+			<li  class="selected" data-target="autoselect_tab_question">
 				<%= image_tag 'interact_keyboard_icon.png' %>
 			</li>
-      <li  class="selected" data-target="autoselect_tab_phone">
+      <li  data-target="autoselect_tab_phone">
       	<%= image_tag 'interact_phone_icon.png' %>
       </li>
       <!--<li data-target="autoselect_tab_video">
@@ -23,12 +23,12 @@
 	</div>
 	
 	<div class="autoselect_body">
-		<div class="autoselect_tab hidden" id="autoselect_tab_question">
+		<div class="autoselect_tab " id="autoselect_tab_question">
 			<div id="autoselect_question" class="question question-container">
 				<%= render partial: "questions/form", locals: { type: "lawyer", placeholder: @subtext[:second] }	%>
 			</div>
 		</div>
-		<div class="autoselect_tab" id="autoselect_tab_phone">
+		<div class="autoselect_tab hidden" id="autoselect_tab_phone">
 			<%= render partial: "clients/phone_consultation", locals: { type: "lawyer", placeholder: @subtext[:second] }%>
 		</div>
 		<!-- <div class="autoselect_tab hidden" id="autoselect_tab_video">

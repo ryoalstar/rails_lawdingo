@@ -26,7 +26,12 @@ class AttorneysController < ApplicationController
 
   def call_payment
     @lawyer = Lawyer.find(params[:id])
-    session[:return_path] = phonecall_url(id: @lawyer.id)
+
+    if params[:type] == "video-chat"
+      session[:return_path] = user_chat_session_url(user_id: @lawyer.id)
+    else
+      session[:return_path] = phonecall_url(id: @lawyer.id)
+    end
   end
 
   private

@@ -11,7 +11,7 @@
       - lawyer.next_available_days(4).each_with_index do |d, i|
         %ul
           %li.title
-            %a.appointment-time{:href => '#', :class => "day-#{i}"} 
+            %span.appointment-time{:class => "day day-#{i}"} 
               - if d === Date.today
                 Today
               - elsif d === Date.tomorrow

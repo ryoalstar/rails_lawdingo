@@ -1164,6 +1164,12 @@ input, select, textarea {
       margin-left: 37px;  
       text-align: center;       
     }
+  .tooltip.expander{
+      top: -27px;
+      left: -47px;  
+      text-align: center;   
+      line-height: 15px;    
+    }
 }
 
 body.offerings.show, body.attorneys.call_payment{
@@ -1871,15 +1877,16 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		
 		
 		.view_profile_wrapper{
-      width: 160px;
+      width: 112px;
       height: 34px;
-      float: right; 
+      float: left;
+      margin-top: 8px;
       
       .view_profile_button
       {
-        width: 110px;
+        width: 97px;
         height: 16px;
-        padding: 8px 8px 8px 14px;
+        padding: 8px;
         border: 1px solid #b9b9b9;
         -moz-border-radius:5px;
         -webkit-border-radius:5px;
