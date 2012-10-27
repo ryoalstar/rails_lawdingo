@@ -37,19 +37,24 @@ class Lawyer < User
   :yelp_business_id
 
   # scopes
-  default_scope where(:user_type => User::LAWYER_TYPE)
+  default_scope lambda{
+    where(:user_type => User::LAWYER_TYPE)
+  }
 
-  scope :approved_lawyers,
+  scope :approved_lawyers, lambda{
     where(:is_approved => true)
       .order("is_online desc, phone desc")
+  }
 
-  scope :offers_legal_services,
+  scope :offers_legal_services, lambda{
     includes(:offerings)
       .where("offerings.id IS NOT NULL")
+  }
 
-  scope :offers_legal_advice,
+  scope :offers_legal_advice, lambda{
     includes(:practice_areas)
       .where("practice_areas.id IS NOT NULL")
+  }
 
   scope :practices_in_state, lambda{|state_or_name|
     name = state_or_name.is_a?(State) ? state_or_name.name : state_or_name
@@ -57,10 +62,20 @@ class Lawyer < User
       .where(["states.name = ?", name])
   }
 
-  scope :paid, where('stripe_card_token IS NOT NULL').where('stripe_customer_token IS NOT NULL').where(:payment_status => 'paid')
-  scope :unpaid, where(:payment_status => 'unpaid')
-  scope :free, where(:payment_status => 'free')
-  scope :shown, where(:is_approved => true).where(:payment_status => ['paid', 'free']) 
+  scope :paid, lambda{
+    where('stripe_card_token IS NOT NULL')
+      .where('stripe_customer_token IS NOT NULL')
+      .where(:payment_status => 'paid')
+  }
+  scope :unpaid, lambda{
+    where(:payment_status => 'unpaid')
+  }
+  scope :free, lambda{
+    where(:payment_status => 'free')
+  }
+  scope :shown, lambda{
+    where(:is_approved => true).where(:payment_status => ['paid', 'free']) 
+  }
 
   scope :offers_practice_area, lambda{|practice_area_or_name|
     if practice_area_or_name.is_a?(PracticeArea)
