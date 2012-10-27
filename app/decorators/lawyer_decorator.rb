@@ -1,5 +1,6 @@
 class LawyerDecorator < ApplicationDecorator
 
-  decorates :lawyer
+  decorates :lawyer,
+    :class => "Lawyer"
 
 end
