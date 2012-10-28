@@ -1,0 +1,12 @@
+<% if @error %>
+$(".subscribe_notice.error").html('Email is required.');
+$(".subscribe_notice.info").html('');
+<% else %>
+$(".subscribe_notice.error").html('');
+$(".subscribe_notice.info").html("Thanks! You've been subscribed.");
+<% end%>
+
+setTimeout(function(){
+	$(".subscribe_notice.info").html('');
+	$(".subscribe_notice.error").html('');
+}, 5000);

@@ -1,0 +1,12 @@
+<% if @error %>
+$(".contact_notice.error").html('All fields are required.');
+$(".contact_notice.info").html('');
+<% else %>
+$(".contact_notice.error").html('');
+$(".contact_notice.info").html('Message sent.');
+<% end%>
+
+setTimeout(function(){
+	$(".contact_notice.info").html('');
+	$(".contact_notice.error").html('');
+}, 5000);

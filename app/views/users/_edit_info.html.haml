@@ -1,5 +1,8 @@
+-# Message from AF: This partial should not be used anymore atmo. The admin is now using user_path instead of edit_user_path
+-# I will leave this file for now. The code was repeated in _account_info.html.haml (it has better styling), so I am using the other partial
+-# Todo: clean up repeated and unused css.
+
 .profile
-  
   .left_menu.same_height
     - act = action_name.to_sym
     - contr = controller_name.to_sym
@@ -59,25 +62,9 @@
           %br/
           = f.text_field :yelp_business_id, placeholder: "Busuniess ID on Yelp"
         - if @user.is_lawyer?
-          - pas = @user.practice_areas
-          - ppas = @user.practice_areas.parent_practice_areas
-          - pas_text = "<h2>Practice Areas: </h2>"
-          - ppas.each{|pa|
-          - pas_text += "<li>#{pa.name}"
-          - sps = pa.specialities
-          - sps_text = ""
-          - sps.each{|sp|
-          - sps_text += pas.include?(sp)? "#{sp.name}, ": ""
-          - }
-          - sps_text.chomp!(', ')
-          - pas_text += (sps_text != '')? "(#{sps_text})</li>": "</li>"
-          - }
-          - pas_text.chomp!(", ")
           = bar_memberships_listing @user
           .clear
-          #div_practice_areas{:style => "font-size:1em;"}
-            %ul.tick= raw(pas_text)
-          %a#practice_areas_editor.dialog-opener{:href => "#practices"} Edit
+          = practice_areas_listing @user
           .clear
           %hr/
           %table
