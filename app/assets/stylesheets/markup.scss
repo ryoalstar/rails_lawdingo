@@ -3307,7 +3307,13 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
         right: 0px;
       }
       
+      .view_profile_button  
+      {
+        display: block !important;
+      }
     }
+		
+		
 		
 		.row, .bio-block{
 			background:#fdfdfd;

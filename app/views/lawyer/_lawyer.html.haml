@@ -6,7 +6,7 @@
         = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
       =link_to attorney_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
         .view_profile_wrapper
-          .view_profile_button
+          .view_profile_button.hidden
             View Profile
       - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
         - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
