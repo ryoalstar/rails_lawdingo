@@ -102,13 +102,38 @@ module LawyersHelper
     output = ''
     bms = lawyer.bar_memberships
     if bms.present?
-      bms_text = '<h2>Bar Memberships: </h3>'
+      bms_text = ''
       bms.each do |bm|
         bar = bm.bar_id? ? "(Bar ID: #{bm.bar_id})" : ""
         bms_text += "<li>#{bm.state.name} #{bar}</li>" if bm.state
       end
-      output = "<div id='div_states_barids'><ul class='tick'>#{bms_text}</ul></div>"
+      output = "<div id='div_states_barids'><h2>Bar Memberships: </h2><ul class='tick bar_list'>#{bms_text}</ul></div>"
       output += '<a href="#bar_membership" id="barids_editor" class="dialog-opener"> Edit</a>'
+    end  
+    output.html_safe
+  end
+  
+  def practice_areas_listing lawyer
+    output = ''
+    pas = lawyer.practice_areas
+    ppas = lawyer.practice_areas.parent_practice_areas
+    if ppas.present?
+      pas_text = ''
+      ppas.each do |pa|
+        pas_text += "<li>#{pa.name}"
+        sps = pa.specialities
+        sps_text = ""
+        
+        sps.each{|sp|
+          sps_text += pas.include?(sp)? "#{sp.name}, ": ""
+        }
+        sps_text.chomp!(', ')
+        pas_text += (sps_text != '')? "(#{sps_text})</li>": "</li>"
+      end
+      pas_text.chomp!(", ")
+        
+      output = "<div id='div_practice_areas'><h2>Practice Areas: </h2><ul class='tick pa_list'>#{pas_text}</ul></div>"
+      output += '<a href="#practices" id="practice_areas_editor" class="dialog-opener"> Edit</a>'
     end  
     output.html_safe
   end  
