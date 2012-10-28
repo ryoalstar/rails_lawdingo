@@ -1718,24 +1718,48 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		
 		
 		.expander_container
+    {
+      width: 28px;
+      height: 29px;
+      background: image-url('lawyer_miniprofile_expand.png');
+      position: absolute;
+      right: -38px;
+      bottom: 10px;
+      transition: right 1s;
+      -moz-transition: right 0.5s; /* Firefox 4 */
+      -webkit-transition: right 0.5s; /* Safari and Chrome */
+      -o-transition: right 0.5s; /* Opera */
+      cursor: pointer;
+      text-align: center;
+      font-size: 19px;
+      padding-left: 9px;
+      line-height: 29px;
+      color: #403f3f;
+      
+      .tooltip.expander
       {
-        width: 28px;
-        height: 29px;
-        background: image-url('lawyer_miniprofile_expand.png');
-        position: absolute;
-        right: -38px;
-        bottom: 10px;
-        transition: right 1s;
-        -moz-transition: right 0.5s; /* Firefox 4 */
-        -webkit-transition: right 0.5s; /* Safari and Chrome */
-        -o-transition: right 0.5s; /* Opera */
-        cursor: pointer;
-        text-align: center;
-        font-size: 19px;
-        padding-left: 9px;
-        line-height: 29px;
-        color: #403f3f 
+        display: block;
+        opacity:0;
+        
+        transition-property:opacity;
+        -moz-transition-property: opacity; /* Firefox 4 */
+        -webkit-transition-property:opacity; /* Safari and Chrome */
+        -o-transition-property:opacity; /* Opera */
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
       }
+    }
+    
+    .expander_container:hover
+    {
+      .tooltip.expander
+      {
+        opacity:1;
+      }
+      
+    }
       
 		.free_section_container
 		{
