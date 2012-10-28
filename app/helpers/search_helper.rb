@@ -6,7 +6,22 @@ module SearchHelper
       lawyer = image.lawyer
       practice_area_text = "Advising on #{lawyer.practice_areas_listing} law. " unless lawyer.parent_practice_area_string.empty?
       images_hash = Hash.new
-      images_hash["free"] = !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer)
+      
+      lawyer_button_link = !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer);
+      lawyer_button_text = ''
+      
+      if lawyer.is_available_by_phone?
+        lawyer_button_text = 'Talk Now'
+      else
+        if lawyer.daily_hours.present?
+          lawyer_button_text = 'Book Appt.'
+        else
+          lawyer_button_text = 'Send Note'
+        end
+      end
+        
+      images_hash["talk_button"] = "<a href='"+ lawyer_button_link  +"' class='free'><p>" + lawyer_button_text  + "</p></a>"
+      
       if image.photo?
         images_hash["url"] = image.photo.url(:large)
       else

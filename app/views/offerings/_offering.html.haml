@@ -34,15 +34,7 @@
               %td
                 %p= start_or_schedule_button(lawyer)
       .free_section_container
-        .free_button_outer
-          = link_to !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer), :class=>'free' do
-            %p
-              Talk Now
-          .free_dropdown{:href=> "#"}
-          .button_tooltip
-            .button-content
-              %ul
-                = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
+        = render(:partial => "lawyer/talk_button", :locals => {:lawyer => lawyer})
         .free_button_explanation
           %p.free_bold= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
           %p.small
