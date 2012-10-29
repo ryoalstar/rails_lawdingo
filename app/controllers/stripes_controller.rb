@@ -30,7 +30,7 @@ class StripesController < ApplicationController
 		respond_to do |format|
 			if @lawyer.coupon_valid?(params[:coupon], false)
 				format.html { render :nothing => true }
-        format.json { render json: {:result => true, :coupon => @lawyer.stripe_get_coupon}, status: :ok }
+        format.json { render json: {:result => true, :coupon => @lawyer.stripe_get_coupon(params[:coupon])}, status: :ok }
       else
 				format.html { render :nothing => true }
         format.json { render json: {:result => false, :errors => @lawyer.errors}, status: :ok }
