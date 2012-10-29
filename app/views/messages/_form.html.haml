@@ -4,5 +4,8 @@
   = form_for @message do |f|
     = f.hidden_field :client_id
     = f.hidden_field :lawyer_id
-    = f.text_field :body, :placeholder => placeholder
-    = f.submit 'Ask', :id => :message_submit_button
+    - if @message.lawyer.present?
+      = f.text_field :body, :placeholder => placeholder, :readonly => true, :class => 'dialog-opener', 'data-fullname' => @message.lawyer.first_name, 'data-l-id' => @message.lawyer.id, :href => '#schedule_session'
+    - else 
+      = f.text_field :body, :placeholder => placeholder, :readonly => true
+    = f.submit 'Ask', :id => :message_submit_button, :disabled => true
