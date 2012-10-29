@@ -12,7 +12,14 @@ Lawdingo::Application.routes.draw do
 
   resources :lawyers, :only => [:new, :create]
   match '/apply' => "lawyers#new", :as => :new_lawyer
+  
+  match '/contact' => "contact#index", :as => :contact
+  
+  post '/contact/send_email' => "contact#send_email", :as => :send_email
+  post '/contact/new_subscriber' => "contact#new_subscriber", :as => :new_subscriber
 
+  
+  
   resources :questions
   resources :reviews
   resources :schools

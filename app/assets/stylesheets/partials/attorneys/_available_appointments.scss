@@ -61,6 +61,20 @@
         color: grey;
       }
     }
+    
+    .day-0, .day-1, .day-2, .day-3{
+        border: 1px solid #d9dbdd;
+        padding: 3px 5px;
+        color: #757575;
+        font-size: 12px;
+        background: #e2e4e6;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: bold;
+      }
   }
   a.appointments{
     text-decoration:none;

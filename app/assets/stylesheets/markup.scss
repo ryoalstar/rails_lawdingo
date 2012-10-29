@@ -591,6 +591,8 @@ body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , bod
         input[type="submit"]{
           width:250px;
           margin-left: 107px;
+          margin-top: 25px;
+          margin-bottom: 10px;
         }
         span.rate_hint{
           margin-left:20px;
@@ -733,22 +735,11 @@ input, select, textarea {
 	width: 100%;
 }
 #container{
-	padding-bottom: 200px;
+	padding-bottom: 250px;
 	float: left;
 	width: 100%;
 }
-#footer{
-	height:84px;
-	position:absolute; 
-	bottom:0;
-	.gplus{
-	  float: left;
-    margin-left: 60px;
-	}
-	.twitter-share-button{
-	  float:left;
-	}
-}
+
 #container > div{
 	
 }
@@ -1506,103 +1497,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		float:left;
 		margin-bottom:10px;
   }
-	#footer{
-		height:180px;
-		z-index:10;
-		width:100%;
-		float:left;
-		//background: image-url('footer_bg.png');
-		position:absolute; 
-		bottom:0;
-		padding-bottom:0;
-		background: image-url('header_bg_gray.png') repeat;
-		color:#bbbbbb;
-    /*background: -moz-linear-gradient(top,  #eaecef 0%, #d5dbe1 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaecef), color-stop(100%,#d5dbe1));
-    background: -webkit-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
-    background: -o-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
-    background: -ms-linear-gradient(top,  #eaecef 0%,#d5dbe1 100%);
-    background: linear-gradient(to bottom,  #eaecef 0%,#d5dbe1 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaecef', endColorstr='#d5dbe1',GradientType=0 );
-    */
-    .footer_border{
-      background:url('footer_border_gray.png') repeat-x;
-      height:4px;
-      width:100%;
-    }
-		.footer-logo{
-		  float:left;
-		  margin-left:235px;
-		  margin-top: 22px;
-		  text-align:center;
-		  width:120px;
-		  font-size:14px;
-		  img{
-		    margin-bottom:5px;
-		  }
-		}
-		.social-links{
-		  float: right;
-      width: 300px;
-      text-align:center;
-      .fb_link{
-        margin-top:22px;
-      }
-      .custom_hr{
-        margin:20px 0;
-      }
-		}
-		.footer_content{
-			margin:0 auto;
-			width:990px;
-			padding-top: 12px;
-
-      .top-offset-small {
-        padding-top: 15px;
-      }
-
-			span.left{
-				font-size: 14px;
-				margin:5px 10px 0px 4px;
-				color:#1a1a1a;
-				display:block;
-				float:left;
-			}
-			span.gplus{
-				width: 100px;
-			}
-			ul{
-				margin-top: 1px;
-				list-style-type:none;
-				float:left;
-				margin:0;
-				padding:0;
-				li:last-child{
-					padding-right: 0;
-				}
-				li{
-					padding:8px 0px;
-					a{
-						color:#e9f6ff;
-						text-decoration:none;
-						display:inline;
-						font-size: 14px;
-						padding: 3px 7px;
-						border-bottom:0;
-					}
-					a.selected, a:hover{
-						color:white;
-						background:#3e4855;
-						-moz-box-shadow: inset 0px 3px 3px #323A44;
-      	    -webkit-box-shadow: inset 0px 3px 3px #323A44;
-      	    box-shadow: inset 0px 3px 3px #323A44;
-					  -moz-border-radius: 15px;
-					  -webkit-border-radius: 15px;
-					}
-				}
-			}
-		}
-	}	
+	
 	#container{
 	  @include tooltip;
     
@@ -1830,24 +1725,48 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		
 		
 		.expander_container
+    {
+      width: 28px;
+      height: 29px;
+      background: image-url('lawyer_miniprofile_expand.png');
+      position: absolute;
+      right: -38px;
+      bottom: 10px;
+      transition: right 1s;
+      -moz-transition: right 0.5s; /* Firefox 4 */
+      -webkit-transition: right 0.5s; /* Safari and Chrome */
+      -o-transition: right 0.5s; /* Opera */
+      cursor: pointer;
+      text-align: center;
+      font-size: 19px;
+      padding-left: 9px;
+      line-height: 29px;
+      color: #403f3f;
+      
+      .tooltip.expander
       {
-        width: 28px;
-        height: 29px;
-        background: image-url('lawyer_miniprofile_expand.png');
-        position: absolute;
-        right: -38px;
-        bottom: 10px;
-        transition: right 1s;
-        -moz-transition: right 0.5s; /* Firefox 4 */
-        -webkit-transition: right 0.5s; /* Safari and Chrome */
-        -o-transition: right 0.5s; /* Opera */
-        cursor: pointer;
-        text-align: center;
-        font-size: 19px;
-        padding-left: 9px;
-        line-height: 29px;
-        color: #403f3f 
+        display: block;
+        opacity:0;
+        
+        transition-property:opacity;
+        -moz-transition-property: opacity; /* Firefox 4 */
+        -webkit-transition-property:opacity; /* Safari and Chrome */
+        -o-transition-property:opacity; /* Opera */
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
       }
+    }
+    
+    .expander_container:hover
+    {
+      .tooltip.expander
+      {
+        opacity:1;
+      }
+      
+    }
       
 		.free_section_container
 		{
@@ -3419,7 +3338,13 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
         right: 0px;
       }
       
+      .view_profile_button  
+      {
+        display: block !important;
+      }
     }
+		
+		
 		
 		.row, .bio-block{
 			background:#fdfdfd;
@@ -3647,7 +3572,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 					/*span:hover{
 						color:#1076e8;
 					}*/
-					.day-0{
+					.day-0, .day-1, .day-2, .day-3{
 						border: 1px solid #d9dbdd;
 						padding: 3px 5px;
 						color: #757575;
@@ -3655,34 +3580,13 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						background: #e2e4e6;
 						-moz-border-radius: 5px;
 						-webkit-border-radius: 5px;
-					}
-					.day-1{
-						border: 1px solid #d9dbdd;
-						padding: 3px 5px;
-						color: #757575;
-						font-size: 12px;
-						background: #e2e4e6;
-						-moz-border-radius: 5px;
-						-webkit-border-radius: 5px;
+						text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: bold;
 					}
 				}
-				// table{
-				// 	height: 60%;
-				// 	width:100%;
-				// 	margin-bottom: 14px;
-				// 	tr{
-						
-				// 		}
-				// 		td{
-				// 			padding-top: 3px;
-				// 			a{
-				// 				font-size:12px;
-				// 				border-bottom: 1px dotted #bbc1c4;
-				// 			}
-				// 		}
-				// 	}
-				// }
-				
+
 				.view_all_wrapper{
 				  text-align: center;
 				  bottom: 0;
@@ -3732,5 +3636,159 @@ body.index.logged-in .framey-video .profile .availability,
 
   .iPhoneCheckContainer{
     float: right;
+  }
+}
+
+
+.contact_wrapper{
+  width: 600px;
+  padding: 30px;
+  height: 270px;
+  background: url(/assets/center_area_bg_gray.png) repeat;
+  margin: 35px auto 15px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  border: 1px solid #3b4551;
+  font-family: "myriad-pro";
+  position: relative;
+  
+  p{
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contact_notice
+  {
+    width: 260px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 20px;
+    margin-right: 33px;
+    margin-top: 5px;
+    font-size: 15px;
+    &.info{
+      color: orange;  
+    }
+    
+    &.error{
+      color: red;
+    }
+  }
+  
+  .contact_stay {
+    display: inline-block;
+    width: 180px;
+    vertical-align: top;
+    .contact_title{
+      color: #e9f6ff;
+      font-size: 22px;
+    }
+    
+    .contact_info_panel{
+      height: 114px;
+      margin-top: 30px;
+      .contact_email
+      {
+        background: url("email_icon_black.png") no-repeat left center ;
+        padding-left: 33px;
+        color: white;
+        font-size: 15px;
+      }
+      
+      .contact_phone
+      {
+        background: url("phone_icon_black.png") no-repeat left center ;
+        padding-left: 33px;
+        color: white;
+        font-size: 15px;
+        margin-top: 20px;
+      }
+      
+      .contact_label
+      {
+        padding-left: 33px;
+        color: #e9f6ff;
+        font-size: 13px;
+      }
+    }
+    
+    .contact_followus{
+      margin-top: 45px;
+      color: white;
+      font-size: 14px;
+      .contact_social{
+        margin-top: 10px;
+        div{
+          width: 32px;
+          height: 32px;
+          float: left;
+          margin-right: 10px;
+          
+          &.contact_fb
+          {
+            background: url("fb_round_icon.png") no-repeat
+          }
+          
+          &.contact_tw
+          {
+            background: url("tw_round_icon.png") no-repeat
+          }
+          
+          &.contact_linkedin
+          {
+            background: url("linkedin_round_icon.png") no-repeat
+          }
+        }
+      }
+    }
+  }
+  
+  
+  .contact_or{
+    display: inline-block;
+    width: 50px;
+    background: url("contact_or.png") center center no-repeat;
+    height: 200px;
+    margin-left: 40px;
+  }
+  
+  .contact_fields{
+    display: inline-block;
+    height: 540px;
+    width: 260px;
+    margin-left: 62px;
+    vertical-align: top;
+    
+    input[type="text"],input[type="email"]{
+      height: 21px;
+      
+    }
+    
+    textarea{
+      height: 110px;
+    }
+    
+    input[type="text"],input[type="email"], textarea{
+      width: 244px;
+      border: 1px solid #B8B8B8;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      padding: 8px;
+
+
+    }
+    
+    .contact_field_wrapper {
+      margin-bottom: 13px;
+    }
+    
+    input[type="submit"]{
+      width: 260px;
+      font-weight: normal;
+    }
+    
   }
 }

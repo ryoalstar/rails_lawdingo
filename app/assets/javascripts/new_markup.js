@@ -277,14 +277,16 @@ $(document).ready(function(){
 	$(".left-bar-section span.voice.online, .left-bar-section span.online_voice_tooltip").live('mouseout', function(){
 	  $(".voice_chat.tooltip.online").fadeOut('slow');
 	});
-	
+
+	// The following code will be done using css
+	/*
 	$(".expander_container").live('mouseover', function(){
 	  $(".tooltip.expander", $(this)).fadeIn('fast');
 	});
 	$(".expander_container").live('mouseout', function(){
 	  $(".tooltip.expander", $(this)).fadeOut('slow');
 	});
-	
+	*/
 
 	$(".cvv-info").live('mouseenter', function(){
 	  $(".tooltip.cvv").fadeIn('slow');

@@ -66,17 +66,7 @@
                         %td
                           %p.active_action= start_or_schedule_button(lawyer)
                 .free_section_container
-                  .free_button_outer
-                    = link_to !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer), :class=>'free' do
-                      %p
-                        Talk Now
-                      -#%p.rate= "#{lawyer.free_consultation_duration} minutes free"
-                    -#%p.small="then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins"
-                    .free_dropdown{:href=> "#"}  
-                    .button_tooltip
-                      .button-content
-                        %ul
-                          = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer})                  
+                  = render(:partial => "lawyer/talk_button", :locals => {:lawyer => lawyer})               
                   .free_button_explanation
                     %p.free_bold= "#{lawyer.free_consultation_duration} minutes free"
                     = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"

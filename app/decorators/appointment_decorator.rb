@@ -1,6 +1,7 @@
 class AppointmentDecorator < ApplicationDecorator
 
-  decorates :appointment
+  decorates :appointment,
+    :class => "Appointment"
 
   def per_minute_rate
     h.number_to_currency(appointment.per_minute_rate)
