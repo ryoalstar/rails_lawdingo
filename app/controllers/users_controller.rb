@@ -7,10 +7,6 @@ class UsersController < ApplicationController
   before_filter :current_user_home, :only => [:landing_page]
   #before_filter :check_payment_info, :only => [:start_phone_call]
 
-  #REMINDER: uncomment only in production
-  #before_filter :force_ssl, :only => ['payment_info']
-  #before_filter :remove_ssl, :only => ['home']
-
   def index
     @tab  = params[:t] ? params[:t] : User::SESSION_TAB
     if User::PAYMENT_TAB == @tab

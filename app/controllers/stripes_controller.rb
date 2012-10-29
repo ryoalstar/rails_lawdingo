@@ -2,7 +2,6 @@ class StripesController < ApplicationController
 
 	before_filter :authenticate
 	before_filter :check_access, :only => [:new, :create, :coupon_validate]
-  force_ssl
 
 	def new
 		@lawyer.create_stripe_customer! unless @lawyer.stripe_customer_token
