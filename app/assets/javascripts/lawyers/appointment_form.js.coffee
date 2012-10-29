@@ -33,10 +33,107 @@ class AppointmentForm
       $(e.target).triggerHandler('click')
 
     @div.find("form").submit (e)=>
-      this.save()
+      if this.checkLawyersStateAndPracticeArea()
+        this.save()
       false
+      
+    @state_name_and_practice_area_select().on "change", =>
+      this.checkLawyersStateAndPracticeArea()
+     
+  state_name_select : ->
+    @div.find("#state_name")
+  practice_area_select : -> 
+    @div.find("#practice_area")
+  state_name_and_practice_area_select : -> 
+    @div.find("#state_name, #practice_area")
+  appointment_warning : ->
+    @div.find("#appointment_warning")
+  submit_button : ->
+    @div.find(".submit_appointment_button")
+  checkLawyersStateAndPracticeArea: => 
+    current_state_id = @state_name_select().val()
+    current_state_name = @state_name_select().find("option[value='#{current_state_id}']").text();
+    current_practice_area_id = @practice_area_select().val()
+    current_practice_area_name = @practice_area_select().find("option[value='#{current_practice_area_id}']").text();
+    lawyer_id = @div.attr("data-id")
+    lawyer_name = @div.attr("data-full_name")
 
-
+    # both are true
+    if this.isLawyersState(current_state_id, lawyer_id) && this.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
+      this.enable_submit_button()
+      this.clear_appointment_warning() 
+      true
+    # isLawyersState false
+    else if !this.isLawyersState(current_state_id, lawyer_id) && this.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
+      this.disable_submit_button()
+      this.write_appointment_state_warning(current_state_name, lawyer_name) 
+      false
+    # isLawyersPracticeArea false
+    else if this.isLawyersState(current_state_id, lawyer_id) && !this.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
+      this.disable_submit_button()
+      this.write_appointment_practice_area_warning(current_practice_area_name, lawyer_name) 
+      false
+    else #
+      this.disable_submit_button()
+      this.write_appointment_state_and_practice_area_warning(current_state_name, current_practice_area_name, lawyer_name)
+      false  
+  isLawyersPracticeArea: (practice_area_id, lawyer_id) => 
+    # return true for all practice_areas
+    return true if practice_area_id == ''
+    practice_areas = []
+    $.ajax(
+      url: '/lawyers/'+lawyer_id+'/practice_areas.json',
+      async: false,
+      dataType: 'json',
+      success: (response) ->
+        if response.practice_areas.length 
+          $.each response.practice_areas, ( key, practice_area ) -> 
+            practice_areas.push(practice_area)
+    )
+    this.inArray(practice_area_id, practice_areas)
+  write_appointment_state_and_practice_area_warning: (state_name,practice_area_name,lawyer_name) =>
+    state_name_for_url = this.state_name_for_url(state_name)
+    practice_area_name_for_url = this.practice_area_name_for_url(practice_area_name)
+    text = "#{lawyer_name} isn't licensed in #{state_name} and doesn't advise on #{practice_area_name}, and thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}/#{practice_area_name_for_url}'>#{state_name} lawyers advising on #{practice_area_name}</a>"
+    this.appointment_warning().html(text)
+  write_appointment_practice_area_warning: (practice_area_name,lawyer_name) =>
+    practice_area_name_for_url = this.practice_area_name_for_url(practice_area_name)
+    text = "#{lawyer_name} doesn't advise on #{practice_area_name}, and thus can't help you. Find <a href='/lawyers/Legal-Advice/All-States/#{practice_area_name_for_url}'>Lawyers advising on #{practice_area_name}</a>"
+    this.appointment_warning().html(text)
+  write_appointment_state_warning: (state_name,lawyer_name) =>
+    state_name_for_url = this.state_name_for_url(state_name)
+    text = "#{lawyer_name} isn't licensed in #{state_name} and, thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}'>#{state_name} lawyers</a>"
+    this.appointment_warning().html(text)
+  practice_area_name_for_url: (practice_area_name) ->
+    practice_area_name.replace /\s+/g, "-"
+  state_name_for_url: (state_name) ->
+    "#{state_name.replace /\s+/g, "_"}-lawyers"
+  clear_appointment_warning: () =>
+    this.appointment_warning().html('')
+  isLawyersState: (state, lawyer_id) =>
+    # return true for all states
+    return true if state == ''
+    states = []
+    $.ajax(
+      url: '/lawyers/'+lawyer_id+'/states.json',
+      async: false,
+      dataType: 'json',
+      success: (response) ->
+        if response.states.length 
+          $.each response.states, ( key, state ) -> 
+            states.push(state)
+    )
+    this.inArray(state, states)
+  inArray: (value, array) ->
+    result = false
+    $.each array, ( key, obj ) -> 
+      if value == obj.id.toString()
+        result = true
+    result    
+  disable_submit_button: () =>
+    this.submit_button().attr('disabled','disabled')
+  enable_submit_button: () =>
+    this.submit_button().removeAttr('disabled')
   show : ()->
     @div.find("form").show()
     @div.find("div.message").hide()

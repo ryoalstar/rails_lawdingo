@@ -52,5 +52,30 @@
     margin-left: 13px !important;
     resize: vertical;
   }
+  .fine-print { 
+    font-size: 0.9em; 
+  }
+  .appointment_state{
+    padding-left: 20px; 
+    padding-top: 10px;
+    height: 55px; 
+    float: left;
+    .appointment_state_bot{
+      margin-top:5px; 
+    }
+  }
+  .appointment_legal_matter{
+    height: 55px; 
+    padding-top: 10px;
+    padding-left: 200px; 
+    .appointment_area_bot{
+      margin-top:5px; 
+    }
+  }
+  #appointment_warning{
+    margin-top: 10px;
+    padding: 0 15px;
+    display: block;
+  }
   @include available_appointments(4);
 }
