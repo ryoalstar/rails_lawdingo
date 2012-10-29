@@ -184,18 +184,18 @@ $(document).ready(function(){
   
   //Makes the question box sticky to top of page when page scrolls down
 	var msie6 = $.browser == 'msie' && $.browser.version < 7;
-	search_box = document.getElementById('generail_question');
+	search_box = document.getElementById('interact_with_lawyer_tabs');
 	filters = document.getElementById('filters');
 	if (search_box && filters && !msie6) {
-		var top = $('#generail_question').offset().top - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
+		var top = $('#interact_with_lawyer_tabs_container').offset().top - parseFloat($('#filters').css('margin-top').replace(/auto/, 0));
 		$(window).scroll(function (event) {
 		  var y = $(this).scrollTop();
 		  if (y >= top) {
-			$('#generail_question').addClass('fixed_question');
+			$('#interact_with_lawyer_tabs_container').addClass('fixed_question');
 			$('#service_type_tabs').addClass('fixed_question_margin');
 			//$('.slidey').addClass('nudge');
 		  } else {
-			$('#generail_question').removeClass('fixed_question');
+			$('#interact_with_lawyer_tabs_container').removeClass('fixed_question');
 			$('#service_type_tabs').removeClass('fixed_question_margin');
 			//$('.slidey').removeClass('nudge');
 		  }
@@ -336,12 +336,12 @@ $(document).ready(function(){
   });
 
   $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").live('mouseover', function(){
-    $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeIn('slow'); // show
+    $(this).nextAll('.tooltips').find('.'+$(this).attr('tooltip')+".tooltip").fadeIn('slow'); // show
     $('.tooltip.dominant').css('opacity','0');
   });
 
   $("span.video.online, span.video.offline, span.voice.online, span.voice.offline, span.text.online, span.text.offline, span.note").live('mouseout', function(){
-    $(this).nextAll('.'+$(this).attr('tooltip')+".tooltip").fadeOut('slow'); // hide
+    $(this).nextAll('.tooltips').find(' .'+$(this).attr('tooltip')+".tooltip").fadeOut('slow'); // hide
     $('.tooltip.dominant').css('opacity','1'); 
   });
 	

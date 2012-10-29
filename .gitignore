@@ -36,3 +36,7 @@
 /solr/conf
 /solr/data
 /solr/pids
+
+/public/sitemap_index.xml.gz
+/public/sitemap1.xml.gz
+

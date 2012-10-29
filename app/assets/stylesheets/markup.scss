@@ -461,7 +461,6 @@ body.index.logged-in{
   }
 }
 
-
 body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit, body.users.update, body.users.edit
 {
   #page > div{
@@ -2981,6 +2980,16 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 						p.last{
 							margin-bottom:10px;
 						}
+						li.practice_area_name{
+						  font-size:14px;
+						  line-height: 26px;
+						}
+						.left{
+						  float:left;
+						}
+						.right{
+						  margin-left: 360px;
+            }
 					}
 					.client-reviews{
 						float:left;
@@ -3244,14 +3253,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 				}
 			}
 			.question{
+			  float: left;
 			  z-index:2;
-				background:#fdfdfd;
-				border:1px solid #d0d2d5;
-				float: left;
-				width:722px;
-				padding-bottom:19px;
-				-moz-border-radius: 5px;
-			  -webkit-border-radius: 5px;
+			  width:682px;
 			  form{
 			    float: left;
           width: 100%;
@@ -3606,8 +3610,7 @@ body.users.edit.logged-in .profile .availability,
 body.users.update.logged-in .profile .availability,
 body.offerings.index.logged-in .profile .availability,
 body.daily_hours.index.logged-in .profile .availability,
-body.index.logged-in .framey-video .profile .availability,
-
+body.index.logged-in .framey-video .profile .availability
 {
   width: 680px;
   .by_video, .by_phone{
@@ -3631,7 +3634,6 @@ body.index.logged-in .framey-video .profile .availability,
     float: right;
   }
 }
-
 
 .contact_wrapper{
   width: 600px;
@@ -3785,3 +3787,12 @@ body.index.logged-in .framey-video .profile .availability,
     
   }
 }
+
+.red {
+  color: red;
+}
+
+[disabled="disabled"]{
+  opacity: 0.7;
+}
+

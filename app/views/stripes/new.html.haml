@@ -14,7 +14,7 @@
       .card-activation
         %h3 
           Activate your Lawdingo profile:   
-          %span#subscription_price $#{@stripe_plan.amount*0.01}/month.
+          %span#subscription_price $#{AppParameter.lawyer_mountly_fee.to_i}/month.
           No commitment, and money back guarantee if you’re not satisfied within the first month.
 
         .card-info
@@ -42,7 +42,7 @@
           %li Display availability, accept appointments
           %li Receive legal inquiries relevant to you
           %li No fee-splitting or referral fees charged
-          %li Just $92/month with no commitments
+          %li Just $#{AppParameter.lawyer_mountly_fee.to_i}/month with no commitments
       .contact_outer
         %p 
           Questions? Contact:

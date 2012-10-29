@@ -39,7 +39,7 @@ describe "Restful Lawyers", :integration do
         
         click_button("Apply as a Lawyer")
         # base case redirects to lawyers path
-        page.current_path.should eql(new_stripe_path)
+        page.current_path.should eql(subscribe_lawyer_path)
 
         Lawyer.last.practice_areas.should include practice_area
 

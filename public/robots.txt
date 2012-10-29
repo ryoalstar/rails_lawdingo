@@ -1,5 +1,12 @@
-# See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
-#
-# To ban all spiders from the entire site uncomment the next two lines:
-# User-Agent: *
-# Disallow: /
+User-Agent: *
+Disallow: /desktopapp/
+Disallow: /assets/
+Disallow: /images/
+Disallow: /photos/
+Disallow: /sounds/
+Disallow: /swf/
+Disallow: /system/
+Disallow: /homepage_images/
+Disallow: /javascripts/
+
+Sitemap: http://lawdingo.com/sitemap_index.xml.gz

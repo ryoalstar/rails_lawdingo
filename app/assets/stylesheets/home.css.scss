@@ -1,0 +1,85 @@
+#interact_with_lawyer_tabs{
+  background-color:#f0f4f7;
+  height: 50px;
+  width: 722px;
+  border: 1px solid #D0D2D5;
+  border-bottom: 1px solid white;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  .tab{
+    margin-top: 10px;
+    background-color:#dbe2e8;
+    height: 40px;
+    width: 60px;
+    float: left;
+  }
+  .tab:hover,
+  .tab.active{
+    background-color: white;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+  .keyboard{
+    background: transparent image-url('interact_keyboard_icon.png') no-repeat 12px 9px;
+  }
+  .phone{
+    background: transparent image-url('interact_phone_icon.png') no-repeat 19px 7px;
+  }
+  .video{
+    background: transparent image-url('interact_video_icon.png') no-repeat 17px 10px;
+  }
+  .interact_description{
+    float: left;
+    width: 150px;
+    margin-left: 20px;
+    margin-top: 8px;
+    line-height: 16px;
+    word-spacing: 2px;
+    .interact_small{
+      font-size: 12px;
+      color: #5d5e5f;
+    }
+    .interact_large{
+      font-size: 14px;
+      color: #5d5e5f;
+    }
+  }
+}
+
+ul.interact_with_lawyer_ul{
+  li{
+    padding:10px!important;
+    height: 66px;
+    background-color: #FDFDFD;
+    border: 1px solid #D0D2D5;
+    border-top: none;
+    width: 702px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}
+
+#phone_consultation_tab{
+  .interact_state,
+  .interact_legal_matter,
+  .interact_phone_number,
+  .interact_submit{
+    height: 60px; 
+    font-size: 14px;
+    color: #5d5e5f;
+    float: left;
+  }
+}
+
+#interact_with_lawyer_tabs_container{
+  z-index: 100;
+}
+

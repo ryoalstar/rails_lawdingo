@@ -132,4 +132,13 @@ class ApplicationController < ActionController::Base
       flash[:notice] = 'Your message has been sent.' 
     end
   end
+  
+  def lawyers_path?
+    request.path == lawyers_path   
+  end
+  
+  def current_path? path
+    request.path == path
+  end
+
 end

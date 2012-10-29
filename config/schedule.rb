@@ -38,6 +38,16 @@ every 12.hours do
   rake 'lawyer:update_payment_status'
 end
 
-every 1.hours do
+every '1 * * * *' do
   rake 'sunspot:solr:reindex'
 end
+
+every 1.day, :at => '1am' do
+  rake 'tmp:clear'
+  rake 'log:clear'
+end
+
+every 1.day, :at => '2am' do
+  rake '-s sitemap:refresh'
+end
+

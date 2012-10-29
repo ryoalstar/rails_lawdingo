@@ -3,7 +3,7 @@
 = form_for(@lawyer, :url => stripe_path, :method => :post, :html => {:id => :new_subscription}) do |f|
   = f.hidden_field :stripe_card_token
   = f.hidden_field :email
-  = hidden_field_tag :stripe_plan_amount, @stripe_plan.amount*0.01
+  = hidden_field_tag :stripe_plan_amount, AppParameter.lawyer_mountly_fee.to_i
   - unless flash[:error]
     - if errors.size > 0
       .error_explanation
@@ -26,6 +26,11 @@
           %tr
             %td
             %td= label_tag :card, 'Credit card has been provided.'
+          %tr  
+            %td
+            %td
+              = text_field_tag :coupon, nil
+              %a.gray_button#apply_coupon_button{:href => coupon_validate_stripe_path(:format => :json)} Apply 
         - else
           %tr
             %td{:colspan=>2}

@@ -4,7 +4,22 @@
     %span.lawyer_name
     %span a question.
   %br/
+  - if @states
+    .schedule_session_state
+      Your state:
+      %br
+      .schedule_session_state_bot
+        = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true, :class=>'select_small'
+  - if @practice_areas
+    .schedule_session_legal_matter
+      Legal matter:
+      %br
+      .schedule_session_area_bot
+        = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_small'
+
   %textarea#message
   %span.fine-print Sending a message does not form an attorney-client relationship.
   %hr/
-  %a.button.blue#send_message_button{:href => "javascript:void(0)"} Send Message
+  %button.button.blue#send_message_button Send Message
+  %br/
+  %span.fine-print.red#schedule_session_warning

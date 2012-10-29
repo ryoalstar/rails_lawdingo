@@ -1,6 +1,7 @@
 <div class="questions-wrapper">
   <h1>Question #<%= @question.id %></h1>
-  <p>by <%= @question.user.full_name %> (<%= mail_to @question.user.email %>)</p>
+  <p>by <%= @question.user.full_name %> (<%= mail_to @question.user.email %><% if @question.user.try(:phone).present? %>
+, phone: <%= @question.user.phone %><% end %>)</p>
 
   <%= simple_form_for @question, remote: true do |f| %>
     <%= f.input :id, as: :hidden %>

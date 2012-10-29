@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  #include ActionView::Helpers::UrlHelper
+
   before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore, :create_lawyer_request]
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
@@ -17,6 +19,8 @@ class UsersController < ApplicationController
       @conversations = current_user.conversations
     end
   end
+  
+
 
   def home
     # if current_user and current_user.is_lawyer?
@@ -32,13 +36,14 @@ class UsersController < ApplicationController
     service_type = (params[:service_type] || "")
     @service_type = service_type.downcase || ""
     
+    @search_query = params[:search_query]
     if @service_type == "legal-services"
       @search = Offering.build_search(
-        params[:search_query], :page => params[:page]
+        @search_query, :page => params[:page]
       )
     else
       @search = Lawyer.build_search(
-        params[:search_query], :page => params[:page]
+        @search_query, :page => params[:page]
       )
     end
 
@@ -57,7 +62,6 @@ class UsersController < ApplicationController
     else
       @lawyers = @search.results
     end
-    
     respond_to do |format|
       format.html
       format.js
@@ -309,11 +313,11 @@ class UsersController < ApplicationController
   end
 
   def update_card_details
-    token = params[:client][:stripe_card_token]
+    token = params[:stripe_card_token]
 
     if token.present?
       customer = Stripe::Customer.create(
-        description: current_user.email,
+        email: current_user.email,
         card: token
       )
 
@@ -380,7 +384,7 @@ class UsersController < ApplicationController
   def start_phone_call
     @lawyer = Lawyer.find(params[:id]) if params[:id].present?
 
-    redirect_to call_payment_path(@lawyer.id) unless current_user.stripe_customer_token.present?
+    redirect_to call_payment_path(@lawyer.id, :return_path=>phonecall_path(:id => params[:id]) ) unless current_user.stripe_customer_token.present?
   end
 
   def create_phone_call
@@ -834,6 +838,15 @@ class UsersController < ApplicationController
       @states = State.all
     end
   end 
+
+  def redirect_to_last_practice_area_state_select_from_cookie
+    if cookies[:practice_area] && cookies[:state]
+      path_from_cookie = filtered_path(:service_type => 'Legal-Advice', :state => cookies[:state], :practice_area => cookies[:practice_area])
+      if lawyers_path? && !current_path?(path_from_cookie)
+        redirect_to(path_from_cookie) and return
+      end
+    end
+  end
 
 end
 

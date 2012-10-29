@@ -111,6 +111,7 @@ class Lawyer < User
     text :states do
       state_names
     end
+    text :state_abbreviations
     integer :state_ids, :multiple => true
     text :reviews do
       review_purpos
@@ -185,6 +186,10 @@ class Lawyer < User
 
   def state_names
     states.map(&:name)*","
+  end
+  
+  def state_abbreviations
+    states.map(&:abbreviation)*","
   end
 
   def review_purpos
@@ -377,7 +382,7 @@ class Lawyer < User
   def practice_areas_names
     self.practice_areas.parent_practice_areas.map do |area|
       #area.name.downcase
-      "<a href='/lawyers#!/lawyers/Legal-Advice/All-States/#{area.name_for_url}'>#{area.name.downcase}</a>"
+      "<a href='/lawyers/Legal-Advice/All-States/#{area.name_for_url}' class='practice_area_name' data-practice-area='#{area.name_for_url}'>#{area.name.downcase}</a>"
     end
   end
 
@@ -540,6 +545,16 @@ class Lawyer < User
 
   def self.get_stripe_plan plan_id = STRIPE_PLAN_ID
     Stripe::Plan.retrieve(plan_id)
+  end
+  
+  # we can update name only
+  def self.stripe_update_plan! params, plan_id = STRIPE_PLAN_ID
+    stripe_plan = self.get_stripe_plan plan_id
+    return false unless stripe_plan
+    params.each do |key, value|
+      stripe_plan.send("#{key}=", value)  
+    end
+    stripe_plan.save
   end
 
   def self.delete_stripe_plan plan_id

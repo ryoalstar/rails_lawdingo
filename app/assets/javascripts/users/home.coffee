@@ -4,7 +4,7 @@ class Home
     this.add_event_listeners()
 
     document.my_flag_search=false
-
+    
     Home.h = {}
     Home.h[198] = 90
     Home.h[169] = 60
@@ -42,7 +42,13 @@ class Home
       this.submit()
     else
       this.add_appointment_forms()
-
+      this.search_defaults()
+      
+  search_defaults : ()->
+    first = getUrlVars()["search_query"]
+    if first
+      $("#input_search_bg_img").hide()
+      $("#input_close_sea_img").show()
   redirect_to_last_practice_area_state_select_from_cookie : ()->
     if document.location.pathname == "/lawyers" && $.cookie('practice_area') && $.cookie('state')
       this.set_state_fields_val($.cookie('state'))
@@ -86,9 +92,10 @@ class Home
     this.page = page
     this.submit()
     this.page = null
-
+  ajaxPort : false  
   submit : ()->
-    $.ajax(this.current_search_url(),{
+    this.ajaxPort.abort() if this.ajaxPort
+    this.ajaxPort = $.ajax(this.current_search_url(),{
       complete : ()=>
         # listeners for appointment forms
         this.add_appointment_forms()
@@ -203,14 +210,14 @@ class Home
       this.set_practice_area_fields_val(
         $(e.target).val()
       )
-      $.cookie('practice_area', $(e.target).val(), { expires: 30 });
+      $.cookie('practice_area', $(e.target).val(), { expires: 30, path: "/" });
       this.submit()
     )
     this.state_fields().change((e)=>
       this.set_state_fields_val(
         $(e.target).val()
       )
-      $.cookie('state', $(e.target).val(), { expires: 30 });
+      $.cookie('state', $(e.target).val(), { expires: 30, path: "/" });
       @submit()
     )
 

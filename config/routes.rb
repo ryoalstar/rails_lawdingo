@@ -3,14 +3,21 @@ Lawdingo::Application.routes.draw do
 
   resources :appointments, :only => [:create]
 
-  resources :clients, :only => [:new, :create]
+  resources :clients, :only => [:new, :create] do
+    post '/new', :on => :collection
+  end
 
   namespace :framey do
     resources :videos
   end
   post "framey/callback" => "framey/videos#callback"
 
-  resources :lawyers, :only => [:new, :create]
+  resources :lawyers, :only => [:new, :create] do 
+    member do
+    get :states
+    get :practice_areas
+    end
+  end
   match '/apply' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact
@@ -44,7 +51,7 @@ Lawdingo::Application.routes.draw do
   match '/apply' => "users#new", :as => :new_lawyer
 
   # Lawyer subscriptions
-  match '/paid' => "stripe#subscribe_lawyer", :as => :subscribe_lawyer
+  match '/paid' => "stripes#new", :as => :subscribe_lawyer
   resource :stripe, only: [:new, :create] do
     post :coupon_validate
   end
@@ -174,9 +181,9 @@ Lawdingo::Application.routes.draw do
   match '/admin' =>"users#show", :as =>:admin_home
   #root :to => 'users#home'
 
-  match '/lawyers/:service_type(/:state)' => 'users#home'
+  match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
-  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home'
+  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }
   match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
   match '/learnmore' => 'users#learnmore'
@@ -189,4 +196,5 @@ Lawdingo::Application.routes.draw do
 
   match '/LoginByApp' => 'sessions#login_by_app'
   match '/UpdateOnlineByApp' => 'sessions#set_status_by_app'
+  
 end

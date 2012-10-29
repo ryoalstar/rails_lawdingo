@@ -4,6 +4,8 @@
   })
 
 - title "#{@attorney.full_name} — #{@attorney.licenced_states.join(', ')} lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
+- description "Lawdingo: Ask a #{@attorney.full_name} Online Now. Lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
+- keywords "#{@attorney.practice_areas.collect{|pa| pa.name}.join(', ')}"
 
 -content_for :head do
   %meta{:property => "og:title",     :content => yield(:title)}
@@ -56,20 +58,23 @@
               %ul
                 %li= pluralize years_practicing_law(@attorney), "year", "years"
             - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:rating_img_url]
-              %p Yelp rating
+              %p(itemscope){:itemtype => 'http://schema.org/Rating'}
+                Yelp rating
+                %span{:itemprop => :ratingValue, :bestRating => 5.0}= @attorney.yelp[:rating]
               .yelp-rating-container
                 .stars
                   = image_tag @attorney.yelp[:rating_img_url]
-                %p.small
+                %p.small{:itemprop => :reviewCount}
                   Based on #{pluralize @attorney.yelp[:review_count], "review", "reviews"}
                 .clear
               %br/  
             - if @attorney.reviews.average(:rating).to_i > 0
-              .yelp-rating-container
-                %p 
-                  Lawdingo rating
+              .yelp-rating-container(itemscope){:itemtype => 'http://schema.org/Rating'}
+                %p
+                  Lawdingo rating 
+                  %span{:itemprop => :ratingValue, :bestRating => 5.0}= @attorney.reviews.average(:rating)
                   = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: @attorney.reviews.average(:rating).to_i }), attorney_path(@attorney, slug: @attorney.slug, anchor: "reviews"), class: "rating-stars"
-                %p.small
+                %p.small{:itemprop => :reviewCount}
                   Based on #{pluralize @attorney.reviews.count, "review", "reviews"}
 
     - bms = []
@@ -89,15 +94,16 @@
     - pas_names = pas.map { |area| area.name.downcase  }
     - pas_names_last = pas_names.pop
     - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"     
-    .main_content
+    .main_content(itemscope){:itemtype => 'http://schema.org/Attorney'}
       .bio-block
         .left_border
         = render "share"
         .avatar
-          = image_tag(@attorney.photo.url(:medium))
+          = link_to image_tag(@attorney.photo.url(:medium), :itemprop => :photo), attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url
         .middle
           %h1.gray
-            = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug)
+            = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url do 
+              %span{:itemprop => "name"}= @attorney.full_name
           -#.price
             -#.free
               %table
@@ -116,7 +122,7 @@
             - unless @attorney.bar_memberships.blank?
               Licensed in #{licenced_states}
           - if @attorney.personal_tagline.present?    
-            %p.tagline= raw "#{simple_format '“' + @attorney.personal_tagline + '”'}"
+            %p.tagline{:itemprop => :description}= raw "#{simple_format '“' + @attorney.personal_tagline + '”'}"
           .free_section_container
             = render(:partial => "lawyer/talk_button", :locals => {:lawyer => @attorney})
             .free_button_explanation
@@ -132,7 +138,7 @@
                 %textarea{:placeholder => 'Type your question here'}
                 %a{:href => '#'} Ask
               .right
-                %div.available-appointments
+                %div.available-appointments{:itemprop => :openingHours}
                   = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => @attorney, :ndays=> 4})                      
                   .clear
               .appointments
@@ -177,23 +183,44 @@
                   Latest
                   = link_to image_tag('yelp_logo_50x25.png'), "http://www.yelp.com"
                   reviews:
-                - @attorney.yelp[:reviews].each do |review|
-                  .comment-block
-                    = image_tag(review["user"]["image_url"])
-                    .comment_cloud
-                      .left_border
-                      .stars
-                        = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
-                      = content_tag :li, class: "yelp-review", id: review["id"] do            
-                        = content_tag :p, yelp_review_excerpt(review, @attorney)
-                        = content_tag :span, yelp_review_posted_by(review), class: "footnote"
+                %div{:itemprop => :reviews}  
+                  - @attorney.yelp[:reviews].each do |review|
+                    .comment-block
+                      = image_tag(review["user"]["image_url"])
+                      .comment_cloud
+                        .left_border
+                        .stars
+                          = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
+                        = content_tag :li, class: "yelp-review", id: review["id"] do            
+                          = content_tag :p, yelp_review_excerpt(review, @attorney)
+                          = content_tag :span, yelp_review_posted_by(review), class: "footnote"
               - if @attorney.reviews.count.to_i > 0
                 %h4 Lawdingo client reviews:        
-                .client-reviews#reviews
+                .client-reviews#reviews{:itemprop => :reviews}
                   %a{:name => 'reviews'}
                   = render @attorney.reviews.order("created_at DESC")
                    
-  = hidden_field_tag :lawyer_id, @attorney.id, :class => :current_selected_lawyer          
+      .profile_info   
+        %h2 Similar Lawyers
+        .main-content
+          .main-info
+            %h4 See also:
+            %br
+            %ul.left
+              - if @attorney.school.present?
+                %li.practice_area_name= link_to "#{@attorney.school.name} alumni", filtered_path(:search_query => @attorney.school.name)
+              - @attorney.practice_areas.parent_practice_areas.each do |ppa|
+                %li.practice_area_name= link_to "#{ppa.name} legal advice", filtered_path(:practice_area => ppa.name_for_url)
+                - ppa.children.each do |cpa|
+                  %li.practice_area_name= link_to "#{cpa.name} legal advice", "/lawyers/Legal-Advice/All-States/#{cpa.name_for_url}"
+                  
+            %ul.right
+              - @attorney.states.each do |state|
+                %li.practice_area_name= link_to "#{state.name} Lawyers", state_path(:state => state.name_for_url)
+                - @attorney.practice_areas.parent_practice_areas.each do |ppa|
+                  %li.practice_area_name= link_to "#{state.name} #{ppa.name} Lawyers", filtered_path(:state => state.name_for_url, :practice_area => ppa.name_for_url)
+  
+  = hidden_field_tag :lawyer_id, @attorney.id, :class => :current_selected_lawyer
   = render '/messages/dialog_window'
   
 

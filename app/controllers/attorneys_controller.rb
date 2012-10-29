@@ -22,6 +22,8 @@ class AttorneysController < ApplicationController
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
 
     @areas = pas_names_list
+    @practice_areas = PracticeArea.parent_practice_areas
+    @states = State.with_approved_lawyers
   end
 
   def call_payment

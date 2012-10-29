@@ -14,11 +14,18 @@
         var is_lawyer = false;
     = javascript_include_tag "application"
     = javascript_include_tag "https://framey.com/javascripts/framey3.js", "https://js.stripe.com/v1/", "payment", "//platform.linkedin.com/in.js"
+    - if current_user.try(:is_lawyer?)
+      :javascript
+        $(function(){ RealtimeChecker.initialize(); })
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
+    - if content_for?(:description)
+      = tag :meta, :name => :description, :content => yield(:description)
+    - if content_for?(:keywords)
+      = tag :meta, :name => :keywords, :content => yield(:keywords)
     = render :partial => 'layouts/ie_style'
     
-    %link{:href=>'http://fonts.googleapis.com/css?family=Exo', :rel=>'stylesheet', :type=>'text/css'}
+    %link{:href=>'//fonts.googleapis.com/css?family=Exo', :rel=>'stylesheet', :type=>'text/css'}
     %meta{:property => "og:site_name", :content => 'Lawdingo: Ask a Lawyer Online Now'}
     = yield :head
     - if Rails.env.production?

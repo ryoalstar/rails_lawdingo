@@ -6,7 +6,7 @@ related to <%= @question.practice_area.downcase %>.</p>
 <p>Name: <%= @question.user.full_name %>.</p>
 <p>Email: <%= @question.user.email %>.</p>
 
-<% if @question.user.phone.present? %>
+<% if @question.user.try(:phone).present? %>
 <p>Phone number: <%= @question.user.phone %>.</p>
 <% end %>
 <br />

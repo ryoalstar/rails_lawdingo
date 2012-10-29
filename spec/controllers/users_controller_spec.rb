@@ -125,7 +125,7 @@ describe UsersController do
     context "#start_phone_call" do
       it "should redirect to the payment info page unless client has payment data in file" do
         get :start_phone_call, { id: arnold.id, client_number: "6087004680" }
-        request.should redirect_to call_payment_path(id: arnold.id)
+        request.should redirect_to call_payment_path(arnold.id, :return_path=>phonecall_path(:id =>arnold.id))
       end
     end
   end
