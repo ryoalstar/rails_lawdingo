@@ -101,8 +101,12 @@ body.sessions.new{
 	  margin: 0;
 	  width: 100%;
 	  margin-top: 30px;
-	  height: 2px;
-	  background: url('footer_hr.png') repeat-x;
+	  border: 1px solid;
+    padding: 0;
+    border-top-color: #444C57;
+    border-bottom-color: #5C6571;
+	  height: 0px;
+	  
 	}
 	.footer_content{
 		margin:0 auto;
