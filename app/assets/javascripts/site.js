@@ -17,7 +17,7 @@ function equalHeight(group) {
     });
     group.height(tallest);
   }
-  $(document).ready(function() {
+  $(window).load(function() {
     $('.row').each(function(){
       equalHeight($(this).find(".row_block"));
     });
