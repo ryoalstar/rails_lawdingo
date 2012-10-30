@@ -53,7 +53,7 @@ Lawdingo::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.force_ssl = false
+  config.force_ssl = true
 
   # Send email with an error log each time an exception is raised
   config.middleware.use ExceptionNotifier,

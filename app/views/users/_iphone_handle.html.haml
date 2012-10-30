@@ -1,6 +1,6 @@
 .availability
   .by_video
-    = check_box_tag :lawyer_is_online, :class => :iphoned
+    = check_box_tag :lawyer_is_online, 1, lawyer.is_online, :class => :iphoned
     %label{:for => :is_online} Available by video:
     .clear
   .by_phone

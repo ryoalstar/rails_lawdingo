@@ -1,9 +1,22 @@
-.appointment-form{:id => "appointment_form_#{lawyer.id}"}
+.appointment-form{:id => "appointment_form_#{lawyer.id}", :data => { :id => lawyer.id, :full_name => lawyer.full_name }}
   .message{:style => "display:none"}
   %form{:action => appointments_path, :method => "POST"}
-    %h2.popup_head Schedule a consultation with #{lawyer.full_name}
+    %h2.popup_head Book an appointment with #{lawyer.full_name}
 
     %div.error{:style => "display:none"}
+
+    - if @states
+      .appointment_state
+        Your state:
+        %br
+        .appointment_state_bot
+          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true, :class=>'select_small'
+    - if @practice_areas
+      .appointment_legal_matter
+        Legal matter:
+        %br
+        .appointment_area_bot
+          = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law", :class=>'select_small'
 
     %p Available appointments (select one)
 
@@ -48,4 +61,6 @@
     /     =radio_button(:appointment, :appointment_type, :video)
     /     Video
     /%hr/
-    = submit_tag("Book Appointment", :class => "button")
+    = submit_tag("Book Appointment", :class => "button submit_appointment_button")
+    %br/
+    %span.fine-print.red#appointment_warning

@@ -593,7 +593,7 @@ class Lawyer < User
     errors.add(:coupon, "That code is invalid.") and return false
   end  
 
-  def apply_coupon plan_id = STRIPE_PLAN_ID, coupon_id
+  def apply_coupon coupon_id, plan_id = STRIPE_PLAN_ID
     return true if coupon_id.empty? # allow blank coupon
     return false unless coupon_valid?(coupon_id)
     customer = self.get_stripe_customer

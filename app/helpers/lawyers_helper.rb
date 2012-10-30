@@ -204,9 +204,9 @@ module LawyersHelper
 
   def schedule_consultation_button_text(lawyer)
     if logged_in?
-      link_to "Schedule Consultation", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
+      link_to "Book appointment", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
-      link_to "Schedule Consultation", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
+      link_to "Book appointment", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
     end
   end
 
@@ -238,9 +238,9 @@ module LawyersHelper
   
   def schedule_consultation_button_profile_text(lawyer)
     if logged_in?
-      link_to "Schedule Consultation", "#", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
+      link_to "Book appointment", "#", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
-      link_to "Schedule Consultation", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
+      link_to "Book appointment", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
     end
   end
 
@@ -384,7 +384,7 @@ module LawyersHelper
       output << '<div class="voice_chat offline tooltip"> Not available by phone now</div>'
     end  
     if lawyer.daily_hours.present?
-      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone? ? '' : ' dominant'}'> Schedule consultation</div>"
+      output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone? ? '' : ' dominant'}'> Book appointment</div>"
     else
       output << '<div class="text_chat offline tooltip">No appointments available</div>'
     end  
