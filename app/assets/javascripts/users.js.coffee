@@ -67,7 +67,7 @@ jQuery ->
     if $input.val() is ""
       $("span.rate_hint", $(this).parent()).html "Will be quoted per 0.1 hour."
     else
-      $("span.rate_hint", $(this).parent()).html "Quoted as $#{rate_per_6minutes.toFixed(2)} / 6 mins."
+      $("span.rate_hint", $(this).parent()).html "Quoted as $#{rate_per_6minutes.toFixed(2)} per 6 mins."
 
   ($ "input#lawyer_hourly_rate").numeric() # accept only numbers
   ($ "input#lawyer_hourly_rate").bind "keyup", ->
@@ -78,7 +78,7 @@ jQuery ->
     if $input.val() is ""
       $("span.rate_hint", $(this).parent()).html "Will be quoted per 0.1 hour."
     else
-      $("span.rate_hint", $(this).parent()).html "Quoted as $#{rate_per_6minutes.toFixed(2)} / 6 mins."
+      $("span.rate_hint", $(this).parent()).html "Quoted as $#{rate_per_6minutes.toFixed(2)} per 6 mins."
 
 
   ($ "a#start_phone_session_button").bind "click", ->

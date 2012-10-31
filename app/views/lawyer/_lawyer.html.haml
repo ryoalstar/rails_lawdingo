@@ -106,7 +106,7 @@
           = render(:partial => "lawyer/talk_button", :locals => {:lawyer => lawyer})
           .free_button_explanation
             %p.free_bold= free_message(lawyer)
-            = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
+            = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small"
         .expander_container
           %span +
           .tooltip.expander See more info

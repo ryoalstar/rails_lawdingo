@@ -62,20 +62,20 @@
                   = render(:partial => "lawyer/talk_button", :locals => {:lawyer => lawyer})               
                   .free_button_explanation
                     %p.free_bold= "#{lawyer.free_consultation_duration} minutes free"
-                    = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
+                    = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small"
                 
               - # content for the modal dialog we are going to display
               %div{:style => "display:none;"}
                 = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
                 -#.lawyer_rates
                   %h5.rate= free_message(lawyer)
-                  = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins", class: "small"
+                  = content_tag :p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small"
                   %p.small
                     %span (prorated to the minute)            
               
                 -#%a.free{:href=> "#"}
                   %p.rate= "#{lawyer.free_consultation_duration} minutes free"
-                  %p.small="then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} / 6 mins"
+                  %p.small="then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins"
                 -#.button_tooltip
                   .button-content
                     %ul
