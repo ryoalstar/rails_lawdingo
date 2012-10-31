@@ -835,13 +835,7 @@ input, select, textarea {
       margin-top: 3px;
     }
     
-    .header_text_now {
-      position: absolute;
-      left: 288px;
-      bottom: 9px; 
-      font-size: 13px;
-      font-weight: bold;
-    }
+   
     
     .header_text_bold{
       font-size: 13px;
@@ -856,7 +850,7 @@ input, select, textarea {
       background-color: #e3eaef;
       position: absolute;
       bottom: 0;
-      left: 167px;
+      left: 185px;
       border-top: 1px solid #cbd0d7;
       border-left: 1px solid #cbd0d7;
       border-right: 1px solid #cbd0d7;
@@ -1485,7 +1479,8 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 		display:block;
 		font-size:13px;
 		color:#313131;
-		text-decoration:none;
+		height: 25px;
+		text-decoration:none; 
 		float:left;
 		margin-bottom:10px;
   }
@@ -1780,6 +1775,9 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
         {
           font-weight: bold;
         }
+        .small{
+          font-size: 12px;
+        }
       }
       
       
@@ -1792,7 +1790,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
       height: 34px;
       float: left;
       margin-top: 8px;
-      
+
       .view_profile_button
       {
         width: 97px;
@@ -1863,6 +1861,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 			margin-top:13px;
 			float:left;		
 			margin-left: 10px;	
+			height: 18px;
 			.rating{
 				height: 16px;
 				overflow: hidden;
@@ -3356,7 +3355,7 @@ body.users.learnmore, body.users.landing_page, body.users.home, body.attorneys.s
 			.left{
 				float:left;
 				width: 118px;
-				padding:17px 10px 0px 17px;
+				padding:15px 10px 15px 17px;
 				.yelp_reviews{
 				  a{
 				    border:0;

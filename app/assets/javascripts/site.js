@@ -17,7 +17,7 @@ function equalHeight(group) {
     });
     group.height(tallest);
   }
-  $(document).ready(function() {
+  $(window).load(function() {
     $('.row').each(function(){
       equalHeight($(this).find(".row_block"));
     });
@@ -105,7 +105,7 @@ function select_unselect_state(id) {
 function setBarIds(){
   var states_barids = new Array();
   var form_data_status = false;
-  $('#leveled_list_bar_ids').children().each(function(index){
+  $('#leveled_list_bar_ids').children('li').each(function(index){
     var self = $(this);
     var checked = false;
     var chkbox = self.find('input[type=checkbox]')

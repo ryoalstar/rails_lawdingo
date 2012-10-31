@@ -52,12 +52,12 @@
                       .tooltip.big.cvv 3 digit code on the back of your card
                     %td.separator
                     %td.labels
-                      Promo code:
-                      %br/
-                      (optional)
+                      -#Promo code:
+                      -#%br/
+                      -#(optional)
                     %td
-                      = text_field_tag :coupon, nil
-                      %a.gray_button#apply_coupon_button{:href => coupon_validate_stripe_path(:format => :json)} Apply        
+                      -#= text_field_tag :coupon, nil
+                      -#%a.gray_button#apply_coupon_button{:href => coupon_validate_stripe_path(:format => :json)} Apply        
 
           
       %tr

@@ -77,7 +77,6 @@ describe "Restful Lawyers", :integration do
       lawyer.is_available_by_phone.should be_false
       sign_in lawyer
       current_url.should eq(user_daily_hours_url(lawyer.id))
-      page.should have_selector('h3.lawyer_notice:contains("You are now shown as available by video chat. Keep this window open to remain available.")')
       lawyer.reload
       lawyer.is_online.should be_true
       lawyer.is_available_by_phone.should be_true

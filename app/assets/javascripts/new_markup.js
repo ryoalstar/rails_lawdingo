@@ -87,7 +87,7 @@ initializeLawyersEvents = function ()
 	      //console.log('flag false');
 	    }
 	});
-
+	/*
 	$("div.row.lawyer").live('click', function(e){
 		var expander = $(".expander_container", $(this));
 		if (expander.length > 0)
@@ -129,7 +129,7 @@ initializeLawyersEvents = function ()
 		return false;
 	}
 	);
-	
+	*/
 	$("div.row.lawyer a, div.row.lawyer input, div.row.lawyer .view_profile_button").live('click',function(event){
 		// If the parent has a expander I will trigger an event manually, so stop propagation.
 		var parent = $(this).parents("div.row.lawyer");

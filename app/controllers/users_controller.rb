@@ -100,6 +100,10 @@ class UsersController < ApplicationController
           redirect_to :protocol => 'https', :t => 'm'
         end
       elsif User::ACCOUNT_TAB == @tab && @user.is_lawyer?
+        #I know that this is a bad practice, but this invalid records on bar membership are causing a lot of trouble
+        @user.bar_memberships.select{|bm| bm.state.nil?}.each do |bm|
+          bm.delete
+        end
         fill_states
         @states.count.times {@user.bar_memberships.build}
       elsif User::SESSION_TAB == @tab && @user.is_lawyer?
