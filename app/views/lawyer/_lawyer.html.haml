@@ -42,10 +42,17 @@
     - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
     - if lawyer.personal_tagline.present?
       - unless params[:controller] == "attorneys"
-        - if lawyer.personal_tagline.length < 120
+        - tagline_length = lawyer.personal_tagline.length
+        - if  tagline_length < 120
           - lawyer_tagline = "“#{lawyer.personal_tagline}”"
+          - long_tagline = lawyer_tagline
         - else
           - lawyer_tagline = "“" + lawyer.personal_tagline.truncate(120, separator: ' ', omission: "...” #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}")
+          - if tagline_length < 600
+            - long_tagline = lawyer.personal_tagline
+          - else
+            - long_tagline = "“" + lawyer.personal_tagline.truncate(600, separator: ' ', omission: "...” #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}")
+          
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
       .online_icons 
@@ -54,10 +61,10 @@
       .clear
       .description
         - if lawyer.personal_tagline.present?
-          %p.lawyer_tagline.hidden= raw lawyer_tagline
-  
+          %p.lawyer_tagline= raw lawyer_tagline
+          %p.lawyer_long_tagline.hidden= raw long_tagline
         = send_message_from_lawyer_mini_profile lawyer
-        .expanded_info.hidden
+        .expanded_info
           - unless lawyer.bar_memberships.blank?
             %ul.bar_memberships
               %li
@@ -84,6 +91,10 @@
                         %td
                           %span
                             #{number_to_currency(offering.fee, precision: 0)}
+            - if !lawyer.school.nil?
+              %li.offerings_item.hidden.law_school
+                Law school:  
+                = lawyer.school.name
         -#.free
           %table
             %tbody

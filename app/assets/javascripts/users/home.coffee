@@ -168,33 +168,80 @@ class Home
         this.submit()
         false
       )
-    $(".expander_container").click( (e) =>
+      
+      
+    expander_control = (expander) ->  
       #First find the parent
-      parent = $(e.target).parents(".lawyer")
+      parent = expander.parents(".lawyer")
       if parent.hasClass('expanded')
         parent.removeClass('expanded')
-        
-        
           
-        $(".expanded_info", parent).hide 'slow', ->
-          $("p.lawyer_tagline", parent).hide 'slow', ->
-            maxheight = parseInt($(".middle", parent).height())
-            if parseInt($(".left", parent).height()) > maxheight
-              maxheight = parseInt($(".left", parent).height()) 
-            $(".right", parent).css('height', maxheight + "px")
-            $(".middle", parent).css('height', maxheight + "px")
         
-        $(e.target).html('+')
+        resizecols = ->
+          maxheight = parseInt($(".middle", parent).height())
+          if parseInt($(".left", parent).height()) > maxheight
+            maxheight = parseInt($(".left", parent).height()) 
+          $(".right", parent).css('height', maxheight + "px")
+          $(".middle", parent).css('height', maxheight + "px")    
+  
+        if (typeof($("p.lawyer_tagline", parent).html()) != 'undefined')
+          if ($("p.lawyer_tagline", parent).html().length !=  $("p.lawyer_long_tagline", parent).html().length)
+            $("p.lawyer_long_tagline", parent).hide 'fast'
+            $("p.lawyer_tagline", parent).show 'slow', ->
+              if $("li.offerings_item.law_school", parent).length > 0
+                $("li.offerings_item.law_school", parent).show 'slow', ->
+                  resizecols()
+              else resizecols()
+          else
+            if $("li.offerings_item.law_school", parent).length > 0
+              $("li.offerings_item.law_school", parent).show 'slow', ->
+                resizecols()
+            else 
+              resizecols()
+        else
+          if $("li.offerings_item.law_school", parent).length > 0
+            $("li.offerings_item.law_school", parent).show 'slow', ->
+              resizecols()
+          else 
+            resizecols()
+        
+        expander.html('+')
       else
         parent.css('height', 'auto')
         $(".middle", parent).css('height', 'auto')
         parent.addClass('expanded')
-        $(".expanded_info", parent).show "slow", ->
-          $("p.lawyer_tagline", parent).show 'slow', ->
-            $(".right", parent).css('height', $(".middle", parent).height())
+        if (typeof($("p.lawyer_tagline", parent).html()) != 'undefined')
+          if ($("p.lawyer_tagline", parent).html().length !=  $("p.lawyer_long_tagline", parent).html().length)
+            $("p.lawyer_tagline", parent).hide()
+            $("p.lawyer_long_tagline", parent).show 'slow', ->
+              if $("li.offerings_item.law_school", parent).length > 0
+                $("li.offerings_item.law_school", parent).show 'slow', ->
+                  $(".right", parent).css('height', $(".middle", parent).height())
+              else
+                $(".right", parent).css('height', $(".middle", parent).height())
+          else
+            if $("li.offerings_item.law_school", parent).length > 0
+              $("li.offerings_item.law_school", parent).show 'slow', ->
+                $(".right", parent).css('height', $(".middle", parent).height())
+            else 
+              $(".right", parent).css('height', $(".middle", parent).height())
+         else
+           if $("li.offerings_item.law_school", parent).length > 0
+             $("li.offerings_item.law_school", parent).show 'slow', ->
+               $(".right", parent).css('height', $(".middle", parent).height())
+           else 
+             $(".right", parent).css('height', $(".middle", parent).height())
+          
         
-        
-        $(e.target).html('-')
+        expander.html('-')
+    
+    $("div.row.lawyer").live 'click', (e) ->
+      expander_control($(".expander_container" ,$(this)))
+      e.stopPropagation()
+      return false
+      
+    $(".expander_container").click( (e) =>
+      expander_control($(e.target))
       e.stopPropagation()
       return false
     )
