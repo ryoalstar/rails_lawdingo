@@ -63,6 +63,22 @@ class AppointmentForm
       this.enable_submit_button()
       this.clear_appointment_warning() 
       true
+      
+    else if !this.isStateSelected() && !this.isPracticeAreaSelected() 
+      this.disable_submit_button()
+      this.write_appointment_state_and_practice_area_missing_warning()
+      false
+      
+    else if !this.isStateSelected()  
+      this.disable_submit_button()
+      this.write_appointment_state_missing_warning() 
+      false
+      
+    else if !this.isPracticeAreaSelected()  
+      this.disable_submit_button()
+      this.write_appointment_practice_area_missing_warning() 
+      false
+      
     # isLawyersState false
     else if !this.isLawyersState(current_state_id, lawyer_id) && this.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
       this.disable_submit_button()
@@ -77,9 +93,14 @@ class AppointmentForm
       this.disable_submit_button()
       this.write_appointment_state_and_practice_area_warning(current_state_name, current_practice_area_name, lawyer_name)
       false  
+  isStateSelected: =>
+    parseInt(this.state_name_select().val()) > 0
+  isPracticeAreaSelected: =>
+    parseInt(this.practice_area_select().val()) > 0
+  isStateAndPracticeAreaSelected: => 
+    this.isStateSelected() && this.isPracticeAreaSelected()
   isLawyersPracticeArea: (practice_area_id, lawyer_id) => 
-    # return true for all practice_areas
-    return true if practice_area_id == ''
+    return false if practice_area_id == ''
     practice_areas = []
     $.ajax(
       url: '/lawyers/'+lawyer_id+'/practice_areas.json',
@@ -104,6 +125,15 @@ class AppointmentForm
     state_name_for_url = this.state_name_for_url(state_name)
     text = "#{lawyer_name} isn't licensed in #{state_name} and, thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}'>#{state_name} lawyers</a>"
     this.appointment_warning().html(text)
+  write_appointment_state_and_practice_area_missing_warning: =>
+    text = "Please, select State and Type of law."
+    this.appointment_warning().html(text)
+  write_appointment_state_missing_warning: =>
+    text = "Please, select State."
+    this.appointment_warning().html(text)
+  write_appointment_practice_area_missing_warning: =>
+    text = "Please, select Type of law."
+    this.appointment_warning().html(text)
   practice_area_name_for_url: (practice_area_name) ->
     practice_area_name.replace /\s+/g, "-"
   state_name_for_url: (state_name) ->
@@ -111,8 +141,7 @@ class AppointmentForm
   clear_appointment_warning: () =>
     this.appointment_warning().html('')
   isLawyersState: (state, lawyer_id) =>
-    # return true for all states
-    return true if state == ''
+    return false if state == ''
     states = []
     $.ajax(
       url: '/lawyers/'+lawyer_id+'/states.json',

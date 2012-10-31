@@ -9,13 +9,13 @@
       Your state:
       %br
       .schedule_session_state_bot
-        = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true, :class=>'select_small'
+        = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :required => true, :class => 'select_small required'
   - if @practice_areas
     .schedule_session_legal_matter
       Legal matter:
       %br
       .schedule_session_area_bot
-        = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_small'
+        = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :required => true, :prompt => "Type of law", :class => 'select_small required'
 
   %textarea#message
   %span.fine-print Sending a message does not form an attorney-client relationship.

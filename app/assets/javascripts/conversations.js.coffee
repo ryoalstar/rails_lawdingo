@@ -46,12 +46,28 @@ conversations =
     current_practice_area_name = ($ "#schedule_session #practice_area option[value='#{current_practice_area_id}']").text();
     lawyer_id = ($ "input#lawyer_id").val()
     lawyer_name = ($ "#schedule_session span.lawyer_name").text()
-      
+    
     # both are true
     if conversations.isLawyersState(current_state_id, lawyer_id) && conversations.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
       conversations.enable_submit_message_button submit_message_button 
       conversations.clear_schedule_session_warning() 
       true
+      
+    else if !conversations.isStateSelected() && !conversations.isPracticeAreaSelected() 
+      conversations.disable_submit_message_button submit_message_button
+      conversations.write_schedule_session_state_and_practice_area_missing_warning()
+      false
+      
+    else if !conversations.isStateSelected()  
+      conversations.disable_submit_message_button submit_message_button
+      conversations.write_schedule_session_state_missing_warning() 
+      false
+      
+    else if !conversations.isPracticeAreaSelected()  
+      conversations.disable_submit_message_button submit_message_button
+      conversations.write_schedule_session_practice_area_missing_warning() 
+      false
+      
     # isLawyersState false
     else if !conversations.isLawyersState(current_state_id, lawyer_id) && conversations.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
       conversations.disable_submit_message_button submit_message_button 
@@ -65,10 +81,22 @@ conversations =
     else #
       conversations.disable_submit_message_button submit_message_button 
       conversations.write_schedule_session_state_and_practice_area_warning(current_state_name, current_practice_area_name, lawyer_name)
-      false  
-  isLawyersPracticeArea: (practice_area_id, lawyer_id) -> 
-    # return true for all practice_areas
-    return true if practice_area_id == ''
+      false
+
+  state_name_select: -> 
+    ($ "#schedule_session #state_name")
+  practice_area_select: -> 
+    ($ "#schedule_session #practice_area")
+  schedule_session_warning: ->
+    ($ "#schedule_session_warning")
+  isStateSelected: ->
+    parseInt(conversations.state_name_select().val()) > 0
+  isPracticeAreaSelected: ->
+    parseInt(conversations.practice_area_select().val()) > 0
+  isStateAndPracticeAreaSelected: -> 
+    conversations.isStateSelected() && conversations.isPracticeAreaSelected()
+  isLawyersPracticeArea: (practice_area_id, lawyer_id) ->
+    return false if practice_area_id == ''
     practice_areas = []
     $.ajax(
       url: '/lawyers/'+lawyer_id+'/practice_areas.json',
@@ -81,21 +109,28 @@ conversations =
     )
     conversations.inArray(practice_area_id, practice_areas)
   write_schedule_session_state_and_practice_area_warning: (state_name,practice_area_name,lawyer_name) ->
-    schedule_session_warning = ($ "#schedule_session_warning")
+    conversations.isStateSelected()
     state_name_for_url = conversations.state_name_for_url(state_name)
     practice_area_name_for_url = conversations.practice_area_name_for_url(practice_area_name)
     text = "#{lawyer_name} isn't licensed in #{state_name} and doesn't advise on #{practice_area_name}, and thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}/#{practice_area_name_for_url}'>#{state_name} lawyers advising on #{practice_area_name}</a>"
-    schedule_session_warning.html(text)
+    conversations.schedule_session_warning().html(text)
   write_schedule_session_practice_area_warning: (practice_area_name,lawyer_name) ->
-    schedule_session_warning = ($ "#schedule_session_warning")
     practice_area_name_for_url = conversations.practice_area_name_for_url(practice_area_name)
     text = "#{lawyer_name} doesn't advise on #{practice_area_name}, and thus can't help you. Find <a href='/lawyers/Legal-Advice/All-States/#{practice_area_name_for_url}'>Lawyers advising on #{practice_area_name}</a>"
-    schedule_session_warning.html(text)
+    conversations.schedule_session_warning().html(text)
   write_schedule_session_state_warning: (state_name,lawyer_name) ->
-    schedule_session_warning = ($ "#schedule_session_warning")
     state_name_for_url = conversations.state_name_for_url(state_name)
     text = "#{lawyer_name} isn't licensed in #{state_name} and, thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}'>#{state_name} lawyers</a>"
-    schedule_session_warning.html(text)
+    conversations.schedule_session_warning().html(text)
+  write_schedule_session_state_and_practice_area_missing_warning: ->
+    text = "Please, select State and Type of law."
+    conversations.schedule_session_warning().html(text)
+  write_schedule_session_state_missing_warning: ->
+    text = "Please, select State."
+    conversations.schedule_session_warning().html(text)
+  write_schedule_session_practice_area_missing_warning: ->
+    text = "Please, select Type of law."
+    conversations.schedule_session_warning().html(text)
   practice_area_name_for_url: (practice_area_name) ->
     practice_area_name.replace /\s+/g, "-"
   state_name_for_url: (state_name) ->
@@ -104,8 +139,7 @@ conversations =
     schedule_session_warning = ($ "#schedule_session_warning")
     schedule_session_warning.html('')
   isLawyersState: (state, lawyer_id) ->
-    # return true for all states
-    return true if state == ''
+    return false if state == ''
     states = []
     $.ajax(
       url: '/lawyers/'+lawyer_id+'/states.json',
@@ -128,5 +162,5 @@ conversations =
   enable_submit_message_button: (button) ->
     button.removeAttr('disabled')
     
-#/lawyers/9/practice_areas.json
-    
+this.conversations = conversations
+
