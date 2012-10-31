@@ -3,6 +3,7 @@
   %head
     %title= content_for?(:title) ? yield(:title) : "Lawdingo: Ask a Lawyer Online Now - Free Consultations for Your Legal Questions"
     <!-- #{Time.zone} -->
+    <!-- #{Time.zone.now} -->
     = stylesheet_link_tag    "application"
     - if current_user && current_user.is_a?(Lawyer)
       :javascript

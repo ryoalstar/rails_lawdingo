@@ -63,7 +63,7 @@ class DailyHour < ActiveRecord::Base
     # we assume we are bookable at at least one point in
     # that day and return true
     if Time.zone.now.midnight == day
-      return self.bookable_at_time?(Time.zone.now)
+      return (Time.zone.now < self.end_time_on_date(day) - BOOKING_BUFFER)
     else
       return self.bookable_at_time?(self.end_time_on_date(day))
     end
