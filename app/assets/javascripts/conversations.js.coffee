@@ -23,13 +23,17 @@ conversations =
             type: 'POST'
             data:
               email_msg: message,
+              'message[body]': message,
+              'message[lawyer_id]': lawyer_id,
+              'message[state_id]': state_name_select.val(),
+              'message[practice_area_id]': practice_area_select.val(),
               authenticity_token: token
             beforeSend: ->
               submit_message_button.val "Sending..."
             complete: ->
               submit_message_button.val "Leave message"
             success: (response) ->
-              if response.result 
+              if response.result
                 alert 'Your message has been sent.'
               else
                 window.location.href = '/clients/new' 

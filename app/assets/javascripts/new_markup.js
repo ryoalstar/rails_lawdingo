@@ -139,26 +139,6 @@ initializeLawyersEvents = function ()
   });
 }
 
-$(document).mouseup(function (e)
-{
-    var container = $("#new_question");
-    var question_body = $("#question_body").val();
-    if (container.has(e.target).length === 0)
-    {
-      if(question_body == 0 || question_body == "")
-      {
-        $("#question_state").hide('slow');
-        $("#question_area").hide('slow');
-        
-        $wrapper = $(this).parents("#autoselect_lawyer_wraper");
-		  	if ($wrapper.length > 0)
-		  	{
-		  		$wrapper.removeClass('expanded');
-		  	}
-      }
-    }
-});
-
 $(document).ready(function(){
   
   $('.testimonials_slider').bxSlider();
@@ -351,24 +331,6 @@ $(document).ready(function(){
     show_on_mouseenter = false;
   });
   
-  $("#question_body").focus(function(event){
-    event.stopPropagation();
-    $("#question_state").show('slow');
-    $("#question_area").show('slow');
-    
-    $wrapper = $(this).parents("#autoselect_lawyer_wraper");
-  	if ($wrapper.length == 0)
-  	{
-  		$wrapper = $(this).parents("#autoselect_landing_wraper");
-  	}
-  	if ($wrapper.length > 0)
-  	{
-  		$wrapper.addClass('expanded');
-  	}
-  });
-    
-	
-	
 	
 	initializeLawyersEvents();
 	

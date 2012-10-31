@@ -4,8 +4,6 @@
     - if params[:notice].present? && @lawyer.present?
       = notice text: "To connect with #{@lawyer.full_name}, simply sign up or sign in with Lawdingo.", |
         avatar: @lawyer.photo                                                                          |
-  - if params[:question_notice].present?
-    = notice text: "To submit that inquiry please sign up with or log in to Lawdingo."
   - if params[:appointment_with].present?
     - @lawyer = Lawyer.find(params[:appointment_with].to_i)
     - if @lawyer.present?

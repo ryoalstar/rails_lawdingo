@@ -498,3 +498,15 @@ $(document).ready(function() {
   });
 
 });
+
+String.prototype.nl2br = function()
+{
+	return this.replace(/\n/g, "<br />");
+}
+
+String.prototype.strip_tags = function()
+{
+	return this.replace(/<(?:.|\n)*?>/gm, '');
+}
+
+

@@ -1,0 +1,16 @@
+#page
+  %div
+    .content_outer
+      .content
+        - if @question
+          .question_options_wrapper.padded{:style => 'min-heigth:300px;'}
+            %h1 Thanks for your inquiry. You have two options.
+            #question.hidden{:data => @question.attributes}
+            %ul
+              %li
+                = radio_button_tag :question_option, 1
+                1 - Pay just $27 to have your question answered. Get your money back if you don't get a response within 12 hours or if you're not satisfied with the response.
+              %li
+                = radio_button_tag :question_option, 2
+                2 - Get a live consultation or appointment with a California attorney who advises on Famili and Divorce matters. Consultations are free to start.
+                

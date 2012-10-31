@@ -18,11 +18,6 @@ describe QuestionsController do
         question_email = ActionMailer::Base.deliveries.last
         question_email.to[0].should == "nikhil.nirmel@gmail.com"
       end
-
-      it "should render notice template" do
-        ask_question
-        should render_template "create"
-      end
     end
 
     context "when user is not signed in" do
@@ -36,7 +31,7 @@ describe QuestionsController do
 
       it "should redirect to sign up page" do
         response.should redirect_to(
-          new_client_path(question_notice: true)
+          new_client_path
         )
       end
     end

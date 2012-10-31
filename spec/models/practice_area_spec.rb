@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe PracticeArea do
   
+  subject { FactoryGirl.create(:practice_area) }
+  specify { should have_many(:specialities) }
+  specify { should have_many(:expert_areas) }
+  specify { should have_many(:lawyers) }
+  specify { should have_many(:offerings) }
+  specify { should have_many(:messages) }
+  specify { should have_many(:children) }
+  specify { should belong_to(:main_area) }
+  
   context "associations" do
     it "should provide an association to find its children" do
     

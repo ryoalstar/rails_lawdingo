@@ -5,6 +5,8 @@ describe Message do
   subject { FactoryGirl.create(:message) }
   specify { should belong_to(:client) }
   specify { should belong_to(:lawyer) }
+  specify { should belong_to(:state) }
+  specify { should belong_to(:practice_area) }
   specify { should validate_presence_of(:client) }
   specify { should validate_presence_of(:lawyer) }
   specify { should validate_presence_of(:body) }

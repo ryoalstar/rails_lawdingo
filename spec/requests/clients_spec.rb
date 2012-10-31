@@ -68,23 +68,6 @@ describe "Restful clients", :integration do
 
       end
       
-      
-      it "should persist question notice" do
-        visit(new_client_path(:question_notice=>true))
-       
-        doc = Nokogiri::HTML(page.html)
-        text_message = doc.css("div.notice div.text").first.content
-       
-        click_link("Log in")
-        
-        page.should have_selector("div.notice div.text")
-        doc = Nokogiri::HTML(page.html)
-        text_message_login = doc.css("div.notice div.text").first.content
-       
-        text_message.should be_eql text_message_login
-
-      end
-      
       it "should persist appointment with notice" do
         visit(new_client_path(:appointment_with=> @lawyer.id))
        
