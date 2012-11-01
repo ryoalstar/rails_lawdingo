@@ -17,7 +17,7 @@ class RealtimeChecker
                 if (window.location != "/users/"+lawyer_id+"/chat_session")
                   window.location = "/users/"+lawyer_id+"/chat_session" if is_lawyer && response == "invite_video_chat"
   
-        10000
+        15000
       )  
 
 this.RealtimeChecker = new RealtimeChecker()
