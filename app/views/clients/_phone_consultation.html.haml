@@ -15,9 +15,5 @@
         %br
         .question_area_bot
           = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_small'
-    .interact_phone_number
-      Your phone number:  
-      %br
-      = f.phone_field :phone, :class=>"phone"
     .interact_submit
       = f.submit :Continue, :id => :interact_submit_button

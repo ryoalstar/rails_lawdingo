@@ -20,9 +20,9 @@ interact_with_lawyer =
         alert 'Sorry, no such lawyers are available right now.'
         return false
       unless interact_with_lawyer.is_logged_in(this)
-        interact_with_lawyer.redirect_to_clients_new_path(lawyers[0], interact_with_lawyer.phone_number(this))
+        interact_with_lawyer.redirect_to_clients_new_path(lawyers[0])
         return false
-      interact_with_lawyer.start_call(interact_with_lawyer.phone_url(lawyers[0], interact_with_lawyer.phone_number(this)))   
+      interact_with_lawyer.start_call(interact_with_lawyer.phone_url(lawyers[0]))   
       false  
   is_logged_in: (form) ->
     ($ form).find('#client_id').length > 0
@@ -43,8 +43,6 @@ interact_with_lawyer =
     interact_with_lawyer.contents().addClass('hidden')  
   show_content: (index) ->
     interact_with_lawyer.contents().eq(index).removeClass('hidden')
-  phone_number: (form) ->
-    ($ form).find('#client_phone').val()  
   get_lawyers: (form) ->
     state_name = ($ form).find('#state_name').val()
     practice_area = ($ form).find('#practice_area').val()
@@ -65,14 +63,12 @@ interact_with_lawyer =
             lawyers = response.lawyers
     )
     lawyers
-  phone_url: (lawyer, number) ->  
-    url = '/twilio/phonecall?id=' + lawyer.id
-    url += "&number=#{number}" if number.length
-    url
+  phone_url: (lawyer) ->  
+    '/twilio/phonecall?id=' + lawyer.id
   start_call: (phone_url) ->
     window.location.href = phone_url 
-  redirect_to_clients_new_path: (lawyer, number) ->
-    path = encodeURI(interact_with_lawyer.phone_url(lawyer, number))
-    document.location = "/clients/new?lawyer_path=#{lawyer.id}&client[phone]=#{number}&notice=true&return_path=#{path}"
+  redirect_to_clients_new_path: (lawyer) ->
+    path = encodeURI(interact_with_lawyer.phone_url(lawyer))
+    document.location = "/clients/new?lawyer_path=#{lawyer.id}&notice=true&return_path=#{path}"
     
     
