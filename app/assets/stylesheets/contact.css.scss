@@ -1,0 +1,154 @@
+.contact_wrapper{
+  width: 600px;
+  padding: 30px;
+  height: 270px;
+  background: url(/assets/center_area_bg_gray.png) repeat;
+  margin: 35px auto 15px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  border: 1px solid #3b4551;
+  font-family: "myriad-pro";
+  position: relative;
+  
+  p{
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contact_notice
+  {
+    width: 260px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 20px;
+    margin-right: 33px;
+    margin-top: 5px;
+    font-size: 15px;
+    &.info{
+      color: orange;  
+    }
+    
+    &.error{
+      color: red;
+    }
+  }
+  
+  
+  
+  
+}
+
+
+.contact_stay {
+  display: inline-block;
+  width: 180px;
+  vertical-align: top;
+  .contact_title{
+    color: #e9f6ff;
+    font-size: 22px;
+  }
+  
+  .contact_info_panel{
+    height: 114px;
+    margin-top: 30px;
+    .contact_email
+    {
+      background: url("email_icon_black.png") no-repeat left center ;
+      padding-left: 33px;
+      color: white;
+      font-size: 15px;
+    }
+    
+    .contact_phone
+    {
+      background: url("phone_icon_black.png") no-repeat left center ;
+      padding-left: 33px;
+      color: white;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+    
+    .contact_label
+    {
+      padding-left: 33px;
+      color: #e9f6ff;
+      font-size: 13px;
+    }
+  }
+}
+
+.contact_or{
+    display: inline-block;
+    width: 50px;
+    background: url("contact_or.png") center center no-repeat;
+    height: 200px;
+    margin-left: 40px;
+  }
+  
+.contact_fields{
+  display: inline-block;
+  height: 540px;
+  width: 260px;
+  margin-left: 62px;
+  vertical-align: top;
+  
+  input[type="text"],input[type="email"]{
+    height: 21px;
+    
+  }
+  
+  textarea{
+    height: 110px;
+  }
+  
+  input[type="text"],input[type="email"], textarea{
+    width: 244px;
+    border: 1px solid #B8B8B8;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 8px;
+
+
+  }
+  
+  .contact_field_wrapper {
+    margin-bottom: 13px;
+  }
+  
+  input[type="submit"]{
+    width: 260px;
+    font-weight: normal;
+  }
+  
+}
+
+.contact_followus{
+  margin-top: 45px;
+  color: white;
+  font-size: 14px;
+}
+
+.contact_social{
+  margin-top: 10px;
+  div{
+    width: 32px;
+    height: 32px;
+    float: left;
+    margin-right: 10px;
+    
+    &.contact_fb
+    {
+      background: url("fb_round_icon.png") no-repeat
+    }
+    
+    &.contact_tw
+    {
+      background: url("tw_round_icon.png") no-repeat
+    }
+    
+    &.contact_linkedin { background: url("linkedin_round_icon.png") no-repeat }
+  }
+}

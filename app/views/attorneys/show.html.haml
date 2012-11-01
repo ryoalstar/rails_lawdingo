@@ -101,7 +101,7 @@
         .avatar
           = link_to image_tag(@attorney.photo.url(:medium), :itemprop => :photo), attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url
         .middle
-          %h1.gray
+          %h1.profile_title
             = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url do 
               %span{:itemprop => "name"}= @attorney.full_name
           -#.price

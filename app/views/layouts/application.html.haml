@@ -91,7 +91,7 @@
         #header_border
       / END HEADER
       / CONTENT
-      #container
+      #container.container
         - if flash[:notice].present?
           = notice text: flash[:notice]
         = yield
