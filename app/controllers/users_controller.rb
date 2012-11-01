@@ -313,7 +313,7 @@ class UsersController < ApplicationController
   end
 
   def update_card_details
-    token = params[:stripe_card_token]
+    token = params[:client][:stripe_card_token]
 
     if token.present?
       customer = Stripe::Customer.create(
