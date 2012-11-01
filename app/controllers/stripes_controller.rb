@@ -10,13 +10,13 @@ class StripesController < ApplicationController
 	def create
 		respond_to do |format|
 			if @lawyer.subscribed? # && params[:coupon].empty?
-				format.html { redirect_to user_offerings_path(@lawyer, :ft => true), :error => "You are subscribed already!" }
+				format.html { redirect_to user_offerings_path(@lawyer, :ft => true) } # , :error => "You are subscribed already!" }
         format.json { render json: @lawyer, status: :ok }
       elsif params[:card] && @lawyer.create_stripe_card(params[:card]) # && @lawyer.apply_coupon(params[:coupon]) # && @lawyer.subscribe! l
-        format.html { redirect_to user_offerings_path(@lawyer, :ft => true), :notice => "Thank you for subscribing!" }
+        format.html { redirect_to user_offerings_path(@lawyer, :ft => true) } #, :notice => "Thank you for subscribing!" }
         format.json { render json: @lawyer, status: :created, location: @lawyer } 
       elsif params[:coupon].present? && @lawyer.apply_coupon(params[:coupon])
-        format.html { redirect_to user_offerings_path(@lawyer, :ft => true), :notice => "Thank you for subscribing! Your coupon applied!" }
+        format.html { redirect_to user_offerings_path(@lawyer, :ft => true) } #, :notice => "Thank you for subscribing! Your coupon applied!" }
         format.json { render json: @lawyer, status: :ok, location: @lawyer } 
       else
         format.html { render action: "new", :error => "Error. Something wrong." }
