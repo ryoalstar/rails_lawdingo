@@ -4,6 +4,7 @@
 // - Imports
 // - Landing page
 // - Lawyers page
+// - Autoselect lawyer panel
 
 
 // ***** Imports ******
@@ -102,9 +103,7 @@
   position: relative;
   @include rounded( 3px );
   
-  a{
-    border-bottom:0;
-  }
+  a{ border-bottom:0; }
   .green_line{
     position:absolute;
     right: 0;
@@ -221,9 +220,7 @@
   border: 1px solid #515862;
   @include autoselect_general;
   
-  &.expanded {
-    height: 200px;
-  }
+  &.expanded { height: 200px; }
   
   @include autoselect;
   #autoselect_question
@@ -408,9 +405,7 @@
             margin: 12px 24px 7px 0px;
             font-size:21px;
           }
-          span{
-            padding-top: 2px;
-          }
+          span{ padding-top: 2px; }
           p{
             margin-top:0;
             line-height: 23px;
@@ -423,9 +418,7 @@
             font-size:14px;
             line-height: 26px;
           }
-          .left{
-            float:left;
-          }
+          .left{ float:left; }
           .right{
             margin-left: 360px;
           }
@@ -434,9 +427,7 @@
           float:left;
           width: 670px;
           margin-top: 24px;
-          h4{
-            margin-bottom: 13px;
-          }
+          h4{ margin-bottom: 13px; }
           .review{
             float:left;
             width: 644px;
@@ -482,13 +473,9 @@
             text-align:left;
             float:left;
             width:110px;
-            p{
-              margin-bottom: 5px;
-            }
+            p{ margin-bottom: 5px; }
           }
-          .stars{
-            margin:5px 0 0 0;
-          }
+          .stars{ margin:5px 0 0 0; }
         }
         h4.yelp{
           margin-bottom: 18px;
@@ -653,9 +640,7 @@
         margin-top: 17px;
         text-align: center;
       }
-      .placeholder_text{
-        top:14px !important;
-      }
+      
       input#question_body{
         color: #393C3D;
         display:block;
@@ -1065,7 +1050,7 @@
 }
 
 
-// Autoselect lawyer panel
+// ***** Autoselect lawyer panel ******
 #autoselect_lawyer_wraper
 { 
   background-color: white;
@@ -1095,6 +1080,10 @@
   
   @include rounded(5px);
   
+  .placeholder_text{
+    top: 23px !important;
+    height: 20px !important;
+  }
   .left.row_block{
     min-height: 200px;
   }
@@ -1603,17 +1592,8 @@ body.users.home {
     width:722px;
     padding: 10px 0;
     margin-top: 15px;
-    background: #f6f6f6; /* Old browsers */
-    background: -moz-linear-gradient(top,  #f6f6f6 0%, #e8e8e8 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#e8e8e8)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #f6f6f6 0%,#e8e8e8 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    @include background_simplegradient(#f6f6f6, #e8e8e8);
+    @include rounded(5px);
     a {
       border: 0px;
       color:#4c4c4c;
@@ -1628,6 +1608,7 @@ label.iPhoneCheckLabelOn, label.iPhoneCheckLabelOff {
   margin: 0 0 0 0 !important;
   color: white !important;
 }
+
 
 body.users.learnmore{
   .new_question#new_question{
@@ -1655,9 +1636,7 @@ body.users.learnmore{
       margin-top: 17px;
       text-align: center;
     }
-    .placeholder_text{
-      top:14px !important;
-    }
+    
     input#question_body{
       color: #393C3D;
       display:block;
@@ -1729,88 +1708,75 @@ body.users.start_phone_call{
   }
 }
 
-body.users.show.logged-in{
-  #page.session-summary > div{
-    .profile.summary_of_sessions{
-      .profile-block{
-        padding:0px;
-        width:757px;
+
+#page.session-summary > div{
+  .profile.summary_of_sessions{
+    .profile-block{
+      padding:0px;
+      width:757px;
+      -webkit-border-top-right-radius: 8px;
+      -webkit-border-bottom-right-radius: 8px;
+      -moz-border-radius-topright: 8px;
+      -moz-border-radius-bottomright: 8px;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      h2{
+        margin:0;
+        font-size:15px;
+        color:#272727;
+        border-bottom:1px solid #e2e3e5;
+        padding:20px 30px;
         -webkit-border-top-right-radius: 8px;
-        -webkit-border-bottom-right-radius: 8px;
         -moz-border-radius-topright: 8px;
-        -moz-border-radius-bottomright: 8px;
         border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-        h2{
-          margin:0;
-          font-size:15px;
-          color:#272727;
-          border-bottom:1px solid #e2e3e5;
-          padding:20px 30px;
-          -webkit-border-top-right-radius: 8px;
-          -moz-border-radius-topright: 8px;
-          border-top-right-radius: 8px;
-          background: #fcfdfd; /* Old browsers */
-          background: -moz-linear-gradient(top,  #fcfdfd 0%, #f0f4f7 100%); /* FF3.6+ */
-          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfdfd), color-stop(100%,#f0f4f7)); /* Chrome,Safari4+ */
-          background: -webkit-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Chrome10+,Safari5.1+ */
-          background: -o-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* Opera 11.10+ */
-          background: -ms-linear-gradient(top,  #fcfdfd 0%,#f0f4f7 100%); /* IE10+ */
-          background: linear-gradient(to bottom,  #fcfdfd 0%,#f0f4f7 100%); /* W3C */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfdfd', endColorstr='#f0f4f7',GradientType=0 ); /* IE6-9 */  
-        }
-        p{
-          padding:0px 29px 0px 30px;
-          color:#404040;
-          font-size:14px;
-        }
-        table.summary{
-          border-spacing: 0;
-          margin-bottom:0;
-          thead{
-            background: #fafafa; /* Old browsers */
-            background: -moz-linear-gradient(top,  #fafafa 0%, #f2f2f2 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  #fafafa 0%,#f2f2f2 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  #fafafa 0%,#f2f2f2 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
-            td{
-              color:#3f3f3f;
-              padding:14px 10px;
-            }
-          }
-          tr{
-          }
+        @include background_simplegradient(#fcfdfd, #f0f4f7);
+        
+      }
+      p{
+        padding:0px 29px 0px 30px;
+        color:#404040;
+        font-size:14px;
+      }
+      table.summary{
+        border-spacing: 0;
+        margin-bottom:0;
+        thead{
+          @include background_simplegradient(#fafafa, #f2f2f2);
+        
           td{
-            font-size:13px;
-            border-bottom:1px solid #e2e3e5;
-            border-right: 1px solid #e2e3e5;
-            text-align:center;
-            vertical-align:center;
-            padding:15px 10px;
+            color:#3f3f3f;
+            padding:14px 10px;
           }
-          tr.gray{
-            background:#f4f5f7;
-          }
-          td.last{
-            border-right: none;
-          }
+        }
+        tr{
+        }
+        td{
+          font-size:13px;
+          border-bottom:1px solid #e2e3e5;
+          border-right: 1px solid #e2e3e5;
+          text-align:center;
+          vertical-align:center;
+          padding:15px 10px;
+        }
+        tr.gray{
+          background:#f4f5f7;
+        }
+        td.last{
+          border-right: none;
         }
       }
     }
   }
 }
 
-body.users.create_phone_call{
-    #payment_div{
-      float: none !important;
-      margin: 0 auto;
-      padding-left: 63px;
-    }
 
+
+#payment_div{
+  float: none !important;
+  margin: 0 auto;
+  padding-left: 63px;
 }
+
 
 body.users.home, body.attorneys.show{
   .ui-dialog{
