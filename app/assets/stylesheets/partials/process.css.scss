@@ -4,7 +4,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
   background:none;
 }
 #page{
-  &.signup, &.payment, &.lawyer_subscribtion, &.apply-form-wrapper {
+  &.signup, &.payment, &.apply-form-wrapper {
 
     form{
       margin: 0px 0px 12px 0px;
@@ -280,7 +280,16 @@ body.clients.new #page.apply-form-wrapper div.outer{
         
         #card_number{
          width: 116px;
-        }    
+        }   
+        input{
+          font-size: 13px !important;
+          height: 13px !important;
+        } 
+        
+        .expiration_col select{
+          position: relative;
+          top: 5px; 
+        }
       }
       
       tr.cards_row{
@@ -326,9 +335,9 @@ body.clients.new #page.apply-form-wrapper div.outer{
           height:21px;
           border:0;
         }
-        &.labels{
-          width: 86px;
-          color: #9b9b9b;
+        &.labels{ 
+          width: 86px !important;
+          color: #9b9b9b !important;
         }
         a.gray_button{
           font-size:12px;
@@ -400,7 +409,14 @@ body.clients.new #page.apply-form-wrapper div.outer{
     .apply-form{
       margin-top:30px;
       padding: 0 50px;
-      
+      td.labels{
+        width: 70px;
+        font-weight: bold;
+        padding-right: 10px;
+      color: #3F3F3F;
+      font-size: 12px;
+      vertical-align: middle;
+      }
       #client_phone{
         background: url("phone_icon.png") no-repeat 98% center white;
       }
@@ -768,7 +784,17 @@ body.clients.new #page.apply-form-wrapper div.outer{
             margin: 0;
           }
           td.separator{ width: 20px;  }
-          #card_number{  width: 116px; }
+          #card_number{  
+            width: 116px; 
+            font-size: 13px !important;
+            height: 13px !important;
+          }
+          td.labels{
+            width: 80px !important;
+            padding-right: 0 !important;
+            color: #9B9B9B !important;
+          }
+          
 
         }
         
@@ -796,6 +822,8 @@ body.clients.new #page.apply-form-wrapper div.outer{
             width:75px;
             display: block;
             float: left;
+            height: 13px !important;
+            font-size: 13px !important;  
           }
           input#lawyer_email{
             width: 197px;

@@ -1517,6 +1517,10 @@ body.users.home, body.offerings.show {
    background: -moz-linear-gradient(top,white,whiteSmoke);
    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff5f5f5',GradientType=0);
   } 
+  p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 form.filters {
