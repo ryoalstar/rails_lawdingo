@@ -1,6 +1,5 @@
 <div id="page" class="signup">
-  <%= notice text: "To start the phone consultation, enter your phone number. If #{@lawyer.full_name} is available, 
-    you’ll be connected by phone momentarily.", avatar: nil %>
+  <%= notice text: "To start the phone consultation, enter your phone number. You'll get a call momentarily. In the event you get a voicemail, please suggest another time to connect.", avatar: nil %>
 
   <div>
     <%= form_tag create_call_path(:lawyer_id =>params[:id]), :id=>"phone_input_form" do %>

@@ -723,10 +723,14 @@ h3.question_label label{
 }
 .question_state .question_state_bot{
   margin-top:15px;
-  margin-left: 80px;
+  margin-left: 80px; 
 }
 .question_area .question_area_top {
   float:left;
+}
+
+.question_state_top, .question_area_top {
+  margin-top: 10px;
 }
 .question_area .question_area_bot{
   margin-top:15px;
@@ -736,9 +740,15 @@ h3.question_label label{
 .question_state select option, .question_area select option{
   font-size: 13px;
 }
+
+.question_state_bot {
+   overflow: hidden;
+   width: 197px;
+  
+}
 .question_state select, .question_area select{
   background: image-url('select_bg.png') no-repeat;
-  width: 197px;
+  width: 238px;
   height: 28px;
   font-size: 13px;
   padding: 5px 5px 5px 10px;
