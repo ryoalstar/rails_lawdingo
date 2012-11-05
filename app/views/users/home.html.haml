@@ -11,7 +11,7 @@
     %a#close_notice{:href => "#"} Close
 #inline-wrapper
   %form.filters#filters
-    .left-bar
+    #left-bar.left-bar
       .left-bar-section.first
         %h2 FIND THE RIGHT LAWYER
       .sticky_filters
@@ -38,7 +38,7 @@
             .national-area-notice
               %p
               %a.show-states-selector{ href: "#" } Set state anyway
-            %select.states{:name => "state"}
+            %select.states.select_medium{:name => "state"}
               - if @state_id
                 %option{:value => "All-States"} Any state
               - else 
@@ -80,73 +80,74 @@
                             = radio_button_tag "practice_area", subarea.name_for_url, false, data: { is_national: area.is_national?.to_s, parent: area.name_for_url  }
                           = label_tag "practice_area_#{subarea.name_for_url}", subarea.name          
     
+        -#The CSS code for the following sections is commented also. Look out.
         -#specialities_filter.filters-section{:style => "display: none;"}
-          %input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
-          %h3 Specific need:
-          %ul.specialities
+          -#%input#select_sp{:name => "select_sp", :style => "display: none;", :type => "text", :value => "0"}/
+          -#%h3 Specific need:
+          -#%ul.specialities
 
         -#.left-bar-section
-          %h3 Minimum free minutes:
-          %p.hidden
-            %label{:for => "minimum_free_minutes"} Free time needed:
-            %input#minutes{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-          #free_minutes_slider
-          .filter_slider_spliters
-          .slider_rates
-            %span.two 2 
-            %span.five 5 
-            %span.ten 10 
-            %span.fiveteen 15 
-            %span.twenty 20 
-            %span.thirty 30 
-            %span.sixty 60 
-            %span.ninety 90
+          -#%h3 Minimum free minutes:
+          -#%p.hidden
+            -#%label{:for => "minimum_free_minutes"} Free time needed:
+            -#%input#minutes{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          -#free_minutes_slider
+          -#.filter_slider_spliters
+          -#.slider_rates
+            -#%span.two 2 
+            -#%span.five 5 
+            -#%span.ten 10 
+            -#%span.fiveteen 15 
+            -#%span.twenty 20 
+            -#%span.thirty 30 
+            -#%span.sixty 60 
+            -#%span.ninety 90
         -#.left-bar-section
-          %h3 Minimum Client rating
-          %p.hidden
-            %label{:for => "minimum_client_rating"} Minimum Client rating:
-            %input#client_rating{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-          #minimum_client_rating
-          .minimum_client_rating_splitters
-          .slider_rates
-            .star.star_1
-              %span 1
-            .star.star_2
-              %span 2
-            .star.star_3
-              %span 3
-            .star.star_4
-              %span 4
-            .star.star_5
-              %span 5    
+          -#%h3 Minimum Client rating
+          -#%p.hidden
+            -#%label{:for => "minimum_client_rating"} Minimum Client rating:
+            -#%input#client_rating{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          -#minimum_client_rating
+          -#.minimum_client_rating_splitters
+          -#.slider_rates
+            -#.star.star_1
+              -#%span 1
+            -#.star.star_2
+              -#%span 2
+            -#.star.star_3
+              -#%span 3
+            -#.star.star_4
+              -#%span 4
+            -#.star.star_5
+              -#%span 5    
         -#.left-bar-section
-          %h3 Per-minute rate:
-          %p.hidden
-            %label{:for => "hourly_rate"} Per-minute rate::
-            %input#hourly_rate_in{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-          #hourly_rate
-          .hourly_rate_splitters
-          .slider_rates
-            %span.h-rate-1
-              $
-            %span.h-rate-2 
-              $$
-            %span.h-rate-3 
-              $$$
-            %span.h-rate-4 
-              $$$$
+          -#%h3 Per-minute rate:
+          -#%p.hidden
+            -#%label{:for => "hourly_rate"} Per-minute rate::
+            -#%input#hourly_rate_in{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          -##hourly_rate
+          -#.hourly_rate_splitters
+          -#.slider_rates
+            -#%span.h-rate-1
+              -#$
+            -#%span.h-rate-2 
+              -#$$
+            -#%span.h-rate-3 
+              -#$$$
+            -#%span.h-rate-4 
+              -#$$$$
         -#.left-bar-section
-          %h3 Law school quality:
-          %p.hidden
-            %label{:for => "law_school_quality"} Law school quality:
-            %input#law_school{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
-          #law_school_quality
-          .hourly_rate_splitters
-          .slider_rates
-            %span.law-school-1 B-
-            %span.law-school-2 B
-            %span.law-school-3 A
-            %span.law-school-4 A+
+          -#%h3 Law school quality:
+          -#%p.hidden
+            -#%label{:for => "law_school_quality"} Law school quality:
+            -#%input#law_school{:style => "border:0; color:#f6931f; font-weight:bold;", :type => "text"}/
+          -##law_school_quality
+          -#.hourly_rate_splitters
+          -#.slider_rates
+            -#%span.law-school-1 B-
+            -#%span.law-school-2 B
+            -#%span.law-school-3 A
+            -#%span.law-school-4 A+
   .main_content
     #service_type_tabs
       = render partial: "service_type_tabs"

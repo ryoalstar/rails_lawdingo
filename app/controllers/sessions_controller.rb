@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
         redirect_to return_path
       end
     else
-      @msg = "You have entered incorrect login credintial."
+      @msg = "You have entered incorrect login credentials."
       render :action => 'new'
     end
   end

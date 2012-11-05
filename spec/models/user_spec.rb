@@ -25,7 +25,7 @@ describe User do
 
     it "timezone_abbreviation" do
       subject.time_zone = 'Atlantic Time (Canada)'
-      subject.timezone_abbreviation.should == "ADT"
+      subject.timezone_abbreviation.should satisfy{|s| ['AST', 'ADT'].include?(s)}
     end
 
   end   

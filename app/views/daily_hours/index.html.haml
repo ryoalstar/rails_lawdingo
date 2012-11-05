@@ -9,7 +9,7 @@
         .profile_availability
           = render  partial: '/users/iphone_handle', locals: {:lawyer => @lawyer}
           .clear
-        .profile-block.same_height
+        #dh_wrap.profile-block.same_height
           = form_tag(user_daily_hours_path(:user_id => @lawyer.id), :method => :put, :id => "user_daily_hours") do
             %ul
               - (0..6).each do |wday|

@@ -38,14 +38,12 @@
             %td.labels Bar membership(s):
             %td
               #div_states_barids
-              %a#barids_editor.dialog-opener.edit_gray{:href => "#bar_membership"} (edit)
-              %a#barids_opener.dialog-opener.blue_button.gray.no-inner-shadow{:href => "#bar_membership", :style => "width: 13em; text-align: center;"} State Bar Membership(s)
+              %a#barids_opener.dialog-opener.blue_button.no-inner-shadow{:href => "#bar_membership", :style => "width: 13em; text-align: center;"} State Bar Membership(s)
           %tr
             %td.labels Practice areas:
             %td
               #div_practice_areas
-              %a#practice_areas_editor.dialog-opener.edit_gray{:href => "#practices"} (edit)
-              %a#practice_areas_opener.dialog-opener.blue_button.gray.no-inner-shadow{:href => "#practices", :style => "width: 11.3em; text-align: center;"} Your Practice Areas
+              %a#practice_areas_opener.dialog-opener.blue_button.no-inner-shadow{:href => "#practices", :style => "width: 11.3em; text-align: center;"} Your Practice Areas
           %tr
             %td.labels Free consultation offered:
             %td           
@@ -81,7 +79,7 @@
             %td.labels Profile Photo:
             %td
               .file_select_wrapper
-                .file_select_button.blue_button.gray.no-inner-shadow
+                .file_select_button.blue_button.no-inner-shadow
                   %ins Add your photo
                   = f.file_field :photo, :accept => 'image/png,image/gif,image/jpeg'
                 %span.file_select_value
