@@ -603,6 +603,14 @@ body.users.home {
     textarea { width: 460px; height: 140px; margin: 4px 0px; margin-left:20px;}
     .button{
       padding-left:20px;
+      float: left;
+    }
+    
+    .offline_message{
+      height: 25px;
+      font-size: 12px;
+      line-height: 30px;
+      margin-top: 18px;
     }
     hr{
       margin:8px 0 8px;

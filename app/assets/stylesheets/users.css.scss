@@ -103,6 +103,10 @@
   position: relative;
   @include rounded( 3px );
   
+  p {
+    font-size: 14px;
+  }
+  
   a{ border-bottom:0; }
   .green_line{
     position:absolute;
@@ -233,9 +237,7 @@
     margin-left: 0px;
   }
   
-  #question_state_name, #question_practice_area{
-    @include select_small;
-  }
+  
   
   
   #autoselect_tab_question{
@@ -244,17 +246,25 @@
     }
     .question_state_bot, .question_area_bot{
       margin-top: 17px;
-      width: 116px;
       overflow: hidden;
-      
-      #question_state_name, #question_practice_area{
-        width: 157px;
-      }
+      margin-left: 19px;
     }  
-  
-    .question_area, .question_state{
-      width: 220px;
+    
+    .question_area_bot{
+      float: left;
+      margin-top: 0;
+    }
+    .question_state_top, .question_area_top{
+      margin-left: 70px;
+      margin-top: 0;
+      
+    }  
+
+    
+    .question_state, .question_area{
+      width: 240px;
       font-size: 12px;
+      margin-left: 0;
     }
   }
   
@@ -263,6 +273,7 @@
     .interact_state, .interact_legal_matter,.interact_phone_number, .interact_submit
     {
       margin-right: 19px;
+      color: white;
     }
     
   }
@@ -1080,6 +1091,12 @@
   }
   .left.row_block{
     min-height: 200px;
+  }
+  
+  .read_more {
+    font-weight: bold;
+    color: #3F3F3F;
+    border-bottom: 1px dotted #BBC1C4;
   }
 
   .left{

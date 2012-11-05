@@ -8,12 +8,12 @@
         Your state:
         %br
         .question_state_bot
-          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true,:class=>'select_small'
+          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true,:class=>'select_medium'
     - if @practice_areas
       .interact_legal_matter
         Legal matter:
         %br
         .question_area_bot
-          = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_small'
+          = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_medium'
     .interact_submit
       = f.submit :Continue, :id => :interact_submit_button
