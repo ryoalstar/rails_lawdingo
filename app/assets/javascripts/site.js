@@ -101,103 +101,52 @@ function select_unselect_state(id) {
     $('#lawyer_bar_memberships_attributes_' + id + '_state_id').val('');
 }
 
+function setBarIds() {
+	var states_barids = new Array();
+	var form_data_status = false;
+	$('#leveled_list_bar_ids input[type=checkbox]:checked').each(function(index) {
+		var dv = $(this).nextAll('div.sub');
+		var state = dv.attr('id');
+		states_barids[state] = $(this).val();
+		form_data_status = true;
+	});
 
-function setBarIds(){
-  var states_barids = new Array();
-  var form_data_status = false;
-  $('#leveled_list_bar_ids').children('li').each(function(index){
-    var self = $(this);
-    var checked = false;
-    var chkbox = self.find('input[type=checkbox]')
-
-    if (chkbox.attr('checked') == 'checked')
-    {
-        var dv = self.find('div');
-        var state = dv.attr('id');
-        var inp = dv.find('input');
-        barId = inp.attr('value');
-        if (barId == "")
-        {
-          //alert("please enter barid for the selected state " + state);
-          //form_data_status = false;
-          states_barids[state] = barId;
-          form_data_status = true;
-        }
-        else
-        {
-          states_barids[state] = barId;
-          form_data_status = true;
-        }
-    }
-  });
-  if(form_data_status)
-  {
-    var states_barids_string = ""; 
-    for(key in states_barids)
-    {
-      states_barids_key_label = states_barids[key] ? key+" (Bar ID: " + states_barids[key] + ")" : '';
+	if (form_data_status) {
+		var states_barids_string = "";
+		for (key in states_barids) {
+			states_barids_key_label = states_barids[key] ? key + " (Bar ID: " + states_barids[key] + ")" : '';
 			states_barids_string += "<li>" + states_barids_key_label + "</li>"
-			
-      //if(states_barids_key_label) {
-      //  states_barids_string += "" + key + " " + states_barids_key_label + ", ";
-      //} else {
-      //  states_barids_string += "" + key + ", ";
-      //}
-    }
-    $('#barids_opener').hide();
-    
-    $('#div_states_barids .bar_list').html(states_barids_string);
-    $('.profile').find(".same_height").css('height', 'auto')
-    equalHeight($('.profile').find(".same_height"));
-    //$('#div_states_barids').show().css('display', 'inline');
-    close_dialogs();
-  }
-  else
-  {
-    close_dialogs();
-    return;
-  }
+		}
+		$('#barids_opener').hide();
+		$('#div_states_barids .bar_list').html(states_barids_string);
+		$('#div_states_barids').show().css('display', 'inline');
+	}
+	$('.profile').find(".same_height").css('height', 'auto')
+	equalHeight($('.profile').find(".same_height"));
+	close_dialogs();
 }
 
-function setPracticeAreas()
-{
-  var practice_list_string = "";
-  $('#leveled-list_practice_areas').children().each(function(index){
-    var parent_list = $(this);
-    var parent_checkbox = parent_list.find('input[type=checkbox]');
-		var practice_area_string = "";
-  	var specialities_string = "";
-  	
-    if(parent_checkbox.attr('checked') == 'checked')
-    {
-      practice_area_string += parent_checkbox.data('name');
-      var div = parent_list.find('div');
-      var inner_ul = div.find('ul');
-      specialities_string = "";
-      inner_ul.children().each(function(index){
-        var inner_list = $(this);
-        var chkbox = inner_list.find('input[type=checkbox]')
-        if(chkbox.attr('checked') == 'checked')
-        {
-          specialities_string += chkbox.data('name') + ', '
-        }
-        
-      });
-      if (specialities_string.length > 0)
-      {
-      	specialities_string = specialities_string.substring(0,specialities_string.length - 2);
-      	practice_area_string += ' (' + specialities_string + ')' ;	
-      }
-      
-    	practice_area_string = "<li>" + practice_area_string + "</li>";
-    	practice_list_string += practice_area_string;
-    }
-    
-  });
-  $('#div_practice_areas .pa_list').html(practice_list_string);
-  $('.profile').find(".same_height").css('height', 'auto');
-  equalHeight($('.profile').find(".same_height"));
-  close_dialogs();
+function setPracticeAreas() {
+	var practice_list_string = practice_area_string = '';
+	var specialities = [];
+	$('#leveled-list_practice_areas input.parent-area[type=checkbox]:checked').each(function() {
+		practice_area_string = $(this).data('name');
+		specialities = [];
+		$(this).nextAll('div.sub').find('input[type=checkbox]:checked').each(function() {
+			specialities.push($(this).data('name'));
+		})
+		if (specialities.length > 0)
+			practice_area_string += ' (' + specialities.join(', ') + ')';
+		practice_area_string = "<li>" + practice_area_string + "</li>";
+		practice_list_string += practice_area_string;
+	});
+
+	$('#practice_areas_opener').hide();
+	$('#div_practice_areas .pa_list').html(practice_list_string);
+	$('#div_practice_areas').show().css('display', 'inline');
+	$('.profile').find(".same_height").css('height', 'auto')
+	equalHeight($('.profile').find(".same_height"));
+	close_dialogs();
 }
 
 function close_dialogs(){

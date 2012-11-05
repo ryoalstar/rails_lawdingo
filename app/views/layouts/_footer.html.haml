@@ -6,8 +6,8 @@
       %ul.top-offset-small
         %li= link_to "About", about_page_path
         %li= link_to "Contact", contact_path
-        %li= link_to "Press", "http://lawdingo.totemapp.com/company?access_id=1258&token=D1rFswOGDi6UUu9oV8U", :target =>'_blank'
-        %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank'
+        %li= link_to "Press", "http://lawdingo.totemapp.com/company", :target =>'_blank', :rel => :nofollow
+        %li= link_to "Blog", "http://lawdingo.wordpress.com", :target =>'_blank', :rel => :nofollow
         %li= link_to "Terms & Privacy", terms_page_path, :target=>'_blank'
       .footer-logo
         = image_tag('footer_dingo.png', :alt => 'Home')
@@ -22,10 +22,10 @@
         = image_tag('footer_social_hr.png', :class => 'custom_hr')
         .gplus
           %g:plusone{size: "medium", href: root_url}
-        %a{href:"https://twitter.com/thelawdingo", class:"twitter-share-button", "data-show-count" => "false", "data-url" => root_url}
+        %a{href:"https://twitter.com/thelawdingo", class:"twitter-share-button", "data-show-count" => "false", "data-url" => root_url, :rel => :nofollow}
       /%span.left.top-offset-small &copy; Lawdingo
       -#%span.left.top-offset-small
-        %a{href:"https://twitter.com/thelawdingo", class:"twitter-follow-button", "data-show-count" => "false", "data-url" => root_url}
+        %a{href:"https://twitter.com/thelawdingo", class:"twitter-follow-button", "data-show-count" => "false", "data-url" => root_url, :rel => :nofollow}
         %g:plusone {size: "small", annotation:"inline"}
       .clear
       .copyright

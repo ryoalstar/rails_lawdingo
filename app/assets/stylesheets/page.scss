@@ -301,6 +301,7 @@ body.users.home {
                   margin: 0px; 
                   color:#313131;
                   font-size:13px;
+                  font-weight:bold;
                 }
                 h1{
                   font-size:23px;
@@ -743,6 +744,9 @@ html[xmlns] .clearfix {
   #div_practice_areas, #div_states_barids{
     h2{
       margin:5px;
+    }
+    .bar_list{
+      padding-left:20px;
     }
   }
 }

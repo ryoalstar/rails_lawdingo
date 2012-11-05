@@ -233,13 +233,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.is_lawyer?
       @user  = Lawyer.find(@user.id)
-      fill_states
-      #@user.bar_memberships.delete_all
-      bar_memb_with_null_states = @user.bar_memberships.select{|bm| bm.state.nil?}.count
-        (@states.count - bar_memb_with_null_states).times {
-          @user.bar_memberships.build
-        } 
-      
+      @user.bar_memberships.delete_all
       @schools = School.order(:name)
       status = @user.update_attributes(params[:lawyer])
       @user.update_attribute :school_id, params[:lawyer][:school_id]
