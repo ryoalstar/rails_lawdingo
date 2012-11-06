@@ -793,8 +793,8 @@ class UsersController < ApplicationController
   def add_practice_area_scope service_type
     # if we have a practice area
     if params[:practice_area].present?
-      scope = params[:practice_area].numeric? ? PracticeArea.find_by_id(params[:practice_area]) : PracticeArea.name_like(params[:practice_area]).first
-      area_id = scope.try(:id)
+      @practice_area = params[:practice_area].numeric? ? PracticeArea.find_by_id(params[:practice_area]) : PracticeArea.name_like(params[:practice_area]).first
+      area_id = @practice_area.try(:id)
       @search.build do
         service_type == "legal-services" ? with(:practice_area_id, area_id) : with(:practice_area_ids, [area_id])
       end if area_id
