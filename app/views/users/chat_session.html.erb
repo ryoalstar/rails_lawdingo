@@ -45,7 +45,7 @@
 	end
   %>
   <%#= link_to "End Session", new_conversation_path  %>
-  <%= render :partial => "flash_player" %>
+  <%= render :partial => "flash_player", :locals=>{:from_to_text=> @from_to_text} %>
 <% else %>
   No one to chat with!
 <% end %>

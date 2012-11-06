@@ -7,10 +7,28 @@
         <input type="button" value="Start Session" class="btn btn-large btn-primary" id ="connectLink" onClick="javascript:connect()" />
         <input type="button" value="End Session"  class="btn btn-large hide" id ="disconnectLink" onClick="javascript:disconnect()" />
   </div>
-
-  <div id="subscribers">
-    <div id="myCamera" class="publisherContainer"></div>
-  </div>
+	<table class="videotable_wrapper">
+		<tbody>
+		<tr class="video_row">
+			<td class="col_chat"></td>
+			<td class="col_video">
+				<div id="subscribers">
+					
+				</div>
+				<div>
+					<div class="from_to_call_wrapper">
+						<%= from_to_text %>
+					</div>
+					<div class="myCamera_wrapper">
+						<div id="myCamera" class="publisherContainer"></div>
+					</div>
+				</div>
+			</td></tr>
+		<tr class="controls_row">
+			<td class="col_chat"></td>
+			<td class="col_video"></td>
+		</tr>
+	</tbody></table>
 
   <script>
     //show('connectLink');

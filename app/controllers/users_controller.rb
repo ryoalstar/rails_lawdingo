@@ -460,7 +460,9 @@ class UsersController < ApplicationController
       redirect_to call_payment_path(@lawyer.id, type: "video-chat")
       return
     end
-
+    
+    @from_to_text = @current_user.full_name + ' to ' + @lawyer.full_name
+    
     require "yaml"
     config = YAML.load_file("config/tokbox.yml")
 

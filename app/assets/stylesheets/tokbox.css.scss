@@ -230,20 +230,67 @@ td {
   float:left;
 }
 
+.videotable_wrapper{
+	width: 995px;
+	background-color: #f8fafd;
+	border-spacing: 0;
+	td{
+	  border: 1px solid #cfd0d0;
+	}
+
+  .from_to_call_wrapper{
+    float: left;
+    font-size: 17px;  
+    line-height: 200px;
+  }
+  
+	td.col_chat{
+		width: 335px;
+	}
+	
+	td.col_video{
+		width: 650px;
+		padding: 7px;
+	}
+	
+	tr.video_row
+	{
+	  height: 536px;
+	}
+	tr.controls_row
+	{
+	  height: 85px;
+	  background: #efefef; /* Old browsers */
+    background: -moz-linear-gradient(top, #efefef 0%, #d1d1d1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #efefef 0%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #efefef 0%,#d1d1d1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #efefef 0%,#d1d1d1 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #efefef 0%,#d1d1d1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#d1d1d1',GradientType=0 ); /* IE6-9 */
+	}
+	
+	.myCamera_wrapper{
+	  
+	}
+}
+
 #subscribers{
   width: 640px;
-  height: 480px;
+  height: 400px;
   margin: 0px auto;
   position: relative;
   z-index: 100;
   display: none;
 }
 #myCamera{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
   border: 2px solid #ffffff;
   z-index: 101;
+  float: right;
+  width: 220px;
+  height: 145px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #opentok_ready{
