@@ -21,5 +21,9 @@ class QuestionsController < ApplicationController
 
     respond_to :js
   end
+  
+  def test
+    
+  end
 
 end

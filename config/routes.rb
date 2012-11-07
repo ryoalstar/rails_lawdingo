@@ -18,6 +18,8 @@ Lawdingo::Application.routes.draw do
     get :practice_areas
     end
   end
+  
+  match '/test' => "questions#test"
   match '/apply' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact
