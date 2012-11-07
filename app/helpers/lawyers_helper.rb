@@ -257,9 +257,9 @@ module LawyersHelper
   def start_or_video_button_p(lawyer)
     if lawyer.is_online && !lawyer.is_busy
       if logged_in?
-        link_to "", user_chat_session_path(lawyer), :class => ''
+        link_to "", user_chat_session_path(lawyer), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
       else
-        link_to "", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
+        link_to "", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
       end
    end
   end
@@ -295,10 +295,9 @@ module LawyersHelper
 
  def start_phone_consultation_p(lawyer)
     if logged_in?
-
-       link_to "", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+       link_to "", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
    else
-     link_to "", new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
+     link_to "", new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
    end
  end
 

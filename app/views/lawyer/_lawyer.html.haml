@@ -55,7 +55,7 @@
           
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
-      .online_icons 
+      .online_icons
         = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
       
       .clear
