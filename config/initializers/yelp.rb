@@ -18,6 +18,7 @@ module Yelp
 
     def find_by_id(business_id)
       response = @access_token.get("/v2/business/#{business_id}").body
+      response.gsub!(/http:\/\/s3-media3.ak.yelpcdn.com/, 'https://s3-media3.ak.yelpcdn.com') # ugly hack yelp doesn't support https
       JSON.parse(response).symbolize_keys
     end
   end

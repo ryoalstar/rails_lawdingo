@@ -11,7 +11,7 @@
             .clear
           .yelp_reviews
             %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
-              = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com'}" + "review").html_safe, class: ""
+              = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com', :rel => :nofollow}" + "review").html_safe, class: ""
         - else
           .stars
             - if lawyer.reviews.average(:rating).to_i > 0
