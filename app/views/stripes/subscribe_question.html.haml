@@ -1,43 +1,24 @@
-.lawyer_subscribtion.subscribe_question-form-wrapper#page
-  %h1.form-header Client Question Subscription
+.subscribe_question-form-wrapper#page
+  %h1.form-header Get a legal question answered
   %div
     .process-wrapper.activation
-
+      .process-header
+        .process-bar
+        .first-step.steps 1
+        .second-step.steps.active 2
+        .third-step.steps 3
+        .clear
+        %p.first-notice.notices Submit Legal Inquiry
+        %p.second-notice.notices Pay Inquiry Fee
+        %p.third-notice.notices Lawyers Respond
       .card-activation
         %h3 
-          Enable Your Question:   
+          Getting a response to your legal question costs 
           %span#subscription_price $#{(@stripe_plan.amount.*0.01).to_i}/#{@stripe_plan.interval}.
-          No commitment, and money back guarantee if you’re not satisfied within the first month.
-
+          %br
+          %span.normal
+            Not happy with the quality of response you get? Email us (refunds@lawdingo.com) for a refund, no questions asked. 
+  
         .card-info
           = render 'subscribe_question_form'
-    .right-wrapper
-      .right-block.testimonials
-        %h3 Testimonials
-        .testimonials_slider
-          %div
-            %p Lawdingo works! I have had paying clients from Lawdingo and I haven't had to expend a lot of time, effort, or money to get them.
-            %p.signature - Deepa Menon, Attorney
-          %div 
-            %p Wouldn’t have used or paid for a lawyer if it weren’t for Lawdingo
-            %p.signature - Lawdingo client
-          %div
-            %p For just over $100 for a half hour call, I got the advice I needed from a top-quality lawyer on Lawdingo.
-            %p.signature - Lawdingo client
-        .clear
-      .right-block
-        %h3 Client Benefits
-        %ul
-          %li Get paid to talk to potential new clients
-          %li Client profile featuring your practice
-          %li List flat-fee services, record intro video
-          %li Display availability, accept appointments
-          %li Receive legal inquiries relevant to you
-          %li No fee-splitting or referral fees charged
-          %li Just $#{(@stripe_plan.amount.*0.01).to_i}/#{@stripe_plan.interval} with no commitments
-      .contact_outer
-        %p 
-          Questions? Contact:
-          %a{:href => 'mailto:info@lawdingo.com'} info@lawdingo.com 
-          %br/
-          or 415-234-DINGO (3464).
+    

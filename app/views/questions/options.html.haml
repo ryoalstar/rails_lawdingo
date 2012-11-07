@@ -1,16 +1,22 @@
-#page
-  %div
-    .content_outer
-      .content
-        - if @question
-          .question_options_wrapper.padded{:style => 'min-heigth:300px;'}
-            %h1 Thanks for your inquiry. You have two options.
-            #question.hidden{:data => @question.attributes}
-            %ul
-              %li
-                = radio_button_tag :question_option, 1
-                1 - Pay just $27 to have your question answered. Get your money back if you don't get a response within 12 hours or if you're not satisfied with the response.
-              %li
-                = radio_button_tag :question_option, 2
-                2 - Get a live consultation or appointment with a California attorney who advises on Famili and Divorce matters. Consultations are free to start.
-                
+.question-chooser
+  
+  %table.question_options
+    %tbody
+      %tr.title_row
+        %td{:colspan=>'2'}
+          #question.hidden{:data => @question.attributes}
+          Thanks for your inquiry. You have two options:  
+      %tr
+        %td
+          .question_button{"data-option"=>"1"}
+            Pay $27 to have question answered
+          .tooltip_pay_wrapper  
+            .tooltip_bubble
+              Money back guarantee if you're not satisfied
+        %td
+          .question_button{"data-option"=>"2"}
+            Consult live with a relevant attorney
+          .tooltip_live_wrapper
+            .tooltip_bubble
+              Free to start, pay be the minute after first 15-20 minutes
+      

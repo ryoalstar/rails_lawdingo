@@ -128,7 +128,7 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
   margin-bottom: 25px;
-  
+  margin: 30px auto;
   width: 710px;
   height: 190px;
   table.question_options{
@@ -162,21 +162,25 @@
       text-align: center;
       line-height: 40px;
       border: 1px solid #babbbe;
-      margin-top: 30px;
+      margin: 30px auto 0;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;  
+      cursor: pointer;
     }
   }  
 }
 
 
+
 .tooltip_live_wrapper{
   width: 290px;
   position: relative;
+  margin: 0 auto;
 }
 
 .tooltip_pay_wrapper{
   width: 230px;
   position: relative;
+  margin: 0 auto;
 }

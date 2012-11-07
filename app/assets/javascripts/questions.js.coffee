@@ -50,9 +50,9 @@ questions =
         $wrapper.addClass('expanded')
 
   question_options: -> 
-    ($ ".question_options_wrapper input[type='radio']")
+    ($ "table.question_options .question_button")
   question: -> 
-    ($ ".question_options_wrapper #question")
+    ($ "table.question_options #question")
   question_id: ->
     @question().attr('data-id')
   practice_area_name_for_url: ->
@@ -68,7 +68,7 @@ questions =
   handleQuestionOptionsPage: ->
     _this = this
     @question_options().on "click", ->
-      switch ($ this).val()
+      switch ($ this).attr('data-option')
         when '1'
           _this.sendUserToTheStripePaymentPage()
         when '2'
