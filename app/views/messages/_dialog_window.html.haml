@@ -9,7 +9,7 @@
       Your state:
       %br
       .schedule_session_state_bot
-        = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :required => true, :class => 'select_medium required'
+        = select_tag :state_name, options_from_collection_for_select(@states, "id", "name", @auto_detected_state.try(:id)), :prompt => "Select state", :required => true, :class => 'select_medium required'
   - if @practice_areas
     .schedule_session_legal_matter
       Legal matter:

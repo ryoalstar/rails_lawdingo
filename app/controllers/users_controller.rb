@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
+  before_filter :auto_detect_state, :only => [:landing_page, :home]
   #before_filter :check_payment_info, :only => [:start_phone_call]
 
   def index

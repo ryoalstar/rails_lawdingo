@@ -1,29 +1,28 @@
 <%= form_for Question.new, :validate=> true do |f| %>
-  
-  <%= f.hidden_field :user_id, :value => (logged_in? ? current_user.id : nil)  %>
-  <%= f.hidden_field :type, :value => type %>
-  <div class="question_body_wrapper input string optional">
-  	<%= f.text_field :body, :size => 50, :placeholder => placeholder, :validate=> true, :required => :required %>
-  </div>
-  <%= f.submit "", class: "" %>
 
-  <div class="question_state" id="question_state">
+<%= f.hidden_field :user_id, :value=> (logged_in? ? current_user.id : nil)  %>
+<%= f.hidden_field :type, :value =>type %>
+<div class="question_body_wrapper input string optional">
+	<%= f.text_field :body, :size => 50, :placeholder => placeholder, :validate => false %>
+</div>
+<%= f.submit "", class: "" %>
+
+<div class="question_state" id="question_state">
 	<div class="question_state_top">
-	<h3 class = "question_label">
-	<label>Your state:</label></h3>
+		<h3 class = "question_label"><label>Your state:</label></h3>
 	</div>
 	<div class="question_state_bot">
 		<% states = @states.map(&:name) %>
-		<% states.insert(0, 'Non-US/UK') %> 
-    <%= f.select :state_name, states, selected: auto_detected_state, :include_blank => "Not specified", :validate => true %>
-	</div>	
-  </div>
-  <div class="question_area" id="question_area">
+		<% states.insert(0, 'Non-US/UK') %>
+		<%= f.select :state_name, states, selected: auto_detected_state, :include_blank => "Not specified", :validate => true %>
+	</div>
+</div>
+<div class="question_area" id="question_area">
 	<div class="question_area_top">
-	<h3 class = "question_label"><label>Type of law:</label></h3>
+		<h3 class = "question_label"><label>Type of law:</label></h3>
 	</div>
 	<div class ="question_area_bot">
-    <%= f.select :practice_area, @practice_areas.map(&:name), :include_blank => "Not specified" %>
+		<%= f.select :practice_area, @practice_areas.map(&:name), :include_blank => "Not specified" %>
 	</div>
-  </div>
+</div>
 <% end %>
