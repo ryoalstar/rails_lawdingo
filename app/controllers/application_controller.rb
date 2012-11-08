@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
   helper_method :current_admin, :logged_in?, :logged_in_admin?
 
   def set_timezone
@@ -106,11 +105,9 @@ class ApplicationController < ActionController::Base
     if question_id.present?
       question = Question.find(question_id)
       question.update_attribute(:user_id, user.id)
-
       UserMailer.new_question_email(question).deliver
       session[:question_id] = nil
-      redirect_to lawyers_path, :notice => "Your question has been submitted, and an attorney will get back to you soon with some info."
-
+      redirect_to "/questions/#{question.id}/options"
     end
   end
   
@@ -124,9 +121,9 @@ class ApplicationController < ActionController::Base
   # send message from guest to lawyer
   def send_message user
     return false unless user.is_a?(Client)
-    return false unless session[:message] && session[:message].is_a?(Message)
-    message = session.delete(:message)
-    message.client = user
+    return false unless session[:message_id]
+    message = Message.find(session.delete(:message_id))
+    message.update_attribute(:client_id, user.id)
     if message.send!
       session[:return_to] = attorney_path(message.lawyer, slug: message.lawyer.slug)
       flash[:notice] = 'Your message has been sent.' 

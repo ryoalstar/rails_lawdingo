@@ -1,10 +1,9 @@
-<%= form_for Question.new, :remote=> logged_in?, :validate=> true do |f| %>
-  <!--<p>Unsure who to choose? Ask a question to a lawyer instantly.</p>-->
+<%= form_for Question.new, :validate=> true do |f| %>
   
-  <%= f.hidden_field :user_id, :value=> (logged_in? ? current_user.id : nil)  %>
-  <%= f.hidden_field :type, :value =>type %>
+  <%= f.hidden_field :user_id, :value => (logged_in? ? current_user.id : nil)  %>
+  <%= f.hidden_field :type, :value => type %>
   <div class="question_body_wrapper input string optional">
-  	<%= f.text_field :body, :size=>50, :placeholder => placeholder, :validate=> false %>
+  	<%= f.text_field :body, :size => 50, :placeholder => placeholder, :validate=> true, :required => :required %>
   </div>
   <%= f.submit "", class: "" %>
 
@@ -14,8 +13,8 @@
 	<label>Your state:</label></h3>
 	</div>
 	<div class="question_state_bot">
-		<% states = State.all.map(&:name) %>
-		<% states.insert(0, states.delete_at(states.index('Non-US/UK'))) if !states.index('Non-US/UK').nil? %> 
+		<% states = @states.map(&:name) %>
+		<% states.insert(0, 'Non-US/UK') %> 
     <%= f.select :state_name, states, selected: auto_detected_state, :include_blank => "Not specified", :validate => true %>
 	</div>	
   </div>
@@ -24,7 +23,7 @@
 	<h3 class = "question_label"><label>Type of law:</label></h3>
 	</div>
 	<div class ="question_area_bot">
-    <%= f.select :practice_area, PracticeArea.where(:parent_id => nil).map(&:name), :include_blank => "Not specified" %>
+    <%= f.select :practice_area, @practice_areas.map(&:name), :include_blank => "Not specified" %>
 	</div>
   </div>
 <% end %>

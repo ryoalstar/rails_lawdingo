@@ -28,6 +28,9 @@
   font-weight: bold;
 }
 
+.normal {
+  font-weight: normal;
+}
 
 .hidden{
   display:none;
@@ -128,6 +131,32 @@ input.valid { border-color:green!important; }
 }
 .blue_button.file_select_button{
   height:28px;
+}
+
+
+.tooltip_bubble{
+  color: white;
+  height: 10px;
+  padding: 5px;
+  font-size: 11px;
+  position: relative;
+  @include background_simplegradient(#2c2c2d, #545455);
+  @include rounded(3px);
+  border: 1px solid black;
+  top:8px;
+}
+.tooltip_bubble:after{ /*arrow added to uparrowdiv DIV*/
+  content:'';
+  display:block;
+  position:absolute;
+  top:-20px; /*should be set to -border-width x 2 */
+  left: 50%;
+  width:0;
+  height:0;
+  border-color: transparent transparent #2c2c2d transparent; /*border color should be same as div div background color*/
+  border-style: solid;
+  border-width: 10px;
+
 }
 
 // Nested to a class wrapper so they are easy to override

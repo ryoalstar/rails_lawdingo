@@ -343,7 +343,7 @@ body.users.home {
         }
     }
 
-    &.signup, &.payment, &.lawyer_subscribtion, &.apply-form-wrapper, &.call-payment {
+    &.signup, &.payment, &.lawyer_subscribtion, &.apply-form-wrapper,  &.call-payment {
         > h3 {
             text-align: center;
             font-weight: normal;
@@ -693,8 +693,8 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
-#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion, #page.apply-form-wrapper,
-.new_offering{
+#page.signup #new_lawyer, #page.signup #new_user, #page.lawyer_subscribtion, #page.apply-form-wrapper, 
+#page.subscribe_question-form-wrapper, .new_offering{
   margin-bottom:10px;
   .field_with_errors{
     input{

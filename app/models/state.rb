@@ -4,6 +4,7 @@ class State < ActiveRecord::Base
 
   has_many :bar_memberships
   has_many :lawyers, :through => :bar_memberships
+  has_many :messages, :inverse_of => :state
   FILE_PATH = "#{Rails.root}/states.csv"
 
   scope :with_approved_lawyers,
@@ -25,6 +26,11 @@ class State < ActiveRecord::Base
   def name_for_url
     return '' unless self.name
     "#{self.name.squish.gsub(/\s+/,'_')}-lawyers"
-  end  
+  end
+  
+  def self.name_for_url name
+    return '' unless name.to_s.length > 0
+    "#{name.to_s.squish.gsub(/\s/,'-')}-lawyers"
+  end
 end
 

@@ -13,9 +13,9 @@ describe Question do
     @question.body = nil
     @question.should_not be_valid
   end
-  it "should not create a question without state" do
+  it "should create a question without state" do
     @question = FactoryGirl.build(:question)
     @question.state_name = nil
-    @question.should_not be_valid
+    @question.should be_valid
   end
 end

@@ -18,6 +18,7 @@ Lawdingo::Application.routes.draw do
     get :practice_areas
     end
   end
+  
   match '/apply' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact
@@ -25,9 +26,14 @@ Lawdingo::Application.routes.draw do
   post '/contact/send_email' => "contact#send_email", :as => :send_email
   post '/contact/new_subscriber' => "contact#new_subscriber", :as => :new_subscriber
 
+  post '/flash/notice' => "flash#notice", :as => :notice
+  post '/flash/alert' => "flash#alert", :as => :alert
   
-  
-  resources :questions
+  resources :questions, :only => [:create, :update] do 
+    member do
+      get :options, :as => :question_options
+    end
+  end
   resources :reviews
   resources :schools
   resources :inquiries, only: :show
@@ -54,6 +60,8 @@ Lawdingo::Application.routes.draw do
   match '/paid' => "stripes#new", :as => :subscribe_lawyer
   resource :stripe, only: [:new, :create] do
     post :coupon_validate
+    get '/subscribe_question/:question_id', :action => :subscribe_question
+    post :subscribe_question_create, :on => :collection
   end
 
   resources :users do
@@ -125,9 +133,11 @@ Lawdingo::Application.routes.draw do
     resources :practice_areas
   end
 
-  resources :messages do 
-    get :clear_session_message, :on => :collection
-    post '/send_message/:lawyer_id', :action => :send_message_to_lawyer, :on => :collection, :as => :schedule_session
+  resources :messages do
+    collection do
+      get :clear_session_message
+      post '/send_message/:lawyer_id', :action => :send_message_to_lawyer, :as => :schedule_session
+    end
   end  
 
   match 'modparam' =>'users#update_parameter', :as =>:update_parameter

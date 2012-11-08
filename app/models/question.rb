@@ -1,13 +1,19 @@
 class Question < ActiveRecord::Base
+  include ActionView::Helpers
   attr_accessible :type, :user_id, :body, :state_name, :practice_area
   belongs_to :user
   has_one :inquiry
-  validates_presence_of :body, :state_name
+  validates_presence_of :body
   validates_length_of :body, :minimum => 11, :message =>"The question should have at least 11 characters."
-
+  validates_format_of :body, :with => /^[\w\s.,?!]+$/
+  before_save :clear_body
   after_create :create_inquiry
 
   set_inheritance_column :ruby_type
+
+  def clear_body
+    self.body = strip_tags(self.body) if self.body
+  end
 
   def matched_lawyers
     state = State.where(name: self.state_name).first

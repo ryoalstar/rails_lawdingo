@@ -1,0 +1,22 @@
+.question-chooser
+  
+  %table.question_options
+    %tbody
+      %tr.title_row
+        %td.option_thanks{:colspan=>'2'}
+          #question.hidden{:data => @question.attributes}
+          Thanks for your inquiry. You have two options:  
+      %tr
+        %td
+          .question_button{"data-option"=>"1"}
+            Pay $28 to have question answered
+          .tooltip_pay_wrapper  
+            .tooltip_bubble
+              Money back guarantee if you're not satisfied
+        %td
+          .question_button{"data-option"=>"2"}
+            Consult live with a relevant attorney
+          .tooltip_live_wrapper
+            .tooltip_bubble
+              Free to start, pay be the minute after first 15-20 minutes
+      

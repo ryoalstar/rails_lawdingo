@@ -4,7 +4,8 @@ body.clients.new #page.apply-form-wrapper div.outer{
   background:none;
 }
 #page{
-  &.signup, &.payment, &.apply-form-wrapper {
+  &.signup, &.payment, &.apply-form-wrapper,
+  .subscribe_question-form-wrapper{
 
     form{
       margin: 0px 0px 12px 0px;
@@ -298,7 +299,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
       }
       tr td{
         vertical-align:middle;
-        font-size:13px;
+        font-size:12px;
         padding:5px 5px 5px 10px;
         color:#5d5e5f;
         &.cards{
@@ -374,6 +375,26 @@ body.clients.new #page.apply-form-wrapper div.outer{
       border-bottom:1px dotted #c3c3c3;
     }
     a:hover{ border:none; }
+  }
+}
+
+#page.subscribe_question-form-wrapper > div{
+  width:615px;
+  padding: 0;
+  border:0;
+  
+  .process-wrapper{
+
+    .process-header{
+      width: auto;
+      .first-step.steps{
+      }
+      .second-step{ margin-left: 250px;  }
+      .third-step{ margin-left: 480px; }
+      .process-bar{ width: 470px; }
+      .second-notice{ margin-left: 140px;  }
+      .third-notice{ margin-left: 450px; }
+    }
   }
 }
 
@@ -585,7 +606,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
       color:#3b454f;
       float:left;
       margin-top:25px;
-      width: 110px;
+      width: 115px; 
       text-align:center;
     }
     .first-notice{ margin-left: -30px; }
@@ -782,6 +803,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
           tr,td{
             padding: 0;
             margin: 0;
+            font-size: 12px;
           }
           td.separator{ width: 20px;  }
           #card_number{  

@@ -1,5 +1,8 @@
 class Home
-
+  stickyHeight: 600,
+  sticky_padding : 5,
+  sticky_topOffset : 110,
+  sticky_footerHeight : 110,  
   initialize : ()->
     this.add_event_listeners()
 
@@ -34,6 +37,7 @@ class Home
     Home.s[65] = 3
     Home.s[0] = 4
   
+    
     this.redirect_to_last_practice_area_state_select_from_cookie()
 
     unless document.location.hash == ""
@@ -43,7 +47,16 @@ class Home
     else
       this.add_appointment_forms()
       this.search_defaults()
-      
+  scrollSticky: ()->
+    if $(window).height() >= this.stickyHeight
+      aOffset = $(".sticky_filters").offset()
+      if $(document).height() - this.footerHeight - this.sticky_padding < $(window).scrollTop() + this.stickyHeight
+        $top = $(document).height() - this.stickyHeight - this.sticky_footerHeight - this.sticky_padding
+        $(".sticky_filters").attr "style", "position:absolute; top:" + $top + "px; border-top: 1px dotted #C8CACC;"
+      else if $(window).scrollTop() + this.sticky_padding > this.sticky_topOffset
+        $(".sticky_filters").attr "style", "position:fixed; top:" + this.sticky_padding + "px; border-top: 1px dotted #C8CACC;"
+      else
+        $(".sticky_filters").attr "style", "position:relative; border-top: 0;"
   search_defaults : ()->
     first = getUrlVars()["search_query"]
     if first
@@ -169,7 +182,9 @@ class Home
         false
       )
       
-      
+    self = this
+    $(window).scroll ->
+      self.scrollSticky()
     expander_control = (expander) ->  
       #First find the parent
       parent = expander.parents(".lawyer")

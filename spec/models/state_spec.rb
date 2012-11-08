@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe State do
+  subject { FactoryGirl.create(:state) }
+  specify { should have_many(:bar_memberships) }
+  specify { should have_many(:lawyers) }
+  specify { should have_many(:messages) }
 
   context "scopes" do
     it "should provide a with_approved_lawyers scope" do

@@ -1,0 +1,24 @@
+.subscribe_question-form-wrapper#page
+  %h1.form-header Get a legal question answered
+  %div
+    .process-wrapper.activation
+      .process-header
+        .process-bar
+        .first-step.steps 1
+        .second-step.steps.active 2
+        .third-step.steps 3
+        .clear
+        %p.first-notice.notices Submit Legal Inquiry
+        %p.second-notice.notices Pay Inquiry Fee
+        %p.third-notice.notices Lawyers Respond
+      .card-activation
+        %h3 
+          Getting a response to your legal question costs 
+          %span#subscription_price $#{(@stripe_plan.amount.*0.01).to_i}.
+          %br
+          %span.normal
+            Not happy with the quality of response you get? Email us (refunds@lawdingo.com) for a refund, no questions asked. 
+  
+        .card-info
+          = render 'subscribe_question_form'
+    

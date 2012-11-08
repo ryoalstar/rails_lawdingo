@@ -16,7 +16,8 @@ describe MessagesController do
     before :each do
       @amy = FactoryGirl.create(:client, first_name: "Amelia")
       @doctor = FactoryGirl.create(:lawyer, first_name: "The Doctor")
-      @attributes = { lawyer_id: @doctor.id, email_msg: "Geronimo!" }
+      @message = FactoryGirl.build(:message, :body => "Geronimo!", :lawyer => @doctor, :client => @amy)
+      @attributes = { lawyer_id: @doctor.id, email_msg: @message.body, message: @message.attributes }
       session[:user_id] = @amy.to_param
     end
 
@@ -32,13 +33,13 @@ describe MessagesController do
       session[:message].should be_nil
       session.delete :user_id
       post :send_message_to_lawyer, @attributes
-      response.body.should eq '{"result":false}'
-      session[:message].should_not be_nil
+      response.body.start_with?('{"result":false').should be_true
+      session[:message_id].should_not be_nil
     end
 
     it "send an email to lawyer" do
       expect {
-        post :send_message_to_lawyer, @attributes
+        @message.send!
       }.to change(ActionMailer::Base.deliveries, :size).by(1)
 
       email = ActionMailer::Base.deliveries.last
@@ -47,17 +48,17 @@ describe MessagesController do
 
     it "render result when message is sent" do
       post :send_message_to_lawyer, @attributes
-      response.body.should eq '{"result":true}'
+      response.body.start_with?('{"result":true').should be_true
       session.delete :user_id
       post :send_message_to_lawyer, @attributes
-      response.body.should eq '{"result":false}'
+      response.body.start_with?('{"result":false').should be_true
     end
 
     it 'clears session message' do 
-      session[:message] = FactoryGirl.build(:message)
+      session[:message_id] = @message.id
       get :clear_session_message
       response.should be_true
-      session[:message].should be_nil
+      session[:message_id].should be_nil
     end
   end
 

@@ -1,5 +1,5 @@
 class PracticeArea < ActiveRecord::Base
-  default_scope order("name ASC")
+  default_scope order(:name)
   
   has_many :specialities, 
     :class_name => "PracticeArea", 
@@ -14,6 +14,7 @@ class PracticeArea < ActiveRecord::Base
   has_many :expert_areas
   has_many :lawyers, :through => :expert_areas
   has_many :offerings
+  has_many :messages, :inverse_of => :practice_area
 
   has_many :children, 
     :class_name => "PracticeArea",
@@ -55,7 +56,12 @@ class PracticeArea < ActiveRecord::Base
   def name_for_url
     return '' unless self.name
     self.name.squish.gsub(/\s/,'-')
-  end  
+  end
+  
+  def self.name_for_url name
+    return '' unless name.to_s.length > 0
+    name.to_s.squish.gsub(/\s/,'-')
+  end
 
   def selected? area_id = nil
     return false unless area_id
