@@ -21,9 +21,7 @@ class QuestionsController < ApplicationController
 
     respond_to :js
   end
-
-  def test
-  end    
+ 
   def options
     @question = Question.find params[:id] || not_found
   end

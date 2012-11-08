@@ -14,7 +14,7 @@
       .card-activation
         %h3 
           Getting a response to your legal question costs 
-          %span#subscription_price $#{(@stripe_plan.amount.*0.01).to_i}/#{@stripe_plan.interval}.
+          %span#subscription_price $#{(@stripe_plan.amount.*0.01).to_i}.
           %br
           %span.normal
             Not happy with the quality of response you get? Email us (refunds@lawdingo.com) for a refund, no questions asked. 

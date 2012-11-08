@@ -105,4 +105,3 @@ jQuery ->
     $("#autoselect_landing_wraper").removeClass("expanded")
     $("#new_question").enableClientSideValidations()
     return false
-

@@ -691,18 +691,22 @@
   #left-bar.left-bar, .left-bars-block .left-bar{
 
     background:#fafcff;
-    border:1px solid #d0d2d5;
+    border: none;
     float: left;
     
     @include rounded(5px);
-    
+    .sticky_filters{
+      width: 246px;
+      background: #FAFCFF;
+      border: 1px solid #D0D2D5;
+      border-top: 0;
+    }
     
     h2{
       font-size:14px;
       color:#4d6b94;
       text-align:center;
       font-weight:bold;
-      margin-top: 10px;
     }
     h3{
       font-size:13px;
@@ -713,7 +717,19 @@
    
     .left-bar-section.first{
       padding: 0 0 11px 0;
-      width:100%;
+      width:246px;
+      padding-top: 12px;
+      border-top: 1px solid #d0d2d5;
+      border-left: 1px solid #d0d2d5;
+      border-right: 1px solid #d0d2d5;
+      border-bottom: 1px dotted #C8CACC;
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-topright: 5px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      
     }
     .left-bar-section:last-child{
       border:0;
@@ -749,8 +765,7 @@
       padding:17px 0 35px 25px;
       border-top:0;
       border-bottom:1px dotted #c8cacc;
-      float: left;
-      width: 100%;
+      width: 246px;
       span.back_to a{
         border-bottom: 1px dotted black;
         color: #303030;
