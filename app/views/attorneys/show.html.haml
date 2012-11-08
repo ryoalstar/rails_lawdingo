@@ -181,7 +181,7 @@
               - if @attorney.yelp_business_id.present? && !!@attorney.yelp[:reviews]
                 %h4.yelp
                   Latest
-                  = link_to image_tag('yelp_logo_50x25.png'), "http://www.yelp.com"
+                  = link_to image_tag('yelp_logo_50x25.png'), "http://www.yelp.com", :rel => :nofollow
                   reviews:
                 %div{:itemprop => :reviews}  
                   - @attorney.yelp[:reviews].each do |review|

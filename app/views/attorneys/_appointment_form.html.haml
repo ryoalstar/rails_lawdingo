@@ -10,7 +10,7 @@
         Your state:
         %br
         .appointment_state_bot
-          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name"), :prompt => "Select state", :validate => true, :class=>'select_small'
+          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name", @auto_detected_state.try(:id)), :prompt => "Select state", :validate => true, :class=>'select_small'
     - if @practice_areas
       .appointment_legal_matter
         Legal matter:

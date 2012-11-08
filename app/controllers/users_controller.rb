@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
+  before_filter :auto_detect_state, :only => [:landing_page, :home]
   #before_filter :check_payment_info, :only => [:start_phone_call]
 
   def index
@@ -793,8 +794,8 @@ class UsersController < ApplicationController
   def add_practice_area_scope service_type
     # if we have a practice area
     if params[:practice_area].present?
-      scope = params[:practice_area].numeric? ? PracticeArea.find_by_id(params[:practice_area]) : PracticeArea.name_like(params[:practice_area]).first
-      area_id = scope.try(:id)
+      @practice_area = params[:practice_area].numeric? ? PracticeArea.find_by_id(params[:practice_area]) : PracticeArea.name_like(params[:practice_area]).first
+      area_id = @practice_area.try(:id)
       @search.build do
         service_type == "legal-services" ? with(:practice_area_id, area_id) : with(:practice_area_ids, [area_id])
       end if area_id

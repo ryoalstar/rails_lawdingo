@@ -131,11 +131,17 @@ class ApplicationController < ActionController::Base
   end
   
   def lawyers_path?
-    request.path == lawyers_path   
+    request.path == lawyers_path
   end
   
   def current_path? path
     request.path == path
+  end
+  
+  def auto_detect_state
+    if request.location.present? && request.location.state_code.present?
+      @auto_detected_state = State.find_by_abbreviation(request.location.state_code)
+    end
   end
 
 end

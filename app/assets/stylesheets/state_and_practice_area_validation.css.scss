@@ -1,0 +1,41 @@
+#state_and_practice_area_validation {
+  padding: 0px 0px 20px 0px;
+  width: 500px;
+  height: auto;
+  margin-left: -250px;
+  margin-top: -150px;
+  z-index: 102;
+  position: fixed;
+  .state_and_practice_area_validation_state {
+    padding-left: 20px;
+    height: 55px;
+    float: left;
+  }
+  .state_and_practice_area_validation_legal_matter {
+    height: 55px;
+  }
+  .fine-print {
+    font-size: 0.8em;
+    padding-left: 20px;
+    color: black;
+  }
+  
+  .button {
+    padding-left: 20px;
+    float: left;
+  }
+  
+  .offline_message {
+    height: 25px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-top: 18px;
+  }
+  #state_and_practice_area_validation_warning {
+    margin-top: 10px;
+    display: block;
+  }
+  hr{
+    margin: 10px 16px 10px 16px;
+  }
+}
