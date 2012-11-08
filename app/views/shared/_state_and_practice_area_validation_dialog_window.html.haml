@@ -3,6 +3,7 @@
     %span Connect with
     %span.lawyer_name
   %br/
+  %span.fine-print Just to clarify, what state are you in what kind of law does this pertain to?
   - if @states
     .state_and_practice_area_validation_state
       Your state:
@@ -15,8 +16,6 @@
       %br
       .state_and_practice_area_validation_area_bot
         = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :required => true, :prompt => "Type of law", :class => 'select_medium required'
-
-  %span.fine-print Just to clarify, what state are you in what kind of law does this pertain to?
   %hr/
   %button.button#continue_button Continue
   - if !logged_in?
