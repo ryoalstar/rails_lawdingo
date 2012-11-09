@@ -380,7 +380,7 @@ module LawyersHelper
     if lawyer.is_available_by_phone?
       output << "<div class='voice_chat online tooltip#{lawyer.is_online ? '' : ' dominant'}'> Start phone consultation</div>"
     else
-      output << '<div class="voice_chat offline tooltip"> Not available by phone now</div>'
+      output << '<div class="voice_chat offline tooltip"> Not available by phone</div>'
     end  
     if lawyer.daily_hours.present?
       output << "<div class='text_chat online tooltip#{lawyer.is_online || lawyer.is_available_by_phone? ? '' : ' dominant'}'> Book appointment</div>"
