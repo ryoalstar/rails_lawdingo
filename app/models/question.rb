@@ -3,9 +3,7 @@ class Question < ActiveRecord::Base
   attr_accessible :type, :user_id, :body, :state_name, :practice_area
   belongs_to :user
   has_one :inquiry
-  validates_presence_of :body
-  validates_length_of :body, :minimum => 11, :message =>"The question should have at least 11 characters."
-  validates_format_of :body, :with => /^[\w\s.,?!]+$/
+  validates_format_of :body, :with => /^[\w\s.,?!]+$/, :allow_blank => true
   before_save :clear_body
   after_create :create_inquiry
 
