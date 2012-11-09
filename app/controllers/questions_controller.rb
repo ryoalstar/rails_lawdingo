@@ -4,11 +4,12 @@ class QuestionsController < ApplicationController
     @question = Question.new(params[:question])
     @question.state_name = params[:question][:state_name] if params[:question][:state_name].present?
     @question.practice_area = params[:question][:practice_area] if params[:question][:practice_area].present?
+    @question.user_id = current_user.id if (current_user.present? && @question.user_id.nil?)
     @question.save
     
     if logged_in?
       UserMailer.new_question_email(@question).deliver
-      render :options
+      redirect_to "/questions/#{@question.id}/options"
     else
       session[:question_id] = @question.to_param
       redirect_to new_client_path, :notice => "To submit that inquiry please sign up with or log in to Lawdingo."
