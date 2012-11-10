@@ -27,7 +27,7 @@
         %p= @subtext[:first]
         
         
-        .browse_lawyers_button{:onclick=>'window.location.href="/lawyers"'}
+        %span.browse_lawyers_button{:onclick=>"window.location.href='/lawyers'"}
           = link_to "Browse Lawyers", lawyers_path, class: ""
         = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
         #autoselect_landing_wraper
