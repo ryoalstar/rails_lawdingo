@@ -375,7 +375,7 @@ module LawyersHelper
     if lawyer.is_online
       output << '<div class="video_chat online tooltip dominant"> Start video consultation</div>'
     else
-      output << '<div class="video_chat offline tooltip"> Not available by video now</div>'
+      output << '<div class="video_chat offline tooltip"> Not available by video</div>'
     end  
     if lawyer.is_available_by_phone?
       output << "<div class='voice_chat online tooltip#{lawyer.is_online ? '' : ' dominant'}'> Start phone consultation</div>"
