@@ -57,15 +57,15 @@ conversations =
       conversations.clear_schedule_session_warning() 
       true
       
-    else if !conversations.isStateSelected() && !conversations.isPracticeAreaSelected() 
-      conversations.disable_submit_message_button submit_message_button
-      conversations.write_schedule_session_state_and_practice_area_missing_warning()
-      false
+    #else if !conversations.isStateSelected() && !conversations.isPracticeAreaSelected() 
+    #  conversations.disable_submit_message_button submit_message_button
+    #  conversations.write_schedule_session_state_and_practice_area_missing_warning()
+    #  false
       
-    else if !conversations.isStateSelected()  
-      conversations.disable_submit_message_button submit_message_button
-      conversations.write_schedule_session_state_missing_warning() 
-      false
+    #else if !conversations.isStateSelected()  
+    #  conversations.disable_submit_message_button submit_message_button
+    #  conversations.write_schedule_session_state_missing_warning() 
+    #  false
       
     else if !conversations.isPracticeAreaSelected()  
       conversations.disable_submit_message_button submit_message_button
@@ -143,7 +143,7 @@ conversations =
     schedule_session_warning = ($ "#schedule_session_warning")
     schedule_session_warning.html('')
   isLawyersState: (state, lawyer_id) ->
-    return false if state == ''
+    return true if state == ''
     states = []
     $.ajax(
       url: '/lawyers/'+lawyer_id+'/states.json',

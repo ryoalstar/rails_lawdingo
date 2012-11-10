@@ -53,12 +53,13 @@
         font-size:18px;
       }
 
-      span.browse_lawyers_button{
+      .browse_lawyers_button{
         border:1px solid #3e454f;
         display:block;
         width:200px;
         margin-top:25px;
         padding: 0 20px;
+        height: 42px; 
         
         @include rounded(3px);
 
@@ -76,8 +77,9 @@
         }
 
       }
-      span.browse_lawyers_button, span.browse_lawyers_button:hover, span.browse_lawyers_button:active{
+      .browse_lawyers_button, .browse_lawyers_button:hover, .browse_lawyers_button:active{
         @include background_simplegradient(#f5b04e, #ee7832);
+        cursor: pointer;
       }
       span.browse_lawyers_button:active {
         -moz-box-shadow: inset 3px 3px 6px #eb7538;
