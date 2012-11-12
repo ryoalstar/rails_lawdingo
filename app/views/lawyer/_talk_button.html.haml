@@ -5,7 +5,7 @@
         Talk Now
       - else
         - if lawyer.daily_hours.present?
-          Book Appt.
+          = content_tag :div, "Book Appt.", :onclick=>'if ($(this).parents(".parent_container").find(".text a").attr("href").length > 1) {window.location.href= $(this).parents(".parent_container").find(".text a").attr("href")} else {$(this).parents(".parent_container").find(".text a").trigger("click");} '
         - else
           Send Note
   .free_dropdown{:href=> "#"}

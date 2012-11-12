@@ -1,4 +1,3 @@
-
 %p.online_icon_profile_wrapper
   - if lawyer.is_online
     %span.video.online= start_or_video_button_p(lawyer)
@@ -20,6 +19,7 @@
 %p.online_icon_profile_wrapper
   %span.note= start_or_schedule_button_text_profile(lawyer)
   %span= start_or_schedule_button_text(lawyer)
+%p
 %p.online_icon_profile_wrapper
   - if lawyer.daily_hours.present?
     %span.text.online= schedule_consultation_button(lawyer)

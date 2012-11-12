@@ -1,4 +1,4 @@
-.row.offering{:id => "offering_#{offering.id}", "data-offering-id" => offering.id, "data-lawyer-id" => lawyer.id, "data-lawyer-slug" => lawyer.slug}
+.row.offering.parent_container{:id => "offering_#{offering.id}", "data-offering-id" => offering.id, "data-lawyer-id" => lawyer.id, "data-lawyer-slug" => lawyer.slug}
   .left.row_block
     .avatar
       = link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))

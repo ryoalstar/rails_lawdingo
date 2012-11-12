@@ -1,5 +1,4 @@
-= content_tag :h3, "#{@attorney.first_name}'s fixed-price offers:" do
-  = content_tag :span, "#{number_to_currency(offering_template.fee, precision: 0)} flat fee"
+
 = hidden_field(:current, :lid)
 .action
   .price
@@ -7,6 +6,7 @@
 .info
   %h3
     = link_to_unless_current "#{offering_template.name}", offering_template
+    = content_tag :span, " - #{number_to_currency(offering_template.fee, precision: 0)} flat fee"
   = simple_format offering_template.description, class: "description"
   -# if offering_template.practice_area.present?
     %p.last

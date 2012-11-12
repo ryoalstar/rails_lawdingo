@@ -15,7 +15,7 @@
   %meta{:property => "og:admins",    :content => '363994853644871'}
 
 %div{:id => "lawyer_#{@attorney.id}"}
-  #inline-wrapper
+  #inline-wrapper.lawyer_profile.parent_container
     .left-bars-block
       = link_to "All Lawyers", lawyers_path, class: 'back_to_lawyers'
       -#.left-bar
@@ -99,7 +99,7 @@
         .left_border
         = render "share"
         .avatar
-          = link_to image_tag(@attorney.photo.url(:medium), :itemprop => :photo), attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url
+          = image_tag(@attorney.photo.url(:medium), :itemprop => :photo)
         .middle
           %h1.profile_title
             = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url do 
