@@ -31,7 +31,7 @@ class Lawyer < User
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
   attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :photo, :personal_tagline, 
   :bar_memberships_attributes, :phone, :time_zone, :hourly_rate, :school_id, :undergraduate_school, :license_year, 
-  :yelp_business_id
+  :yelp_business_id, :payment_status
 
   # scopes
   default_scope lambda{
