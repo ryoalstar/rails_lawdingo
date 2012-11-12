@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(:version => 20121031135525) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_national"
+    t.boolean  "is_national", :default => false
   end
 
   create_table "questions", :force => true do |t|

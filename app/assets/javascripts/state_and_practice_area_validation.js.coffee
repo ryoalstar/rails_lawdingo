@@ -67,31 +67,33 @@ state_and_practice_area_validation =
       @clear_state_and_practice_area_validation_warning() 
       true
       
-    else if !@isStateSelected() && !@isPracticeAreaSelected() 
+    else if !@isStateSelected() && !@isPracticeAreaSelected()
       @disable_submit_message_button()
       @write_state_and_practice_area_validation_state_and_practice_area_missing_warning()
       false
       
-    else if !@isStateSelected()
-      @disable_submit_message_button()
-      @write_state_and_practice_area_validation_state_missing_warning() 
-      false
-      
-    else if !@isPracticeAreaSelected()  
+    else if !@isPracticeAreaSelected()
       @disable_submit_message_button()
       @write_state_and_practice_area_validation_practice_area_missing_warning() 
       false
       
-    # isLawyersState false
-    else if !@isLawyersState(current_state_id, lawyer_id) && @isLawyersPracticeArea(current_practice_area_id, lawyer_id)
+    else if !@isStateSelected() && !@isPracticeAreaNational()
       @disable_submit_message_button()
-      @write_state_and_practice_area_validation_state_warning(current_state_name, lawyer_name) 
+      @write_state_and_practice_area_validation_state_missing_warning()
       false
+      
     # isLawyersPracticeArea false
     else if @isLawyersState(current_state_id, lawyer_id) && !@isLawyersPracticeArea(current_practice_area_id, lawyer_id)
       @disable_submit_message_button()
       @write_state_and_practice_area_validation_practice_area_warning(current_practice_area_name, lawyer_name) 
       false
+      
+    # isLawyersState false && isLawyersPracticeArea true
+    else if !@isLawyersState(current_state_id, lawyer_id) && @isLawyersPracticeArea(current_practice_area_id, lawyer_id)
+      @disable_submit_message_button()
+      @write_state_and_practice_area_validation_state_warning(current_state_name, lawyer_name) 
+      false
+
     else #
       @disable_submit_message_button()
       @write_state_and_practice_area_validation_state_and_practice_area_warning(current_state_name, current_practice_area_name, lawyer_name)
@@ -111,6 +113,10 @@ state_and_practice_area_validation =
     parseInt(@practice_area_select().val()) > 0
   isStateAndPracticeAreaSelected: -> 
     @isStateSelected() && @isPracticeAreaSelected()
+  isPracticeAreaNational: ->
+    current_practice_area_id = @practice_area_select().val()
+    current_practice_area_is_national = @practice_area_select().find("option[value='#{current_practice_area_id}']").attr('is_national');
+    current_practice_area_is_national == 'true'
   isLawyersPracticeArea: (practice_area_id, lawyer_id) ->
     return false if practice_area_id == ''
     unless @practice_areas.length
@@ -155,6 +161,7 @@ state_and_practice_area_validation =
     state_and_practice_area_validation_warning = ($ "#state_and_practice_area_validation_warning")
     state_and_practice_area_validation_warning.html('')
   isLawyersState: (state, lawyer_id) ->
+    return true if @isPracticeAreaNational()
     return false if state == ''
     unless @states.length
       $.ajax(

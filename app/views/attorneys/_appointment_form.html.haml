@@ -16,7 +16,7 @@
         Legal matter:
         %br
         .appointment_area_bot
-          = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law", :class=>'select_small'
+          = select_tag :practice_area, options_for_select(@practice_areas.map{|x| [x.name, x.id, {:is_national => x.is_national}]}), :prompt => "Type of law", :class=>'select_small'
 
     %p Available appointments (select one)
 

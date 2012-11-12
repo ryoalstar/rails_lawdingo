@@ -15,7 +15,7 @@
       Legal matter:
       %br
       .state_and_practice_area_validation_area_bot
-        = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :required => true, :prompt => "Type of law", :class => 'select_medium required'
+        = select_tag :practice_area, options_for_select(@practice_areas.map{|x| [x.name, x.id, {:is_national => x.is_national}]}), :required => true, :prompt => "Type of law", :class => 'select_medium required'
   %hr/
   %button.button#continue_button Continue
   - if !logged_in?
