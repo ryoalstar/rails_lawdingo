@@ -131,17 +131,7 @@ describe "Restful Lawyers", :integration do
       practice_area = FactoryGirl.create(:practice_area)
       @lawyer.practice_areas << practice_area
     end
-    it "should render the practice area link" do
-      xhr :get, carousel_images_path, :format => "json"
-      parsed_body = JSON.parse(response.body)
-      homepage_options = parsed_body.last;
-      @lawyer.practice_areas_names.each do |pa_name|
-        includes = homepage_options["description"].include?(pa_name)
-        includes.should be_true
-      end
-    end
   end
-  
   
   context "Logged in lawyer" do
     before(:each) do

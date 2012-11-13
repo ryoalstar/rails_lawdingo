@@ -88,6 +88,7 @@ class UsersController < ApplicationController
     @subtext = AppParameter.service_homepage_subtext
     @practice_areas = PracticeArea.parent_practice_areas
     @states = State.with_approved_lawyers
+    @homepage_images = HomepageImage.all.shuffle
   end
 
   def show
