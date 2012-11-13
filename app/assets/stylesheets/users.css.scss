@@ -197,6 +197,7 @@
 
 // ***** Lawyers page *****
 
+
 #inline-wrapper{
   // Filters in the lawyer page
   form.filters{
@@ -606,6 +607,8 @@
       border-top-right-radius: 5px;
       
     }
+    
+    
     .left-bar-section:last-child{
       border:0;
     }
@@ -613,19 +616,17 @@
     // Practice areas
     .left-bar-section.legal_domain{
       padding-bottom: 11px;
-      padding-left: 0;
       
-      h3{
-        margin-left:25px;
-      }
+   
       p{
-        margin-left:25px;
         padding-top: 1px;
       }
       .practice-areas.children{
         background:#f2f2f2;
         padding: 10px 0;
         margin: 10px 0;
+        margin-left: -25px;
+        padding-left: 25px;
         h3{
           margin-bottom:0;
           padding-left: 3px;
@@ -650,6 +651,9 @@
       p{
         font-size:13px;
         margin-bottom: 3px;
+      }
+      .online_icons p{
+        margin-bottom: 1px;
       }
       
       a.service, a.advice{
