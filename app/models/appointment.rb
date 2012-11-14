@@ -20,6 +20,8 @@ class Appointment < ActiveRecord::Base
   validates :client, :presence => true
   validates :lawyer, :presence => true
   validates :time, :presence => true
+  scope :futures, where('time >= ?', DateTime.now)
+  scope :need_for_initiate, where(:time => (DateTime.now - 1.minute)..(DateTime.now + 1.minute))
 
   delegate :email,
     :to => :lawyer,
@@ -60,6 +62,12 @@ class Appointment < ActiveRecord::Base
   def per_minute_rate
     return nil if self.lawyer.blank?
     return self.lawyer.rate
+  end
+  
+  def client_call_to_lawyer
+    return false unless self.client.is_a? Client
+    return false unless self.lawyer.is_a? Lawyer
+    self.client.call_to_lawyer self.lawyer
   end
 
 end

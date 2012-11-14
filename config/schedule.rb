@@ -51,3 +51,7 @@ every 1.day, :at => '2am' do
   rake '-s sitemap:refresh'
 end
 
+every 30.minutes do
+  rake '-s appointment:auto_initiate_apponntments'
+end
+

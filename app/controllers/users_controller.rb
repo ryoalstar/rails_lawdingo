@@ -376,6 +376,10 @@ class UsersController < ApplicationController
     status = @user.stripe_customer_token.present? ? '1' : '0'
     render :text => status, :layout => false
   end
+  
+  def have_i_payment_info
+    render :json => {:result => current_user.stripe_customer_token.present?}, :layout => false, :status => :ok
+  end
 
   def start_phone_call
     @lawyer = Lawyer.find(params[:id]) if params[:id].present?

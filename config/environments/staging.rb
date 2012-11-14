@@ -61,4 +61,8 @@ Lawdingo::Application.configure do
     sender_address: "notifier@lawdingo.com",
     exception_recipients: %w{nikhil.nirmel@gmail.com adam.miribyan@gmail.com chernyakov.sergey@gmail.com},
     ignore_exceptions: ExceptionNotifier.default_ignore_exceptions
+    
+  config.after_initialize do
+    Rails.application.routes.default_url_options[:host] = 'lawdingo.com:5001'
+  end
 end

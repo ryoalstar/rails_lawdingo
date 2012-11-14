@@ -173,6 +173,7 @@ Lawdingo::Application.routes.draw do
   match '/CheckCallStatus' => 'users#check_call_status'
   match '/UpdateCallStatus' => 'users#update_call_status'
   # match '/results' => "users#home", :as => :results
+  match '/haveIPaymentInfo' => 'users#have_i_payment_info'
 
   # New phone calls flow routes
   match "/twilio/welcome", to: "twilio#welcome", as: :twilio_welcome

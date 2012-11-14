@@ -61,6 +61,7 @@ Lawdingo::Application.configure do
     Object.const_set(
       "STRIPE_PUBLIC_KEY", "pk_nhHiYxc2FBJLSEkQ9esXEbmXgvmnW"
     )
+    Rails.application.routes.default_url_options[:host] = 'www.lawdingo.com'
   end
 
   # Send email with an error log each time an exception is raised

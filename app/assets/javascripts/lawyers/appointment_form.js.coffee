@@ -179,7 +179,15 @@ class AppointmentForm
       draggable : false,
       resizable : false
     })
-
+  has_payment_info: ->
+    result = false
+    $.ajax
+      url : '/haveIPaymentInfo'
+      dataType: "json"
+      async: false
+      success: (response) -> 
+        result = response.result
+    result
   save : ()->
     $.ajax(
       url : "#{@div.find("form").attr("action")}.json",
@@ -188,7 +196,11 @@ class AppointmentForm
       dataType : "json"
       statusCode : 
         201 : (data, status, xhr)=>
-          this.show_success(data.appointment)
+          lawyer_id = @div.attr("data-id")
+          if @has_payment_info()
+            this.show_success(data.appointment)
+          else
+            window.location.href = "/attorneys/#{lawyer_id}/call-payment/appointment"
         422 : (xhr, status, text)=>
           this.show_error(JSON.parse(xhr.responseText).appointment.errors)
           true
