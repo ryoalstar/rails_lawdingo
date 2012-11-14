@@ -26,7 +26,7 @@
   width:960px;
   margin:0 auto;
   //padding-top:0;
-  .profile{
+  .profile_wrapper{
     display: inline-block;
     h2{
       margin-top:0;
@@ -40,27 +40,7 @@
     .recorder-wrapper{
       padding-bottom: 10px;
     }
-    .left_menu{
-      display: block;
-      width:168px;
-      float: left;
-      ul{
-        li{
-          font-size:15px;
-          font-weight:bold;
-          padding:15px 0;
-          a{
-            color: #2491FF;
-            font-size:15px;
-            text-decoration:none;
-            border:0;
-          }
-          a:hover{
-            text-decoration:underline;
-          }
-        }
-      }
-    }
+    
   }
 }
 
@@ -314,28 +294,7 @@ body.users.show.logged-in #page.session-summary > div .profile.client_info .prof
   margin:0 auto;
   .profile{
     display: inline-block;
-    .left_menu{
-      padding-bottom: 30px;
-      display: block;
-      width:168px;
-      float: left;
-      ul{
-        li{
-          font-size:15px;
-          font-weight:bold;
-          padding:15px 0;
-          a{
-            color: #2491FF;
-            font-size:15px;
-            text-decoration:none;
-            border:0;
-          }
-          a:hover{
-            text-decoration:underline;
-          }
-        }
-      }
-    }
+    
     .profile-block{
       display: inline-block;
       float:left;
