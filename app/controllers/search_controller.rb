@@ -2,7 +2,6 @@ include ActionView::Helpers::NumberHelper # Number helpers available inside cont
 
 class SearchController < ApplicationController
   include LawyersHelper
-  include SearchHelper
   include MessageHelper
   include ActionView::Helpers::TextHelper
   
@@ -85,15 +84,6 @@ class SearchController < ApplicationController
       @offerings = @area_offerings & @state_offerings
         
       render action: "filter_offering_results", layout: false
-    end
-  end
-
-  def get_homepage_lawyers
-    @homepage_images = HomepageImage.all
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: get_homepage_images_hash(@homepage_images) }
     end
   end
   
