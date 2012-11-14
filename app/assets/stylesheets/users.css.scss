@@ -5,6 +5,7 @@
 // - Landing page
 // - Lawyers page
 // - Autoselect lawyer panel
+// - Sign up - Sign in - Account info
 
 
 // ***** Imports ******
@@ -1636,6 +1637,54 @@ body.users.home, body.attorneys.show{
     font-size: 14px;
     color: #5d5e5f;
     float: left;
+  }
+}
+
+// ***** Sign up - Sign in - Account info *****
+
+#div_states_barids{
+  font-size:1em;
+  float:left;
+  width:100%;
+}
+#div_practice_areas{
+  float: left;
+  width: 100%;
+}
+
+.profile.client_info{
+  .left_menu{
+    padding-top: 30px;
+    ul li a{
+      padding-left:15px;
+      width:170px;
+    }
+  }
+  table.client_info_fields{
+    td{
+      vertical-align:middle;
+      span{
+        font-size:12px;
+      }
+      input[type="text"]{
+        margin: 5px 0;
+      }
+    }
+  }
+  input[type="submit"]{
+    width:205px !important;
+  }
+  .profile-block{
+    padding:0;
+    table.summary{
+      thead{
+        td:last-child{
+          -webkit-border-top-right-radius: 7px;
+          -moz-border-radius-topright: 7px;
+          border-top-right-radius: 7px;
+        }
+      }
+    }
   }
 }
 
