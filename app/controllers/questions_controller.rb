@@ -9,7 +9,8 @@ class QuestionsController < ApplicationController
     
     if logged_in?
       UserMailer.new_question_email(@question).deliver
-      redirect_to "/questions/#{@question.id}/options"
+      @stripe_plan = Client::get_stripe_plan '4'
+      render :options
     else
       session[:question_id] = @question.to_param
       redirect_to new_client_path, :notice => "To submit that inquiry please sign up with or log in to Lawdingo."
@@ -24,6 +25,7 @@ class QuestionsController < ApplicationController
   end
  
   def options
+    @stripe_plan = Client::get_stripe_plan '4'
     @question = Question.find params[:id] || not_found
   end
 

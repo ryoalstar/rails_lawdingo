@@ -9,7 +9,7 @@
       %tr
         %td
           .question_button{"data-option"=>"1"}
-            Pay $28 to have question answered
+            Pay $#{(@stripe_plan.amount.*0.01).to_i} to have question answered
           .tooltip_pay_wrapper  
             .tooltip_bubble
               Money back guarantee if you're not satisfied
