@@ -57,26 +57,27 @@ conversations =
       conversations.clear_schedule_session_warning() 
       true
       
-    #else if !conversations.isStateSelected() && !conversations.isPracticeAreaSelected() 
-    #  conversations.disable_submit_message_button submit_message_button
-    #  conversations.write_schedule_session_state_and_practice_area_missing_warning()
-    #  false
-      
-    #else if !conversations.isStateSelected()  
-    #  conversations.disable_submit_message_button submit_message_button
-    #  conversations.write_schedule_session_state_missing_warning() 
-    #  false
+    else if !conversations.isStateSelected() && !conversations.isPracticeAreaSelected() 
+      conversations.disable_submit_message_button submit_message_button
+      conversations.write_schedule_session_state_and_practice_area_missing_warning()
+      false
       
     else if !conversations.isPracticeAreaSelected()  
       conversations.disable_submit_message_button submit_message_button
       conversations.write_schedule_session_practice_area_missing_warning() 
       false
       
+    else if !conversations.isStateSelected() && !conversations.isPracticeAreaNational()
+      conversations.disable_submit_message_button submit_message_button
+      conversations.write_schedule_session_state_missing_warning() 
+      false
+
     # isLawyersState false
     else if !conversations.isLawyersState(current_state_id, lawyer_id) && conversations.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
       conversations.disable_submit_message_button submit_message_button 
       conversations.write_schedule_session_state_warning(current_state_name, lawyer_name) 
       false
+      
     # isLawyersPracticeArea false
     else if conversations.isLawyersState(current_state_id, lawyer_id) && !conversations.isLawyersPracticeArea(current_practice_area_id, lawyer_id)
       conversations.disable_submit_message_button submit_message_button 
@@ -142,8 +143,13 @@ conversations =
   clear_schedule_session_warning: () ->
     schedule_session_warning = ($ "#schedule_session_warning")
     schedule_session_warning.html('')
+  isPracticeAreaNational: ->
+    current_practice_area_id = @practice_area_select().val()
+    current_practice_area_is_national = @practice_area_select().find("option[value='#{current_practice_area_id}']").attr('is_national');
+    current_practice_area_is_national == 'true'
   isLawyersState: (state, lawyer_id) ->
-    return true if state == ''
+    return true if @isPracticeAreaNational()
+    return false if state == ''
     states = []
     $.ajax(
       url: '/lawyers/'+lawyer_id+'/states.json',

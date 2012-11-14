@@ -59,7 +59,7 @@
           = f.text_field :yelp_business_id, placeholder: "Busuniess ID on Yelp"
           - if @user.is_lawyer?
             %br/
-            = f.select :payment_status, options_for_select(Lawyer::PAYMENT_STATUSES), prompt: "Payment status"
+            = f.select :payment_status, options_for_select(Lawyer::PAYMENT_STATUSES, selected: @user.payment_status), prompt: "Payment status"
         - if @user.is_lawyer?
           = bar_memberships_listing @user
           .clear

@@ -69,14 +69,14 @@ class AppointmentForm
       this.write_appointment_state_and_practice_area_missing_warning()
       false
       
-    else if !this.isStateSelected()  
-      this.disable_submit_button()
-      this.write_appointment_state_missing_warning() 
-      false
-      
     else if !this.isPracticeAreaSelected()  
       this.disable_submit_button()
       this.write_appointment_practice_area_missing_warning() 
+      false
+      
+    else if !this.isStateSelected() && !@isPracticeAreaNational()
+      this.disable_submit_button()
+      this.write_appointment_state_missing_warning() 
       false
       
     # isLawyersState false
@@ -140,7 +140,12 @@ class AppointmentForm
     "#{state_name.replace /\s+/g, "_"}-lawyers"
   clear_appointment_warning: () =>
     this.appointment_warning().html('')
+  isPracticeAreaNational: ->
+    current_practice_area_id = @practice_area_select().val()
+    current_practice_area_is_national = @practice_area_select().find("option[value='#{current_practice_area_id}']").attr('is_national');
+    current_practice_area_is_national == 'true'
   isLawyersState: (state, lawyer_id) =>
+    return true if @isPracticeAreaNational()
     return false if state == ''
     states = []
     $.ajax(
