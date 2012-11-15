@@ -24,6 +24,8 @@ class StripesController < ApplicationController
         format.json { render json: @lawyer.errors, status: :unprocessable_entity }
       end
     end
+  rescue Stripe::CardError => exception
+    redirect_to :back, :notice => exception.message
 	end
 
 	def coupon_validate
@@ -54,6 +56,8 @@ class StripesController < ApplicationController
         format.json { render json: @client.errors, status: :unprocessable_entity }
       end
     end
+  rescue Stripe::CardError => exception
+    redirect_to :back, :notice => exception.message
 	end
 
 	private

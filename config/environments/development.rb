@@ -1,5 +1,4 @@
 #require 'rack/ssl'
-Rails.application.routes.default_url_options[:foo]= 'bar'
 Lawdingo::Application.configure do
 # Settings specified here will take precedence over those in config/application.rb
 

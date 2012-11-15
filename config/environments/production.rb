@@ -68,6 +68,6 @@ Lawdingo::Application.configure do
   config.middleware.use ExceptionNotifier,
     email_prefix: "[Lawdingo] ",
     sender_address: "notifier@lawdingo.com",
-    exception_recipients: %w{nikhil.nirmel@gmail.com},
+    exception_recipients: %w{nikhil.nirmel@gmail.com chernyakov.sergey@gmail.com},
     ignore_exceptions: ExceptionNotifier.default_ignore_exceptions
 end
