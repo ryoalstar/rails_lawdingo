@@ -1,9 +1,10 @@
 class Appointment < ActiveRecord::Base
 
   # Associations
-  belongs_to :client
-  belongs_to :lawyer
-
+  belongs_to :client, :inverse_of => :appointments
+  belongs_to :lawyer, :inverse_of => :appointments
+  belongs_to :state, :inverse_of => :appointments
+  belongs_to :practice_area, :inverse_of => :appointments
 
   # Validations
 

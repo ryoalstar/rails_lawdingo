@@ -41,11 +41,11 @@ class AppointmentForm
       this.checkLawyersStateAndPracticeArea()
      
   state_name_select : ->
-    @div.find("#state_name")
+    @div.find("#appointment_state_id")
   practice_area_select : -> 
-    @div.find("#practice_area")
+    @div.find("#appointment_practice_area_id")
   state_name_and_practice_area_select : -> 
-    @div.find("#state_name, #practice_area")
+    @div.find("#appointment_state_id, #appointment_practice_area_id")
   appointment_warning : ->
     @div.find("#appointment_warning")
   submit_button : ->

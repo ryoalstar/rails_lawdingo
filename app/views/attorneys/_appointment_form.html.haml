@@ -10,13 +10,13 @@
         Your state:
         %br
         .appointment_state_bot
-          = select_tag :state_name, options_from_collection_for_select(@states, "id", "name", @auto_detected_state.try(:id)), :prompt => "Select state", :validate => true, :class=>'select_small'
+          = select_tag 'appointment[state_id]', options_from_collection_for_select(@states, "id", "name", @auto_detected_state.try(:id)), :prompt => "Select state", :validate => true, :class=>'select_small'
     - if @practice_areas
       .appointment_legal_matter
         Legal matter:
         %br
         .appointment_area_bot
-          = select_tag :practice_area, options_for_select(@practice_areas.map{|x| [x.name, x.id, {:is_national => x.is_national}]}), :prompt => "Type of law", :class=>'select_small'
+          = select_tag 'appointment[practice_area_id]', options_for_select(@practice_areas.map{|x| [x.name, x.id, {:is_national => x.is_national}]}), :prompt => "Type of law", :class=>'select_small'
 
     %p Available appointments (select one)
 

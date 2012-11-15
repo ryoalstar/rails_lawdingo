@@ -3,10 +3,10 @@ class Client < User
   include Rails.application.routes.url_helpers
 
   # Associations
-  has_many :appointments
+  has_many :appointments, :inverse_of => :client
   has_many :conversations
   has_many :calls
-  has_many :messages
+  has_many :messages, :inverse_of => :client
 
   def total_spending
     self.conversations.sum(:billed_amount)

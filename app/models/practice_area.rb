@@ -15,6 +15,7 @@ class PracticeArea < ActiveRecord::Base
   has_many :lawyers, :through => :expert_areas
   has_many :offerings
   has_many :messages, :inverse_of => :practice_area
+  has_many :appointments, :inverse_of => :practice_area
 
   has_many :children, 
     :class_name => "PracticeArea",

@@ -6,8 +6,8 @@ class Lawyer < User
   has_many :bar_memberships, :inverse_of => :lawyer
   has_many :conversations
   has_many :bids
-  has_many :messages
-  has_many :appointments
+  has_many :messages, :inverse_of => :lawyer
+  has_many :appointments, :inverse_of => :lawyer
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews

@@ -8,6 +8,7 @@ describe PracticeArea do
   specify { should have_many(:lawyers) }
   specify { should have_many(:offerings) }
   specify { should have_many(:messages) }
+  specify { should have_many(:appointments) }
   specify { should have_many(:children) }
   specify { should belong_to(:main_area) }
   
