@@ -17,7 +17,6 @@ class AppointmentsController < ApplicationController
         if @appointment.new_record?
           return render(:status => :unprocessable_entity)
         else
-          AppointmentMailer.appointment_created(@appointment).deliver
           return render(:status => :created)
         end
       end

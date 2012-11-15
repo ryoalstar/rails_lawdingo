@@ -28,6 +28,25 @@ class Appointment < ActiveRecord::Base
     :to => :lawyer,
     :prefix => :attorney,
     :allow_nil => true
+  
+  after_create :send_emails!
+  
+  def send_emails!
+    self.notify_client_about_appointment_created!
+    self.notify_lawyer_about_appointment_created!
+  end
+  
+  def notify_client_about_appointment_created!
+    return false unless self.client.present?
+    return false unless self.client.email.present?
+    AppointmentMailer.notify_client_about_appointment_created(self).deliver
+  end
+  
+  def notify_lawyer_about_appointment_created!
+    return false unless self.lawyer.present?
+    return false unless self.lawyer.email.present?
+    AppointmentMailer.notify_lawyer_about_appointment_created(self).deliver
+  end
 
   # full name of this appointment's attorney
   def attorney_name

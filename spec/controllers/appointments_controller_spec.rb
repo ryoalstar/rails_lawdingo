@@ -34,10 +34,6 @@ describe AppointmentsController do
       Appointment.expects(:create)
         .with(appt_data.merge("client" => current_user))
         .returns(appointment)
-
-      AppointmentMailer.expects(:appointment_created)
-        .returns(stub("Mailer", :deliver => true))
-
       post(:create, :appointment => appt_data, :format => :json)
       response.status.should eql 201
     end
