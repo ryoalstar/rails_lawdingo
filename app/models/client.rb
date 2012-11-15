@@ -7,6 +7,12 @@ class Client < User
   has_many :conversations
   has_many :calls
   has_many :messages, :inverse_of => :client
+  
+  after_create :welcome!
+    
+  def welcome!
+    UserMailer.client_welcome_email(self).deliver
+  end
 
   def total_spending
     self.conversations.sum(:billed_amount)

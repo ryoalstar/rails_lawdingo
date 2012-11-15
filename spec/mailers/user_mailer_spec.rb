@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe UserMailer do
   DatabaseCleaner.clean
+  
+  it "should send welcome email to client after create" do
+    expect {
+      FactoryGirl.create(:client)
+    }.to change(ActionMailer::Base.deliveries, :size).by(1)
+  end
+  
+  it "should send welcome email to lawyer after create" do
+    expect {
+      FactoryGirl.create(:lawyer)
+    }.to change(ActionMailer::Base.deliveries, :size).by(1)
+  end
 
   context "#notify_lawyer_application" do
     before :each do
