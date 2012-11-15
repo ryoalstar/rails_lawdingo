@@ -61,7 +61,7 @@
                 = "#{@states[i].abbreviation} Bar ID:"
                 = bar_membership_fields.text_field :bar_id
             - i += 1
-      %a.button.blue{:onclick => "setBarIds();"} Done
+      %a.button{:onclick => "setBarIds();"} Done
     #practices.dialog-window
       %h3 Edit Practice Area(s)
       %div
@@ -88,5 +88,5 @@
                       %li
                         %input{:id => s.name, :name => "practice_areas[]", :type => "checkbox", :value => s.id}/
                         = s.name
-      %a.button.blue{:onclick => "setPracticeAreas();"} Done
+      %a.button{:onclick => "setPracticeAreas();"} Done
   = f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply for Attorney Account' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button"

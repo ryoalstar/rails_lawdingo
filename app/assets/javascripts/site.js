@@ -107,14 +107,15 @@ function setBarIds() {
 	$('#leveled_list_bar_ids input[type=checkbox]:checked').each(function(index) {
 		var dv = $(this).nextAll('div.sub');
 		var state = dv.attr('id');
-		states_barids[state] = $(this).val();
+		var index = $(this).parents('li').attr('id')
+		states_barids[state] = $(dv).find('#lawyer_bar_memberships_attributes_'+index+'_bar_id').val()
 		form_data_status = true;
 	});
 
 	if (form_data_status) {
 		var states_barids_string = "";
 		for (key in states_barids) {
-			states_barids_key_label = states_barids[key] ? key + " (Bar ID: " + states_barids[key] + ")" : '';
+			states_barids_key_label = states_barids[key] ? key + " (Bar ID: " + states_barids[key] + ")" : key;
 			states_barids_string += "<li>" + states_barids_key_label + "</li>"
 		}
 		$('#barids_opener').hide();
