@@ -52,19 +52,14 @@
                       .tooltip.big.cvv 3 digit code on the back of your card
                     %td.separator
                     %td.labels
-                      -#Promo code:
-                      -#%br/
-                      -#(optional)
-                    %td
-                      -#= text_field_tag :coupon, nil
-                      -#%a.gray_button#apply_coupon_button{:href => coupon_validate_stripe_path(:format => :json)} Apply        
-
-          
       %tr
-        %td.buttons{:colspan=>2}
+        %td.buttons_left
+        %td.buttons{:colspan=>4}
           = f.submit 'Continue', :class=>"button", id: "submit_subscribe"
           %span#siteseal
             %script{:type=>"text/javascript", :src => 'https://seal.godaddy.com/getSeal?sealID=DY6qS9Z5Yb3G0eASdQ2SOHDc5j8MndNNTbTEvYzffdVwSYY0hv2'}
+                
+      
       %tr.row_notice
         %td
 
