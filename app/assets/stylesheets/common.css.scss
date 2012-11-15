@@ -159,6 +159,15 @@ input.valid { border-color:green!important; }
 
 }
 
+
+#wrapper-main{
+  min-height:100%; 
+  position:relative;
+  float: left;
+  width: 100%;
+}
+
+
 // Nested to a class wrapper so they are easy to override
 .container{
   h1{
@@ -390,6 +399,42 @@ input.valid { border-color:green!important; }
   width:990px;
   margin:21px auto;
 }
+
+ul.tick{
+  li{
+    line-height: 25px;
+    list-style-image: image-url('li_list_img.png');
+    font-size: 13px;
+    color: #3F3F3F;
+  }
+}
+.center{
+  text-align:center;
+}
+
+
+
+
+// error styles
+div.error {
+  padding: 3px;
+  margin: 3px 0;
+  color: #D8000C;
+}
+input, select, textarea {
+  &.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+  }
+}
+
+.lawyer_notice{
+  color:red;
+  text-align:center;
+  font-size:16px !important;
+  font-weight:normal !important;
+}
+
 
 // ***** Footer *****
 
@@ -795,3 +840,26 @@ form#new_subscription{
     margin-left: 5px;
   }
 }
+
+.back_to_lawyers{
+  display:block;
+  float:left;
+  background: image-url('back_to_lawyers_button.png') no-repeat 0 0;
+  width:245px;
+  height:32px;
+  border-bottom:none;
+  color:#4c4c4c;
+  font-size:16px;
+  text-decoration:none;
+  margin-bottom: 20px;
+  padding: 13px 0 0 0px;
+  text-align:center;
+}
+
+.back_to_lawyers:hover{
+  background-position:0px -46px;
+}
+.back_to_lawyers:active{
+  background-position:0px -92px;
+}
+

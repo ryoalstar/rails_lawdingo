@@ -5,6 +5,7 @@
 // - Landing page
 // - Lawyers page
 // - Autoselect lawyer panel
+// - Sign up - Sign in - Account info
 
 
 // ***** Imports ******
@@ -196,6 +197,7 @@
 
 
 // ***** Lawyers page *****
+
 
 #inline-wrapper{
   // Filters in the lawyer page
@@ -606,6 +608,8 @@
       border-top-right-radius: 5px;
       
     }
+    
+    
     .left-bar-section:last-child{
       border:0;
     }
@@ -613,19 +617,17 @@
     // Practice areas
     .left-bar-section.legal_domain{
       padding-bottom: 11px;
-      padding-left: 0;
       
-      h3{
-        margin-left:25px;
-      }
+   
       p{
-        margin-left:25px;
         padding-top: 1px;
       }
       .practice-areas.children{
         background:#f2f2f2;
         padding: 10px 0;
         margin: 10px 0;
+        margin-left: -25px;
+        padding-left: 25px;
         h3{
           margin-bottom:0;
           padding-left: 3px;
@@ -650,6 +652,9 @@
       p{
         font-size:13px;
         margin-bottom: 3px;
+      }
+      .online_icons p{
+        margin-bottom: 1px;
       }
       
       a.service, a.advice{
@@ -696,123 +701,14 @@
           cursor:pointer;
         }
       }
-      /*
-      #free_minutes_slider, #minimum_client_rating, #hourly_rate, #law_school_quality{
-        width:194px;
-        height:11px;
-        background:image-url('filter_slider_bg.png');
-        position: relative;
-        float:left;
-        .ui-slider-range{
-          background:image-url('filter_silder_bg_active.png') repeat-x 1px 1px; 
-          //left: 0;
-          //top: 0;
-          height: 100%;
-          position: absolute;
-          z-index: 1;
-          font-size: .7em;
-          display: block;
-          border: 0;
-          margin-top: 1px;
-          margin-left: 1px;
-          background-position: 0 0;
-        }
-        .ui-slider-handle{
-          position: absolute;
-          border:0;
-          z-index: 2;
-          width: 13px;
-          height: 22px;
-          cursor: default;
-          margin-top: -4px;
-          background:image-url('filter_silder_nood.png') no-repeat;
-          margin-left: -5px;
-        }
-      }
-      .filter_slider_spliters{
-        width:198px;
-        height:9px;
-        float:left;
-        background:image-url('min_minutes_slider_splitters.png');
-      }
-      .slider_rates{
-        float:left;
-        margin-top:6px;
-        span{
-          display:block;
-          float:left;
-          color:#838383;
-          font-size:12px;
-          font-weight:bold;
-        }
-        span.two{
-          margin-left:-2px;
-        }
-        span.five{
-          margin-left: 21px;
-        }
-        span.ten{
-          margin-left:17px;
-        }
-        span.fiveteen, span.ninety, span.twenty, span.thirty, span.sixty{
-          margin-left:14px;
-        }
-        .star{
-          float:left;
-          background:image-url('star.png');
-          height:24px;
-          width:24px;
-          span{
-            margin-left: 8px;
-            margin-top: 7px;
-            color:#303030;
-          }
-        }
-        .star_1{
-          margin-left: -11px;
-        }
-        .star_2, .star_3, .star_4, .star_5{
-          margin-left: 25px;
-        }
-        .h-rate-1{
-          margin-left: -2px;
-        }
-        .h-rate-2{
-          margin-left:54px;
-        }
-        .h-rate-3{
-          margin-left:48px;
-        }
-        .h-rate-4{
-          margin-left:40px;
-        }
-        .law-school-1{
-          margin-left: -2px;
-        }
-        .law-school-2{
-          margin-left:51px;
-        }
-        .law-school-3{
-          margin-left: 56px;
-        }
-        .law-school-4{
-          margin-left: 52px;
-        }       
-      }
-      .minimum_client_rating_splitters{
-        width:198px;
-        height:9px;
-        float:left;
-        background:image-url('minimum_client_rating_splitters.png');
-      }
-      .hourly_rate_splitters{
-        width:198px;
-        height:9px;
-        float:left;
-        background:image-url('hourly_rate_splitters.png');
-      }*/
     }
   }
+}
+
+// Attorneys profile page left bar.
+.lawyer_profile .left-bar
+{
+  border: 1px solid #D0D2D5 !important;
 }
 
 // Panel that appears when no lawyer is found
@@ -1741,6 +1637,54 @@ body.users.home, body.attorneys.show{
     font-size: 14px;
     color: #5d5e5f;
     float: left;
+  }
+}
+
+// ***** Sign up - Sign in - Account info *****
+
+#div_states_barids{
+  font-size:1em;
+  float:left;
+  width:100%;
+}
+#div_practice_areas{
+  float: left;
+  width: 100%;
+}
+
+.profile.client_info{
+  .left_menu{
+    padding-top: 30px;
+    ul li a{
+      padding-left:15px;
+      width:170px;
+    }
+  }
+  table.client_info_fields{
+    td{
+      vertical-align:middle;
+      span{
+        font-size:12px;
+      }
+      input[type="text"]{
+        margin: 5px 0;
+      }
+    }
+  }
+  input[type="submit"]{
+    width:205px !important;
+  }
+  .profile-block{
+    padding:0;
+    table.summary{
+      thead{
+        td:last-child{
+          -webkit-border-top-right-radius: 7px;
+          -moz-border-radius-topright: 7px;
+          border-top-right-radius: 7px;
+        }
+      }
+    }
   }
 }
 
