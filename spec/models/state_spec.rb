@@ -5,7 +5,7 @@ describe State do
   specify { should have_many(:bar_memberships) }
   specify { should have_many(:lawyers) }
   specify { should have_many(:messages) }
-  specify { should have_many(:appointments) }
+  #specify { should have_many(:appointments) }
 
   context "scopes" do
     it "should provide a with_approved_lawyers scope" do

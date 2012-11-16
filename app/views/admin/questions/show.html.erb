@@ -8,6 +8,8 @@
     <%= f.input :state_name, as: :select, collection: State.all.map(&:name), include_blank: "Not specified" %>
     <%= f.input :practice_area, as: :select, collection: PracticeArea.where(parent_id: nil).map(&:name), include_blank: "Not specified" %>
     <%= f.input :body, label: "Inquiry" %>
+    <%= f.input :published, label: "Published?" %>
+    
     <div class="actions">
       <%= f.submit "Save changes", class: "button" %>
       <span class="status"></span>
