@@ -802,7 +802,30 @@ body.clients.new #page.apply-form-wrapper div.outer{
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-
+      
+      td.promo_code{
+        #coupon {
+          width: 100px;
+          float: left;
+        }
+        #apply_coupon_button{
+          border: none;
+          text-decoration: none;
+          cursor: pointer;
+          float:left;
+          padding: 9px;
+          font-size: 12px;
+          div {
+            background-color: #f3f3f3;
+            border: 1px solid #babbbe;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 9px;
+          }  
+        }
+      }
+      
       table.card_user_info{
         width: 100%;
         margin: 0px;
