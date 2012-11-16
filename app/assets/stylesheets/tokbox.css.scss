@@ -251,6 +251,41 @@ td {
 	td.col_video{
 		width: 650px;
 		padding: 7px;
+	 
+	  .end_session{
+	    width: 36px;
+	    height: 18px;
+	    margin: 23px auto 0;
+	    background: url('/assets/end_session.png');
+	    cursor: pointer;
+	    
+	  }
+	  .start_session{
+      width: 36px;
+      height: 18px;
+      margin: 23px auto 0;
+      background: url('/assets/end_session.png');
+      cursor: pointer;
+      display:none;
+    }     
+    
+    .video_total_timer{
+      float: left;
+      font-size: 13px;
+      font-weight: bold;
+      margin-left: 20px;
+      position: relative;
+      top: -15px;
+    }
+    
+    .video_free_timer{
+      float: right;
+      font-size: 13px;
+      font-weight: bold;
+      margin-right: 20px;
+      position: relative;
+      top: -15px;
+    } 
 	}
 	
 	tr.video_row
@@ -343,4 +378,11 @@ td {
 
 #video_window{
   display:none;
+}
+
+#tokbox_player
+{
+  display: none;
+
+
 }

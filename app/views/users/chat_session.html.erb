@@ -9,9 +9,40 @@
   	var lawyer_id = "<%=@lawyer.id%>";
   	var is_chat_session_page = true;
   	var g_conversation_id = "<%=@conversation_id%>";
+  	count = 60 * <%= @lawyer.free_consultation_duration %>;
+	  var freeCallTimer = $.timer(function() {
+	    --count;
+	    if(count <= 0)
+	    {
+	      freeCallTimer.pause();
+	      
+	    }
+	    else
+	    {
+	      seconds = count%60;
+	      seconds_string = (seconds.toString().length >1) ? seconds.toString() : '0' + seconds.toString();
+	      minutes = parseInt(count/60);
+	      timeString = minutes.toString() + ':' + seconds_string;
+	      $('#time_span').html(timeString);
+	    }
+	  });
+	
+	
+	
+	    incrementCounter = 0;
+	    var countUpTimer = $.timer(function() {
+	      ++incrementCounter;
+	      seconds = incrementCounter%60;
+	      minutes = parseInt(incrementCounter/60);
+	      minutesString = (minutes.toString().length > 1) ? minutes.toString() : '0'+minutes.toString();
+	      secondsString = (seconds.toString().length > 1) ? seconds.toString() : '0'+seconds.toString();
+	      timeString = minutesString + ":" + secondsString;
+	      $('#count_up_time_span').html(timeString);
+	    });
   </script>
   
   <%= hidden_field_tag 'session_id', @lawyer.tb_session_id%>
+  
   <%
   	#current_user LAWYER CLIENT
 	if !current_user.is_lawyer?
@@ -45,7 +76,9 @@
 	end
   %>
   <%#= link_to "End Session", new_conversation_path  %>
-  <%= render :partial => "flash_player", :locals=>{:from_to_text=> @from_to_text} %>
+  <div id="tokbox_player">
+  	<%= render :partial => "flash_player", :locals=>{:from_to_text=> @from_to_text} %>
+  </div>
 <% else %>
   No one to chat with!
 <% end %>
@@ -53,8 +86,8 @@
 	<div id="video_window">
 		<div id="opentok_console"></div>
 		<div id="links">
-	       	<input type="button" value="Start" id ="connectLink" onClick="javascript:connect()" />
-	       	<input type="button" value="Stop" id ="disconnectLink" onClick="javascript:disconnect()" />
+	       	<!--<input type="button" value="Start" id ="connectLink" onClick="javascript:connect()" />
+	       	<input type="button" value="Stop" id ="disconnectLink" onClick="javascript:disconnect()" />-->
 	       	<!--<input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
 	       	<input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" />-->
 		</div>

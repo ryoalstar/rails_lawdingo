@@ -1,7 +1,8 @@
     var session;
     var publisher;
     var subscribers = {};
-
+		
+	    
     $(document).ready(function(){
       if(typeof(TB)=='undefined')return;
       if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
@@ -16,6 +17,10 @@
         session.addEventListener('streamCreated', streamCreatedHandler);
         session.addEventListener('streamDestroyed', streamDestroyedHandler);
       }
+      
+      freeCallTimer.set({ time : 1000, autostart : false });
+      countUpTimer.set({ time : 1000, autostart : false });
+        
     });
 
     function connect() {
@@ -23,6 +28,9 @@
       $('#subscribers').show();
       session.connect(apiKey, token);
       $('#connectLink').attr('disabled',true);
+      $(".end_session").show();
+      $(".start_session").hide();
+
     }
 
     function disconnect() {
@@ -32,6 +40,9 @@
       hide('publishLink');
       hide('unpublishLink');
       $('#connectLink').attr('disabled',false);
+      $(".end_session").hide();
+      $(".start_session").show();
+      
     }
 
     function startPublishing() {
@@ -240,8 +251,15 @@ function fn_accept_invite(){
            fn_open_video_window();
         }
   });
+  
+  freeCallTimer.play();
+  countUpTimer.play();
+  $("#tokbox_player").show();
 }
+function fn_stop_ring(){
+    $('#dewplayer_wrapper').html('<div id="dewplayer_content"></div>');
 
+}
 function fn_decline_invite(){
   $.ajax({
         url: "/UpdateOnlineStatus",
