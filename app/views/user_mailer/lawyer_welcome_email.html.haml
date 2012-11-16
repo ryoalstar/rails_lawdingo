@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    = tag :meta, 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8'
+  %body
+    %h1 Welcome to Lawdingo!
+    %p
+      Hello #{@lawyer.full_name}, and welcome to Lawdingo!
+      %br
+      %br
+      Your data:
+      %br
+      Full Name : #{@lawyer.full_name}
+      %br
+      Email : #{@lawyer.email}
+    %br
+    Thanks,
+    %br
+    Lawdingo Team

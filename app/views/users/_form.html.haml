@@ -111,7 +111,7 @@
                         = "#{@filled_states[j].abbreviation} Bar ID:"
                         = bar_membership_fields.text_field :bar_id
                     - j += 1
-            %a.button.blue{:onclick => "setBarIds();", :style => "width: 100px; text-align: center;"} Done
+            %a.button{:onclick => "setBarIds();", :style => "width: 100px; text-align: center;"} Done
           #practices.dialog-window
             %h3 What are your practice areas? Click any to expand.
             %div
@@ -130,7 +130,7 @@
                             %input{"data-name" => s.name, :id => "practice_area_#{s.id}", :name => "lawyer[practice_area_ids][]", :type => "checkbox", :value => s.id}/
                             = label_tag "practice_area_#{s.id}", s.name
             .dialog-close
-            %a.button.blue{:onclick => "setPracticeAreas();", :style => "width: 100px; text-align: center;"} Done      
+            %a.button{:onclick => "setPracticeAreas();", :style => "width: 100px; text-align: center;"} Done      
         %tr
           %td
           %td= f.submit user.is_lawyer? ? (user.new_record? ? 'Apply as a Lawyer' : 'Update Account') : (user.new_record? ? 'Join Lawdingo' : 'Update Account'), :class=>"button", id: "submit_signup"

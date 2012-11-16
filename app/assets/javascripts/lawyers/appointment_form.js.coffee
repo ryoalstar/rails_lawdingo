@@ -41,11 +41,11 @@ class AppointmentForm
       this.checkLawyersStateAndPracticeArea()
      
   state_name_select : ->
-    @div.find("#state_name")
+    @div.find("#appointment_state_id")
   practice_area_select : -> 
-    @div.find("#practice_area")
+    @div.find("#appointment_practice_area_id")
   state_name_and_practice_area_select : -> 
-    @div.find("#state_name, #practice_area")
+    @div.find("#appointment_state_id, #appointment_practice_area_id")
   appointment_warning : ->
     @div.find("#appointment_warning")
   submit_button : ->
@@ -179,7 +179,15 @@ class AppointmentForm
       draggable : false,
       resizable : false
     })
-
+  has_payment_info: ->
+    result = false
+    $.ajax
+      url : '/haveIPaymentInfo'
+      dataType: "json"
+      async: false
+      success: (response) -> 
+        result = response.result
+    result
   save : ()->
     $.ajax(
       url : "#{@div.find("form").attr("action")}.json",
@@ -188,7 +196,11 @@ class AppointmentForm
       dataType : "json"
       statusCode : 
         201 : (data, status, xhr)=>
-          this.show_success(data.appointment)
+          lawyer_id = @div.attr("data-id")
+          if @has_payment_info()
+            this.show_success(data.appointment)
+          else
+            window.location.href = "/attorneys/#{lawyer_id}/call-payment/appointment"
         422 : (xhr, status, text)=>
           this.show_error(JSON.parse(xhr.responseText).appointment.errors)
           true

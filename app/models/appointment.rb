@@ -1,9 +1,10 @@
 class Appointment < ActiveRecord::Base
 
   # Associations
-  belongs_to :client
-  belongs_to :lawyer
-
+  belongs_to :client, :inverse_of => :appointments
+  belongs_to :lawyer, :inverse_of => :appointments
+  belongs_to :state, :inverse_of => :appointments
+  belongs_to :practice_area, :inverse_of => :appointments
 
   # Validations
 
@@ -20,11 +21,32 @@ class Appointment < ActiveRecord::Base
   validates :client, :presence => true
   validates :lawyer, :presence => true
   validates :time, :presence => true
+  scope :futures, where('time >= ?', DateTime.now)
+  scope :need_for_initiate, where(:time => (DateTime.now - 1.minute)..(DateTime.now + 1.minute))
 
   delegate :email,
     :to => :lawyer,
     :prefix => :attorney,
     :allow_nil => true
+  
+  after_create :send_emails!
+  
+  def send_emails!
+    self.notify_client_about_appointment_created!
+    self.notify_lawyer_about_appointment_created!
+  end
+  
+  def notify_client_about_appointment_created!
+    return false unless self.client.present?
+    return false unless self.client.email.present?
+    AppointmentMailer.notify_client_about_appointment_created(self).deliver
+  end
+  
+  def notify_lawyer_about_appointment_created!
+    return false unless self.lawyer.present?
+    return false unless self.lawyer.email.present?
+    AppointmentMailer.notify_lawyer_about_appointment_created(self).deliver
+  end
 
   # full name of this appointment's attorney
   def attorney_name
@@ -60,6 +82,12 @@ class Appointment < ActiveRecord::Base
   def per_minute_rate
     return nil if self.lawyer.blank?
     return self.lawyer.rate
+  end
+  
+  def client_call_to_lawyer
+    return false unless self.client.is_a? Client
+    return false unless self.lawyer.is_a? Lawyer
+    self.client.call_to_lawyer self.lawyer
   end
 
 end

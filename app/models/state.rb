@@ -5,6 +5,7 @@ class State < ActiveRecord::Base
   has_many :bar_memberships
   has_many :lawyers, :through => :bar_memberships
   has_many :messages, :inverse_of => :state
+  has_many :appointments, :inverse_of => :state
   FILE_PATH = "#{Rails.root}/states.csv"
 
   scope :with_approved_lawyers,

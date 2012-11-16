@@ -61,12 +61,13 @@ Lawdingo::Application.configure do
     Object.const_set(
       "STRIPE_PUBLIC_KEY", "pk_nhHiYxc2FBJLSEkQ9esXEbmXgvmnW"
     )
+    Rails.application.routes.default_url_options[:host] = 'www.lawdingo.com'
   end
 
   # Send email with an error log each time an exception is raised
   config.middleware.use ExceptionNotifier,
     email_prefix: "[Lawdingo] ",
     sender_address: "notifier@lawdingo.com",
-    exception_recipients: %w{nikhil.nirmel@gmail.com},
+    exception_recipients: %w{nikhil.nirmel@gmail.com chernyakov.sergey@gmail.com},
     ignore_exceptions: ExceptionNotifier.default_ignore_exceptions
 end

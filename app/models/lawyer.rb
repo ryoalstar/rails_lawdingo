@@ -6,14 +6,20 @@ class Lawyer < User
   has_many :bar_memberships, :inverse_of => :lawyer
   has_many :conversations
   has_many :bids
-  has_many :messages
-  has_many :appointments
+  has_many :messages, :inverse_of => :lawyer
+  has_many :appointments, :inverse_of => :lawyer
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
   has_many :states, :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
-  has_many :daily_hours, :autosave => true 
+  has_many :daily_hours, :autosave => true
+  
+  after_create :welcome!
+    
+  def welcome!
+    UserMailer.lawyer_welcome_email(self).deliver
+  end
 
   def reindex!
      Sunspot.index!(self)

@@ -6,13 +6,19 @@
   <body>
     <br />
     <p>
-      A client, <%= @user.full_name %>, has sent you the following message on Lawdingo:<br/>
+      A client, <strong><%= @user.full_name %></strong>, has sent you the following message on Lawdingo:<br/>
     </p>
     <hr />
     <p>
-      <%= simple_format(@msg.gsub(/\n/, '<br />')) %>
+      <strong><%= simple_format(@msg.body.nl2br) %></strong>
     </p>
     <hr />
+    <% if @msg.state.present? %>
+        <p>State: <strong><%= @msg.state.name %></strong></p>
+    <% end %>
+    <% if @msg.practice_area.present? %>
+        <p>Legal matter: <strong><%= @msg.practice_area.name %></strong></p>
+    <% end %>
     <p>You can reply directly to <%= @user.full_name %> about scheduling a time to connect on Lawdingo at <%= @user.email %>
         <%= @user.try(:phone).present? ? " or by phone at #{@user.phone}" : '' %>.</p><br/>
     Thanks,<br/>

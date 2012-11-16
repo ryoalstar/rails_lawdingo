@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031135525) do
+ActiveRecord::Schema.define(:version => 20121115105505) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -25,11 +25,21 @@ ActiveRecord::Schema.define(:version => 20121031135525) do
     t.datetime "time"
     t.string   "contact_number"
     t.string   "appointment_type", :default => "phone"
+    t.integer  "practice_area_id"
+    t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "message"
     t.integer  "client_id"
   end
+
+  add_index "appointments", ["appointment_type"], :name => "index_appointments_on_appointment_type"
+  add_index "appointments", ["client_id"], :name => "index_appointments_on_client_id"
+  add_index "appointments", ["created_at"], :name => "index_appointments_on_created_at"
+  add_index "appointments", ["lawyer_id"], :name => "index_appointments_on_lawyer_id"
+  add_index "appointments", ["practice_area_id"], :name => "index_appointments_on_practice_area_id"
+  add_index "appointments", ["state_id"], :name => "index_appointments_on_state_id"
+  add_index "appointments", ["time"], :name => "index_appointments_on_time"
 
   create_table "bar_memberships", :force => true do |t|
     t.integer  "lawyer_id"

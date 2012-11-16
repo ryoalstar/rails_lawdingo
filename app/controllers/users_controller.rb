@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   #include ActionView::Helpers::UrlHelper
 
-  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :chat_session, :landing_page, :search, :learnmore, :create_lawyer_request]
+  before_filter :authenticate, :except => [:detect_state ,:index, :new, :create, :home, :register_for_videochat, :find_remote_user_for_videochat, :welcome_lawyer, :update_online_status, :has_payment_info, :landing_page, :search, :learnmore, :create_lawyer_request]
   before_filter :ensure_self_account, :only => [:edit, :update]
   before_filter :ensure_admin_login, :only => [:update_parameter]
   before_filter :current_user_home, :only => [:landing_page]
@@ -310,7 +310,6 @@ class UsersController < ApplicationController
 
   def update_card_details
     token = params[:client][:stripe_card_token]
-
     if token.present?
       customer = Stripe::Customer.create(
         email: current_user.email,
@@ -334,6 +333,8 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+  rescue Stripe::CardError => exception
+    redirect_to :back, :notice => exception.message
   end
 
   def update_payment_info
@@ -375,6 +376,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     status = @user.stripe_customer_token.present? ? '1' : '0'
     render :text => status, :layout => false
+  end
+  
+  def have_i_payment_info
+    render :json => {:result => current_user.stripe_customer_token.present?}, :layout => false, :status => :ok
   end
 
   def start_phone_call

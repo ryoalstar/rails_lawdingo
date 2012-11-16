@@ -86,5 +86,15 @@ class UserMailer < ApplicationMailer
 
     mail(to: "info@lawdingo.com", subject: "New lawyer request")
   end
+  
+  def client_welcome_email(client)
+    @client = client
+    mail(:to => client.email, :subject => "Welcome to Lawdingo!")
+  end
+  
+  def lawyer_welcome_email(lawyer)
+    @lawyer = lawyer
+    mail(:to => lawyer.email, :subject => "Welcome to Lawdingo!")
+  end
 
 end

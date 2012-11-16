@@ -153,7 +153,7 @@
                           = bar_membership_fields.hidden_field :id, :value => nil
                       - j += 1
 
-            %a.button.blue{:onclick => "setBarIds();", :style => 'float: left;'} Done
+            %a.button{:onclick => "setBarIds();", :style => 'float: left;'} Done
           #practices.dialog-window
             %h3 Edit Practice Area(s)
             %div
@@ -180,6 +180,6 @@
                             %li
                               %input{"data-name" => s.name, "data-parent-id" => p.id, :id => s.name, :name => "practice_areas[]", :type => "checkbox", :value => s.id}/
                               = s.name
-            %a.button.blue{:onclick => "setPracticeAreas();", :style => 'float:left;'} Done
+            %a.button{:onclick => "setPracticeAreas();", :style => 'float:left;'} Done
             .dialog-close
         = f.submit @user.is_lawyer? ? (@user.new_record? ? 'Apply as Lawyer' : 'Update Account') : (@user.new_record? ? 'Join Lawdingo' : 'Update Account')  ,:class=>"button"

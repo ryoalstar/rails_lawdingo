@@ -7,6 +7,15 @@
   %p
     %strong #{@appointment.message}
 
+  -if @appointment.state.present?
+    %p
+      State:
+      %strong #{@appointment.state.name}
+  -if @appointment.practice_area.present?
+    %p
+      Legal matter:
+      %strong #{@appointment.practice_area.name}
+
 %p
   If you have the capability to consult by video chat, please log
   in to Lawdingo just before this time so that you can accept a

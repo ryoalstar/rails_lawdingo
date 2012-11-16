@@ -43,5 +43,9 @@ Lawdingo::Application.configure do
   # config.after_initialize do
   #   Debugger.start
   # end
+  
+  config.after_initialize do
+    Rails.application.routes.default_url_options[:host] = '0.0.0.0:3000'
+  end
 
 end
