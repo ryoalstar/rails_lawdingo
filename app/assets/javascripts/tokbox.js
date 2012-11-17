@@ -18,8 +18,7 @@
         session.addEventListener('streamDestroyed', streamDestroyedHandler);
       }
       
-      freeCallTimer.set({ time : 1000, autostart : false });
-      countUpTimer.set({ time : 1000, autostart : false });
+     
         
     });
 
@@ -252,8 +251,7 @@ function fn_accept_invite(){
         }
   });
   
-  freeCallTimer.play();
-  countUpTimer.play();
+	window.videoChatTimers.initialize();
   $("#tokbox_player").show();
 }
 function fn_stop_ring(){

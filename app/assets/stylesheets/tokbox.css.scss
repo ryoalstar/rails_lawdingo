@@ -269,13 +269,16 @@ td {
       display:none;
     }     
     
-    .video_total_timer{
+    .video_total_timer, .video_paid_timer{
       float: left;
       font-size: 13px;
       font-weight: bold;
       margin-left: 20px;
       position: relative;
       top: -15px;
+    }
+    .video_paid_timer{
+      display:none;
     }
     
     .video_free_timer{
