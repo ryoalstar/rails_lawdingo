@@ -3,7 +3,7 @@
     = hidden_field(:current, :lid)
     .left.row_block
       .avatar
-        = link_to image_tag(lawyer.photo.url(:thumb)), attorney_path(lawyer, slug: lawyer.slug)
+        = lawyer.photo
       - if (lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]) || lawyer.reviews.count.to_i > 0
         - if lawyer.yelp_business_id.present? && !!lawyer.yelp[:reviews]
           .stars
@@ -23,36 +23,7 @@
           .view_profile_button.hidden
             View Profile
       .clear
-    - bms = []
-    - bms = lawyer.bar_memberships unless lawyer.bar_memberships.blank?
-    - licenced_states = ""
-    - bms.each{ |bm|
-    - licenced_states += bm.state.abbreviation + ', ' if !bm.state.nil?
-    - }
-    - licenced_states.chomp!(', ')
-    - pas = []
-    - pas = lawyer.practice_areas.parent_practice_areas unless lawyer.practice_areas.blank?
-    - pas_string = ""
-    - pas.each{|pa|
-    - pas_string += pa.name + ', '
-    - }
-    - pas_string.chomp!(', ')
-    - pas_names = pas.map { |area| "#{area.name.downcase}"  }
-    - pas_names_last = pas_names.pop
-    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
-    - if lawyer.personal_tagline.present?
-      - unless params[:controller] == "attorneys"
-        - tagline_length = lawyer.personal_tagline.length
-        - if  tagline_length < 120
-          - lawyer_tagline = "“#{lawyer.personal_tagline}”"
-          - long_tagline = lawyer_tagline
-        - else
-          - lawyer_tagline = "“" + lawyer.personal_tagline.truncate(120, separator: ' ', omission: "...” <span class='read_more'> read more</span>")
-          - if tagline_length < 600
-            - long_tagline = lawyer.personal_tagline
-          - else
-            - long_tagline = "“" + lawyer.personal_tagline.truncate(600, separator: ' ', omission: "...” #{link_to('read more', attorney_path(lawyer, slug: lawyer.slug))}")
-          
+    
     .middle.row_block
       %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
       .online_icons
@@ -60,15 +31,19 @@
       
       .clear
       .description
+        
         - if lawyer.personal_tagline.present?
-          %p.lawyer_tagline= raw lawyer_tagline
-          %p.lawyer_long_tagline.hidden= raw long_tagline
+          %p.lawyer_tagline
+            #{lawyer.short_personal_tagline}
+          %p.lawyer_long_tagline.hidden
+            #{lawyer.long_personal_tagline}
+
         = send_message_from_lawyer_mini_profile lawyer
         .expanded_info
           - unless lawyer.bar_memberships.blank?
             %ul.bar_memberships
               %li
-                Licensed in #{licenced_states}
+                Licensed in #{lawyer.licensed_states}
             - if lawyer.license_year.present?
               %ul.license_years
                 %li #{pluralize years_practicing_law(lawyer), "year", "years'"} experience
@@ -76,7 +51,11 @@
           %ul
             - unless lawyer.practice_areas.blank?
               %li
-                Advises on #{@selected_practice_area.present? ? @selected_practice_area.name : raw(pas_names_list) + " law"}
+                Advises on 
+                - if @selected_practice_area.present? 
+                  #{@selected_practice_area.name}
+                - else 
+                  #{lawyer.practice_area_names} law
             - if lawyer.offerings.count > 0
               %li.offerings_item
                 Offers
@@ -91,7 +70,7 @@
                         %td
                           %span
                             #{number_to_currency(offering.fee, precision: 0)}
-            - if !lawyer.school.nil?
+            - if lawyer.school.present?
               %li.offerings_item.hidden.law_school
                 Law school:  
                 = lawyer.school.name

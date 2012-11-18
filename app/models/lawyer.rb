@@ -11,7 +11,8 @@ class Lawyer < User
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
-  has_many :states, :through => :bar_memberships
+  has_many :states, 
+    :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours, :autosave => true
   
@@ -364,6 +365,10 @@ class Lawyer < User
     end
   end
   
+  # get our practice areas that are at the top of the tree
+  def parent_practice_areas
+    self.practice_areas.parent_practice_areas
+  end
 
   def total_earning
     sum = 0.0
@@ -405,14 +410,6 @@ class Lawyer < User
 
   def slug
     "#{full_name.parameterize}"
-  end
-
-  def licenced_states
-    states = []
-    bar_memberships.each do |membership|
-      states << membership.state.abbreviation if membership.state.present?
-    end
-    states
   end
 
   def areas_human_list

@@ -2,7 +2,7 @@
 = hidden_field(:current, :lid)
 .action
   .price
-= link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))
+= link_to_unless_current(image_tag(lawyer.photo_url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))
 .info
   %h3
     = link_to_unless_current "#{offering_template.name}", offering_template

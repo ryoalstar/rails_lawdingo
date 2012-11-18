@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "/attorneys/show" do
 
   before(:each) do
-    assign(:attorney, lawyer)
+    assign(:attorney, LawyerDecorator.new(lawyer))
     view.stubs(:logged_in? => true)
   end
   

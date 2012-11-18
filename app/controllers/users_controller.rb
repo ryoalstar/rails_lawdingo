@@ -40,7 +40,15 @@ class UsersController < ApplicationController
       )
     else
       @search = Lawyer.build_search(
-        @search_query, :page => params[:page]
+        @search_query, 
+        :page => params[:page],
+        :include => [
+          :daily_hours,
+          :offerings, 
+          :practice_areas, 
+          :school, 
+          :states
+        ]
       )
     end
 
@@ -53,12 +61,15 @@ class UsersController < ApplicationController
     add_school_rank_scope
 
     @search.execute
-    
+
     if @service_type == "legal-services"
+      @results = @search.results
       @offerings = @search.results
     else
-      @lawyers = @search.results
+      @results = @search.results
+      @lawyers = LawyerDecorator.decorate(@results)
     end
+
     respond_to do |format|
       format.html
       format.js

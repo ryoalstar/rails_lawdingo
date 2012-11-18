@@ -555,4 +555,15 @@ describe Lawyer do
     end
   end
 
+  context "#parent_practice_areas" do
+
+    it "should call the scope of its practice areas" do
+      # this is here to make sure that the scope exists
+      PracticeArea.expects(:parent_practice_areas => [])
+      subject.stubs(:practice_areas => PracticeArea)
+      subject.parent_practice_areas.should eql([])
+    end
+
+  end
+
 end

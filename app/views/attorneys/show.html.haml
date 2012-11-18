@@ -3,7 +3,7 @@
     LawyersShow.initialize(#{@attorney.id})
   })
 
-- title "#{@attorney.full_name} — #{@attorney.licenced_states.join(', ')} lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
+- title "#{@attorney.full_name} — #{@attorney.licensed_states} lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
 - description "Lawdingo: Ask a #{@attorney.full_name} Online Now. Lawyer advising on #{@attorney.areas_human_list} on Lawdingo"
 - keywords "#{@attorney.practice_areas.collect{|pa| pa.name}.join(', ')}"
 
@@ -11,7 +11,7 @@
   %meta{:property => "og:title",     :content => yield(:title)}
   %meta{:property => "og:type",      :content => 'public_figure'}
   %meta{:property => "og:url",       :content => attorney_url(@attorney, slug: @attorney.slug)}
-  %meta{:property => "og:image",     :content => @attorney.photo.url(:medium)}
+  %meta{:property => "og:image",     :content => @attorney.photo_url(:medium)}
   %meta{:property => "og:admins",    :content => '363994853644871'}
 
 %div{:id => "lawyer_#{@attorney.id}"}
@@ -77,23 +77,6 @@
                 %p.small{:itemprop => :reviewCount}
                   Based on #{pluralize @attorney.reviews.count, "review", "reviews"}
 
-    - bms = []
-    - bms = @attorney.bar_memberships unless @attorney.bar_memberships.blank?
-    - licenced_states = ""
-    - bms.each{ |bm|
-    - licenced_states += bm.state.abbreviation + ', ' if bm.state
-    - }
-    - licenced_states.chomp!(', ')
-    - pas = []
-    - pas = @attorney.practice_areas.parent_practice_areas unless @attorney.practice_areas.blank?
-    - pas_string = ""
-    - pas.each{|pa|
-    - pas_string += pa.name + ', '
-    - }
-    - pas_string.chomp!(', ')
-    - pas_names = pas.map { |area| area.name.downcase  }
-    - pas_names_last = pas_names.pop
-    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
     .main_content(itemscope){:itemtype => 'http://schema.org/Attorney'}
       .bio-block
         -if @attorney.directory_only?
@@ -104,7 +87,7 @@
         .left_border
         = render "share"
         .avatar
-          = image_tag(@attorney.photo.url(:medium), :itemprop => :photo)
+          = image_tag(@attorney.photo_url(:medium), :itemprop => :photo)
         .middle
           %h1.profile_title
             = link_to_unless_current "#{@attorney.full_name}", attorney_path(@attorney, slug: @attorney.slug), :itemprop => :url do 
@@ -125,7 +108,7 @@
                 %span (prorated to the minute)                    
           %h3
             - unless @attorney.bar_memberships.blank?
-              Licensed in #{licenced_states}
+              Licensed in #{@attorney.licensed_states}
           - if @attorney.personal_tagline.present?    
             %p.tagline{:itemprop => :description}= raw "#{simple_format '“' + @attorney.personal_tagline + '”'}"
           .free_section_container

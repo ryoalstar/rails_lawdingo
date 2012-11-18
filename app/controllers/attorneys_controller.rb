@@ -2,10 +2,15 @@ class AttorneysController < ApplicationController
   before_filter :authenticate, only: :call_payment
 
   def show
-    @attorney = Lawyer.find(params[:id])
-    check_approval
-    @video = Framey::Video.find_by_creator_id(@attorney.id) if @attorney.has_video?
+    @attorney = LawyerDecorator.new(Lawyer.find(params[:id]))
+
     @areas = @attorney.areas_human_list 
+    # set the time zone
+    # Time.zone = @attorney.time_zone
+    if @attorney.has_video?
+      @video = Framey::Video.find_by_creator_id(@attorney.id)
+    end
+
     @practice_areas = PracticeArea.parent_practice_areas
     @states = State.with_approved_lawyers
   end
