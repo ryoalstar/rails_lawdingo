@@ -70,6 +70,11 @@
               = f.text_field :hourly_rate, :class=>"paypal lawyer_hourly_rate", :placeholder => "Hourly rate", title: "Your hourly rate is quoted to clients per 0.1 hour.", rel: "twipsy"
               %span.rate_hint Will be quoted per 0.1 hour.
           %tr
+            %td
+            %td.no_charge
+              = check_box_tag :no_charge
+              %span.no_charge_hint No charge for consultations
+          %tr
             %td.labels Direct phone number:
             %td= f.text_field :phone, :placeholder => "Your direct phone number", title: "To receive clients by phone, enter your direct phone line here.", rel: "twipsy"
           %tr

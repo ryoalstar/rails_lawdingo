@@ -139,12 +139,12 @@ module LawyersHelper
   end  
 
   def free_message lawyer
-    # if !lawyer.is_online && lawyer.phone.present?
-    #   msg = "two minutes free, then:"
-    # else
-    #   msg = "free consultation, then:"
-    # end
-    "#{lawyer.free_consultation_duration} minutes free"
+    return '' unless lawyer.is_a? Lawyer
+    lawyer.consultation_free? ? 'Talk for free' : "#{lawyer.free_consultation_duration} minutes free"
+  end
+  
+  def free_message_then lawyer
+    lawyer.consultation_free? ? '' : content_tag(:p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small")
   end
 
   def start_or_schedule_button(lawyer)

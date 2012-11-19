@@ -428,6 +428,10 @@ class Lawyer < User
     pas_names_last = pas_names.pop
     pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last} law"
   end
+  
+  def consultation_free?
+    self.rate.to_f == 0
+  end
 
   protected
   # convert a date to a time if applicable

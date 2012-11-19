@@ -120,7 +120,7 @@
             %br/
             -#.lawyer_rates
               %h5= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute"
+              = free_message_then @attorney
               %p.small
                 %span (prorated to the minute)                    
           %h3
@@ -132,8 +132,8 @@
             = render(:partial => "lawyer/talk_button", :locals => {:lawyer => @attorney})
             .free_button_explanation
               %p.free_bold= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small"                                   
-      - if @attorney.daily_hours.present?          
+              = free_message_then @attorney
+      - if @attorney.daily_hours.present?
         .profile_info
           %h2 Schedule a Consultation with #{@attorney.first_name}
           .main-content
