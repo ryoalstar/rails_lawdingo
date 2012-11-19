@@ -28,8 +28,8 @@ class Lawyer < User
   # validations
   validates_presence_of :payment_status, :if => :is_lawyer?
   validates_inclusion_of :payment_status, :in => PAYMENT_STATUSES, :if => :is_lawyer?
-  validates :time_zone,
-    :presence => true
+  validates :time_zone, :presence => true
+  validates :password, :presence => true, :on => :update, :if => :directory_only?
 
   # TODO: use attr_accessible
   #attr_accessible :payment_status, :stripe_customer_token, :stripe_card_token

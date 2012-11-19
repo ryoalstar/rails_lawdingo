@@ -93,9 +93,14 @@
     - pas_string.chomp!(', ')
     - pas_names = pas.map { |area| area.name.downcase  }
     - pas_names_last = pas_names.pop
-    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"     
+    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
     .main_content(itemscope){:itemtype => 'http://schema.org/Attorney'}
       .bio-block
+        -if @attorney.directory_only?
+          %span.claim_text 
+            Are you Attorney #{@attorney.full_name}? 
+            = link_to 'Claim this profile', new_lawyer_path(@attorney)
+            now to start consulting with clients on Lawdingo.
         .left_border
         = render "share"
         .avatar

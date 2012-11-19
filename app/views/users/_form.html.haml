@@ -1,6 +1,9 @@
 .form-inner
   = raw flash[:error]
   = form_for user, :validate => true, :html=>{:multipart => true} do |f|
+    - if user.is_lawyer?
+      = f.hidden_field :directory_only, :value => false
+      
     - unless flash[:error]
       
       - if user.errors.size > 0
@@ -25,15 +28,13 @@
         
         %tr
           %td.labels Password:
-          %td.pass_field= f.password_field :password, :placeholder=>"Password", :class=>"passw", title: "A password.", rel: "twipsy"
+          %td.pass_field= f.password_field :password, :placeholder=>"Password", :class=>"passw", title: "A password.", rel: "twipsy", :validate => true
         - if !user.is_lawyer?
           %tr 
             %td.labels Phone number (optional):
             %td= f.text_field :phone, :placeholder => "Your direct phone number", :validate=>false, rel: "twipsy"  
           
-        
         - if user.is_lawyer?
-          
           %tr
             %td.labels Bar membership(s):
             %td
@@ -90,27 +91,30 @@
             %h3 In which state are you licensed to practice law?
             %div
               %ul#leveled_list_bar_ids.leveled-list
+                - j = 0
                 = f.fields_for :bar_memberships do |bar_membership_fields|
-                  - if bar_membership_fields.object.new_record?
-                    %li{:id => i}
-                      = check_box_tag("states_#{i}", @states[i].id, false, :id => "state_#{i}", :onchange =>"javascript:select_unselect_state('#{i}');")
-                      = label_tag "state_#{i}", @states[i].name
+                  - if bar_membership_fields.object.new_record? 
+                    %li{:id => i + j}
                       = bar_membership_fields.hidden_field :state_id
+                      = check_box_tag("states_#{i+j}", @states[i].id, false, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")
+                      %span 
+                        = @states[i].name
                       .sub{:id => @states[i].name}
                         = "#{@states[i].abbreviation} Bar ID:"
                         = bar_membership_fields.text_field :bar_id
                     - i += 1
-                - j = 0
-                = f.fields_for :bar_memberships do |bar_membership_fields|
-                  - unless bar_membership_fields.object.new_record?
-                    %li{:id => i + j}
-                      = check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")
-                      = label_tag "state_#{i+j}", @filled_states[j].name
-                      = bar_membership_fields.hidden_field :state_id
-                      .sub{:id => @filled_states[j].name}
-                        = "#{@filled_states[j].abbreviation} Bar ID:"
-                        = bar_membership_fields.text_field :bar_id
-                    - j += 1
+                  - else
+                    - if !bar_membership_fields.object.state.nil?
+                      %li{:id => (i + j).to_s }
+                        = bar_membership_fields.hidden_field :state_id
+                        = check_box_tag("states_#{i + j}", @filled_states[j].id, true, :id => "state_#{i+j}", :onchange =>"javascript:select_unselect_state('#{i+j}');")
+                        %span
+                          = @filled_states[j].name
+                        .sub.filled{:id => @filled_states[j].name}
+                          = "#{@filled_states[j].abbreviation} Bar ID:"
+                          = bar_membership_fields.text_field :bar_id
+                          = bar_membership_fields.hidden_field :id, :value => nil
+                      - j += 1
             %a.button{:onclick => "setBarIds();", :style => "width: 100px; text-align: center;"} Done
           #practices.dialog-window
             %h3 What are your practice areas? Click any to expand.

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include ActiveModel::Dirty
   ADMIN_TYPE  = 'Admin'
   CLIENT_TYPE = 'Client'
   LAWYER_TYPE = 'Lawyer'
@@ -148,7 +149,7 @@ class User < ActiveRecord::Base
   end
   
   def directory_only?
-    self.directory_only
+    self.directory_only_was || self.directory_only
   end
   
 end
