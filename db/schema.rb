@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115105505) do
+ActiveRecord::Schema.define(:version => 20121119082312) do
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "app_parameters", ["created_at"], :name => "index_app_parameters_on_created_at"
+  add_index "app_parameters", ["name"], :name => "index_app_parameters_on_name"
 
   create_table "appointments", :force => true do |t|
     t.integer  "lawyer_id"
@@ -48,6 +51,11 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "bar_memberships", ["bar_id"], :name => "index_bar_memberships_on_bar_id"
+  add_index "bar_memberships", ["created_at"], :name => "index_bar_memberships_on_created_at"
+  add_index "bar_memberships", ["lawyer_id"], :name => "index_bar_memberships_on_lawyer_id"
+  add_index "bar_memberships", ["state_id"], :name => "index_bar_memberships_on_state_id"
 
   create_table "bids", :force => true do |t|
     t.integer  "inquiry_id"
@@ -116,6 +124,11 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.integer "end_time"
   end
 
+  add_index "daily_hours", ["end_time"], :name => "index_daily_hours_on_end_time"
+  add_index "daily_hours", ["lawyer_id"], :name => "index_daily_hours_on_lawyer_id"
+  add_index "daily_hours", ["start_time"], :name => "index_daily_hours_on_start_time"
+  add_index "daily_hours", ["wday"], :name => "index_daily_hours_on_wday"
+
   create_table "expert_areas", :force => true do |t|
     t.integer  "lawyer_id"
     t.integer  "practice_area_id"
@@ -183,6 +196,11 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.integer  "practice_area_id"
   end
 
+  add_index "offerings", ["created_at"], :name => "index_offerings_on_created_at"
+  add_index "offerings", ["name"], :name => "index_offerings_on_name"
+  add_index "offerings", ["practice_area_id"], :name => "index_offerings_on_practice_area_id"
+  add_index "offerings", ["user_id"], :name => "index_offerings_on_user_id"
+
   create_table "pages", :force => true do |t|
     t.string   "name"
     t.string   "page_title"
@@ -200,6 +218,11 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.datetime "updated_at"
     t.boolean  "is_national", :default => false
   end
+
+  add_index "practice_areas", ["created_at"], :name => "index_practice_areas_on_created_at"
+  add_index "practice_areas", ["is_national"], :name => "index_practice_areas_on_is_national"
+  add_index "practice_areas", ["name"], :name => "index_practice_areas_on_name"
+  add_index "practice_areas", ["parent_id"], :name => "index_practice_areas_on_parent_id"
 
   create_table "questions", :force => true do |t|
     t.text     "body"
@@ -245,6 +268,9 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "states", ["abbreviation"], :name => "index_states_on_abbreviation"
+  add_index "states", ["name"], :name => "index_states_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -292,10 +318,21 @@ ActiveRecord::Schema.define(:version => 20121115105505) do
     t.string   "call_status",                :limit => 50
     t.boolean  "is_available_by_phone",                    :default => false
     t.string   "type"
+    t.boolean  "directory_only",                           :default => false
   end
 
+  add_index "users", ["bar_ids"], :name => "index_users_on_bar_ids"
+  add_index "users", ["call_status"], :name => "index_users_on_call_status"
+  add_index "users", ["created_at"], :name => "index_users_on_created_at"
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["is_approved"], :name => "index_users_on_is_approved"
   add_index "users", ["is_available_by_phone"], :name => "index_users_on_is_available_by_phone"
+  add_index "users", ["is_busy"], :name => "index_users_on_is_busy"
+  add_index "users", ["is_online"], :name => "index_users_on_is_online"
   add_index "users", ["payment_status"], :name => "index_users_on_payment_status"
+  add_index "users", ["peer_id"], :name => "index_users_on_peer_id"
+  add_index "users", ["school_id"], :name => "index_users_on_school_id"
+  add_index "users", ["type"], :name => "index_users_on_type"
   add_index "users", ["user_type", "id"], :name => "index_users_on_user_type_and_id"
 
 end

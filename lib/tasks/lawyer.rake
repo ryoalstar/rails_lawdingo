@@ -1,6 +1,19 @@
+require 'csv'
 namespace :lawyer do
-  desc "Reindex lawyer table for solr: is_available_by_phone, daily_hours_present"
-  task :import => :environment do 
+  # rake lawyer:import
+  # first csv row - model property name
+  desc "Import lawyers from csv"
+  task :import => :environment do
+    counter = 0
+    filename = Rails.root.join('lib', 'tasks', 'lawyers', 'lawyers.csv')
+    CSV.foreach(filename, { :col_sep => "\t", :headers => :first_row, :return_headers => false }) do |row|
+      begin
+        lawyer = Lawyer.new(row.to_hash)
+        counter += 1 if lawyer.save(:validate => false)
+      rescue
+      end
+    end
+    puts "Loaded #{counter} lawyers."
   end
 
   # rake lawyer:update_online_status

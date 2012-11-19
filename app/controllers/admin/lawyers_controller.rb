@@ -3,11 +3,11 @@ class Admin::LawyersController < ApplicationController
   before_filter :authenticate_admin
 
   def index
-    @users = User.get_lawyers
+    @users = Lawyer.non_directory.reverse_order
   end
 
   def new
-    @user = Lawyer.new(:user_type =>User::LAWYER_TYPE)
+    @user = Lawyer.new
   end
 
   def create

@@ -15,7 +15,7 @@ class Lawyer < User
   has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours, :autosave => true
   
-  after_create :welcome!
+  after_create :welcome!, :unless => :directory_only?
     
   def welcome!
     UserMailer.lawyer_welcome_email(self).deliver
@@ -37,7 +37,7 @@ class Lawyer < User
   accepts_nested_attributes_for :bar_memberships, :reject_if => proc { |attributes| attributes['state_id'].blank? }
   attr_accessible :practice_area_ids, :is_available_by_phone, :is_online, :rate, :payment_email, :photo, :personal_tagline, 
   :bar_memberships_attributes, :phone, :time_zone, :hourly_rate, :school_id, :undergraduate_school, :license_year, 
-  :yelp_business_id, :payment_status
+  :yelp_business_id, :payment_status, :directory_only, :state_ids
 
   # scopes
   default_scope lambda{
@@ -77,7 +77,7 @@ class Lawyer < User
     where(:payment_status => 'free')
   }
   scope :shown, lambda{
-    where(:is_approved => true).where(:payment_status => ['paid', 'free']) 
+    where(:is_approved => true).where(:payment_status => ['paid', 'free']).where(:directory_only => false)
   }
 
   scope :offers_practice_area, lambda{|practice_area_or_name|
@@ -94,9 +94,12 @@ class Lawyer < User
         {:ids => [pa.id] + pa.children.collect(&:id)}
       ])
   }
+  
+  scope :directory, where(:directory_only => true)
+  scope :non_directory, where(:directory_only => false)
 
   #solr index
-  searchable :auto_index => true, :auto_remove => true, :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved} do
+  searchable :auto_index => true, :auto_remove => true, :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved && !lawyer.directory_only} do
     text :flat_fee_service_name do
       offering_names if offerings!=[]
     end

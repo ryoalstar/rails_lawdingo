@@ -1,7 +1,7 @@
 class LawyersController < ApplicationController
 
   def index
-    @users  = User.get_lawyers
+    @users  = Lawyer.non_directory.reverse_order
   end
 
   def new
