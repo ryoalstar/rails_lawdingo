@@ -16,6 +16,7 @@ class AttorneysController < ApplicationController
     if params[:type] == "video-chat"
       session[:return_path] = user_chat_session_url(user_id: @lawyer.id)
     elsif params[:type] == "appointment"
+      @appointment = true
       session[:return_path] = lawyers_path
     else
       session[:return_path] = phonecall_url(id: @lawyer.id)

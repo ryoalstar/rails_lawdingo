@@ -1,24 +1,23 @@
-#page.call-payment                                                                                    |
-  %h1.form-header Start a legal consultation
+#page.call-payment
+  %h1.form-header= @appointment ? 'Book An Appointment' : 'Start a legal consultation'
   %div
     .process-wrapper
       .process-header
         .process-bar
-        .first-step.steps
-          1
-        .second-step.steps.active
-          2
-        .third-step.steps
-          3
+        .first-step.steps 1
+        .second-step.steps.active 2
+        .third-step.steps 3
         .clear
-        %p.first-notice.notices Select Lawyer
+        %p.first-notice.notices= @appointment ? 'Select Time' : 'Select Lawyer' 
         %p.second-notice.notices Add Payment info
-        %p.third-notice.notices Talk to lawyer
+        %p.third-notice.notices= @appointment ? 'Connect Automatically' : 'Talk to lawyer'
       .process_notice
-        %h3
-          First #{@lawyer.free_consultation_duration} minutes are completely free. After #{@lawyer.free_consultation_duration} minutes costs #{ lawyer_rate @lawyer }.
-        %p.info
-          We ask that you enter your payment information to start the consultation
+        - if @appointment
+          %h3 To book an appointment with #{@lawyer.full_name}, you need to have your payment info on file. 
+          %p.info Lawdingo will call you at the designated time and connect you to #{@lawyer.first_name}. The first #{@lawyer.free_consultation_duration} minutes will be completely free, and if you talk longer you'll just be billed at #{ lawyer_rate @lawyer }.
+        - else
+          %h3 First #{@lawyer.free_consultation_duration} minutes are completely free. After #{@lawyer.free_consultation_duration} minutes costs #{ lawyer_rate @lawyer }.
+          %p.info We ask that you enter your payment information to start the consultation
       .apply-form
         .card-info
           = form_for(current_user, :url => user_update_card_details_path(current_user), :method => :put, :html => {:id => :new_callpayment}) do |f|
