@@ -1,6 +1,6 @@
 - if defined? homepage_image
   %li
-    .image-carousel
+    .image-carousel.parent_container
       .carousel-image
         %a.profile_link{:href => attorney_path(homepage_image.lawyer, slug: homepage_image.lawyer.slug)}
           = image_tag homepage_image.photo.url(:large), :alt => homepage_image.lawyer.full_name
