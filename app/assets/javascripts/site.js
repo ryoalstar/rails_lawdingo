@@ -103,24 +103,29 @@ function select_unselect_state(id) {
 
 function setBarIds() {
 	var states_barids = new Array();
-	var form_data_status = false;
+	var counter = 0;
 	$('#leveled_list_bar_ids input[type=checkbox]:checked').each(function(index) {
 		var dv = $(this).nextAll('div.sub');
 		var state = dv.attr('id');
 		var index = $(this).parents('li').attr('id')
 		states_barids[state] = $(dv).find('#lawyer_bar_memberships_attributes_'+index+'_bar_id').val()
-		form_data_status = true;
+		counter++
 	});
-
-	if (form_data_status) {
+	if(counter){
 		var states_barids_string = "";
 		for (key in states_barids) {
 			states_barids_key_label = states_barids[key] ? key + " (Bar ID: " + states_barids[key] + ")" : key;
 			states_barids_string += "<li>" + states_barids_key_label + "</li>"
 		}
-		$('#barids_opener').hide();
+		$('#barids_opener').addClass('hidden');
+		$('#barids_editor').removeClass('hidden');
 		$('#div_states_barids .bar_list').html(states_barids_string);
 		$('#div_states_barids').show().css('display', 'inline');
+	}
+	else{
+		$('#barids_opener').removeClass('hidden');
+		$('#barids_editor').addClass('hidden');
+		$('#div_states_barids .bar_list').html('');
 	}
 	$('.profile').find(".same_height").css('height', 'auto')
 	equalHeight($('.profile').find(".same_height"));
@@ -130,6 +135,7 @@ function setBarIds() {
 function setPracticeAreas() {
 	var practice_list_string = practice_area_string = '';
 	var specialities = [];
+	var counter = 0;
 	$('#leveled-list_practice_areas input.parent-area[type=checkbox]:checked').each(function() {
 		practice_area_string = $(this).data('name');
 		specialities = [];
@@ -140,11 +146,19 @@ function setPracticeAreas() {
 			practice_area_string += ' (' + specialities.join(', ') + ')';
 		practice_area_string = "<li>" + practice_area_string + "</li>";
 		practice_list_string += practice_area_string;
+		counter++
 	});
-
-	$('#practice_areas_opener').hide();
-	$('#div_practice_areas .pa_list').html(practice_list_string);
-	$('#div_practice_areas').show().css('display', 'inline');
+	if(counter){
+		$('#practice_areas_opener').addClass('hidden');
+		$('#practice_areas_editor').removeClass('hidden');
+		$('#div_practice_areas .pa_list').html(practice_list_string);
+		$('#div_practice_areas').show().css('display', 'inline');
+	}
+	else{
+		$('#practice_areas_opener').removeClass('hidden');
+		$('#practice_areas_editor').addClass('hidden');
+		$('#div_practice_areas .pa_list').html('');
+	}
 	$('.profile').find(".same_height").css('height', 'auto')
 	equalHeight($('.profile').find(".same_height"));
 	close_dialogs();

@@ -12,17 +12,16 @@ Lawdingo::Application.routes.draw do
   end
   post "framey/callback" => "framey/videos#callback"
 
-  resources :lawyers, :only => [:new, :create] do 
+  resources :lawyers, :only => [:new, :create, :update] do 
     member do
-    get :states
-    get :practice_areas
+      get :states
+      get :practice_areas
     end
   end
   
-  match '/apply' => "lawyers#new", :as => :new_lawyer
+  match '/apply(/:id)' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact
-  
   post '/contact/send_email' => "contact#send_email", :as => :send_email
   post '/contact/new_subscriber' => "contact#new_subscriber", :as => :new_subscriber
 
@@ -54,7 +53,6 @@ Lawdingo::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   match 'attorneys/:id/call-payment(/:type)' => 'attorneys#call_payment', as: :call_payment
   match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
-  match '/apply' => "users#new", :as => :new_lawyer
 
   # Lawyer subscriptions
   match '/paid' => "stripes#new", :as => :subscribe_lawyer
@@ -146,6 +144,7 @@ Lawdingo::Application.routes.draw do
   match '/users/:user_id/daily_hours' =>"users#daily_hours", :as =>:user_daily_hours
   match '/users/:user_id' =>"users#account_information", :as =>:user_account_information
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
+  get   '/attorney-directory(/:page)' => 'attorneys#directory', :as => :directory
   match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page
   match '/pricing_process' =>"pages#pricing_process", :name =>'pricing_process', :as =>:pricing_process

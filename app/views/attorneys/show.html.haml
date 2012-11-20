@@ -93,9 +93,14 @@
     - pas_string.chomp!(', ')
     - pas_names = pas.map { |area| area.name.downcase  }
     - pas_names_last = pas_names.pop
-    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"     
+    - pas_names_list = pas_names.empty? ? pas_names_last : "#{pas_names.join(', ')} and #{pas_names_last}"
     .main_content(itemscope){:itemtype => 'http://schema.org/Attorney'}
       .bio-block
+        -if @attorney.directory_only?
+          %span.claim_text 
+            Are you Attorney #{@attorney.full_name}? 
+            = link_to 'Claim this profile', new_lawyer_path(@attorney)
+            now to start consulting with clients on Lawdingo.
         .left_border
         = render "share"
         .avatar
@@ -115,7 +120,7 @@
             %br/
             -#.lawyer_rates
               %h5= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate + AppParameter.service_charge_value)}/minute"
+              = free_message_then @attorney
               %p.small
                 %span (prorated to the minute)                    
           %h3
@@ -127,8 +132,8 @@
             = render(:partial => "lawyer/talk_button", :locals => {:lawyer => @attorney})
             .free_button_explanation
               %p.free_bold= free_message(@attorney)
-              = content_tag :p, "then #{number_to_currency (@attorney.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small"                                   
-      - if @attorney.daily_hours.present?          
+              = free_message_then @attorney
+      - if @attorney.daily_hours.present?
         .profile_info
           %h2 Schedule a Consultation with #{@attorney.first_name}
           .main-content

@@ -1,6 +1,6 @@
 //= require users/home
-
 jQuery ->
+
   # ($ ".leveled-list input.parent-area").bind "click", ->
   #  value = ($ this).attr("checked") is "checked" ? "true" : "false"
   #  ($ ".sub[data-parent-id='#{($ this).data("id")}']").find("input").attr "checked", value
@@ -105,3 +105,26 @@ jQuery ->
     $("#autoselect_landing_wraper").removeClass("expanded")
     $("#new_question").enableClientSideValidations()
     return false
+    
+  users.initialize()
+
+users =
+  initialize: ->
+    @handleApplyForm()
+    
+  no_charge: -> 
+    ($ '#no_charge')
+  lawyer_hourly_rate: ->
+    ($ '#lawyer_hourly_rate')
+  rate_hint: ->
+    ($ 'span.rate_hint')
+  handleApplyForm: ->
+    _this = this
+    @no_charge().on "change", ->
+      if ($ this).is ':checked'
+        _this.lawyer_hourly_rate().val(0.0).attr('disabled', 'disabled')
+        _this.rate_hint().html "Will be quoted per 0.1 hour."
+      else
+        _this.lawyer_hourly_rate().removeAttr('disabled')
+    
+this.users = users

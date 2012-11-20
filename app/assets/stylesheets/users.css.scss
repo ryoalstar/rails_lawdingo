@@ -1131,8 +1131,8 @@
   ul.share {
     position: absolute;
     display: block;
-    top: 29px;
-    right: 54px;
+    top: 24px;
+    right: 24px;
     border: 1px solid #ddd;
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -1188,6 +1188,12 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   margin-top:0;
+  .claim_text{
+    display: block;
+    font-size: 14px;
+    padding-bottom: 10px;
+    width: 490px;
+  }
   .avatar{
     a{
       border-bottom:0;
@@ -1353,6 +1359,12 @@ form.filters {
 
   input#lawyer_rate {
     margin-bottom: 2px !important;
+  }
+}
+
+.no_charge{
+  .no_charge_hint{
+    padding-left: 10px;
   }
 }
 

@@ -306,12 +306,12 @@ $(document).ready(function(){
 		image_tick_class: "radios"
 	});   	
 
-  $("div.row.lawyer").live('mouseover',function(){
+  $("div.row.lawyer, #carousel_wrapper .jcarousel-clip").live('mouseover',function(){
     $(this).find(".tooltip.dominant").show();
   });
 
 	
-  $("div.row.lawyer").live('mouseout',function(){
+  $("div.row.lawyer, #carousel_wrapper .jcarousel-clip").live('mouseout',function(){
     $(this).find(".tooltip.dominant").hide();
   });
 

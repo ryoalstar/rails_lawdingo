@@ -207,7 +207,8 @@ describe Lawyer do
     Lawyer.shown.where_values_hash.should eql(
       :user_type => [User::LAWYER_TYPE], 
       :is_approved => true, 
-      :payment_status => ['paid', 'free']
+      :payment_status => ['paid', 'free'],
+      :directory_only => false
     )
   end
 

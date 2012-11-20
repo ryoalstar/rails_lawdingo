@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include ActiveModel::Dirty
   ADMIN_TYPE  = 'Admin'
   CLIENT_TYPE = 'Client'
   LAWYER_TYPE = 'Lawyer'
@@ -121,12 +122,8 @@ class User < ActiveRecord::Base
     self.hashed_password
   end
 
-  def self.get_lawyers
-    Lawyer.order('id desc')
-  end
-
   def self.get_clients
-    Client.order('id desc')
+    Client.order(:id).reverse_order
   end
 
   def full_name
@@ -149,6 +146,10 @@ class User < ActiveRecord::Base
 
   def timezone_abbreviation
     ActiveSupport::TimeZone.find_tzinfo(self.time_zone).current_period.abbreviation.to_s  rescue ''
-  end  
+  end
+  
+  def directory_only?
+    self.directory_only_was || self.directory_only
+  end
   
 end

@@ -1,0 +1,14 @@
+- title "Attorney Directory on Lawdingo"
+%div
+  .content_outer
+    .content
+      .list
+        %h1 Directory of Lawyers
+        %br
+        - @lawyers.each do |lawyer|
+          .item= link_to lawyer.full_name, attorney_path(lawyer, slug:lawyer.slug)
+        .clear
+        .pager
+          .apple_pagination
+            = will_paginate @lawyers
+.clear

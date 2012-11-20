@@ -33,7 +33,7 @@
 }
 
 .hidden{
-  display:none;
+  display:none!important;
 }
 
 .clear {
@@ -444,7 +444,7 @@ input, select, textarea {
 }
 
 #footer{
-  height:240px;
+  height:268px;
   z-index:10;
   width:100%;
   float:left;
@@ -491,7 +491,7 @@ input, select, textarea {
     }
     
     .copyright{
-      margin-top: 38px;
+      margin-top: 65px;
       color: #E9F6FF;
       font-size: 13px;
     }
@@ -500,7 +500,7 @@ input, select, textarea {
   .footer_hr{
     margin: 0;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 55px;
     border: 1px solid;
     padding: 0;
     border-top-color: #444C57;
@@ -616,13 +616,14 @@ input, select, textarea {
           padding-right: 0;
         }
         li{
-          padding:6px 0px;
+          color:#929597;
+          font-size: 14px;
+          padding: 6px 7px;
           a{
             color:#e9f6ff;
             text-decoration:none;
             display:inline;
             font-size: 14px;
-            padding: 3px 7px;
             border-bottom:0;
           }
           a.selected, a:hover{
@@ -763,9 +764,8 @@ select.select_medium{
     width:183px;
     margin-top: -34px;
     margin-left:11px;
-    padding-left:25px;        
+    padding-left:25px;
     font-size: 12px;
-    padding-left:17px;
   }
   .tooltip.text_chat.online{
     background:image-url('tooltip_cloud.png') no-repeat;

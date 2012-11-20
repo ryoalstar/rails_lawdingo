@@ -1,0 +1,26 @@
+body.lawyers.new{
+  a.dialog-opener{
+    float:left;
+    margin-left: 10px;
+    font-size:11px!important;
+    color:#4c4c4c;
+    padding:6px 8px;
+    border:1px solid #b8b8b8;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #f6f6f6; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6f6f6 0%, #e8e8e8 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#e8e8e8)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f6f6f6 0%,#e8e8e8 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f6f6f6 0%,#e8e8e8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+  }
+  #div_practice_areas{
+    ul.pa_list{
+      padding-left: 20px;
+    }
+  }
+}

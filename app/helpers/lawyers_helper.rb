@@ -98,23 +98,30 @@ module LawyersHelper
     areas_names.empty? ? last_area_name : "#{areas_names.join(', ')} and #{last_area_name}"
   end
 
-  def bar_memberships_listing lawyer
-    output = ''
+  def bar_memberships_listing lawyer, show_title = true
+    output = '<div id="div_states_barids">'
+    bms_text = ''
+    bar_memberships_with_state_present = false
     bms = lawyer.bar_memberships
     if bms.present?
-      bms_text = ''
       bms.each do |bm|
-        bar = bm.bar_id? ? "(Bar ID: #{bm.bar_id})" : ""
-        bms_text += "<li>#{bm.state.name} #{bar}</li>" if bm.state
+        if bm.state
+          bar = bm.bar_id? ? "(Bar ID: #{bm.bar_id})" : ""
+          bms_text += "<li>#{bm.state.name} #{bar}</li>"
+          bar_memberships_with_state_present = true
+        end
       end
-      output = "<div id='div_states_barids'><h2>Bar Memberships: </h2><ul class='tick bar_list'>#{bms_text}</ul></div>"
-      output += '<a href="#bar_membership" id="barids_editor" class="dialog-opener"> Edit</a>'
-    end  
+    end
+    output += '<h2>Bar Memberships: </h2>' if show_title
+    output += "<ul class='tick bar_list'>#{bms_text}</ul></div>"
+    output += "<a href='#bar_membership' id='barids_editor' class='dialog-opener#{bar_memberships_with_state_present ? '' : ' hidden'}'>Edit</a>"
+    output += "<a href='#bar_membership' id='barids_opener' class='dialog-opener blue_button no-inner-shadow#{bar_memberships_with_state_present ? ' hidden' : ''}'>State Bar Membership(s)</a>"
     output.html_safe
   end
   
-  def practice_areas_listing lawyer
-    output = ''
+  def practice_areas_listing lawyer, show_title = true
+    output = '<div id="div_practice_areas">'
+    pas_text = ''
     pas = lawyer.practice_areas
     ppas = lawyer.practice_areas.parent_practice_areas
     if ppas.present?
@@ -131,20 +138,21 @@ module LawyersHelper
         pas_text += (sps_text != '')? "(#{sps_text})</li>": "</li>"
       end
       pas_text.chomp!(", ")
-        
-      output = "<div id='div_practice_areas'><h2>Practice Areas: </h2><ul class='tick pa_list'>#{pas_text}</ul></div>"
-      output += '<a href="#practices" id="practice_areas_editor" class="dialog-opener"> Edit</a>'
-    end  
+    end
+    output += '<h2>Practice Areas: </h2>' if show_title
+    output += "<ul class='tick pa_list'>#{pas_text}</ul></div>"
+    output += "<a href='#practices' id='practice_areas_editor' class='dialog-opener#{ppas.present? ? '' : ' hidden'}'>Edit</a>"
+    output += "<a href='#practices' id='practice_areas_opener' class='dialog-opener blue_button no-inner-shadow#{ppas.present? ? ' hidden' : ''}'>Your Practice Areas</a>"
     output.html_safe
   end  
 
   def free_message lawyer
-    # if !lawyer.is_online && lawyer.phone.present?
-    #   msg = "two minutes free, then:"
-    # else
-    #   msg = "free consultation, then:"
-    # end
-    "#{lawyer.free_consultation_duration} minutes free"
+    return '' unless lawyer.is_a? Lawyer
+    lawyer.consultation_free? ? 'Talk for free' : "#{lawyer.free_consultation_duration} minutes free"
+  end
+  
+  def free_message_then lawyer
+    lawyer.consultation_free? ? '' : content_tag(:p, "then #{number_to_currency (lawyer.rate_for_minutes(6) + AppParameter.service_charge_value)} per 6 mins", class: "small")
   end
 
   def start_or_schedule_button(lawyer)
