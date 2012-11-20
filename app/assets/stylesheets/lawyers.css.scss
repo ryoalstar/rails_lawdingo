@@ -1,3 +1,4 @@
+
 body.lawyers.new{
   a.dialog-opener{
     float:left;
@@ -24,3 +25,65 @@ body.lawyers.new{
     }
   }
 }
+
+#inquiries_wrap{
+  h1 {
+    font-size: 24px;
+  }
+  
+  h2{
+    font-size: 20px;
+  }
+  .question_desc a{
+      font-size: 15px;
+      color: #2491FF !important;
+      border: none !important;
+      margin-bottom: 10px;
+  }
+  
+  .question_info{
+    font-size: 12px;
+    padding: 5px;
+    .grey_box{
+      color: #4C4C4C;
+      border: 1px solid #B8B8B8;
+      padding: 10px 10px;
+      background: #F6F6F6;
+      display: inline-block;
+    }
+  }
+  
+  .answers_container{
+    margin-top: 20px;
+    margin-bottom: 25px;  
+  }
+  .answer_heading{
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  #answer_body {
+    width: 350px;
+    height: 100px;
+    margin-bottom: 30px;
+    font-size: 13px;
+    padding: 10px;
+  }
+  
+  .answered_by {
+    margin-bottom: 10px;
+  }
+  .answered_by a{
+    font-size: 15px;
+    color: #2491FF !important;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .otheranswer_body{
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+}
+

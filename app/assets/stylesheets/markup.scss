@@ -209,7 +209,8 @@ body.users.show, body.daily_hours.index, body.offerings.index, body.users.edit, 
 }
 */
 
-body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , body.users.update.logged-in {
+body.index.logged-in, body.users.show.logged-in, body.users.edit.logged-in , body.users.update.logged-in,
+body.lawyers.inquiries {
   #page > div{
     width:960px;
     padding:0;

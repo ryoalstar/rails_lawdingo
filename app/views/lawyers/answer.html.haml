@@ -1,0 +1,44 @@
+%div#page.inquiries
+  %div
+    .profile
+      = render(:partial =>  "lawyer/menu", :locals => {:lawyer => @lawyer})
+      .profile_wrapper.same_height
+        .profile_availability
+          = render  partial: '/users/iphone_handle', locals: {:lawyer => @lawyer}
+          .clear
+        #inquiries_wrap.profile-block.same_height.edit_lawyer
+          %h3 Client Inquiry:
+          %h2 
+            =@question.body
+          %br
+          .question_info
+            %span.grey_box
+              Client's State: 
+              %span.bold
+                = @question.state_name
+            %span.grey_box
+              Likely practice area:
+              %span.bold
+                = @question.practice_area
+          %br
+          %p.answer_heading Your response:
+          .answer_wrapper
+            = form_for @answer do |f|
+              =  f.hidden_field :question_id, :value => @question.id.to_s
+              =  f.hidden_field :user_id, :value => current_user.id.to_s
+              = f.text_area :body
+              .submit_wrapper
+                = f.submit "Submit Response", :class=>'button'
+          %br
+          %br
+          %br
+          .answers_container
+            - if @other_answers.length > 0
+              %p.answer_heading Answers so far:
+              - @other_answers.each do |other_answer|
+                %p.answered_by
+                  = link_to other_answer.user.full_name, attorney_path(other_answer.user, slug: other_answer.user.slug)
+                %p.otheranswer_body
+                  = other_answer.body
+                
+          
