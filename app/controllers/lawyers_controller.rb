@@ -63,6 +63,20 @@ class LawyersController < ApplicationController
     end
   end
   
+  def inquiries
+    @lawyer = Lawyer.find(params[:id]) 
+    @questions = @lawyer.matching_questions
+  end
+  
+  def answer
+    @lawyer = Lawyer.find(params[:id]) 
+    @question = Question.find(params[:question_id])
+    @answer = Answer.new
+    
+    @other_answers = Answer.all(:conditions=>{:question_id=>@question.id})
+  end
+
+  
   private
   def i_want_claim
     if params[:id]
@@ -104,18 +118,6 @@ class LawyersController < ApplicationController
     end
   end 
 
-  def inquiries
-    @lawyer = Lawyer.find(params[:id]) 
-    @questions = @lawyer.matching_questions
-  end
   
-  def answer
-    @lawyer = Lawyer.find(params[:id]) 
-    @question = Question.find(params[:question_id])
-    @answer = Answer.new
-    
-    @other_answers = Answer.all(:conditions=>{:question_id=>@question.id})
-  end
-
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116193304) do
+ActiveRecord::Schema.define(:version => 20121119144401) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20121116193304) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 
   create_table "app_parameters", :force => true do |t|
     t.string   "name"
@@ -91,6 +90,24 @@ ActiveRecord::Schema.define(:version => 20121116193304) do
     t.integer  "digits"
   end
 
+  create_table "card_details", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country"
+    t.string   "card_type"
+    t.string   "card_number"
+    t.string   "expire_month"
+    t.string   "expire_year"
+    t.string   "card_verification"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "conversations", :force => true do |t|
     t.integer  "client_id",                            :null => false
     t.integer  "lawyer_id",                            :null => false
@@ -111,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20121116193304) do
   create_table "daily_hours", :force => true do |t|
     t.integer "lawyer_id"
     t.integer "wday"
-    t.integer "start_time", :default => -1
-    t.integer "end_time",   :default => -1
+    t.integer "start_time"
+    t.integer "end_time"
   end
 
   add_index "daily_hours", ["end_time"], :name => "index_daily_hours_on_end_time"
@@ -160,6 +177,15 @@ ActiveRecord::Schema.define(:version => 20121116193304) do
     t.boolean  "is_closed",   :default => false
   end
 
+  create_table "lawyer_daily_hours", :force => true do |t|
+    t.integer  "lawyer_id"
+    t.integer  "wday"
+    t.integer  "start_time"
+    t.integer  "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "client_id"
@@ -169,6 +195,12 @@ ActiveRecord::Schema.define(:version => 20121116193304) do
     t.integer  "state_id"
     t.integer  "practice_area_id"
     t.string   "status",           :default => "new"
+  end
+
+  create_table "offering_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "offerings", :force => true do |t|
