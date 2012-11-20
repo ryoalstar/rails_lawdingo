@@ -34,6 +34,12 @@ SitemapGenerator::Sitemap.create do
       end
    end
    
+  Lawyer.directory.find_in_batches do |lawyers|
+       lawyers.each do |lawyer|
+        add attorney_path(lawyer, slug: lawyer.slug), :lastmod => lawyer.updated_at, :changefreq => 'monthly', :priority => 0.8
+      end
+   end
+   
    Offering.find_in_batches do |offerings| 
      offerings.each do |offering|
        add offering_path(offering), :lastmod => offering.updated_at, :changefreq => 'monthly', :priority => 0.8

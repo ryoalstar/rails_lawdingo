@@ -51,6 +51,7 @@ gem 'framey'
 gem 'oauth'
 gem 'haml-rails'
 gem 'sitemap_generator'
+gem 'will_paginate', '~> 3.0'
 
 # Handling cron jobs
 gem 'whenever', require: false

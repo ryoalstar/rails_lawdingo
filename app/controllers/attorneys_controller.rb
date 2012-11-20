@@ -22,6 +22,15 @@ class AttorneysController < ApplicationController
       session[:return_path] = phonecall_url(id: @lawyer.id)
     end
   end
+  
+  def directory
+    @lawyers = Lawyer.directory.paginate(:page => params[:page], :per_page => 100)
+
+    respond_to do |format|
+      format.html # directory.html.haml
+      format.json { render json: @lawyers }
+    end
+  end
 
   private
 

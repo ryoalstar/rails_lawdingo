@@ -144,6 +144,7 @@ Lawdingo::Application.routes.draw do
   match '/users/:user_id/daily_hours' =>"users#daily_hours", :as =>:user_daily_hours
   match '/users/:user_id' =>"users#account_information", :as =>:user_account_information
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
+  get   '/attorney-directory(/:page)' => 'attorneys#directory', :as => :directory
   match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page
   match '/pricing_process' =>"pages#pricing_process", :name =>'pricing_process', :as =>:pricing_process
