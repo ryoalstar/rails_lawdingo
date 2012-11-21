@@ -122,7 +122,7 @@ users =
     _this = this
     @no_charge().on "change", ->
       if ($ this).is ':checked'
-        _this.lawyer_hourly_rate().val(0.0).attr('disabled', 'disabled')
+        _this.lawyer_hourly_rate().val('').attr('disabled', 'disabled')
         _this.rate_hint().html "Will be quoted per 0.1 hour."
       else
         _this.lawyer_hourly_rate().removeAttr('disabled')

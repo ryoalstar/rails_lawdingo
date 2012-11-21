@@ -5,6 +5,7 @@ describe "/attorneys/show" do
   before(:each) do
     assign(:attorney, LawyerDecorator.new(lawyer))
     view.stubs(:logged_in? => true)
+    view.stubs(:current_user => FactoryGirl.build_stubbed(:client))
   end
   
   let(:lawyer) do

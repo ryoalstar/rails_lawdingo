@@ -33,12 +33,16 @@ class AppointmentForm
       $(e.target).triggerHandler('click')
 
     @div.find("form").submit (e)=>
-      if this.checkLawyersStateAndPracticeArea()
+      if this.isClientHasPhone() && this.checkLawyersStateAndPracticeArea() 
         this.save()
       false
       
     @state_name_and_practice_area_select().on "change", =>
       this.checkLawyersStateAndPracticeArea()
+      
+    @appointment_contact_number().on "change", =>
+      @enable_submit_button()
+      @clear_appointment_warning() 
      
   state_name_select : ->
     @div.find("#appointment_state_id")
@@ -50,6 +54,8 @@ class AppointmentForm
     @div.find("#appointment_warning")
   submit_button : ->
     @div.find(".submit_appointment_button")
+  appointment_contact_number : -> 
+    @div.find("#appointment_contact_number")
   checkLawyersStateAndPracticeArea: => 
     current_state_id = @state_name_select().val()
     current_state_name = @state_name_select().find("option[value='#{current_state_id}']").text();
@@ -99,6 +105,13 @@ class AppointmentForm
     parseInt(this.practice_area_select().val()) > 0
   isStateAndPracticeAreaSelected: => 
     this.isStateSelected() && this.isPracticeAreaSelected()
+  isClientHasPhone: ->
+    unless @appointment_contact_number().val().length
+      @disable_submit_button()
+      @write_phone_warning()
+      false
+    else
+      true
   isLawyersPracticeArea: (practice_area_id, lawyer_id) => 
     return false if practice_area_id == ''
     practice_areas = []
@@ -133,6 +146,9 @@ class AppointmentForm
     this.appointment_warning().html(text)
   write_appointment_practice_area_missing_warning: =>
     text = "Please, select Type of law."
+    this.appointment_warning().html(text)
+  write_phone_warning: =>
+    text = "Please, add phone number."
     this.appointment_warning().html(text)
   practice_area_name_for_url: (practice_area_name) ->
     practice_area_name.replace /\s+/g, "-"

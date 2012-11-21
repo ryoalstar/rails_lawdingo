@@ -16,7 +16,7 @@ class Lawyer < User
   has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours, :autosave => true
   
-  after_create :welcome!, :unless => :directory_only?
+  #after_create :welcome!, :unless => :directory_only?
     
   def welcome!
     UserMailer.lawyer_welcome_email(self).deliver

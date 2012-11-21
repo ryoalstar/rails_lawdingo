@@ -10,6 +10,7 @@ describe UserMailer do
   end
   
   it "should send welcome email to lawyer after create" do
+    pending 'welcome email to lawyer temporarily removed'
     expect {
       FactoryGirl.create(:lawyer)
     }.to change(ActionMailer::Base.deliveries, :size).by(1)
