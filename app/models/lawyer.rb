@@ -96,8 +96,13 @@ class Lawyer < User
       ])
   }
   
-  scope :directory, where(:directory_only => true)
-  scope :non_directory, where(:directory_only => false)
+  scope :directory, lambda{
+    where(:directory_only => true)
+  }
+  
+  scope :non_directory, lambda{
+    where(:directory_only => false)
+  }
 
   #solr index
   searchable :auto_index => true, :auto_remove => true, :if => proc { |lawyer| lawyer.user_type == User::LAWYER_TYPE && lawyer.is_approved && !lawyer.directory_only} do
