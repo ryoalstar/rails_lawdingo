@@ -5,14 +5,23 @@
   %body
     %h1 Welcome to Lawdingo!
     %p
-      Hello #{@client.full_name}, and welcome to Lawdingo!
+      Hey #{@client.first_name},
       %br
-      Your data:
+      Thanks for joining Lawdingo. Lawdingo lets anyone talk to a top-quality lawyer from wherever they are. 
       %br
-      Full Name : #{@client.full_name}
+      With Lawdingo, you can:
+      %ul
+        %li Talk immediately to a lawyer by phone or video chat
+        %li Book an appointment with a lawyer for a virtual consultation
+        %li Get an answer to your legal question
       %br
-      Email : #{@client.email}
-    %br
-    Thanks,
-    %br
-    Lawdingo Team
+      If you like Lawdingo as a service, do share it with friends on 
+      = link_to 'Facebook.', 'https://www.facebook.com/TheLawdingo', :target => '_blank'
+      %br
+      Team Lawdingo
+      %br
+      San Francisco, CA
+      %br
+      = link_to 'info@lawdingo.com', 'mailto:info@lawdingo.com?Subject=RE:Welcome%20to%20Lawdingo'
+      %br
+      415-234-3464

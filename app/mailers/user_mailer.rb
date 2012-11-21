@@ -89,12 +89,12 @@ class UserMailer < ApplicationMailer
   
   def client_welcome_email(client)
     @client = client
-    mail(:to => client.email, :subject => "Welcome to Lawdingo!")
+    mail(:to => client.email, :subject => "Welcome to Lawdingo", :from => "\"Lawdingo\" <info@lawdingo.com>")
   end
   
   def lawyer_welcome_email(lawyer)
     @lawyer = lawyer
-    mail(:to => lawyer.email, :subject => "Welcome to Lawdingo!")
+    mail(:to => lawyer.email, :subject => "Welcome to Lawdingo")
   end
 
 end
