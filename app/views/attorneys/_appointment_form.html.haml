@@ -64,6 +64,6 @@
     %p
       %label Your phone number (required):
       = text_field :appointment, :contact_number, :value => current_user.try(:phone), :required => :required, :placeholder => "phone number"
-    = submit_tag("Book Appointment", :class => "button submit_appointment_button")
+    = submit_tag(current_user.try(:stripe_customer_token).present? ? "Book Appointment" : "Continue...", :class => "button submit_appointment_button")
     %br/
     %span.fine-print.red#appointment_warning
