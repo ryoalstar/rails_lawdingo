@@ -3,15 +3,15 @@
 .left_menu.same_height
   %h2= link_to "Connect with clients", lawyer_inquiries_path(lawyer, :t => User::INQUIRIES_TAB)
   %ul
-    %li.acc_info
-      %span= link_to "Client Inquiries", lawyer_inquiries_path(lawyer, :t => User::INQUIRIES_TAB)
+    %li.acc_inquiries
+      %span= link_to "Client Inquiries (" + lawyer.matching_questions.length.to_s + ')' , lawyer_inquiries_path(lawyer, :t => User::INQUIRIES_TAB)
   %h2= link_to_unless (controller.controller_name == 'daily_hours' || controller.controller_name == 'offerings' || controller.controller_name == 'videos' || controller.controller_name == 'lawyers'), "Profile info", user_path(lawyer, :t => User::ACCOUNT_TAB)
   %ul
     %li.acc_info
       %span= link_to "Account information", user_path(lawyer, :t => User::ACCOUNT_TAB)
     %li.price_offers
-      %span= link_to "Fixed-price offers", user_offerings_path(lawyer), :class => (act == :index && contr == :offerings) ? 'active' : ''
-    %li.availability
+      %span= link_to "Flat-free services", user_offerings_path(lawyer), :class => (act == :index && contr == :offerings) ? 'active' : ''
+    %li.availability_li
       %span= link_to "Set availability", user_daily_hours_path(lawyer), :class => (act == :index && contr == :daily_hours) ? 'active' : ''
     %li.video
       %span= link_to "Intro video", framey_videos_path, :class => (act == :index && contr == :'videos') ? 'active' : ''

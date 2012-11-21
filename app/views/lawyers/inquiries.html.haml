@@ -4,16 +4,23 @@
       = render(:partial =>  "lawyer/menu", :locals => {:lawyer => @lawyer})
       .profile_wrapper.same_height
         .profile_availability
+          .title
+            Client Inquiries
+            
           = render  partial: '/users/iphone_handle', locals: {:lawyer => @lawyer}
           .clear
         #inquiries_wrap.profile-block.same_height.edit_lawyer
-          %h1 Client Inquiries
-          %br
           %h2 Inquiries related to your practice area and bar memberships:
           %br
           %br
-          - if !@questions.nil?
-            - @questions.each do |question|
-              %p.question_desc
-                = link_to question.body, lawyer_answer_path(current_user, :question_id=>question.id)
-          
+          %table.inquiries_list
+            %tbody
+              - if !@questions.nil?
+                - @questions.each do |question|
+                  %tr
+                    %td.arrow_col
+                      .arrow
+                    %td
+                      %p.question_desc
+                        = link_to question.body, lawyer_answer_path(current_user, :question_id=>question.id)
+                  

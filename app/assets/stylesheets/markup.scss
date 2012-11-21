@@ -11,9 +11,16 @@
     .profile_availability{
       padding-left: 45px;
       padding-top: 25px;
-      padding-bottom: 18px;
+      padding-bottom: 35px;
       height: 40px;
       border-bottom: 1px solid #e8e8e8;
+      
+      .title{
+        float: left;
+        font-size: 23px;
+        font-weight: bold;
+        margin-top: 17px;
+      }
     }
     
   }
@@ -81,12 +88,18 @@
           background-position:14px 7px; 
         }
       }
+      li.acc_inquiries{
+        a{
+          background-image:image-url('acc_questions_icon.png');
+          background-position:10px 5px; 
+        }
+      }
       li.price_offers{
         a{
           background-image:image-url('offers_icon.png');
         }
       }
-      li.availability{
+      li.availability_li{
         a{
           background-image:image-url('availability_icon.png');
           background-position:14px 7px;
@@ -1196,17 +1209,18 @@ h3.question_label label{
 
 .profile .availability
 {
-  width: 680px;
+  width: 400px;
+  float: right;
   .by_video, .by_phone{
-    width: 295px;
+    width: 172px;
     float: left;
     padding-right: 10px;
     label{
       color: #ccc;
       margin-right:10px;
       font-size:13px;
-      margin-top: 5px;
       display: inline-block;
+      margin-bottom: 10px;
     }
   }
   .by_phone{
@@ -1214,9 +1228,7 @@ h3.question_label label{
     margin-bottom: 20px;
   }
 
-  .iPhoneCheckContainer{
-    float: right;
-  }
+ 
 }
 
 
