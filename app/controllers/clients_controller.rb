@@ -43,7 +43,7 @@ class ClientsController < ApplicationController
       return redirect_to(session.delete(:return_to))
     end
     # default to redirecting to lawyers path
-    return redirect_to(lawyers_path)
+    return redirect_to lawyers_path, :notice => 'Thanks for joining Lawdingo. Please find an appropriate attorney with whom to consult below.'
   end
 
 end
