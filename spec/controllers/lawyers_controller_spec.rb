@@ -2,12 +2,11 @@ require 'spec_helper'
 
 
 describe LawyersController do 
-
   
   context "POST #create" do
 
     it "should send a signup notification" do
-      Lawyer.any_instance.stubs(:save => true, :id => 132)
+      Lawyer.any_instance.stubs(:save => true)
       UserMailer.expects(:notify_lawyer_application)
         .with(instance_of(Lawyer))
         .returns(stub(:deliver => true))
@@ -23,13 +22,13 @@ describe LawyersController do
       assigns[:current_user].should be_instance_of(Lawyer)
     end
 
-    it "should redirect to the subscription path by default" do
-      Lawyer.any_instance.stubs(:save => true, :id => 132)
-      post(:create)
-      response.should redirect_to(new_stripe_path)
+    it "should redirect to the pricing page by default" do
+      Lawyer.any_instance.stubs(:save => true)
+      post :create
+      response.should render_template(:pricing)
     end
 
   end
 
-
 end
+

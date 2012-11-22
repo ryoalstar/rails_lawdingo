@@ -1,7 +1,9 @@
 class LawyersController < ApplicationController
   
   before_filter :logout_user, :only => [:new, :create], :if => :logged_in?
-
+  before_filter :authenticate, :only => [:pricing, :update]
+  before_filter :only_lawyer, :only => [:pricing, :update]
+  
   def index
     @users  = Lawyer.non_directory.reverse_order
   end
@@ -22,8 +24,7 @@ class LawyersController < ApplicationController
       self.log_in_user!(@lawyer)
       # deliver our signup notification
       UserMailer.notify_lawyer_application(@lawyer).deliver
-      # redirect to the subscription
-      return redirect_to(new_stripe_path)
+      return render(:action => :pricing)
     else
       return render(:action => :new)
     end
@@ -62,10 +63,6 @@ class LawyersController < ApplicationController
       format.json { render json: {:practice_areas => @lawyer.practice_areas.to_a}, status: :ok }
     end
   end
-  
-  
-  
-
   
   private
   def i_want_claim
@@ -106,7 +103,7 @@ class LawyersController < ApplicationController
     else
       @states = State.all
     end
-  end 
+  end
 
   
 end

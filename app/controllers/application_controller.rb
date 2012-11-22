@@ -143,5 +143,13 @@ class ApplicationController < ActionController::Base
       @auto_detected_state = State.find_by_abbreviation(request.location.state_code)
     end
   end
+  
+  def only_client
+    redirect lawyers_path, :notice => "This page only for Client" unless current_user.try(:is_client?)
+  end
+  
+  def only_lawyer
+    redirect lawyers_path, :notice => "This page only for Lawyer!" unless current_user.try(:is_lawyer?)
+  end
 
 end
