@@ -97,7 +97,8 @@ body.clients.new #page.apply-form-wrapper div.outer{
           input[type="text"].name{
             width: 204px;
           }
-          input[type="text"]#lawyer_phone{
+          input[type="text"]#lawyer_phone,
+          input[type="text"]#client_phone{
             background:url('phone_icon.png') no-repeat 98% center white;
           }
           input[type="text"]#client_last_name{
