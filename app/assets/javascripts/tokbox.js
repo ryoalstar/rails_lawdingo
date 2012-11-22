@@ -176,7 +176,7 @@
 
 
 
-var g_invite_interval = 0;
+window.g_invite_interval = 0;
 var xhr=0;
 function fn_invite_check(){
   if(typeof(fn_play_ring) == "undefined"){
@@ -185,7 +185,9 @@ function fn_invite_check(){
   fn_play_ring();
   if(is_lawyer)return;
   $('#opentok_resume').hide();
-  g_invite_interval = setInterval(function(){
+  
+  
+  invite_checker = function(){
     $('.spinner').hide();
     if(xhr) xhr.abort();
     xhr = $.ajax({
@@ -214,13 +216,17 @@ function fn_invite_check(){
               clearInterval(g_invite_interval);
               alert("Your invitation has been declined.");
             break;
+            
+            break;
           }
         },
         error: function(){
-
+					
         }
     });
-  },3000);
+   }
+  window.g_invite_interval = setInterval(invite_checker, 5000);
+
 
 }
 
@@ -276,11 +282,12 @@ function fn_decline_invite(){
 function fn_open_video_window(){
   $('#opentok_ready').remove();
   $('#video_window').show();
+  $('#tokbox_player').show();
+  
   connect();
 }
 
 
-
-$(function(){
-  fn_invite_check();
-})
+$(window).load(function(){
+	fn_invite_check();
+});
