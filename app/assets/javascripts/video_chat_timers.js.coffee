@@ -12,20 +12,9 @@ videoChatTimers =
     @timeElapsed.set(time: 1000, autostart: false)
     @freeTimeRemaining.set(time: 1000, autostart: false)
     @paidTimeElapsed.set(time: 1000, autostart: false)
-    @chatStatusInspector.set(time: 1000, autostart: true)
+    @chatInspector.set(time: 1000, autostart: true)
 
     ($ ".video-chat-timers").show()
-
-  chatStatusInspector: $.timer ->
-    videoChatTimers.timeElapsed.play()
-
-    if videoChatTimers.startedBilling is false
-      videoChatTimers.freeTimeRemaining.play()
-    else
-      videoChatTimers.freeTimeRemaining.pause()
-      videoChatTimers.paidTimeElapsed.play()
-      ($ "#free_time_remaining_wrapper").hide()
-      ($ "#paid_time_elapsed_wrapper").show()
 
   startBilling: ->
     $.ajax(
@@ -35,6 +24,26 @@ videoChatTimers =
           videoChatTimers.startedBilling = true
           console.log "Billing started for conversation ##{videoChatTimers.conversationId}."
       )
+      
+  chatStatusInspector: $.timer ->
+    videoChatTimers.timeElapsed.play()
+    if videoChatTimers.startedBilling is false
+      videoChatTimers.freeTimeRemaining.play()
+    else
+      videoChatTimers.freeTimeRemaining.pause()
+      videoChatTimers.paidTimeElapsed.play()
+      ($ "#free_time_remaining_wrapper").hide()
+      ($ "#paid_time_elapsed_wrapper").show()
+  chatInspector: $.timer ->
+    videoChatTimers.timeElapsed.play()
+
+    if videoChatTimers.startedBilling is false
+      videoChatTimers.freeTimeRemaining.play()
+    else
+      videoChatTimers.freeTimeRemaining.pause()
+      videoChatTimers.paidTimeElapsed.play()
+      ($ "#free_time_remaining_wrapper").hide()
+      ($ "#paid_time_elapsed_wrapper").show()
 
   timeElapsed: $.timer ->
     ++videoChatTimers.timeElapsedCounter

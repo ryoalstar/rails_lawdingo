@@ -225,7 +225,7 @@ function fn_invite_check(){
         }
     });
    }
-  window.g_invite_interval = setInterval(invite_checker, 5000);
+  window.g_invite_interval = setInterval(invite_checker, 7000);
 
 
 }
@@ -283,7 +283,7 @@ function fn_open_video_window(){
   $('#opentok_ready').remove();
   $('#video_window').show();
   $('#tokbox_player').show();
-  
+  window.videoChatTimers.initialize()
   connect();
 }
 
