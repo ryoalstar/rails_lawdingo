@@ -1183,7 +1183,7 @@ h3.question_label label{
   
   .tooltip.expander
   {
-    display: block;
+    display: block!important;
     opacity:0;
     
     transition-property:opacity;
@@ -1202,6 +1202,7 @@ h3.question_label label{
   .tooltip.expander
   {
     opacity:1;
+    
   }
   
 }
