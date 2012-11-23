@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-
+  before_filter :only_client, :if => :logged_in?
   layout false
   def send_message_to_lawyer
     @lawyer = User.find params[:lawyer_id]

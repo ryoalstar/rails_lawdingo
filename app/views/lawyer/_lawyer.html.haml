@@ -1,4 +1,4 @@
-- cache("lawyer/_lawyer/#{lawyer.id}-#{logged_in?}-#{lawyer.updated_at.to_i}", :expires_in => 1.hour) do
+- cache("lawyer/_lawyer/#{lawyer.id}-#{logged_in?}-#{(logged_in? && current_user.is_lawyer?)}-#{lawyer.updated_at.to_i}", :expires_in => 1.hour) do
   .row.lawyer.parent_container{:id => "lawyer_#{lawyer.id}", "data-lawyer-id" => lawyer.id, "data-lawyer-slug" => lawyer.slug}
     = hidden_field(:current, :lid)
     .left.row_block
@@ -95,13 +95,13 @@
           Available appointments  
         .available-appointments
           = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => lawyer, :ndays=> 2})
-          - if lawyer.time_zone       
-            .times           
+          - if lawyer.time_zone
+            .times
               %span.grey Times in #{lawyer.timezone_abbreviation}
-              = "(#{lawyer.timezone_utc_offset}:00)"            
+              = "(#{lawyer.timezone_utc_offset}:00)"
           .clear
         .view_all_wrapper
-          %a.appt-select.appointments{:href => '#'}
+          %a.appointments{:href => 'javascript:void(0)', :class => (logged_in? && current_user.is_lawyer?) ? 'only_for_client' : 'appt-select'}
             View All Appointments
       - else
         .no_appointments

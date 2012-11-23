@@ -76,6 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logout_user
+    return false unless current_user.present?
     current_user.update_attributes(:is_online => false, :is_busy =>false, :peer_id =>'0', :last_online => Time.now)
     session[:user_id] = nil
   end
@@ -145,11 +146,11 @@ class ApplicationController < ActionController::Base
   end
   
   def only_client
-    redirect lawyers_path, :notice => "This page only for Client" unless current_user.try(:is_client?)
+    redirect_to lawyers_path, :notice => "This page only for Client" unless current_user.try(:is_client?)
   end
   
   def only_lawyer
-    redirect lawyers_path, :notice => "This page only for Lawyer!" unless current_user.try(:is_lawyer?)
+    redirect_to lawyers_path, :notice => "This page only for Lawyer!" unless current_user.try(:is_lawyer?)
   end
 
 end

@@ -217,6 +217,12 @@ class AppointmentForm
             this.show_success(data.appointment)
           else
             window.location.href = "/attorneys/#{lawyer_id}/call-payment/appointment"
+        200 : (data, status, xhr)=>
+          alert "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
+          $('.dialog-close').click();
+        302 : (data, status, xhr)=>
+          alert "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
+          $('.dialog-close').click();
         422 : (xhr, status, text)=>
           this.show_error(JSON.parse(xhr.responseText).appointment.errors)
           true

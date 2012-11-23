@@ -1,6 +1,6 @@
 class PasswordResetsController < ApplicationController
-  def new
-  end
+  
+  before_filter :logout_user, :only => :new
 
   def create
     begin
@@ -10,9 +10,9 @@ class PasswordResetsController < ApplicationController
     end
     if user
       user.send_password_reset
-      redirect_to root_url(reset_email_notice: true)
+      redirect_to login_path, :notice => "Thanks - please check your email for instructions on resetting your password."
     else
-      redirect_to new_password_reset_path(reset_email_notice: true)
+      redirect_to new_password_reset_path, :notice => "Hmm.. it doesn't look like there's an account with that email."
     end
   end
 
@@ -21,16 +21,15 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-  @user = User.find_by_password_reset_token!(params[:id])
-  if @user.password_reset_sent_at < 30.minutes.ago
-    redirect_to new_password_reset_path, :alert => "Password reset has expired."
-  elsif @user.update_attributes(params[:user])
-    redirect_to root_url, :notice => "Password has been reset."
-  else
-    render :edit
+    @user = User.find_by_password_reset_token!(params[:id])
+    if @user.password_reset_sent_at < 30.minutes.ago
+      redirect_to new_password_reset_path, :alert => "Password reset has expired."
+    elsif @user.update_attributes(params[:user])
+      redirect_to login_path, :notice => "Password has been reset."
+    else
+      render :edit
+    end
   end
-end
-
 
 end
 

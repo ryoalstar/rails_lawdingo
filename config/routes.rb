@@ -1,8 +1,6 @@
 Lawdingo::Application.routes.draw do
-  match 'sitemap.xml' => 'sitemaps#sitemap'
-
+  
   resources :appointments, :only => [:create]
-
   resources :clients, :only => [:new, :create] do
     post '/new', :on => :collection
   end
@@ -158,7 +156,7 @@ Lawdingo::Application.routes.draw do
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page  
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
-  match '/details' => 'users#payment_info', :as => :card_detail
+  # match '/details' => 'users#payment_info', :as => :card_detail
   match '/welcome' => 'users#welcome_lawyer', :as => :welcome
   match '/Register' => 'users#register_for_videochat', :as => :register_videochat
   match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
@@ -166,12 +164,12 @@ Lawdingo::Application.routes.draw do
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
   match '/twilio/phonecall' => 'users#start_phone_call', :as => :phonecall
   match '/twilio/createcall' => 'users#create_phone_call', :as => :create_call
-  match '/twilio/endcall' => 'users#end_phone_call', :as => :endcall
-  match '/search' => 'users#search'
-  match '/search/populate_specialities' => 'search#populate_specialities'
+  # match '/twilio/endcall' => 'users#end_phone_call', :as => :endcall
+  # match '/search' => 'users#search'
+  # match '/search/populate_specialities' => 'search#populate_specialities'
   # Temporary route for the next home page
-  match '/search/populate_specialities_next' => 'search#populate_specialities_next'
-  match '/search/filter_results' => 'search#filter_results'
+  #match '/search/populate_specialities_next' => 'search#populate_specialities_next'
+  #match '/search/filter_results' => 'search#filter_results'
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
   match '/CheckCallStatus' => 'users#check_call_status'
@@ -193,14 +191,13 @@ Lawdingo::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
-  #root :to => 'users#home'
 
   match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
   match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }
   match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
-  match '/learnmore' => 'users#learnmore'
+  # match '/learnmore' => 'users#learnmore'
 
   root :to => 'users#landing_page'
 

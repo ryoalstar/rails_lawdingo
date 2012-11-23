@@ -6,7 +6,7 @@ describe QuestionsController do
   context "on asking a question" do
     context "when user is signed in" do
       before :each do
-        @brian = FactoryGirl.create(:user, email: "brian@lawdingo.com")
+        @brian = FactoryGirl.create(:client, email: "brian@lawdingo.com")
         session[:user_id] = @brian.to_param
       end
 

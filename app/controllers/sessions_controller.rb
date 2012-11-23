@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  before_filter :logout_user, :only => [:new, :destroy]
   def new
     # Empy return_to if user came from homepage
     session[:return_to] = nil if request.referer == root_url
@@ -80,10 +80,8 @@ class SessionsController < ApplicationController
     end
   end
 
-
   def destroy
     begin
-      logout_user
       redirect_to root_path #, :notice => "You successfully logged out"
     rescue
       redirect_to root_path

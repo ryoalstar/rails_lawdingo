@@ -3,6 +3,7 @@ class LawyersController < ApplicationController
   before_filter :logout_user, :only => [:new, :create], :if => :logged_in?
   before_filter :authenticate, :only => [:pricing, :update]
   before_filter :only_lawyer, :only => [:pricing, :update]
+  before_filter :logout_user, :only => :new
   
   def index
     @users  = Lawyer.non_directory.reverse_order

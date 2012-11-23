@@ -94,7 +94,7 @@ jQuery ->
     $("#new_question").resetClientSideValidations()
     tabId = $(this).attr("data-target")
     tabContent = $("#" + tabId)
-    tabContent.show()
+    tabContent.show().removeClass('hidden')
     $(this).addClass "selected"
     $(this).siblings().removeClass "selected"
     tabContent.siblings().hide()

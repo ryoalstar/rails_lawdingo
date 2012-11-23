@@ -130,10 +130,10 @@
                   = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => @attorney, :ndays=> 4})                      
                   .clear
               .appointments
-                %a.appt-select{:href => '#'}
+                %a{:href => '#', :class => (logged_in? && current_user.is_lawyer?) ? 'only_for_client' : 'appt-select'}
                   See All Appointments
-                  - if @attorney.time_zone       
-                    .times           
+                  - if @attorney.time_zone
+                    .times
                       %span.grey Times in #{@attorney.timezone_abbreviation}
                       = "(#{@attorney.timezone_utc_offset}:00)"  
               - # important this is outside the .right because otherwise listeners are applied
