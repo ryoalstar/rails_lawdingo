@@ -113,17 +113,22 @@ body.lawyers.new{
     margin-left: -40px;
     margin-bottom: 30px;
     border: 0;
-    border-spacing:0;
+    border-spacing:1px;
     border-collapse:collapse;
     tr{
       height: 45px;
       line-height: 45px;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
     }
     tr:hover{
       background-color: #f4f5f7;
-      border-top: 1px solid #B8B8B8;
-      border-bottom: 1px solid #B8B8B8;
+      
       td{
+        border-top: 1px solid #B8B8B8 !important;
+        border-bottom: 1px solid #B8B8B8 !important;
+      }
+      td.arrow_col{
         border: none;
       }
       .arrow{

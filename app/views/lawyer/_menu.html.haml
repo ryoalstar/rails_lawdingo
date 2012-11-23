@@ -10,7 +10,7 @@
     %li.acc_info
       %span= link_to "Account information", user_path(lawyer, :t => User::ACCOUNT_TAB)
     %li.price_offers
-      %span= link_to "Flat-free services", user_offerings_path(lawyer), :class => (act == :index && contr == :offerings) ? 'active' : ''
+      %span= link_to "Flat-fee services", user_offerings_path(lawyer), :class => (act == :index && contr == :offerings) ? 'active' : ''
     %li.availability_li
       %span= link_to "Set availability", user_daily_hours_path(lawyer), :class => (act == :index && contr == :daily_hours) ? 'active' : ''
     %li.video
