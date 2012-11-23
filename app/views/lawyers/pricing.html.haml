@@ -28,7 +28,9 @@
                 %li Get an unlisted profile that you can use for your own marketing purposes.
               %ul
                 %li Get notified of inquiries relevant to you (only paying members can answer though)
-            %a.select-account-type{:href => lawyers_path} Create Free Profile
+            = form_tag user_offerings_path(current_user), :method => :get do
+              = hidden_field_tag :notice, 'All set!...'
+              = submit_tag 'Create Free Profile', :class => 'select-account-type'
         .account-type-wrapper
           .left-border
           .account-type

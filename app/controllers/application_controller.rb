@@ -152,5 +152,10 @@ class ApplicationController < ActionController::Base
   def only_lawyer
     redirect_to lawyers_path, :notice => "This page only for Lawyer!" unless current_user.try(:is_lawyer?)
   end
+  
+  def check_for_notices
+    flash[:notice] = params[:notice] if params[:notice]
+    flash[:alert] = params[:alert] if params[:alert]
+  end
 
 end

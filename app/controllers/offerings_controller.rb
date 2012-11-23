@@ -1,6 +1,6 @@
 class OfferingsController < ApplicationController
   before_filter :ensure_self_account, only: :index
-
+  before_filter :check_for_notices, only: :index
   def index
     @lawyer = @user = User.find(params[:user_id])
     @offering = @lawyer.offerings.new

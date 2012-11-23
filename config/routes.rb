@@ -16,6 +16,7 @@ Lawdingo::Application.routes.draw do
       get :practice_areas
     end
     resources :questions, :only=>[:index]
+    # get :pricing, :on => :collection
   end
   
   resources :questions, :only=>[:show] do

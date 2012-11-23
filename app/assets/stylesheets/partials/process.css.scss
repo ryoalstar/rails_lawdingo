@@ -750,6 +750,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
           background: -ms-linear-gradient(top,  #58a1e2 0%,#4989d9 100%); /* IE10+ */
           background: linear-gradient(to bottom,  #58a1e2 0%,#4989d9 100%); /* W3C */
           filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#58a1e2', endColorstr='#4989d9',GradientType=0 ); /* IE6-8 */ 
+          cursor: pointer;
         }
         .select-account-type:hover{
           background: #61abe5; /* Old browsers */
