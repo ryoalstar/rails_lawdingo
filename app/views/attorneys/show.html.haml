@@ -215,7 +215,7 @@
   
   = hidden_field_tag :lawyer_id, @attorney.id, :class => :current_selected_lawyer
   = render '/messages/dialog_window'
-  
+  = render '/shared/state_and_practice_area_validation_dialog_window'
 
 :javascript
   $(".person_info .rating").raty({

@@ -270,9 +270,9 @@ end
       if logged_in? && current_user.is_lawyer?
         link_to "Chat now by video conference", "javascript:void(0)", :class => :only_for_client, :title => "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
       elsif logged_in?
-        link_to "Chat now by video conference", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => ''
+        link_to "Chat now by video conference", user_chat_session_path(lawyer), :title => "Chat now by video conference", :class => "state-and-practice-area-validation-dialog-opener"
       else
-        link_to "Chat now by video conference", new_client_path(notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => ''
+        link_to "Chat now by video conference", new_client_path(notice: true, return_path: user_chat_session_path(lawyer)), :title => "Chat now by video conference", :class => "state-and-practice-area-validation-dialog-opener"
       end
     end
   end
@@ -294,9 +294,9 @@ end
       if logged_in? && current_user.is_lawyer?
         link_to "Start a video consultation", "javascript:void(0)", :class => :only_for_client, :title => "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
       elsif logged_in?
-        link_to "Start a video consultation", user_chat_session_path(lawyer), :class => ''
+        link_to "Start a video consultation", user_chat_session_path(lawyer), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
       else
-        link_to "Start a video consultation", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
+        link_to "Start a video consultation", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
       end
     end
   end
@@ -306,9 +306,9 @@ end
       if logged_in? && current_user.is_lawyer?
         link_to "Start free video consultation", "javascript:void(0)", :class => :only_for_client, :title => "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
       elsif logged_in?
-        link_to "Start free video consultation", user_chat_session_path(lawyer), :class => ''
+        link_to "Start free video consultation", user_chat_session_path(lawyer), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
       else
-        link_to "Start free video consultation", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :class => ''
+        link_to "Start free video consultation", new_client_path(notice: true, return_path: user_chat_session_path(lawyer), lawyer_path: lawyer.id), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
       end
     end
   end
@@ -317,9 +317,9 @@ end
     if logged_in? && current_user.is_lawyer?
       link_to "Start phone consultation", "javascript:void(0)", :class => :only_for_client, :title => "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
     elsif logged_in?
-      link_to "Start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+      link_to "Start phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
     else
-      link_to 'Start phone consultation', new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
+      link_to 'Start phone consultation', new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
     end
   end
 
@@ -337,9 +337,9 @@ end
     if logged_in? && current_user.is_lawyer?
       link_to "Start free phone consultation", "javascript:void(0)", :class => :only_for_client, :title => "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
     elsif logged_in?
-      link_to "Start free phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
+      link_to "Start free phone consultation", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
     else
-      link_to "Start free phone consultation", new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ""
+      link_to "Start free phone consultation", new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "state-and-practice-area-validation-dialog-opener"
     end
   end
 
