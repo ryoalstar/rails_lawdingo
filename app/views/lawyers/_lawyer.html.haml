@@ -1,4 +1,4 @@
-- cache("lawyer/_lawyer/#{lawyer.id}-#{logged_in?}-#{(logged_in? && current_user.is_lawyer?)}-#{lawyer.updated_at.to_i}", :expires_in => 1.hour) do
+- cache("lawyers/_lawyer/#{lawyer.id}-#{logged_in?}-#{(logged_in? && current_user.is_lawyer?)}-#{lawyer.updated_at.to_i}", :expires_in => 1.hour) do
   .row.lawyer.parent_container{:id => "lawyer_#{lawyer.id}", "data-lawyer-id" => lawyer.id, "data-lawyer-slug" => lawyer.slug}
     = hidden_field(:current, :lid)
     .left.row_block
@@ -10,24 +10,24 @@
             = image_tag lawyer.yelp[:rating_img_url]
             .clear
           .yelp_reviews
-            %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
+            %a{:href => lawyer_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
               = content_tag :span, pluralize(lawyer.yelp[:review_count], "#{link_to image_tag('miniMapLogo.png'), 'http://www.yelp.com', :rel => :nofollow}" + "review").html_safe, class: ""
         - else
           .stars
             - if lawyer.reviews.average(:rating).to_i > 0
-              = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
-          %a{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
+              = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), lawyer_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+          %a{:href => lawyer_path(lawyer, slug: lawyer.slug, anchor: "reviews")} 
             = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
-      =link_to attorney_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
+      =link_to lawyer_path(lawyer, slug: lawyer.slug), :target=>"_blank" do
         .view_profile_wrapper
           .view_profile_button.hidden
             View Profile
       .clear
     
     .middle.row_block
-      %h1= link_to_unless_current "#{lawyer.full_name}", attorney_path(lawyer, slug: lawyer.slug)
+      %h1= link_to_unless_current "#{lawyer.full_name}", lawyer_path(lawyer, slug: lawyer.slug)
       .online_icons
-        = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
+        = render(:partial => "lawyers/online_icons", :locals => {:lawyer => lawyer})
       
       .clear
       .description
@@ -59,7 +59,7 @@
             - if lawyer.offerings.count > 0
               %li.offerings_item
                 Offers
-                %a.offerings{:href => attorney_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee #{pluralize(lawyer.offerings.count, 'service').split(" ", 2)[1]}
+                %a.offerings{:href => lawyer_path(lawyer, slug: lawyer.slug, anchor: "flat-fee")} #{lawyer.offerings.count} flat-fee #{pluralize(lawyer.offerings.count, 'service').split(" ", 2)[1]}
                 .offerings_wrapper
                   %table
                     - lawyer.offerings.each do |offering|
@@ -82,7 +82,7 @@
                   %p= start_or_schedule_button(lawyer)
         .clear
         .free_section_container
-          = render(:partial => "lawyer/talk_button", :locals => {:lawyer => lawyer})
+          = render(:partial => "lawyers/talk_button", :locals => {:lawyer => lawyer})
           .free_button_explanation
             %p.free_bold= free_message(lawyer)
             = free_message_then lawyer
@@ -94,7 +94,7 @@
         .appointments_title
           Available appointments  
         .available-appointments
-          = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => lawyer, :ndays=> 2})
+          = render(:partial => "lawyers/lawyer_appointments", :locals => {:lawyer => lawyer, :ndays=> 2})
           - if lawyer.time_zone
             .times
               %span.grey Times in #{lawyer.timezone_abbreviation}
@@ -111,7 +111,7 @@
   
       - # content for the modal dialog we are going to display
       %div{:style => "display:none;"}
-        = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})
+        = render(:partial => "/lawyers/appointment_form", :locals => {:lawyer => lawyer})
   
   :javascript
     $(".row .rating").raty({

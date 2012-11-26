@@ -171,8 +171,8 @@ module LawyersHelper
           if current_user.stripe_customer_token.present?
             link_to "Chat now by phone", phonecall_path(:id => lawyer.id), :id => "start_phone_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => ""
           else
-          # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :attorneyid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
-            link_to "Chat now by phone", call_payment_path(lawyer.id), :id => "start_phone_session_button", :class => ""
+          # link_to "start phone consultation", "#paid_schedule_session", :id => "start_phone_session_button", :data => { :lawyerid => lawyer.id, :fcd => lawyer.free_consultation_duration, :lrate => lawyer.rate, :fullname => lawyer.first_name },:class => "dialog-opener "
+            link_to "Chat now by phone", call_payment_lawyer_path(lawyer.id), :id => "start_phone_session_button", :class => ""
           end
         else
           link_to 'Start phone consultation', new_client_path(notice: true, return_path: phonecall_path(:id => lawyer.id), lawyer_path: lawyer.id), :class => ''
@@ -196,7 +196,7 @@ def ask_question_button(lawyer)
 if logged_in?
 link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
 else
-link_to "", new_client_path(question_notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+link_to "", new_client_path(question_notice: true, return_path: lawyer_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
 end
 end
 
@@ -204,7 +204,7 @@ def ask_question_button_text(lawyer)
 if logged_in?
 link_to "Ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
 else
-link_to "Ask a question", new_client_path(question_notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+link_to "Ask a question", new_client_path(question_notice: true, return_path: lawyer_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
 end
 end
 
@@ -212,7 +212,7 @@ def schedule_consultation_button(lawyer)
 if logged_in?
 link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
 else
-link_to "", new_client_path(notice: true, appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
+link_to "", new_client_path(notice: true, appointment_with:lawyer.id,  return_path: lawyer_path(lawyer, slug: lawyer.slug)), :class => ''
 end
 end
 =end
@@ -223,7 +223,7 @@ end
     elsif logged_in?
       link_to "Book appointment", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
-      link_to "Book appointment", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
+      link_to "Book appointment", new_client_path(appointment_with:lawyer.id,  return_path: lawyer_path(lawyer, slug: lawyer.slug)), :class => ''
     end
   end
 
@@ -232,7 +232,7 @@ def start_or_schedule_button_text(lawyer)
 if logged_in?
 link_to "Send a note or ask a question", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
 else
-link_to "Send a note or ask a question", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+link_to "Send a note or ask a question", new_client_path(notice: true, return_path: lawyer_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
 end
 end
 
@@ -241,7 +241,7 @@ def start_or_schedule_button_text_profile(lawyer)
 if logged_in?
 link_to "", "#schedule_session", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "dialog-opener "
 else
-link_to "", new_client_path(notice: true, return_path: attorney_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
+link_to "", new_client_path(notice: true, return_path: lawyer_path(lawyer, slug: lawyer.slug), lawyer_path: lawyer.id), :class => ''
 end
 end
 =end
@@ -251,7 +251,7 @@ end
     elsif logged_in?
       link_to "", "#", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
-      link_to "", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
+      link_to "", new_client_path(appointment_with:lawyer.id,  return_path: lawyer_path(lawyer, slug: lawyer.slug)), :class => ''
     end
   end
 
@@ -261,7 +261,7 @@ end
     elsif logged_in?
       link_to "Book appointment", "#", :id => "schedule_session_button", :data => { :l_id => lawyer.id, :fullname => lawyer.first_name }, :class => "appt-select"
     else
-      link_to "Book appointment", new_client_path(appointment_with:lawyer.id,  return_path: attorney_path(lawyer, slug: lawyer.slug)), :class => ''
+      link_to "Book appointment", new_client_path(appointment_with:lawyer.id,  return_path: lawyer_path(lawyer, slug: lawyer.slug)), :class => ''
     end
   end
 
@@ -435,6 +435,20 @@ end
 
   def lawyer_rate(lawyer)
     number_to_currency("#{lawyer.rate + AppParameter.service_charge_value}") + "/minute"
+  end
+  
+  def yelp_review_posted_by(review)
+    user_id = review["user"]["id"]
+    user_name = review["user"]["name"]
+
+    link_to_user = link_to user_name, "http://www.yelp.com/user_details?userid=#{user_id}", :rel => :nofollow
+    link_to_yelp = link_to "Yelp.com", "http://www.yelp.com", :rel => :nofollow
+
+    "Posted by #{link_to_user} on #{link_to_yelp}".html_safe
+  end
+
+  def yelp_review_excerpt(review, lawyer)
+    "#{review["excerpt"]} #{link_to "read more", "http://www.yelp.com/biz/#{lawyer.yelp_business_id}#hrid:#{review["id"]}", :rel => :nofollow}".html_safe
   end
 end
 

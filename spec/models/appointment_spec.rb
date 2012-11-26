@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Appointment do
 
-  context "#attorney_name" do
+  context "#lawyer_name" do
 
-    it "should delegate the call to the attorney's full name" do
+    it "should delegate the call to the lawyer's full name" do
       lawyer = Lawyer.new
       lawyer.stubs(:full_name => "Dan Langevin")
 
       subject.stubs(:lawyer => lawyer)
-      subject.attorney_name.should eql("Dan Langevin")
+      subject.lawyer_name.should eql("Dan Langevin")
     end
 
   end

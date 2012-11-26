@@ -1,10 +1,10 @@
 #inline-wrapper
   .main_content
     #results.results
-      = content_tag :h1, "Start a call with #{@attorney.full_name}"
-      = render partial: "lawyer/lawyer", locals: { lawyer: @attorney }
+      = content_tag :h1, "Start a call with #{@lawyer.full_name}"
+      = render partial: "lawyers/lawyer", locals: { lawyer: @lawyer }
       .payment-details
-        = content_tag :h2, "Talking to #{@attorney.full_name} is completely free for the first #{@attorney.free_consultation_duration} minutes."
+        = content_tag :h2, "Talking to #{@lawyer.full_name} is completely free for the first #{@lawyer.free_consultation_duration} minutes."
         %p To start the call, though, you do need to have payment info on file in case the call goes longer.
         .error_explanation
           %ul.errors
@@ -17,7 +17,7 @@
             = render "godaddy_seal"
           = hidden_field_tag :stripe_card_token
           = hidden_field_tag :form_type, "ajax"
-          = hidden_field_tag :attorney_id, @attorney.id
+          = hidden_field_tag :lawyer_id, @lawyer.id
           %div{:style => "margin-bottom: 0.75em;"}
             %label{:for => "card_number"} Credit card number:
             %input#card_detail_card_number{:autocomplete => "off", :maxlength => "26", :name => "card_number", :placeholder => "Credit card number", :size => "26", :type => "text"}

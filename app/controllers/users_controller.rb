@@ -367,8 +367,8 @@ class UsersController < ApplicationController
     @status = true
    end
 
-   unless params[:attorney_id].blank?
-     #render :js => "window.location = '#{phonecall_path(:id => params[:attorney_id])}'" and return
+   unless params[:lawyer_id].blank?
+     #render :js => "window.location = '#{phonecall_path(:id => params[:lawyer_id])}'" and return
      @phone_call_payment_status = true
    else
     @err_msg = ''
@@ -397,7 +397,7 @@ class UsersController < ApplicationController
   def start_phone_call
     @lawyer = Lawyer.find(params[:id]) if params[:id].present?
 
-    redirect_to call_payment_path(@lawyer.id, :return_path=>phonecall_path(:id => params[:id]) ) unless current_user.stripe_customer_token.present?
+    redirect_to call_payment_lawyer_path(@lawyer.id, :return_path=>phonecall_path(:id => params[:id]) ) unless current_user.stripe_customer_token.present?
   end
 
   def create_phone_call
@@ -476,7 +476,7 @@ class UsersController < ApplicationController
     @lawyer = Lawyer.find(params[:user_id])
 
     unless current_user.stripe_customer_token.present?
-      redirect_to call_payment_path(@lawyer.id, type: "video-chat")
+      redirect_to call_payment_lawyer_path(@lawyer.id, type: "video-chat")
       return
     end
     
@@ -720,7 +720,7 @@ class UsersController < ApplicationController
 
   def check_payment_info
     unless current_user.stripe_customer_token.present?
-     redirect_to call_payment_path(params[:id]) and return
+     redirect_to call_payment_lawyer_path(params[:id]) and return
     end
   end
 

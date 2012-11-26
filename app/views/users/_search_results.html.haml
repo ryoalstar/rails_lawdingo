@@ -8,8 +8,7 @@
       %a{:href => "javascript:void(0)", "data-page" => @results.next_page} Show More Services
 
 - else
-  - @lawyers.each do |lawyer|
-    = render :partial =>'/lawyer/lawyer', :locals=>{:lawyer =>lawyer}
+  = render @lawyers
 
   - unless @results.last_page?
     %div.load-more

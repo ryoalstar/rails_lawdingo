@@ -1,6 +1,6 @@
 %p
   Hello, #{@appointment.client_name}, you have scheduled a
-  consultation with #{@appointment.attorney_name} at #{@appointment.time}.
+  consultation with #{@appointment.lawyer_name} at #{@appointment.time}.
 
 - if @appointment.message.present?
   %p You would like to discuss the following:
@@ -23,9 +23,9 @@
   phone, so keep your phone handy.
 
 - if @appointment.lawyer.try(:phone).present?
-  %p To confirm or reschedule, you can contact #{@appointment.attorney_name} by email at #{@appointment.lawyer.try(:email)} or by phone at #{@appointment.lawyer.try(:phone)}.
+  %p To confirm or reschedule, you can contact #{@appointment.lawyer_name} by email at #{@appointment.lawyer.try(:email)} or by phone at #{@appointment.lawyer.try(:phone)}.
 - else 
-  %p To confirm or reschedule, you can contact #{@appointment.attorney_name} by email at #{@appointment.lawyer.try(:email)}.
+  %p To confirm or reschedule, you can contact #{@appointment.lawyer_name} by email at #{@appointment.lawyer.try(:email)}.
 
 %p
   Remember that, per your settings, the first

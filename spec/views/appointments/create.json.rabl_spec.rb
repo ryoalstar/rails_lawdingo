@@ -9,7 +9,7 @@ describe "/appointments/create" do
   let(:appointment) do
     Appointment.new.tap do |a| 
       a.stubs({
-        :attorney_name => "Dan Langevin",
+        :lawyer_name => "Dan Langevin",
         :contact_number => "2035544552"
       })
     end
@@ -18,7 +18,7 @@ describe "/appointments/create" do
   it "should render the appropriate fields of the appointment" do
     render
     json = JSON.parse(rendered)
-    %w{time attorney_name}.each do |field|
+    %w{time lawyer_name}.each do |field|
       json["appointment"].should have_key(field)
     end
   end

@@ -126,7 +126,7 @@ class ApplicationController < ActionController::Base
     message = Message.find(session.delete(:message_id))
     message.update_attribute(:client_id, user.id)
     if message.send!
-      session[:return_to] = attorney_path(message.lawyer, slug: message.lawyer.slug)
+      session[:return_to] = lawyer_path(message.lawyer, slug: message.lawyer.slug)
       flash[:notice] = 'Your message has been sent.' 
     end
   end

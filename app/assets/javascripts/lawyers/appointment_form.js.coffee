@@ -238,7 +238,7 @@ class AppointmentForm
           if @has_payment_info()
             this.show_success(data.appointment)
           else
-            window.location.href = "/attorneys/#{lawyer_id}/call-payment/appointment"
+            window.location.href = "/lawyers/#{lawyer_id}/call-payment/appointment"
         200 : (data, status, xhr)=>
           alert "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
           $('.dialog-close').click();

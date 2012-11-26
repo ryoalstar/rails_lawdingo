@@ -1,4 +1,4 @@
-@import "partials/attorneys/appointment_form";
+@import "partials/lawyers/appointment_form";
 @import "partials/mixins";
 
 
@@ -521,7 +521,7 @@ body.lawyers.inquiries {
     }
 }
 
-body.offerings.show, body.attorneys.call_payment{
+body.offerings.show, body.lawyers.call_payment{
 	.main_content{
 		margin: 0 auto;
 		float:initial !important;
@@ -645,7 +645,7 @@ h3.question_label label{
   }
 }
 
-// This is in the attorneys page
+// This is in the lawyers page
 .left-bars-block{
   float: left;
   width: 245px;

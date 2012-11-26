@@ -6,7 +6,7 @@
         %h1 Directory of Lawyers
         %br
         - @lawyers.each do |lawyer|
-          .item= link_to lawyer.full_name, attorney_path(lawyer, slug:lawyer.slug)
+          .item= link_to lawyer.full_name, lawyer_path(lawyer, :slug => lawyer.slug)
         .clear
         .pager
           .apple_pagination

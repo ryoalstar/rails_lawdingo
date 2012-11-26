@@ -13,8 +13,8 @@
 @import "partials/process";
 @import "partials/questions";
 
-@import "partials/lawyer/lawyer";
-@import "partials/attorneys/appointment_form";
+@import "partials/lawyers/lawyer";
+@import "partials/lawyers/appointment_form";
 
 // ***** Landing page *****
 #top_content_border{
@@ -738,7 +738,7 @@
   }
 }
 
-// Attorneys profile page left bar.
+// Lawyers profile page left bar.
 .lawyer_profile .left-bar
 {
   border: 1px solid #D0D2D5 !important;
@@ -1626,7 +1626,7 @@ body.users.start_phone_call{
 }
 
 
-body.users.home, body.attorneys.show{
+body.users.home, body.lawyers.show{
   .ui-dialog{
     width: 420px !important;
     h2{

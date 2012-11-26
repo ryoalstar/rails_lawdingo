@@ -1,0 +1,7 @@
+@import "../partials/lawyers/appointment_form";
+
+body.lawyers.show {
+  div.appointment-form {
+    @include appointment_form;
+  }
+}

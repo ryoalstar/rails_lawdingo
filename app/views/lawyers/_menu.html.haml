@@ -17,5 +17,5 @@
       %span= link_to "Intro video", framey_videos_path, :class => (act == :index && contr == :'videos') ? 'active' : ''
     - if lawyer.is_approved
       %li.view_profile
-        %span= link_to "View your profile", attorney_path(lawyer, slug: lawyer.slug), :target => 'blank'
+        %span= link_to "View your profile", lawyer_path(lawyer, slug: lawyer.slug), :target => 'blank'
   %h2= link_to_unless_current "Summary of sessions", user_path(lawyer, :t => User::SESSION_TAB)

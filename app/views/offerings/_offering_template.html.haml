@@ -2,7 +2,7 @@
 = hidden_field(:current, :lid)
 .action
   .price
-= link_to_unless_current(image_tag(lawyer.photo_url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))
+= link_to_unless_current(image_tag(lawyer.photo_url(:thumb), class: "hide_on_lawyers"), lawyer_path(lawyer, slug: lawyer.slug))
 .info
   %h3
     = link_to_unless_current "#{offering_template.name}", offering_template
@@ -11,8 +11,8 @@
   -# if offering_template.practice_area.present?
     %p.last
       %strong Practice area: #{offering_template.practice_area.name}
-  %p.hide_on_attorneys
-    Delivered by: #{link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug)}
+  %p.hide_on_lawyers
+    Delivered by: #{link_to lawyer.full_name, lawyer_path(lawyer, slug: lawyer.slug)}
     %span.status= status_message(lawyer)
   -#.action-buttons
     = start_or_schedule_button(lawyer)

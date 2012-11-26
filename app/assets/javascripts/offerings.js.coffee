@@ -90,7 +90,7 @@ class Offering
       else
         path = encodeURI(
           # document.location.pathname + document.location.search
-          "/attorneys/#{@lawyer_id}/#{@slug}"
+          "/lawyers/#{@lawyer_id}/#{@slug}"
         )
         document.location = "/clients/new?appointment_with=#{@lawyer_id}&return_path=#{path}"
       # always return false
