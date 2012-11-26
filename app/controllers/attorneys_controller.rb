@@ -1,6 +1,6 @@
 class AttorneysController < ApplicationController
   before_filter :authenticate, only: :call_payment
-
+  before_filter :auto_detect_state, :only => :show
   def show
     @attorney = LawyerDecorator.new(Lawyer.find(params[:id]))
 
