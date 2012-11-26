@@ -29,7 +29,7 @@
               %ul
                 %li Get notified of inquiries relevant to you (only paying members can answer though)
             = form_tag user_offerings_path(current_user), :method => :get do
-              = hidden_field_tag :notice, 'All set!...'
+              = hidden_field_tag :notice, 'Welcome. For now, go ahead and complete your profile. You\'ll be able to view it once we verify your bar membership.'
               = submit_tag 'Create Free Profile', :class => 'select-account-type'
         .account-type-wrapper
           .left-border
