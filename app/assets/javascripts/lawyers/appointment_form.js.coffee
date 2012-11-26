@@ -19,6 +19,28 @@ class AppointmentForm
       @div.find("a.more").parent().hide()
       @div.find("li.hidden").removeClass('hidden')
       false
+      
+    ($ ".profile_info a.arrows#right_arrow").on 'click', ->
+      if parseInt(($ '.available-appointments').css('left')) < -2900
+        ($ '.profile_info a.arrows#right_arrow').addClass('hidden')
+        
+      if parseInt(($ '.available-appointments').css('left')) < 415
+        ($ '.profile_info a.arrows#left_arrow').removeClass('hidden')
+      
+      ($ '.available-appointments').animate(
+        left: '-=415'
+      , 1000)
+      
+    ($ ".profile_info a.arrows#left_arrow").on 'click', ->
+      if parseInt(($ '.available-appointments').css('left')) > -3400
+        ($ '.profile_info a.arrows#right_arrow').removeClass('hidden')
+        
+      if parseInt(($ '.available-appointments').css('left')) > -450
+        ($ @).addClass('hidden')
+        
+      ($ '.available-appointments').animate(
+        left: '+=415px'
+      , 1000)
 
     radios = @div.find(
       "#appointment_appointment_type_phone, " 

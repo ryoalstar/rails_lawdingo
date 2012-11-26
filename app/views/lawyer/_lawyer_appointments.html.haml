@@ -4,7 +4,7 @@
 - lawyer.next_available_days_usertimezone(ndays).each_with_index do |d, i| 
   %ul
     %li.title
-      %span{:class => "day-#{i}", :data => {:date => d}}
+      %span{:class => "day day-#{i}", :data => {:date => d}}
         - if d === Time.zone.now.to_date
           Today
         - elsif d === Time.zone.now.tomorrow.to_date

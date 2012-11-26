@@ -124,11 +124,16 @@
               -#.left
                 %h2 Ask a question:
                 %textarea{:placeholder => 'Type your question here'}
-                %a{:href => '#'} Ask
+                %a{:href => 'javascript:void(0)'} Ask
               .right
-                %div.available-appointments{:itemprop => :openingHours}
-                  = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => @attorney, :ndays=> 4})                      
-                  .clear
+                %a.arrows#right_arrow{:href => "javascript:void(0);"}
+                  .right_arrow
+                %a.arrows.hidden#left_arrow{:href => "javascript:void(0);"}
+                  .left_arrow
+                .line
+                  .available-appointments{:itemprop => :openingHours}
+                    = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => @attorney, :ndays => 36})                      
+                    .clear
               .appointments
                 %a{:href => '#', :class => (logged_in? && current_user.is_lawyer?) ? 'only_for_client' : 'appt-select'}
                   See All Appointments
