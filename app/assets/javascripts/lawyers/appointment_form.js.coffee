@@ -17,7 +17,7 @@ class AppointmentForm
 
     @div.find("a.more").click (e)=>
       @div.find("a.more").parent().hide()
-      @div.find("li.hidden").show()
+      @div.find("li.hidden").removeClass('hidden')
       false
 
     radios = @div.find(
