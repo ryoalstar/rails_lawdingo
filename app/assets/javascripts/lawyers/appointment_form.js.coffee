@@ -161,16 +161,16 @@ class AppointmentForm
     text = "#{lawyer_name} isn't licensed in #{state_name} and, thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}'>#{state_name} lawyers</a>"
     this.appointment_warning().html(text)
   write_appointment_state_and_practice_area_missing_warning: =>
-    text = "Please, select State and Type of law."
+    text = "Please select state and type of law."
     this.appointment_warning().html(text)
   write_appointment_state_missing_warning: =>
-    text = "Please, select State."
+    text = "Please select state."
     this.appointment_warning().html(text)
   write_appointment_practice_area_missing_warning: =>
-    text = "Please, select Type of law."
+    text = "Please select type of law."
     this.appointment_warning().html(text)
   write_phone_warning: =>
-    text = "Please, add phone number."
+    text = "Please add phone number."
     this.appointment_warning().html(text)
   practice_area_name_for_url: (practice_area_name) ->
     practice_area_name.replace /\s+/g, "-"
