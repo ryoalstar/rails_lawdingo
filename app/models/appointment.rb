@@ -39,13 +39,13 @@ class Appointment < ActiveRecord::Base
   def notify_client_about_appointment_created!
     return false unless self.client.present?
     return false unless self.client.email.present?
-    AppointmentMailer.notify_client_about_appointment_created(self).deliver
+    AppointmentMailer.notify_client_about_appointment_created(AppointmentDecorator.new(self)).deliver
   end
   
   def notify_lawyer_about_appointment_created!
     return false unless self.lawyer.present?
     return false unless self.lawyer.email.present?
-    AppointmentMailer.notify_lawyer_about_appointment_created(self).deliver
+    AppointmentMailer.notify_lawyer_about_appointment_created(AppointmentDecorator.new(self)).deliver
   end
 
   # full name of this appointment's attorney

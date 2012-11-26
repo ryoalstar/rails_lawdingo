@@ -9,10 +9,15 @@ class AppointmentDecorator < ApplicationDecorator
 
   # formatted time 3:00 PM on Sunday, 1/1
   def time
-    return "" if appointment.time.blank?
-    return appointment.time.strftime(
-      "%-l:%M %p on %A, %-m/%-e"
-    )
+    return "" unless appointment.time.present?
+    day = if (appointment.time.to_date == Date.today) 
+      'Today'
+    elsif (appointment.time.to_date == Date.tomorrow) 
+      'Tomorrow'
+    else
+      appointment.time.to_time.strftime("%A")
+    end
+    appointment.time.to_time.strftime("%-l:%M%P %Z #{day}, %-m/%-e")
   end
 
 end
