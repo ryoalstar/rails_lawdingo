@@ -16,7 +16,7 @@
     - if lawyer.is_available_by_phone? && d === Time.zone.now.to_date
       - last_index_times = 1
       %li 
-        = link_to 'NOW', start_phone_consultation_path(lawyer)
+        = link_to 'NOW', start_phone_consultation_path(lawyer), :class => only_for_client ? 'only_for_client' : ''
     - times[0..last_index_times].each do |t|
       %li
         %a{:href => "javascript:void(0)", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S"), :class => only_for_client ? 'only_for_client' : 'appt-select' }

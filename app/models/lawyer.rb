@@ -10,8 +10,7 @@ class Lawyer < User
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
-  has_many :states, 
-    :through => :bar_memberships
+  has_many :states, :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours, :autosave => true
   
