@@ -1,10 +1,10 @@
 - act = action_name.to_sym
 - contr = controller_name.to_sym
 .left_menu.same_height
-  %h2= link_to "Connect with clients", lawyer_inquiries_path(lawyer, :t => User::INQUIRIES_TAB)
+  %h2= link_to "Connect with clients", lawyer_questions_path(lawyer, :t => User::INQUIRIES_TAB)
   %ul
     %li.acc_inquiries
-      %span= link_to "Client Inquiries (" + lawyer.matching_questions.length.to_s + ')' , lawyer_inquiries_path(lawyer, :t => User::INQUIRIES_TAB)
+      %span= link_to "Client Inquiries (" + lawyer.matching_questions.length.to_s + ')' , lawyer_questions_path(lawyer.id, :t => User::INQUIRIES_TAB)
   %h2= link_to_unless (controller.controller_name == 'daily_hours' || controller.controller_name == 'offerings' || controller.controller_name == 'videos' || controller.controller_name == 'lawyers'), "Profile info", user_path(lawyer, :t => User::ACCOUNT_TAB)
   %ul
     %li.acc_info

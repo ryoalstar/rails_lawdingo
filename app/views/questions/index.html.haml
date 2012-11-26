@@ -22,5 +22,5 @@
                       .arrow
                     %td
                       %p.question_desc
-                        = link_to question.body, lawyer_answer_path(current_user, :question_id=>question.id)
+                        = link_to question.body, new_question_answer_path(question.id)
                   

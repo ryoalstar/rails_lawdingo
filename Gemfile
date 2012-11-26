@@ -17,6 +17,7 @@ group :assets do
   gem 'uglifier'
 end
 
+gem 'arel'
 
 #solr-sunspot
 gem 'sunspot_rails' #fork for rails

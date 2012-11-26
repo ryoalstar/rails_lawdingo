@@ -436,7 +436,7 @@ class Lawyer < User
   end
 
   def matching_questions
-    Question.all(:conditions=>["published=true AND practice_area IN (?) AND state_name IN (?)", self.practice_areas.map{|pa| pa.name}, self.states.map{|s| s.name} ])
+    Question.where(:published=>true, :practice_area=>self.practice_areas.map{|pa| pa.name}, :state_name=> self.states.map{|s| s.name} )
   end
 
   protected

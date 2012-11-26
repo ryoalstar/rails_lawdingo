@@ -17,7 +17,13 @@ Lawdingo::Application.routes.draw do
       get :states
       get :practice_areas
     end
+    resources :questions, :only=>[:index]
   end
+  
+  resources :questions, :only=>[:show] do
+    resources :answers, :only=>[:new]
+  end
+  
   
   match '/apply(/:id)' => "lawyers#new", :as => :new_lawyer
   
@@ -143,8 +149,7 @@ Lawdingo::Application.routes.draw do
   match "/users/create_lawyer_request", to: "users#create_lawyer_request", as: :create_lawyer_request
   match '/user/sessions/:user_id' =>"users#session_history", :as =>:user_session_history
   match '/users/:user_id/daily_hours' =>"users#daily_hours", :as =>:user_daily_hours
-  match '/lawyers/:id/inquiries' =>"lawyers#inquiries", :as =>:lawyer_inquiries
-  match '/lawyers/:id/answer' =>"lawyers#answer", :as =>:lawyer_answer
+  
   
   match '/users/:user_id' =>"users#account_information", :as =>:user_account_information
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
