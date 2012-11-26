@@ -15,9 +15,9 @@ class AppointmentDecorator < ApplicationDecorator
     elsif (appointment.time.to_date == Date.tomorrow) 
       'Tomorrow'
     else
-      appointment.time.to_time.strftime("%A")
+      appointment.time.strftime("%A")
     end
-    appointment.time.to_time.strftime("%-l:%M%P %Z #{day}, %-m/%-e")
+    appointment.time.strftime("%-l:%M%P %Z #{day}, %-m/%-e")
   end
 
 end
