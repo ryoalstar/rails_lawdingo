@@ -1,5 +1,11 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate, :only => [:options, :update]
+  
+  def index
+    @lawyer = Lawyer.find(params[:lawyer_id]) 
+    @questions = @lawyer.matching_questions
+  end
+  
   def create
     @question = Question.new(params[:question])
     @question.state_name = params[:question][:state_name] if params[:question][:state_name].present?

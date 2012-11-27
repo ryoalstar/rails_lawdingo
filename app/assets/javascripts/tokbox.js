@@ -1,7 +1,8 @@
     var session;
     var publisher;
     var subscribers = {};
-
+		
+	    
     $(document).ready(function(){
       if(typeof(TB)=='undefined')return;
       if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
@@ -16,6 +17,9 @@
         session.addEventListener('streamCreated', streamCreatedHandler);
         session.addEventListener('streamDestroyed', streamDestroyedHandler);
       }
+      
+     
+        
     });
 
     function connect() {
@@ -23,6 +27,9 @@
       $('#subscribers').show();
       session.connect(apiKey, token);
       $('#connectLink').attr('disabled',true);
+      $(".end_session").show();
+      $(".start_session").hide();
+
     }
 
     function disconnect() {
@@ -32,6 +39,9 @@
       hide('publishLink');
       hide('unpublishLink');
       $('#connectLink').attr('disabled',false);
+      $(".end_session").hide();
+      $(".start_session").show();
+      
     }
 
     function startPublishing() {
@@ -166,7 +176,7 @@
 
 
 
-var g_invite_interval = 0;
+window.g_invite_interval = 0;
 var xhr=0;
 function fn_invite_check(){
   if(typeof(fn_play_ring) == "undefined"){
@@ -175,7 +185,9 @@ function fn_invite_check(){
   fn_play_ring();
   if(is_lawyer)return;
   $('#opentok_resume').hide();
-  g_invite_interval = setInterval(function(){
+  
+  
+  invite_checker = function(){
     $('.spinner').hide();
     if(xhr) xhr.abort();
     xhr = $.ajax({
@@ -204,13 +216,17 @@ function fn_invite_check(){
               clearInterval(g_invite_interval);
               alert("Your invitation has been declined.");
             break;
+            
+            break;
           }
         },
         error: function(){
-
+					
         }
     });
-  },3000);
+   }
+  window.g_invite_interval = setInterval(invite_checker, 7000);
+
 
 }
 
@@ -240,8 +256,14 @@ function fn_accept_invite(){
            fn_open_video_window();
         }
   });
+  
+	window.videoChatTimers.initialize();
+  $("#tokbox_player").show();
 }
+function fn_stop_ring(){
+    $('#dewplayer_wrapper').html('<div id="dewplayer_content"></div>');
 
+}
 function fn_decline_invite(){
   $.ajax({
         url: "/UpdateOnlineStatus",
@@ -260,11 +282,12 @@ function fn_decline_invite(){
 function fn_open_video_window(){
   $('#opentok_ready').remove();
   $('#video_window').show();
+  $('#tokbox_player').show();
+  window.videoChatTimers.initialize()
   connect();
 }
 
 
-
-$(function(){
-  fn_invite_check();
-})
+$(window).load(function(){
+	fn_invite_check();
+});

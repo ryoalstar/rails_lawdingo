@@ -10,6 +10,8 @@
       = render partial: "lawyer/menu", locals: { lawyer: current_user }
       .profile_wrapper.same_height
         .profile_availability
+          .title
+            Flat-fee services
           = render partial: '/users/iphone_handle', locals: {:lawyer => current_user}
           .clear
         .profile-block

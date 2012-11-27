@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
   include ActionView::Helpers
-  attr_accessible :type, :user_id, :body, :state_name, :practice_area
+  attr_accessible :type, :user_id, :body, :state_name, :practice_area, :published
   belongs_to :user
   has_one :inquiry
   validates_format_of :body, :with => /^[\w\s.,?!]+$/, :allow_blank => true

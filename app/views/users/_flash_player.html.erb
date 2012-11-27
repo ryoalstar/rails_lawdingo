@@ -4,8 +4,7 @@
   
   <div id="opentok_console"></div>
   <div id="links">
-        <input type="button" value="Start Session" class="btn btn-large btn-primary" id ="connectLink" onClick="javascript:connect()" />
-        <input type="button" value="End Session"  class="btn btn-large hide" id ="disconnectLink" onClick="javascript:disconnect()" />
+        <!-- <input type="button" value="Start Session" class="btn btn-large btn-primary" id ="connectLink" onClick="javascript:connect()" /> -->
   </div>
 	<table class="videotable_wrapper">
 		<tbody>
@@ -26,10 +25,25 @@
 			</td></tr>
 		<tr class="controls_row">
 			<td class="col_chat"></td>
-			<td class="col_video"></td>
+			<td class="col_video">
+				<div class='end_session' onClick="javascript:disconnect()">
+					
+				</div>
+				<div class='start_session' onClick="javascript:connect()">
+					
+				</div>
+				<p id="count_up_timer" class="video_total_timer">call duration <span id="time_elapsed">0:00</span></p>
+      	<p id="free_time_remaining_wrapper" class="video_free_timer">Free duration remaining: <span id="free_time_remaining">5:00</span>.</p>
+      	<p id="paid_time_elapsed_wrapper" class="video_paid_timer">Billing time: <span id="paid_time_elapsed">5:00</span>.</p>
+      
+			</td>
 		</tr>
 	</tbody></table>
 
   <script>
+
+  
+
+
     //show('connectLink');
   </script>

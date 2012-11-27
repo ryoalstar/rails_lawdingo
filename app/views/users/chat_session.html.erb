@@ -1,7 +1,12 @@
 <script src="https://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
-<div style="width:1000px; height:410px; position: relative; margin: 25px auto 50px auto;">
+<div style="width:1000px; min-height:410px; position: relative; margin: 25px auto 50px auto;">
 
 <% if @lawyer %>
+	<%= tag :div, id: "video_chat", data: {
+	    free_consultation_duration: @lawyer.free_consultation_duration,
+	    conversation_id: @conversation_id,
+	    lawyers_watching: current_user.is_lawyer?
+	  } %>
   <script>
   	var apiKey = <%=@api_key%>;
     var sessionId = '<%=@lawyer.tb_session_id %>';
@@ -9,9 +14,11 @@
   	var lawyer_id = "<%=@lawyer.id%>";
   	var is_chat_session_page = true;
   	var g_conversation_id = "<%=@conversation_id%>";
+  	
   </script>
   
   <%= hidden_field_tag 'session_id', @lawyer.tb_session_id%>
+  
   <%
   	#current_user LAWYER CLIENT
 	if !current_user.is_lawyer?
@@ -45,7 +52,9 @@
 	end
   %>
   <%#= link_to "End Session", new_conversation_path  %>
-  <%= render :partial => "flash_player", :locals=>{:from_to_text=> @from_to_text} %>
+  <div id="tokbox_player">
+  	<%= render :partial => "flash_player", :locals=>{:from_to_text=> @from_to_text} %>
+  </div>
 <% else %>
   No one to chat with!
 <% end %>
@@ -53,8 +62,8 @@
 	<div id="video_window">
 		<div id="opentok_console"></div>
 		<div id="links">
-	       	<input type="button" value="Start" id ="connectLink" onClick="javascript:connect()" />
-	       	<input type="button" value="Stop" id ="disconnectLink" onClick="javascript:disconnect()" />
+	       	<!--<input type="button" value="Start" id ="connectLink" onClick="javascript:connect()" />
+	       	<input type="button" value="Stop" id ="disconnectLink" onClick="javascript:disconnect()" />-->
 	       	<!--<input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
 	       	<input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" />-->
 		</div>
@@ -62,5 +71,4 @@
 			<div id="myCamera" class="publisherContainer"></div>
 		</div>
 	</div>
-
 </div>

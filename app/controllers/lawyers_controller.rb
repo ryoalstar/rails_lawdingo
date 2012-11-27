@@ -63,6 +63,10 @@ class LawyersController < ApplicationController
     end
   end
   
+  
+  
+
+  
   private
   def i_want_claim
     if params[:id]
@@ -104,5 +108,6 @@ class LawyersController < ApplicationController
     end
   end 
 
+  
 end
 

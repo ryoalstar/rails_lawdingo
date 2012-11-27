@@ -202,6 +202,7 @@ class Home
         if (typeof($("p.lawyer_tagline", parent).html()) != 'undefined')
           if ($("p.lawyer_tagline", parent).html().length !=  $("p.lawyer_long_tagline", parent).html().length)
             $("p.lawyer_long_tagline", parent).hide 'fast'
+           
             $("p.lawyer_tagline", parent).show 'slow', ->
               if $("li.offerings_item.law_school", parent).length > 0
                 $("li.offerings_item.law_school", parent).show 'slow', ->
@@ -228,6 +229,9 @@ class Home
         if (typeof($("p.lawyer_tagline", parent).html()) != 'undefined')
           if ($("p.lawyer_tagline", parent).html().length !=  $("p.lawyer_long_tagline", parent).html().length)
             $("p.lawyer_tagline", parent).hide()
+            
+            $("p.lawyer_long_tagline", parent).hide()
+            $("p.lawyer_long_tagline", parent).removeClass('hidden')
             $("p.lawyer_long_tagline", parent).show 'slow', ->
               if $("li.offerings_item.law_school", parent).length > 0
                 $("li.offerings_item.law_school", parent).show 'slow', ->

@@ -1,0 +1,26 @@
+%div#page.inquiries
+  %div
+    .profile
+      = render(:partial =>  "lawyer/menu", :locals => {:lawyer => @lawyer})
+      .profile_wrapper.same_height
+        .profile_availability
+          .title
+            Client Inquiries
+            
+          = render  partial: '/users/iphone_handle', locals: {:lawyer => @lawyer}
+          .clear
+        #inquiries_wrap.profile-block.same_height.edit_lawyer
+          %h2 Inquiries related to your practice area and bar memberships:
+          %br
+          %br
+          %table.inquiries_list
+            %tbody
+              - if !@questions.nil?
+                - @questions.each do |question|
+                  %tr
+                    %td.arrow_col
+                      .arrow
+                    %td
+                      %p.question_desc
+                        = link_to question.body, new_question_answer_path(question.id)
+                  

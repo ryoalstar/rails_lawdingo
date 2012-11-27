@@ -45,14 +45,13 @@
                     %td
                       = text_field_tag 'card[cvc]', nil, :required => :required, :validate => true
                       %a.cvv-info{:href => '#'}
-                    %td.separator
-
-          
-      %tr
-        %td.buttons{:colspan=>2}
-          = f.submit 'Continue', :class=>"button", id: "submit_subscribe"
-          %span#siteseal
-            %script{:type=>"text/javascript", :src => 'https://seal.godaddy.com/getSeal?sealID=DY6qS9Z5Yb3G0eASdQ2SOHDc5j8MndNNTbTEvYzffdVwSYY0hv2'}
+                    %td.separator      
+        %tr
+          %td.buttons_left
+          %td.buttons{:colspan=>4}
+            = f.submit 'Continue', :class=>"button", id: "submit_subscribe"
+            %span#siteseal
+              %script{:type=>"text/javascript", :src => 'https://seal.godaddy.com/getSeal?sealID=DY6qS9Z5Yb3G0eASdQ2SOHDc5j8MndNNTbTEvYzffdVwSYY0hv2'}
       %tr.row_notice
         %td
 

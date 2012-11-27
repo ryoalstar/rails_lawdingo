@@ -11,7 +11,7 @@ class LawyerDecorator < ApplicationDecorator
   def long_personal_tagline
     escaped_tagline = h.escape_once(self.lawyer.personal_tagline)
     link = h.link_to(
-      'read more', h.attorney_path(self.lawyer, slug: self.lawyer.slug)
+      'read even more', h.attorney_path(self.lawyer, slug: self.lawyer.slug)
     )
     line = escaped_tagline.truncate(
       600, 

@@ -435,6 +435,10 @@ class Lawyer < User
     self.rate.to_f == 0
   end
 
+  def matching_questions
+    Question.where(:published=>true, :practice_area=>self.practice_areas.map{|pa| pa.name}, :state_name=> self.states.map{|s| s.name} )
+  end
+
   protected
   # convert a date to a time if applicable
   def convert_date(time)

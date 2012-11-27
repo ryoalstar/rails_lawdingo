@@ -29,6 +29,8 @@ client_payment =
   handleStripeResponse: (status, response) ->
     if status == 200
       $('#client_stripe_card_token').val(response.id)
+      
+      
       $('#new_callpayment')[0].submit()
     else
       $('#stripe_error').text(response.error.message)

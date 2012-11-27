@@ -7,6 +7,8 @@
       = render(:partial =>  "lawyer/menu", :locals => {:lawyer => @lawyer})
       .profile_wrapper.same_height
         .profile_availability
+          .title
+            Set availability
           = render  partial: '/users/iphone_handle', locals: {:lawyer => @lawyer}
           .clear
         #dh_wrap.profile-block.same_height

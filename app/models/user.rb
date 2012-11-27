@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   PAYMENT_TAB = 'm'
   SESSION_TAB = 'l'
   PFOFILE_TAB = 'profile'
+  INQUIRIES_TAB = 'inquiries'
 
   self.inheritance_column = "user_type"
 

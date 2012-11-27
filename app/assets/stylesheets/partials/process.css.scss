@@ -5,7 +5,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
 }
 #page{
   &.signup, &.payment, &.apply-form-wrapper,
-  .subscribe_question-form-wrapper{
+  &.subscribe_question-form-wrapper{
 
     form{
       margin: 0px 0px 12px 0px;
@@ -14,6 +14,12 @@ body.clients.new #page.apply-form-wrapper div.outer{
           width: 70px;
           font-weight:bold;
         }
+        
+        
+        td.buttons_left{
+          width: 70px;
+        }
+        
         .field_with_errors{
           label.message{
             padding:4px 5px 2px 5px;
@@ -61,7 +67,7 @@ body.clients.new #page.apply-form-wrapper div.outer{
           }
         }
         tr td{
-          padding-right:10px;
+          padding-right:7px;
           color:#3f3f3f;
           font-size:12px;
           vertical-align:middle;
@@ -171,6 +177,9 @@ body.clients.new #page.apply-form-wrapper div.outer{
   }
 }
 
+
+
+
 #page.call-payment > div{
   width:670px;
   padding: 0;
@@ -267,6 +276,10 @@ body.clients.new #page.apply-form-wrapper div.outer{
         height: 35px;
       }
       
+      td.buttons_left{
+        width: 70px;
+      }
+      
       table.card_info_table{
         margin: 0;
         padding: 0;
@@ -297,6 +310,8 @@ body.clients.new #page.apply-form-wrapper div.outer{
         height: 47px;
         background-color: #e2f1f8;
       }
+      
+      
       tr td{
         vertical-align:middle;
         font-size:12px;
@@ -787,7 +802,30 @@ body.clients.new #page.apply-form-wrapper div.outer{
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-
+      
+      td.promo_code{
+        #coupon {
+          width: 100px;
+          float: left;
+        }
+        #apply_coupon_button{
+          border: none;
+          text-decoration: none;
+          cursor: pointer;
+          float:left;
+          padding: 9px;
+          font-size: 12px;
+          div {
+            background-color: #f3f3f3;
+            border: 1px solid #babbbe;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 9px;
+          }  
+        }
+      }
+      
       table.card_user_info{
         width: 100%;
         margin: 0px;

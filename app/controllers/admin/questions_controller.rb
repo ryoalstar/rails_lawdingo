@@ -1,4 +1,5 @@
 class Admin::QuestionsController < ApplicationController
+  before_filter :authenticate_admin
   def index
     @questions = Question.where("user_id IS NOT NULL").order("created_at DESC")
   end
