@@ -13,7 +13,6 @@ Lawdingo::Application.routes.draw do
   match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home', :constraints => {:service_type => /Legal-Advice|Legal-Services/}
   match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
-  get '/lawyers/:id/*slug' => "lawyers#show", :constraints => {:id => /([0-9])+/}, :as => :lawyer
   resources :lawyers, :only => [:new, :create, :update], :constraints => {:id => /([0-9])+/} do
     get '/directory(/:page)', :action => :directory, :on => :collection, :as => :directory, :constraints => {:page => /([0-9])+/}
     member do
@@ -24,12 +23,12 @@ Lawdingo::Application.routes.draw do
     resources :questions, :only=>[:index]
     # get :pricing, :on => :collection
   end
+  get '/lawyers/:id/*slug' => "lawyers#show", :constraints => {:id => /([0-9])+/}, :as => :lawyer
   
   resources :questions, :only=>[:show] do
     resources :answers, :only=>[:new]
   end
-  
-  
+
   match '/apply(/:id)' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact
