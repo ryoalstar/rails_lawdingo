@@ -80,12 +80,20 @@
     .main_content(itemscope){:itemtype => 'http://schema.org/Attorney'}
       .bio-block
         -if @lawyer.directory_only?
-          %span.claim_text 
-            Are you Attorney #{@lawyer.full_name}? 
-            = link_to 'Claim this profile', new_lawyer_path(@lawyer)
-            now to start consulting with clients on Lawdingo.
+          .claim_wrapper
+            %span.claim_text.bold
+              Are you #{@lawyer.full_name}? 
+            %span.claim_text
+              now to start consulting with clients on Lawdingo.
+            = link_to new_lawyer_path(@lawyer) do 
+              .green_button.claim_link
+                Claim
         .left_border
-        = render "share"
+        - if @lawyer.directory_only?
+          .share_wrapper
+            = render "share"
+        -else
+          = render "share"
         .avatar
           = image_tag(@lawyer.photo_url(:medium), :itemprop => :photo)
         .middle

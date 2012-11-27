@@ -133,6 +133,36 @@ input.valid { border-color:green!important; }
   height:28px;
 }
 
+.green_button{
+  @include background_simplegradient(#86be53, #b5d784);
+  height:29px;
+  display:block;
+  margin: 0px 5px 0 0px;
+  padding:1px 16px 0px;
+  line-height:27px;
+  border:1px solid #81966a;
+  margin-right: 0;
+  font-size:14px !important;
+  font-weight:normal;
+  cursor:pointer;
+  color: white;
+  @include rounded( 3px );
+  -moz-text-shadow: 1px 1px 1px #b5bcc3;
+  -webkit-text-shadow: 1px 1px 1px #b5bcc3;
+  text-shadow: 1px 1px 1px #b5bcc3;
+  -moz-box-shadow: 0px 1px 1px #B6B6B6;
+  -webkit-box-shadow: 0px 1px 1px #B6B6B6;
+  box-shadow: 0px 1px 1px #B6B6B6;
+  text-shadow: 0.1em 0.1em #73b541;
+}
+.green_button:hover{
+  @include background_simplegradient(#92c55b, #c5df9d);
+}
+.green_button:active{
+  @include background_simplegradient(#86be53, #b3d57f);
+  
+}
+
 
 .tooltip_bubble{
   color: white;
@@ -435,6 +465,12 @@ input, select, textarea {
   text-align:center;
   font-size:16px !important;
   font-weight:normal !important;
+}
+
+.dingo_ate{
+  font-size: 20px;
+  color: red;
+  line-height: 1.5em;
 }
 
 

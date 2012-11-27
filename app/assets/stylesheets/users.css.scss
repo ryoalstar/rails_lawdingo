@@ -1174,9 +1174,19 @@
     }
   }
 
+  
+  .share_wrapper{
+    position: absolute;
+    top: 100px;
+    right: 24px;
+    z-index: 1;
+    ul.share{
+      position: static;  
+    }
+  }
   // Share icons in the lawyer page
   ul.share {
-    z-index: 1;
+    
     position: absolute;
     display: block;
     top: 24px;
@@ -1236,11 +1246,26 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   margin-top:0;
+  
+  .claim_wrapper{
+    @include background_simplegradient(#fcfdfd, #f0f4f7);
+    @include rounded(5px);
+    -moz-box-shadow: inset 0px 1px 2px #e3e3e3;
+    -webkit-box-shadow: inset 0px 1px 2px #e3e3e3;
+    box-shadow: inset 0px 1px 2px #e3e3e3;
+    border: 1px solid #D0D2D5;
+    padding: 18px 10px;
+    margin-bottom: 10px;
+    
+    .claim_link{
+      float: right; 
+      position: relative;
+      top: -8px; 
+    }
+  }
+  
   .claim_text{
-    display: block;
     font-size: 14px;
-    padding-bottom: 10px;
-    width: 490px;
   }
   .avatar{
     a{
