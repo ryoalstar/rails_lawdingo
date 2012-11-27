@@ -1,4 +1,4 @@
-#phone_consultation_tab 
+#phone_consultation_tab
   - client = current_user.try(:is_client?) ? current_user : Client.new
   = form_for client, :html => { :id => :phone_consultation_form}, :url => logged_in? ? root_path : new_client_path, :method => :post, :validate=> true do |f|
     - if logged_in?
@@ -16,4 +16,4 @@
         .question_area_bot
           = select_tag :practice_area, options_from_collection_for_select(@practice_areas, "id", "name"), :prompt => "Type of law",:class=>'select_medium'
     .interact_submit
-      = f.submit :Continue, :id => :interact_submit_button
+      = f.submit :Continue, :id => :interact_submit_button, :disabled => logged_in? && current_user.is_lawyer?

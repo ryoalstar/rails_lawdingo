@@ -1,10 +1,10 @@
 -# lawyer is the lawyer
 -# ndays is the number of days to show
-
+- only_for_client = logged_in? && current_user.is_lawyer?
 - lawyer.next_available_days_usertimezone(ndays).each_with_index do |d, i| 
   %ul
     %li.title
-      %span{:class => "day-#{i}", :data => {:date => d}}
+      %span{:class => "day day-#{i}", :data => {:date => d}}
         - if d === Time.zone.now.to_date
           Today
         - elsif d === Time.zone.now.tomorrow.to_date
@@ -16,13 +16,12 @@
     - if lawyer.is_available_by_phone? && d === Time.zone.now.to_date
       - last_index_times = 1
       %li 
-        = link_to 'NOW', start_phone_consultation_path(lawyer)
+        = link_to 'NOW', start_phone_consultation_path(lawyer), :class => only_for_client ? 'only_for_client' : ''
     - times[0..last_index_times].each do |t|
       %li
-        %a.appt-select{:href => "#", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S")}
+        %a{:href => "javascript:void(0)", "data-time" => t.strftime("%Y-%m-%d %H:%M:%S"), :class => only_for_client ? 'only_for_client' : 'appt-select' }
           #{t.strftime("%l:%M%p")}
     - if times.length > last_index_times + 1
       %li
-        %a.appt-select{:href => "#"}
+        %a{:href => "javascript:void(0)", :class => only_for_client ? 'only_for_client' : 'appt-select'}
           More
-

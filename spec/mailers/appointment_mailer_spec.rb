@@ -34,7 +34,7 @@ describe AppointmentMailer do
       mailer.to.should eql(["lawyer@test.com"])
       mailer.body.should =~ /Hi there/
       mailer.body.should =~ /A. Client/
-      mailer.body.should =~ /3:00 PM on Saturday, 1\/1/
+      mailer.body.should =~ /3:00pm EST Saturday, 1\/1/
       mailer.body.should =~ /10 minutes will be free/
       mailer.body.should =~ /will earn \$1.50 per minute/
     end
@@ -45,7 +45,7 @@ describe AppointmentMailer do
       mailer.to.should eql(["client@test.com"])
       mailer.body.should =~ /Hi there/
       mailer.body.should =~ /A. Client/
-      mailer.body.should =~ /3:00 PM on Saturday, 1\/1/
+      mailer.body.should =~ /3:00pm EST Saturday, 1\/1/
       mailer.body.should =~ /10 minutes will be free/
       mailer.body.should =~ /will be charged \$1.50 per minute/
     end

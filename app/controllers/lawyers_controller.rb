@@ -1,9 +1,20 @@
 class LawyersController < ApplicationController
   
   before_filter :logout_user, :only => [:new, :create], :if => :logged_in?
+  before_filter :authenticate, :only => [:pricing, :update, :call_payment]
+  before_filter :only_lawyer, :only => [:pricing, :update]
+  before_filter :logout_user, :only => :new
+  before_filter :auto_detect_state, :only => :show
+  
+  def show
+    @lawyer = LawyerDecorator.new(Lawyer.find(params[:id]))
+    @areas = @lawyer.areas_human_list 
+    if @lawyer.has_video?
+      @video = Framey::Video.find_by_creator_id(@lawyer.id)
+    end
 
-  def index
-    @users  = Lawyer.non_directory.reverse_order
+    @practice_areas = PracticeArea.parent_practice_areas
+    @states = State.with_approved_lawyers
   end
 
   def new
@@ -22,8 +33,7 @@ class LawyersController < ApplicationController
       self.log_in_user!(@lawyer)
       # deliver our signup notification
       UserMailer.notify_lawyer_application(@lawyer).deliver
-      # redirect to the subscription
-      return redirect_to(new_stripe_path)
+      return render(:action => :pricing)
     else
       return render(:action => :new)
     end
@@ -63,9 +73,27 @@ class LawyersController < ApplicationController
     end
   end
   
-  
-  
+  def call_payment
+    @lawyer = Lawyer.find(params[:id])
 
+    if params[:type] == "video-chat"
+      session[:return_path] = user_chat_session_url(user_id: @lawyer.id)
+    elsif params[:type] == "appointment"
+      @appointment = true
+      session[:return_path] = lawyers_path
+    else
+      session[:return_path] = phonecall_url(id: @lawyer.id)
+    end
+  end
+  
+  def directory
+    @lawyers = Lawyer.directory.paginate(:page => params[:page], :per_page => 100)
+
+    respond_to do |format|
+      format.html # directory.html.haml
+      format.json { render json: @lawyers }
+    end
+  end
   
   private
   def i_want_claim
@@ -106,7 +134,11 @@ class LawyersController < ApplicationController
     else
       @states = State.all
     end
-  end 
+  end
+  
+  def check_approval
+    redirect_to lawyers_path, notice: "Sorry, this lawyer's bar membership hasn't been verified just yet." unless @lawyer.is_approved || @lawyer.directory_only?
+  end
 
   
 end

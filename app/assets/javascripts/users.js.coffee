@@ -82,11 +82,11 @@ jQuery ->
 
 
   ($ "a#start_phone_session_button").bind "click", ->
-    lawyerid = ($ @).data('attorneyid')
+    lawyerid = ($ @).data('lawyerid')
     free_consultation_duration = ($ @).data('fcd')
     lawyer_rate = ($ @).data('lrate')
     lawyer_first_name = ($ @).data('fullname')
-    $("#attorney_id").val(lawyerid)
+    $("#lawyer_id").val(lawyerid)
     $('.paid_model_header').html("The first #{free_consultation_duration} minutes with #{lawyer_first_name} are free. To start the phone call, though, we require payment info, as any time past #{free_consultation_duration} minutes is billed at $#{lawyer_rate}/minute.");
     $('#payment_overlay_submit_button').val('Continue');
     
@@ -94,7 +94,7 @@ jQuery ->
     $("#new_question").resetClientSideValidations()
     tabId = $(this).attr("data-target")
     tabContent = $("#" + tabId)
-    tabContent.show()
+    tabContent.show().removeClass('hidden')
     $(this).addClass "selected"
     $(this).siblings().removeClass "selected"
     tabContent.siblings().hide()

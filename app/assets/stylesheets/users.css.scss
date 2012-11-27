@@ -13,8 +13,8 @@
 @import "partials/process";
 @import "partials/questions";
 
-@import "partials/lawyer/lawyer";
-@import "partials/attorneys/appointment_form";
+@import "partials/lawyers/lawyer";
+@import "partials/lawyers/appointment_form";
 
 // ***** Landing page *****
 #top_content_border{
@@ -410,11 +410,11 @@
         }
       }
       .header_content{
-        padding:14px 16px 0px 24px;
+        position: relative;
+        padding:14px 16px 0px 0px;
         float:left;
-        background:#eff2f7;
         height:195px;
-        width: 647px;
+        width: 685px;
         -webkit-border-top-left-radius: 5px;
         -webkit-border-top-right-radius: 5px;
         -moz-border-radius-topleft: 5px;
@@ -463,8 +463,19 @@
         }
         .right{
           float:left;
-          width:610px;
+          width:685px;
           text-align:center;
+          .line{
+            overflow: hidden;
+            width: 420px;
+            margin-left: 140px;
+            .available-appointments{
+              width: 3800px!important;
+              overflow: hidden;
+              position:relative;
+              left:0;
+            }
+          }
           p{
             margin-top: 0;
             font-size: 14px;
@@ -474,7 +485,43 @@
             color:#525d6a;
             text-align:center;
           }
+          .right_arrow{
+            background:image-url('arrows.png') no-repeat -60px 0;
+            position: absolute;
+            top: 90px;
+            right: 15px;
+            width: 60px;
+            height: 60px;
+            opacity: 0.5;
+          }
+          .left_arrow{
+            background:image-url('arrows.png') no-repeat;
+            position: absolute;
+            top: 90px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            opacity: 0.5;
+          }
+          .right_arrow:hover,
+          .left_arrow:hover{
+            opacity: 1;
+          }
           @include appointment_form
+        }
+        .appointments{
+          color: red;
+          float: left;
+          width: 100%;
+          text-align: center;
+          a.appt-select{
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            .times{
+              margin-top: 5px;
+            }
+          }
         }
       }
     }
@@ -705,7 +752,7 @@
   }
 }
 
-// Attorneys profile page left bar.
+// Lawyers profile page left bar.
 .lawyer_profile .left-bar
 {
   border: 1px solid #D0D2D5 !important;
@@ -1117,7 +1164,6 @@
       position: absolute;
     }
     a.appointments{
-      
       word-spacing: 2px;
       text-decoration:none;
       border-bottom:0;
@@ -1127,7 +1173,7 @@
       margin-bottom: 20px;
     }
   }
-  
+
   // Share icons in the lawyer page
   ul.share {
     z-index: 1;
@@ -1593,7 +1639,7 @@ body.users.start_phone_call{
 }
 
 
-body.users.home, body.attorneys.show{
+body.users.home, body.lawyers.show{
   .ui-dialog{
     width: 420px !important;
     h2{

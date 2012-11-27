@@ -1,6 +1,6 @@
 .profile.summary_of_sessions
   - if current_user.is_lawyer?
-    = render partial: "lawyer/menu", locals: { lawyer: @user }
+    = render partial: "lawyers/menu", locals: { lawyer: @user }
     
   .profile-block.same_height
     - if current_user.is_lawyer?

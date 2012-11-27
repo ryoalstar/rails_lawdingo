@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "/attorneys/show" do
+describe "/lawyers/show" do
 
   before(:each) do
-    assign(:attorney, LawyerDecorator.new(lawyer))
+    assign(:lawyer, LawyerDecorator.new(lawyer))
     view.stubs(:logged_in? => true)
     view.stubs(:current_user => FactoryGirl.build_stubbed(:client))
   end

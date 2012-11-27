@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119144401) do
+ActiveRecord::Schema.define(:version => 20121123130110) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -177,15 +177,6 @@ ActiveRecord::Schema.define(:version => 20121119144401) do
     t.boolean  "is_closed",   :default => false
   end
 
-  create_table "lawyer_daily_hours", :force => true do |t|
-    t.integer  "lawyer_id"
-    t.integer  "wday"
-    t.integer  "start_time"
-    t.integer  "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "client_id"
@@ -295,19 +286,19 @@ ActiveRecord::Schema.define(:version => 20121119144401) do
     t.string   "hashed_password"
     t.string   "address"
     t.string   "skype"
-    t.float    "balance",                                  :default => 0.0
-    t.boolean  "is_online",                                :default => false
-    t.boolean  "is_busy",                                  :default => false
+    t.float    "balance",                                                                 :default => 0.0
+    t.boolean  "is_online",                                                               :default => false
+    t.boolean  "is_busy",                                                                 :default => false
     t.datetime "last_login"
     t.datetime "last_online"
-    t.string   "user_type",                                                                          :null => false
-    t.boolean  "is_approved",                              :default => false
-    t.string   "payment_status",                           :default => "unpaid"
+    t.string   "user_type",                                                                                                         :null => false
+    t.boolean  "is_approved",                                                             :default => false
+    t.string   "payment_status",                                                          :default => "unpaid"
     t.text     "undergraduate_school"
     t.text     "law_school"
     t.text     "alma_maters"
     t.string   "law_firm"
-    t.float    "rate",                                     :default => 0.0
+    t.decimal  "rate",                                     :precision => 10, :scale => 2, :default => 0.0
     t.string   "payment_email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -317,8 +308,8 @@ ActiveRecord::Schema.define(:version => 20121119144401) do
     t.datetime "photo_updated_at"
     t.text     "personal_tagline"
     t.string   "bar_ids"
-    t.boolean  "has_payment_info",                         :default => false
-    t.string   "peer_id",                                  :default => "0"
+    t.boolean  "has_payment_info",                                                        :default => false
+    t.string   "peer_id",                                                                 :default => "0"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "stripe_customer_token"
@@ -330,13 +321,13 @@ ActiveRecord::Schema.define(:version => 20121119144401) do
     t.integer  "school_id"
     t.integer  "license_year"
     t.string   "yelp_business_id"
-    t.string   "time_zone",                                :default => "Pacific Time (US & Canada)"
+    t.string   "time_zone",                                                               :default => "Pacific Time (US & Canada)"
     t.string   "tb_session_id"
     t.text     "tb_token"
     t.string   "call_status",                :limit => 50
-    t.boolean  "is_available_by_phone",                    :default => false
+    t.boolean  "is_available_by_phone",                                                   :default => false
     t.string   "type"
-    t.boolean  "directory_only",                           :default => false
+    t.boolean  "directory_only",                                                          :default => false
   end
 
   add_index "users", ["bar_ids"], :name => "index_users_on_bar_ids"

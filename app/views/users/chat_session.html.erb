@@ -33,7 +33,7 @@
 			<p>Please wait while we try contact the lawyer</p>
 			<div id="opentok_buttons">
 			    <input id="opentok_resume" type="button" value="Resume" onclick="location.reload();" />
-			    <input id="opentok_cancel" type="button" value="Cancel" onclick="fn_cancel_lawyer(); location.replace('<%=attorney_url(@lawyer, slug: @lawyer.slug) %>');" />
+			    <input id="opentok_cancel" type="button" value="Cancel" onclick="fn_cancel_lawyer(); location.replace('<%=lawyer_url(@lawyer, slug: @lawyer.slug) %>');" />
 			</div>
 		</div>
 	  

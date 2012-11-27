@@ -22,7 +22,7 @@ interact_with_lawyer =
       unless interact_with_lawyer.is_logged_in(this)
         interact_with_lawyer.redirect_to_clients_new_path(lawyers[0])
         return false
-      interact_with_lawyer.start_call(interact_with_lawyer.phone_url(lawyers[0]))   
+      interact_with_lawyer.start_call(interact_with_lawyer.phone_url(lawyers[0]))
       false  
   is_logged_in: (form) ->
     ($ form).find('#client_id').length > 0
@@ -64,11 +64,12 @@ interact_with_lawyer =
     )
     lawyers
   phone_url: (lawyer) ->  
-    '/twilio/phonecall?id=' + lawyer.id
+    '/twilio/phonecall?id=' + lawyer.model.id
   start_call: (phone_url) ->
     window.location.href = phone_url 
   redirect_to_clients_new_path: (lawyer) ->
     path = encodeURI(interact_with_lawyer.phone_url(lawyer))
-    document.location = "/clients/new?lawyer_path=#{lawyer.id}&notice=true&return_path=#{path}"
+    document.location = "/clients/new?lawyer_path=#{lawyer.model.id}&notice=true&return_path=#{path}"
     
-    
+this.interact_with_lawyer = interact_with_lawyer
+

@@ -26,7 +26,7 @@ class Appointment < ActiveRecord::Base
 
   delegate :email,
     :to => :lawyer,
-    :prefix => :attorney,
+    :prefix => :lawyer,
     :allow_nil => true
   
   after_create :send_emails!
@@ -39,22 +39,22 @@ class Appointment < ActiveRecord::Base
   def notify_client_about_appointment_created!
     return false unless self.client.present?
     return false unless self.client.email.present?
-    AppointmentMailer.notify_client_about_appointment_created(self).deliver
+    AppointmentMailer.notify_client_about_appointment_created(AppointmentDecorator.new(self)).deliver
   end
   
   def notify_lawyer_about_appointment_created!
     return false unless self.lawyer.present?
     return false unless self.lawyer.email.present?
-    AppointmentMailer.notify_lawyer_about_appointment_created(self).deliver
+    AppointmentMailer.notify_lawyer_about_appointment_created(AppointmentDecorator.new(self)).deliver
   end
 
-  # full name of this appointment's attorney
-  def attorney_name
+  # full name of this appointment's lawyer
+  def lawyer_name
     return nil if self.lawyer.blank?
     return self.lawyer.full_name
   end
 
-  # full name of this appointment's attorney
+  # full name of this appointment's lawyer
   def client_name
     return nil if self.client.blank?
     return self.client.full_name

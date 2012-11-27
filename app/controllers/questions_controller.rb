@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate, :only => [:options, :update]
-  
+  before_filter :only_client, :if => :logged_in?
+
   def index
     @lawyer = Lawyer.find(params[:lawyer_id]) 
     @questions = @lawyer.matching_questions

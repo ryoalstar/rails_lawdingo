@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   belongs_to :school, touch: true
 
   has_attached_file :photo,
-    :styles => { :medium => "253x253>", :thumb => "102x127>" },
+    :styles => { :medium => "253x253>", :thumb => "102x162>" },
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :s3_protocol => "https",

@@ -1,0 +1,230 @@
+:javascript
+  $(function(){
+    LawyersShow.initialize(#{@lawyer.id})
+  })
+
+- title "#{@lawyer.full_name} — #{@lawyer.licensed_states} lawyer advising on #{@lawyer.areas_human_list} on Lawdingo"
+- description "Lawdingo: Ask a #{@lawyer.full_name} Online Now. Lawyer advising on #{@lawyer.areas_human_list} on Lawdingo"
+- keywords "#{@lawyer.practice_areas.collect{|pa| pa.name}.join(', ')}"
+
+-content_for :head do
+  %meta{:property => "og:title",     :content => yield(:title)}
+  %meta{:property => "og:type",      :content => 'public_figure'}
+  %meta{:property => "og:url",       :content => lawyer_url(@lawyer, slug: @lawyer.slug)}
+  %meta{:property => "og:image",     :content => @lawyer.photo_url(:medium)}
+  %meta{:property => "og:admins",    :content => '363994853644871'}
+
+%div{:id => "lawyer_#{@lawyer.id}", :data => {'lawyer-slug' => @lawyer.slug}}
+  #inline-wrapper.lawyer_profile.parent_container
+    .left-bars-block
+      = link_to "All Lawyers", lawyers_path, class: 'back_to_lawyers'
+      -#.left-bar
+        .left-bar-section.first_section
+          %span.back_to
+            = link_to "< Back to All Lawyers", lawyers_path
+      .left-bar.status
+        .left-bar-section.info-header
+          = content_tag :h2, "Talk to #{@lawyer.first_name}"
+        .left-bar-section
+          .online_icons
+            = render(:partial => "lawyers/online_icons_profile", :locals => {:lawyer => @lawyer})
+            
+      .left-bar
+        .left-bar-section.info-header
+          %h2 
+            About 
+            = @lawyer.first_name
+        .left-bar-section.info
+          %div
+            %h3 State bar memberships:
+            %ul
+              - @lawyer.states.each do |state|
+                %li= state.name
+            = content_tag :h3, "#{@lawyer.first_name}'s key practice areas:"
+            = render collection: @lawyer.practice_areas.where(parent_id: nil).order("name"), partial: "lawyers/area", as: :area, locals: { lawyer: @lawyer }
+          .person_info
+            - if @lawyer.school.present? || @lawyer.undergraduate_school.present?
+              = content_tag :h3, "#{@lawyer.first_name}'s background:"
+            - if @lawyer.school.present?
+              %p Law school
+              %ul
+                %li= @lawyer.school.name
+            - if @lawyer.undergraduate_school.present?
+              %p Undergrad school
+              %ul
+                %li= @lawyer.undergraduate_school
+            - if @lawyer.license_year.present?
+              %p Years practicing law
+              %ul
+                %li= pluralize years_practicing_law(@lawyer), "year", "years"
+            - if @lawyer.yelp_business_id.present? && !!@lawyer.yelp[:rating_img_url]
+              %p(itemscope){:itemtype => 'http://schema.org/Rating'}
+                Yelp rating
+                %span{:itemprop => :ratingValue, :bestRating => 5.0}= @lawyer.yelp[:rating]
+              .yelp-rating-container
+                .stars
+                  = image_tag @lawyer.yelp[:rating_img_url]
+                %p.small{:itemprop => :reviewCount}
+                  Based on #{pluralize @lawyer.yelp[:review_count], "review", "reviews"}
+                .clear
+              %br/  
+            - if @lawyer.reviews.average(:rating).to_i > 0
+              .yelp-rating-container(itemscope){:itemtype => 'http://schema.org/Rating'}
+                %p
+                  Lawdingo rating 
+                  %span{:itemprop => :ratingValue, :bestRating => 5.0}= @lawyer.reviews.average(:rating)
+                  = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: @lawyer.reviews.average(:rating).to_i }), lawyer_path(@lawyer, slug: @lawyer.slug, anchor: "reviews"), class: "rating-stars"
+                %p.small{:itemprop => :reviewCount}
+                  Based on #{pluralize @lawyer.reviews.count, "review", "reviews"}
+
+    .main_content(itemscope){:itemtype => 'http://schema.org/Attorney'}
+      .bio-block
+        -if @lawyer.directory_only?
+          %span.claim_text 
+            Are you Attorney #{@lawyer.full_name}? 
+            = link_to 'Claim this profile', new_lawyer_path(@lawyer)
+            now to start consulting with clients on Lawdingo.
+        .left_border
+        = render "share"
+        .avatar
+          = image_tag(@lawyer.photo_url(:medium), :itemprop => :photo)
+        .middle
+          %h1.profile_title
+            = link_to_unless_current "#{@lawyer.full_name}", lawyer_path(@lawyer, slug: @lawyer.slug), :itemprop => :url do 
+              %span{:itemprop => "name"}= @lawyer.full_name
+          -#.price
+            -#.free
+              %table
+                %tbody
+                  %tr
+                    %td
+                      %p= start_or_schedule_button(@lawyer)
+
+            %br/
+            -#.lawyer_rates
+              %h5= free_message(@lawyer)
+              = free_message_then @lawyer
+              %p.small
+                %span (prorated to the minute)                    
+          %h3
+            - unless @lawyer.bar_memberships.blank?
+              Licensed in #{@lawyer.licensed_states}
+          - if @lawyer.personal_tagline.present?    
+            %p.tagline{:itemprop => :description}= raw "#{simple_format '“' + @lawyer.personal_tagline + '”'}"
+          .free_section_container
+            = render(:partial => "lawyers/talk_button", :locals => {:lawyer => @lawyer})
+            .free_button_explanation
+              %p.free_bold= free_message(@lawyer)
+              = free_message_then @lawyer
+      - if @lawyer.daily_hours.present?
+        .profile_info
+          %h2 Schedule a Consultation with #{@lawyer.first_name}
+          .main-content
+            .header_content
+              -#.left
+                %h2 Ask a question:
+                %textarea{:placeholder => 'Type your question here'}
+                %a{:href => 'javascript:void(0)'} Ask
+              .right
+                %a.arrows#right_arrow{:href => "javascript:void(0);"}
+                  .right_arrow
+                %a.arrows.hidden#left_arrow{:href => "javascript:void(0);"}
+                  .left_arrow
+                .line
+                  .available-appointments{:itemprop => :openingHours}
+                    = render(:partial => "lawyers/lawyer_appointments", :locals => {:lawyer => @lawyer, :ndays => 36})                      
+                    .clear
+              .appointments
+                %a{:href => '#', :class => (logged_in? && current_user.is_lawyer?) ? 'only_for_client' : 'appt-select'}
+                  See All Appointments
+                  - if @lawyer.time_zone
+                    .times
+                      %span.grey Times in #{@lawyer.timezone_abbreviation}
+                      = "(#{@lawyer.timezone_utc_offset}:00)"  
+              - # important this is outside the .right because otherwise listeners are applied
+              - # to the a tags in the actual form rather than only to the list above
+              %div{:style => "display:none;"}
+                = render(:partial => "appointment_form", :locals => {:lawyer => @lawyer})
+      - if @lawyer.has_video?
+        .profile_info
+          %h2 #{@lawyer.first_name}'s self-introduction video:
+          .main-content
+            .video-block
+            
+              #intro_video.video-block
+                = render_player({                                |
+                      video_url: @video.flv_url,                 |
+                      thumbnail_url: @video.large_thumbnail_url, |
+                  })
+        -#.practice-block
+          %h4 More about practice:
+          %p Strip steak tongue salami biltong. Pancetta ground round short ribies tail streips siteak. Tongue pig beef ris strip steak fnekiefurter kielbasa. Pork t-bone venison, ham hiock shank ball tip pork belly. Spare ribes ham  filet mignon chicken flank pork belly tri-tip shank speck. Kielbasa fatback jerky, haam t-bone leberkeuas tongue. Pork belly beef ribs ham, chicken venison ham hock swine burger ground round shank ribeye.   
+      - if @lawyer.offerings.any?    
+        .profile_info 
+          %a#flat-fee{:name => 'flat-fee'}
+          = content_tag :h2, "#{@lawyer.first_name}'s Flat-fee Services (#{@lawyer.offerings.count})" 
+          .main-content
+            .main-info
+              = render collection: @lawyer.offerings, partial: "offerings/offering_template", locals: { lawyer: @lawyer } 
+      - if (@lawyer.yelp_business_id.present? && !!@lawyer.yelp[:reviews]) || @lawyer.reviews.count.to_i > 0
+        .profile_info   
+          %h2 Reviews
+          .main-content
+            .main-info
+              - if @lawyer.yelp_business_id.present? && !!@lawyer.yelp[:reviews]
+                %h4.yelp
+                  Latest
+                  = link_to image_tag('yelp_logo_50x25.png'), "http://www.yelp.com", :rel => :nofollow
+                  reviews:
+                %div{:itemprop => :reviews}  
+                  - @lawyer.yelp[:reviews].each do |review|
+                    .comment-block
+                      = image_tag(review["user"]["image_url"])
+                      .comment_cloud
+                        .left_border
+                        .stars
+                          = content_tag :div, image_tag(review["rating_image_url"]), class: "rating"
+                        = content_tag :li, class: "yelp-review", id: review["id"] do            
+                          = content_tag :p, yelp_review_excerpt(review, @lawyer)
+                          = content_tag :span, yelp_review_posted_by(review), class: "footnote"
+              - if @lawyer.reviews.count.to_i > 0
+                %h4 Lawdingo client reviews:        
+                .client-reviews#reviews{:itemprop => :reviews}
+                  %a{:name => 'reviews'}
+                  = render @lawyer.reviews.order("created_at DESC")
+                   
+      .profile_info   
+        %h2 Similar Lawyers
+        .main-content
+          .main-info
+            %h4 See also:
+            %br
+            %ul.left
+              - if @lawyer.school.present?
+                %li.practice_area_name= link_to "#{@lawyer.school.name} alumni", filtered_path(:search_query => @lawyer.school.name)
+              - @lawyer.practice_areas.parent_practice_areas.each do |ppa|
+                %li.practice_area_name= link_to "#{ppa.name} legal advice", filtered_path(:practice_area => ppa.name_for_url)
+                - ppa.children.each do |cpa|
+                  %li.practice_area_name= link_to "#{cpa.name} legal advice", "/lawyers/Legal-Advice/All-States/#{cpa.name_for_url}"
+                  
+            %ul.right
+              - @lawyer.states.each do |state|
+                %li.practice_area_name= link_to "#{state.name} Lawyers", state_path(:state => state.name_for_url)
+                - @lawyer.practice_areas.parent_practice_areas.each do |ppa|
+                  %li.practice_area_name= link_to "#{state.name} #{ppa.name} Lawyers", filtered_path(:state => state.name_for_url, :practice_area => ppa.name_for_url)
+  
+  = hidden_field_tag :lawyer_id, @lawyer.id, :class => :current_selected_lawyer
+  = render '/messages/dialog_window'
+  = render '/shared/state_and_practice_area_validation_dialog_window'
+
+:javascript
+  $(".person_info .rating").raty({
+      path: "/assets/raty",
+      hintList: ['', '', '', '', '', ''],
+      readOnly: true,
+      start: function() {return $(this).data("score")}
+  });
+
+
+
+

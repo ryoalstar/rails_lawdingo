@@ -1,7 +1,7 @@
 @mixin available_appointments($num){
   div.available-appointments{
     width: $num * 105px;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 20px auto;
     height: 122px;
     ul {
       float: left;

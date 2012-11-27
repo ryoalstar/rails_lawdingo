@@ -1,6 +1,5 @@
 class Lawyer < User
   include Extensions::VStripe
-  
   PAYMENT_STATUSES = ['free', 'paid', 'unpaid']
 
   has_many :bar_memberships, :inverse_of => :lawyer
@@ -11,8 +10,7 @@ class Lawyer < User
   has_many :expert_areas
   has_many :practice_areas, :through => :expert_areas
   has_many :reviews
-  has_many :states, 
-    :through => :bar_memberships
+  has_many :states, :through => :bar_memberships
   has_one :homepage_image, :dependent => :destroy
   has_many :daily_hours, :autosave => true
   
@@ -162,15 +160,15 @@ class Lawyer < User
   end
   
   def rate_for_minutes(minutes)
-    (self.rate * minutes *100).round()/100
+    ((self.rate * minutes *100)/100).round(2)
   end  
   
   def hourly_rate
-    self.rate.nil? ? '' : self.rate* 60
+    self.rate.nil? ? '' : (self.rate*60).round(2)
   end
   
   def hourly_rate=(value)
-    self.rate = value.to_f / 60.0
+    self.rate = (value.to_f / 60.0).round(2)
   end
 
   def detail

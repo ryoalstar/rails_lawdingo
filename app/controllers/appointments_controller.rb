@@ -1,7 +1,8 @@
 class AppointmentsController < ApplicationController
 
   before_filter :authenticate
-
+  before_filter :only_client
+  
   # create a new appointment
   def create
     update_client_phone params[:appointment][:contact_number]

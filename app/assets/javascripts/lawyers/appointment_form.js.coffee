@@ -17,8 +17,30 @@ class AppointmentForm
 
     @div.find("a.more").click (e)=>
       @div.find("a.more").parent().hide()
-      @div.find("li.hidden").show()
+      @div.find("li.hidden").removeClass('hidden')
       false
+      
+    ($ ".profile_info a.arrows#right_arrow").on 'click', ->
+      if parseInt(($ '.available-appointments').css('left')) < -2900
+        ($ '.profile_info a.arrows#right_arrow').addClass('hidden')
+        
+      if parseInt(($ '.available-appointments').css('left')) < 415
+        ($ '.profile_info a.arrows#left_arrow').removeClass('hidden')
+      
+      ($ '.available-appointments').animate(
+        left: '-=415'
+      , 1000)
+      
+    ($ ".profile_info a.arrows#left_arrow").on 'click', ->
+      if parseInt(($ '.available-appointments').css('left')) > -3400
+        ($ '.profile_info a.arrows#right_arrow').removeClass('hidden')
+        
+      if parseInt(($ '.available-appointments').css('left')) > -450
+        ($ @).addClass('hidden')
+        
+      ($ '.available-appointments').animate(
+        left: '+=415px'
+      , 1000)
 
     radios = @div.find(
       "#appointment_appointment_type_phone, " 
@@ -139,16 +161,16 @@ class AppointmentForm
     text = "#{lawyer_name} isn't licensed in #{state_name} and, thus can't help you. Find <a href='/lawyers/Legal-Advice/#{state_name_for_url}'>#{state_name} lawyers</a>"
     this.appointment_warning().html(text)
   write_appointment_state_and_practice_area_missing_warning: =>
-    text = "Please, select State and Type of law."
+    text = "Please select state and type of law."
     this.appointment_warning().html(text)
   write_appointment_state_missing_warning: =>
-    text = "Please, select State."
+    text = "Please select state."
     this.appointment_warning().html(text)
   write_appointment_practice_area_missing_warning: =>
-    text = "Please, select Type of law."
+    text = "Please select type of law."
     this.appointment_warning().html(text)
   write_phone_warning: =>
-    text = "Please, add phone number."
+    text = "Please add phone number."
     this.appointment_warning().html(text)
   practice_area_name_for_url: (practice_area_name) ->
     practice_area_name.replace /\s+/g, "-"
@@ -216,7 +238,13 @@ class AppointmentForm
           if @has_payment_info()
             this.show_success(data.appointment)
           else
-            window.location.href = "/attorneys/#{lawyer_id}/call-payment/appointment"
+            window.location.href = "/lawyers/#{lawyer_id}/call-payment/appointment"
+        200 : (data, status, xhr)=>
+          alert "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
+          $('.dialog-close').click();
+        302 : (data, status, xhr)=>
+          alert "Sorry, only clients can contact lawyers; lawyers can't contact other lawyers."
+          $('.dialog-close').click();
         422 : (xhr, status, text)=>
           this.show_error(JSON.parse(xhr.responseText).appointment.errors)
           true

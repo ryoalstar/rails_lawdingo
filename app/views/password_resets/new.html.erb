@@ -1,9 +1,9 @@
-<div id="page" class="signup">
-  <% if params[:reset_email_notice].present? %>
-    <%= notice text: "Hmm.. it doesn't look like there's an account with that email." %>
-  <% end %>
+<% content_for(:title) do %>
+  Reset Password - Lawdingo: Ask a Lawyer Online Now
+<% end %>
 
-  <h1>Reset Password</h1>
+<div id="page" class="signup">
+  <h1 class="form-header">Reset Password</h1>
   <div class="form-inner">
   <%= form_tag password_resets_path, :method => :post do %>
     <div>

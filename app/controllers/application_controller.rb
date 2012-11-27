@@ -76,6 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logout_user
+    return false unless current_user.present?
     current_user.update_attributes(:is_online => false, :is_busy =>false, :peer_id =>'0', :last_online => Time.now)
     session[:user_id] = nil
   end
@@ -125,7 +126,7 @@ class ApplicationController < ActionController::Base
     message = Message.find(session.delete(:message_id))
     message.update_attribute(:client_id, user.id)
     if message.send!
-      session[:return_to] = attorney_path(message.lawyer, slug: message.lawyer.slug)
+      session[:return_to] = lawyer_path(message.lawyer, slug: message.lawyer.slug)
       flash[:notice] = 'Your message has been sent.' 
     end
   end
@@ -142,6 +143,19 @@ class ApplicationController < ActionController::Base
     if request.location.present? && request.location.state_code.present?
       @auto_detected_state = State.find_by_abbreviation(request.location.state_code)
     end
+  end
+  
+  def only_client
+    redirect_to lawyers_path, :notice => "This page only for Client" unless current_user.try(:is_client?)
+  end
+  
+  def only_lawyer
+    redirect_to lawyers_path, :notice => "This page only for Lawyer!" unless current_user.try(:is_lawyer?)
+  end
+  
+  def check_for_notices
+    flash[:notice] = params[:notice] if params[:notice]
+    flash[:alert] = params[:alert] if params[:alert]
   end
 
 end

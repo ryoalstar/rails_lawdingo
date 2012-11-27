@@ -19,9 +19,6 @@ class PagesController < ApplicationController
     render "about_attorneys"
   end
   
-  def pricing_process
-  end
-  
   def process_signup
     if params[:return_path]
       session[:return_to] = params[:return_path]

@@ -27,7 +27,7 @@ describe AppointmentDecorator do
   context "#time" do
 
     it "should format the time as human-readable" do
-      formatted_time = "3:00 PM on Sunday, 1/1"
+      formatted_time = "3:00pm EST Sunday, 1/1"
       subject.time.should eql(formatted_time)
     end
 

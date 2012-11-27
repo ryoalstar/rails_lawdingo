@@ -8,6 +8,7 @@ class Message < ActiveRecord::Base
   validates :client, :presence => true, :on => :update
 
   def send!
+    return false unless self.lawyer.present?
     self.save unless self.persisted? && self.valid?
     self.update_attribute(:status,STATUSES[2]) if UserMailer.schedule_session_email(client, lawyer.email, self).deliver
   end

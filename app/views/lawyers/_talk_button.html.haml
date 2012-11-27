@@ -1,5 +1,5 @@
 .free_button_outer
-  = link_to !lawyer.is_available_by_phone? ? "#" : start_phone_consultation_path(lawyer), :class=>'free' do
+  = link_to !lawyer.is_available_by_phone? ? "javascript:void(0)" : start_phone_consultation_path(lawyer), :data => { :l_id => lawyer.id, :fullname => lawyer.first_name },  :class => (logged_in? && current_user.is_lawyer?) ? 'free only_for_client' : 'free state-and-practice-area-validation-dialog-opener' do
     %p
       - if lawyer.is_available_by_phone?
         Talk Now
@@ -12,4 +12,4 @@
   .button_tooltip
     .button-content
       %ul
-        = render(:partial => "lawyer/online_icons_list", :locals => {:lawyer => lawyer}) 
+        = render(:partial => "lawyers/online_icons_list", :locals => {:lawyer => lawyer}) 

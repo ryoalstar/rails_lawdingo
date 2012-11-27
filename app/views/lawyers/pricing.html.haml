@@ -1,3 +1,5 @@
+- content_for(:title) do
+  Activate Subcription - Lawdingo: Ask a Lawyer Online Now
 #page
   %div
     .process-wrapper
@@ -23,28 +25,32 @@
               .right-border
             .account-info
               %ul
-                %li Get an unlsted profile that you can use to cover existing or potential clients
+                %li Get an unlisted profile that you can use for your own marketing purposes.
               %ul
-                %li Get notified of inquiries that listed Lawdingo lawyers have rejected
-            %a.select-account-type{:href => '#'} Create Free Profile
+                %li Get notified of inquiries relevant to you (only paying members can answer though)
+            = form_tag user_offerings_path(current_user), :method => :get do
+              = hidden_field_tag :notice, 'Welcome. For now, go ahead and complete your profile. You\'ll be able to view it once we verify your bar membership.'
+              = submit_tag 'Create Free Profile', :class => 'select-account-type'
         .account-type-wrapper
           .left-border
           .account-type
             .header
               %h3 Basic Listing
-              %h2 $195/month
+              %h2 $#{AppParameter.lawyer_mountly_fee.to_i}/month
               .right-border
             .account-info
               %ul
                 %li 
                   %strong Money back guarantee!
               %ul
-                %li Get a full profile listed on Lawdingo.com
+                %li Get a full profile listed on Lawdingo
               %ul
-                %li Receive unlimited inbound messages, phone calls, video calls and appointments
+                %li Receive unlimited consultations, appointments and messages
               %ul
-                %li Talk live to clients, with option to bill for consultation
-            %a.select-account-type{:href => '#'} Choose Basic plan
+                %li Respond to inquiries
+              %ul
+                %li Earn money form consultations on your own schedule
+            %a.select-account-type{:href => new_stripe_path} Choose Basic plan
         .account-type-wrapper
           .left-border
           .account-type
@@ -57,11 +63,8 @@
                 %li Have capacity to take on a lot of clients? Contact us for custom solutions
               %ul
                 %li
-                  %strong Pakcages@lawdingo.com
+                  %strong= link_to 'Pakcages@lawdingo.com', 'mailto:pakcages@lawdingo.com'
               %ul
                 %li
                   %strong 415-234-3464
-            %a.select-account-type{:href => '#'} Contact Lawdingo
-        
-      
-  
+            %a.select-account-type{:href => contact_path} Contact Lawdingo

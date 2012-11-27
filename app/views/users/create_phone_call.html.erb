@@ -46,7 +46,7 @@
 
         <%= hidden_field_tag :form_type, "ajax" %>
         <%= hidden_field_tag :stripe_card_token %>
-        <%= hidden_field_tag :attorney_id, @lawyer.id %>
+        <%= hidden_field_tag :lawyer_id, @lawyer.id %>
         <h3 class="paid_model_header">To talk longer than <%= @lawyer.free_consultation_duration %> minutes, you will need to have payment information on file, or else the call will end.</h3>
           <fieldset class="personal-info">
               <%= image_tag("creditcards.png") %>

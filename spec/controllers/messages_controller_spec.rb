@@ -25,7 +25,7 @@ describe MessagesController do
       expect {
         post :send_message_to_lawyer, @attributes
       }.to change(Message, :count).by(1)
-
+      
       message = Message.last
       message.lawyer_id.should eq(@doctor.id)
       message.client_id.should eq(@amy.id)

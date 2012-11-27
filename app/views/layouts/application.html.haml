@@ -77,15 +77,15 @@
               - user = current_user
               - full_name = user.full_name
                 %li
-                  #{link_to full_name, user_path(user.id, :t => User::ACCOUNT_TAB)}
+                  #{link_to_unless_current full_name, user_path(user.id, :t => User::ACCOUNT_TAB)}
                   #{link_to "Log out", logout_path}
               - else
                 %li
-                  = link_to "Log In", login_path
-                  = link_to "Client Signup", new_client_path, :class => 'signup'
+                  = link_to_unless_current "Log In", login_path
+                  = link_to_unless_current "Client Signup", new_client_path, :class => 'signup'
                 %li
                   %span.lawyers_signup
-                    = link_to "Attorney Signup", new_lawyer_path, :class => ''
+                    = link_to_unless_current "Attorney Signup", new_lawyer_path, :class => ''
           %a.logo{:href => '/'}
             = image_tag('Lawdingo-logo.png', :alt => 'Home')      
         #header_border
@@ -139,7 +139,7 @@
               = render "godaddy_seal"
             = hidden_field_tag :stripe_card_token
             = hidden_field_tag :form_type, "ajax"
-            = hidden_field_tag :attorney_id
+            = hidden_field_tag :lawyer_id
             %h3.paid_model_header To start a phone consultation, you'll need to have payment information on file. The first two minutes of the call are free.
             %label Credit card number:
             %br/

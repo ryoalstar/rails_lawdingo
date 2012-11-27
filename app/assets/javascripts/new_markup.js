@@ -387,6 +387,6 @@ $(document).ready(function(){
   });
   $( "#law_school" ).val( "$" + $( "#law_school_quality" ).slider( "value" ) );  
 
-	var $video = $('body.attorneys.show .main_content .profile_info .main-content .video-block');
-  var $info = $('body.attorneys.show .main_content .profile_info .main-content .main-info');
+	var $video = $('body.lawyers.show .main_content .profile_info .main-content .video-block');
+  var $info = $('body.lawyers.show .main_content .profile_info .main-content .main-info');
 });

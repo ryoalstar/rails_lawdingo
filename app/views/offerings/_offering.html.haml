@@ -1,17 +1,17 @@
 .row.offering.parent_container{:id => "offering_#{offering.id}", "data-offering-id" => offering.id, "data-lawyer-id" => lawyer.id, "data-lawyer-slug" => lawyer.slug}
   .left.row_block
     .avatar
-      = link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_attorneys"), attorney_path(lawyer, slug: lawyer.slug))
+      = link_to_unless_current(image_tag(lawyer.photo.url(:thumb), class: "hide_on_lawyers"), lawyer_path(lawyer, slug: lawyer.slug))
     .stars
       - if lawyer.reviews.average(:rating).to_i > 0
-        = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), attorney_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
+        = link_to_unless_current content_tag(:div, "", class: "rating", data: { score: lawyer.reviews.average(:rating).to_i }), lawyer_path(lawyer, slug: lawyer.slug, anchor: "reviews"), class: "rating-stars"
     - if lawyer.reviews.count > 0
       = content_tag :span, pluralize(lawyer.reviews.count, "review", "reviews"), class: "reviews"
     .clear      
   .middle.row_block  
     %h1= link_to_unless_current "#{offering.name}", offering
     .online_icons
-      = render(:partial => "lawyer/online_icons", :locals => {:lawyer => lawyer})
+      = render(:partial => "lawyers/online_icons", :locals => {:lawyer => lawyer})
       .video_chat.online.tooltip Available for video chat
       .voice_chat.online.tooltip Available for voice chat
       .note_chat.tooltip Ask (text) question
@@ -24,8 +24,8 @@
       - if offering.practice_area.present?
         %p
           Practice area: #{offering.practice_area.name}
-      %p.hide_on_attorneys
-        Delivered by: #{link_to lawyer.full_name, attorney_path(lawyer, slug: lawyer.slug)}
+      %p.hide_on_lawyers
+        Delivered by: #{link_to lawyer.full_name, lawyer_path(lawyer, slug: lawyer.slug)}
         /%span.status= status_message(lawyer)          
       -#.free
         %table
@@ -34,7 +34,7 @@
               %td
                 %p= start_or_schedule_button(lawyer)
       .free_section_container
-        = render(:partial => "lawyer/talk_button", :locals => {:lawyer => lawyer})
+        = render(:partial => "lawyers/talk_button", :locals => {:lawyer => lawyer})
         .free_button_explanation
           %p.free_bold= "#{number_to_currency(offering.fee, precision: 0)} flat fee"
           %p.small
@@ -43,7 +43,7 @@
     - if lawyer.daily_hours.present?      
       %p Available appointments
       .available-appointments
-        = render(:partial => "lawyer/lawyer_appointments", :locals => {:lawyer => lawyer, :ndays=> 2})
+        = render(:partial => "lawyers/lawyer_appointments", :locals => {:lawyer => lawyer, :ndays=> 2})
         - if lawyer.time_zone       
           .times           
             %span.grey Times in #{lawyer.timezone_abbreviation}
@@ -58,7 +58,7 @@
         %p Are Available
     - # content for the modal dialog we are going to display
     %div{:style => "display:none;"}
-      = render(:partial => "/attorneys/appointment_form", :locals => {:lawyer => lawyer})                    
+      = render(:partial => "/lawyers/appointment_form", :locals => {:lawyer => lawyer})                    
 :javascript
   $(".row .rating").raty({
       path: "/assets/raty",

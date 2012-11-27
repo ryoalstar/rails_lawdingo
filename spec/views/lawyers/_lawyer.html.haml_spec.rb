@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "/lawyer/_lawyer" do
+describe "/lawyers/_lawyer" do
 
   before(:each) do
     view.stubs(:logged_in? => true, :current_user => lawyer)  
@@ -25,7 +25,7 @@ describe "/lawyer/_lawyer" do
 
   it "should render the base views for the next two days of appointments" do
     render(
-      :partial => "/lawyer/lawyer", 
+      :partial => "/lawyers/lawyer", 
       :locals => {:lawyer => LawyerDecorator.new(lawyer)}
     )
     lawyer.next_available_days(2).each do |day|
@@ -40,7 +40,7 @@ describe "/lawyer/_lawyer" do
 
     lawyer.stubs(:daily_hours => [])
     render(
-      :partial => "/lawyer/lawyer", 
+      :partial => "/lawyers/lawyer", 
       :locals => {:lawyer => LawyerDecorator.new(lawyer)}
     )
     rendered.should_not have_selector("a.appointments")

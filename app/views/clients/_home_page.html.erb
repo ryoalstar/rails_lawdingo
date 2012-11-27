@@ -46,7 +46,7 @@ txt_color = ['black','blue']
       <% if tab == User::ACCOUNT_TAB %>
         <%= render :partial =>"/users/account_info", :locals => {:user => user} %>
       <% elsif tab == User::PAYMENT_TAB %>
-        <%= render :partial =>"/client/payment_info" %>
+        <%= render :partial =>"/clients/payment_info" %>
       <% elsif tab == User::SESSION_TAB %>
         <%= render :template =>"/conversations/index" %>
       <% end %>

@@ -1,8 +1,6 @@
 Lawdingo::Application.routes.draw do
-  match 'sitemap.xml' => 'sitemaps#sitemap'
-
+  
   resources :appointments, :only => [:create]
-
   resources :clients, :only => [:new, :create] do
     post '/new', :on => :collection
   end
@@ -12,19 +10,25 @@ Lawdingo::Application.routes.draw do
   end
   post "framey/callback" => "framey/videos#callback"
 
-  resources :lawyers, :only => [:new, :create, :update] do 
+  match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
+  match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home', :constraints => {:service_type => /Legal-Advice|Legal-Services/}
+  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
+  resources :lawyers, :only => [:new, :create, :update], :constraints => {:id => /([0-9])+/} do
+    get '/directory(/:page)', :action => :directory, :on => :collection, :as => :directory, :constraints => {:page => /([0-9])+/}
     member do
       get :states
       get :practice_areas
+      match '/call-payment(/:type)', :action => :call_payment, :as => :call_payment
     end
     resources :questions, :only=>[:index]
+    # get :pricing, :on => :collection
   end
+  get '/lawyers/:id/*slug' => "lawyers#show", :constraints => {:id => /([0-9])+/}, :as => :lawyer
   
   resources :questions, :only=>[:show] do
     resources :answers, :only=>[:new]
   end
-  
-  
+
   match '/apply(/:id)' => "lawyers#new", :as => :new_lawyer
   
   match '/contact' => "contact#index", :as => :contact
@@ -58,8 +62,6 @@ Lawdingo::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  match 'attorneys/:id/call-payment(/:type)' => 'attorneys#call_payment', as: :call_payment
-  match 'attorneys/:id/*slug' => 'attorneys#show', as: :attorney
 
   # Lawyer subscriptions
   match '/paid' => "stripes#new", :as => :subscribe_lawyer
@@ -153,16 +155,10 @@ Lawdingo::Application.routes.draw do
   
   match '/users/:user_id' =>"users#account_information", :as =>:user_account_information
   match '/about' =>"pages#show", :name =>'about', :as =>:about_page
-  get   '/attorney-directory(/:page)' => 'attorneys#directory', :as => :directory
   match '/about_attorneys' =>"pages#about_attorneys", :name =>'about_attorneys', :as =>:about_attorneys
-  match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page
-  match '/pricing_process' =>"pages#pricing_process", :name =>'pricing_process', :as =>:pricing_process
-  match '/pricing_process_activation' =>"pages#pricing_process_activation", :name =>'pricing_process_activation', :as =>:pricing_process_activation
-  match '/process_signup' =>"pages#process_signup", :name =>'process_signup', :as =>:process_signup
-  
+  match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page  
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
-  match '/details' => 'users#payment_info', :as => :card_detail
   match '/welcome' => 'users#welcome_lawyer', :as => :welcome
   match '/Register' => 'users#register_for_videochat', :as => :register_videochat
   match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
@@ -170,17 +166,10 @@ Lawdingo::Application.routes.draw do
   match '/UpdateOnlineStatus' => 'users#update_online_status', :as => :UpdateOnlineStatus
   match '/twilio/phonecall' => 'users#start_phone_call', :as => :phonecall
   match '/twilio/createcall' => 'users#create_phone_call', :as => :create_call
-  match '/twilio/endcall' => 'users#end_phone_call', :as => :endcall
-  match '/search' => 'users#search'
-  match '/search/populate_specialities' => 'search#populate_specialities'
-  # Temporary route for the next home page
-  match '/search/populate_specialities_next' => 'search#populate_specialities_next'
-  match '/search/filter_results' => 'search#filter_results'
   match '/updatePaymentInfo' => 'users#update_payment_info'
   match '/CheckPaymentInfo' => 'users#has_payment_info'
   match '/CheckCallStatus' => 'users#check_call_status'
   match '/UpdateCallStatus' => 'users#update_call_status'
-  # match '/results' => "users#home", :as => :results
   match '/haveIPaymentInfo' => 'users#have_i_payment_info'
 
   # New phone calls flow routes
@@ -197,14 +186,9 @@ Lawdingo::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   match '/admin' =>"users#show", :as =>:admin_home
-  #root :to => 'users#home'
-
-  match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}
-  match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home'
-  match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }
   match '/auto-detect/detect-state' => 'users#detect_state'
   match '/lawyers' => 'users#home'
-  match '/learnmore' => 'users#learnmore'
+  # match '/learnmore' => 'users#learnmore'
 
   root :to => 'users#landing_page'
 

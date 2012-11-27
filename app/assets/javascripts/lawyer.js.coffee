@@ -18,7 +18,7 @@ class Lawyer
       else
         path = encodeURI(
           # document.location.pathname + document.location.search
-          "/attorneys/#{@id}/#{@slug}"
+          "/lawyers/#{@id}/#{@slug}"
         )
         document.location = "/clients/new?appointment_with=#{@id}&return_path=#{path}"
       # always return false

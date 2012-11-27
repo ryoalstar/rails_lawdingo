@@ -30,13 +30,13 @@ SitemapGenerator::Sitemap.create do
 
   Lawyer.approved_lawyers.find_in_batches do |lawyers|
        lawyers.each do |lawyer|
-        add attorney_path(lawyer, slug: lawyer.slug), :lastmod => lawyer.updated_at, :changefreq => 'monthly', :priority => 0.8
+        add lawyer_path(lawyer, slug: lawyer.slug), :lastmod => lawyer.updated_at, :changefreq => 'monthly', :priority => 0.8
       end
    end
    
   Lawyer.directory.find_in_batches do |lawyers|
        lawyers.each do |lawyer|
-        add attorney_path(lawyer, slug: lawyer.slug), :lastmod => lawyer.updated_at, :changefreq => 'monthly', :priority => 0.8
+        add lawyer_path(lawyer, slug: lawyer.slug), :lastmod => lawyer.updated_at, :changefreq => 'monthly', :priority => 0.8
       end
    end
    
