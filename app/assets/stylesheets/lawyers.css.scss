@@ -1,3 +1,13 @@
+@mixin inline-block {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
 body.lawyers{
   
   #results {
@@ -420,16 +430,6 @@ body.call_payment {
       background-image: url(grey_right_arrow.png);
       width: 11px;
       height: 11px;
-    }
-
-    @mixin inline-block {
-      display: -moz-inline-box;
-      -moz-box-orient: vertical;
-      display: inline-block;
-      vertical-align: baseline;
-      zoom: 1;
-      *display: inline;
-      *vertical-align: auto;
     }
 
   }

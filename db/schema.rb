@@ -177,15 +177,6 @@ ActiveRecord::Schema.define(:version => 20121123130110) do
     t.boolean  "is_closed",   :default => false
   end
 
-  create_table "lawyer_daily_hours", :force => true do |t|
-    t.integer  "lawyer_id"
-    t.integer  "wday"
-    t.integer  "start_time"
-    t.integer  "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "client_id"
