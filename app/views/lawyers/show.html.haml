@@ -14,7 +14,7 @@
   %meta{:property => "og:image",     :content => @lawyer.photo_url(:medium)}
   %meta{:property => "og:admins",    :content => '363994853644871'}
 
-%div{:id => "lawyer_#{@lawyer.id}"}
+%div{:id => "lawyer_#{@lawyer.id}", :data => {'lawyer-slug' => @lawyer.slug}}
   #inline-wrapper.lawyer_profile.parent_container
     .left-bars-block
       = link_to "All Lawyers", lawyers_path, class: 'back_to_lawyers'

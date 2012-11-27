@@ -509,6 +509,20 @@
           }
           @include appointment_form
         }
+        .appointments{
+          color: red;
+          float: left;
+          width: 100%;
+          text-align: center;
+          a.appt-select{
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            .times{
+              margin-top: 5px;
+            }
+          }
+        }
       }
     }
     .avatar{
@@ -1150,7 +1164,6 @@
       position: absolute;
     }
     a.appointments{
-      
       word-spacing: 2px;
       text-decoration:none;
       border-bottom:0;
@@ -1160,7 +1173,7 @@
       margin-bottom: 20px;
     }
   }
-  
+
   // Share icons in the lawyer page
   ul.share {
     z-index: 1;
