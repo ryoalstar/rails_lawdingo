@@ -159,6 +159,7 @@ Lawdingo::Application.routes.draw do
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page  
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
+  match '/details' => 'users#payment_info', :as => :card_detail
   match '/welcome' => 'users#welcome_lawyer', :as => :welcome
   match '/Register' => 'users#register_for_videochat', :as => :register_videochat
   match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
