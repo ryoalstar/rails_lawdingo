@@ -10,6 +10,10 @@ Lawdingo::Application.routes.draw do
   end
   post "framey/callback" => "framey/videos#callback"
 
+  match '/attorneys/:id/*slug' => redirect{|params| "/lawyers/#{params[:id]}/#{params[:slug]}"}
+  match '/attorney-directory/:page' => redirect{|params| "/lawyers/directory/#{params[:page]}"}
+  match '/attorney-directory', :to => redirect('/lawyers/directory')
+
   match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home', :constraints => {:service_type => /Legal-Advice|Legal-Services/}
   match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
