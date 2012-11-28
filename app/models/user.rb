@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :s3_protocol => "https",
-    :path => "system/:attachment/:id/:style/:basename.:extension"
+    :path => "system/:attachment/:id/:style/:basename.:extension",
+    :default_url => "/assets/photos/:style/missing.png"
 
   before_save :normalize_name
   after_update :reindex_lawyer!, :if => :is_lawyer?
