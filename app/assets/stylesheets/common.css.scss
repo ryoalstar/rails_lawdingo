@@ -163,6 +163,12 @@ input.valid { border-color:green!important; }
   
 }
 
+//Quick hack to override jquery UI close button position
+.ui-dialog .ui-dialog-titlebar-close{
+  right: -16px !important;
+  left: auto !important;
+}
+
 
 .tooltip_bubble{
   color: white;

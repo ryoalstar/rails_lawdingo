@@ -1131,6 +1131,7 @@
       vertical-align: middle;
       text-align: center;
       font-size: 13px;
+      border-top-right-radius: 5px;
     }
     .available-appointments{
       span{
@@ -1729,7 +1730,6 @@ body.users.home, body.lawyers.show{
 
 #div_states_barids{
   font-size:1em;
-  float:left;
   width:100%;
 }
 #div_practice_areas{

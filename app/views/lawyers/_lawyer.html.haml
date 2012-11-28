@@ -110,7 +110,7 @@
           %p Are Available
   
       - # content for the modal dialog we are going to display
-      %div{:style => "display:none;"}
+      .appointment_form_wrapper{:style => "display:none;"}
         = render(:partial => "/lawyers/appointment_form", :locals => {:lawyer => lawyer})
   
   :javascript
