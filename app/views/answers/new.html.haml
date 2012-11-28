@@ -39,7 +39,7 @@
               %p.responses_heading Responses so far:
               - @other_answers.each do |other_answer|
                 %p.answered_by
-                  = link_to other_answer.user.full_name, attorney_path(other_answer.user, slug: other_answer.user.slug)
+                  = link_to other_answer.user.full_name, lawyer_path(other_answer.user, slug: other_answer.user.slug)
                 %p.otheranswer_body
                   = other_answer.body
                 

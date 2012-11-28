@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-  before_filter :authenticate, :only => [:options, :update]
-  before_filter :only_client, :if => :logged_in?
+  before_filter :authenticate, :except => :create
+  before_filter :only_client, :only => [:options, :create, :update], :if => :logged_in?
 
   def index
     @lawyer = Lawyer.find(params[:lawyer_id]) 
@@ -28,7 +28,6 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     @question.update_attributes(params[:question])
-
     respond_to :js
   end
  

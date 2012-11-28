@@ -24,7 +24,7 @@ Lawdingo::Application.routes.draw do
       get :practice_areas
       match '/call-payment(/:type)', :action => :call_payment, :as => :call_payment
     end
-    resources :questions, :only=>[:index]
+    resources :questions, :only => [:index]
     # get :pricing, :on => :collection
   end
   get '/lawyers/:id(/*slug)' => "lawyers#show", :constraints => {:id => /([0-9])+/}, :as => :lawyer

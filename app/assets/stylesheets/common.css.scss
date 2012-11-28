@@ -162,7 +162,6 @@ input.valid { border-color:green!important; }
 
 #wrapper-main{
   min-height:100%; 
-  position:relative;
   float: left;
   width: 100%;
 }
@@ -319,11 +318,9 @@ input.valid { border-color:green!important; }
   }
 }
 
-
-
 // ***** Body *****/
 #container{
-  padding-bottom: 280px;
+  padding-bottom: 20px;
   float: left;
   width: 100%;
   
@@ -453,8 +450,6 @@ input, select, textarea {
   z-index:10;
   width:100%;
   float:left;
-  //background: url(footer_bg.png);
-  position:absolute;
   bottom:0;
   padding-bottom:0;
   background: url('footer_bg.png') repeat;
