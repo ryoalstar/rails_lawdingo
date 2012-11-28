@@ -8,7 +8,6 @@ SitemapGenerator::Sitemap.create do
   add about_page_path
   add about_attorneys_path
   add terms_page_path
-  add pricing_process_path
   add new_lawyer_path
   add new_clients_path
   

@@ -8,6 +8,9 @@ describe DailyHoursController do
 
   before(:each) do
     Lawyer.expects(:find).with(lawyer.id.to_s).returns(lawyer)
+    controller.stubs(:current_user).returns(lawyer)
+    controller.stubs(:authenticate).returns(lawyer)
+    controller.stubs(:current_user_is_online).returns(true)
   end
 
   context "GET /users/:id/daily_hours" do

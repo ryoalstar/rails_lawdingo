@@ -38,15 +38,15 @@ class Home
     Home.s[0] = 4
   
     
-    #this.redirect_to_last_practice_area_state_select_from_cookie()
+    this.redirect_to_last_practice_area_state_select_from_cookie()
 
-    # unless document.location.hash == ""
-      # this.set_defaults(default_state)
-      # this.read_hash()
-      # this.submit()
-    # else
-      # this.add_appointment_forms()
-      # this.search_defaults()
+    unless document.location.hash == ""
+      this.set_defaults(default_state)
+      this.read_hash()
+      this.submit()
+    else
+      this.add_appointment_forms()
+      this.search_defaults()
   scrollSticky: ()->
     if $(window).height() >= this.stickyHeight
       aOffset = $(".sticky_filters").offset()

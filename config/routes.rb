@@ -10,20 +10,24 @@ Lawdingo::Application.routes.draw do
   end
   post "framey/callback" => "framey/videos#callback"
 
+  match '/attorneys/:id/*slug' => redirect{|params| "/lawyers/#{params[:id]}/#{params[:slug]}"}
+  match '/attorney-directory/:page' => redirect{|params| "/lawyers/directory/#{params[:page]}"}
+  match '/attorney-directory', :to => redirect('/lawyers/directory')
+
   match '/lawyers/:service_type(/:state)' => 'users#home', :as => :state, :defaults => { :service_type => 'Legal-Advice'}, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
   match '/lawyers/:service_type/:state(/:practice_area)' => 'users#home', :constraints => {:service_type => /Legal-Advice|Legal-Services/}
   match '/lawyers/:service_type/:state/:practice_area(/:practice_subarea)' => 'users#home', :as => :filtered, :defaults => { :service_type => 'Legal-Advice', :state => 'All-States', :practice_area => 'All' }, :constraints => {:service_type => /Legal-Advice|Legal-Services/}
-  resources :lawyers, :only => [:new, :create, :update], :constraints => {:id => /([0-9])+/} do
+  resources :lawyers, :only => [:new, :show, :create, :update], :constraints => {:id => /([0-9])+/} do
     get '/directory(/:page)', :action => :directory, :on => :collection, :as => :directory, :constraints => {:page => /([0-9])+/}
     member do
       get :states
       get :practice_areas
       match '/call-payment(/:type)', :action => :call_payment, :as => :call_payment
     end
-    resources :questions, :only=>[:index]
+    resources :questions, :only => [:index]
     # get :pricing, :on => :collection
   end
-  get '/lawyers/:id/*slug' => "lawyers#show", :constraints => {:id => /([0-9])+/}, :as => :lawyer
+  get '/lawyers/:id(/*slug)' => "lawyers#show", :constraints => {:id => /([0-9])+/}, :as => :lawyer
   
   resources :questions, :only=>[:show] do
     resources :answers, :only=>[:new]
@@ -67,7 +71,7 @@ Lawdingo::Application.routes.draw do
   match '/paid' => "stripes#new", :as => :subscribe_lawyer
   resource :stripe, only: [:new, :create] do
     post :coupon_validate
-    get '/subscribe_question/:question_id', :action => :subscribe_question
+    get '/subscribe_question/:question_id', :action => :subscribe_question, :as => :subscribe_question
     post :subscribe_question_create, :on => :collection
   end
 
@@ -159,6 +163,7 @@ Lawdingo::Application.routes.draw do
   match '/terms' =>"pages#terms_of_use", :name =>'terms', :as =>:terms_page  
   match '/login' => "sessions#new", :as => :login
   match '/logout' => "sessions#destroy", :as => :logout
+  match '/details' => 'users#payment_info', :as => :card_detail
   match '/welcome' => 'users#welcome_lawyer', :as => :welcome
   match '/Register' => 'users#register_for_videochat', :as => :register_videochat
   match '/find_friend' => 'users#find_remote_user_for_videochat', :as => :find_remote_user
