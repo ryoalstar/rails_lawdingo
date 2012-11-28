@@ -4,8 +4,10 @@
     .start_off_info
       %h1= @tagline
       %p= @subtext[:first]
-      %span.browse_lawyers_button{:onclick=>"window.location.href='/lawyers'"}
-        = link_to "Browse Lawyers", lawyers_path, class: ""
+      .lawyers_button_wrap
+        %span.browse_lawyers_button{:onclick=>"window.location.href='/lawyers'"}
+          = link_to "Browse Lawyers", lawyers_path, class: ""
+        .start_here
       = image_tag('homepage_or.png', :alt => '', :style => 'margin-top:30px;')
       #autoselect_landing_wraper
         = render partial: "autoselect_lawyer", locals:{:header_text=>'In a rush?'}

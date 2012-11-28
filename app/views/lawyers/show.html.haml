@@ -84,7 +84,7 @@
             %span.claim_text.bold
               Are you #{@lawyer.full_name}? 
             %span.claim_text
-              now to start consulting with clients on Lawdingo.
+              Claim this profile now to start consulting with clients on Lawdingo.
             = link_to new_lawyer_path(@lawyer) do 
               .green_button.claim_link
                 Claim
@@ -151,7 +151,7 @@
                       = "(#{@lawyer.timezone_utc_offset}:00)"  
               - # important this is outside the .right because otherwise listeners are applied
               - # to the a tags in the actual form rather than only to the list above
-              %div{:style => "display:none;"}
+              .appointment_form_wrapper{:style => "display:none;"}
                 = render(:partial => "appointment_form", :locals => {:lawyer => @lawyer})
       - if @lawyer.has_video?
         .profile_info
