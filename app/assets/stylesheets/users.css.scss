@@ -17,6 +17,19 @@
 @import "partials/lawyers/appointment_form";
 
 // ***** Landing page *****
+
+.lawyers_button_wrap{
+  position: relative;
+}
+.start_here{
+  
+  background: image-url('start_here.png') no-repeat;
+  width: 159px;
+  height: 78px;
+  position: absolute;
+  top: -17px;
+  left: 247px;
+}
 #top_content_border{
     height:4px;
     background: image-url('homepage_topc_border.png') repeat-x;
@@ -1131,6 +1144,7 @@
       vertical-align: middle;
       text-align: center;
       font-size: 13px;
+      border-top-right-radius: 5px;
     }
     .available-appointments{
       span{
@@ -1174,9 +1188,19 @@
     }
   }
 
+  
+  .share_wrapper{
+    position: absolute;
+    top: 100px;
+    right: 24px;
+    z-index: 1;
+    ul.share{
+      position: static;  
+    }
+  }
   // Share icons in the lawyer page
   ul.share {
-    z-index: 1;
+    
     position: absolute;
     display: block;
     top: 24px;
@@ -1236,11 +1260,26 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   margin-top:0;
+  
+  .claim_wrapper{
+    @include background_simplegradient(#fcfdfd, #f0f4f7);
+    @include rounded(5px);
+    -moz-box-shadow: inset 0px 1px 2px #e3e3e3;
+    -webkit-box-shadow: inset 0px 1px 2px #e3e3e3;
+    box-shadow: inset 0px 1px 2px #e3e3e3;
+    border: 1px solid #D0D2D5;
+    padding: 18px 10px;
+    margin-bottom: 10px;
+    
+    .claim_link{
+      float: right; 
+      position: relative;
+      top: -8px; 
+    }
+  }
+  
   .claim_text{
-    display: block;
     font-size: 14px;
-    padding-bottom: 10px;
-    width: 490px;
   }
   .avatar{
     a{
@@ -1704,7 +1743,6 @@ body.users.home, body.lawyers.show{
 
 #div_states_barids{
   font-size:1em;
-  float:left;
   width:100%;
 }
 #div_practice_areas{

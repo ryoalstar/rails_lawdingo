@@ -113,7 +113,7 @@ module LawyersHelper
     end
     output += '<h2>Bar Memberships: </h2>' if show_title
     output += "<ul class='tick bar_list'>#{bms_text}</ul></div>"
-    output += "<a href='#bar_membership' id='barids_editor' class='dialog-opener#{bar_memberships_with_state_present ? '' : ' hidden'}'>Edit</a>"
+    output += "<a href='#bar_membership' id='barids_editor' class='edit_barmembership dialog-opener#{bar_memberships_with_state_present ? '' : ' hidden'}'>Edit</a>"
     output += "<a href='#bar_membership' id='barids_opener' class='dialog-opener blue_button no-inner-shadow#{bar_memberships_with_state_present ? ' hidden' : ''}'>State Bar Membership(s)</a>"
     output.html_safe
   end

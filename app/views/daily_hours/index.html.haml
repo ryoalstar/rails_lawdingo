@@ -21,7 +21,8 @@
                 %li{:class => cycle("white", "gray")}
                   %b #{Date::DAYNAMES[wday]}
                   #{daily_hours_time_select("start_time", wday)}
-                  to
+                  %span.daily_to
+                    to
                   #{daily_hours_time_select("end_time", wday)}
                   - if daily_hour.present? && daily_hour.errors.present?
                     %div.error
