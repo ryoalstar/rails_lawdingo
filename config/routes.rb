@@ -71,7 +71,7 @@ Lawdingo::Application.routes.draw do
   match '/paid' => "stripes#new", :as => :subscribe_lawyer
   resource :stripe, only: [:new, :create] do
     post :coupon_validate
-    get '/subscribe_question/:question_id', :action => :subscribe_question
+    get '/subscribe_question/:question_id', :action => :subscribe_question, :as => :subscribe_question
     post :subscribe_question_create, :on => :collection
   end
 

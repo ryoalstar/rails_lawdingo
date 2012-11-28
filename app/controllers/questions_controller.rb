@@ -17,7 +17,8 @@ class QuestionsController < ApplicationController
     if logged_in?
       UserMailer.new_question_email(@question).deliver
       @stripe_plan = Client::get_stripe_plan '4'
-      render :options
+      #render :options # temporary route directly to the payment page
+      redirect_to subscribe_question_stripe_path @question
     else
       session[:question_id] = @question.to_param
       redirect_to new_client_path, :notice => "To submit that inquiry please sign up with or log in to Lawdingo."

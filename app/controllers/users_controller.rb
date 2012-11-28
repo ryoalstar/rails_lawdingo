@@ -828,9 +828,6 @@ class UsersController < ApplicationController
     return state_name.gsub(/\-/,' ')
   end
 
-  def daily_hours
-  end
-
   def save_search
     query = params[:search_query].presence
     page = params[:page].presence

@@ -96,6 +96,11 @@ class ApplicationController < ActionController::Base
   def logged_in_admin?
     logged_in? and current_user.is_admin?
   end
+  
+  def current_user_is_online
+    return false unless current_user.present?
+    current_user.update_attributes(:is_online => true, :is_available_by_phone => true, :last_online => Time.now)
+  end
 
   def access_denied
     session[:referred_url] = request.fullpath
@@ -108,7 +113,8 @@ class ApplicationController < ActionController::Base
       question.update_attribute(:user_id, user.id)
       UserMailer.new_question_email(question).deliver
       session[:question_id] = nil
-      redirect_to "/questions/#{question.id}/options"
+      # redirect_to "/questions/#{question.id}/options" # temporary route directly to the payment page
+      redirect_to subscribe_question_stripe_path question
     end
   end
   

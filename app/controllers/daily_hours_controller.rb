@@ -1,6 +1,9 @@
 class DailyHoursController < ApplicationController
-
-  before_filter(:set_lawyer)
+  
+  before_filter :authenticate
+  before_filter :current_user_is_online
+  before_filter :set_lawyer
+  before_filter :only_lawyer, :only => [:daily_hours], :if => :logged_in?
 
   # GET /users/:id/daily_hours
   def index
