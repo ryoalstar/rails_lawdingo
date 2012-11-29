@@ -16,10 +16,7 @@
       .process_notice
         %h3
           Already a Lawdingo member?
-          - parameters = {}
-          - notice_params = ['lawyer_path', 'notice', 'question_notice', 'appointment_with']
-          - params.each_pair{|key,value| parameters[key] = value if notice_params.include?(key)  }
-          = link_to("Log in", login_path(parameters))
+          = login_with_notice
           now.
       .apply-form
         = render(:partial =>'/users/form', :locals => {:user => @client})

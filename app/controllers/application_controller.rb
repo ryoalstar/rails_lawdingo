@@ -163,5 +163,10 @@ class ApplicationController < ActionController::Base
     flash[:notice] = params[:notice] if params[:notice]
     flash[:alert] = params[:alert] if params[:alert]
   end
+  
+  def prolong_notices
+    flash[:notice] = flash[:notice].to_s if flash[:notice]
+    flash[:alert] = flash[:alert].to_s if flash[:alert]
+  end
 
 end

@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_filter :logout_user, :only => :new
+  before_filter :prolong_notices, :only => :new
   def new
     # this is how we redirect users on login
     if params[:return_path].present?

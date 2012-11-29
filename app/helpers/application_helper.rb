@@ -92,6 +92,13 @@ module ApplicationHelper
       link_to image_tag("logo.png", :alt => 'Lawdingo'), root_path, :title=>'Home', :class => 'home-link'
     end
   end
+  
+  def login_with_notice
+    parameters = {}
+    notice_params = ['lawyer_path', 'notice', 'question_notice', 'appointment_with']
+    params.each_pair{|key,value| parameters[key] = value if notice_params.include?(key)}
+    link_to_unless_current "Log In", login_path(parameters)
+  end
 
 end
 

@@ -57,8 +57,8 @@ describe "Restful clients", :integration do
        
         doc = Nokogiri::HTML(page.html)
         text_message = doc.css("div.notice div.text").first.content
-       
-        click_link("Log in")
+
+        click_link("Log In")
         
         page.should have_selector("div.notice div.text")
         doc = Nokogiri::HTML(page.html)
@@ -74,7 +74,7 @@ describe "Restful clients", :integration do
         doc = Nokogiri::HTML(page.html)
         text_message = doc.css("div.notice div.text").first.content
        
-        click_link("Log in")
+        click_link("Log In")
         
         page.should have_selector("div.notice div.text")
         doc = Nokogiri::HTML(page.html)
