@@ -1,8 +1,8 @@
-first_name	last_name	phone	email	license_year	personal_tagline	state_ids	user_type	directory_only
-L. Douglas	Hoyt	(303) 778-0323		1953	Akron-based lawyer licensed in Colorodo for 59 years.	5	Lawyer	1
-Nicholas E. Darrow	Esq			1938	Alamosa-based attorney licensed in Colorodo since 1938. 	5	Lawyer	1
-Jeffrey Scott	George	(719) 448-5907	jsgeorge@hhlaw.com	1989	Alamosa-based lawyer licensed in Colorodo since 1989.  Employed at Hogan & Hartson LLP.	5	Lawyer	1
-Edward Charles	Hopkins	(720)262-5545	ehopkins@hopkinsway.com	2011	Alamosa-based lawyer licensed in Colorodo since 2011.  Areas of practice include Business Law, Libel/Slander, Litigation, Personal Injury/Property Employed at HopkinsWay PLLC.	5	Lawyer	1
-Eric J.	Lucas	(916)501-3082		2000	Windsor-based lawyer practicing law in Colorodo since 2000. 	5	Lawyer	1
-Saranne K.	Maxwell	(303) 297-2400	saranne.maxwell@kutakrock.com	1988	Windsor-based attorney licensed in Colorodo since 1988.  Employed at Kutak Rock.	5	Lawyer	1
-Allan	Mena	(303)861-7760	arm@cla-law.net	2002	Windsor-based lawyer practicing law in Colorodo for 10 years. Employed at Campbell Latiolais & Averbach, P.C..	5	Lawyer	1
+first_name	last_name	phone	email	license_year	personal_tagline	state_ids	user_type	directory_only	is_available_by_phone
+L. Douglas	Hoyt	(303) 778-0323		1953	Akron-based lawyer licensed in Colorodo for 59 years.	5	Lawyer	1	1
+Nicholas E. Darrow	Esq			1938	Alamosa-based attorney licensed in Colorodo since 1938. 	5	Lawyer	1	1
+Jeffrey Scott	George	(719) 448-5907	jsgeorge@hhlaw.com	1989	Alamosa-based lawyer licensed in Colorodo since 1989.  Employed at Hogan & Hartson LLP.	5	Lawyer	1	1
+Edward Charles	Hopkins	(720)262-5545	ehopkins@hopkinsway.com	2011	Alamosa-based lawyer licensed in Colorodo since 2011.  Areas of practice include Business Law, Libel/Slander, Litigation, Personal Injury/Property Employed at HopkinsWay PLLC.	5	Lawyer	1	1
+Eric J.	Lucas	(916)501-3082		2000	Windsor-based lawyer practicing law in Colorodo since 2000. 	5	Lawyer	1	1
+Saranne K.	Maxwell	(303) 297-2400	saranne.maxwell@kutakrock.com	1988	Windsor-based attorney licensed in Colorodo since 1988.  Employed at Kutak Rock.	5	Lawyer	1	1
+Allan	Mena	(303)861-7760	arm@cla-law.net	2002	Windsor-based lawyer practicing law in Colorodo for 10 years. Employed at Campbell Latiolais & Averbach, P.C..	5	Lawyer	1	1
