@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129161447) do
+ActiveRecord::Schema.define(:version => 20121129164038) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(:version => 20121129161447) do
     t.datetime "last_login"
     t.datetime "last_online"
     t.string   "user_type",                                                                                                         :null => false
-    t.boolean  "is_approved",                                                             :default => false
+    t.boolean  "is_approved",                                                             :default => true
     t.string   "payment_status",                                                          :default => "unpaid"
     t.text     "undergraduate_school"
     t.text     "law_school"
