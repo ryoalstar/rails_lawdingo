@@ -4,8 +4,9 @@
 
 
 .profile{
-  display: inline-block;
+  display: inline-block;  
   width: 100%;
+  box-shadow: 5px 5px 5px #888888;
   .profile_wrapper{
     float:left;
     .profile_availability{
@@ -28,7 +29,7 @@
     display: block;
     width:200px;
     float: left;
-    background:#f2f7fb;
+    background:#f2f7fb;    
     border-right: solid 1px #B8B8B8;
     -webkit-border-top-left-radius: 10px;
     -webkit-border-bottom-left-radius: 10px;
@@ -36,6 +37,7 @@
     -moz-border-radius-bottomleft: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    box-shadow: 5px 5px 5px #888888;
     h2{
       padding: 15px 15px 0 15px;
       text-transform:uppercase;
