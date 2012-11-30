@@ -631,7 +631,8 @@
     background:#fafcff;
     border: none;
     float: left;
-    box-shadow: 5px 5px 5px #888888;
+    box-shadow: 1px 1px 1px #888888;
+    opacity: 0.7;
     
     @include rounded(5px);
     .sticky_filters{
@@ -909,7 +910,9 @@
   background-color: white;
   width: 722px;
   border: 1px solid #cbd0d7;
-  box-shadow: 5px 5px 5px #888888;
+  box-shadow: 1px 1px 1px #888888;
+  opacity: 0.7px;
+  
   // mixin in partials/mixins
   @include autoselect_general;
   
@@ -931,7 +934,8 @@
   margin-top: 23px;
   min-height: 170px;  
   position: relative;
-  box-shadow: 5px 5px 5px #888888;
+  box-shadow: 1px 1px 1px #888888;
+  opacity: 0.7;
   
   @include rounded(5px);
   
