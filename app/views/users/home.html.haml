@@ -148,7 +148,7 @@
   .main_content
     #service_type_tabs
       = render partial: "service_type_tabs"
-    .clear
+    .clear    
     #autoselect_lawyer_wraper
       = render partial: "autoselect_lawyer", locals:{:header_text=>'Don’t know who to pick?'}
     -##generail_question.question.question-container
@@ -158,6 +158,8 @@
     / RESULTS
     #results.results
       = render(:partial => "search_results")
+  .clear
+
 = hidden_field_tag :lawyer_id, '', :class => :current_selected_lawyer
 = render '/messages/dialog_window'
 = render '/shared/state_and_practice_area_validation_dialog_window'
