@@ -220,9 +220,9 @@
   }
   
   .main_content{
-    width: 711px;    
+    width: 724px;    
     float:left;
-    margin-left:60px;    
+    margin-left:25px;    
     
     p{
       font-size:13px;
@@ -242,6 +242,7 @@
       border:1px solid #d0d2d5;
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
+      box-shadow: 0px 0px 8px #DCDCDC;
       h2{
         text-align:center;
         border-bottom:1px solid #D0D2D5;
@@ -630,14 +631,16 @@
     background:#fafcff;
     border: none;
     float: left;
-    box-shadow: 0px 0px 8px #DCDCDC;    
-    
+    box-shadow: 0px 0px 8px #DCDCDC;
+        
     @include rounded(5px);
     .sticky_filters{
       width: 246px;
       background: #FAFCFF;
       border: 1px solid #D0D2D5;
       border-top: 0;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;      
     }
     
     h2{

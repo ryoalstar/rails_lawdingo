@@ -258,7 +258,7 @@ input.valid { border-color:green!important; }
     border-bottom:0;
   }
   .wrapper{
-    width:990px;
+    width:995px;
     margin:0 auto;
     line-height: 64px;
     .logo{
@@ -277,9 +277,9 @@ input.valid { border-color:green!important; }
         li{
           float:left;
           color:#e9f6ff;
-          padding:2px 11px 3px 11px;
+          padding:2px 1px 3px;
           font-size:14px;
-          margin: 0px 5px;
+          
           a{
             text-decoration:none;
             padding:2px 11px 3px 11px;
@@ -433,11 +433,11 @@ input.valid { border-color:green!important; }
 }
 
 #inline-wrapper{
-  width:1032px;  
+  width:995px;  
   margin:0 auto;
   padding:25px;
   background: rgba(248, 248, 255, 0.5);
-  box-shadow: 0px 0px 8px #DCDCDC;
+  box-shadow: 0px 0px 3px #d3d3d3;  
 }
 
 ul.tick{
