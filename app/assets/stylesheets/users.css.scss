@@ -220,10 +220,9 @@
   }
   
   .main_content{
-    width: 711px;
-    margin-bottom:23px;
-    float:right;
-    opacity: 0.8;
+    width: 711px;    
+    float:left;
+    margin-left:60px;    
     
     p{
       font-size:13px;
@@ -631,8 +630,7 @@
     background:#fafcff;
     border: none;
     float: left;
-    box-shadow: 1px 1px 1px #888888;
-    opacity: 0.7;
+    box-shadow: 0px 0px 8px #DCDCDC;    
     
     @include rounded(5px);
     .sticky_filters{
@@ -910,8 +908,7 @@
   background-color: white;
   width: 722px;
   border: 1px solid #cbd0d7;
-  box-shadow: 1px 1px 1px #888888;
-  opacity: 0.7px;
+  box-shadow: 0px 0px 8px #DCDCDC;  
   
   // mixin in partials/mixins
   @include autoselect_general;
@@ -934,8 +931,7 @@
   margin-top: 23px;
   min-height: 170px;  
   position: relative;
-  box-shadow: 1px 1px 1px #888888;
-  opacity: 0.7;
+  box-shadow: 0px 0px 8px #DCDCDC;  
   
   @include rounded(5px);
   
@@ -1794,3 +1790,6 @@ body.users.home, body.lawyers.show{
   }
 }
 
+.clear {
+  clear: both;
+}

@@ -6,8 +6,7 @@
 .profile{
   display: inline-block;  
   width: 100%;
-  box-shadow: 1px 1px 1px #888888;
-  opacity: 0.7;
+  box-shadow: 0px 0px 8px #DCDCDC;  
   .profile_wrapper{
     float:left;
     .profile_availability{
@@ -38,8 +37,7 @@
     -moz-border-radius-bottomleft: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    box-shadow: 1px 1px 1px #888888;
-    opacity: 0.7;
+    box-shadow: 0px 0px 8px #DCDCDC;    
     h2{
       padding: 15px 15px 0 15px;
       text-transform:uppercase;
@@ -233,8 +231,7 @@ body.lawyers.inquiries {
     padding:0;
     .profile{
       display: inline-block;
-      box-shadow: 1px 1px 1px #888888;
-      opacity: 0.7;     
+      box-shadow: 0px 0px 8px #DCDCDC;      
       
       
       
