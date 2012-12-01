@@ -220,7 +220,7 @@
                 %li.practice_area_name= link_to "#{state.name} Lawyers", state_path(:state => state.name_for_url)
                 - @lawyer.practice_areas.parent_practice_areas.each do |ppa|
                   %li.practice_area_name= link_to "#{state.name} #{ppa.name} Lawyers", filtered_path(:state => state.name_for_url, :practice_area => ppa.name_for_url)
-  
+    .clear      
   = hidden_field_tag :lawyer_id, @lawyer.id, :class => :current_selected_lawyer
   = render '/messages/dialog_window'
   = render '/shared/state_and_practice_area_validation_dialog_window'
