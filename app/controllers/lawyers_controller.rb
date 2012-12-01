@@ -6,7 +6,7 @@ class LawyersController < ApplicationController
   before_filter :logout_user, :only => :new
   before_filter :auto_detect_state, :only => :show
   
-  def show
+  def show    
     @lawyer = LawyerDecorator.new(Lawyer.find(params[:id]))
     @areas = @lawyer.areas_human_list 
     if @lawyer.has_video?
@@ -26,7 +26,7 @@ class LawyersController < ApplicationController
     end
   end
 
-  def create
+  def create    
     @lawyer = Lawyer.new(params[:lawyer])
     @states = State.all
     if @lawyer.save
@@ -42,7 +42,7 @@ class LawyersController < ApplicationController
   # only profile for claim use update action
   # PUT /lawyers/1
   # PUT /lawyers/1.json
-  def update
+  def update    
     @lawyer = Lawyer.find(params[:id])
     fill_states
     @lawyer.bar_memberships.delete_all
@@ -59,21 +59,21 @@ class LawyersController < ApplicationController
     end
   end
   
-  def states
+  def statess    
     @lawyer = Lawyer.find(params[:id]) || not_found
     respond_to do |format|
       format.json { render json: {:states => @lawyer.states.to_a}, status: :ok }
     end
   end
   
-  def practice_areas
+  def practice_areas    
     @lawyer = Lawyer.find(params[:id]) || not_found
     respond_to do |format|
       format.json { render json: {:practice_areas => @lawyer.practice_areas.to_a}, status: :ok }
     end
   end
   
-  def call_payment
+  def call_payment    
     @lawyer = Lawyer.find(params[:id])
 
     if params[:type] == "video-chat"
@@ -86,7 +86,7 @@ class LawyersController < ApplicationController
     end
   end
   
-  def directory
+  def directory    
     @lawyers = Lawyer.directory.paginate(:page => params[:page], :per_page => 100)
 
     respond_to do |format|
@@ -96,7 +96,7 @@ class LawyersController < ApplicationController
   end
   
   private
-  def i_want_claim
+  def i_want_claim    
     if params[:id]
       lawyer = Lawyer.find params[:id] || not_found
       if lawyer.directory_only?
@@ -108,7 +108,7 @@ class LawyersController < ApplicationController
     end
   end
   
-  def update_lawyers_practice_areas lawyer
+  def update_lawyers_practice_areas lawyer    
     lawyer.practice_areas.delete_all
     unless params[:practice_areas].blank?
       practice_areas = params[:practice_areas]
@@ -125,7 +125,7 @@ class LawyersController < ApplicationController
     end
   end
   
-  def fill_states
+  def fill_states    
     @filled_states = @lawyer.states
     unless @filled_states.blank?
       filled_state_ids = []

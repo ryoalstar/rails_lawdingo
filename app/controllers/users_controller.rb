@@ -24,10 +24,9 @@ class UsersController < ApplicationController
     # if current_user and current_user.is_lawyer?
     #   redirect_to users_path(:t=>'l')
     # end
-    #return render :json =>current_user
-
+    #return render :json =>current_user    
     @question = Question.new
-    @subtext = AppParameter.service_homepage_subtext
+    @subtext = AppParameter.service_homepage_subtext    
     @practice_areas = PracticeArea.parent_practice_areas
     @states = State.with_approved_lawyers
   
