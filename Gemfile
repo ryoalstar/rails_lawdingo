@@ -55,7 +55,7 @@ gem 'sitemap_generator'
 gem 'will_paginate', '~> 3.0'
 
 # Handling cron jobs
-gem 'whenever', require: false
+gem 'whenever' #, require: false
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
@@ -78,7 +78,7 @@ group :test do
   gem "guard-bundler"
   gem "guard-rspec"
   gem "guard-spork"
-  gem "mocha", require: false
+  gem "mocha" #, require: false
   gem "timecop"
   gem 'rails3-generators' #mainly for factory_girl & simple_form at this point
   gem "rspec-rails"
